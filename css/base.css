@@ -262,6 +262,7 @@ img {
   color: #fcfcfe;
   text-shadow: 0 1px 10px rgb(0 0 0 / 30%);
 }
+/* 两个连续的.XXX 表示:选择在.navigation元素内部的.buttom元素 */
 .navigation .buttom:hover{
   transform: scale(1.1);
   color: #fff;
@@ -579,6 +580,7 @@ img {
 /* 置顶层 */
 .zz{
   position: relative;
+  /* z-index 属性设置定位元素及其后代元素或 flex 项目的 Z 轴顺序。z-index 值较大的元素会覆盖较小的元素。 */
   z-index: 1;
 }
 
