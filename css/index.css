@@ -1,21 +1,8 @@
- /* 正文 */
+/* 正文 */
  .content-li.li1 {
   display: flex;
   justify-content: space-between;
 }
-
-/* .li1-box::after {
-  content: '';
-  position: absolute;
-  top: -8px;
-  left: 8%;
-  right: 8%;
-  height: 10px;
-  background-color: var(--backColor);
-  border-radius: 5px 5px 0% 0%;
-  opacity: .3;
-
-} */
 
 .content-li.li1>.li1-box {
   position: relative;
@@ -70,11 +57,12 @@
 
 .li2-box {
   /* width: 100%; */
-  min-height: 50px;
+  min-height: 40px;
   padding: 40px;
   box-shadow: 0 2px 4px -2px rgb(0 0 0 / 15%);
 }
 
+/* 插入结束引号 */
 .li2-box blockquote::after {
   margin: 0;
   width: 50px;
@@ -82,11 +70,14 @@
   line-height: 55px;
   content: '"';
   position: absolute;
-  bottom: -40px;
-  right: -25px;
+  
+  bottom: -70px;
+  right: -30px;
+
   font-size: 54px;
 }
 
+/* 插入开始引号 */
 .li2-box blockquote::before {
   margin: 0;
   color: var(--mainColor);
@@ -94,11 +85,12 @@
   line-height: 55px;
   content: '"';
   position: absolute;
-  top: -25px;
+  top: -50px;
   left: -25px;
   font-size: 54px;
 }
 
+/* 引用样式 */
 .li2-box blockquote {
   position: relative;
   padding: 0;
@@ -291,9 +283,6 @@ svg {
   box-shadow: 0 2px 4px -2px rgb(0 0 0 / 15%);
 
 }
-
-/* 第六个 */
-.content-li.li6 {}
 
 .li6-box {
   display: flex;

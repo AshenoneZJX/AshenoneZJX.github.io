@@ -8,6 +8,12 @@
   padding: 20px;
 }
 
+/* 添加#next-one的宽度样式 */
+#next-one {
+  width: 100%;
+  box-sizing: border-box;
+}
+
 .card-item {
   flex: 0 0 auto;
   max-width: 400px;
@@ -69,6 +75,12 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
+}
+
+/* 确保li3能够填满整个容器宽度 */
+.li1-box .content-li.li3 {
+  width: 100%;
+  flex: 1;
 }
 
 .li1-box-item{
