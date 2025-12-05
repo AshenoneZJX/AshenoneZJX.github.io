@@ -18,7 +18,7 @@ git add -A
 git commit -m 'deploy'
 
 # ⚠️ 注意：下面这行要换成你自己的仓库地址
-# 格式为: git push -f git@github.com:<USERNAME>/<REPO>.git master:gh-pages
-git push -f git@github.com:AshenoneZJX/AshenoneZJX.github.io.git master:gh-pages
+# 格式为: git push -f git@github.com:<USERNAME>/<REPO>.git main:gh-pages
+git push -f git@github.com:AshenoneZJX/AshenoneZJX.github.io.git main:gh-pages
 
 cd -
