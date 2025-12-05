@@ -8,9 +8,7 @@ module.exports = {
   
   // 因为您的仓库名是 AshenoneZJX.github.io，这是一个用户主页仓库
   // 所以通常直接部署在根路径下即可
-  publicPath: process.env.NODE_ENV === 'production'
-    ? '/' 
-    : '/',
+  publicPath: '/AshenoneZJX.github.io/',
 
   // 生产环境是否生成 sourceMap 文件
   productionSourceMap: false,
