@@ -8,6 +8,8 @@
   padding: 20px;
 }
 
+.kaig-bottm{display:none!important}
+
 /* 添加#next-one的宽度样式 */
 #next-one {
   width: 100%;
@@ -226,4 +228,23 @@ h6{
   .li2-box li{
     width: 100%;
   }
+}
+:root{
+  --backColor:#0f1d2e;
+  --bagColor:#0f1d2e;
+  --borderline:#223a4a;
+  --headerCOlor:#16202a;
+  --headerhover:rgba(22,32,42,.9);
+  --headerFont:#c7d5e0;
+  --fontColor:#c7d5e0;
+  --mainColor:#66c0f4;
+  --navbarBg:#1b2838;
+  --cardBg:linear-gradient(180deg, rgba(17,25,35,0.85), rgba(17,25,35,0.65));
+  --cardBorder:rgba(102,192,244,.18);
+  --shadowDeep:0 10px 24px rgba(0,0,0,.35);
+}
+
+body{
+  background-color: var(--bagColor);
+  color: var(--headerFont);
 }
