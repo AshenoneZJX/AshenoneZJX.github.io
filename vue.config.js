@@ -8,30 +8,8 @@ module.exports = {
   
   // 因为您的仓库名是 AshenoneZJX.github.io，这是一个用户主页仓库
   // 所以通常直接部署在根路径下即可
-  publicPath: '/AshenoneZJX.github.io/',
+  publicPath: '/',
 
   // 生产环境是否生成 sourceMap 文件
   productionSourceMap: false,
-
-  // 简单的 webpack 配置
-  configureWebpack: {
-    resolve: {
-      alias: {
-        // 可以在这里配置别名，虽然 @ 默认已经指向 src 了
-        'assets': '@/assets',
-        'components': '@/components',
-        'views': '@/views',
-      }
-    }
-  },
-  
-  // 开发服务器配置
-  devServer: {
-    port: 8080, // 端口号
-    open: true, // 启动后自动打开浏览器
-    overlay: {
-      warnings: false,
-      errors: true
-    }
-  }
 }
