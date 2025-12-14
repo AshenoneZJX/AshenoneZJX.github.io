@@ -151,24 +151,4 @@ export default {
 .tag-cat { border-color: #c7d5e0; color: #c7d5e0; background: rgba(199,213,224,0.10); }
 .record-item.clickable { cursor: pointer; }
 .record-excerpt { font-size: 13px; color: #8f98a0; }
-/* 
-.todo-list {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  margin-top: 10px;
-  color: #8f98a0;
-  font-size: 14px;
-}
-
-.todo-list label {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  cursor: pointer;
-}
-
-.todo-list input[type="checkbox"] {
-  accent-color: #66c0f4;
-} */
 </style>
