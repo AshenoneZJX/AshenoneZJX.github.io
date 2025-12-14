@@ -3,6 +3,11 @@ import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import Cars from '../views/Cars.vue'
 import Records from '../views/Records.vue'
+import RecordDetail from '../views/RecordDetail.vue'
+import MySpace from '../views/MySpace.vue'
+import MySpaceOverview from '../views/MySpaceOverview.vue'
+import Digital from '../views/Digital.vue'
+import Photography from '../views/Photography.vue'
 
 Vue.use(VueRouter)
 
@@ -13,14 +18,24 @@ const routes = [
     component: Home
   },
   {
-    path: '/cars',
-    name: 'Cars',
-    component: Cars
+    path: '/mySpace',
+    component: MySpace,
+    children: [
+      { path: '', name: 'MySpace', component: MySpaceOverview },
+      { path: 'cars', name: 'Cars', component: Cars },
+      { path: 'digital', name: 'Digital', component: Digital },
+      { path: 'photography', name: 'Photography', component: Photography }
+    ]
   },
   {
     path: '/records',
     name: 'Records',
     component: Records
+  },
+  {
+    path: '/records/:id',
+    name: 'RecordDetail',
+    component: RecordDetail
   }
 ]
 

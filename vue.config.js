@@ -12,4 +12,11 @@ module.exports = {
 
   // 生产环境是否生成 sourceMap 文件
   productionSourceMap: false,
+  chainWebpack: config => {
+    config.module
+      .rule('md')
+      .test(/\.md$/)
+      .use('raw-loader')
+      .loader('raw-loader')
+  }
 }

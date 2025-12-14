@@ -6,7 +6,7 @@
       </div>
       <div class="nav-links">
         <router-link to="/" exact tag="button">主页</router-link>
-        <router-link to="/cars" tag="button">汽车</router-link>
+        <router-link to="/mySpace" tag="button">MySpace</router-link>
         <router-link to="/records" tag="button">记录</router-link>
       </div>
     </div>
@@ -37,11 +37,11 @@
 }
 
 .logo {
+  font-family: var(--title-font);
   font-size: 24px;
-  font-weight: 700;
-  color: #c6d4df;
-  /* text-transform: uppercase; */
-  letter-spacing: 1px;
+  font-weight: 300;
+  color: #ffffff;
+  letter-spacing: 2px;
   display: flex;
   align-items: center;
 }

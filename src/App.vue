@@ -25,6 +25,10 @@ export default {
 </script>
 
 <style>
+@font-face { font-family: 'MotivaTitle'; font-style: normal; font-weight: 400; font-display: swap; src: url('./assets/fonts/MotivaSans-Regular_woff.ttf') format('truetype'); }
+h2 { color: #fff; font-weight: 300; letter-spacing: 2px; }
+:root { --title-font: 'MotivaTitle', "Motiva Sans", "Helvetica Neue", Helvetica, Arial, sans-serif; }
+h1, h2, h3, .logo, .section-header h2, .panel-header { font-family: var(--title-font); }
 /* --- 全局样式重置 --- */
 * {
   box-sizing: border-box;
