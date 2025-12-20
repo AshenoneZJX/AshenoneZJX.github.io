@@ -53,6 +53,8 @@ export default {
     }
   },
   computed: {
+    
+    // 从记录中提取所有分类，并添加“All”选项供筛选
     categories() {
       const set = new Set(this.records.map(r => r.category))
       return ['All', ...Array.from(set)]
