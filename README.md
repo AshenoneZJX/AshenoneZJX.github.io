@@ -33,4 +33,8 @@ npm install
 
 # 开发启动
 npm run serve
+
+# 同步部署到 GitHub Pages
+1. npm run build
+2. sh deploy.sh
 ```

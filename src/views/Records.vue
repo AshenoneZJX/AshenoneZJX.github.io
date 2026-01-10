@@ -13,17 +13,19 @@
         <span class="filter-icon" aria-hidden="true">
           <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M3 5h18l-7 8v5l-4 3v-8z"/></svg>
         </span>
-        <span v-for="cat in categories" :key="cat" :class="{ active: activeCategory === cat }" @click="setCategory(cat)">{{ cat }}</span>
+        <button
+          v-for="cat in categories"
+          :key="cat"
+          class="filter-btn"
+          :class="{ active: activeCategory === cat }"
+          @click="setCategory(cat)"
+        >{{ cat }}</button>
       </div>
     </div>
 
     <div class="record-list">
 
       <div class="record-item clickable" v-for="rec in filteredRecords" :key="rec.id" @click="goDetail(rec)">
-        <div class="record-date-box">
-          <span class="month">{{ monthAbbr(rec.date) }}</span>
-          <span class="day">{{ dayOfMonth(rec.date) }}</span>
-        </div>
         <div class="record-content">
           <div class="record-title">{{ rec.title }}</div>
           <div class="record-tags">
@@ -111,15 +113,26 @@ export default {
   margin-bottom: 20px;
 }
 
-.filters span {
-  margin-left: 12px;
+.filters { display: flex; align-items: center; flex-wrap: nowrap; white-space: nowrap; }
+.filter-icon { display: inline-flex; align-items: center; color: #66c0f4; margin-right: 10px; pointer-events: none; }
+.filter-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 26px;
+  padding: 0 14px;
+  border-radius: 0px;
+  border: 1px solid #3c4551;
+  background: #263545;
+  color: #c7d5e0;
+  font-size: 13px;
+  margin: 0;
   cursor: pointer;
-  font-size: 14px;
 }
-.filters span:hover, .filters span.active { color: #fff; }
+.filter-btn:hover { background: #2e4156; color: #e6f3ff; }
+.filter-btn.active { background: #3b5f76; border-color: #66c0f4; color: #ffffff; }
 
-.filters { display: flex; align-items: center; }
-.filter-icon { display: inline-flex; align-items: center; color: #66c0f4; margin-right: 10px; }
+.filters::-webkit-scrollbar { display: none; }
 
 /* 列表布局核心 */
 .record-list { display: flex; flex-direction: column; gap: 8px; }
@@ -132,25 +145,31 @@ export default {
 }
 .record-item:hover { background: #222b35; }
 
-.record-date-box {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 60px;
-  margin-right: 20px;
-  border-right: 1px solid #38424e;
-  padding-right: 15px;
-}
 .month { color: #8f98a0; font-size: 12px; }
 .day { color: #66c0f4; font-size: 24px; font-weight: bold; }
 
-.record-title { color: #ffffff; font-size: 20px; font-weight: 600; margin-bottom: 4px; }
+.record-title { color: #66c0f4; font-size: 20px; font-weight: 600; margin-bottom: 4px; }
 .record-tags { display: flex; gap: 8px; flex-wrap: wrap; margin: 6px 0 10px; }
-.tag { display: inline-block; padding: 2px 8px; border-radius: 2px; font-size: 12px; border: 1px solid #3c4551; color: #c7d5e0; background: rgba(102,192,244,0.12); }
+.tag { display: inline-flex; align-items: center; padding: 4px 10px; border-radius: 2px; font-size: 12px; border: 1px solid #3c4551; color: #c7d5e0; background: rgba(102,192,244,0.10); }
 .tag-title { border-color: #66c0f4; color: #ffffff; background: rgba(102,192,244,0.18); }
-.tag-date { border-color: #a1cf70; color: #a1cf70; background: rgba(161,207,112,0.12); }
-.tag-cat { border-color: #c7d5e0; color: #c7d5e0; background: rgba(199,213,224,0.10); }
+.tag-date {
+  background: transparent;
+  border: none;
+  padding: 0;
+  color: #c7d5e0;
+  pointer-events: none;
+}
+.tag-cat {
+  background: rgba(102,192,244,0.16);
+  color: #e6f3ff;
+  border: 1px solid rgba(103,193,245,0.50);
+  border-radius: 9999px;
+  padding: 4px 14px;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.06);
+  pointer-events: none;
+}
 .record-item.clickable { cursor: pointer; }
 .record-excerpt { font-size: 13px; color: #8f98a0; }
 </style>

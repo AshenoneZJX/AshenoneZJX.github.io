@@ -1,0 +1,171 @@
+[
+  {
+    "id": 1,
+    "title": "本田 思域",
+    "img": "https://p3.dcarimg.com/img/motor-mis-img/43781dd9b828e478472d302877167f4e~2508x0.webp",
+    "energy": ["燃油", "混动"],
+    "body": "轿车",
+    "intro": "本田思域（Civic）是一款紧凑型轿车，以运动操控与高效节能著称。提供燃油与混合动力（e:HEV）版本，1.5T发动机与CVT/AT变速器，前麦弗逊/后多连杆悬架，配备Honda SENSING安全辅助与智能互联系统，兼顾日常通勤与驾控乐趣。",
+    "specs": {
+      "dimensions": "长4674mm × 宽1802mm × 高1415mm，轴距2735mm，整备质量约1350kg",
+      "engine": "1.5T L4 VTEC Turbo 182PS",
+      "transmission": "CVT/6AT",
+      "chassis": "前麦弗逊、后多连杆，前置前驱"
+    }
+  },
+  {
+    "id": 2,
+    "title": "特斯拉 Model 3",
+    "img": "https://images.unsplash.com/photo-1536700503339-1e4b06520771?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=60",
+    "energy": "纯电",
+    "body": "轿车",
+    "intro": "特斯拉Model 3是一款中型纯电轿车，以极简设计、长续航与智能辅助驾驶著称。采用全铝车身与纯电平台，后置/双电机四驱，零百加速最快3.3s，CLTC续航最高713km，标配Autopilot与OTA升级，兼顾家用与科技体验。",
+    "specs": {
+      "dimensions": "长4694mm × 宽1850mm × 高1443mm，轴距2875mm，整备质量约1761kg",
+      "engine": "后置永磁同步电机 / 前后双电机（Performance） 283-450PS",
+      "transmission": "单速固定齿比",
+      "chassis": "前双叉臂、后多连杆，后置后驱/双电机四驱"
+    }
+  },
+  {
+    "id": 3,
+    "title": "本田 雅阁",
+    "img": "https://p3.dcarimg.com/img/motor-mis-img/DCP_c7377bbfc31b691024e86003974cfd78~2508x0.webp",
+    "energy": ["燃油", "混动"],
+    "body": "轿车",
+    "intro": "本田雅阁（Accord）是一款中型轿车，以舒适空间与高效动力著称。提供燃油与混合动力（e:HEV）版本，1.5T/2.0L发动机匹配CVT/E-CVT变速器，前麦弗逊/后多连杆悬架，配备Honda SENSING安全辅助与Honda CONNECT智能互联，兼顾商务与家用需求。",
+    "specs": {
+      "dimensions": "长4906mm × 宽1862mm × 高1449mm，轴距2830mm，整备质量约1500kg",
+      "engine": "1.5T L4 VTEC Turbo / 2.0L 阿特金森循环 + 电机 194PS / 207PS",
+      "transmission": "CVT / E-CVT",
+      "chassis": "前麦弗逊、后多连杆，前置前驱"
+    }
+  },
+  {
+    "id": 4,
+    "title": "大众 速腾",
+    "img": "https://p3.dcarimg.com/img/motor-mis-img/DCP_0092b5b95af205e296eb9fcd06376610~2508x0.webp",
+    "energy": "燃油",
+    "body": "轿车",
+    "intro": "大众速腾（Sagitar）是一款紧凑型轿车，以稳重设计、宽敞空间与德系操控著称。提供燃油与混合动力版本，1.2T/1.4T发动机匹配5MT/7DSG变速器，前麦弗逊/后多连杆悬架，配备IQ.Drive安全辅助与MIB智能互联，兼顾家用与商务出行。",
+    "specs": {
+      "dimensions": "长4791mm × 宽1801mm × 高1465mm，轴距2731mm，整备质量约1380kg",
+      "engine": "1.2T/1.4T L4 涡轮增压 116PS / 150PS",
+      "transmission": "5MT / 7DSG",
+      "chassis": "前麦弗逊、后多连杆，前置前驱"
+    }
+  },
+  {
+    "id": 5,
+    "title": "大众 迈腾",
+    "img": "https://p3.dcarimg.com/img/motor-mis-img/DCP_a13b1bf7cc76b97e32e4f6e58b7cf234~2508x0.webp",
+    "energy": "燃油",
+    "body": "轿车",
+    "intro": "大众迈腾（Magotan）是一款中型轿车，以稳重商务与舒适驾乘著称。提供1.4T/2.0T发动机匹配7DSG变速器，前麦弗逊/后多连杆悬架，配备IQ.Drive安全辅助与MIB智能互联，兼顾商务接待与家用出行。",
+    "specs": {
+      "dimensions": "长4866mm × 宽1832mm × 高1464mm，轴距2871mm，整备质量约1540kg",
+      "engine": "1.4T/2.0T L4 涡轮增压 150PS / 220PS",
+      "transmission": "7DSG",
+      "chassis": "前麦弗逊、后多连杆，前置前驱"
+    }
+  },
+  {
+    "id": 6,
+    "title": "长城 哈弗大狗",
+    "img": "https://p3.dcarimg.com/img/motor-mis-img/DCP_379cc0453680553ee61d47a5ce8c13a2~2508x0.webp",
+    "energy": "燃油",
+    "body": "SUV",
+    "intro": "哈弗大狗是长城汽车旗下紧凑型SUV，以硬朗复古造型与全地形能力著称。提供1.5T/2.0T发动机匹配7DCT变速器，部分车型带博格华纳第五代智能四驱+后桥差速锁，配备L2级智能驾驶与Coffee OS智能座舱，兼顾城市通勤与轻度越野。",
+    "specs": {
+      "dimensions": "长4620mm × 宽1890mm × 高1780mm，轴距2738mm，整备质量约1580kg",
+      "engine": "1.5T/2.0T L4 涡轮增压 184PS / 211PS",
+      "transmission": "7DCT",
+      "chassis": "前麦弗逊、后多连杆，前置前驱/智能四驱"
+    }
+  },
+  {
+    "id": 7,
+    "title": "特斯拉 Model Y",
+    "img": "https://p3.dcarimg.com/img/motor-mis-img/DCP_087c87c159092e01db409d8d61bcf745~1200x0.webp",
+    "energy": "纯电",
+    "body": "SUV",
+    "intro": "特斯拉Model Y是一款中型纯电SUV，以极简设计、长续航与智能辅助驾驶著称。采用全铝车身与纯电平台，后置/双电机四驱，零百加速最快3.7s，CLTC续航最高688km，标配Autopilot与OTA升级，兼顾家用与科技体验。",
+    "specs": {
+      "dimensions": "长4750mm × 宽1921mm × 高1624mm，轴距2890mm，整备质量约1997kg",
+      "engine": "后置永磁同步电机 / 前后双电机（Performance） 299-486PS",
+      "transmission": "单速固定齿比",
+      "chassis": "前双叉臂、后多连杆，后置后驱/双电机四驱"
+    }
+  },
+  {
+    "id": 8,
+    "title": "宝马 3系",
+    "img": "https://p3.dcarimg.com/img/tos-cn-i-dcdx/5882ef00ae474ee4b07710eb4106b16c~1200x0.webp",
+    "energy": "燃油",
+    "body": "轿车",
+    "intro": "宝马3系（BMW 3 Series）是一款中型豪华轿车，以运动操控与豪华质感著称。提供1.5T/2.0T发动机匹配8AT变速器，前双球节/后多连杆悬架，配备BMW Personal CoPilot驾驶辅助与iDrive智能互联，兼顾驾驶乐趣与日常通勤。",
+    "specs": {
+      "dimensions": "长4709mm × 宽1827mm × 高1435mm，轴距2851mm，整备质量约1480kg",
+      "engine": "1.5T/2.0T L4 涡轮增压 156PS / 184PS / 258PS",
+      "transmission": "8AT",
+      "chassis": "前双球节弹簧减振支柱、后多连杆，前置后驱/四驱"
+    }
+  }
+  ,
+  {
+    "id": 9,
+    "title": "奥迪 A4L",
+    "img": "https://p3.dcarimg.com/img/motor-mis-img/DCP_869333979fc804260178ec37db0c3f75~1200x0.webp",
+    "energy": "燃油",
+    "body": "轿车",
+    "intro": "奥迪A4L（Audi A4L）是一款中型豪华轿车，以科技感与舒适驾乘著称。提供2.0T发动机匹配7DCT变速器，前五连杆/后五连杆悬架，配备Audi Pre Sense安全辅助与MMI智能互联，兼顾商务与家用需求。",
+    "specs": {
+      "dimensions": "长4858mm × 宽1847mm × 高1439mm，轴距2908mm，整备质量约1645kg",
+      "engine": "2.0T L4 涡轮增压 190PS / 245PS",
+      "transmission": "7DCT",
+      "chassis": "前五连杆、后五连杆，前置前驱/四驱"
+    }
+  },
+  {
+    "id": 10,
+    "title": "奔驰 C级L",
+    "img": "https://p3.dcarimg.com/img/motor-mis-img/DCP_9971a28555ae44a5c5d80ed2ad99a194~2508x0.webp",
+    "energy": "燃油",
+    "body": "轿车",
+    "intro": "奔驰C级L（Mercedes-Benz C-Class L）是一款中型豪华轿车，以优雅设计与舒适驾乘著称。提供1.5T/2.0T发动机匹配9AT变速器，前多连杆/后多连杆悬架，配备MBUX智能互联与主动安全辅助，兼顾商务与家用需求。",
+    "specs": {
+      "dimensions": "长4882mm × 宽1820mm × 高1461mm，轴距2954mm，整备质量约1650kg",
+      "engine": "1.5T/2.0T L4 涡轮增压 170PS / 204PS / 258PS",
+      "transmission": "9AT",
+      "chassis": "前多连杆、后多连杆，前置后驱/四驱"
+    }
+  },
+  {
+    "id": 11,
+    "title": "奔驰 E级L",
+    "img": "https://p3.dcarimg.com/img/motor-mis-img/DCP_dfe9599b870c550cab688433d0f5f9a1~2508x0.webp",
+    "energy": "燃油",
+    "body": "轿车",
+    "intro": "奔驰E级L（Mercedes-Benz E-Class L）是一款中大型豪华轿车，以豪华质感与行政舒适著称。提供2.0T发动机匹配9AT变速器，前多连杆/后多连杆悬架，配备MBUX智能互联与L2级驾驶辅助，兼顾商务接待与高端家用。",
+    "specs": {
+      "dimensions": "长5078mm × 宽1860mm × 高1490mm，轴距3079mm，整备质量约1780kg",
+      "engine": "2.0T L4 涡轮增压 197PS / 258PS",
+      "transmission": "9AT",
+      "chassis": "前多连杆、后多连杆，前置后驱/四驱"
+    }
+  },
+  {
+    "id": 12,
+    "title": "奔驰 S级L",
+    "img": "https://p3.dcarimg.com/img/motor-mis-img/DCP_3e1b9733f3b9363d2a69d9c153b8cbca~2508x0.webp",
+    "energy": "燃油",
+    "body": "轿车",
+    "intro": "奔驰S级L（Mercedes-Benz S-Class L）是一款大型旗舰豪华轿车，以极致舒适与尖端科技著称。提供3.0T L6发动机匹配9AT变速器，前双叉臂/后多连杆悬架，配备MBUX后排娱乐与L3级驾驶辅助，定义行政与豪华出行新标准。",
+    "specs": {
+      "dimensions": "长5320mm × 宽1921mm × 高1503mm，轴距3216mm，整备质量约2130kg",
+      "engine": "3.0T L6 涡轮增压 + 48V轻混 313PS / 367PS",
+      "transmission": "9AT",
+      "chassis": "前双叉臂、后多连杆，前置后驱/四驱"
+    }
+  }
+]

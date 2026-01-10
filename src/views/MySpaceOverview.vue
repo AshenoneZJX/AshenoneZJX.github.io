@@ -15,29 +15,26 @@
         <div class="card-image" :style="bg('https://images.unsplash.com/photo-1692450931594-e076fcdb896f?q=80&w=2832&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')">
           <div class="hover-overlay">汽车 Cars</div>
         </div>
-        <div class="card-info">
-          <div class="card-title">汽车收藏</div>
-          <div class="card-tags"><span class="tag">Sport</span><span class="tag">V8</span></div>
-        </div>
+        
       </router-link>
 
       <router-link class="gallery-card" to="/mySpace/digital">
         <div class="card-image" :style="bg('https://images.unsplash.com/photo-1525547719571-a2d4ac8945e2?q=80&w=3164&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')">
           <div class="hover-overlay">数码 Digital</div>
         </div>
-        <div class="card-info">
-          <div class="card-title">数码设备</div>
-          <div class="card-tags"><span class="tag">Laptop</span><span class="tag">Mobile</span></div>
-        </div>
+        
       </router-link>
 
       <router-link class="gallery-card" to="/mySpace/photography">
         <div class="card-image" :style="bg('https://images.unsplash.com/photo-1590486803833-1c5dc8ddd4c8?q=80&w=774&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')">
           <div class="hover-overlay">摄影 Photography</div>
         </div>
-        <div class="card-info">
-          <div class="card-title">摄影器材</div>
-          <div class="card-tags"><span class="tag">Camera</span><span class="tag">Lens</span></div>
+        
+      </router-link>
+      
+      <router-link class="gallery-card" to="/mySpace/car-basics">
+        <div class="card-image" :style="bg('https://images.unsplash.com/photo-1516738901179-3bb3d15f9f48?q=80&w=2846&auto=format&fit=crop&ixlib=rb-4.1.0')">
+          <div class="hover-overlay">汽车基础知识 Car Basics</div>
         </div>
       </router-link>
     </div>
@@ -78,7 +75,4 @@ export default {
 .card-image { height: 160px; background-size: cover; background-position: center; position: relative; }
 .hover-overlay { position: absolute; bottom: 0; left: 0; right: 0; padding: 8px 12px; background: rgba(0,0,0,0.5); color: #fff; font-weight: 600; letter-spacing: 1px; }
 
-.card-info { padding: 12px; }
-.card-title { color: #66c0f4; margin-bottom: 5px; font-weight: bold; }
-.card-tags .tag { display: inline-block; background: #344658; color: #fff; font-size: 10px; padding: 2px 5px; margin-right: 5px; }
 </style>

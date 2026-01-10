@@ -9,6 +9,7 @@ import MySpaceOverview from '../views/MySpaceOverview.vue'
 import Digital from '../views/Digital.vue'
 import Photography from '../views/Photography.vue'
 import CarDetail from '../views/CarDetail.vue'
+import CarBasics from '../views/CarBasics.vue'
 
 Vue.use(VueRouter)
 
@@ -26,7 +27,8 @@ const routes = [
       { path: 'cars', name: 'Cars', component: Cars },
       { path: 'cars/:id', name: 'CarDetail', component: CarDetail },
       { path: 'digital', name: 'Digital', component: Digital },
-      { path: 'photography', name: 'Photography', component: Photography }
+      { path: 'photography', name: 'Photography', component: Photography },
+      { path: 'car-basics', name: 'CarBasics', component: CarBasics }
     ]
   },
   {
