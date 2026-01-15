@@ -5,29 +5,21 @@
       <button class="back-btn" @click="$router.push('/mySpace')">返回总览</button>
     </div>
     <div class="divider"></div>
-    <div class="basics-grid">
-      <div class="basics-card">
-        <div class="card-title">车身与尺寸</div>
-        <div class="card-content">
-          <p>了解长宽高、轴距与整备质量的含义与作用。</p>
-        </div>
-      </div>
-      <div class="basics-card">
-        <div class="card-title">动力与传动</div>
-        <div class="card-content">
-          <p>常见发动机、电机参数与变速箱类型的区别。</p>
-        </div>
-      </div>
-      <div class="basics-card">
-        <div class="card-title">底盘与悬架</div>
-        <div class="card-content">
-          <p>麦弗逊、双叉臂、多连杆等悬架形式的特点。</p>
-        </div>
-      </div>
-      <div class="basics-card">
-        <div class="card-title">能源类型</div>
-        <div class="card-content">
-          <p>燃油、混动与纯电的优缺点与使用场景。</p>
+
+    
+
+    <div class="record-list">
+      <div
+        class="record-item clickable"
+        v-for="art in items"
+        :key="art.id"
+        @click="goDetail(art)"
+      >
+        <div class="record-content">
+          <div class="record-title">{{ art.title }}</div>
+          <div class="record-excerpt">
+            {{ art.excerpt || toExcerpt(art.content) }}
+          </div>
         </div>
       </div>
     </div>
@@ -35,8 +27,27 @@
 </template>
 
 <script>
+import carBasics from '@/data/carBasics'
+
 export default {
-  name: 'CarBasics'
+  name: 'CarBasics',
+  data() {
+    return {
+      items: carBasics
+    }
+  },
+  computed: {
+  },
+  methods: {
+    toExcerpt(text) {
+      if (!text) return ''
+      const t = String(text).replace(/\n/g, ' ')
+      return t.length > 120 ? t.slice(0, 120) + '…' : t
+    },
+    goDetail(art) {
+      this.$router.push({ name: 'CarBasicsDetail', params: { id: art.id } })
+    }
+  }
 }
 </script>
 
@@ -44,10 +55,22 @@ export default {
 .section-header { display: flex; justify-content: space-between; align-items: center; }
 .section-header h2 { color: #fff; font-weight: 300; letter-spacing: 2px; }
 .divider { height: 2px; background: #2a475e; margin: 10px 0 20px 0; }
-.back-btn { background: #2a475e; border: 1px solid #3c4551; color: #c7d5e0; padding: 6px 12px; cursor: pointer; }
-.back-btn:hover { color: #fff; border-color: #66c0f4; }
-.basics-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 16px; }
-.basics-card { background: #16202d; border: 1px solid #3c4551; padding: 12px; }
-.card-title { color: #66c0f4; font-weight: 600; margin-bottom: 8px; }
-.card-content p { color: #c7d5e0; line-height: 1.7; }
+.back-btn { background: transparent; border: none; color: #c7d5e0; padding: 6px 12px; cursor: pointer; border-radius: 6px; }
+.back-btn:hover { color: #e6f3ff; background: rgba(102,192,244,0.12); }
+.back-btn:active, .back-btn.router-link-active { background: rgba(102,192,244,0.22); color: #ffffff; }
+
+ 
+
+.record-list { display: flex; flex-direction: column; gap: 8px; }
+.record-item {
+  display: flex;
+  background: rgba(0, 0, 0, 0.2);
+  padding: 15px;
+  transition: background 0.2s;
+}
+.record-item:hover { background: #222b35; }
+.record-item.clickable { cursor: pointer; }
+.record-content { flex: 1; }
+.record-title { color: #66c0f4; font-size: 20px; font-weight: 600; margin-bottom: 4px; }
+.record-excerpt { font-size: 13px; color: #8f98a0; }
 </style>

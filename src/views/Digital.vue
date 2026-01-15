@@ -46,8 +46,9 @@ export default {
 .page-digital { padding-top: 20px; }
 .section-header { display: flex; justify-content: space-between; align-items: flex-end; }
 .section-header h2 { color: #fff; font-weight: 300; letter-spacing: 2px; }
-.actions .back-btn { background: #2a475e; border: 1px solid #3c4551; color: #c7d5e0; padding: 6px 12px; cursor: pointer; }
-.actions .back-btn:hover { color: #fff; border-color: #66c0f4; }
+.actions .back-btn { background: transparent; border: none; color: #c7d5e0; padding: 6px 12px; cursor: pointer; border-radius: 6px; }
+.actions .back-btn:hover { color: #e6f3ff; background: rgba(102,192,244,0.12); }
+.actions .back-btn:active, .actions .back-btn.router-link-active { background: rgba(102,192,244,0.22); color: #ffffff; }
 .divider { height: 2px; background: #2a475e; margin: 10px 0 30px 0; }
 
 .gallery-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 20px; }

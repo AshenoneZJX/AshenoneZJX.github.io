@@ -18,18 +18,18 @@
       <div class="right-col content-panel">
         <div class="panel-header">站点介绍</div>
         <div class="steam-article">
-           <p>这是一个采用 Steam 风格的个人网站，整体沿用双栏布局与深色主题，以模块化方式呈现内容与项目。</p>
+           <p>这是一个采用 Steam 风格的个人网站，双栏布局与深色主题，模块化呈现个人资料、日志记录、车型数据库与主题空间。</p>
            <br>
            <h3>包含的功能与模块</h3>
-           <p>• 个人信息卡片（左侧）：展示头像、昵称、签名与社交链接，是固定的个人资料区。</p>
-           <p>• 活动记录（右侧）：以列表形式呈现日志条目，支持按分类筛选与查看摘要，点击进入详情页。</p>
-           <p>• 记录详情：阅读完整内容，查看日期与分类等元信息，便于归档与检索。</p>
-           <p>• 项目展示（Showcase）：用于展示精选项目或作品封面，强调当前重点方向。</p>
-           <p>• 筛选模块：左侧使用 SVG 图标作功能标识，后随矮宽按钮快速切换分类，按钮根据文字长度自适应。</p>
-           <p>• 主题与布局：双栏自适应布局，深色视觉与浅蓝高亮，移动端自动切换为单栏以保证可读性。</p>
+           <p>• 个人资料卡片（左侧）：固定展示头像、昵称、签名与社交链接。</p>
+           <p>• 活动记录（Records）：列表呈现日志条目，支持按分类筛选与摘要查看，点击进入详情页。</p>
+           <p>• 记录详情：完整阅读内容并查看日期、分类等元信息，便于归档与检索。</p>
+           <p>• 车辆数据库（Cars）：车型列表与参数图片，包含基础知识（CarBasics）与车型详情（CarDetail）。</p>
+           <p>• MYSPACE：汽车 / 电子数码 / 摄影主题页，聚合个人兴趣内容与记录。</p>
+           <p>• 主题与布局：双栏自适应，深色视觉与浅蓝高亮；移动端自动切换为单栏以保证可读性。</p>
            <br>
            <h3>目的与作用</h3>
-           <p>通过统一的视觉与交互规范，将“日志记录、项目展示、个人资料”三个核心信息聚合在同一页面中，便于快速浏览与持续更新。</p>
+           <p>以统一的视觉与交互规范，将“日志记录、车型数据、主题空间与个人资料”聚合在同一页面中，便于快速浏览与持续更新。</p>
            <br>
            <h3>MYSPACE</h3>
            <p>个人主题空间，包含“汽车”“电子数码”“摄影”三个子页面：</p>
@@ -46,11 +46,6 @@
                <div class="card-title">摄影</div>
                <div class="card-desc">作品集与器材记录，展示精选照片与拍摄信息。</div>
              </div>
-           </div>
-           <div class="showcase-box">
-             <div class="showcase-title">Featured Project</div>
-             <div class="showcase-img" :style="{ backgroundImage: 'url(https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=1200&q=60)' }"></div>
-             <div class="showcase-desc">Steam 风格博客重构：双栏布局、活动记录与分类筛选、详情阅读与项目展示。</div>
            </div>
          </div>
       </div>
@@ -76,7 +71,7 @@ export default {
   margin-top: -40px; 
   height: 320px;
   background: linear-gradient(0deg, rgba(27,40,56,1) 0%, rgba(27,40,56,0) 100%), 
-              url('https://images.unsplash.com/photo-1511512578047-dfb367046420?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+              url('~@/assets/images/bg.png');
   background-size: cover;
   background-position: center;
   display: flex;
@@ -89,8 +84,8 @@ export default {
   text-align: center;
   background: rgba(0, 0, 0, 0.5);
   padding: 20px 40px;
-  backdrop-filter: blur(4px);
-  border: 1px solid #66c0f4;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
 }
 
 .quote { 
@@ -139,5 +134,17 @@ export default {
 @media (max-width: 768px) {
   .home-layout { flex-direction: column; }
   .left-col { width: 100%; }
+}
+
+/* 站点介绍正文与标题排版调整 */
+.steam-article p {
+  font-size: 14px;
+  line-height: 1.5;
+  margin: 6px 0;
+}
+.steam-article h3 {
+  font-size: 20px;
+  line-height: 1.4;
+  margin: 12px 0 8px;
 }
 </style>

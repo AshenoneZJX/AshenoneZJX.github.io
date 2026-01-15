@@ -33,7 +33,7 @@
       </router-link>
       
       <router-link class="gallery-card" to="/mySpace/car-basics">
-        <div class="card-image" :style="bg('https://images.unsplash.com/photo-1516738901179-3bb3d15f9f48?q=80&w=2846&auto=format&fit=crop&ixlib=rb-4.1.0')">
+        <div class="card-image" :style="bg('https://images.unsplash.com/photo-1645549047893-b0c6447aec2b?q=80&w=774&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')">
           <div class="hover-overlay">汽车基础知识 Car Basics</div>
         </div>
       </router-link>
