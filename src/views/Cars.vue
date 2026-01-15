@@ -269,7 +269,8 @@ export default {
   z-index: 1000;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1300px) {
+  /* 移动端：隐藏桌面端横向筛选条，改用底部抽屉式筛选 */
   .filters { display: none; }
   .filter-toggle.mobile-only { display: inline-flex; }
   .filter-sheet.mobile-only { display: block; }

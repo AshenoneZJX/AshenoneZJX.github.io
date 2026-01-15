@@ -125,13 +125,13 @@ export default {
 .card-title { font-size: 16px; font-weight: 600; margin-bottom: 6px; color: #66c0f4; }
 .card-desc { font-size: 13px; color: #c7d5e0; }
 
-@media (max-width: 768px) {
+@media (max-width: 1300px) {
   .myspace-grid { flex-direction: column; }
   .myspace-card { width: 100%; }
 }
 
 /* 响应式：手机端变为单栏 */
-@media (max-width: 768px) {
+@media (max-width: 1300px) {
   .home-layout { flex-direction: column; }
   .left-col { width: 100%; }
 }

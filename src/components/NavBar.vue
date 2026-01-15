@@ -152,7 +152,7 @@ export default {
   opacity: 1;
 }
 
-@media (max-width: 640px) {
+@media (max-width: 1300px) {
   .nav-container {
     max-width: 100%;
     padding: 0 12px;

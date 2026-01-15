@@ -280,7 +280,7 @@ export default {
 .not-found { color: #8f98a0; }
 
 /* 移动端适配：当视口宽度 ≤ 768px 时生效 */
-@media (max-width: 768px) {
+@media (max-width: 1300px) {
   /* 目录与正文不再左右分栏，改为上下堆叠 */
   .detail-layout { grid-template-columns: 1fr; }
   

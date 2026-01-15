@@ -301,7 +301,7 @@ export default {
 .panel-header { background: transparent; padding: 8px 0; border-bottom: 1px solid #38424e; }
 .mobile-only { display: none; }
 
-@media (max-width: 768px) {
+@media (max-width: 1300px) {
   .content-2col { flex-direction: column; }
   .col-left, .col-right { width: 100%; }
   .filter-toggle.mobile-only { display: inline-flex; }

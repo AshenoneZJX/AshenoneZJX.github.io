@@ -131,7 +131,7 @@ export default {
 
 .not-found { color: #8f98a0; }
 
-@media (max-width: 768px) {
+@media (max-width: 1300px) {
   .detail-body { padding: 16px; border-radius: 6px; }
   .content { font-size: 14px; line-height: 1.85; }
   .content :deep(h1) { font-size: 24px; margin: 16px 0 10px; }

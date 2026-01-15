@@ -309,7 +309,7 @@
     opacity: 1;
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: 1300px) {
     .hero { height: 280px; }
     .detail-content { margin-top: -70px; }
     .two-col { flex-direction: column; }
