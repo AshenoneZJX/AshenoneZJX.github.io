@@ -24,9 +24,9 @@ v2版本
 
 v3版本（最新版）
 > 优化多个页面的样式布局和交互，**新增移动端适配（重大更新）**
-桌面端：  
-![v3 移动端](./src/assets/images/showPic/index_v3_1.png)  
 移动端：  
+![v3 移动端](./src/assets/images/showPic/index_v3_1.jpeg)  
+桌面端：  
 ![v3 桌面端](./src/assets/images/showPic/index_v3_2.jpeg)
 
 </details>
