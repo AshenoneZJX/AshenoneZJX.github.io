@@ -8,7 +8,7 @@ const md = new MarkdownIt({
 })
 
 function loadMdBasics() {
-  const ctx = require.context('@/car-basics', false, /\.md$/)
+  const ctx = require.context('!!raw-loader!@/car-basics', false, /\.md$/)
   const items = ctx.keys().map(key => {
     const mod = ctx(key)
     const raw = typeof mod === 'string' ? mod : (mod && mod.default) || ''

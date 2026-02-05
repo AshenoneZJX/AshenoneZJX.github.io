@@ -1,40 +1,41 @@
 <template>
-  <div class="container page-car-basics-detail">
+  <div class="page-car-basics-detail">
     <div v-if="article">
-      <div class="top-actions">
-        <button
-          class="toc-toggle"
-          @click="toggleToc"
-          :aria-label="tocCollapsed ? '展开大纲' : '折叠大纲'"
-          :title="tocCollapsed ? '展开大纲' : '折叠大纲'"
-        >
-          <span
-            class="arrow-icon"
-            :class="tocCollapsed ? 'arrow-open' : 'arrow-close'"
-            :title="tocCollapsed ? '展开大纲' : '折叠大纲'"
-          ></span>
-          <span class="toc-label">{{ tocCollapsed ? '展开大纲' : '折叠大纲' }}</span>
-        </button>
+      <!-- 顶部操作行：独占一行 -->
+      <div class="top-actions-row">
+        <div class="spacer"></div>
         <router-link to="/mySpace/car-basics" class="back-btn">返回列表</router-link>
       </div>
-      <div class="detail-layout" :class="{ 'toc-hidden': tocCollapsed }">
-        <aside class="toc-sidebar">
-          <div class="toc-overview" v-show="!tocCollapsed">Overview</div>
-          <div class="toc-list" v-show="!tocCollapsed">
+
+      <div class="main-layout">
+        <!-- 左侧边栏：固定显示大纲 -->
+        <aside class="left-sidebar">
+          <div class="sidebar-title">大纲</div>
+          
+          <div class="toc-list">
             <div class="toc-section" v-for="sec in toc" :key="sec.id">
               <button class="toc-h2" @click="toggle(sec.id)">
-                <span class="caret" :class="{ open: !sec.collapsed }"></span>
+                <span v-if="sec.children && sec.children.length > 0" class="caret" :class="{ open: !sec.collapsed }"></span>
+                <span v-else class="caret-placeholder"></span>
                 <span class="toc-text">{{ sec.text }}</span>
               </button>
-              <div class="toc-h3-list" v-show="!sec.collapsed">
+              <div class="toc-h3-list" v-show="!sec.collapsed && sec.children && sec.children.length > 0">
                 <button class="toc-h3" v-for="it in sec.children" :key="it.id" @click="scrollTo(it.id)">{{ it.text }}</button>
               </div>
             </div>
           </div>
         </aside>
-      <div class="detail-body">
-          <div ref="contentRef" class="content" v-html="displayHtml"></div>
-      </div>
+
+        <!-- 中间内容区 -->
+        <main class="center-content">
+          <div class="detail-body">
+            <div ref="contentRef" class="content" v-html="displayHtml"></div>
+          </div>
+        </main>
+
+        <!-- 右侧边栏：占位，无内容 -->
+        <aside class="right-sidebar">
+        </aside>
       </div>
     </div>
 
@@ -54,17 +55,20 @@ export default {
     return {
       article: null,
       toc: [],
-      tocCollapsed: false,
       displayHtml: ''
     }
   },
   methods: {
-    toggleToc() {
-      this.tocCollapsed = !this.tocCollapsed
-    },
     toggle(id) {
       const sec = this.toc.find(s => s.id === id)
-      if (sec) sec.collapsed = !sec.collapsed
+      if (sec) {
+        // 如果没有子标题，点击直接滚动到该位置
+        if (!sec.children || sec.children.length === 0) {
+          this.scrollTo(sec.id)
+        } else {
+          sec.collapsed = !sec.collapsed
+        }
+      }
     },
     scrollTo(id) {
       const el = document.getElementById(id)
@@ -145,63 +149,91 @@ export default {
 </script>
 
 <style scoped>
-.page-car-basics-detail { padding-top: 20px; }
-.back-btn { background: transparent; border: none; color: #c7d5e0; cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; height: 28px; padding: 0 10px; font-size: 12px; border-radius: 6px; }
-.back-btn:hover { color: #e6f3ff; background: rgba(102,192,244,0.12); }
-.top-actions { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 14px; padding-bottom: 10px; border-bottom: 1px solid #38424e; }
-.detail-layout {
+.page-car-basics-detail { 
+  width: 100%;
+  max-width: 100%;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* 顶部操作行 */
+.top-actions-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 16px;
+  padding: 0 10px;
+  min-height: 32px; /* 保证高度，防止没有按钮时塌陷 */
+}
+
+.spacer {
+  flex: 1; /* 占据剩余空间，将右侧元素推到最右 */
+}
+
+.back-btn { 
+  background: rgba(102,192,244,0.12); /* 浅蓝灰色背景 */
+  border: 1px solid rgba(102,192,244,0.3); /* 边框 */
+  color: #66c0f4; /* 修改为主题蓝色 */
+  cursor: pointer; 
+  text-decoration: none; 
+  display: inline-flex; 
+  align-items: center; 
+  height: 32px; /* 增加高度 */
+  padding: 0 10px; /* 减小水平内边距 */
+  font-size: 15px; /* 再次调大字体 */
+  font-weight: 700; /* 加粗文字 */
+  border-radius: 6px; 
+  transition: all 0.2s ease;
+}
+.back-btn:hover { 
+  color: #66c0f4; /* 保持蓝色，或稍微加亮 */
+  background: rgba(102,192,244,0.25); /* 悬停加深背景 */
+  border-color: rgba(102,192,244,0.5); /* 悬停加深边框 */
+}
+
+/* 布局相关：改为三栏 Grid */
+.main-layout {
   display: grid;
-  grid-template-columns: 140px minmax(0, 1fr);
+  /* 左侧边栏 200px，中间自适应，右侧边栏 200px */
+  grid-template-columns: 200px minmax(0, 1fr) 200px;
   gap: 16px;
   position: relative;
+  align-items: start;
 }
-.detail-layout.toc-hidden { grid-template-columns: 1fr; }
-.detail-layout.toc-hidden .toc-sidebar { display: none; }
-.toc-sidebar {
+
+.left-sidebar {
   position: sticky;
   top: 80px;
-  align-self: start;
-  border: none;
   background: transparent;
+  border: none;
   border-radius: 0;
   padding: 0;
+  min-height: 200px;
 }
-.toc-toggle {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  height: 32px;
-  padding: 0 12px;
-  border-radius: 6px;
-}
-.toc-toggle:hover { background: rgba(102,192,244,0.12); }
-.arrow-icon {
-  width: 20px;
-  height: 20px;
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: 18px 18px;
-  display: inline-block;
-  margin: 0;
-}
-.arrow-open { background-image: url(~@/assets/images/zhankai.svg); }
-.arrow-close { background-image: url(~@/assets/images/zhedie.svg); }
-.back-btn {
-  height: 32px;
-  padding: 0 12px;
-  font-size: 13px;
-}
-.toc-label { color: #c7d5e0; font-size: 13px; }
-.toc-overview {
-  color: #c7d5e0;
-  font-size: 13px;
+
+.sidebar-title {
+  color: #66c0f4;
+  font-size: 16px; /* 增大字号 */
   font-weight: 700;
-  letter-spacing: 0.4px;
-  margin-bottom: 6px;
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+  border-bottom: 2px solid #38424e; /* 加粗下划线 */
+  letter-spacing: 0.5px; /* 增加字间距 */
 }
+
+.right-sidebar {
+  /* 仅作为占位 */
+  position: sticky;
+  top: 80px;
+  min-height: 200px;
+  /* 可以不设背景，或者设为透明 */
+  background: transparent; 
+}
+
+.center-content {
+  min-width: 0;
+}
+
+/* 目录样式 */
 .toc-list { display: flex; flex-direction: column; gap: 4px; }
 .toc-section { display: flex; flex-direction: column; }
 .toc-h2 {
@@ -218,8 +250,9 @@ export default {
   font-weight: 700;
   letter-spacing: 0.3px;
   text-transform: uppercase;
+  width: 100%;
 }
-.toc-h2:hover { color: #c7d5e0; }
+.toc-h2:hover { color: #66c0f4; text-decoration: underline; }
 .caret {
   width: 0; height: 0;
   border-left: 5px solid #8f98a0;
@@ -229,7 +262,13 @@ export default {
   transition: transform 0.15s;
 }
 .caret.open { transform: rotate(0deg); }
-.toc-text { flex: 1; font-size: 12px; }
+.caret-placeholder {
+  width: 5px; /* 与 caret 宽度一致 */
+  height: 10px;
+  display: inline-block;
+  margin-right: 0; /* 保持对齐 */
+}
+.toc-text { flex: 1; font-size: 13px; /* 增大文字字号 */ }
 .toc-h3-list { display: flex; flex-direction: column; margin: 4px 0 10px 16px; gap: 2px; }
 .toc-h3 {
   background: transparent;
@@ -240,18 +279,22 @@ export default {
   cursor: pointer;
   font-size: 12px;
   font-weight: 400;
+  width: 100%;
 }
-.toc-h3:hover { color: #66c0f4; }
+.toc-h3:hover { color: #66c0f4; text-decoration: underline; }
+
+/* 内容主体 */
 .detail-body { background: rgba(0,0,0,0.2); padding: 24px; border: 1px solid #38424e; border-radius: 6px; min-width: 0; }
+
 /* 文章分类标签样式 */
 .cat {
-  background: rgba(102,192,244,0.16); /* 背景色：半透明蓝色 */
-  color: #e6f3ff;                   /* 文字色：淡蓝白 */
-  border: 1px solid rgba(103,193,245,0.50); /* 边框：半透明蓝色 */
-  border-radius: 9999px;            /* 圆角：胶囊形状 */
-  padding: 4px 14px;                /* 内边距：上下4px，左右14px */
-  box-shadow: inset 0 1px 0 rgba(255,255,255,0.06); /* 内阴影：轻微高光 */
-  font-size: 12px;                  /* 字号：12px */
+  background: rgba(102,192,244,0.16);
+  color: #e6f3ff;
+  border: 1px solid rgba(103,193,245,0.50);
+  border-radius: 9999px;
+  padding: 4px 14px;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.06);
+  font-size: 12px;
 }
 
 .content { color: #cfe0ee; font-size: 14px; line-height: 1.9; overflow-wrap: anywhere; font-family: "Times New Roman", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans CJK SC", "Source Han Sans SC", sans-serif; }
@@ -279,32 +322,36 @@ export default {
 .content :deep(.mjx-container[display="true"]) { display: block; padding: 10px 12px; margin: 10px 0; }
 .not-found { color: #8f98a0; }
 
+/* 响应式调整：当宽度不足以容纳三栏时（例如 < 1200px），隐藏右侧占位栏 */
+@media (max-width: 1200px) {
+  .main-layout {
+    grid-template-columns: 200px minmax(0, 1fr); /* 移除右侧列定义 */
+  }
+  .right-sidebar {
+    display: none;
+  }
+}
+
 /* 移动端适配：当视口宽度 ≤ 768px 时生效 */
-@media (max-width: 1300px) {
-  /* 目录与正文不再左右分栏，改为上下堆叠 */
-  .detail-layout { grid-template-columns: 1fr; }
+@media (max-width: 768px) {
+  /* 移动端只显示中间内容，隐藏侧边栏 */
+  .main-layout {
+    display: block;
+  }
   
-  /* 目录侧边栏取消粘性定位，随文档流滚动 */
-  .toc-sidebar { position: relative; top: 0; }
+  .left-sidebar, .right-sidebar {
+    display: none !important;
+  }
   
-  /* 正文区域减少内边距，保证小屏可用空间 */
+  /* 正文区域减少内边距 */
   .detail-body { padding: 16px; border-radius: 6px; }
   
-  /* 基础字号略调小，行高更紧凑，提升阅读效率 */
   .content { font-size: 14px; line-height: 1.85; }
-  
-  /* 逐级缩小标题字号，保持层级清晰 */
   .content :deep(h1) { font-size: 24px; line-height: 1.3; margin: 16px 0 10px; }
   .content :deep(h2) { font-size: 20px; line-height: 1.25; margin: 14px 0 8px; }
   .content :deep(h3) { font-size: 18px; line-height: 1.2; font-weight: 700; }
-  
-  /* 表格横向可滚动，避免内容溢出撑破布局 */
   .content :deep(table) { display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; }
-  
-  /* 表头与单元格禁止换行，保持表格整齐 */
   .content :deep(th), .content :deep(td) { white-space: nowrap; }
-  
-  /* 代码块减少内边距，节省横向空间 */
   .content :deep(pre) { padding: 10px; }
 }
 </style>

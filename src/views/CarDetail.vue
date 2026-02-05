@@ -148,7 +148,25 @@
   </script>
 
   <style scoped>
-  .page-car-detail { padding-top: 20px; }
+@font-face {
+  font-family: 'SourceHanSansSC';
+  src: url('~@/assets/fonts/SourceHanSansSC-Regular-2.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'RobotoMono';
+  src: url('~@/assets/fonts/RobotoMono-VariableFont_wght.ttf') format('truetype');
+  font-weight: 100 900;
+  font-display: swap;
+}
+
+.page-car-detail {
+  padding-top: 20px;
+  font-family: 'SourceHanSansSC', sans-serif;
+}
   .section-header {
     display: flex;
     justify-content: space-between;
@@ -215,7 +233,7 @@
 
   .overlay-intro { color: #c7d5e0; line-height: 1.8; font-size: 15px; }
   .specs { border-top: none; padding-top: 0; }
-  .specs-box { background: rgba(27,40,56,0.55); border: 1px solid #3c4551; backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); border-radius: 6px; padding: 12px; font-family: Menlo, Monaco, Consolas, "Courier New", monospace; font-size: 13px; width: 100%; max-width: 480px; margin-left: auto; margin-right: 0; }
+  .specs-box { background: rgba(27,40,56,0.55); border: 1px solid #3c4551; backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); border-radius: 6px; padding: 12px; font-family: 'RobotoMono', Menlo, Monaco, Consolas, "Courier New", monospace, 'SourceHanSansSC', sans-serif; font-size: 13px; width: 100%; max-width: 480px; margin-left: auto; margin-right: 0; }
   .spec-grid { display: grid; grid-template-columns: 1fr; gap: 8px; }
   .spec-group { display: grid; grid-template-columns: max-content 1fr; gap: 8px; align-items: start; }
   .group-label { color: #8f98a0; font-size: 14px; font-weight: 400; margin: 0; text-align: left; align-self: center; }
@@ -309,7 +327,7 @@
     opacity: 1;
   }
 
-  @media (max-width: 1300px) {
+  @media (max-width: 768px) {
     .hero { height: 280px; }
     .detail-content { margin-top: -70px; }
     .two-col { flex-direction: column; }

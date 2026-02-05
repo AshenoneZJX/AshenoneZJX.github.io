@@ -9,14 +9,16 @@
       </button>
       <div class="nav-links">
         <router-link to="/" exact tag="button">主页</router-link>
-        <router-link to="/mySpace" tag="button">MySpace</router-link>
+        <router-link to="/mySpace" tag="button">个人空间</router-link>
         <router-link to="/records" tag="button">记录</router-link>
+        <router-link to="/learning" tag="button">Learning</router-link>
       </div>
       <transition name="slide-down">
         <div v-if="isOpen" class="mobile-menu">
           <router-link @click.native="isOpen = false" to="/" exact tag="button">主页</router-link>
-          <router-link @click.native="isOpen = false" to="/mySpace" tag="button">MySpace</router-link>
+          <router-link @click.native="isOpen = false" to="/mySpace" tag="button">个人空间</router-link>
           <router-link @click.native="isOpen = false" to="/records" tag="button">记录</router-link>
+          <router-link @click.native="isOpen = false" to="/learning" tag="button">Learning</router-link>
         </div>
       </transition>
     </div>
@@ -41,7 +43,9 @@ export default {
   left: 0;
   width: 100%;
   height: 80px;
-  background-color: #171a21;
+  background-color: rgba(23, 26, 33, 0.9);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
   z-index: 1000;
   box-shadow: 0 0 10px rgba(0,0,0,0.5);
   display: flex;
@@ -50,7 +54,7 @@ export default {
 }
 
 .nav-container {
-  width: 940px;
+  width: 100%;
   max-width: 96%;
   display: flex;
   justify-content: space-between;
@@ -105,6 +109,8 @@ export default {
 /* Vue Router 激活时的类名 */
 .nav-links button.router-link-active {
   color: #66c0f4;
+  background-color: rgba(102, 192, 244, 0.2);
+  border-radius: 4px;
   border-bottom: 3px solid #66c0f4;
 }
 
@@ -152,7 +158,7 @@ export default {
   opacity: 1;
 }
 
-@media (max-width: 1300px) {
+@media (max-width: 768px) {
   .nav-container {
     max-width: 100%;
     padding: 0 12px;

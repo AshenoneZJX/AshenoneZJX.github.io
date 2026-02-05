@@ -1,0 +1,51 @@
+<!-- Learning 总览页面：展示学习模块入口 -->
+
+<template>
+  <div class="page-learning">
+    <div class="section-header">
+      <h2>Learning</h2>
+      <div class="divider"></div>
+    </div>
+
+    <div class="gallery-grid">
+      <router-link class="gallery-card" to="/learning/ielts">
+        <div class="card-image" :style="bg('https://images.unsplash.com/photo-1520975922287-5ae3a0e18e82?q=80&w=2767&auto=format&fit=crop&ixlib=rb-4.1.0')">
+          <div class="hover-overlay">雅思 IELTS</div>
+        </div>
+      </router-link>
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+  name: 'LearningOverview',
+  methods: {
+    bg(url) {
+      return { backgroundImage: `url(${url})` }
+    }
+  }
+}
+</script>
+
+<style scoped>
+.page-learning { padding-top: 20px; }
+.section-header h2 { color: #fff; font-weight: 300; letter-spacing: 2px; }
+.divider { height: 2px; background: #2a475e; margin: 10px 0 30px 0; }
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 20px;
+}
+.gallery-card {
+  background: #16202d;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+  transition: transform 0.2s;
+  cursor: pointer;
+  text-decoration: none;
+}
+.gallery-card:hover { transform: translateY(-5px); }
+.card-image { height: 160px; background-size: cover; background-position: center; position: relative; }
+.hover-overlay { position: absolute; bottom: 0; left: 0; right: 0; padding: 8px 12px; background: rgba(0,0,0,0.5); color: #fff; font-weight: 600; letter-spacing: 1px; }
+</style>

@@ -27,6 +27,32 @@
         </div>
       </div>
       <aside class="filters-panel col-right mobile-sheet" :class="{ active: filterOpen }">
+        <div class="panel-section stats-card">
+          <div class="stats-row">
+             <div class="stat-item">
+                <span class="stat-num">{{ totalNoteCount }}</span>
+                <span class="stat-label">笔记数</span>
+             </div>
+             <div class="stat-item">
+                <span class="stat-num">{{ totalTagCount }}</span>
+                <span class="stat-label">标签数</span>
+             </div>
+          </div>
+          <div class="heatmap-container">
+             <div class="heatmap-header">
+                <button class="heatmap-nav" @click="changeYear(-1)">←</button>
+                <span class="heatmap-year">{{ heatmapYear }}</span>
+                <button class="heatmap-nav" @click="changeYear(1)">→</button>
+             </div>
+             <div class="heatmap-grid">
+                <div v-for="(week, index) in currentYearWeeks" :key="index"
+                     class="week-box"
+                     :class="`intensity-${week.intensity}`"
+                     :title="week.title">
+                </div>
+             </div>
+          </div>
+        </div>
         <div class="panel-header">
           <span class="filter-icon" aria-hidden="true">
             <img :src="filterIcon" width="16" height="16" alt="">
@@ -101,10 +127,45 @@ export default {
       dateStart: null,
       dateEnd: null,
       filterYear: null,
-      filterOpen: false
+      filterOpen: false,
+      heatmapYear: new Date().getFullYear()
     }
   },
   computed: {
+    totalNoteCount() {
+      return this.records.length
+    },
+    totalTagCount() {
+      return this.categories.length - 1
+    },
+    currentYearWeeks() {
+      const year = this.heatmapYear
+      const counts = new Array(53).fill(0)
+      
+      this.records.forEach(r => {
+        const dt = this.parseDate(r.date)
+        if (dt && dt.getFullYear() === year) {
+          const week = this.getWeekNumber(dt)
+          if (week >= 1 && week <= 53) {
+            counts[week - 1]++
+          }
+        }
+      })
+
+      return counts.map((count, index) => {
+        let intensity = 0
+        if (count > 0) intensity = 1
+        if (count > 1) intensity = 2
+        if (count > 2) intensity = 3
+        if (count >= 4) intensity = 4
+        
+        return {
+          count,
+          intensity,
+          title: `${year} 第 ${index + 1} 周: ${count} 篇`
+        }
+      })
+    },
     categories() {
       const set = new Set(this.records.map(r => r.category))
       return ['All', ...Array.from(set)]
@@ -131,7 +192,20 @@ export default {
       return this.dateStart > this.dateEnd
     }
   },
+  mounted() {
+    this.heatmapYear = new Date().getFullYear()
+  },
   methods: {
+    changeYear(delta) {
+      this.heatmapYear += delta
+    },
+    getWeekNumber(d) {
+      d = new Date(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()))
+      d.setUTCDate(d.getUTCDate() + 4 - (d.getUTCDay()||7))
+      var yearStart = new Date(Date.UTC(d.getUTCFullYear(),0,1))
+      var weekNo = Math.ceil(( ( (d - yearStart) / 86400000) + 1)/7)
+      return weekNo
+    },
     monthAbbr(d) {
       const dt = new Date(d)
       return MONTHS[dt.getMonth()]
@@ -228,7 +302,23 @@ export default {
   font-display: swap;
   unicode-range: U+0030-0039, U+0041-005A, U+0061-007A;
 }
-.page-records { padding-top: 20px; font-family: "RobotoVar", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans CJK SC", "Source Han Sans SC", sans-serif; }
+
+@font-face {
+  font-family: 'SourceHanSansSC';
+  src: url('~@/assets/fonts/SourceHanSansSC-Regular-2.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'RobotoMono';
+  src: url('~@/assets/fonts/RobotoMono-VariableFont_wght.ttf') format('truetype');
+  font-weight: 100 900;
+  font-display: swap;
+}
+
+.page-records { padding-top: 20px; font-family: "RobotoVar", "SourceHanSansSC", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans CJK SC", "Source Han Sans SC", sans-serif; }
 
 .section-header {
   display: flex;
@@ -281,9 +371,15 @@ export default {
 .panel-section { display: flex; flex-direction: column; gap: 8px; }
 .panel-subtitle { font-size: 13px; color: #8f98a0; display: block; background: transparent; padding: 2px 0; border-bottom: 1px solid #38424e; }
 .panel-buttons { display: flex; flex-wrap: wrap; column-gap: 8px; row-gap: 2px; }
-.panel-buttons.compact { flex-wrap: nowrap; gap: 6px; white-space: nowrap; overflow-x: auto; }
+.panel-buttons.compact { flex-wrap: wrap; gap: 6px; white-space: normal; overflow-x: visible; }
 .panel-buttons.compact::-webkit-scrollbar { display: none; }
-.panel-buttons.compact .filter-btn { height: 24px; padding: 0 10px; font-size: 12px; }
+.panel-buttons.compact .filter-btn {
+  height: 24px;
+  padding: 0 10px;
+  font-size: 12px;
+  font-family: 'RobotoMono', monospace;
+  margin-bottom: 4px;
+}
 .date-range { display: flex; flex-direction: column; align-items: flex-start; gap: 8px; }
 .date-row { display: flex; align-items: center; gap: 8px; }
 .date-input {
@@ -301,7 +397,7 @@ export default {
 .panel-header { background: transparent; padding: 8px 0; border-bottom: 1px solid #38424e; }
 .mobile-only { display: none; }
 
-@media (max-width: 1300px) {
+@media (max-width: 768px) {
   .content-2col { flex-direction: column; }
   .col-left, .col-right { width: 100%; }
   .filter-toggle.mobile-only { display: inline-flex; }
@@ -349,20 +445,20 @@ export default {
   flex-direction: column;
   background: rgba(0, 0, 0, 0.2);
   padding: 15px;
-  border: 1px solid #3c4551;
+  border: 1px solid transparent;
   border-radius: 8px;
   transition: background 0.2s, border-color 0.2s, box-shadow 0.2s;
 }
 .record-item:hover { 
   background: #1b2838; 
   border-color: #66c0f4; 
-  box-shadow: 0 8px 20px rgba(0,0,0,0.35), 0 0 0 2px rgba(102,192,244,0.35);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.35);
 }
 
 .month { color: #8f98a0; font-size: 12px; }
 .day { color: #66c0f4; font-size: 24px; font-weight: bold; }
 
-.record-title { color: #66c0f4; font-size: 20px; font-weight: 600; }
+.record-title { color: #66c0f4; font-size: 20px; font-weight: bold; letter-spacing: 2px; }
 .record-divider { height: 1px; background: #38424e; margin: 8px 10px 10px; }
 
 /* 标签容器：水平排列，自动换行，上下间距 */
@@ -380,7 +476,7 @@ export default {
   padding: 0;
   color: #c7d5e0;
   pointer-events: none; /* 禁止鼠标事件 */
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  font-family: 'RobotoMono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
   font-variant-numeric: tabular-nums;
 }
 
@@ -394,7 +490,91 @@ export default {
   -webkit-backdrop-filter: blur(6px);
   box-shadow: inset 0 1px 0 rgba(255,255,255,0.06); /* 顶部内阴影 */
   pointer-events: none; /* 禁止鼠标事件 */
+  font-family: 'RobotoMono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace, 'SourceHanSansSC', sans-serif;
 }
 .record-item.clickable { cursor: pointer; }
 .record-excerpt { font-size: 13px; color: #8f98a0; }
+
+/* Stats & Heatmap */
+.stats-card {
+  margin-bottom: 14px;
+  /* background: rgba(0, 0, 0, 0.2); handled by panel-section if needed, but adding specific bg */
+  background: transparent; /* match other panels */
+  padding: 0;
+}
+.stats-row {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 16px;
+  padding: 10px 0;
+  background: rgba(0,0,0,0.2);
+  border-radius: 8px;
+}
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.stat-num {
+  font-size: 24px;
+  font-weight: bold;
+  color: #c7d5e0;
+  font-family: 'RobotoMono', monospace;
+}
+.stat-label {
+  font-size: 12px;
+  color: #8f98a0;
+  margin-top: 4px;
+}
+
+.heatmap-container {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 12px;
+  background: rgba(0,0,0,0.2);
+  border-radius: 8px;
+}
+.heatmap-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #8f98a0;
+  font-size: 13px;
+  margin-bottom: 4px;
+}
+.heatmap-nav {
+  background: transparent;
+  border: 1px solid transparent;
+  color: #66c0f4;
+  cursor: pointer;
+  padding: 0 6px;
+  font-weight: bold;
+  border-radius: 4px;
+  line-height: 1;
+}
+.heatmap-nav:hover {
+  background: rgba(102,192,244,0.12);
+}
+.heatmap-year {
+  font-family: 'RobotoMono', monospace;
+  color: #c7d5e0;
+}
+
+.heatmap-grid {
+  display: grid;
+  grid-template-columns: repeat(13, 1fr);
+  gap: 3px;
+}
+.week-box {
+  aspect-ratio: 1;
+  background: rgba(255,255,255,0.05);
+  border-radius: 2px;
+  transition: background 0.2s;
+}
+.intensity-1 { background: rgba(102,192,244,0.3); }
+.intensity-2 { background: rgba(102,192,244,0.5); }
+.intensity-3 { background: rgba(102,192,244,0.7); }
+.intensity-4 { background: #66c0f4; box-shadow: 0 0 4px rgba(102,192,244,0.5); }
+
 </style>
