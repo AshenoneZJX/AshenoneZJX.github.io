@@ -1,3 +1,11 @@
+<!-- 
+ 汽车基础知识详情页：
+    左侧目录
+    中间 Markdown 渲染内容
+    右侧占位栏
+    支持 MathJax 公式与响应式布局
+-->
+
 <template>
   <div class="page-car-basics-detail">
     <div v-if="article">

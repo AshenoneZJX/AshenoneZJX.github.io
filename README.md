@@ -31,7 +31,12 @@ v3版本（最新版）
 
 </details>
 
-## 3. 安装 (Installation)
+## 3. 功能更新
+> 新增记录页的热力图展示
+> ！[记录页热力图](./src/assets/images/showPic/Records_v2.jpeg)
+> 新增LEARNING页，展示个人学习记录
+
+## 4. 安装 (Installation)
 
 Node.js ≥ 18 与 pnpm ≥ 8 为推荐环境；npm / yarn 亦可。
 
