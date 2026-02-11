@@ -1,6 +1,10 @@
 module.exports = {
   chainWebpack: config => {
     config.module
+      .rule('fonts')
+      .test(/\.(woff2?|eot|ttf|otf|ttc)(\?.*)?$/i)
+
+    config.module
       .rule('xlsx')
       .test(/\.xlsx$/i)
       .use('file-loader')

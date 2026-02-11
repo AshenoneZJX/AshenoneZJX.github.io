@@ -1,7 +1,7 @@
 <template>
   <nav class="steam-navbar">
     <div class="nav-container">
-      <div class="logo">
+      <div class="logo" @click="$router.push('/')">
         ASHENONE's Blog
       </div>
       <button class="menu-toggle" @click="isOpen = !isOpen" aria-label="打开导航" :aria-expanded="isOpen">
@@ -37,6 +37,22 @@ export default {
 </script>
 
 <style scoped>
+@font-face {
+  font-family: 'Motiva Sans';
+  src: url('~@/assets/fonts/MotivaSans-Regular_woff.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'msyhsb';
+  src: url('~@/assets/fonts/wryh/msyhsb.ttc') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
 .steam-navbar {
   position: fixed;
   top: 0;
@@ -69,6 +85,7 @@ export default {
   letter-spacing: 2px;
   display: flex;
   align-items: center;
+  cursor: pointer;
 }
 
 .menu-toggle {
@@ -93,13 +110,15 @@ export default {
   background: transparent;
   border: none;
   color: #b8b6b4;
-  font-size: 14px;
+  font-size: 16px;
   font-weight: bold;
   text-transform: uppercase;
   padding: 10px 20px;
   cursor: pointer;
   transition: color 0.3s;
   outline: none;
+  font-family: 'Motiva Sans', 'msyhsb', sans-serif;
+  letter-spacing: 1px;
 }
 
 .nav-links button:hover {
@@ -130,12 +149,14 @@ export default {
   background: transparent;
   border: none;
   color: #b8b6b4;
-  font-size: 14px;
+  font-size: 16px;
   font-weight: bold;
   text-transform: uppercase;
   padding: 12px 20px;
   text-align: left;
   cursor: pointer;
+  font-family: 'Motiva Sans', 'msyhsb', sans-serif;
+  letter-spacing: 1px;
 }
 
 .mobile-menu button:hover,

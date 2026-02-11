@@ -52,6 +52,12 @@ export default {
 </script>
 
 <style scoped>
+.page-car-basics {
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+  padding-top: 20px;
+}
 .section-header { display: flex; justify-content: space-between; align-items: center; }
 .section-header h2 { color: #fff; font-weight: 700; letter-spacing: 2px; }
 .divider { height: 2px; background: #2a475e; margin: 10px 0 20px 0; }

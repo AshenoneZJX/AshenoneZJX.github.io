@@ -1,21 +1,62 @@
 <template>
   <div class="page-brand-detail">
     <div class="section-header">
-      <h2>{{ brandName }} 品牌</h2>
+      <h2>{{ brandName }}</h2>
       <router-link class="back-link" to="/mySpace/brands">返回品牌列表</router-link>
     </div>
     <div class="divider"></div>
 
-    <div class="models-grid">
-      <div
-        v-for="c in brandModels"
-        :key="c.id"
-        class="model-card"
-        @click="$router.push({ name: 'CarDetail', params: { id: c.id } })"
-      >
-        <img :src="c.img" alt="" class="model-img"/>
-        <div class="model-title">{{ c.title }}</div>
-        <div class="model-meta">{{ c.body }} · {{ Array.isArray(c.energy) ? c.energy.join('/') : c.energy }}</div>
+    <div class="brand-content">
+      <!-- 简介 -->
+      <section class="brand-intro" v-if="brandInfo && brandInfo.description">
+        <div class="wiki-box">
+          <p class="summary">{{ brandInfo.description }}</p>
+        </div>
+      </section>
+
+      <!-- 历史 -->
+      <section class="brand-section" v-if="brandInfo && brandInfo.history">
+        <h3 class="section-title">
+          <span class="icon">📜</span> 品牌历史
+        </h3>
+        <div class="wiki-text">
+          <p>{{ brandInfo.history }}</p>
+        </div>
+      </section>
+
+      <!-- 车型列表 -->
+      <section class="brand-section" v-if="brandModels.length">
+        <h3 class="section-title">
+          <span class="icon">🚗</span> 代表车型
+        </h3>
+        <div class="models-grid">
+          <div
+            v-for="c in brandModels"
+            :key="c.id"
+            class="model-card"
+          >
+            <img :src="c.img" alt="" class="model-img"/>
+            <div class="model-title">{{ c.title }}</div>
+            <div class="model-meta">{{ c.body }} · {{ Array.isArray(c.energy) ? c.energy.join('/') : c.energy }}</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 核心技术 -->
+      <section class="brand-section" v-if="brandInfo && brandInfo.technology && brandInfo.technology.length">
+        <h3 class="section-title">
+          <span class="icon">🔬</span> 核心技术
+        </h3>
+        <div class="tech-grid">
+          <div v-for="(tech, index) in brandInfo.technology" :key="index" class="tech-card">
+            <div class="tech-header">{{ tech.title }}</div>
+            <div class="tech-body">{{ tech.content }}</div>
+          </div>
+        </div>
+      </section>
+      
+      <div v-if="!brandInfo && brandModels.length === 0" class="empty-state">
+        暂无该品牌相关信息
       </div>
     </div>
   </div>
@@ -23,6 +64,7 @@
 
 <script>
 import cars from '../data/cars.json'
+import brandDetails from '../data/brandDetails.json'
 
 function getBrand (title) {
   if (!title) return '未知'
@@ -38,33 +80,166 @@ export default {
     },
     brandModels () {
       return cars.filter(c => getBrand(c.title) === this.brandName)
+    },
+    brandInfo () {
+      return brandDetails[this.brandName] || null
     }
   }
 }
 </script>
 
 <style scoped>
-.page-brand-detail { padding-top: 20px; }
-.section-header { display: flex; justify-content: space-between; align-items: center; }
-.section-header h2 { color: #fff; font-weight: 300; letter-spacing: 2px; }
-.divider { height: 2px; background: #2a475e; margin: 10px 0 10px 0; }
-.back-link { color: #66c0f4; text-decoration: none; display: inline-block; margin-bottom: 20px; }
+.page-brand-detail {
+  padding-top: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.section-header h2 {
+  color: #fff;
+  font-weight: 300;
+  letter-spacing: 2px;
+  font-size: 28px;
+}
+
+.divider {
+  height: 2px;
+  background: #2a475e;
+  margin: 10px 0 30px 0;
+}
+
+.back-link {
+  background: transparent;
+  border: 1px solid #4b619b;
+  color: #66c0f4;
+  padding: 6px 16px;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.2s;
+  background-color: rgba(61, 86, 117, 0.3);
+}
+
+.back-link:hover {
+  color: #ffffff;
+  border-color: #66c0f4;
+  background-color: rgba(102, 192, 244, 0.2);
+}
+
+.brand-section {
+  margin-bottom: 40px;
+}
+
+.section-title {
+  color: #fff;
+  font-size: 20px;
+  font-weight: 500;
+  margin-bottom: 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding-bottom: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.section-title .icon {
+  margin-right: 10px;
+  font-size: 20px;
+}
+
+.wiki-box {
+  background: rgba(22, 32, 45, 0.5);
+  border-left: 4px solid #66c0f4;
+  padding: 16px 20px;
+  border-radius: 0 4px 4px 0;
+  margin-bottom: 30px;
+}
+
+.summary {
+  color: #c6d4df;
+  font-size: 16px;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.wiki-text p {
+  color: #acb2b8;
+  line-height: 1.8;
+  font-size: 15px;
+  text-indent: 2em;
+}
 
 .models-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-  gap: 16px;
+  gap: 20px;
 }
+
 .model-card {
   background: #16202d;
   padding: 12px;
   border-radius: 6px;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.4);
-  cursor: pointer;
-  transition: transform 0.2s;
+  border: 1px solid transparent;
 }
-.model-card:hover { transform: translateY(-4px); }
-.model-img { width: 100%; height: 140px; object-fit: cover; border-radius: 4px; }
-.model-title { color: #fff; font-weight: 600; margin-top: 8px; }
-.model-meta { color: #9cc9f5; font-size: 12px; margin-top: 2px; }
+
+.model-img {
+  width: 100%;
+  height: 140px;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.model-title {
+  color: #fff;
+  font-weight: 600;
+  margin-top: 12px;
+  font-size: 16px;
+}
+
+.model-meta {
+  color: #66c0f4;
+  font-size: 12px;
+  margin-top: 4px;
+}
+
+.tech-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.tech-card {
+  background: #1b2838;
+  border-radius: 8px;
+  padding: 20px;
+  border: 1px solid #2a475e;
+}
+
+.tech-header {
+  color: #fff;
+  font-weight: bold;
+  font-size: 16px;
+  margin-bottom: 10px;
+  color: #66c0f4;
+}
+
+.tech-body {
+  color: #8f98a0;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.empty-state {
+  color: #666;
+  text-align: center;
+  padding: 40px;
+}
 </style>

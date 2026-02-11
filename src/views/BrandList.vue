@@ -56,7 +56,12 @@ export default {
 </script>
 
 <style scoped>
-.page-brands { padding-top: 20px; }
+.page-brands { 
+  padding-top: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+}
 .section-header { display: flex; justify-content: space-between; align-items: center; }
 .section-header h2 { color: #fff; font-weight: bold; letter-spacing: 2px; }
 .divider { height: 2px; background: #2a475e; margin: 10px 0 30px 0; }

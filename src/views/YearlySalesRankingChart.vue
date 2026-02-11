@@ -100,6 +100,15 @@ export default {
 </script>
 
 <style scoped>
-.chart-wrapper { width: 100%; }
-.chart { width: 100%; height: 360px; }
+.chart-wrapper {
+  width: 100%;
+  height: 100%;
+  min-height: 360px;
+  position: relative;
+}
+.chart {
+  width: 100%;
+  height: 100%;
+  min-height: 360px;
+}
 </style>

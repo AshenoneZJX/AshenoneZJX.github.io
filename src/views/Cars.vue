@@ -185,7 +185,20 @@ export default {
 </script>
 
 <style scoped>
-.page-cars { padding-top: 20px; }
+@font-face {
+  font-family: 'MSYaHei-Semibold';
+  src: url('~@/assets/fonts/wryh/msyhsb.ttc') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+.page-cars { 
+  padding-top: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+}
 .section-header { display: flex; justify-content: space-between; align-items: center; }
 .section-header h2 { color: #fff; font-weight: bold; letter-spacing: 2px; }
 .header-left { display: flex; align-items: center; gap: 16px; }
@@ -230,6 +243,7 @@ export default {
   justify-content: center;
   height: 28px;
   line-height: 1;
+  font-family: 'MSYaHei-Semibold', sans-serif;
 }
 
 /* 标签按钮：悬停高亮，边框与文字变色 */
@@ -304,18 +318,18 @@ export default {
 .gallery-card {
   background: #16202d;
   box-shadow: 0 4px 15px rgba(0,0,0,0.4);
-  border: 1px solid #3c4551;
-  border-radius: 6px;
-  transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s, background 0.2s;
+  border: none;
+  border-radius: 10px;
+  overflow: hidden;
+  transition: transform 0.2s, box-shadow 0.2s, filter 0.2s;
   cursor: pointer;
   text-decoration: none;
   display: block;
 }
 .gallery-card:hover {
   transform: translateY(-8px);
-  background: #1b2838;
-  border-color: #66c0f4;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.45), 0 0 0 2px rgba(102,192,244,0.45);
+  filter: brightness(1.15);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.45);
 }
 
 .card-image {
@@ -325,12 +339,12 @@ export default {
   position: relative;
 }
 
-.card-info { padding: 12px; }
-.card-title { color: #66c0f4; margin-bottom: 8px; font-weight: bold; }
+.card-info { padding: 12px; background: #222e3b; }
+.card-title { color: #ffffff; margin-bottom: 8px; font-weight: bold; }
 .card-tags { display: flex; align-items: center; gap: 6px; }
 .card-tags .tag { display: inline-block; padding: 2px 6px; font-size: 10px; border-radius: 3px; }
-.card-tags .tag-energy { background: #66c0f4; color: #0b1c2d; font-weight: 600; }
-.card-tags .tag-body { background: #344658; color: #f7e38f; font-weight: 600; }
+.card-tags .tag-energy { background: #1a4d7a; color: #ffffff; font-weight: 600; }
+.card-tags .tag-body { background: #2e6b36; color: #ffffff; font-weight: 600; }
 .pagination { display: flex; align-items: center; justify-content: center; gap: 8px; margin-top: 20px; }
 .page-btn { background: none; border: 1px solid #3c4551; color: #c7d5e0; padding: 6px 10px; cursor: pointer; border-radius: 4px; font-size: 12px; }
 .page-btn:hover { color: #fff; border-color: #66c0f4; }

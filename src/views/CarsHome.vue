@@ -8,7 +8,8 @@
       <div class="divider"></div>
     </div>
 
-    <div class="charts-area">
+    <div class="dashboard-layout">
+      <div class="charts-area">
       <div class="charts-toolbar">
         <label>月份</label>
         <select v-model="selectedMonth">
@@ -88,6 +89,7 @@
           <div class="hover-overlay">品牌介绍</div>
         </div>
       </router-link>
+    </div>
     </div>
   </div>
   </template>
@@ -216,7 +218,19 @@ export default {
 </script>
 
 <style scoped>
-.page-cars-home { padding-top: 20px; }
+.page-cars-home { 
+  padding-top: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.dashboard-layout {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+}
+
 .section-header h2 { color: #fff; font-weight: 700; letter-spacing: 2px; }
 .header-row {
   display: flex;
@@ -242,13 +256,17 @@ export default {
   padding: 12px;
   border-radius: 6px;
   box-shadow: 0 4px 15px rgba(0,0,0,0.4);
-  margin-bottom: 20px;
+  margin-bottom: 0;
+  flex: 1;
+  min-width: 0;
 }
 .charts-toolbar {
   display: flex;
   align-items: center;
   gap: 10px;
   margin-bottom: 10px;
+  border-bottom: 1px solid #2a475e;
+  padding-bottom: 10px;
 }
 .charts-toolbar label { color: #8a9aa8; font-size: 13px; }
 .charts-toolbar select {
@@ -349,11 +367,14 @@ export default {
 .fade-leave-from { opacity: 1; }
 
 .gallery-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-  gap: 20px;
-  margin-top: 10px;
+  width: 280px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-top: 0;
+  flex-shrink: 0;
 }
+
 .gallery-card {
   background: #16202d;
   box-shadow: 0 4px 15px rgba(0,0,0,0.4);
@@ -362,6 +383,20 @@ export default {
   text-decoration: none;
 }
 .gallery-card:hover { transform: translateY(-5px); }
-.card-image { height: 160px; background-size: cover; background-position: center; position: relative; }
+.card-image { height: 100px; background-size: cover; background-position: center; position: relative; }
 .hover-overlay { position: absolute; bottom: 0; left: 0; right: 0; padding: 8px 12px; background: rgba(0,0,0,0.5); color: #fff; font-weight: 600; letter-spacing: 1px; }
+
+@media (max-width: 1000px) {
+  .dashboard-layout {
+    flex-direction: column;
+  }
+  .gallery-grid {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+  }
+  .card-image { height: 160px; }
+}
 </style>

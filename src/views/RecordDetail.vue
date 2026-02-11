@@ -166,12 +166,27 @@ export default {
 
 <style scoped>
 @font-face {
+  font-family: 'SourceHanSansSC';
+  src: url('~@/assets/fonts/SourceHanSansSC-Regular-2.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
   font-family: 'RobotoMono';
   src: url('~@/assets/fonts/RobotoMono-VariableFont_wght.ttf') format('truetype');
   font-weight: 100 900;
   font-display: swap;
 }
-.page-record-detail { padding-top: 20px; width: 100%; max-width: 100%; box-sizing: border-box; }
+.page-record-detail { 
+  padding-top: 20px;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  padding-left: 20px;
+  padding-right: 20px;
+}
 
 /* 布局相关：三栏 Grid */
 .main-layout {
@@ -198,6 +213,7 @@ export default {
   padding-bottom: 8px;
   border-bottom: 2px solid #38424e;
   letter-spacing: 0.5px;
+  font-family: 'SourceHanSansSC', sans-serif;
 }
 
 .right-sidebar {
@@ -220,19 +236,20 @@ export default {
   gap: 8px;
   background: transparent;
   border: none;
-  color: #8f98a0;
+  color: #ffffff;
   padding: 6px 0;
   cursor: pointer;
   text-align: left;
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 700;
   letter-spacing: 0.3px;
   width: 100%;
+  font-family: 'SourceHanSansSC', sans-serif;
 }
 .toc-h2:hover { color: #66c0f4; text-decoration: underline; }
 .caret {
   width: 0; height: 0;
-  border-left: 5px solid #8f98a0;
+  border-left: 5px solid #ffffff;
   border-top: 4px solid transparent;
   border-bottom: 4px solid transparent;
   transform: rotate(-90deg);
@@ -245,7 +262,7 @@ export default {
   display: inline-block;
   margin-right: 0;
 }
-.toc-text { flex: 1; font-size: 13px; }
+.toc-text { flex: 1; font-size: 15px; }
 .toc-h3-list { display: flex; flex-direction: column; margin: 4px 0 10px 16px; gap: 2px; }
 .toc-h3 {
   background: transparent;
@@ -254,9 +271,10 @@ export default {
   text-align: left;
   padding: 4px 0;
   cursor: pointer;
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 400;
   width: 100%;
+  font-family: 'SourceHanSansSC', sans-serif;
 }
 .toc-h3:hover { color: #66c0f4; text-decoration: underline; }
 
@@ -289,10 +307,10 @@ export default {
 .month { color: #8f98a0; font-size: 12px; }
 .day { color: #66c0f4; font-size: 20px; font-weight: bold; font-family: 'RobotoMono', Menlo, Monaco, Consolas, "Courier New", monospace; }
 .year { color: #8f98a0; font-size: 12px; }
-.cat { color: #ffffff; font-size: 12px; display: inline-block; padding: 2px 8px; border: 1px solid #38424e; border-radius: 6px; background: rgba(102,192,244,0.12); }
+.cat { color: #ffffff; font-size: 12px; display: inline-block; padding: 2px 8px; border: 1px solid #38424e; border-radius: 6px; background: rgba(102,192,244,0.12); font-family: 'RobotoMono', monospace; }
 .content-divider { height: 1px; background: #38424e; margin: 8px 0 14px; }
 
-.content { color: #cfe0ee; font-size: 16px; line-height: 1.9; overflow-wrap: anywhere; font-family: "Times New Roman", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans CJK SC", "Source Han Sans SC", sans-serif; }
+.content { color: #cfe0ee; font-size: 16px; line-height: 1.9; overflow-wrap: anywhere; font-family: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans CJK SC", "Source Han Sans SC", sans-serif; }
 .content :deep(p) { color: #cfe0ee; line-height: 1.9; margin: 12px 0; font-size: 16px; font-weight: 400; }
 .content :deep(h1) { color: #ffffff; font-size: 28px; line-height: 1.35; margin: 18px 0 12px; font-weight: 700; letter-spacing: 0.3px; }
 .content :deep(h2) { color: #66c0f4; font-size: 22px; line-height: 1.25; margin: 16px 0 10px; font-weight: 700; letter-spacing: 0.2px; }
@@ -301,16 +319,18 @@ export default {
 .content :deep(h4), .content :deep(h5), .content :deep(h6) { color: #cfe0ee; font-size: 14px; line-height: 1.9; margin: 12px 0; font-weight: 400; }
 .content :deep(a) { color: #66c0f4; text-decoration: none; }
 .content :deep(a:hover) { text-decoration: underline; }
-.content :deep(ul), .content :deep(ol) { margin: 12px 0 12px 0; padding-left: 22px; }
-.content :deep(li) { margin: 6px 0; line-height: 1.85; color: #cfe0ee; font-size: 16px; font-weight: 400; }
+.content :deep(ul), .content :deep(ol) { margin: 12px 0 12px 0; padding-left: 28px; }
+.content :deep(ol) { font-family: 'RobotoMono', Menlo, Monaco, Consolas, "Courier New", monospace; }
+.content :deep(li) { margin: 6px 0; line-height: 1.85; color: #cfe0ee; font-size: 16px; font-weight: 400; padding-left: 6px; font-family: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans CJK SC", "Source Han Sans SC", sans-serif; }
+.content :deep(ul) :deep(li) { font-family: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans CJK SC", "Source Han Sans SC", sans-serif; }
 .content :deep(hr) { border: none; height: 1px; background: #2a475e; margin: 18px 0; }
 .content :deep(code) { background: #1b2838; border: 1px solid #38424e; padding: 2px 6px; border-radius: 4px; color: #e6f3ff; font-family: 'RobotoMono', Menlo, Monaco, Consolas, "Courier New", monospace; font-size: 13px; }
 .content :deep(pre) { background: #0f1b2a; border: 1px solid #38424e; border-radius: 6px; padding: 12px; overflow: auto; font-family: 'RobotoMono', Menlo, Monaco, Consolas, "Courier New", monospace; }
 .content :deep(pre code) { background: transparent; border: none; padding: 0; font-size: 13px; font-family: 'RobotoMono', Menlo, Monaco, Consolas, "Courier New", monospace; }
-.content :deep(table) { width: 100%; border-collapse: collapse; border: 1px solid #38424e; margin: 14px 0; }
-.content :deep(th), .content :deep(td) { border: 1px solid #38424e; padding: 10px 12px; text-align: left; }
+.content :deep(table) { width: 100%; border-collapse: collapse; border: 1px solid #38424e; margin: 14px 0; font-size: 14px; }
+.content :deep(th), .content :deep(td) { border: 1px solid #38424e; padding: 6px 8px; text-align: left; line-height: 2; vertical-align: top; }
 .content :deep(th) { background: #223447; color: #e6f3ff; font-weight: 600; }
-.content :deep(tr:nth-child(even)) { background: rgba(34,52,71,0.35); }
+.content :deep(tr) { background: transparent; }
 .content :deep(blockquote) { border-left: 4px solid #66c0f4; background: rgba(27,40,56,0.5); padding: 10px 14px; margin: 12px 0; color: #cfe0ee; border-radius: 4px; }
 .content :deep(img) { max-width: 100%; height: auto; display: block; margin: 12px auto; border-radius: 6px; box-shadow: 0 4px 12px rgba(0,0,0,0.35); border: 1px solid #38424e; }
 .not-found { color: #8f98a0; }
