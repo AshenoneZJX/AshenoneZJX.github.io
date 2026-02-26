@@ -80,7 +80,7 @@
 
       <router-link class="gallery-card" to="/mySpace/cars">
         <div class="card-image" :style="bg('https://images.unsplash.com/photo-1692450931594-e076fcdb896f?q=80&w=1600&auto=format&fit=crop&ixlib=rb-4.1.0')">
-          <div class="hover-overlay">车型大全（浏览列表）</div>
+          <div class="hover-overlay">车型总览列表</div>
         </div>
       </router-link>
 
@@ -89,6 +89,8 @@
           <div class="hover-overlay">品牌介绍</div>
         </div>
       </router-link>
+      
+      <div class="gallery-card placeholder" aria-hidden="true"></div>
     </div>
     </div>
   </div>
@@ -228,7 +230,7 @@ export default {
 .dashboard-layout {
   display: flex;
   gap: 20px;
-  align-items: flex-start;
+  align-items: stretch;
 }
 
 .section-header h2 { color: #fff; font-weight: 700; letter-spacing: 2px; }
@@ -259,6 +261,8 @@ export default {
   margin-bottom: 0;
   flex: 1;
   min-width: 0;
+  display: flex;
+  flex-direction: column;
 }
 .charts-toolbar {
   display: flex;
@@ -386,6 +390,17 @@ export default {
 .card-image { height: 100px; background-size: cover; background-position: center; position: relative; }
 .hover-overlay { position: absolute; bottom: 0; left: 0; right: 0; padding: 8px 12px; background: rgba(0,0,0,0.5); color: #fff; font-weight: 600; letter-spacing: 1px; }
 
+.gallery-card.placeholder {
+  height: 100px;
+  cursor: default;
+}
+.gallery-card.placeholder:hover { transform: none; }
+
+.charts-area >>> .chart-wrapper {
+  flex: 1 1 auto;
+  height: auto;
+}
+
 @media (max-width: 1000px) {
   .dashboard-layout {
     flex-direction: column;
@@ -398,5 +413,6 @@ export default {
     margin-top: 20px;
   }
   .card-image { height: 160px; }
+  .gallery-card.placeholder { height: 160px; }
 }
 </style>

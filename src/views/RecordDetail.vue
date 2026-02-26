@@ -4,7 +4,7 @@
       <!-- 顶部操作行：独立一行，跨越整个宽度 -->
       <div class="top-actions-row">
         <div class="spacer"></div>
-        <router-link to="/records" class="back-btn">返回列表</router-link>
+        <router-link to="/records" class="back-btn">返回</router-link>
       </div>
 
       <div class="main-layout">
@@ -206,8 +206,8 @@ export default {
 }
 
 .sidebar-title {
-  color: #66c0f4;
-  font-size: 16px;
+  color: #ffffff;
+  font-size: 18px;
   font-weight: 700;
   margin-bottom: 12px;
   padding-bottom: 8px;
@@ -236,7 +236,7 @@ export default {
   gap: 8px;
   background: transparent;
   border: none;
-  color: #ffffff;
+  color: #c7d5e0;
   padding: 6px 0;
   cursor: pointer;
   text-align: left;
@@ -262,7 +262,7 @@ export default {
   display: inline-block;
   margin-right: 0;
 }
-.toc-text { flex: 1; font-size: 15px; }
+.toc-text { flex: 1; font-size: 14px; }
 .toc-h3-list { display: flex; flex-direction: column; margin: 4px 0 10px 16px; gap: 2px; }
 .toc-h3 {
   background: transparent;
@@ -294,7 +294,8 @@ export default {
 }
 
 .title-row { display: flex; align-items: flex-start; margin: 0 0 10px; }
-.back-btn { background: transparent; border: none; color: #c7d5e0; padding: 6px 12px; cursor: pointer; text-decoration: none; display: inline-block; border-radius: 6px; }
+.back-btn { background: transparent; border: none; color: #c7d5e0; padding: 6px 12px; cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; border-radius: 6px; }
+.back-btn::before { content: ""; display: inline-block; width: 16px; height: 16px; background: url('~@/assets/images/fanhui.svg') no-repeat center / contain; }
 .back-btn:hover { color: #e6f3ff; background: rgba(102,192,244,0.12); }
 
 .top-title { color: #ffffff; font-size: 28px; line-height: 1.35; margin: 0; font-weight: 700; letter-spacing: 0.3px; }

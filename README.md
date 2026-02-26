@@ -32,9 +32,11 @@ v3版本（最新版）
 </details>
 
 ## 3. 功能更新
-> 新增记录页的热力图展示
-> ！[记录页热力图](./src/assets/images/showPic/Records_v2.jpeg)
-> 新增LEARNING页，展示个人学习记录
+> 新增记录页的热力图展示  
+> ![记录页热力图](./src/assets/images/showPic/Records_v2.jpeg)  
+> 新增LEARNING页，展示个人学习记录   
+> 重构汽车详情页，优化信息层级与视觉动线，提升浏览体验  
+> ![汽车详情页](./src/assets/images/showPic/carDetailShow.png)
 
 ## 4. 安装 (Installation)
 

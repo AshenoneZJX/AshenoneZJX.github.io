@@ -12,7 +12,7 @@
       <!-- 顶部操作行：独占一行 -->
       <div class="top-actions-row">
         <div class="spacer"></div>
-        <router-link to="/mySpace/car-basics" class="back-btn">返回列表</router-link>
+        <router-link to="/mySpace/car-basics" class="back-btn">返回</router-link>
       </div>
 
       <div class="main-layout">
@@ -85,6 +85,19 @@ export default {
     scrollTo(id) {
       const el = document.getElementById(id)
       if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    },
+    handleAnchor() {
+      const text = this.$route && this.$route.query ? this.$route.query.anchor : ''
+      if (!text || !this.toc || this.toc.length === 0) return
+      const sec = this.toc.find(s => s.text === text)
+      if (sec) {
+        this.scrollTo(sec.id)
+        return
+      }
+      for (const s of this.toc) {
+        const h3 = (s.children || []).find(c => c.text === text)
+        if (h3) { this.scrollTo(h3.id); return }
+      }
     },
     buildToc() {
       const root = this.$refs.contentRef
@@ -168,11 +181,20 @@ export default {
       this.buildToc()
       await this.loadMathJax()
       this.typesetMath()
+      this.handleAnchor()
     })
   },
   mounted() {
     this.buildToc()
-    this.loadMathJax().then(() => this.typesetMath())
+    this.loadMathJax().then(() => {
+      this.typesetMath()
+      this.handleAnchor()
+    })
+  },
+  watch: {
+    '$route.query.anchor'() {
+      this.$nextTick(() => this.handleAnchor())
+    }
   }
 }
 </script>
@@ -215,16 +237,8 @@ export default {
   flex: 1; 
 }
 
-.back-btn { 
-  background: transparent; 
-  border: none; 
-  color: #c7d5e0; 
-  padding: 6px 12px; 
-  cursor: pointer; 
-  text-decoration: none; 
-  display: inline-block; 
-  border-radius: 6px; 
-}
+.back-btn { background: transparent; border: none; color: #c7d5e0; padding: 6px 12px; cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; border-radius: 6px; }
+.back-btn::before { content: ""; display: inline-block; width: 16px; height: 16px; background: url('~@/assets/images/fanhui.svg') no-repeat center / contain; }
 .back-btn:hover { 
   color: #e6f3ff; 
   background: rgba(102,192,244,0.12); 
@@ -248,8 +262,8 @@ export default {
 }
 
 .sidebar-title {
-  color: #66c0f4;
-  font-size: 16px;
+  color: #ffffff;
+  font-size: 18px;
   font-weight: 700;
   margin-bottom: 12px;
   padding-bottom: 8px;
@@ -278,7 +292,7 @@ export default {
   gap: 8px;
   background: transparent;
   border: none;
-  color: #ffffff;
+  color: #c7d5e0;
   padding: 6px 0;
   cursor: pointer;
   text-align: left;
@@ -305,7 +319,7 @@ export default {
   display: inline-block;
   margin-right: 0;
 }
-.toc-text { flex: 1; font-size: 15px; }
+.toc-text { flex: 1; font-size: 14px; }
 .toc-h3-list { display: flex; flex-direction: column; margin: 4px 0 10px 16px; gap: 2px; }
 .toc-h3 {
   background: transparent;

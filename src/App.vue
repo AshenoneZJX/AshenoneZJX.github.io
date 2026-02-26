@@ -5,6 +5,10 @@
       <transition name="fade" mode="out-in">
         <router-view />
       </transition>
+      <div v-if="$route.name === 'CarDetail'" class="detail-pager-global">
+        <button class="nav-icon" :disabled="!hasPrev" @click="goPrev" aria-label="上一辆">‹</button>
+        <button class="nav-icon" :disabled="!hasNext" @click="goNext" aria-label="下一辆">›</button>
+      </div>
     </main>
     
     <footer class="steam-footer">
@@ -15,11 +19,46 @@
 
 <script>
 import NavBar from '@/components/NavBar.vue'
+import cars from '@/data/cars.json'
 
 export default {
   name: 'App',
   components: {
     NavBar
+  },
+  computed: {
+    isCarDetail() {
+      return this.$route && this.$route.name === 'CarDetail'
+    },
+    sortedCars() {
+      if (!this.isCarDetail) return []
+      return [...cars].sort((a, b) => Number(a.id) - Number(b.id))
+    },
+    currentIndex() {
+      if (!this.isCarDetail) return -1
+      const id = Number(this.$route.params.id)
+      return this.sortedCars.findIndex(c => Number(c.id) === id)
+    },
+    prevId() {
+      const i = this.currentIndex
+      if (i > 0) return this.sortedCars[i - 1].id
+      return null
+    },
+    nextId() {
+      const i = this.currentIndex
+      if (i >= 0 && i < this.sortedCars.length - 1) return this.sortedCars[i + 1].id
+      return null
+    },
+    hasPrev() { return this.prevId !== null },
+    hasNext() { return this.nextId !== null }
+  },
+  methods: {
+    goPrev() {
+      if (this.hasPrev) this.$router.push({ name: 'CarDetail', params: { id: this.prevId } })
+    },
+    goNext() {
+      if (this.hasNext) this.$router.push({ name: 'CarDetail', params: { id: this.nextId } })
+    }
   }
 }
 </script>
@@ -41,6 +80,7 @@ body {
   -webkit-font-smoothing: antialiased;
   background-color: #1b2838; /* Steam 主背景色 */
   color: #c6d4df; /* Steam 默认字色 */
+  overscroll-behavior-y: none; /* 阻止向上回弹出现空白 */
 }
 
 /* 页面通用容器，用于限制宽度 */
@@ -64,6 +104,30 @@ body {
   font-size: 12px;
   border-top: 1px solid #2e353f;
 }
+
+.detail-pager-global {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  margin-top: 16px;
+}
+.detail-pager-global .nav-icon {
+  background: rgba(102,192,244,0.12);
+  border: none;
+  color: #c7d5e0;
+  padding: 8px 14px;
+  min-width: 40px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  font-size: 18px;
+  line-height: 1;
+}
+.detail-pager-global .nav-icon:hover { color: #e6f3ff; background: rgba(102,192,244,0.22); }
+.detail-pager-global .nav-icon[disabled] { opacity: 0.6; cursor: default; pointer-events: none; background: rgba(102,192,244,0.06); }
 
 /* 页面切换动画 */
 .fade-enter-active, .fade-leave-active {

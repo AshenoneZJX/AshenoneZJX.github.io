@@ -1,8 +1,11 @@
 <template>
   <div class="page-brand-detail">
     <div class="section-header">
-      <h2>{{ brandName }}</h2>
-      <router-link class="back-link" to="/mySpace/brands">返回品牌列表</router-link>
+      <div class="title-with-logo">
+        <img v-if="brandLogoFor" class="brand-logo" :src="brandLogoFor" :alt="brandName" />
+        <h2>{{ brandName }}</h2>
+      </div>
+      <router-link class="back-btn" to="/mySpace/brands">返回</router-link>
     </div>
     <div class="divider"></div>
 
@@ -35,7 +38,7 @@
             :key="c.id"
             class="model-card"
           >
-            <img :src="c.img" alt="" class="model-img"/>
+            <img :src="coverOf(c)" alt="" class="model-img"/>
             <div class="model-title">{{ c.title }}</div>
             <div class="model-meta">{{ c.body }} · {{ Array.isArray(c.energy) ? c.energy.join('/') : c.energy }}</div>
           </div>
@@ -83,7 +86,27 @@ export default {
     },
     brandInfo () {
       return brandDetails[this.brandName] || null
+    },
+    brandLogoFor () {
+      const name = this.brandName
+      if (!name) return ''
+      if (this.brandLogoMap && this.brandLogoMap[name]) return this.brandLogoMap[name]
+      return ''
     }
+  },
+  data () {
+    return {
+      brandLogoMap: {}
+    }
+  },
+  methods: {
+    coverOf (car) {
+      const imgs = Array.isArray(car.images) ? car.images : []
+      return imgs.length ? imgs[0] : ''
+    }
+  },
+  created () {
+    import('@/data/brandLogos.json').then(mod => { this.brandLogoMap = mod.default })
   }
 }
 </script>
@@ -101,11 +124,25 @@ export default {
   align-items: center;
 }
 
+.title-with-logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
 .section-header h2 {
   color: #fff;
-  font-weight: 300;
+  font-weight: 700;
   letter-spacing: 2px;
   font-size: 28px;
+}
+
+.brand-logo {
+  height: 1em;
+  width: auto;
+  object-fit: contain;
+  border-radius: 4px;
+  background: transparent;
 }
 
 .divider {
@@ -114,26 +151,9 @@ export default {
   margin: 10px 0 30px 0;
 }
 
-.back-link {
-  background: transparent;
-  border: 1px solid #4b619b;
-  color: #66c0f4;
-  padding: 6px 16px;
-  cursor: pointer;
-  text-decoration: none;
-  display: inline-block;
-  border-radius: 4px;
-  font-size: 14px;
-  font-weight: 500;
-  transition: all 0.2s;
-  background-color: rgba(61, 86, 117, 0.3);
-}
-
-.back-link:hover {
-  color: #ffffff;
-  border-color: #66c0f4;
-  background-color: rgba(102, 192, 244, 0.2);
-}
+.back-btn { background: transparent; border: none; color: #c7d5e0; padding: 6px 12px; cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; border-radius: 6px; }
+.back-btn::before { content: ""; display: inline-block; width: 16px; height: 16px; background: url('~@/assets/images/fanhui.svg') no-repeat center / contain; }
+.back-btn:hover { color: #e6f3ff; background: rgba(102,192,244,0.12); }
 
 .brand-section {
   margin-bottom: 40px;

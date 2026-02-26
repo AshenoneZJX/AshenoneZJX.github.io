@@ -2,8 +2,11 @@
   "本田": "/brand-logos/honda.png",
   "特斯拉": "/brand-logos/tesla.png",
   "大众": "/brand-logos/volkswagen.svg",
-  "长城": "/brand-logos/greatwallmotors.png",
+  "长城": "/brand-logos/Great_Wall_Motor.png",
+  "丰田": "/brand-logos/toyota.png",
   "宝马": "/brand-logos/bmw.png",
-  "奥迪": "/brand-logos/audi.svg",
-  "奔驰": "/brand-logos/mercedes.png"
+  "奥迪": "/brand-logos/audi.png",
+  "奔驰": "/brand-logos/mercedes.png",
+  "凯迪拉克": "/brand-logos/cadillac.png",
+  "小米": "/brand-logos/xiaomi.png"
 }

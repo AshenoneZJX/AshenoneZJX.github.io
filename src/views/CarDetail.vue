@@ -2,8 +2,41 @@
   <div class="container page-car-detail">
     <div v-if="car" class="detail-layout">
       <!-- Left Column: 70% -->
-      <div class="left-section" :style="{ backgroundImage: `url(${car.img})` }">
-        <div class="hero-overlay"></div>
+      <div class="left-section">
+        <transition :name="slideDirection === 'next' ? 'slide-next' : 'slide-prev'">
+          <img
+            v-if="images.length"
+            :key="images[currentImageIndex]"
+            class="gallery-image"
+            :src="images[currentImageIndex]"
+            :alt="modelName || '车辆图片'"
+          />
+        </transition>
+        <button
+          v-if="images.length > 1"
+          class="gallery-nav prev"
+          aria-label="上一张"
+          @click="prevImage"
+        >‹</button>
+        <button
+          v-if="images.length > 1"
+          class="gallery-nav next"
+          aria-label="下一张"
+          @click="nextImage"
+        >›</button>
+        <div
+          v-if="images.length > 1"
+          class="dot-indicators"
+          aria-label="图片序号指示"
+        >
+          <span
+            v-for="(src, idx) in images"
+            :key="idx"
+            class="dot"
+            :class="{ active: idx === currentImageIndex }"
+            @click="goToImage(idx)"
+          ></span>
+        </div>
       </div>
 
       <!-- Right Column: 30% -->
@@ -11,9 +44,30 @@
         <!-- Upper Part: Title, Back Button, Tags, Intro -->
         <div class="info-upper">
           <div class="section-header">
-            <h2>{{ car.title }}</h2>
+            <div class="title-with-logo">
+              <router-link
+                v-if="brandLogoFor && brandName"
+                class="brand-logo-link"
+                :to="{ name: 'BrandDetail', params: { name: brandName } }"
+                aria-label="查看品牌"
+              >
+                <img
+                  class="brand-logo"
+                  :src="brandLogoFor"
+                  :alt="car.brand || '品牌'"
+                />
+              </router-link>
+              <h2>
+                <router-link
+                  v-if="brandName"
+                  class="brand-link"
+                  :to="{ name: 'BrandDetail', params: { name: brandName } }"
+                >{{ brandName }}</router-link>
+                <span class="model-name">{{ modelName }}</span>
+              </h2>
+            </div>
             <div class="actions">
-              <router-link to="/mySpace/cars" class="back-btn">返回列表</router-link>
+              <router-link to="/mySpace/cars" class="back-btn">返回</router-link>
             </div>
           </div>
           
@@ -21,6 +75,7 @@
             <div class="tag-group">
               <span class="tag tag-energy" v-for="e in energyList" :key="e">{{ e }}</span>
               <span class="tag tag-body">{{ car.body }}</span>
+              <span class="tag tag-size" v-if="car.sizeClass">{{ car.sizeClass }}</span>
             </div>
           </div>
           
@@ -29,30 +84,31 @@
 
         <!-- Lower Part: Specs -->
         <div class="info-lower">
+          <div class="specs-hint">提示：点击参数名称可查看介绍详情</div>
           <div class="specs specs-box">
             <div class="spec-grid">
               <div class="spec-row">
-                <span class="row-label">车身尺寸</span>
+                <span class="row-label" @click="goBasics('size')">车身尺寸</span>
                 <span class="row-value">{{ bodySpecParsed.size }}</span>
               </div>
               <div class="spec-row">
-                <span class="row-label">轴距</span>
+                <span class="row-label" @click="goBasics('wheelbase')">轴距</span>
                 <span class="row-value">{{ bodySpecParsed.wheelbase }}</span>
               </div>
               <div class="spec-row">
-                <span class="row-label">车重</span>
+                <span class="row-label" @click="goBasics('weight')">车重</span>
                 <span class="row-value">{{ bodySpecParsed.weight }}</span>
               </div>
               <div class="spec-row">
-                <span class="row-label">发动机</span>
+                <span class="row-label" @click="goBasics('engine')">发动机</span>
                 <span class="row-value">{{ specs.engine }}</span>
               </div>
               <div class="spec-row">
-                <span class="row-label">变速箱</span>
+                <span class="row-label" @click="goBasics('transmission')">变速箱</span>
                 <span class="row-value">{{ specs.transmission }}</span>
               </div>
               <div class="spec-row">
-                <span class="row-label">底盘</span>
+                <span class="row-label" @click="goBasics('chassis')">底盘</span>
                 <span class="row-value">{{ specs.chassis }}</span>
               </div>
             </div>
@@ -72,35 +128,37 @@
             <button class="drawer-close" @click="toggleSpecs">关闭</button>
           </div>
           <div class="specs specs-box-mobile">
+            <div class="specs-hint">提示：点击参数名称可查看介绍详情</div>
             <div class="spec-grid">
                <div class="spec-row">
-                <span class="row-label">车身尺寸</span>
+                <span class="row-label" @click="goBasics('size')">车身尺寸</span>
                 <span class="row-value">{{ bodySpecParsed.size }}</span>
               </div>
               <div class="spec-row">
-                <span class="row-label">轴距</span>
+                <span class="row-label" @click="goBasics('wheelbase')">轴距</span>
                 <span class="row-value">{{ bodySpecParsed.wheelbase }}</span>
               </div>
               <div class="spec-row">
-                <span class="row-label">车重</span>
+                <span class="row-label" @click="goBasics('weight')">车重</span>
                 <span class="row-value">{{ bodySpecParsed.weight }}</span>
               </div>
               <div class="spec-row">
-                <span class="row-label">发动机</span>
+                <span class="row-label" @click="goBasics('engine')">发动机</span>
                 <span class="row-value">{{ specs.engine }}</span>
               </div>
               <div class="spec-row">
-                <span class="row-label">变速箱</span>
+                <span class="row-label" @click="goBasics('transmission')">变速箱</span>
                 <span class="row-value">{{ specs.transmission }}</span>
               </div>
               <div class="spec-row">
-                <span class="row-label">底盘</span>
+                <span class="row-label" @click="goBasics('chassis')">底盘</span>
                 <span class="row-value">{{ specs.chassis }}</span>
               </div>
             </div>
           </div>
         </div>
       </transition>
+      <!-- 详情页内不再显示翻页按钮，改为全局 footer 上方显示 -->
     </div>
 
     <div v-else class="not-found">
@@ -116,10 +174,36 @@ export default {
   data() {
     return {
       car: null,
-      showSpecs: false
+      showSpecs: false,
+      brandLogoMap: {},
+      currentImageIndex: 0,
+      slideDirection: 'next'
     }
   },
   computed: {
+    sortedCars() {
+      return [...cars].sort((a, b) => Number(a.id) - Number(b.id))
+    },
+    currentIndex() {
+      if (!this.car) return -1
+      return this.sortedCars.findIndex(c => Number(c.id) === Number(this.car.id))
+    },
+    prevId() {
+      const i = this.currentIndex
+      if (i > 0) return this.sortedCars[i - 1].id
+      return null
+    },
+    nextId() {
+      const i = this.currentIndex
+      if (i >= 0 && i < this.sortedCars.length - 1) return this.sortedCars[i + 1].id
+      return null
+    },
+    hasPrev() {
+      return this.prevId !== null
+    },
+    hasNext() {
+      return this.nextId !== null
+    },
     energyList() {
       if (!this.car) return []
       return Array.isArray(this.car.energy) ? this.car.energy : [this.car.energy]
@@ -142,16 +226,106 @@ export default {
       wheelbase = wheelMatch ? wheelMatch[0].replace(/^\s*轴距\s*/, '') : ''
       weight = weightMatch ? weightMatch[0].replace(/^\s*(整备质量|车重)\s*/, '') : ''
       return { size, wheelbase, weight }
+    },
+    brandLogoFor() {
+      if (!this.car) return ''
+      if (this.car.brandLogo) return this.car.brandLogo
+      const b = this.car.brand
+      if (b && this.brandLogoMap && this.brandLogoMap[b]) return this.brandLogoMap[b]
+      return ''
+    },
+    brandName() {
+      if (!this.car) return ''
+      return this.car.brand || ''
+    },
+    modelName() {
+      if (!this.car) return ''
+      const brand = this.car.brand || ''
+      const t = this.car.title || ''
+      if (brand && t.startsWith(brand)) {
+        return t.slice(brand.length).trim()
+      }
+      return t
+    },
+    images() {
+      if (!this.car) return []
+      const imgs = Array.isArray(this.car.images) ? this.car.images : []
+      if (imgs.length > 0) return imgs
+      return this.car.img ? [this.car.img] : []
     }
   },
   methods: {
+    carDetailPath(id) {
+      return `/mySpace/cars/${id}`
+    },
+    goPrev() {
+      if (this.hasPrev) {
+        this.$router.push(this.carDetailPath(this.prevId))
+      }
+    },
+    goNext() {
+      if (this.hasNext) {
+        this.$router.push(this.carDetailPath(this.nextId))
+      }
+    },
+    nextImage() {
+      const len = this.images.length
+      if (len <= 1) return
+      this.slideDirection = 'next'
+      this.currentImageIndex = (this.currentImageIndex + 1) % len
+    },
+    prevImage() {
+      const len = this.images.length
+      if (len <= 1) return
+      this.slideDirection = 'prev'
+      this.currentImageIndex = (this.currentImageIndex - 1 + len) % len
+    },
+    goToImage(idx) {
+      if (idx >= 0 && idx < this.images.length) {
+        this.slideDirection = idx > this.currentImageIndex ? 'next' : 'prev'
+        this.currentImageIndex = idx
+      }
+    },
+    loadCar(id) {
+      const n = Number(id)
+      this.car = cars.find(c => Number(c.id) === n) || null
+      this.currentImageIndex = 0
+    },
     toggleSpecs() {
       this.showSpecs = !this.showSpecs
+    },
+    goBasics(key) {
+      const map = {
+        size:        { id: 'body-size', anchor: '基本尺寸' },
+        wheelbase:   { id: 'body-size', anchor: '基本尺寸' },
+        weight:      { id: 'body-size', anchor: '质量参数' },
+        engine:      { id: 'power-transmission', anchor: '发动机与电机参数' },
+        transmission:{ id: 'power-transmission', anchor: '变速箱类型' },
+        chassis:     { id: 'chassis-suspension', anchor: '常见悬架形式' }
+      }
+      const t = map[key]
+      if (!t) return
+      this.$router.push({
+        name: 'CarBasicsDetail',
+        params: { id: t.id },
+        query: { anchor: t.anchor }
+      })
     }
   },
   created() {
-    const id = Number(this.$route.params.id)
-    this.car = cars.find(c => Number(c.id) === id) || null
+    this.loadCar(this.$route.params.id)
+    import('@/data/brandLogos.json').then(mod => { this.brandLogoMap = mod.default })
+    if (typeof window !== 'undefined' && window.scrollTo) {
+      window.scrollTo({ top: 0, behavior: 'auto' })
+    }
+  },
+  watch: {
+    '$route.params.id'(val) {
+      this.loadCar(val)
+      if (typeof window !== 'undefined' && window.scrollTo) {
+        window.scrollTo({ top: 0, behavior: 'auto' })
+      }
+    }
   }
 }
 </script>
@@ -189,11 +363,12 @@ export default {
 }
 
 .page-car-detail {
-  padding-top: 20px;
+  padding-top: 0;
   font-family: 'SourceHanSansSC', sans-serif;
   height: 70vh; /* Reduced height to remove excess whitespace */
   min-height: 500px;
   box-sizing: border-box;
+  padding-bottom: 24px; /* add spacing above footer */
 }
 
 .detail-layout {
@@ -202,40 +377,147 @@ export default {
   gap: 20px;
 }
 
+.detail-pager {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+}
+
+.nav-icon {
+  background: rgba(102,192,244,0.12);
+  border: none;
+  color: #c7d5e0;
+  padding: 8px 14px;
+  min-width: 40px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  font-size: 18px;
+  line-height: 1;
+}
+.nav-icon:hover {
+  color: #e6f3ff;
+  background: rgba(102,192,244,0.22);
+}
+.nav-icon:disabled {
+  opacity: 0.6;
+  cursor: default;
+  pointer-events: none;
+  background: rgba(102,192,244,0.06);
+}
+
 /* Left Section: 70% */
 .left-section {
-  flex: 0 0 70%;
+  flex: 0 0 60%;
   position: relative;
   overflow: hidden;
   border-radius: 0;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5); /* Added shadow for depth */
   /* Merged hero styles */
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
 }
 
-.hero-overlay {
+.gallery-image {
   position: absolute;
   inset: 0;
-  background: transparent; /* No overlay for clean image */
-  z-index: 1;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  user-select: none;
 }
+
+.gallery-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+  width: 46px;
+  height: 92px;
+  border-radius: 8px;
+  border: none;
+  background: rgba(27,40,56,0.55);
+  color: #ffffff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  line-height: 1;
+  cursor: pointer;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.15s ease;
+}
+.gallery-nav.prev { left: 8px; }
+.gallery-nav.next { right: 8px; }
+.left-section:hover .gallery-nav {
+  opacity: 1;
+  pointer-events: auto;
+}
+.gallery-nav:hover {
+  background: rgba(27,40,56,0.75);
+}
+
+.dot-indicators {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 10px;
+  display: flex;
+  gap: 6px;
+  z-index: 2;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.15s ease;
+}
+.left-section:hover .dot-indicators {
+  opacity: 1;
+  pointer-events: auto;
+}
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  border: 1px solid #e6f3ff;
+  background: transparent;
+}
+.dot.active {
+  background: #e6f3ff;
+}
+
+.slide-next-enter-active, .slide-next-leave-active { transition: transform 0.25s ease, opacity 0.25s ease; }
+.slide-next-enter { transform: translateX(40px); opacity: 0; }
+.slide-next-enter-to { transform: translateX(0); opacity: 1; }
+.slide-next-leave { transform: translateX(0); opacity: 1; }
+.slide-next-leave-to { transform: translateX(-40px); opacity: 0; }
+
+.slide-prev-enter-active, .slide-prev-leave-active { transition: transform 0.25s ease, opacity 0.25s ease; }
+.slide-prev-enter { transform: translateX(-40px); opacity: 0; }
+.slide-prev-enter-to { transform: translateX(0); opacity: 1; }
+.slide-prev-leave { transform: translateX(0); opacity: 1; }
+.slide-prev-leave-to { transform: translateX(40px); opacity: 0; }
 
 /* Right Section: 30% */
 .right-section {
-  flex: 0 0 30%;
+  flex: 0 0 40%;
   display: flex;
   flex-direction: column;
   gap: 20px;
-  overflow-y: auto; /* Allow scrolling if content is too long */
+  overflow: hidden;
+  padding: 0 40px;
+  box-sizing: border-box;
 }
 
 /* Upper Part */
 .info-upper {
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 10px;
+  height: 240px;
+  overflow: hidden;
 }
 
 .section-header {
@@ -243,7 +525,13 @@ export default {
   justify-content: space-between;
   align-items: center;
   border-bottom: 1px solid #38424e;
-  padding-bottom: 10px;
+  padding-bottom: 6px;
+}
+
+.title-with-logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
 }
 
 .section-header h2 {
@@ -253,22 +541,63 @@ export default {
   color: #e6f3ff;
 }
 
-.actions .back-btn {
-  background: transparent;
-  border: none;
-  color: #c7d5e0;
-  padding: 6px 12px;
-  cursor: pointer;
+.brand-link {
+  color: #66c0f4;
   text-decoration: none;
-  display: inline-block;
-  border-radius: 6px;
 }
+.brand-link:hover { text-decoration: underline; }
+.model-name { margin-left: 6px; }
+
+.brand-logo-link {
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+.brand-logo {
+  height: 24px;
+  width: auto;
+  object-fit: contain;
+  border-radius: 3px;
+  background: transparent;
+}
+
+.actions .back-btn { background: transparent; border: none; color: #c7d5e0; padding: 6px 12px; cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; border-radius: 6px; }
+.actions .back-btn::before { content: ""; display: inline-block; width: 16px; height: 16px; background: url('~@/assets/images/fanhui.svg') no-repeat center / contain; }
 
 .actions .back-btn:hover {
   color: #e6f3ff;
   background: rgba(102,192,244,0.12);
 }
 
+.actions .nav-icon {
+  background: rgba(102,192,244,0.12);
+  border: 1px solid rgba(102,192,244,0.25);
+  border: none;
+  color: #c7d5e0;
+  padding: 6px 10px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  margin-right: 6px;
+  font-size: 18px;
+  line-height: 1;
+}
+
+.actions .nav-icon:hover {
+  color: #e6f3ff;
+  background: rgba(102,192,244,0.22);
+}
+
+.actions .nav-icon:disabled {
+  opacity: 0.6;
+  cursor: default;
+  pointer-events: none;
+  background: rgba(102,192,244,0.06);
+  border-color: rgba(255,255,255,0.1);
+}
 .meta-block {
   display: flex;
   align-items: center;
@@ -300,10 +629,14 @@ export default {
 .intro-text {
   color: #c7d5e0;
   line-height: 1.6;
-  font-size: 17px; /* Increased font size */
+  font-size: 16px;
   margin: 0;
   text-align: justify;
   font-family: 'MSYaHei-Semibold', sans-serif;
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 /* Lower Part */
@@ -326,18 +659,28 @@ export default {
 .spec-grid {
   display: flex;
   flex-direction: column;
-  gap: 0; /* No gap between rows */
+  gap: 0;
   background: transparent;
+}
+
+.specs-hint {
+  color: #8f98a0;
+  font-size: 12px;
+  padding: 0 16px;
+  text-align: right;
+  margin: 6px 0 10px;
+  background: transparent;
+  border: none;
 }
 
 .spec-row {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: rgba(0, 0, 0, 0.2); /* Dark row background */
+  background: rgba(0, 0, 0, 0.2);
   padding: 8px 16px;
   transition: background 0.2s;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* Separator line */
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .spec-row:last-child {
@@ -347,20 +690,26 @@ export default {
 .row-label {
   background: transparent;
   color: #ffffff; /* White text */
-  font-size: 13px; /* Smaller font */
+  font-size: 12px;
   padding: 0;
   width: auto;
   flex-shrink: 0;
   display: block;
+  cursor: pointer;
 }
 
 .row-value {
   color: #ffffff; /* White text */
-  font-size: 13px; /* Smaller font */
+  font-size: 12px;
   text-align: right;
   padding: 0;
   flex-grow: 1;
   display: block;
+}
+
+.row-label:hover {
+  color: #66c0f4;
+  text-decoration: underline;
 }
 
 .not-found {

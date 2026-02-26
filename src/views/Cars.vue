@@ -18,24 +18,30 @@
         <button class="chip filter-toggle mobile-only" @click="toggleFilter">筛选</button>
         <div class="filters">
           <div class="filter-group">
-            <button
-              v-for="opt in energyOptions"
-              :key="opt"
-              class="chip"
-              :class="{ active: selectedEnergies.includes(opt) }"
-              @click="toggleEnergy(opt)"
-            >{{ opt }}</button>
+            <select class="select" v-model="selectedEnergy">
+              <option :value="null">全部能源</option>
+              <option v-for="opt in energyOptions" :key="opt" :value="opt">{{ opt }}</option>
+            </select>
           </div>
-          <span class="filter-sep" aria-hidden="true"></span>
           <div class="filter-group">
-            <button
-              v-for="opt in bodyOptions"
-              :key="opt"
-              class="chip"
-              :class="{ active: selectedBody === opt }"
-              @click="toggleBody(opt)"
-            >{{ opt }}</button>
+            <select class="select" v-model="selectedBody">
+              <option :value="null">全部车型</option>
+              <option v-for="opt in bodyOptions" :key="opt" :value="opt">{{ opt }}</option>
+            </select>
           </div>
+          <div class="filter-group">
+            <select class="select" v-model="selectedBrand">
+              <option :value="null">全部品牌</option>
+              <option v-for="opt in brandOptions" :key="opt" :value="opt">{{ opt }}</option>
+            </select>
+          </div>
+          <div class="filter-group">
+            <select class="select" v-model="selectedSizeClass">
+              <option :value="null">全部尺寸</option>
+              <option v-for="opt in sizeClassOptions" :key="opt" :value="opt">{{ opt }}</option>
+            </select>
+          </div>
+          <button v-if="hasActiveFilters" class="chip clear-chip" @click="clearFilters">清除所有筛选</button>
         </div>
         <div class="filter-sheet mobile-only" :class="{ active: filterOpen }">
           <div class="sheet-header">
@@ -45,24 +51,33 @@
           <div class="sheet-content">
             <div class="sheet-subtitle">能源类型</div>
             <div class="filter-group">
-              <button
-                v-for="opt in energyOptions"
-                :key="opt"
-                class="chip"
-                :class="{ active: selectedEnergies.includes(opt) }"
-                @click="toggleEnergy(opt)"
-              >{{ opt }}</button>
+              <select class="select" v-model="selectedEnergy">
+                <option :value="null">全部能源</option>
+                <option v-for="opt in energyOptions" :key="opt" :value="opt">{{ opt }}</option>
+              </select>
             </div>
             <div class="sheet-subtitle">车型</div>
             <div class="filter-group">
-              <button
-                v-for="opt in bodyOptions"
-                :key="opt"
-                class="chip"
-                :class="{ active: selectedBody === opt }"
-                @click="toggleBody(opt)"
-              >{{ opt }}</button>
+              <select class="select" v-model="selectedBody">
+                <option :value="null">全部车型</option>
+                <option v-for="opt in bodyOptions" :key="opt" :value="opt">{{ opt }}</option>
+              </select>
             </div>
+            <div class="sheet-subtitle">品牌</div>
+            <div class="filter-group">
+              <select class="select" v-model="selectedBrand">
+                <option :value="null">全部品牌</option>
+                <option v-for="opt in brandOptions" :key="opt" :value="opt">{{ opt }}</option>
+              </select>
+            </div>
+            <div class="sheet-subtitle">尺寸等级</div>
+            <div class="filter-group">
+              <select class="select" v-model="selectedSizeClass">
+                <option :value="null">全部尺寸</option>
+                <option v-for="opt in sizeClassOptions" :key="opt" :value="opt">{{ opt }}</option>
+              </select>
+            </div>
+            <button v-if="hasActiveFilters" class="chip clear-chip" @click="clearFilters">清除所有筛选</button>
           </div>
         </div>
       </div>
@@ -78,18 +93,27 @@
         :key="car.id"
         :to="{ name: 'CarDetail', params: { id: car.id } }"
       >
-        <div class="card-image" :style="{ backgroundImage: `url(${car.img})` }"></div>
+        <div class="card-image" :style="coverBg(car)"></div>
         <div class="card-info">
-          <div class="card-title">{{ car.title }}</div>
+          <div class="card-title">
+            <img
+              v-if="brandLogoFor(car)"
+              class="brand-logo"
+              :src="brandLogoFor(car)"
+              :alt="car.brand"
+            />
+            <span class="title-text">{{ car.title }}</span>
+          </div>
           <div class="card-tags">
             <span class="tag tag-energy" v-for="e in energyList(car)" :key="e">{{ e }}</span>
             <span class="tag tag-body">{{ car.body }}</span>
+            <span class="tag tag-size" v-if="car.sizeClass">{{ car.sizeClass }}</span>
           </div>
         </div>
       </router-link>
     </div>
     <div class="pagination" v-if="totalPages > 1">
-      <button class="page-btn" :disabled="page === 1" @click="goPage(page - 1)">Prev</button>
+      <button class="page-btn" :disabled="page === 1" @click="goPage(page - 1)" aria-label="上一页">‹</button>
       <button
         class="page-btn"
         v-for="n in totalPages"
@@ -97,7 +121,7 @@
         :class="{ active: page === n }"
         @click="goPage(n)"
       >{{ n }}</button>
-      <button class="page-btn" :disabled="page === totalPages" @click="goPage(page + 1)">Next</button>
+      <button class="page-btn" :disabled="page === totalPages" @click="goPage(page + 1)" aria-label="下一页">›</button>
     </div>
   </div>
 </template>
@@ -109,22 +133,39 @@ export default {
     return {
       energyOptions: ['纯电', '混动', '燃油'],
       bodyOptions: ['轿车', 'SUV'],
+      selectedEnergy: null,
+      selectedBrand: null,
+      selectedSizeClass: null,
       selectedEnergies: [],
       selectedBody: null,
+      brandLogoMap: {},
       cars: [],
       page: 1,
-      pageSize: 9,
+      pageSize: 12,
       filterOpen: false
     }
   },
   computed: {
+    hasActiveFilters() {
+      return Boolean(this.selectedEnergy || this.selectedBody || this.selectedBrand || this.selectedSizeClass)
+    },
+    brandOptions() {
+      const set = new Set(this.cars.map(c => c.brand).filter(Boolean))
+      return Array.from(set)
+    },
+    sizeClassOptions() {
+      const set = new Set(this.cars.map(c => c.sizeClass).filter(Boolean))
+      return Array.from(set)
+    },
     filteredCars() {
       return this.cars.filter(c => {
         const selected = this.selectedEnergies
         const carEnergy = Array.isArray(c.energy) ? c.energy : [c.energy]
         const energyOk = selected.length ? selected.every(e => carEnergy.includes(e)) : true
         const bodyOk = this.selectedBody ? c.body === this.selectedBody : true
-        return energyOk && bodyOk
+        const brandOk = this.selectedBrand ? c.brand === this.selectedBrand : true
+        const sizeOk = this.selectedSizeClass ? c.sizeClass === this.selectedSizeClass : true
+        return energyOk && bodyOk && brandOk && sizeOk
       })
     },
     totalPages() {
@@ -137,6 +178,18 @@ export default {
     }
   },
   methods: {
+    coverBg(car) {
+      const imgs = Array.isArray(car.images) ? car.images : []
+      const url = imgs.length ? imgs[0] : ''
+      return { backgroundImage: url ? `url(${url})` : '' }
+    },
+    brandLogoFor(car) {
+      if (car && car.brandLogo) return car.brandLogo
+      if (this.brandLogoMap && car && car.brand && this.brandLogoMap[car.brand]) {
+        return this.brandLogoMap[car.brand]
+      }
+      return ''
+    },
     energyList(car) {
       return Array.isArray(car.energy) ? car.energy : [car.energy]
     },
@@ -162,6 +215,20 @@ export default {
     toggleBody(opt) {
       this.selectedBody = this.selectedBody === opt ? null : opt
     },
+    toggleBrand(opt) {
+      this.selectedBrand = this.selectedBrand === opt ? null : opt
+    },
+    toggleSizeClass(opt) {
+      this.selectedSizeClass = this.selectedSizeClass === opt ? null : opt
+    },
+    clearFilters() {
+      this.selectedEnergy = null
+      this.selectedEnergies = []
+      this.selectedBody = null
+      this.selectedBrand = null
+      this.selectedSizeClass = null
+      this.page = 1
+    },
     goPage(n) {
       if (n < 1) n = 1
       if (n > this.totalPages) n = this.totalPages
@@ -169,17 +236,24 @@ export default {
     }
   },
   watch: {
-    selectedEnergies() {
+    selectedEnergies() { this.page = 1 },
+    selectedBody() {
       this.page = 1
     },
-    selectedBody() {
+    selectedEnergy() {
+      this.selectedEnergies = this.selectedEnergy ? [this.selectedEnergy] : []
+      this.page = 1
+    },
+    selectedBrand() {
+      this.page = 1
+    },
+    selectedSizeClass() {
       this.page = 1
     }
   },
   created() {
-    import('@/data/cars.json').then(mod => {
-      this.cars = mod.default
-    })
+    import('@/data/cars.json').then(mod => { this.cars = mod.default })
+    import('@/data/brandLogos.json').then(mod => { this.brandLogoMap = mod.default })
   }
 }
 </script>
@@ -255,6 +329,35 @@ export default {
   color: #ffffff;
 }
 
+.clear-chip {
+  border: none;
+  padding: 0 12px;
+}
+.clear-chip:hover { }
+
+.select {
+  background: transparent;
+  border: 1px solid #3c4551;
+  color: #c7d5e0;
+  padding: 0 8px;
+  font-size: 12px;
+  border-radius: 6px;
+  height: 28px;
+  line-height: 28px;
+  width: 100px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.select:focus,
+.select:focus-visible {
+  outline: none;
+  border-color: #66c0f4;
+}
+.select:hover {
+  border-color: #66c0f4;
+}
+
 .mobile-only { display: none; }
 .filter-sheet {
   position: fixed;
@@ -288,10 +391,12 @@ export default {
   .filters { display: none; }
   .filter-toggle.mobile-only { display: inline-flex; }
   .filter-sheet.mobile-only { display: block; }
+  .gallery-grid { grid-template-columns: repeat(2, 1fr); }
   .filter-sheet .filter-group { flex-direction: column; align-items: stretch; gap: 6px; }
   .filter-sheet .chip { width: 100%; justify-content: flex-start; padding: 0 14px; height: 30px; }
   .filter-sheet .filter-sep { width: 100%; height: 1px; background: #38424e; }
   .filter-sheet .sheet-header .chip { width: auto; margin-left: auto; justify-content: center; height: 28px; }
+  .filter-sheet .select { width: 100%; height: 30px; }
   .filter-toggle.mobile-only {
     font-size: 13px;
     border: 1px solid #3c4551;
@@ -340,14 +445,18 @@ export default {
 }
 
 .card-info { padding: 12px; background: #222e3b; }
-.card-title { color: #ffffff; margin-bottom: 8px; font-weight: bold; }
+.card-title { color: #ffffff; margin-bottom: 8px; font-weight: bold; display: flex; align-items: center; gap: 8px; }
+.card-title .title-text { display: inline-block; }
+.brand-logo { width: 24px; height: 24px; object-fit: contain; background: transparent; }
+.brand-logo { height: 1em; width: auto; object-fit: contain; background: transparent; }
 .card-tags { display: flex; align-items: center; gap: 6px; }
 .card-tags .tag { display: inline-block; padding: 2px 6px; font-size: 10px; border-radius: 3px; }
 .card-tags .tag-energy { background: #1a4d7a; color: #ffffff; font-weight: 600; }
 .card-tags .tag-body { background: #2e6b36; color: #ffffff; font-weight: 600; }
-.pagination { display: flex; align-items: center; justify-content: center; gap: 8px; margin-top: 20px; }
-.page-btn { background: none; border: 1px solid #3c4551; color: #c7d5e0; padding: 6px 10px; cursor: pointer; border-radius: 4px; font-size: 12px; }
-.page-btn:hover { color: #fff; border-color: #66c0f4; }
-.page-btn.active { background: #2a475e; color: #fff; border-color: #66c0f4; }
+.card-tags .tag-size { background: #3a3f45; color: #ffffff; font-weight: 600; }
+.pagination { display: flex; align-items: center; justify-content: center; gap: 8px; margin-top: 32px; }
+.page-btn { background: none; border: none; color: #c7d5e0; padding: 6px 10px; cursor: pointer; border-radius: 4px; font-size: 12px; }
+.page-btn:hover { color: #fff; }
+.page-btn.active { background: #2a475e; color: #fff; }
 .page-btn[disabled] { opacity: 0.5; cursor: not-allowed; }
 </style>

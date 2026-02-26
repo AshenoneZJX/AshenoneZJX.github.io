@@ -2,7 +2,14 @@
   {
     "id": 1,
     "title": "本田 思域",
-    "img": "https://p3.dcarimg.com/img/motor-mis-img/43781dd9b828e478472d302877167f4e~2508x0.webp",
+    "brand": "本田",
+    "brandLogo": "/brand-logos/honda.png",
+    "sizeClass": "紧凑型轿车",
+    "images": [
+      "https://p3.dcarimg.com/img/motor-mis-img/43781dd9b828e478472d302877167f4e~2508x0.webp",
+      "https://p3.dcarimg.com/img/motor-mis-img/DCP_26bed67c3999265b9697ed34bcc8630a~2508x0.webp",
+      "https://p3.dcarimg.com/img/motor-mis-img/e0188b2adb8748363a304a30a66f40c6~2508x0.webp"
+    ],
     "energy": ["燃油", "混动"],
     "body": "轿车",
     "intro": "本田思域（Civic）是一款紧凑型轿车，以运动操控与高效节能著称。提供燃油与混合动力（e:HEV）版本，1.5T发动机与CVT/AT变速器，前麦弗逊/后多连杆悬架，配备Honda SENSING安全辅助与智能互联系统，兼顾日常通勤与驾控乐趣。",
@@ -16,7 +23,14 @@
   {
     "id": 2,
     "title": "特斯拉 Model 3",
-    "img": "https://images.unsplash.com/photo-1536700503339-1e4b06520771?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=60",
+    "brand": "特斯拉",
+    "brandLogo": "/brand-logos/tesla.png",
+    "sizeClass": "中型轿车",
+    "images": [
+      "https://p3.dcarimg.com/img/motor-mis-img/DCP_22c73cf1b4ee18d4f1d338bf5a3c7e20~2508x0.webp",
+      "https://p3.dcarimg.com/img/motor-mis-img/DCP_c8c6dd4cc8ea071c61ec83220663a241~2508x0.webp",
+      "https://p3.dcarimg.com/img/motor-mis-img/DCP_6de63fe9ab4e3f994451d662604ddef5~2508x0.webp"
+    ],
     "energy": "纯电",
     "body": "轿车",
     "intro": "特斯拉Model 3是一款中型纯电轿车，以极简设计、长续航与智能辅助驾驶著称。采用全铝车身与纯电平台，后置/双电机四驱，零百加速最快3.3s，CLTC续航最高713km，标配Autopilot与OTA升级，兼顾家用与科技体验。",
@@ -30,7 +44,14 @@
   {
     "id": 3,
     "title": "本田 雅阁",
-    "img": "https://p3.dcarimg.com/img/motor-mis-img/DCP_c7377bbfc31b691024e86003974cfd78~2508x0.webp",
+    "brand": "本田",
+    "brandLogo": "/brand-logos/honda.png",
+    "sizeClass": "中型轿车",
+    "images": [
+      "https://p3.dcarimg.com/img/motor-mis-img/DCP_c7377bbfc31b691024e86003974cfd78~2508x0.webp",
+      "https://p3.dcarimg.com/img/motor-mis-img/DCP_1edab071ad1c91933780882d9c04e834~2508x0.webp",
+      "https://p3.dcarimg.com/img/motor-mis-img/DCP_6d0917828c27f8f9a7f13ddec72bc717~2508x0.webp"
+    ],
     "energy": ["燃油", "混动"],
     "body": "轿车",
     "intro": "本田雅阁（Accord）是一款中型轿车，以舒适空间与高效动力著称。提供燃油与混合动力（e:HEV）版本，1.5T/2.0L发动机匹配CVT/E-CVT变速器，前麦弗逊/后多连杆悬架，配备Honda SENSING安全辅助与Honda CONNECT智能互联，兼顾商务与家用需求。",
@@ -44,7 +65,13 @@
   {
     "id": 4,
     "title": "大众 速腾",
-    "img": "https://p3.dcarimg.com/img/motor-mis-img/DCP_0092b5b95af205e296eb9fcd06376610~2508x0.webp",
+    "brand": "大众",
+    "brandLogo": "/brand-logos/volkswagen.svg",
+    "sizeClass": "紧凑型轿车",
+    "images": [
+      "https://p3.dcarimg.com/img/motor-mis-img/DCP_0092b5b95af205e296eb9fcd06376610~2508x0.webp",
+      "https://p3.dcarimg.com/img/motor-mis-img/DCP_0092b5b95af205e296eb9fcd06376610~2508x0.webp"
+    ],
     "energy": "燃油",
     "body": "轿车",
     "intro": "大众速腾（Sagitar）是一款紧凑型轿车，以稳重设计、宽敞空间与德系操控著称。提供燃油与混合动力版本，1.2T/1.4T发动机匹配5MT/7DSG变速器，前麦弗逊/后多连杆悬架，配备IQ.Drive安全辅助与MIB智能互联，兼顾家用与商务出行。",
@@ -58,7 +85,14 @@
   {
     "id": 5,
     "title": "大众 迈腾",
-    "img": "https://p3.dcarimg.com/img/motor-mis-img/DCP_a13b1bf7cc76b97e32e4f6e58b7cf234~2508x0.webp",
+    "brand": "大众",
+    "brandLogo": "/brand-logos/volkswagen.svg",
+    "sizeClass": "中型轿车",
+    "images": [
+      "https://p3.dcarimg.com/img/motor-mis-img/DCP_a13b1bf7cc76b97e32e4f6e58b7cf234~2508x0.webp",
+      "https://p3.dcarimg.com/img/motor-mis-img/DCP_08c237025a34549d1301c9bd67e39e25~2508x0.webp",
+      "https://p3.dcarimg.com/img/motor-mis-img/DCP_f9ccb4155915a82c2cb5fca22c5fe243~2508x0.webp"
+    ],
     "energy": "燃油",
     "body": "轿车",
     "intro": "大众迈腾（Magotan）是一款中型轿车，以稳重商务与舒适驾乘著称。提供1.4T/2.0T发动机匹配7DSG变速器，前麦弗逊/后多连杆悬架，配备IQ.Drive安全辅助与MIB智能互联，兼顾商务接待与家用出行。",
@@ -72,7 +106,14 @@
   {
     "id": 6,
     "title": "长城 哈弗大狗",
-    "img": "https://p3.dcarimg.com/img/motor-mis-img/DCP_379cc0453680553ee61d47a5ce8c13a2~2508x0.webp",
+    "brand": "长城",
+    "brandLogo": "/brand-logos/Great_Wall_Motor.png",
+    "sizeClass": "紧凑型SUV",
+    "images": [
+      "https://p3.dcarimg.com/img/motor-mis-img/DCP_379cc0453680553ee61d47a5ce8c13a2~2508x0.webp",
+      "https://p3.dcarimg.com/img/motor-mis-img/DCP_89530b8cbf904a8a44f67995c993d87d~2508x0.webp",
+      "https://p3.dcarimg.com/img/motor-mis-img/DCP_1563da0a247f4bac8e82cdb52d2bffb1~2508x0.webp"
+    ],
     "energy": "燃油",
     "body": "SUV",
     "intro": "哈弗大狗是长城汽车旗下紧凑型SUV，以硬朗复古造型与全地形能力著称。提供1.5T/2.0T发动机匹配7DCT变速器，部分车型带博格华纳第五代智能四驱+后桥差速锁，配备L2级智能驾驶与Coffee OS智能座舱，兼顾城市通勤与轻度越野。",
@@ -86,7 +127,12 @@
   {
     "id": 7,
     "title": "特斯拉 Model Y",
-    "img": "https://p3.dcarimg.com/img/motor-mis-img/DCP_087c87c159092e01db409d8d61bcf745~1200x0.webp",
+    "brand": "特斯拉",
+    "brandLogo": "/brand-logos/tesla.png",
+    "sizeClass": "中型SUV",
+    "images": [
+      "https://p3.dcarimg.com/img/motor-mis-img/DCP_b3456e40d9b7e4f10c7247ecefbf6bcf~2508x0.webp"
+    ],
     "energy": "纯电",
     "body": "SUV",
     "intro": "特斯拉Model Y是一款中型纯电SUV，以极简设计、长续航与智能辅助驾驶著称。采用全铝车身与纯电平台，后置/双电机四驱，零百加速最快3.7s，CLTC续航最高688km，标配Autopilot与OTA升级，兼顾家用与科技体验。",
@@ -100,7 +146,12 @@
   {
     "id": 8,
     "title": "宝马 3系",
-    "img": "https://p3.dcarimg.com/img/tos-cn-i-dcdx/5882ef00ae474ee4b07710eb4106b16c~1200x0.webp",
+    "brand": "宝马",
+    "brandLogo": "/brand-logos/bmw.png",
+    "sizeClass": "中型轿车",
+    "images": [
+      "https://p3.dcarimg.com/img/motor-mis-img/DCP_dc2fee0ead02dae0ceb4ace22724d562~2508x0.webp"
+    ],
     "energy": "燃油",
     "body": "轿车",
     "intro": "宝马3系（BMW 3 Series）是一款中型豪华轿车，以运动操控与豪华质感著称。提供1.5T/2.0T发动机匹配8AT变速器，前双球节/后多连杆悬架，配备BMW Personal CoPilot驾驶辅助与iDrive智能互联，兼顾驾驶乐趣与日常通勤。",
@@ -114,8 +165,13 @@
   ,
   {
     "id": 9,
+    "brand": "奥迪",
+    "brandLogo": "/brand-logos/audi.png",
+    "sizeClass": "中型轿车",
     "title": "奥迪 A4L",
-    "img": "https://p3.dcarimg.com/img/motor-mis-img/DCP_869333979fc804260178ec37db0c3f75~1200x0.webp",
+    "images": [
+      "https://p3.dcarimg.com/img/motor-mis-img/DCP_dd46d6d9109405610ae49bd87825a3c8~2508x0.webp"
+    ],
     "energy": "燃油",
     "body": "轿车",
     "intro": "奥迪A4L（Audi A4L）是一款中型豪华轿车，以科技感与舒适驾乘著称。提供2.0T发动机匹配7DCT变速器，前五连杆/后五连杆悬架，配备Audi Pre Sense安全辅助与MMI智能互联，兼顾商务与家用需求。",
@@ -128,8 +184,13 @@
   },
   {
     "id": 10,
+    "brand": "奔驰",
+    "brandLogo": "/brand-logos/mercedes.png",
+    "sizeClass": "中型轿车",
     "title": "奔驰 C级L",
-    "img": "https://p3.dcarimg.com/img/motor-mis-img/DCP_9971a28555ae44a5c5d80ed2ad99a194~2508x0.webp",
+    "images": [
+      "https://p3.dcarimg.com/img/motor-mis-img/DCP_9971a28555ae44a5c5d80ed2ad99a194~2508x0.webp"
+    ],
     "energy": "燃油",
     "body": "轿车",
     "intro": "奔驰C级L（Mercedes-Benz C-Class L）是一款中型豪华轿车，以优雅设计与舒适驾乘著称。提供1.5T/2.0T发动机匹配9AT变速器，前多连杆/后多连杆悬架，配备MBUX智能互联与主动安全辅助，兼顾商务与家用需求。",
@@ -142,8 +203,13 @@
   },
   {
     "id": 11,
+    "brand": "奔驰",
+    "brandLogo": "/brand-logos/mercedes.png",
+    "sizeClass": "中大型轿车",
     "title": "奔驰 E级L",
-    "img": "https://p3.dcarimg.com/img/motor-mis-img/DCP_dfe9599b870c550cab688433d0f5f9a1~2508x0.webp",
+    "images": [
+      "https://p3.dcarimg.com/img/motor-mis-img/DCP_dfe9599b870c550cab688433d0f5f9a1~2508x0.webp"
+    ],
     "energy": "燃油",
     "body": "轿车",
     "intro": "奔驰E级L（Mercedes-Benz E-Class L）是一款中大型豪华轿车，以豪华质感与行政舒适著称。提供2.0T发动机匹配9AT变速器，前多连杆/后多连杆悬架，配备MBUX智能互联与L2级驾驶辅助，兼顾商务接待与高端家用。",
@@ -156,8 +222,13 @@
   },
   {
     "id": 12,
+    "brand": "奔驰",
+    "brandLogo": "/brand-logos/mercedes.png",
+    "sizeClass": "大型轿车",
     "title": "奔驰 S级L",
-    "img": "https://p3.dcarimg.com/img/motor-mis-img/DCP_3e1b9733f3b9363d2a69d9c153b8cbca~2508x0.webp",
+    "images": [
+      "https://p3.dcarimg.com/img/motor-mis-img/DCP_3e1b9733f3b9363d2a69d9c153b8cbca~2508x0.webp"
+    ],
     "energy": "燃油",
     "body": "轿车",
     "intro": "奔驰S级L（Mercedes-Benz S-Class L）是一款大型旗舰豪华轿车，以极致舒适与尖端科技著称。提供3.0T L6发动机匹配9AT变速器，前双叉臂/后多连杆悬架，配备MBUX后排娱乐与L3级驾驶辅助，定义行政与豪华出行新标准。",
@@ -166,6 +237,215 @@
       "engine": "3.0T L6 涡轮增压 + 48V轻混 313PS / 367PS，功率200kW / 240kW，最大扭矩350N·m / 420N·m",
       "transmission": "9AT",
       "chassis": "前双叉臂、后多连杆，前置后驱/四驱"
+    }
+  },
+  {
+    "id": 13,
+    "brand": "丰田",
+    "brandLogo": null,
+    "sizeClass": "紧凑型SUV",
+    "title": "丰田 RAV4",
+    "images": [
+      "https://p3.dcarimg.com/img/motor-mis-img/DCP_13317b5eb90a17972ef0ba906d1ea6c3~2508x0.webp"
+    ],
+    "energy": ["燃油", "混动"],
+    "body": "SUV",
+    "intro": "丰田RAV4是一款紧凑型SUV，以可靠耐用与均衡性能著称。提供燃油与混合动力（THS）版本，2.0L/2.5L发动机匹配CVT/E-CVT变速器，前麦弗逊/后多连杆悬架，配备Toyota Safety Sense安全辅助与TSS智能互联系统，兼顾城市通勤与轻度越野。",
+    "specs": {
+      "dimensions": "长4600mm × 宽1855mm × 高1685mm，轴距2690mm，整备质量约1620kg",
+      "engine": "2.0L L4 自然吸气 / 2.5L 阿特金森循环 + 电机 171PS / 218PS，功率126kW / 160kW，最大扭矩203N·m / 221N·m",
+      "transmission": "CVT / E-CVT",
+      "chassis": "前麦弗逊、后多连杆，前置前驱/智能四驱"
+    }
+  },
+  {
+    "id": 14,
+    "brand": "大众",
+    "brandLogo": "/brand-logos/volkswagen.svg",
+    "sizeClass": "紧凑型SUV",
+    "title": "大众 途岳",
+    "images": [
+      "https://p3.dcarimg.com/img/motor-mis-img/1286901b6e05f036c8ba6a33a1bf7873~2508x0.webp"
+    ],
+    "energy": "燃油",
+    "body": "SUV",
+    "intro": "大众途岳（Tharu）是一款紧凑型SUV，以硬朗外观与实用空间著称。提供1.4T/2.0T发动机匹配7DSG变速器，前麦弗逊/后多连杆悬架，配备IQ.Drive安全辅助与MIB智能互联，兼顾城市通勤与家庭出行。",
+    "specs": {
+      "dimensions": "长4453mm × 宽1841mm × 高1632mm，轴距2680mm，整备质量约1405kg",
+      "engine": "1.4T/2.0T L4 涡轮增压 150PS / 186PS，功率110kW / 137kW，最大扭矩250N·m / 320N·m",
+      "transmission": "7DSG",
+      "chassis": "前麦弗逊、后多连杆，前置前驱/四驱"
+    }
+  },
+  {
+    "id": 15,
+    "brand": "小米",
+    "brandLogo": null,
+    "sizeClass": "中大型轿车",
+    "title": "小米 SU7",
+    "images": [
+      "https://p3.dcarimg.com/img/motor-mis-img/522ee205908b4878408f5a03ebad1c55~2508x0.webp"
+    ],
+    "energy": "纯电",
+    "body": "轿车",
+    "intro": "小米SU7是小米汽车首款中大型纯电轿车，以极致性能与智能生态著称。采用800V高压平台与双电机四驱，零百加速最快2.78s，CLTC续航最高800km，全系标配小米Pilot高阶智驾与HyperOS智能座舱，兼顾性能与科技体验。",
+    "specs": {
+      "dimensions": "长4997mm × 宽1963mm × 高1440mm，轴距3000mm，整备质量约2205kg",
+      "engine": "后置永磁同步电机 / 前后双电机（Max） 673PS，功率495kW，最大扭矩838N·m",
+      "transmission": "单速固定齿比",
+      "chassis": "前双叉臂、后五连杆，后置后驱/双电机四驱"
+    }
+  },
+  {
+    "id": 16,
+    "brand": "小米",
+    "brandLogo": null,
+    "sizeClass": "中大型SUV",
+    "title": "小米 YU7",
+    "images": [
+      "https://p3.dcarimg.com/img/motor-mis-img/DCP_a78097465320cd00006fa3ed462326e5~2508x0.webp"
+    ],
+    "energy": "纯电",
+    "body": "SUV",
+    "intro": "小米YU7是小米汽车首款中大型纯电SUV，以家庭智能出行与全场景续航著称。采用800V高压平台与双电机四驱，零百加速最快3.23s，CLTC续航最高770km，全系标配小米Pilot高阶智驾与HyperOS智能座舱，兼顾空间与科技体验。",
+    "specs": {
+      "dimensions": "长4930mm × 宽1980mm × 高1656mm，轴距2995mm，整备质量约2405kg",
+      "engine": "后置永磁同步电机 / 前后双电机（Max） 691PS，功率508kW，最大扭矩880N·m",
+      "transmission": "单速固定齿比",
+      "chassis": "前双叉臂、后五连杆，后置后驱/双电机四驱"
+    }
+  },
+  {
+    "id": 17,
+    "brand": "丰田",
+    "brandLogo": null,
+    "sizeClass": "中型轿车",
+    "title": "丰田 凯美瑞",
+    "images": [
+      "https://p3.dcarimg.com/img/motor-mis-img/DCP_7b6e61c0c0b518903985c992422a065d~2508x0.webp"
+    ],
+    "energy": ["燃油", "混动"],
+    "body": "轿车",
+    "intro": "丰田凯美瑞（Camry）是一款中型轿车，以舒适可靠与高效节能著称。提供燃油与混合动力（THS）版本，2.0L/2.5L发动机匹配CVT/E-CVT变速器，前麦弗逊/后多连杆悬架，配备Toyota Safety Sense安全辅助与TSS智能互联，兼顾家用与商务出行。",
+    "specs": {
+      "dimensions": "长4885mm × 宽1840mm × 高1455mm，轴距2825mm，整备质量约1580kg",
+      "engine": "2.0L/2.5L L4 自然吸气 / 2.5L 阿特金森循环 + 电机 178PS / 218PS，功率131kW / 160kW，最大扭矩210N·m / 221N·m",
+      "transmission": "CVT / E-CVT",
+      "chassis": "前麦弗逊、后多连杆，前置前驱/智能四驱"
+    }
+  },
+  {
+    "id": 18,
+    "brand": "大众",
+    "brandLogo": "/brand-logos/volkswagen.svg",
+    "sizeClass": "中型轿车",
+    "title": "大众 帕萨特",
+    "images": [
+      "https://p3.dcarimg.com/img/motor-mis-img/DCP_7160c3861fc58cc2e82aacbf09ff8107~2508x0.webp"
+    ],
+    "energy": "燃油",
+    "body": "轿车",
+    "intro": "大众帕萨特（Passat）是一款中型轿车，以稳重商务与宽敞空间著称。提供1.4T/2.0T发动机匹配7DSG变速器，前麦弗逊/后多连杆悬架，配备IQ.Drive安全辅助与MIB智能互联，兼顾商务接待与家用出行。",
+    "specs": {
+      "dimensions": "长4948mm × 宽1836mm × 高1469mm，轴距2871mm，整备质量约1570kg",
+      "engine": "1.4T/2.0T L4 涡轮增压 150PS / 186PS / 220PS，功率110kW / 137kW / 162kW，最大扭矩250N·m / 320N·m / 350N·m",
+      "transmission": "7DSG",
+      "chassis": "前麦弗逊、后多连杆，前置前驱/四驱"
+    }
+  },
+  {
+    "id": 19,
+    "brand": "凯迪拉克",
+    "brandLogo": null,
+    "sizeClass": "中型轿车",
+    "title": "凯迪拉克 CT5",
+    "images": [
+      "https://p3.dcarimg.com/img/motor-mis-img/DCP_70ea0fc4da1924ad4fbbd01132dc76e9~2508x0.webp"
+    ],
+    "energy": "燃油",
+    "body": "轿车",
+    "intro": "凯迪拉克CT5是一款中型豪华轿车，以运动风格与后驱操控著称。提供2.0T发动机匹配10AT变速器，前双枢轴/后五连杆悬架，配备Super Cruise安全辅助与CUE智能互联，兼顾驾驶乐趣与豪华体验。",
+    "specs": {
+      "dimensions": "长4924mm × 宽1883mm × 高1453mm，轴距2947mm，整备质量约1640kg",
+      "engine": "2.0T L4 涡轮增压 237PS，功率174kW，最大扭矩350N·m",
+      "transmission": "10AT",
+      "chassis": "前双枢轴、后五连杆，前置后驱/四驱"
+    }
+  },
+  {
+    "id": 20,
+    "brand": "奥迪",
+    "brandLogo": "/brand-logos/audi.png",
+    "sizeClass": "中大型轿车",
+    "title": "奥迪 A6L",
+    "images": [
+      "https://p3.dcarimg.com/img/motor-mis-img/DCP_6a37bf06e9a9b532ad052cccb49c5993~2508x0.webp"
+    ],
+    "energy": "燃油",
+    "body": "轿车",
+    "intro": "奥迪A6L（Audi A6L）是一款中大型豪华轿车，以行政级空间与前沿科技著称。提供2.0T/3.0T发动机匹配7DCT变速器，前五连杆/后五连杆悬架，配备Audi Pre Sense 360安全辅助与MMI Touch智能互联，定义豪华商务出行新标杆。",
+    "specs": {
+      "dimensions": "长5038mm × 宽1886mm × 高1475mm，轴距3024mm，整备质量约1800kg",
+      "engine": "2.0T L4 涡轮增压 190PS / 245PS；3.0T V6 涡轮增压 + 48V轻混 340PS，功率140kW / 185kW / 250kW，最大扭矩320N·m / 370N·m / 500N·m",
+      "transmission": "7DCT",
+      "chassis": "前五连杆、后五连杆，前置前驱/四驱"
+    }
+  },
+  {
+    "id": 21,
+    "brand": "大众",
+    "brandLogo": "/brand-logos/volkswagen.svg",
+    "sizeClass": "紧凑型轿车",
+    "title": "大众 高尔夫",
+    "images": [
+      "https://p3.dcarimg.com/img/motor-mis-img/DCP_53516affa811cffe393d29e13784b827~2508x0.webp"
+    ],
+    "energy": "燃油",
+    "body": "轿车",
+    "intro": "大众高尔夫（Golf）是一款紧凑型轿车，以经典两厢设计与德系操控著称。提供1.2T/1.4T发动机匹配5MT/7DSG变速器，前麦弗逊/后多连杆悬架，配备IQ.Drive安全辅助与MIB智能互联，兼顾日常通勤与驾驶乐趣。",
+    "specs": {
+      "dimensions": "长4296mm × 宽1788mm × 高1471mm，轴距2631mm，整备质量约1300kg",
+      "engine": "1.2T/1.4T L4 涡轮增压 116PS / 150PS，功率85kW / 110kW，最大扭矩175N·m / 250N·m",
+      "transmission": "5MT / 7DSG",
+      "chassis": "前麦弗逊、后多连杆，前置前驱"
+    }
+  },
+  {
+    "id": 22,
+    "brand": "宝马",
+    "brandLogo": "/brand-logos/bmw.png",
+    "sizeClass": "中大型轿车",
+    "title": "宝马 5系",
+    "images": [
+      "https://p3.dcarimg.com/img/motor-mis-img/DCP_7bf33a215bed978d401927d2b8ffde0e~2508x0.webp"
+    ],
+    "energy": "燃油",
+    "body": "轿车",
+    "intro": "宝马5系（BMW 5 Series）是一款中大型豪华轿车，以均衡性能与商务豪华著称。提供2.0T/3.0T发动机匹配8AT变速器，前双叉臂/后多连杆悬架，配备BMW Personal CoPilot驾驶辅助与iDrive智能互联，兼顾行政商务与舒适驾乘。",
+    "specs": {
+      "dimensions": "长5106mm × 宽1868mm × 高1500mm，轴距3105mm，整备质量约1740kg",
+      "engine": "2.0T L4 涡轮增压 184PS / 252PS；3.0T L6 涡轮增压 + 48V轻混 340PS，功率135kW / 185kW / 250kW，最大扭矩290N·m / 350N·m / 450N·m",
+      "transmission": "8AT",
+      "chassis": "前双叉臂、后多连杆，前置后驱/四驱"
+    }
+  },
+  {
+    "id": 23,
+    "brand": "领克",
+    "brandLogo": null,
+    "sizeClass": "紧凑型轿车",
+    "title": "领克 03",
+    "images": [
+      "https://p3.dcarimg.com/img/motor-mis-img/DCP_711ea2ab449b5f2240415995c749ec1b~2508x0.webp"
+    ],
+    "energy": ["燃油", "混动"],
+    "body": "轿车",
+    "intro": "领克03（Lynk & Co 03）是一款紧凑型轿车，以运动造型与智能科技著称。提供1.5T/2.0T燃油及1.5T混动版本，匹配7DCT/E-CVT变速器，前麦弗逊/后多连杆悬架，配备Lynk Co Pilot安全辅助与Lynk OS智能座舱，兼顾个性与家用需求。",
+    "specs": {
+      "dimensions": "长4684mm × 宽1843mm × 高1460mm，轴距2730mm，整备质量约1520kg",
+      "engine": "1.5T L3 涡轮增压 180PS / 2.0T L4 涡轮增压 254PS / 1.5T L3 + 电机 245PS，功率132kW / 187kW / 180kW，最大扭矩265N·m / 350N·m / 545N·m",
+      "transmission": "7DCT / E-CVT",
+      "chassis": "前麦弗逊、后多连杆，前置前驱/四驱"
     }
   }
 ]

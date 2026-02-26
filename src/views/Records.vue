@@ -465,7 +465,7 @@ export default {
 .month { color: #8f98a0; font-size: 12px; }
 .day { color: #66c0f4; font-size: 24px; font-weight: bold; }
 
-.record-title { color: #66c0f4; font-size: 20px; font-weight: bold; letter-spacing: 2px; }
+.record-title { color: #ffffff; background: transparent; border-radius: 6px; font-size: 20px; font-weight: bold; letter-spacing: 2px; margin: 0; }
 .record-divider { height: 1px; background: #38424e; margin: 8px 10px 10px; }
 
 /* 标签容器：水平排列，自动换行，上下间距 */
