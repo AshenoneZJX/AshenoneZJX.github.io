@@ -40,9 +40,9 @@
           </div>
           <div class="heatmap-container">
              <div class="heatmap-header">
-                <button class="heatmap-nav" @click="changeYear(-1)">←</button>
+                <button class="heatmap-nav" @click="changeYear(-1)">&lt;</button>
                 <span class="heatmap-year">{{ heatmapYear }}</span>
-                <button class="heatmap-nav" @click="changeYear(1)">→</button>
+                <button class="heatmap-nav" @click="changeYear(1)">&gt;</button>
              </div>
              <div class="heatmap-grid">
                 <div v-for="(week, index) in currentYearWeeks" :key="index"
@@ -338,7 +338,7 @@ export default {
 .section-header h2 { font-weight: 400; }
 
 .filters { display: flex; align-items: center; flex-wrap: nowrap; white-space: nowrap; }
-.filter-icon { display: inline-flex; align-items: center; color: #66c0f4; margin-right: 14px; pointer-events: none; }
+.filter-icon { display: inline-flex; align-items: center; color: #66c0f4; margin-right: 4px; pointer-events: none; }
 .filter-icon img { width: 16px; height: 16px; display: block; }
 .filter-btn {
   display: inline-flex;
@@ -372,13 +372,13 @@ export default {
   border-radius: 8px;
   padding: 0 12px;
 }
-.panel-header { display: flex; align-items: center; gap: 8px; color: #c7d5e0; }
+.panel-header { display: flex; align-items: center; gap: 6px; color: #c7d5e0; }
 .panel-actions { margin-left: auto; display: flex; align-items: center; }
 .panel-title { font-size: 16px; color: #8f98a0; }
 .panel-section { display: flex; flex-direction: column; gap: 8px; }
 .panel-subtitle { font-size: 13px; color: #8f98a0; display: block; background: transparent; padding: 2px 0; border-bottom: 1px solid #38424e; }
 .panel-buttons { display: flex; flex-wrap: wrap; column-gap: 8px; row-gap: 2px; }
-.panel-buttons.compact { flex-wrap: wrap; gap: 6px; white-space: normal; overflow-x: visible; }
+.panel-buttons.compact { flex-wrap: wrap; gap: 6px; white-space: normal; overflow-x: visible; background: rgba(0,0,0,0.2); border-radius: 8px; padding: 10px; }
 .panel-buttons.compact::-webkit-scrollbar { display: none; }
 .panel-buttons.compact .filter-btn {
   height: 24px;
@@ -465,8 +465,16 @@ export default {
 .month { color: #8f98a0; font-size: 12px; }
 .day { color: #66c0f4; font-size: 24px; font-weight: bold; }
 
-.record-title { color: #ffffff; background: transparent; border-radius: 6px; font-size: 20px; font-weight: bold; letter-spacing: 2px; margin: 0; }
-.record-divider { height: 1px; background: #38424e; margin: 8px 10px 10px; }
+.record-title { color: #ffffff; background: transparent; border-radius: 6px; font-size: 20px; font-weight: bold; letter-spacing: 2px; margin: 0; display: inline-block; }
+.record-title::after {
+  content: "";
+  display: block;
+  height: 1px;
+  background: #38424e;
+  margin: 8px 0 10px 0;
+  width: 100%;
+}
+.record-divider { display: none; }
 
 /* 标签容器：水平排列，自动换行，上下间距 */
 .record-tags { display: flex; gap: 8px; flex-wrap: wrap; margin: 0 0 10px; }

@@ -31,8 +31,11 @@
           <h3>目的与作用</h3>
            <p>以统一的视觉与交互规范，将“日志记录、车型数据、主题空间与个人资料”聚合在同一页面中，便于快速浏览与持续更新。</p>
            <br>
-           <h3>个人空间</h3>
-           <p>个人主题空间，包含“汽车”“电子数码”“摄影”三个子页面：</p>
+          <h3>个人空间</h3>
+          <p>架构与入口：/mySpace 为根路由，MySpace 作为布局容器；默认子路由为 MySpaceOverview（/mySpace）。</p>
+          <p>汽车类页面：/mySpace/cars-home（CarsHome，专题总览）、/mySpace/cars（CarsModels，车型列表）、/mySpace/cars/:id（CarDetail，车型详情）。基础知识：/mySpace/car-basics（CarBasics）与 /mySpace/car-basics/:id（CarBasicsDetail）。品牌：/mySpace/brands（BrandList）与 /mySpace/brands/:name（BrandDetail）。</p>
+          <p>主题页面：/mySpace/digital（Digital，电子数码）与 /mySpace/photography（Photography，摄影）。</p>
+          <p>跳转关系示例：在品牌详情页点击车型名称，若项目收录则跳转到对应 /mySpace/cars/:id；在车型详情页标题处点击品牌名称可返回 /mySpace/brands/:name；在汽车总览页可进入车型列表与基础知识模块。</p>
            <div class="myspace-grid">
              <div class="myspace-card">
                <div class="card-title">汽车</div>
@@ -122,7 +125,7 @@ export default {
   margin: 0 auto;
 }
 
-.left-col { width: 280px; flex-shrink: 0; }
+.left-col { width: 280px; flex-shrink: 0; position: sticky; top: 104px; }
 .right-col { flex-grow: 1; background: rgba(0,0,0,0.2); padding: 20px; }
 
 .showcase-box {
@@ -133,8 +136,8 @@ export default {
 .showcase-img { height: 160px; background: #000; margin-top: 5px; background-size: cover; background-position: center; border: 1px solid #3c4551;}
 .showcase-desc { margin-top: 8px; color: #c7d5e0; font-size: 13px; }
 
-.myspace-grid { display: flex; gap: 0; margin-top: 10px; }
-.myspace-card { display: flex; flex-direction: column; justify-content: center; width: 33.333%; min-height: 90px; padding: 12px 14px; background: rgba(0,0,0,0.25); border: 1px solid #3c4551; color: #e6f3ff; cursor: default; }
+.myspace-grid { display: flex; gap: 12px; margin-top: 10px; }
+.myspace-card { display: flex; flex-direction: column; justify-content: center; width: 33.333%; min-height: 90px; padding: 12px 14px; background: rgba(0,0,0,0.25); border: 1px solid #3c4551; color: #e6f3ff; cursor: default; border-radius: 8px; }
 .card-title { font-size: 16px; font-weight: 600; margin-bottom: 6px; color: #66c0f4; }
 .card-desc { font-size: 13px; color: #c7d5e0; }
 
@@ -146,7 +149,7 @@ export default {
 /* 响应式：手机端变为单栏 */
 @media (max-width: 768px) {
   .home-layout { flex-direction: column; }
-  .left-col { width: 100%; }
+  .left-col { width: 100%; position: static; top: auto; }
 }
 
 /* 站点介绍正文与标题排版调整 */
@@ -164,6 +167,6 @@ export default {
 }
 
 /* Learning 静态卡片展示 */
-.learning-grid { display: flex; gap: 0; margin-top: 10px; }
-.learning-card { display: flex; flex-direction: column; justify-content: center; width: 33.333%; min-height: 90px; padding: 12px 14px; background: rgba(0,0,0,0.25); border: 1px solid #3c4551; color: #e6f3ff; cursor: default; }
+.learning-grid { display: flex; gap: 12px; margin-top: 10px; }
+.learning-card { display: flex; flex-direction: column; justify-content: center; width: 33.333%; min-height: 90px; padding: 12px 14px; background: rgba(0,0,0,0.25); border: 1px solid #3c4551; color: #e6f3ff; cursor: default; border-radius: 8px; }
 </style>

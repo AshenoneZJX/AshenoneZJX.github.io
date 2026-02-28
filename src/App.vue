@@ -92,7 +92,7 @@ body {
 
 .main-content {
   min-height: 80vh;
-  padding-top: 104px; /* 为固定导航栏留出空间 */
+  padding-top: 80px; /* 为固定导航栏留出空间，紧贴导航栏底部 */
 }
 
 .steam-footer {

@@ -1,11 +1,7 @@
 <template>
   <div class="container page-record-detail">
     <div v-if="record">
-      <!-- 顶部操作行：独立一行，跨越整个宽度 -->
-      <div class="top-actions-row">
-        <div class="spacer"></div>
-        <router-link to="/records" class="back-btn">返回</router-link>
-      </div>
+      <!-- 顶部操作行移除，返回按钮并入标题行 -->
 
       <div class="main-layout">
         <!-- 左侧边栏：固定显示大纲 -->
@@ -30,6 +26,7 @@
           <div class="detail-body">
             <div class="title-row">
               <div class="top-title" v-if="heading">{{ heading }}</div>
+              <router-link to="/records" class="back-btn">返回</router-link>
             </div>
             <div class="meta">
               <span class="month">{{ monthAbbr(record.date) }}</span>
@@ -191,7 +188,7 @@ export default {
 /* 布局相关：三栏 Grid */
 .main-layout {
   display: grid;
-  grid-template-columns: 200px minmax(0, 1fr) 200px;
+  grid-template-columns: 260px minmax(0, 1fr) 260px;
   gap: 16px;
   position: relative;
   align-items: start;
@@ -207,7 +204,7 @@ export default {
 
 .sidebar-title {
   color: #ffffff;
-  font-size: 18px;
+  font-size: 17px;
   font-weight: 700;
   margin-bottom: 12px;
   padding-bottom: 8px;
@@ -240,7 +237,7 @@ export default {
   padding: 6px 0;
   cursor: pointer;
   text-align: left;
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 700;
   letter-spacing: 0.3px;
   width: 100%;
@@ -262,7 +259,7 @@ export default {
   display: inline-block;
   margin-right: 0;
 }
-.toc-text { flex: 1; font-size: 14px; }
+.toc-text { flex: 1; font-size: 13px; }
 .toc-h3-list { display: flex; flex-direction: column; margin: 4px 0 10px 16px; gap: 2px; }
 .toc-h3 {
   background: transparent;
@@ -271,7 +268,7 @@ export default {
   text-align: left;
   padding: 4px 0;
   cursor: pointer;
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 400;
   width: 100%;
   font-family: 'SourceHanSansSC', sans-serif;
@@ -294,7 +291,8 @@ export default {
 }
 
 .title-row { display: flex; align-items: flex-start; margin: 0 0 10px; }
-.back-btn { background: transparent; border: none; color: #c7d5e0; padding: 6px 12px; cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; border-radius: 6px; }
+.title-row .back-btn { margin-left: auto; }
+.back-btn { background: transparent; border: 1px solid #3c4551; color: #c7d5e0; padding: 6px 12px; cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; border-radius: 6px; }
 .back-btn::before { content: ""; display: inline-block; width: 16px; height: 16px; background: url('~@/assets/images/fanhui.svg') no-repeat center / contain; }
 .back-btn:hover { color: #e6f3ff; background: rgba(102,192,244,0.12); }
 

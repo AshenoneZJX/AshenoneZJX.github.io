@@ -32,17 +32,20 @@
         <h3 class="section-title">
           <span class="icon">🚗</span> 代表车型
         </h3>
-        <div class="models-grid">
-          <div
-            v-for="c in brandModels"
-            :key="c.id"
-            class="model-card"
+        <ul class="models-list">
+          <li
+            v-for="m in representativeModelNames"
+            :key="m"
+            class="model-item"
           >
-            <img :src="coverOf(c)" alt="" class="model-img"/>
-            <div class="model-title">{{ c.title }}</div>
-            <div class="model-meta">{{ c.body }} · {{ Array.isArray(c.energy) ? c.energy.join('/') : c.energy }}</div>
-          </div>
-        </div>
+            <router-link
+              v-if="carIdOfModelName(m) !== null"
+              class="model-link"
+              :to="{ name: 'CarDetail', params: { id: carIdOfModelName(m) } }"
+            >{{ m }}</router-link>
+            <span v-else class="model-name">{{ m }}</span>
+          </li>
+        </ul>
       </section>
 
       <!-- 核心技术 -->
@@ -92,6 +95,13 @@ export default {
       if (!name) return ''
       if (this.brandLogoMap && this.brandLogoMap[name]) return this.brandLogoMap[name]
       return ''
+    },
+    representativeModelNames () {
+      const listFromDetails = (this.brandInfo && Array.isArray(this.brandInfo.models)) ? this.brandInfo.models : []
+      const listFromCars = this.brandModels.map(c => this.modelNameOf(c))
+      const merged = [...listFromDetails, ...listFromCars]
+      const dedup = Array.from(new Set(merged.filter(Boolean)))
+      return dedup
     }
   },
   data () {
@@ -100,9 +110,22 @@ export default {
     }
   },
   methods: {
-    coverOf (car) {
-      const imgs = Array.isArray(car.images) ? car.images : []
-      return imgs.length ? imgs[0] : ''
+    modelNameOf (car) {
+      const t = car && car.title ? String(car.title) : ''
+      const b = getBrand(t)
+      if (b && t.startsWith(b)) return t.slice(b.length).trim()
+      return t
+    },
+    carIdOfModelName (name) {
+      const brand = this.brandName
+      if (!name || !brand) return null
+      const hit = cars.find(c => {
+        const b = getBrand(c.title)
+        if (b !== brand) return false
+        const model = this.modelNameOf(c)
+        return model === name
+      })
+      return hit ? hit.id : null
     }
   },
   created () {
@@ -128,17 +151,18 @@ export default {
   display: inline-flex;
   align-items: center;
   gap: 8px;
+  --brand-title-size: 28px;
 }
 
 .section-header h2 {
   color: #fff;
   font-weight: 700;
   letter-spacing: 2px;
-  font-size: 28px;
+  font-size: var(--brand-title-size);
 }
 
 .brand-logo {
-  height: 1em;
+  height: var(--brand-title-size);
   width: auto;
   object-fit: contain;
   border-radius: 4px;
@@ -151,7 +175,7 @@ export default {
   margin: 10px 0 30px 0;
 }
 
-.back-btn { background: transparent; border: none; color: #c7d5e0; padding: 6px 12px; cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; border-radius: 6px; }
+.back-btn { background: transparent; border: 1px solid #3c4551; color: #c7d5e0; padding: 6px 12px; cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; border-radius: 6px; }
 .back-btn::before { content: ""; display: inline-block; width: 16px; height: 16px; background: url('~@/assets/images/fanhui.svg') no-repeat center / contain; }
 .back-btn:hover { color: #e6f3ff; background: rgba(102,192,244,0.12); }
 
@@ -261,5 +285,22 @@ export default {
   color: #666;
   text-align: center;
   padding: 40px;
+}
+
+/* 仅显示车型名称的列表样式 */
+.models-list {
+  list-style: disc;
+  margin: 0;
+  padding-left: 22px;
+}
+.model-item { line-height: 1.8; margin: 4px 0; font-size: 15px; }
+.model-link {
+  color: #acb2b8;
+  text-decoration: none;
+}
+.model-link:hover { color: #66c0f4; text-decoration: underline; }
+.model-link:focus { color: #66c0f4; text-decoration: underline; }
+.model-name {
+  color: #acb2b8;
 }
 </style>

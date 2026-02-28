@@ -45,24 +45,58 @@
         <div class="info-upper">
           <div class="section-header">
             <div class="title-with-logo">
-              <router-link
+              <span
                 v-if="brandLogoFor && brandName"
                 class="brand-logo-link"
-                :to="{ name: 'BrandDetail', params: { name: brandName } }"
-                aria-label="查看品牌"
+                aria-label="品牌标识"
               >
                 <img
-                  class="brand-logo"
+                  :class="['brand-logo', { 'brand-logo-xiaomi': brandName === '小米' }]"
                   :src="brandLogoFor"
                   :alt="car.brand || '品牌'"
                 />
-              </router-link>
+              </span>
               <h2>
-                <router-link
+                <div
+                  class="brand-hover-wrapper"
                   v-if="brandName"
-                  class="brand-link"
-                  :to="{ name: 'BrandDetail', params: { name: brandName } }"
-                >{{ brandName }}</router-link>
+                  @mouseenter="showBrandCard = true"
+                  @mouseleave="showBrandCard = false"
+                >
+                  <router-link
+                    class="brand-link"
+                    :to="{ name: 'BrandDetail', params: { name: brandName } }"
+                  >{{ brandName }}</router-link>
+                  <div v-if="showBrandCard" class="brand-hover-card" role="tooltip" ref="hoverCard">
+                    <img
+                      v-if="brandLogoFor"
+                      class="hover-card-logo"
+                      :src="brandLogoFor"
+                      :alt="brandName"
+                      ref="hoverLogo"
+                    />
+                    <div class="hover-card-text" ref="hoverText">
+                      <div class="hover-section-desc" ref="hoverDescSection">
+                        <p
+                          v-if="brandInfo && brandInfo.description"
+                          class="hover-card-desc"
+                          ref="hoverDesc"
+                          :class="{ clamp: descClamp > 0 }"
+                          :style="descClampStyle"
+                        >{{ brandInfo.description }}</p>
+                      </div>
+                      <div class="hover-section-models" ref="hoverModelsSection">
+                        <p
+                          v-if="modelsText"
+                          class="hover-card-models"
+                          ref="hoverModels"
+                          :class="{ clamp: modelsClamp > 0 }"
+                          :style="modelsClampStyle"
+                        >代表车型：{{ modelsText }}</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
                 <span class="model-name">{{ modelName }}</span>
               </h2>
             </div>
@@ -169,6 +203,7 @@
 
 <script>
 import cars from '@/data/cars.json'
+import brandDetails from '@/data/brandDetails.json'
 export default {
   name: 'CarDetail',
   data() {
@@ -177,7 +212,12 @@ export default {
       showSpecs: false,
       brandLogoMap: {},
       currentImageIndex: 0,
-      slideDirection: 'next'
+      slideDirection: 'next',
+      showBrandCard: false,
+      descClamp: 0,
+      modelsClamp: 0,
+      maxDescLines: 10,
+      maxModelsLines: 3
     }
   },
   computed: {
@@ -252,6 +292,23 @@ export default {
       const imgs = Array.isArray(this.car.images) ? this.car.images : []
       if (imgs.length > 0) return imgs
       return this.car.img ? [this.car.img] : []
+    },
+    brandInfo() {
+      const name = this.brandName
+      if (!name) return null
+      return brandDetails[name] || null
+    },
+    modelsText() {
+      const list = (this.brandInfo && Array.isArray(this.brandInfo.models)) ? this.brandInfo.models : []
+      return list.join('、')
+    },
+    descClampStyle() {
+      if (this.descClamp > 0) return { WebkitLineClamp: String(this.descClamp) }
+      return {}
+    },
+    modelsClampStyle() {
+      if (this.modelsClamp > 0) return { WebkitLineClamp: String(this.modelsClamp) }
+      return {}
     }
   },
   methods: {
@@ -310,6 +367,50 @@ export default {
         params: { id: t.id },
         query: { anchor: t.anchor }
       })
+    },
+    computeBrandCardClamp() {
+      const desc = this.$refs.hoverDesc
+      const models = this.$refs.hoverModels
+      const descSection = this.$refs.hoverDescSection
+      const modelsSection = this.$refs.hoverModelsSection
+      const card = this.$refs.hoverCard
+      const logoEl = this.$refs.hoverLogo
+      this.descClamp = 0
+      this.modelsClamp = 0
+      if (!card || !descSection || !modelsSection || !desc) return
+      const width = card.offsetWidth || 280
+      const maxTextHeight = width * 1.5
+      const logoHeight = logoEl ? (logoEl.clientHeight || 120) : 120
+      const textAvailable = Math.max(maxTextHeight - logoHeight - 20, 0)
+      const csDesc = window.getComputedStyle(desc)
+      const csModels = models ? window.getComputedStyle(models) : null
+      const lhDesc = parseFloat(csDesc.lineHeight) || 22
+      const lhModels = csModels ? parseFloat(csModels.lineHeight) || 20 : 20
+      const fullDesc = desc.scrollHeight
+      const fullModels = models ? models.scrollHeight : 0
+      const fullDescLines = lhDesc > 0 ? Math.ceil(fullDesc / lhDesc) : 0
+      const fullModelsLines = lhModels > 0 ? Math.ceil(fullModels / lhModels) : 0
+      // 分配可用高度（与布局比例一致）
+      const descAlloc = textAvailable * 0.75
+      const modelsAlloc = textAvailable * 0.25
+      const availDescLines = lhDesc > 0 ? Math.floor(descAlloc / lhDesc) : 0
+      const availModelsLines = lhModels > 0 ? Math.floor(modelsAlloc / lhModels) : 0
+      // 介绍：超过上限或超过可用空间则启用省略，最多 10 行
+      if (fullDescLines > this.maxDescLines || fullDescLines > availDescLines) {
+        const cappedDesc = Math.min(availDescLines, this.maxDescLines)
+        this.descClamp = cappedDesc > 0 ? cappedDesc : 0
+      } else {
+        this.descClamp = 0
+      }
+      // 代表车型：超过上限或超过可用空间则启用省略，最多 3 行
+      if (models) {
+        if (fullModelsLines > this.maxModelsLines || fullModelsLines > availModelsLines) {
+          const cappedModels = Math.min(availModelsLines, this.maxModelsLines)
+          this.modelsClamp = cappedModels > 0 ? cappedModels : 0
+        } else {
+          this.modelsClamp = 0
+        }
+      }
     }
   },
   created() {
@@ -324,6 +425,22 @@ export default {
       this.loadCar(val)
       if (typeof window !== 'undefined' && window.scrollTo) {
         window.scrollTo({ top: 0, behavior: 'auto' })
+      }
+    },
+    showBrandCard(val) {
+      if (val) {
+        this.$nextTick(() => {
+          this.computeBrandCardClamp()
+          if (typeof window !== 'undefined') {
+            window.addEventListener('resize', this.computeBrandCardClamp)
+          }
+        })
+      } else {
+        if (typeof window !== 'undefined') {
+          window.removeEventListener('resize', this.computeBrandCardClamp)
+        }
+        this.descClamp = 0
+        this.modelsClamp = 0
       }
     }
   }
@@ -506,7 +623,7 @@ export default {
   display: flex;
   flex-direction: column;
   gap: 20px;
-  overflow: hidden;
+  overflow: visible;
   padding: 0 40px;
   box-sizing: border-box;
 }
@@ -517,7 +634,7 @@ export default {
   flex-direction: column;
   gap: 10px;
   height: 240px;
-  overflow: hidden;
+  overflow: visible;
 }
 
 .section-header {
@@ -561,8 +678,86 @@ export default {
   border-radius: 3px;
   background: transparent;
 }
+.brand-logo-xiaomi {
+  height: 1em;
+}
 
-.actions .back-btn { background: transparent; border: none; color: #c7d5e0; padding: 6px 12px; cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; border-radius: 6px; }
+.brand-hover-wrapper {
+  position: relative;
+  display: inline-block;
+}
+.brand-hover-card {
+  position: absolute;
+  top: 120%;
+  left: 0;
+  z-index: 2000;
+  --hover-card-width: 280px;
+  width: var(--hover-card-width);
+  max-height: calc(var(--hover-card-width) * 1.5);
+  background: #1b2838;
+  border: 1px solid #2a475e;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  box-shadow:
+    0 12px 28px rgba(0,0,0,0.55),
+    0 6px 12px rgba(0,0,0,0.35),
+    0 0 0 2px rgba(102,192,244,0.12);
+  overflow: hidden;
+  will-change: box-shadow;
+}
+.hover-card-logo {
+  width: 100%;
+  height: var(--hover-logo-height, 120px);
+  object-fit: contain;
+  background: transparent;
+  border-bottom: 1px solid rgba(102,192,244,0.25);
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+.hover-card-text {
+  padding: 8px 10px;
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+}
+.hover-section-desc {
+  flex: 0 0 75%;
+  overflow: hidden;
+}
+.hover-section-models {
+  flex: 0 0 25%;
+  overflow: hidden;
+  border-top: 1px solid rgba(102,192,244,0.18);
+  padding-top: 6px;
+}
+.hover-card-desc {
+  color: #c6d4df;
+  font-size: 14px;
+  line-height: 1.6;
+  margin: 0 0 6px 0;
+  overflow: hidden;
+  word-break: break-word;
+}
+.hover-card-desc.clamp {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  text-overflow: ellipsis;
+}
+.hover-card-models {
+  color: #66c0f4;
+  font-size: 12px;
+  margin: 0;
+  overflow: hidden;
+  word-break: break-word;
+}
+.hover-card-models.clamp {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  text-overflow: ellipsis;
+}
+
+.actions .back-btn { background: transparent; border: 1px solid #3c4551; color: #c7d5e0; padding: 6px 12px; cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; border-radius: 6px; }
 .actions .back-btn::before { content: ""; display: inline-block; width: 16px; height: 16px; background: url('~@/assets/images/fanhui.svg') no-repeat center / contain; }
 
 .actions .back-btn:hover {
