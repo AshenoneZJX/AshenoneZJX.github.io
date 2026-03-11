@@ -13,59 +13,67 @@
 
     <div class="dashboard-layout">
       <div class="charts-area">
-      <div class="charts-toolbar">
-        <label>月份</label>
-        <select v-model="selectedMonth">
-          <option v-for="m in monthsOptions" :key="m" :value="m">{{ m }}</option>
-        </select>
-        <div class="price-pop" ref="pricePop">
-          <button class="filter-btn" @click="togglePriceFilter">价格</button>
-          <transition name="fade">
-            <div class="filter-popover" v-if="showPriceFilter" @click.stop>
-              <div class="range-header">
-                <span class="value">{{ Math.min(selectedPriceMin, selectedPriceMax).toFixed(0) }}-{{ Math.max(selectedPriceMin, selectedPriceMax).toFixed(0) }}万</span>
-              </div>
-              <div class="range-ticks">
-                <span v-for="t in ticks" :key="t">{{ t }}</span>
-                <span>不限</span>
-              </div>
-              <div class="range-track" :style="trackStyle"></div>
-              <div class="range-inputs">
-                <input
-                  class="range-thumb min"
-                  type="range"
-                  :min="0"
-                  :max="priceMax"
-                  step="1"
-                  v-model.number="selectedPriceMin"
-                />
-                <input
-                  class="range-thumb max"
-                  type="range"
-                  :min="0"
-                  :max="priceMax"
-                  step="1"
-                  v-model.number="selectedPriceMax"
-                />
-              </div>
-            </div>
-          </transition>
+      <div class="charts-toolbar" :class="{ 'is-expanded': isMobileMenuOpen }">
+        <div class="mobile-toggle-bar">
+          <span class="mobile-label">筛选条件</span>
+          <button class="menu-toggle-btn" @click="toggleMobileMenu">
+            {{ isMobileMenuOpen ? '收起' : '展开' }}
+          </button>
         </div>
-        <span class="price-summary"><span class="value">{{ Math.min(selectedPriceMin, selectedPriceMax).toFixed(0) }}-{{ Math.max(selectedPriceMin, selectedPriceMax).toFixed(0) }}万</span></span>
-        <button
-          class="sort-btn"
-          :aria-label="sortBy === 'sales' ? '销量倒序' : '名称排列'"
-          :title="sortBy === 'sales' ? '销量倒序' : '名称排列'"
-          @click="toggleSort"
-        >排序：{{ sortBy === 'sales' ? '销量倒序' : '名称排列' }}</button>
-        <label>车型</label>
-        <select v-model="selectedType">
-          <option v-for="t in typeOptions" :key="t" :value="t">{{ t }}</option>
-        </select>
-        <label>品牌</label>
-        <select v-model="selectedBrand">
-          <option v-for="b in brandOptions" :key="b" :value="b">{{ b }}</option>
-        </select>
+        <div class="toolbar-controls">
+          <label>月份</label>
+          <select v-model="selectedMonth">
+            <option v-for="m in monthsOptions" :key="m" :value="m">{{ m }}</option>
+          </select>
+          <div class="price-pop" ref="pricePop">
+            <button class="filter-btn" @click="togglePriceFilter">价格</button>
+            <transition name="fade">
+              <div class="filter-popover" v-if="showPriceFilter" @click.stop>
+                <div class="range-header">
+                  <span class="value">{{ Math.min(selectedPriceMin, selectedPriceMax).toFixed(0) }}-{{ Math.max(selectedPriceMin, selectedPriceMax).toFixed(0) }}万</span>
+                </div>
+                <div class="range-ticks">
+                  <span v-for="t in ticks" :key="t">{{ t }}</span>
+                  <span>不限</span>
+                </div>
+                <div class="range-track" :style="trackStyle"></div>
+                <div class="range-inputs">
+                  <input
+                    class="range-thumb min"
+                    type="range"
+                    :min="0"
+                    :max="priceMax"
+                    step="1"
+                    v-model.number="selectedPriceMin"
+                  />
+                  <input
+                    class="range-thumb max"
+                    type="range"
+                    :min="0"
+                    :max="priceMax"
+                    step="1"
+                    v-model.number="selectedPriceMax"
+                  />
+                </div>
+              </div>
+            </transition>
+          </div>
+          <span class="price-summary"><span class="value">{{ Math.min(selectedPriceMin, selectedPriceMax).toFixed(0) }}-{{ Math.max(selectedPriceMin, selectedPriceMax).toFixed(0) }}万</span></span>
+          <button
+            class="sort-btn"
+            :aria-label="sortBy === 'sales' ? '销量倒序' : '名称排列'"
+            :title="sortBy === 'sales' ? '销量倒序' : '名称排列'"
+            @click="toggleSort"
+          >排序：{{ sortBy === 'sales' ? '销量倒序' : '名称排列' }}</button>
+          <label>车型</label>
+          <select v-model="selectedType">
+            <option v-for="t in typeOptions" :key="t" :value="t">{{ t }}</option>
+          </select>
+          <label>品牌</label>
+          <select v-model="selectedBrand">
+            <option v-for="b in brandOptions" :key="b" :value="b">{{ b }}</option>
+          </select>
+        </div>
       </div>
       <YearlySalesRankingChart
         :title="`年度车型销量排名（${selectedMonth}）`"
@@ -151,7 +159,8 @@ export default {
       selectedPriceMax: maxPrice,
       priceMax: maxPrice,
       showPriceFilter: false,
-      sortBy: 'sales'
+      sortBy: 'sales',
+      isMobileMenuOpen: false
     }
   },
   mounted () {
@@ -217,6 +226,9 @@ export default {
       if (this.selectedPriceMax < this.selectedPriceMin) {
         this.selectedPriceMax = this.selectedPriceMin
       }
+    },
+    toggleMobileMenu () {
+      this.isMobileMenuOpen = !this.isMobileMenuOpen
     }
   }
 }
@@ -276,12 +288,19 @@ export default {
   flex-direction: column;
 }
 .charts-toolbar {
-  display: flex;
-  align-items: center;
-  gap: 10px;
   margin-bottom: 10px;
   border-bottom: 1px solid #2a475e;
   padding-bottom: 10px;
+  position: relative;
+}
+.mobile-toggle-bar {
+  display: none;
+}
+.toolbar-controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
 }
 .charts-toolbar label { color: #8a9aa8; font-size: 13px; }
 .charts-toolbar select {
@@ -425,5 +444,47 @@ export default {
   }
   .card-image { height: 160px; }
   .gallery-card.placeholder { height: 160px; }
+}
+
+@media (max-width: 850px) {
+  .mobile-toggle-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 0;
+  }
+  .mobile-label {
+    color: #fff;
+    font-size: 14px;
+  }
+  .menu-toggle-btn {
+    background: rgba(102,192,244,0.12);
+    border: 1px solid #3c4551;
+    color: #66c0f4;
+    padding: 4px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 13px;
+  }
+  .toolbar-controls {
+    display: none;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+    padding-top: 10px;
+    width: 100%;
+  }
+  .charts-toolbar.is-expanded .toolbar-controls {
+    display: flex;
+  }
+  /* 让 select 和 button 在移动端占满宽度或更易点击 */
+  .charts-toolbar select {
+    width: 100%;
+    max-width: 200px;
+  }
+  .sort-btn {
+    width: 100%;
+    max-width: 200px;
+  }
 }
 </style>
