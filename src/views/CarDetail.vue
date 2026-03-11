@@ -101,7 +101,10 @@
               </h2>
             </div>
             <div class="actions">
-              <router-link to="/mySpace/cars" class="back-btn">返回</router-link>
+              <router-link to="/mySpace/cars" class="back-btn">
+                <img src="@/assets/images/fanhui.svg" class="back-icon" alt="返回" />
+                返回
+              </router-link>
             </div>
           </div>
           
@@ -152,6 +155,13 @@
 
       <!-- Mobile Specs Drawer (Keep for compatibility) -->
       <button class="fab-specs" aria-label="查看参数" @click="toggleSpecs">参数</button>
+
+      <!-- Mobile Pager (Narrow Screen) -->
+      <div class="detail-pager-mobile">
+        <button class="nav-icon" :disabled="!hasPrev" @click="goPrev" aria-label="上一辆">‹</button>
+        <button class="nav-icon" :disabled="!hasNext" @click="goNext" aria-label="下一辆">›</button>
+      </div>
+
       <transition name="fade">
         <div class="specs-overlay" v-if="showSpecs" @click="toggleSpecs"></div>
       </transition>
@@ -652,7 +662,7 @@ export default {
 }
 
 .section-header h2 {
-  font-weight: 700;
+  font-weight: 400;
   margin: 0;
   font-size: 24px;
   color: #e6f3ff;
@@ -663,7 +673,7 @@ export default {
   text-decoration: none;
 }
 .brand-link:hover { text-decoration: underline; }
-.model-name { margin-left: 6px; }
+.model-name { margin-left: 6px; font-family: 'MotivaSans', sans-serif; }
 
 .brand-logo-link {
   display: inline-flex;
@@ -694,17 +704,19 @@ export default {
   --hover-card-width: 280px;
   width: var(--hover-card-width);
   max-height: calc(var(--hover-card-width) * 1.5);
-  background: #1b2838;
-  border: 1px solid #2a475e;
+  background: rgba(32, 43, 58, 0.6);
+  backdrop-filter: blur(24px) saturate(120%);
+  -webkit-backdrop-filter: blur(24px) saturate(120%);
+  border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 8px;
   display: flex;
   flex-direction: column;
   box-shadow:
-    0 12px 28px rgba(0,0,0,0.55),
-    0 6px 12px rgba(0,0,0,0.35),
-    0 0 0 2px rgba(102,192,244,0.12);
-  overflow: hidden;
-  will-change: box-shadow;
+    0 12px 32px rgba(0,0,0,0.4),
+    0 4px 12px rgba(0,0,0,0.2),
+    0 0 0 1px rgba(255,255,255,0.05);
+  overflow: visible;
+  will-change: box-shadow, transform, opacity;
 }
 .hover-card-logo {
   width: 100%;
@@ -714,12 +726,28 @@ export default {
   border-bottom: 1px solid rgba(102,192,244,0.25);
   padding-top: 8px;
   padding-bottom: 8px;
+  border-radius: 8px 8px 0 0;
 }
 .hover-card-text {
   padding: 8px 10px;
   flex: 1 1 auto;
   display: flex;
   flex-direction: column;
+}
+.brand-hover-card::before {
+  content: "";
+  position: absolute;
+  left: 20px;
+  top: -7px;
+  width: 12px;
+  height: 12px;
+  background: rgba(32, 43, 58, 0.6);
+  border-left: 1px solid rgba(255, 255, 255, 0.12);
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  transform: rotate(45deg);
+  backdrop-filter: blur(24px) saturate(120%);
+  -webkit-backdrop-filter: blur(24px) saturate(120%);
+  z-index: 1;
 }
 .hover-section-desc {
   flex: 0 0 75%;
@@ -757,8 +785,27 @@ export default {
   text-overflow: ellipsis;
 }
 
-.actions .back-btn { background: transparent; border: 1px solid #3c4551; color: #c7d5e0; padding: 6px 12px; cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; border-radius: 6px; }
-.actions .back-btn::before { content: ""; display: inline-block; width: 16px; height: 16px; background: url('~@/assets/images/fanhui.svg') no-repeat center / contain; }
+.actions .back-btn { 
+  background: transparent; 
+  border: 1px solid #3c4551; 
+  color: #c7d5e0; 
+  padding: 6px 12px; 
+  cursor: pointer; 
+  text-decoration: none; 
+  display: inline-flex; 
+  align-items: center; 
+  gap: 6px; 
+  border-radius: 6px; 
+  flex-shrink: 0; /* 防止被压缩 */
+  white-space: nowrap; /* 防止文字换行 */
+  height: 32px; /* 固定高度 */
+  box-sizing: border-box;
+}
+.back-icon {
+  width: 16px;
+  height: 16px;
+  display: block;
+}
 
 .actions .back-btn:hover {
   color: #e6f3ff;
@@ -806,7 +853,7 @@ export default {
 }
 
 .tag {
-  font-size: 12px;
+  font-size: 11px;
   padding: 4px 8px;
   border-radius: 4px;
   background: rgba(62, 128, 182, 0.4); /* Lighter theme blue background */
@@ -827,7 +874,7 @@ export default {
   font-size: 16px;
   margin: 0;
   text-align: justify;
-  font-family: 'MSYaHei-Semibold', sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   flex: 1 1 auto;
   min-height: 0;
   overflow-y: auto;
@@ -937,12 +984,28 @@ export default {
   display: none;
 }
 
+.detail-pager-mobile {
+  display: none;
+}
+
 @media (max-width: 900px) {
+  .page-car-detail {
+    height: auto;
+  }
+  
   .detail-layout {
     flex-direction: column;
     height: auto;
   }
   
+  .detail-pager-mobile {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin: 16px 0;
+    order: 4;
+  }
+
   .right-section, .info-upper {
     display: contents;
   }
@@ -957,8 +1020,8 @@ export default {
     flex: none;
   }
 
-  .intro-text { order: 4; }
-  .info-lower { order: 5; }
+  .intro-text { order: 5; }
+  .info-lower { order: 6; }
   
   /* On very small screens, hide the specs box in column and show FAB */
   @media (max-width: 600px) {
@@ -979,11 +1042,16 @@ export default {
       position: fixed;
       left: 0; right: 0; bottom: 0;
       max-height: 70vh;
-      background: #1b2838;
-      border-top: 1px solid #3c4551;
+      background: rgba(32, 43, 58, 0.75);
+      backdrop-filter: blur(24px) saturate(120%);
+      -webkit-backdrop-filter: blur(24px) saturate(120%);
+      border-top: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 16px 16px 0 0;
+      box-shadow: 0 -4px 24px rgba(0,0,0,0.4);
       padding: 20px;
       z-index: 1001;
       overflow-y: auto;
+      will-change: transform;
     }
     
     .drawer-header {
@@ -1010,9 +1078,9 @@ export default {
 
 /* Transitions */
 .slide-up-enter-active, .slide-up-leave-active { transition: transform 0.3s; }
-.slide-up-enter-from, .slide-up-leave-to { transform: translateY(100%); }
-.slide-up-enter-to, .slide-up-leave-from { transform: translateY(0); }
+.slide-up-enter, .slide-up-leave-to { transform: translateY(100%); }
+.slide-up-enter-to, .slide-up-leave { transform: translateY(0); }
 
 .fade-enter-active, .fade-leave-active { transition: opacity 0.3s; }
-.fade-enter-from, .fade-leave-to { opacity: 0; }
+.fade-enter, .fade-leave-to { opacity: 0; }
 </style>

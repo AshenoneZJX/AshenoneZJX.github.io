@@ -81,7 +81,10 @@
           </div>
         </div>
       </div>
-      <button class="back-btn" @click="$router.push('/mySpace/cars-home')">返回汽车主页</button>
+      <button class="back-btn" @click="$router.push('/mySpace/cars-home')">
+        <img src="@/assets/images/fanhui.svg" class="back-icon" alt="返回" />
+        返回汽车主页
+      </button>
     </div>
     <div class="dropdown-mask mobile-only" v-if="filterOpen" @click="closeFilter"></div>
     <div class="divider"></div>
@@ -277,7 +280,12 @@ export default {
 .section-header h2 { color: #fff; font-weight: bold; letter-spacing: 2px; }
 .header-left { display: flex; align-items: center; gap: 16px; }
 .header-left { position: relative; }
-.back-btn { background: transparent; border: none; color: #c7d5e0; padding: 6px 12px; cursor: pointer; border-radius: 6px; font-size: 16px; }
+.back-btn { background: transparent; border: 1px solid #3c4551; color: #c7d5e0; padding: 6px 12px; cursor: pointer; border-radius: 6px; font-size: 16px; display: inline-flex; align-items: center; gap: 6px; }
+.back-icon {
+  width: 16px;
+  height: 16px;
+  display: block;
+}
 .back-btn:hover { color: #e6f3ff; background: rgba(102,192,244,0.12); }
 .back-btn:active, .back-btn.router-link-active { background: rgba(102,192,244,0.22); color: #ffffff; }
 

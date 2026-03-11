@@ -5,7 +5,10 @@
         <img v-if="brandLogoFor" class="brand-logo" :src="brandLogoFor" :alt="brandName" />
         <h2>{{ brandName }}</h2>
       </div>
-      <router-link class="back-btn" to="/mySpace/brands">返回</router-link>
+      <router-link class="back-btn" to="/mySpace/brands">
+        <img src="@/assets/images/fanhui.svg" class="back-icon" alt="返回" />
+        返回
+      </router-link>
     </div>
     <div class="divider"></div>
 
@@ -176,7 +179,11 @@ export default {
 }
 
 .back-btn { background: transparent; border: 1px solid #3c4551; color: #c7d5e0; padding: 6px 12px; cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; border-radius: 6px; }
-.back-btn::before { content: ""; display: inline-block; width: 16px; height: 16px; background: url('~@/assets/images/fanhui.svg') no-repeat center / contain; }
+.back-icon {
+  width: 16px;
+  height: 16px;
+  display: block;
+}
 .back-btn:hover { color: #e6f3ff; background: rgba(102,192,244,0.12); }
 
 .brand-section {

@@ -2,7 +2,10 @@
   <div class="page-car-basics container">
     <div class="section-header">
       <h2>汽车基础知识</h2>
-      <button class="back-btn" @click="$router.push('/mySpace/cars-home')">返回汽车主页</button>
+      <button class="back-btn" @click="$router.push('/mySpace/cars-home')">
+        <img src="@/assets/images/fanhui.svg" class="back-icon" alt="返回" />
+        返回汽车主页
+      </button>
     </div>
     <div class="divider"></div>
 
@@ -61,7 +64,12 @@ export default {
 .section-header { display: flex; justify-content: space-between; align-items: center; }
 .section-header h2 { color: #fff; font-weight: 700; letter-spacing: 2px; }
 .divider { height: 2px; background: #2a475e; margin: 10px 0 20px 0; }
-.back-btn { background: transparent; border: none; color: #c7d5e0; padding: 6px 12px; cursor: pointer; border-radius: 6px; font-size: 14px; }
+.back-btn { background: transparent; border: 1px solid #3c4551; color: #c7d5e0; padding: 6px 12px; cursor: pointer; border-radius: 6px; font-size: 14px; display: inline-flex; align-items: center; gap: 6px; }
+.back-icon {
+  width: 16px;
+  height: 16px;
+  display: block;
+}
 .back-btn:hover { color: #e6f3ff; background: rgba(102,192,244,0.12); }
 .back-btn:active, .back-btn.router-link-active { background: rgba(102,192,244,0.22); color: #ffffff; }
 

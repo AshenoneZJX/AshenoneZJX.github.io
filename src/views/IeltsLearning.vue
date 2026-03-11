@@ -5,7 +5,10 @@
     <div class="section-header">
       <div class="title-row">
         <h2>雅思学习</h2>
-        <router-link class="back-btn" to="/learning">返回总览</router-link>
+        <router-link class="back-btn" to="/learning">
+          <img src="@/assets/images/fanhui.svg" class="back-icon" alt="返回" />
+          返回总览
+        </router-link>
       </div>
       <div class="divider"></div>
     </div>
@@ -51,6 +54,14 @@ export default {
   border-radius: 6px;
   cursor: pointer;
   text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.back-icon {
+  width: 16px;
+  height: 16px;
+  display: block;
 }
 .back-btn:hover {
   background: rgba(102,192,244,0.12);

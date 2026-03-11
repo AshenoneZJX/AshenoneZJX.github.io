@@ -3,7 +3,10 @@
     <div class="section-header">
       <div class="header-row">
         <h2>汽车主页</h2>
-        <router-link class="back-btn" to="/mySpace" aria-label="返回 MySpace" title="返回 MySpace">返回总览</router-link>
+        <router-link class="back-btn" to="/mySpace" aria-label="返回 MySpace" title="返回 MySpace">
+          <img src="@/assets/images/fanhui.svg" class="back-icon" alt="返回" />
+          返回总览
+        </router-link>
       </div>
       <div class="divider"></div>
     </div>
@@ -233,7 +236,7 @@ export default {
   align-items: stretch;
 }
 
-.section-header h2 { color: #fff; font-weight: 700; letter-spacing: 2px; }
+.section-header h2 { color: #fff; font-weight: 400; letter-spacing: 2px; }
 .header-row {
   display: flex;
   align-items: center;
@@ -247,6 +250,14 @@ export default {
   border-radius: 6px;
   cursor: pointer;
   text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.back-icon {
+  width: 16px;
+  height: 16px;
+  display: block;
 }
 .back-btn:hover { background: rgba(102,192,244,0.12); color: #e6f3ff; }
 .section-subheader h3 { color: #fff; font-weight: 400; letter-spacing: 1px; margin-top: 30px; }
@@ -388,7 +399,7 @@ export default {
 }
 .gallery-card:hover { transform: translateY(-5px); }
 .card-image { height: 100px; background-size: cover; background-position: center; position: relative; }
-.hover-overlay { position: absolute; bottom: 0; left: 0; right: 0; padding: 8px 12px; background: rgba(0,0,0,0.5); color: #fff; font-weight: 600; letter-spacing: 1px; }
+.hover-overlay { position: absolute; bottom: 0; left: 0; right: 0; padding: 8px 12px; background: rgba(0,0,0,0.5); color: #fff; font-weight: 400; letter-spacing: 1px; }
 
 .gallery-card.placeholder {
   height: 100px;

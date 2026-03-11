@@ -467,5 +467,26 @@
       "transmission": "7DCT / E-CVT",
       "chassis": "前麦弗逊、后多连杆，前置前驱/四驱"
     }
+  },
+  {
+    "id": 24,
+    "brand": "奥迪",
+    "brandLogo": "/brand-logos/audi.png",
+    "sizeClass": "紧凑型轿车",
+    "title": "奥迪 A3",
+    "images": [
+      "https://p3.dcarimg.com/img/motor-mis-img/DCP_ed5344e0d5eee0a43d90caed22d9d83c~2508x0.webp",
+      "https://p3.dcarimg.com/img/motor-mis-img/DCP_ef06db522a29eff3a2f35720b11839d3~2508x0.webp",
+      "https://p3.dcarimg.com/img/motor-mis-img/DCP_d7db4693903221af28c1721be41e818d~2508x0.webp"
+    ],
+    "energy": "燃油",
+    "body": "轿车",
+    "intro": "奥迪A3是一款紧凑型豪华两厢轿车，以精致设计、灵动操控与科技座舱著称。搭载1.5T涡轮增压发动机，匹配7速S-tronic双离合变速器，前麦弗逊/后多连杆悬架，配备奥迪Pre Sense前部安全系统与MMI触控互联系统，兼顾城市通勤与驾驶乐趣。",
+    "specs": {
+      "dimensions": "长4343mm × 宽1815mm × 高1458mm，轴距2630mm，整备质量约1340kg",
+      "engine": "1.5T L4 涡轮增压 150PS，功率110kW，最大扭矩250N·m",
+      "transmission": "7DCT",
+      "chassis": "前麦弗逊、后多连杆，前置前驱"
+    }
   }
 ]

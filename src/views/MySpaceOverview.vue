@@ -48,13 +48,22 @@ export default {
 </script>
 
 <style scoped>
+@font-face {
+  font-family: 'MotivaSans';
+  src: url('~@/assets/fonts/MotivaSans-Regular_woff.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
 .page-myspace { 
   padding-top: 20px;
   max-width: 1200px;
   margin: 0 auto;
   width: 100%;
+  font-family: 'MotivaSans', sans-serif;
 }
-.section-header h2 { color: #fff; font-weight: 700; letter-spacing: 2px; }
+.section-header h2 { color: #fff; font-weight: 400; letter-spacing: 2px; }
 .divider { height: 2px; background: #2a475e; margin: 10px 0 30px 0; }
 
 .gallery-grid {
@@ -73,6 +82,6 @@ export default {
 .gallery-card:hover { transform: translateY(-5px); }
 
 .card-image { height: 160px; background-size: cover; background-position: center; position: relative; }
-.hover-overlay { position: absolute; bottom: 0; left: 0; right: 0; padding: 8px 12px; background: rgba(0,0,0,0.5); color: #fff; font-weight: 600; letter-spacing: 1px; }
+.hover-overlay { position: absolute; bottom: 0; left: 0; right: 0; padding: 8px 12px; background: rgba(0,0,0,0.5); color: #fff; font-weight: 400; letter-spacing: 1px; }
 
 </style>

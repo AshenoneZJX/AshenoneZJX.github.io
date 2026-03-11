@@ -318,6 +318,14 @@ export default {
   font-display: swap;
 }
 
+@font-face {
+  font-family: 'MotivaSans';
+  src: url('~@/assets/fonts/MotivaSans-Regular_woff.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
 .page-records { 
   padding-top: 20px; 
   font-family: "RobotoVar", "SourceHanSansSC", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans CJK SC", "Source Han Sans SC", sans-serif;
@@ -465,7 +473,7 @@ export default {
 .month { color: #8f98a0; font-size: 12px; }
 .day { color: #66c0f4; font-size: 24px; font-weight: bold; }
 
-.record-title { color: #ffffff; background: transparent; border-radius: 6px; font-size: 20px; font-weight: bold; letter-spacing: 2px; margin: 0; display: inline-block; }
+.record-title { color: #ffffff; background: transparent; border-radius: 6px; font-size: 20px; font-weight: normal; letter-spacing: 2px; margin: 0; display: inline-block; font-family: 'MotivaSans', sans-serif; }
 .record-title::after {
   content: "";
   display: block;
