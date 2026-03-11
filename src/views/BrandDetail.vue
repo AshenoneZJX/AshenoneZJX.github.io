@@ -1,6 +1,6 @@
 <template>
   <div class="page-brand-detail">
-    <div class="section-header">
+    <div class="section-header span-full">
       <div class="title-with-logo">
         <img v-if="brandLogoFor" class="brand-logo" :src="brandLogoFor" :alt="brandName" />
         <h2>{{ brandName }}</h2>
@@ -10,63 +10,55 @@
         返回
       </router-link>
     </div>
-    <div class="divider"></div>
+    <div class="divider span-full"></div>
 
-    <div class="brand-content">
-      <!-- 简介 -->
-      <section class="brand-intro" v-if="brandInfo && brandInfo.description">
-        <div class="wiki-box">
-          <p class="summary">{{ brandInfo.description }}</p>
-        </div>
-      </section>
+    <!-- 简介 -->
+    <div class="wiki-box span-full" v-if="brandInfo && brandInfo.description">
+      <p class="summary">{{ brandInfo.description }}</p>
+    </div>
 
-      <!-- 历史 -->
-      <section class="brand-section" v-if="brandInfo && brandInfo.history">
-        <h3 class="section-title">
-          <span class="icon">📜</span> 品牌历史
-        </h3>
-        <div class="wiki-text">
-          <p>{{ brandInfo.history }}</p>
-        </div>
-      </section>
+    <!-- 历史 -->
+    <section class="brand-section span-full" v-if="brandInfo && brandInfo.history">
+      <h3 class="section-title">
+        <span class="icon">📜</span> 品牌历史
+      </h3>
+      <p class="history-text">{{ brandInfo.history }}</p>
+    </section>
 
-      <!-- 车型列表 -->
-      <section class="brand-section" v-if="brandModels.length">
-        <h3 class="section-title">
-          <span class="icon">🚗</span> 代表车型
-        </h3>
-        <ul class="models-list">
-          <li
-            v-for="m in representativeModelNames"
-            :key="m"
-            class="model-item"
-          >
-            <router-link
-              v-if="carIdOfModelName(m) !== null"
-              class="model-link"
-              :to="{ name: 'CarDetail', params: { id: carIdOfModelName(m) } }"
-            >{{ m }}</router-link>
-            <span v-else class="model-name">{{ m }}</span>
-          </li>
-        </ul>
-      </section>
+    <!-- 左侧：代表车型 (30%) -->
+    <section class="brand-section col-left" v-if="brandModels.length">
+      <h3 class="section-title">
+        <span class="icon">🚗</span> 代表车型
+      </h3>
+      <ul class="models-list">
+        <li
+          v-for="m in representativeModelNames"
+          :key="m"
+          class="model-item"
+        >
+          <router-link
+            v-if="carIdOfModelName(m) !== null"
+            class="model-link"
+            :to="{ name: 'CarDetail', params: { id: carIdOfModelName(m) } }"
+          >{{ m }}</router-link>
+          <span v-else class="model-name">{{ m }}</span>
+        </li>
+      </ul>
+    </section>
 
-      <!-- 核心技术 -->
-      <section class="brand-section" v-if="brandInfo && brandInfo.technology && brandInfo.technology.length">
-        <h3 class="section-title">
-          <span class="icon">🔬</span> 核心技术
-        </h3>
-        <div class="tech-grid">
-          <div v-for="(tech, index) in brandInfo.technology" :key="index" class="tech-card">
-            <div class="tech-header">{{ tech.title }}</div>
-            <div class="tech-body">{{ tech.content }}</div>
-          </div>
-        </div>
-      </section>
-      
-      <div v-if="!brandInfo && brandModels.length === 0" class="empty-state">
-        暂无该品牌相关信息
+    <!-- 右侧：核心技术 (70%) -->
+    <section class="brand-section col-right" v-if="brandInfo && brandInfo.technology && brandInfo.technology.length">
+      <h3 class="section-title">
+        <span class="icon">🔬</span> 核心技术
+      </h3>
+      <div v-for="(tech, index) in brandInfo.technology" :key="index" class="tech-card">
+        <div class="tech-header">{{ tech.title }}</div>
+        <div class="tech-body">{{ tech.content }}</div>
       </div>
+    </section>
+    
+    <div v-if="!brandInfo && brandModels.length === 0" class="empty-state span-full">
+      暂无该品牌相关信息
     </div>
   </div>
 </template>
@@ -138,10 +130,30 @@ export default {
 </script>
 
 <style scoped>
+@font-face {
+  font-family: 'Motiva Sans';
+  src: url('~@/assets/fonts/MotivaSans-Regular_woff.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
 .page-brand-detail {
   padding-top: 20px;
   max-width: 1200px;
   margin: 0 auto;
+  box-sizing: border-box;
+  padding-left: 20px;
+  padding-right: 20px;
+  /* Layout: Grid for 2-column support */
+  display: grid;
+  grid-template-columns: 3fr 7fr;
+  column-gap: 40px;
+  align-items: start;
+}
+
+.span-full {
+  grid-column: 1 / -1;
 }
 
 .section-header {
@@ -159,9 +171,10 @@ export default {
 
 .section-header h2 {
   color: #fff;
-  font-weight: 700;
+  font-weight: normal;
   letter-spacing: 2px;
   font-size: var(--brand-title-size);
+  font-family: 'Motiva Sans', sans-serif;
 }
 
 .brand-logo {
@@ -193,7 +206,8 @@ export default {
 .section-title {
   color: #fff;
   font-size: 20px;
-  font-weight: 500;
+  font-weight: normal;
+  font-family: 'Motiva Sans', sans-serif;
   margin-bottom: 20px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   padding-bottom: 10px;
@@ -221,50 +235,11 @@ export default {
   margin: 0;
 }
 
-.wiki-text p {
+.history-text {
   color: #acb2b8;
   line-height: 1.8;
   font-size: 15px;
   text-indent: 2em;
-}
-
-.models-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-  gap: 20px;
-}
-
-.model-card {
-  background: #16202d;
-  padding: 12px;
-  border-radius: 6px;
-  border: 1px solid transparent;
-}
-
-.model-img {
-  width: 100%;
-  height: 140px;
-  object-fit: cover;
-  border-radius: 4px;
-}
-
-.model-title {
-  color: #fff;
-  font-weight: 600;
-  margin-top: 12px;
-  font-size: 16px;
-}
-
-.model-meta {
-  color: #66c0f4;
-  font-size: 12px;
-  margin-top: 4px;
-}
-
-.tech-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 20px;
 }
 
 .tech-card {
@@ -309,5 +284,32 @@ export default {
 .model-link:focus { color: #66c0f4; text-decoration: underline; }
 .model-name {
   color: #acb2b8;
+}
+
+.col-left {
+  grid-column: 1;
+  min-width: 0;
+}
+.col-right {
+  grid-column: 2;
+  min-width: 0;
+  
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 20px;
+}
+
+.col-right .section-title {
+  grid-column: 1 / -1;
+  margin-bottom: 0;
+}
+
+@media (max-width: 768px) {
+  .page-brand-detail {
+    grid-template-columns: 1fr;
+  }
+  .col-left, .col-right {
+    grid-column: 1;
+  }
 }
 </style>

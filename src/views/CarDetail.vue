@@ -496,6 +496,9 @@ export default {
   min-height: 500px;
   box-sizing: border-box;
   padding-bottom: 24px; /* add spacing above footer */
+  max-width: 1500px;
+  margin: 0 auto;
+  width: 100%;
 }
 
 .detail-layout {

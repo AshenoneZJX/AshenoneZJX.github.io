@@ -18,6 +18,9 @@
         :key="art.id"
         @click="goDetail(art)"
       >
+        <div class="record-logo" v-if="getLogo(art.title)">
+          <img :src="getLogo(art.title)" :alt="art.title" />
+        </div>
         <div class="record-content">
           <div class="record-title">{{ art.title }}</div>
           <div class="record-excerpt">
@@ -49,6 +52,13 @@ export default {
     },
     goDetail(art) {
       this.$router.push({ name: 'CarBasicsDetail', params: { id: art.id } })
+    },
+    getLogo(title) {
+      try {
+        return require(`@/assets/images/carbasicLOGO/${title}.png`)
+      } catch (e) {
+        return ''
+      }
     }
   }
 }
@@ -62,7 +72,7 @@ export default {
   padding-top: 20px;
 }
 .section-header { display: flex; justify-content: space-between; align-items: center; }
-.section-header h2 { color: #fff; font-weight: 700; letter-spacing: 2px; }
+.section-header h2 { color: #fff; font-weight: 400; letter-spacing: 2px; }
 .divider { height: 2px; background: #2a475e; margin: 10px 0 20px 0; }
 .back-btn { background: transparent; border: 1px solid #3c4551; color: #c7d5e0; padding: 6px 12px; cursor: pointer; border-radius: 6px; font-size: 14px; display: inline-flex; align-items: center; gap: 6px; }
 .back-icon {
@@ -84,7 +94,22 @@ export default {
 }
 .record-item:hover { background: #222b35; }
 .record-item.clickable { cursor: pointer; }
+.record-logo {
+  width: 60px;
+  height: 60px;
+  margin-right: 15px;
+  padding: 5px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.record-logo img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
 .record-content { flex: 1; }
-.record-title { color: #66c0f4; font-size: 20px; font-weight: 600; margin-bottom: 4px; }
+.record-title { color: #66c0f4; font-size: 20px; font-weight: 400; margin-bottom: 4px; }
 .record-excerpt { font-size: 13px; color: #8f98a0; }
 </style>

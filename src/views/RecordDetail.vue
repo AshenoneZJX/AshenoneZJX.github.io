@@ -1,8 +1,9 @@
 <template>
   <div class="container page-record-detail">
     <div v-if="record">
-      <!-- 顶部操作行 -->
+      <!-- 上容器：顶部工具栏 -->
       <div class="top-actions-row">
+        <div class="header-placeholder"></div>
         <div class="header-info">
           <div class="top-title" v-if="heading">{{ heading }}</div>
           <div class="meta">
@@ -18,6 +19,7 @@
         </router-link>
       </div>
 
+      <!-- 下容器：内容布局 -->
       <div class="main-layout">
         <!-- 左侧边栏：固定显示大纲 -->
         <aside class="left-sidebar">
@@ -189,28 +191,79 @@ export default {
 }
 
 .page-record-detail { 
-  padding-top: 20px;
+  padding: 0;
+  margin: 0;
   width: 100%;
   max-width: 100%;
   box-sizing: border-box;
-  padding-left: 20px;
-  padding-right: 20px;
 }
+
+/* 顶部操作行样式 */
+.top-actions-row {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 20px 20px;
+  min-height: 32px;
+  max-width: 1400px;
+  margin: 0 auto;
+  border-bottom: 1px solid #2a475e;
+}
+
+.header-placeholder {
+  width: 200px;
+  margin-right: 0;
+  flex-shrink: 0;
+}
+
+.header-info {
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.title-row { display: flex; align-items: flex-start; margin: 0 0 10px; }
+.title-row .back-btn { margin-left: auto; }
+.back-btn { background: transparent; border: none; color: #c7d5e0; padding: 6px 12px; cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; border-radius: 6px; margin-left: auto; }
+.back-icon {
+  width: 16px;
+  height: 16px;
+  display: block;
+}
+.back-btn:hover { color: #e6f3ff; background: rgba(102,192,244,0.12); }
+
+.top-title { color: #ffffff; font-size: 34px; line-height: 1.4; margin: 0; font-weight: 400; letter-spacing: 1.5px; text-shadow: 0 2px 4px rgba(0,0,0,0.5); font-family: 'SourceHanSansSC', sans-serif; }
+.meta {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  margin-bottom: 0;
+}
+.month { color: #8f98a0; font-size: 12px; }
+.day { color: #66c0f4; font-size: 20px; font-weight: bold; font-family: 'RobotoMono', Menlo, Monaco, Consolas, "Courier New", monospace; }
+.year { color: #8f98a0; font-size: 12px; }
+.cat { color: #ffffff; font-size: 12px; display: inline-block; padding: 2px 8px; border: 1px solid #38424e; border-radius: 6px; background: rgba(102,192,244,0.12); font-family: 'RobotoMono', monospace; }
+.content-divider { height: 1px; background: #38424e; margin: 8px 0 14px; }
 
 /* 布局相关：三栏 Grid */
 .main-layout {
   display: grid;
-  grid-template-columns: 260px minmax(0, 1fr) 260px;
-  gap: 16px;
+  grid-template-columns: 200px minmax(0, 1fr) 200px;
+  gap: 0;
   position: relative;
   align-items: start;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 20px;
 }
 
 .left-sidebar {
   position: sticky;
   top: 80px;
   background: transparent;
-  padding: 0;
+  padding: 20px 0 20px 20px;
   min-height: 200px;
 }
 
@@ -220,7 +273,6 @@ export default {
   font-weight: 700;
   margin-bottom: 12px;
   padding-bottom: 8px;
-  border-bottom: 2px solid #38424e;
   letter-spacing: 0.5px;
   font-family: 'SourceHanSansSC', sans-serif;
 }
@@ -234,6 +286,8 @@ export default {
 
 .center-content {
   min-width: 0;
+  border-left: 1px solid #2a475e;
+  padding-left: 0;
 }
 
 /* 目录样式 */
@@ -287,48 +341,13 @@ export default {
 }
 .toc-h3:hover { color: #66c0f4; text-decoration: underline; }
 
-.detail-body { background: rgba(0,0,0,0.2); padding: 24px; border: 1px solid #38424e; border-radius: 6px; }
-
-/* 顶部操作行样式 */
-.top-actions-row {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  margin-bottom: 30px;
-  padding: 0 10px;
-  min-height: 32px;
+/* 内容卡片区域：半透明黑色背景、内边距、边框和圆角，用于包裹正文内容 */
+.detail-body { 
+  background: rgba(0,0,0,0.2); /* 20% 透明度的黑色背景，使下方暗色主题更沉浸 */
+  padding: 10px 20px;   /* 上下 10px、左右 20px 的内边距 */
+  border: none; /* 移除边框 */
+  border-radius: 6px;        /* 6px 圆角，柔和视觉，避免生硬矩形 */
 }
-
-.header-info {
-  display: flex;
-  flex-direction: row;
-  align-items: baseline;
-  gap: 12px;
-  flex-wrap: wrap;
-}
-
-.title-row { display: flex; align-items: flex-start; margin: 0 0 10px; }
-.title-row .back-btn { margin-left: auto; }
-.back-btn { background: transparent; border: 1px solid #3c4551; color: #c7d5e0; padding: 6px 12px; cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; border-radius: 6px; }
-.back-icon {
-  width: 16px;
-  height: 16px;
-  display: block;
-}
-.back-btn:hover { color: #e6f3ff; background: rgba(102,192,244,0.12); }
-
-.top-title { color: #ffffff; font-size: 26px; line-height: 1.35; margin: 0; font-weight: 400; letter-spacing: 0.3px; font-family: 'MotivaSans', sans-serif; }
-.meta {
-  display: flex;
-  align-items: baseline;
-  gap: 12px;
-  margin-bottom: 0;
-}
-.month { color: #8f98a0; font-size: 12px; }
-.day { color: #66c0f4; font-size: 20px; font-weight: bold; font-family: 'RobotoMono', Menlo, Monaco, Consolas, "Courier New", monospace; }
-.year { color: #8f98a0; font-size: 12px; }
-.cat { color: #ffffff; font-size: 12px; display: inline-block; padding: 2px 8px; border: 1px solid #38424e; border-radius: 6px; background: rgba(102,192,244,0.12); font-family: 'RobotoMono', monospace; }
-.content-divider { height: 1px; background: #38424e; margin: 8px 0 14px; }
 
 .content { color: #cfe0ee; font-size: 16px; line-height: 1.9; overflow-wrap: anywhere; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; }
 .content :deep(p) { color: #cfe0ee; line-height: 1.9; margin: 12px 0; font-size: 16px; font-weight: 400; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; }
@@ -360,6 +379,9 @@ export default {
   .main-layout {
     grid-template-columns: 200px minmax(0, 1fr);
   }
+  .header-placeholder {
+    width: 200px;
+  }
   .right-sidebar {
     display: none;
   }
@@ -369,10 +391,10 @@ export default {
   .main-layout {
     display: block;
   }
-  .left-sidebar, .right-sidebar {
+  .left-sidebar, .right-sidebar, .header-placeholder {
     display: none !important;
   }
-
+  
   .detail-body { padding: 16px; border-radius: 6px; }
   .content { font-size: 17px; line-height: 2.0; }
   .content :deep(p) { font-size: 17px; line-height: 2.0; }

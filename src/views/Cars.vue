@@ -263,6 +263,14 @@ export default {
 
 <style scoped>
 @font-face {
+  font-family: 'Motiva Sans';
+  src: url('~@/assets/fonts/MotivaSans-Regular_woff.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
   font-family: 'MSYaHei-Semibold';
   src: url('~@/assets/fonts/wryh/msyhsb.ttc') format('truetype');
   font-weight: normal;
@@ -277,7 +285,7 @@ export default {
   width: 100%;
 }
 .section-header { display: flex; justify-content: space-between; align-items: center; }
-.section-header h2 { color: #fff; font-weight: bold; letter-spacing: 2px; }
+.section-header h2 { color: #fff; font-weight: normal; letter-spacing: 2px; }
 .header-left { display: flex; align-items: center; gap: 16px; }
 .header-left { position: relative; }
 .back-btn { background: transparent; border: 1px solid #3c4551; color: #c7d5e0; padding: 6px 12px; cursor: pointer; border-radius: 6px; font-size: 16px; display: inline-flex; align-items: center; gap: 6px; }
@@ -453,7 +461,7 @@ export default {
 }
 
 .card-info { padding: 12px; background: #222e3b; }
-.card-title { color: #ffffff; margin-bottom: 8px; font-weight: bold; display: flex; align-items: center; gap: 8px; }
+.card-title { color: #ffffff; margin-bottom: 8px; font-weight: normal; font-family: 'Motiva Sans', sans-serif; display: flex; align-items: center; gap: 8px; }
 .card-title .title-text { display: inline-block; }
 .brand-logo { width: 24px; height: 24px; object-fit: contain; background: transparent; }
 .brand-logo { height: 1em; width: auto; object-fit: contain; background: transparent; }
