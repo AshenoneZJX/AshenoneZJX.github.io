@@ -103,7 +103,7 @@
             <div class="actions">
               <router-link to="/mySpace/cars" class="back-btn">
                 <img src="@/assets/images/fanhui.svg" class="back-icon" alt="返回" />
-                返回
+                <span class="back-text">返回</span>
               </router-link>
             </div>
           </div>
@@ -1086,4 +1086,9 @@ export default {
 
 .fade-enter-active, .fade-leave-active { transition: opacity 0.3s; }
 .fade-enter, .fade-leave-to { opacity: 0; }
+
+  @media (max-width: 768px) {
+    .back-text { display: none; }
+    .back-btn { padding: 6px; }
+  }
 </style>

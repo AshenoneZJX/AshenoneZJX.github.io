@@ -5,7 +5,7 @@
         <h2>汽车主页</h2>
         <router-link class="back-btn" to="/mySpace" aria-label="返回 MySpace" title="返回 MySpace">
           <img src="@/assets/images/fanhui.svg" class="back-icon" alt="返回" />
-          返回总览
+          <span class="back-text">返回总览</span>
         </router-link>
       </div>
       <div class="divider"></div>
@@ -15,9 +15,8 @@
       <div class="charts-area">
       <div class="charts-toolbar" :class="{ 'is-expanded': isMobileMenuOpen }">
         <div class="mobile-toggle-bar">
-          <span class="mobile-label">筛选条件</span>
           <button class="menu-toggle-btn" @click="toggleMobileMenu">
-            {{ isMobileMenuOpen ? '收起' : '展开' }}
+            筛选条件
           </button>
         </div>
         <div class="toolbar-controls">
@@ -323,7 +322,7 @@ export default {
   height: 28px;
 }
 .sort-btn:hover { background: rgba(102,192,244,0.12); color: #e6f3ff; }
-.filter-btn { background: transparent; border: 1px solid #3c4551; color: #c7d5e0; padding: 6px 10px; border-radius: 6px; cursor: pointer; }
+.filter-btn { background: transparent; border: none; color: #c7d5e0; padding: 6px 10px; border-radius: 6px; cursor: pointer; }
 .filter-btn:hover { background: rgba(102,192,244,0.12); color: #e6f3ff; }
 .price-summary { color: #c7d5e0; font-size: 13px; margin-left: 8px; margin-right: 8px; }
 .price-summary .value { color: #ff5a5f; }
@@ -441,30 +440,31 @@ export default {
     grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
     gap: 20px;
     margin-top: 20px;
+    padding: 0 20px;
+    box-sizing: border-box;
   }
   .card-image { height: 160px; }
   .gallery-card.placeholder { height: 160px; }
+  
+  .back-text { display: none; }
+  .back-btn { padding: 4px; }
 }
 
 @media (max-width: 850px) {
   .mobile-toggle-bar {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
     align-items: center;
-    padding: 5px 0;
-  }
-  .mobile-label {
-    color: #fff;
-    font-size: 14px;
+    padding: 10px 0;
   }
   .menu-toggle-btn {
     background: rgba(102,192,244,0.12);
     border: 1px solid #3c4551;
     color: #66c0f4;
-    padding: 4px 10px;
+    padding: 6px 14px;
     border-radius: 4px;
     cursor: pointer;
-    font-size: 13px;
+    font-size: 14px;
   }
   .toolbar-controls {
     display: none;
@@ -476,6 +476,20 @@ export default {
   }
   .charts-toolbar.is-expanded .toolbar-controls {
     display: flex;
+    position: absolute;
+    top: 100%;
+    margin-top: -15px;
+    left: 0;
+    width: fit-content;
+    z-index: 999;
+    background: rgba(27, 40, 56, 0.7);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    padding: 15px;
+    border: 1px solid rgba(60, 69, 81, 0.5);
+    border-radius: 6px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+    box-sizing: border-box;
   }
   /* 让 select 和 button 在移动端占满宽度或更易点击 */
   .charts-toolbar select {

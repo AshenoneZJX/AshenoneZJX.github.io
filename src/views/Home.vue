@@ -297,6 +297,10 @@ export default {
 @media (max-width: 768px) {
   .home-layout { flex-direction: column; }
   .left-col, .right-col { width: 100%; position: static; top: auto; }
+  /* Reorder: Profile(1) -> Quick Access(2) -> Intro(3) */
+  .left-col { order: 1; }
+  .right-col { order: 2; }
+  .middle-col { order: 3; }
 }
 
 /* 站点介绍正文与标题排版调整 */

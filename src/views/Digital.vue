@@ -5,7 +5,7 @@
       <div class="actions">
         <button class="back-btn" @click="$router.push('/mySpace')">
           <img src="@/assets/images/fanhui.svg" class="back-icon" alt="返回" />
-          返回总览
+          <span class="back-text">返回总览</span>
         </button>
       </div>
     </div>
@@ -67,4 +67,9 @@ export default {
 .card-info { padding: 12px; }
 .card-title { color: #66c0f4; margin-bottom: 5px; font-weight: bold; }
 .card-tags .tag { display: inline-block; background: #344658; color: #fff; font-size: 10px; padding: 2px 5px; margin-right: 5px; }
+
+@media (max-width: 768px) {
+  .back-text { display: none; }
+  .back-btn { padding: 6px; }
+}
 </style>

@@ -7,7 +7,7 @@
       </div>
       <router-link class="back-btn" to="/mySpace/brands">
         <img src="@/assets/images/fanhui.svg" class="back-icon" alt="返回" />
-        返回
+        <span class="back-text">返回</span>
       </router-link>
     </div>
     <div class="divider span-full"></div>
@@ -311,5 +311,8 @@ export default {
   .col-left, .col-right {
     grid-column: 1;
   }
+  
+  .back-text { display: none; }
+  .back-btn { padding: 6px; }
 }
 </style>

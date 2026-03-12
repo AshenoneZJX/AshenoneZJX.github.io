@@ -83,7 +83,7 @@
       </div>
       <button class="back-btn" @click="$router.push('/mySpace/cars-home')">
         <img src="@/assets/images/fanhui.svg" class="back-icon" alt="返回" />
-        返回汽车主页
+        <span class="back-text">返回汽车主页</span>
       </button>
     </div>
     <div class="dropdown-mask mobile-only" v-if="filterOpen" @click="closeFilter"></div>
@@ -475,4 +475,9 @@ export default {
 .page-btn:hover { color: #fff; }
 .page-btn.active { background: #2a475e; color: #fff; }
 .page-btn[disabled] { opacity: 0.5; cursor: not-allowed; }
+
+  @media (max-width: 768px) {
+    .back-text { display: none; }
+    .back-btn { padding: 6px; }
+  }
 </style>

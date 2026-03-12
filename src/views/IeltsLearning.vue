@@ -7,7 +7,7 @@
         <h2>雅思学习</h2>
         <router-link class="back-btn" to="/learning">
           <img src="@/assets/images/fanhui.svg" class="back-icon" alt="返回" />
-          返回总览
+          <span class="back-text">返回总览</span>
         </router-link>
       </div>
       <div class="divider"></div>
@@ -88,4 +88,9 @@ export default {
   margin-bottom: 8px;
 }
 .card-desc { font-size: 13px; }
+
+@media (max-width: 768px) {
+  .back-text { display: none; }
+  .back-btn { padding: 6px; }
+}
 </style>

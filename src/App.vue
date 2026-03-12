@@ -1,27 +1,29 @@
 <template>
   <div id="app">
     <NavBar />
-    <main class="main-content">
-      <transition name="fade" mode="out-in">
-        <router-view />
-      </transition>
-      <div v-if="$route.name === 'CarDetail'" class="detail-pager-global">
-        <button class="nav-icon" :disabled="!hasPrev" @click="goPrev" aria-label="上一辆">‹</button>
-        <button class="nav-icon" :disabled="!hasNext" @click="goNext" aria-label="下一辆">›</button>
-      </div>
-    </main>
-    
-    <footer class="steam-footer">
-      <div class="footer-content">
-        <div class="footer-text">© 2025 AshenOne's Blog. Powered by Vue 2.</div>
-        <div class="footer-links">
-          <a href="https://github.com/AshenoneZJX" target="_blank" rel="noopener noreferrer" class="footer-link">
-            <img src="@/assets/images/GitHub.svg" alt="GitHub" class="footer-icon">
-            <span class="footer-link-text">作者主页</span>
-          </a>
+    <div class="content-wrapper">
+      <main class="main-content">
+        <transition name="fade" mode="out-in">
+          <router-view />
+        </transition>
+        <div v-if="$route.name === 'CarDetail'" class="detail-pager-global">
+          <button class="nav-icon" :disabled="!hasPrev" @click="goPrev" aria-label="上一辆">‹</button>
+          <button class="nav-icon" :disabled="!hasNext" @click="goNext" aria-label="下一辆">›</button>
         </div>
-      </div>
-    </footer>
+      </main>
+      
+      <footer class="steam-footer">
+        <div class="footer-content">
+          <div class="footer-text">© 2025 AshenOne's Blog. Powered by Vue 2.</div>
+          <div class="footer-links">
+            <a href="https://github.com/AshenoneZJX" target="_blank" rel="noopener noreferrer" class="footer-link">
+              <img src="@/assets/images/GitHub.svg" alt="GitHub" class="footer-icon">
+              <span class="footer-link-text">作者主页</span>
+            </a>
+          </div>
+        </div>
+      </footer>
+    </div>
   </div>
 </template>
 
@@ -98,12 +100,19 @@ body {
   margin: 0 auto;
 }
 
+.content-wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
 .main-content {
-  min-height: 80vh;
+  flex: 1 0 auto;
   padding-top: 80px; /* 为固定导航栏留出空间，紧贴导航栏底部 */
 }
 
 .steam-footer {
+  flex-shrink: 0;
   margin-top: 50px;
   padding: 40px 0;
   background: #171a21;

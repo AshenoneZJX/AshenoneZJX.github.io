@@ -3,6 +3,16 @@
     <div v-if="record">
       <!-- 上容器：顶部工具栏 -->
       <div class="top-actions-row">
+        <!-- 移动端：目录切换按钮 -->
+        <button class="toc-toggle-btn" @click="showMobileToc = !showMobileToc">
+          <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
+          <span style="margin-left: 4px;">目录</span>
+        </button>
+
         <div class="header-placeholder"></div>
         <div class="header-info">
           <div class="top-title" v-if="heading">{{ heading }}</div>
@@ -15,14 +25,17 @@
         </div>
         <router-link to="/records" class="back-btn">
           <img src="@/assets/images/fanhui.svg" class="back-icon" alt="返回" />
-          返回
+          <span class="back-text">返回</span>
         </router-link>
       </div>
 
       <!-- 下容器：内容布局 -->
       <div class="main-layout">
+        <!-- 移动端：遮罩层 -->
+        <div class="mobile-overlay" v-if="showMobileToc" @click="showMobileToc = false"></div>
+
         <!-- 左侧边栏：固定显示大纲 -->
-        <aside class="left-sidebar">
+        <aside class="left-sidebar" :class="{ 'mobile-open': showMobileToc }">
           <div class="sidebar-title">大纲</div>
           <div class="toc-list">
             <div class="toc-section" v-for="sec in toc" :key="sec.id">
@@ -68,7 +81,8 @@ export default {
       record: null,
       heading: '',
       displayHtml: '',
-      toc: []
+      toc: [],
+      showMobileToc: false
     }
   },
   methods: {
@@ -96,7 +110,11 @@ export default {
     },
     scrollTo(id) {
       const el = document.getElementById(id)
-      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' })
+      if (el) {
+        // 关闭移动端目录
+        this.showMobileToc = false
+        el.scrollIntoView({ behavior: 'smooth', block: 'start' })
+      }
     },
     buildToc() {
       const root = this.$refs.contentRef
@@ -196,6 +214,22 @@ export default {
   width: 100%;
   max-width: 100%;
   box-sizing: border-box;
+}
+
+.toc-toggle-btn {
+  display: none;
+  background: transparent;
+  border: 1px solid #38424e;
+  color: #c7d5e0;
+  padding: 6px 12px;
+  cursor: pointer;
+  align-items: center;
+  border-radius: 6px;
+  margin-right: 12px;
+}
+
+.mobile-overlay {
+  display: none;
 }
 
 /* 顶部操作行样式 */
@@ -344,7 +378,7 @@ export default {
 /* 内容卡片区域：半透明黑色背景、内边距、边框和圆角，用于包裹正文内容 */
 .detail-body { 
   background: rgba(0,0,0,0.2); /* 20% 透明度的黑色背景，使下方暗色主题更沉浸 */
-  padding: 10px 20px;   /* 上下 10px、左右 20px 的内边距 */
+  padding: 40px;   /* 上下 40px、左右 40px 的内边距 */
   border: none; /* 移除边框 */
   border-radius: 6px;        /* 6px 圆角，柔和视觉，避免生硬矩形 */
 }
@@ -390,12 +424,64 @@ export default {
 @media (max-width: 768px) {
   .main-layout {
     display: block;
-  }
-  .left-sidebar, .right-sidebar, .header-placeholder {
-    display: none !important;
+    padding: 0;
   }
   
-  .detail-body { padding: 16px; border-radius: 6px; }
+  /* Show toggle button */
+  .toc-toggle-btn {
+    display: flex;
+  }
+  
+  /* Hide right sidebar and placeholder */
+  .right-sidebar, .header-placeholder {
+    display: none !important;
+  }
+
+  /* Mobile Sidebar (Slide-out) */
+  .left-sidebar {
+    display: block !important;
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 260px;
+    background: #1b2838;
+    z-index: 2000;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+    padding: 20px;
+    overflow-y: auto;
+    box-shadow: 2px 0 12px rgba(0,0,0,0.5);
+    border-right: 1px solid #2a475e;
+  }
+  
+  .left-sidebar.mobile-open {
+    transform: translateX(0);
+  }
+
+  .mobile-overlay {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.6);
+    z-index: 1900;
+    backdrop-filter: blur(2px);
+  }
+  
+  /* Adjust detail body for full width */
+  .detail-body { 
+    padding: 20px; 
+    border-radius: 0;
+    margin: 0;
+  }
+
+  /* Back button text hidden on mobile */
+  .back-text { display: none; }
+  .back-btn { padding: 6px; }
+
   .content { font-size: 17px; line-height: 2.0; }
   .content :deep(p) { font-size: 17px; line-height: 2.0; }
   .content :deep(li) { font-size: 17px; line-height: 2.0; }

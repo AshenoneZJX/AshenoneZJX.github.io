@@ -4,7 +4,7 @@
       <h2>汽车基础知识</h2>
       <button class="back-btn" @click="$router.push('/mySpace/cars-home')">
         <img src="@/assets/images/fanhui.svg" class="back-icon" alt="返回" />
-        返回汽车主页
+        <span class="back-text">返回汽车主页</span>
       </button>
     </div>
     <div class="divider"></div>
@@ -112,4 +112,10 @@ export default {
 .record-content { flex: 1; }
 .record-title { color: #66c0f4; font-size: 20px; font-weight: 400; margin-bottom: 4px; }
 .record-excerpt { font-size: 13px; color: #8f98a0; }
+
+@media (max-width: 768px) {
+  .back-text { display: none; }
+  .back-btn { padding: 6px; }
+  .record-list { padding: 0 20px; }
+}
 </style>

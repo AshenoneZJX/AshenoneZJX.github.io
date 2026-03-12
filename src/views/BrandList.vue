@@ -4,7 +4,7 @@
       <h2>品牌介绍</h2>
       <button class="back-btn" @click="$router.push('/mySpace/cars-home')">
         <img src="@/assets/images/fanhui.svg" class="back-icon" alt="返回" />
-        返回汽车主页
+        <span class="back-text">返回汽车主页</span>
       </button>
     </div>
     <div class="divider"></div>
@@ -108,4 +108,9 @@ export default {
 .brand-card:hover { transform: translateY(-4px); }
 .brand-title { color: #fff; font-weight: 600; font-size: 18px; margin-bottom: 6px; position: relative; z-index: 1; }
 .brand-meta { color: #9cc9f5; font-size: 13px; position: relative; z-index: 1; }
+
+@media (max-width: 768px) {
+  .back-text { display: none; }
+  .back-btn { padding: 6px; }
+}
 </style>

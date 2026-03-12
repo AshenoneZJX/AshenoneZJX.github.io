@@ -415,6 +415,7 @@ export default {
 @media (max-width: 768px) {
   .content-2col { flex-direction: column; }
   .col-left, .col-right { width: 100%; }
+  .record-list { padding: 0 20px; }
   .filter-toggle.mobile-only { display: inline-flex; }
   .filter-toggle.mobile-only {
     font-size: 14px;

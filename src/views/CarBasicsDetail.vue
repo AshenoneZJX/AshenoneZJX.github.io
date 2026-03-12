@@ -11,20 +11,33 @@
     <div v-if="article">
       <!-- 上容器：顶部工具栏 -->
       <div class="top-actions-row">
+        <!-- 移动端：目录切换按钮 -->
+        <button class="toc-toggle-btn" @click="showMobileToc = !showMobileToc">
+          <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
+          <span style="margin-left: 4px;">目录</span>
+        </button>
+
         <div class="header-placeholder"></div>
         <div class="header-info">
           <div class="top-title" v-if="heading">{{ heading }}</div>
         </div>
         <router-link to="/mySpace/car-basics" class="back-btn">
           <img src="@/assets/images/fanhui.svg" class="back-icon" alt="返回" />
-          返回
+          <span class="back-text">返回</span>
         </router-link>
       </div>
 
       <!-- 下容器：内容布局 -->
       <div class="main-layout">
+        <!-- 移动端：遮罩层 -->
+        <div class="mobile-overlay" v-if="showMobileToc" @click="showMobileToc = false"></div>
+
         <!-- 左侧边栏：固定显示大纲 -->
-        <aside class="left-sidebar">
+        <aside class="left-sidebar" :class="{ 'mobile-open': showMobileToc }">
           <div class="sidebar-title">大纲</div>
           
           <div class="toc-list">
@@ -70,7 +83,8 @@ export default {
       article: null,
       toc: [],
       displayHtml: '',
-      heading: ''
+      heading: '',
+      showMobileToc: false
     }
   },
   methods: {
@@ -89,6 +103,8 @@ export default {
     scrollTo(id) {
       const el = document.getElementById(id)
       if (el) {
+        // 关闭移动端目录
+        this.showMobileToc = false
         const headerOffset = 100 // 导航栏高度 80px + 20px 缓冲
         const elementPosition = el.getBoundingClientRect().top
         const offsetPosition = elementPosition + window.pageYOffset - headerOffset
@@ -243,6 +259,22 @@ export default {
   box-sizing: border-box;
 }
 
+.toc-toggle-btn {
+  display: none;
+  background: transparent;
+  border: 1px solid #38424e;
+  color: #c7d5e0;
+  padding: 6px 12px;
+  cursor: pointer;
+  align-items: center;
+  border-radius: 6px;
+  margin-right: 12px;
+}
+
+.mobile-overlay {
+  display: none;
+}
+
 /* 顶部操作行样式 */
 .top-actions-row {
   display: flex;
@@ -385,7 +417,7 @@ export default {
 /* 内容主体 */
 .detail-body { 
   background: rgba(0,0,0,0.2); 
-  padding: 10px 20px; 
+  padding: 40px; 
   border: none; 
   border-radius: 6px; 
 }
@@ -435,13 +467,64 @@ export default {
 @media (max-width: 768px) {
   .main-layout {
     display: block;
+    padding: 0;
   }
-  .left-sidebar, .right-sidebar, .header-placeholder {
+  
+  /* Show toggle button */
+  .toc-toggle-btn {
+    display: flex;
+  }
+  
+  /* Hide right sidebar and placeholder */
+  .right-sidebar, .header-placeholder {
     display: none !important;
   }
+
+  /* Mobile Sidebar (Slide-out) */
+  .left-sidebar {
+    display: block !important;
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 260px;
+    background: #1b2838;
+    z-index: 2000;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+    padding: 20px;
+    overflow-y: auto;
+    box-shadow: 2px 0 12px rgba(0,0,0,0.5);
+    border-right: 1px solid #2a475e;
+  }
   
-  .detail-body { padding: 16px; border-radius: 6px; }
+  .left-sidebar.mobile-open {
+    transform: translateX(0);
+  }
   
+  .mobile-overlay {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.6);
+    z-index: 1900;
+    backdrop-filter: blur(2px);
+  }
+  
+  /* Adjust detail body for full width */
+  .detail-body { 
+    padding: 20px; 
+    border-radius: 0; 
+    margin: 0;
+  }
+  
+  /* Back button text hidden on mobile */
+  .back-text { display: none; }
+  .back-btn { padding: 6px; }
+
   .content { font-size: 17px; line-height: 2.0; }
   .content :deep(p) { font-size: 17px; line-height: 2.0; }
   .content :deep(li) { font-size: 17px; line-height: 2.0; }
