@@ -108,7 +108,7 @@
 
 <script>
 import YearlySalesRankingChart from './YearlySalesRankingChart.vue'
-import sales2025 from '../data/2025_dcd_sales_rank.json'
+import sales2025 from '@/data/car/2025_dcd_sales_rank.json'
 
 function parsePriceRange (s) {
   if (!s) return [NaN, NaN]

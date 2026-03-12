@@ -1,10 +1,16 @@
 <template>
   <nav class="steam-navbar">
     <div class="nav-container">
-      <div class="logo" @click="$router.push('/')">
+      <div class="logo" @click="goHome">
         ASHENONE's Blog
       </div>
-      <button class="menu-toggle" @click="isOpen = !isOpen" aria-label="打开导航" :aria-expanded="isOpen">
+      <button
+        class="menu-toggle"
+        @click="toggleMenu"
+        aria-label="打开导航"
+        :aria-expanded="isOpen"
+        aria-controls="navbar-mobile-menu"
+      >
         菜单
       </button>
       <div class="nav-links">
@@ -13,15 +19,16 @@
         <router-link to="/records" tag="button">记录</router-link>
         <router-link to="/learning" tag="button">Learning</router-link>
       </div>
-      <transition name="slide-down">
-        <div v-if="isOpen" class="mobile-menu">
-          <router-link @click.native="isOpen = false" to="/" exact tag="button">主页</router-link>
-          <router-link @click.native="isOpen = false" to="/mySpace" tag="button">个人空间</router-link>
-          <router-link @click.native="isOpen = false" to="/records" tag="button">记录</router-link>
-          <router-link @click.native="isOpen = false" to="/learning" tag="button">Learning</router-link>
-        </div>
-      </transition>
     </div>
+    <transition name="slide-down">
+      <div v-if="isOpen" id="navbar-mobile-menu" class="mobile-menu" @click.stop>
+        <router-link @click.native="closeMenu" to="/" exact tag="button">主页</router-link>
+        <router-link @click.native="closeMenu" to="/mySpace" tag="button">个人空间</router-link>
+        <router-link @click.native="closeMenu" to="/records" tag="button">记录</router-link>
+        <router-link @click.native="closeMenu" to="/learning" tag="button">Learning</router-link>
+      </div>
+    </transition>
+    <div v-if="isOpen" class="menu-mask" @click="closeMenu"></div>
   </nav>
 </template>
 
@@ -31,6 +38,23 @@ export default {
   data() {
     return {
       isOpen: false
+    }
+  },
+  watch: {
+    $route() {
+      this.isOpen = false
+    }
+  },
+  methods: {
+    toggleMenu() {
+      this.isOpen = !this.isOpen
+    },
+    closeMenu() {
+      this.isOpen = false
+    },
+    goHome() {
+      this.isOpen = false
+      this.$router.push('/')
     }
   }
 }
@@ -134,7 +158,7 @@ export default {
 }
 
 .mobile-menu {
-  position: absolute;
+  position: fixed;
   top: 80px;
   left: 0;
   right: 0;
@@ -143,6 +167,7 @@ export default {
   display: none;
   flex-direction: column;
   padding: 8px 0;
+  z-index: 1002;
 }
 
 .mobile-menu button {
@@ -170,13 +195,24 @@ export default {
 }
 .slide-down-enter-from,
 .slide-down-leave-to {
-  transform: translateY(-10px);
+  transform: translateY(-16px);
   opacity: 0;
 }
 .slide-down-enter-to,
 .slide-down-leave-from {
   transform: translateY(0);
   opacity: 1;
+}
+
+.menu-mask {
+  position: fixed;
+  top: 80px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0,0,0,0.4);
+  z-index: 1001;
+  display: none;
 }
 
 @media (max-width: 768px) {
@@ -192,6 +228,9 @@ export default {
   }
   .mobile-menu {
     display: flex;
+  }
+  .menu-mask {
+    display: block;
   }
 }
 </style>

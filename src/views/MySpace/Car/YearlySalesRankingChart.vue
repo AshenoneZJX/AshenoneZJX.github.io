@@ -6,7 +6,7 @@
 
 <script>
 import * as echarts from 'echarts'
-import sales2025 from '../data/2025_dcd_sales_rank.json'
+import sales2025 from '@/data/car/2025_dcd_sales_rank.json'
 
 export default {
   name: 'YearlySalesRankingChart',
@@ -56,6 +56,8 @@ export default {
     },
     render () {
       if (!this.chart) return
+      const w = (this.$refs.chart && this.$refs.chart.clientWidth) ? this.$refs.chart.clientWidth : window.innerWidth
+      const isNarrow = w <= 520
       const src = (Array.isArray(this.items) && this.items.length)
         ? this.items
         : (Number(this.year) === 2025 && sales2025 && Array.isArray(sales2025.items) ? sales2025.items : [])
@@ -73,11 +75,11 @@ export default {
       const leftPad = Math.min(320, Math.max(100, Math.round(longest * 12)))
       this.chart.setOption({
         title: { text: this.title, left: 'center', textStyle: { color: '#fff' } },
-        grid: { left: leftPad, right: 30, top: 60, bottom: 40 },
+        grid: { left: leftPad, right: 30, top: 60, bottom: isNarrow ? 60 : 40 },
         tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' } },
         xAxis: {
           type: 'value',
-          axisLabel: { color: '#9cc9f5' },
+          axisLabel: { color: '#9cc9f5', rotate: isNarrow ? 35 : 0, hideOverlap: true, margin: 10 },
           splitLine: { show: true, lineStyle: { color: '#2a475e' } }
         },
         yAxis: {

@@ -38,7 +38,7 @@
 
 <script>
 export default {
-  name: 'MySpaceOverview',
+  name: 'MySpace',
   methods: {
     bg(url) {
       return { backgroundImage: `url(${url})` }

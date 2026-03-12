@@ -15,7 +15,7 @@
     <div class="section-header">
       <div class="header-left">
         <h2>Cars</h2>
-        <button class="chip filter-toggle mobile-only" @click="toggleFilter">筛选</button>
+        <button class="filter-btn filter-toggle mobile-only" @click="toggleFilters">筛选</button>
         <div class="filters">
           <div class="filter-group">
             <select class="select" v-model="selectedEnergy">
@@ -43,50 +43,49 @@
           </div>
           <button v-if="hasActiveFilters" class="chip clear-chip" @click="clearFilters">清除所有筛选</button>
         </div>
-        <div class="filter-sheet mobile-only" :class="{ active: filterOpen }">
-          <div class="sheet-header">
-            <span class="sheet-title">筛选</span>
-            <button class="chip" @click="closeFilter">关闭</button>
-          </div>
-          <div class="sheet-content">
-            <div class="sheet-subtitle">能源类型</div>
-            <div class="filter-group">
-              <select class="select" v-model="selectedEnergy">
-                <option :value="null">全部能源</option>
-                <option v-for="opt in energyOptions" :key="opt" :value="opt">{{ opt }}</option>
-              </select>
-            </div>
-            <div class="sheet-subtitle">车型</div>
-            <div class="filter-group">
-              <select class="select" v-model="selectedBody">
-                <option :value="null">全部车型</option>
-                <option v-for="opt in bodyOptions" :key="opt" :value="opt">{{ opt }}</option>
-              </select>
-            </div>
-            <div class="sheet-subtitle">品牌</div>
-            <div class="filter-group">
-              <select class="select" v-model="selectedBrand">
-                <option :value="null">全部品牌</option>
-                <option v-for="opt in brandOptions" :key="opt" :value="opt">{{ opt }}</option>
-              </select>
-            </div>
-            <div class="sheet-subtitle">尺寸等级</div>
-            <div class="filter-group">
-              <select class="select" v-model="selectedSizeClass">
-                <option :value="null">全部尺寸</option>
-                <option v-for="opt in sizeClassOptions" :key="opt" :value="opt">{{ opt }}</option>
-              </select>
-            </div>
-            <button v-if="hasActiveFilters" class="chip clear-chip" @click="clearFilters">清除所有筛选</button>
-          </div>
-        </div>
       </div>
       <button class="back-btn" @click="$router.push('/mySpace/cars-home')">
         <img src="@/assets/images/fanhui.svg" class="back-icon" alt="返回" />
         <span class="back-text">返回汽车主页</span>
       </button>
     </div>
-    <div class="dropdown-mask mobile-only" v-if="filterOpen" @click="closeFilter"></div>
+    <aside class="filters-panel mobile-sheet" :class="{ active: filterOpen }">
+      <div class="sheet-header">
+        <span class="sheet-title">筛选</span>
+      </div>
+      <div class="sheet-content">
+        <div class="sheet-subtitle">能源类型</div>
+        <div class="filter-group">
+          <select class="select" v-model="selectedEnergy">
+            <option :value="null">全部能源</option>
+            <option v-for="opt in energyOptions" :key="opt" :value="opt">{{ opt }}</option>
+          </select>
+        </div>
+        <div class="sheet-subtitle">车型</div>
+        <div class="filter-group">
+          <select class="select" v-model="selectedBody">
+            <option :value="null">全部车型</option>
+            <option v-for="opt in bodyOptions" :key="opt" :value="opt">{{ opt }}</option>
+          </select>
+        </div>
+        <div class="sheet-subtitle">品牌</div>
+        <div class="filter-group">
+          <select class="select" v-model="selectedBrand">
+            <option :value="null">全部品牌</option>
+            <option v-for="opt in brandOptions" :key="opt" :value="opt">{{ opt }}</option>
+          </select>
+        </div>
+        <div class="sheet-subtitle">尺寸等级</div>
+        <div class="filter-group">
+          <select class="select" v-model="selectedSizeClass">
+            <option :value="null">全部尺寸</option>
+            <option v-for="opt in sizeClassOptions" :key="opt" :value="opt">{{ opt }}</option>
+          </select>
+        </div>
+        <button v-if="hasActiveFilters" class="chip clear-chip" @click="clearFilters">清除所有筛选</button>
+      </div>
+    </aside>
+    <div v-if="filterOpen" class="sheet-mask mobile-only" @click="closeFilters"></div>
     <div class="divider"></div>
 
     <div class="gallery-grid">
@@ -196,10 +195,10 @@ export default {
     energyList(car) {
       return Array.isArray(car.energy) ? car.energy : [car.energy]
     },
-    toggleFilter() {
+    toggleFilters() {
       this.filterOpen = !this.filterOpen
     },
-    closeFilter() {
+    closeFilters() {
       this.filterOpen = false
     },
     toggleEnergy(opt) {
@@ -255,8 +254,8 @@ export default {
     }
   },
   created() {
-    import('@/data/cars.json').then(mod => { this.cars = mod.default })
-    import('@/data/brandLogos.json').then(mod => { this.brandLogoMap = mod.default })
+    import('@/data/car/cars.json').then(mod => { this.cars = mod.default })
+    import('@/data/car/brandLogos.json').then(mod => { this.brandLogoMap = mod.default })
   }
 }
 </script>
@@ -319,6 +318,23 @@ export default {
 }
 
 /* 标签按钮：默认状态，深色背景，圆角，禁止换行 */
+.filter-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 26px;
+  padding: 0 14px;
+  border-radius: 6px;
+  border: none;
+  background: transparent;
+  color: #c7d5e0;
+  font-size: 13px;
+  margin: 0;
+  cursor: pointer;
+}
+.filter-btn:hover { background: rgba(102,192,244,0.12); color: #e6f3ff; }
+.filter-btn.active { background: rgba(102,192,244,0.22); color: #ffffff; }
+
 .chip {
   background: transparent;
   border: none;
@@ -375,46 +391,48 @@ export default {
 }
 
 .mobile-only { display: none; }
-.filter-sheet {
-  position: fixed;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 40%;
-  max-width: 360px;
-  background: #0f1a24;
-  border-right: 1px solid #3c4551;
-  box-shadow: 10px 0 24px rgba(0,0,0,0.45);
-  transform: translateX(-100%);
-  transition: transform 0.25s ease;
-  z-index: 1001;
-  display: none;
-}
-.filter-sheet.active { transform: translateX(0); display: block; }
-.sheet-header { display: flex; align-items: center; justify-content: space-between; padding: 10px 12px; }
-.sheet-title { color: #8f98a0; font-size: 16px; width: 100%; }
-.sheet-content { padding: 12px; display: flex; flex-direction: column; gap: 10px; width: 100%; }
-.sheet-subtitle { color: #8f98a0; font-size: 13px; padding: 2px 0; border-bottom: 1px solid #38424e; }
-.dropdown-mask {
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.4);
-  z-index: 1000;
+.filters-panel { display: none; }
+
+/* Grid 布局核心 */
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); /* 自适应列 */
+  gap: 20px;
 }
 
 @media (max-width: 768px) {
   /* 移动端：隐藏桌面端横向筛选条，改用底部抽屉式筛选 */
   .filters { display: none; }
   .filter-toggle.mobile-only { display: inline-flex; }
-  .filter-sheet.mobile-only { display: block; }
-  .gallery-grid { grid-template-columns: repeat(2, 1fr); }
-  .filter-sheet .filter-group { flex-direction: column; align-items: stretch; gap: 6px; }
-  .filter-sheet .chip { width: 100%; justify-content: flex-start; padding: 0 14px; height: 30px; }
-  .filter-sheet .filter-sep { width: 100%; height: 1px; background: #38424e; }
-  .filter-sheet .sheet-header .chip { width: auto; margin-left: auto; justify-content: center; height: 28px; }
-  .filter-sheet .select { width: 100%; height: 30px; }
+  .filters-panel.mobile-sheet {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 50%;
+    max-width: 360px;
+    padding: 12px 14px;
+    background: #0f1a24;
+    box-shadow: 10px 0 24px rgba(0,0,0,0.45);
+    transform: translateX(-100%);
+    transition: transform 0.25s ease;
+    z-index: 1001;
+    display: block;
+  }
+  .filters-panel.mobile-sheet.active { transform: translateX(0); }
+  .sheet-mask.mobile-only {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.4);
+    z-index: 1000;
+    display: block;
+  }
+  .sheet-header { display: flex; align-items: center; justify-content: space-between; padding: 10px 12px; border-bottom: 1px solid #38424e; }
+  .sheet-title { color: #8f98a0; font-size: 14px; font-weight: 600; }
+  .sheet-content { padding: 12px; display: flex; flex-direction: column; gap: 10px; }
+  .sheet-subtitle { color: #8f98a0; font-size: 13px; margin-top: 6px; }
   .filter-toggle.mobile-only {
-    font-size: 13px;
+    font-size: 14px;
     border: 1px solid #3c4551;
     border-radius: 6px;
     padding: 0 16px;
@@ -425,16 +443,12 @@ export default {
     color: #e6f3ff;
     border-color: #66c0f4;
   }
+  .filters-panel .filter-group { flex-direction: column; align-items: stretch; gap: 6px; }
+  .filters-panel .select { width: 100%; height: 32px; font-size: 13px; }
+  .gallery-grid { grid-template-columns: repeat(2, 1fr); }
 }
 /* 分隔线：深色横线，用于区隔头部与内容区域 */
 .divider { height: 2px; background: #2a475e; margin: 10px 0 30px 0; }
-
-/* Grid 布局核心 */
-.gallery-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); /* 自适应列 */
-  gap: 20px;
-}
 
 .gallery-card {
   background: #16202d;

@@ -28,8 +28,8 @@
 </template>
 
 <script>
-import NavBar from '@/components/NavBar.vue'
-import cars from '@/data/cars.json'
+import NavBar from '@/components/Shared/NavBar.vue'
+import cars from '@/data/car/cars.json'
 
 export default {
   name: 'App',

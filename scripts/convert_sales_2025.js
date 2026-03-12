@@ -2,8 +2,8 @@ const fs = require('fs')
 const path = require('path')
 const XLSX = require('xlsx')
 
-const xlsxPath = path.resolve(__dirname, '../src/data/2025_dcd_sales_rank.xlsx')
-const outPath = path.resolve(__dirname, '../src/data/2025_dcd_sales_rank.json')
+const xlsxPath = path.resolve(__dirname, '../src/data/car/2025_dcd_sales_rank.xlsx')
+const outPath = path.resolve(__dirname, '../src/data/car/2025_dcd_sales_rank.json')
 
 function pick(keys, regex, fallbackIdx = 0) {
   return keys.find(k => regex.test(k)) || keys[fallbackIdx]

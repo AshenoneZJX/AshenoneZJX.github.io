@@ -169,7 +169,6 @@
         <div class="specs-drawer" v-if="showSpecs">
           <div class="drawer-header">
             <span>车辆参数</span>
-            <button class="drawer-close" @click="toggleSpecs">关闭</button>
           </div>
           <div class="specs specs-box-mobile">
             <div class="specs-hint">提示：点击参数名称可查看介绍详情</div>
@@ -212,8 +211,8 @@
 </template>
 
 <script>
-import cars from '@/data/cars.json'
-import brandDetails from '@/data/brandDetails.json'
+import cars from '@/data/car/cars.json'
+import brandDetails from '@/data/car/brandDetails.json'
 export default {
   name: 'CarDetail',
   data() {
@@ -425,7 +424,7 @@ export default {
   },
   created() {
     this.loadCar(this.$route.params.id)
-    import('@/data/brandLogos.json').then(mod => { this.brandLogoMap = mod.default })
+    import('@/data/car/brandLogos.json').then(mod => { this.brandLogoMap = mod.default })
     if (typeof window !== 'undefined' && window.scrollTo) {
       window.scrollTo({ top: 0, behavior: 'auto' })
     }
@@ -966,16 +965,18 @@ export default {
 /* Mobile Responsive */
 .fab-specs {
   position: fixed;
-  right: 16px;
-  bottom: 16px;
-  width: 56px;
-  height: 56px;
+  right: 20px;
+  bottom: 20px;
+  width: 72px;
+  height: 72px;
   border-radius: 50%;
-  border: none;
-  background: #66c0f4;
-  color: #1b2838;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(32, 43, 58, 0.6);
+  backdrop-filter: blur(24px) saturate(120%);
+  -webkit-backdrop-filter: blur(24px) saturate(120%);
+  color: #e6f3ff;
   font-weight: 700;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.35);
   z-index: 1000;
   display: none; /* Hidden on desktop */
   align-items: center;
@@ -1005,7 +1006,7 @@ export default {
     display: flex;
     justify-content: center;
     gap: 12px;
-    margin: 16px 0;
+    margin: 4px 0;
     order: 4;
   }
 

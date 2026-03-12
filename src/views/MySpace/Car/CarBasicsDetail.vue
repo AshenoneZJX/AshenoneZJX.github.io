@@ -1,6 +1,14 @@
+<!-- 
+ 汽车基础知识详情页：
+    左侧目录
+    中间 Markdown 渲染内容
+    右侧占位栏
+    支持 MathJax 公式与响应式布局
+-->
+
 <template>
-  <div class="container page-record-detail">
-    <div v-if="record">
+  <div class="container page-car-basics-detail">
+    <div v-if="article">
       <!-- 上容器：顶部工具栏 -->
       <div class="top-actions-row">
         <!-- 移动端：目录切换按钮 -->
@@ -10,20 +18,14 @@
             <line x1="3" y1="6" x2="21" y2="6"></line>
             <line x1="3" y1="18" x2="21" y2="18"></line>
           </svg>
-          <span style="margin-left: 4px;">目录</span>
+          <span style="margin-left: 4px; display: none;">目录</span>
         </button>
 
         <div class="header-placeholder"></div>
         <div class="header-info">
           <div class="top-title" v-if="heading">{{ heading }}</div>
-          <div class="meta">
-            <span class="month">{{ monthAbbr(record.date) }}</span>
-            <span class="day">{{ dayOfMonth(record.date) }}</span>
-            <span class="year">{{ yearOf(record.date) }}</span>
-            <span class="cat">{{ record.category }}</span>
-          </div>
         </div>
-        <router-link to="/records" class="back-btn">
+        <router-link to="/mySpace/car-basics" class="back-btn">
           <img src="@/assets/images/fanhui.svg" class="back-icon" alt="返回" />
           <span class="back-text">返回</span>
         </router-link>
@@ -37,6 +39,7 @@
         <!-- 左侧边栏：固定显示大纲 -->
         <aside class="left-sidebar" :class="{ 'mobile-open': showMobileToc }">
           <div class="sidebar-title">大纲</div>
+          
           <div class="toc-list">
             <div class="toc-section" v-for="sec in toc" :key="sec.id">
               <button class="toc-h2" @click="toggle(sec.id)">
@@ -62,45 +65,33 @@
         <aside class="right-sidebar"></aside>
       </div>
     </div>
+
     <div v-else class="not-found">
-      <p>抱歉，没有找到该日志。</p>
+      <p>抱歉，没有找到该内容。</p>
     </div>
   </div>
 </template>
 
 <script>
-import records from '@/data/records'
+import carBasics from '@/data/car/carBasics.js'
 import MarkdownIt from 'markdown-it'
 
-const MONTHS = ['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC']
-
 export default {
-  name: 'RecordDetail',
+  name: 'CarBasicsDetail',
   data() {
     return {
-      record: null,
-      heading: '',
-      displayHtml: '',
+      article: null,
       toc: [],
+      displayHtml: '',
+      heading: '',
       showMobileToc: false
     }
   },
   methods: {
-    monthAbbr(d) {
-      const dt = new Date(d)
-      return MONTHS[dt.getMonth()]
-    },
-    dayOfMonth(d) {
-      const dt = new Date(d)
-      return dt.getDate()
-    },
-    yearOf(d) {
-      const dt = new Date(d)
-      return dt.getFullYear()
-    },
     toggle(id) {
       const sec = this.toc.find(s => s.id === id)
       if (sec) {
+        // 如果没有子标题，点击直接滚动到该位置
         if (!sec.children || sec.children.length === 0) {
           this.scrollTo(sec.id)
         } else {
@@ -108,12 +99,32 @@ export default {
         }
       }
     },
+    // 大纲点击跳转正文对应标题位置功能：平滑滚动到指定 ID 的元素，自动减去顶部导航栏高度
     scrollTo(id) {
       const el = document.getElementById(id)
       if (el) {
         // 关闭移动端目录
         this.showMobileToc = false
-        el.scrollIntoView({ behavior: 'smooth', block: 'start' })
+        const headerOffset = 100 // 导航栏高度 80px + 20px 缓冲
+        const elementPosition = el.getBoundingClientRect().top
+        const offsetPosition = elementPosition + window.pageYOffset - headerOffset
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: 'smooth'
+        })
+      }
+    },
+    handleAnchor() {
+      const text = this.$route && this.$route.query ? this.$route.query.anchor : ''
+      if (!text || !this.toc || this.toc.length === 0) return
+      const sec = this.toc.find(s => s.text === text)
+      if (sec) {
+        this.scrollTo(sec.id)
+        return
+      }
+      for (const s of this.toc) {
+        const h3 = (s.children || []).find(c => c.text === text)
+        if (h3) { this.scrollTo(h3.id); return }
       }
     },
     buildToc() {
@@ -146,18 +157,38 @@ export default {
       })
       this.toc = toc
     },
+    loadMathJax() {
+      return new Promise(resolve => {
+        if (window.MathJax) { resolve(); return }
+        window.MathJax = {
+          tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] },
+          options: { skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'] },
+          startup: { typeset: false }
+        }
+        const s = document.createElement('script')
+        s.src = 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js'
+        s.async = true
+        s.onload = () => resolve()
+        document.head.appendChild(s)
+      })
+    },
+    typesetMath() {
+      if (!this.$refs.contentRef) return
+      if (window.MathJax && window.MathJax.typesetPromise) {
+        window.MathJax.typesetPromise([this.$refs.contentRef]).catch(() => {})
+      }
+    },
     prepareContent() {
-      if (!this.record || !this.record.html) {
+      if (!this.article) {
         this.heading = ''
         this.displayHtml = ''
         return
       }
-      const md = new MarkdownIt({
-        html: true,
-        linkify: true,
-        breaks: false
-      })
-      const sourceHtml = this.record.content ? md.render(this.record.content) : this.record.html
+      const md = new MarkdownIt({ html: true, linkify: true, breaks: false })
+      // 优先使用 content 重新渲染，以便统一处理 H1
+      const source = this.article.content || ''
+      const sourceHtml = source ? md.render(source) : (this.article.html || '')
+      
       const tmp = document.createElement('div')
       tmp.innerHTML = sourceHtml
       const h1 = tmp.querySelector('h1')
@@ -165,22 +196,33 @@ export default {
         this.heading = h1.textContent.trim()
         h1.remove()
       } else {
-        this.heading = ''
+        this.heading = this.article.title || ''
       }
       this.displayHtml = tmp.innerHTML
-      
-      this.$nextTick(() => {
-        this.buildToc()
-      })
     }
   },
   created() {
     const id = String(this.$route.params.id)
-    this.record = records.find(r => String(r.id) === id) || null
+    this.article = carBasics.find(r => String(r.id) === id) || null
     this.prepareContent()
+    this.$nextTick(async () => {
+      this.buildToc()
+      await this.loadMathJax()
+      this.typesetMath()
+      this.handleAnchor()
+    })
   },
   mounted() {
     this.buildToc()
+    this.loadMathJax().then(() => {
+      this.typesetMath()
+      this.handleAnchor()
+    })
+  },
+  watch: {
+    '$route.query.anchor'() {
+      this.$nextTick(() => this.handleAnchor())
+    }
   }
 }
 </script>
@@ -200,6 +242,7 @@ export default {
   font-weight: 100 900;
   font-display: swap;
 }
+
 @font-face {
   font-family: 'MotivaSans';
   src: url('~@/assets/fonts/MotivaSans-Regular_woff.ttf') format('truetype');
@@ -208,7 +251,7 @@ export default {
   font-display: swap;
 }
 
-.page-record-detail { 
+.page-car-basics-detail { 
   padding: 0;
   margin: 0;
   width: 100%;
@@ -240,7 +283,7 @@ export default {
   padding: 20px 20px;
   min-height: 32px;
   max-width: 1400px;
-  margin: 0 auto;
+  margin: -20px auto 0;
   border-bottom: 1px solid #2a475e;
 }
 
@@ -258,8 +301,17 @@ export default {
   flex-wrap: wrap;
 }
 
-.title-row { display: flex; align-items: flex-start; margin: 0 0 10px; }
-.title-row .back-btn { margin-left: auto; }
+.top-title { 
+  color: #ffffff; 
+  font-size: 30px; 
+  line-height: 1.4; 
+  margin: 0; 
+  font-weight: 400; 
+  letter-spacing: 1.5px; 
+  text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+  font-family: 'SourceHanSansSC', sans-serif; 
+}
+
 .back-btn { background: transparent; border: none; color: #c7d5e0; padding: 6px 12px; cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; border-radius: 6px; margin-left: auto; }
 .back-icon {
   width: 16px;
@@ -268,20 +320,7 @@ export default {
 }
 .back-btn:hover { color: #e6f3ff; background: rgba(102,192,244,0.12); }
 
-.top-title { color: #ffffff; font-size: 34px; line-height: 1.4; margin: 0; font-weight: 400; letter-spacing: 1.5px; text-shadow: 0 2px 4px rgba(0,0,0,0.5); font-family: 'SourceHanSansSC', sans-serif; }
-.meta {
-  display: flex;
-  align-items: baseline;
-  gap: 12px;
-  margin-bottom: 0;
-}
-.month { color: #8f98a0; font-size: 12px; }
-.day { color: #66c0f4; font-size: 20px; font-weight: bold; font-family: 'RobotoMono', Menlo, Monaco, Consolas, "Courier New", monospace; }
-.year { color: #8f98a0; font-size: 12px; }
-.cat { color: #ffffff; font-size: 12px; display: inline-block; padding: 2px 8px; border: 1px solid #38424e; border-radius: 6px; background: rgba(102,192,244,0.12); font-family: 'RobotoMono', monospace; }
-.content-divider { height: 1px; background: #38424e; margin: 8px 0 14px; }
-
-/* 布局相关：三栏 Grid */
+/* 下容器：布局相关：三栏 Grid */
 .main-layout {
   display: grid;
   grid-template-columns: 200px minmax(0, 1fr) 200px;
@@ -289,7 +328,7 @@ export default {
   position: relative;
   align-items: start;
   max-width: 1400px;
-  margin: 0 auto;
+  margin: 0;
   padding: 0 20px;
 }
 
@@ -375,12 +414,12 @@ export default {
 }
 .toc-h3:hover { color: #66c0f4; text-decoration: underline; }
 
-/* 内容卡片区域：半透明黑色背景、内边距、边框和圆角，用于包裹正文内容 */
+/* 内容主体 */
 .detail-body { 
-  background: rgba(0,0,0,0.2); /* 20% 透明度的黑色背景，使下方暗色主题更沉浸 */
-  padding: 40px;   /* 上下 40px、左右 40px 的内边距 */
-  border: none; /* 移除边框 */
-  border-radius: 6px;        /* 6px 圆角，柔和视觉，避免生硬矩形 */
+  background: rgba(0,0,0,0.2); 
+  padding: 20px; 
+  border: none; 
+  border-radius: 6px; 
 }
 
 .content { color: #cfe0ee; font-size: 16px; line-height: 1.9; overflow-wrap: anywhere; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; }
@@ -406,6 +445,9 @@ export default {
 .content :deep(tr) { background: transparent; }
 .content :deep(blockquote) { border-left: 4px solid #66c0f4; background: rgba(27,40,56,0.5); padding: 10px 14px; margin: 12px 0; color: #cfe0ee; border-radius: 4px; }
 .content :deep(img) { max-width: 100%; height: auto; display: block; margin: 12px auto; border-radius: 6px; box-shadow: 0 4px 12px rgba(0,0,0,0.35); border: 1px solid #38424e; }
+.content :deep(.mjx-container) { color: #cfe0ee; background: rgba(27,40,56,0.5); border: 1px solid #38424e; border-radius: 6px; padding: 2px 6px; display: inline-block; margin: 0 2px; }
+.content :deep(.mjx-container[display="true"]) { display: block; padding: 10px 12px; margin: 10px 0; }
+
 .not-found { color: #8f98a0; }
 
 /* 响应式调整：当宽度不足以容纳三栏时（例如 < 1200px），隐藏右侧占位栏 */
@@ -421,6 +463,7 @@ export default {
   }
 }
 
+/* 移动端适配 */
 @media (max-width: 768px) {
   .main-layout {
     display: block;
@@ -458,7 +501,7 @@ export default {
   .left-sidebar.mobile-open {
     transform: translateX(0);
   }
-
+  
   .mobile-overlay {
     display: block;
     position: fixed;
@@ -473,11 +516,15 @@ export default {
   
   /* Adjust detail body for full width */
   .detail-body { 
-    padding: 20px; 
-    border-radius: 0;
+    padding: 10px; 
+    border-radius: 0; 
     margin: 0;
   }
-
+  
+  .center-content {
+    border-left: none;
+  }
+  
   /* Back button text hidden on mobile */
   .back-text { display: none; }
   .back-btn { padding: 6px; }

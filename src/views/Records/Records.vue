@@ -111,7 +111,7 @@
 </template>
 
 <script>
-import records from '@/data/records'
+import records from '@/data/records/records.js'
 import filterIcon from '@/assets/images/shaixuan.svg'
 
 const MONTHS = ['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC']
@@ -415,7 +415,8 @@ export default {
 @media (max-width: 768px) {
   .content-2col { flex-direction: column; }
   .col-left, .col-right { width: 100%; }
-  .record-list { padding: 0 20px; }
+  .record-list { padding: 0 10px; }
+  .section-header { padding: 0 10px; }
   .filter-toggle.mobile-only { display: inline-flex; }
   .filter-toggle.mobile-only {
     font-size: 14px;

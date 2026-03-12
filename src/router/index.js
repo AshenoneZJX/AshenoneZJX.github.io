@@ -1,22 +1,21 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
-import Cars from '../views/Cars.vue'
-import CarsHome from '../views/CarsHome.vue'
-import Records from '../views/Records.vue'
-import RecordDetail from '../views/RecordDetail.vue'
-import MySpace from '../views/MySpace.vue'
-import MySpaceOverview from '../views/MySpaceOverview.vue'
-import Digital from '../views/Digital.vue'
-import Photography from '../views/Photography.vue'
-import CarDetail from '../views/CarDetail.vue'
-import CarBasics from '../views/CarBasics.vue'
-import CarBasicsDetail from '../views/CarBasicsDetail.vue'
-import BrandList from '../views/BrandList.vue'
-import BrandDetail from '../views/BrandDetail.vue'
-import Learning from '../views/Learning.vue'
-import LearningOverview from '../views/LearningOverview.vue'
-import IeltsLearning from '../views/IeltsLearning.vue'
+import Home from '@/views/Home/Home.vue'
+import Cars from '@/views/MySpace/Car/Cars.vue'
+import CarsHome from '@/views/MySpace/Car/CarsHome.vue'
+import Records from '@/views/Records/Records.vue'
+import RecordDetail from '@/views/Records/RecordDetail.vue'
+import MySpace from '@/views/MySpace/MySpace.vue'
+import Digital from '@/views/MySpace/Digital/Digital.vue'
+import Photography from '@/views/MySpace/Photography/Photography.vue'
+import CarDetail from '@/views/MySpace/Car/CarDetail.vue'
+import CarBasics from '@/views/MySpace/Car/CarBasics.vue'
+import CarBasicsDetail from '@/views/MySpace/Car/CarBasicsDetail.vue'
+import BrandList from '@/views/MySpace/Car/BrandList.vue'
+import BrandDetail from '@/views/MySpace/Car/BrandDetail.vue'
+import Learning from '@/views/Learning/Learning.vue'
+import LearningOverview from '@/views/Learning/LearningOverview.vue'
+import IeltsLearning from '@/views/Learning/IeltsLearning.vue'
 
 Vue.use(VueRouter)
 
@@ -28,20 +27,18 @@ const routes = [
   },
   {
     path: '/mySpace',
-    component: MySpace,
-    children: [
-      { path: '', name: 'MySpace', component: MySpaceOverview },
-      { path: 'cars-home', name: 'CarsHome', component: CarsHome },
-      { path: 'cars', name: 'CarsModels', component: Cars },
-      { path: 'cars/:id', name: 'CarDetail', component: CarDetail },
-      { path: 'digital', name: 'Digital', component: Digital },
-      { path: 'photography', name: 'Photography', component: Photography },
-      { path: 'car-basics', name: 'CarBasics', component: CarBasics },
-      { path: 'car-basics/:id', name: 'CarBasicsDetail', component: CarBasicsDetail },
-      { path: 'brands', name: 'BrandList', component: BrandList },
-      { path: 'brands/:name', name: 'BrandDetail', component: BrandDetail }
-    ]
+    name: 'MySpace',
+    component: MySpace
   },
+  { path: '/mySpace/cars-home', name: 'CarsHome', component: CarsHome },
+  { path: '/mySpace/cars', name: 'CarsModels', component: Cars },
+  { path: '/mySpace/cars/:id', name: 'CarDetail', component: CarDetail },
+  { path: '/mySpace/digital', name: 'Digital', component: Digital },
+  { path: '/mySpace/photography', name: 'Photography', component: Photography },
+  { path: '/mySpace/car-basics', name: 'CarBasics', component: CarBasics },
+  { path: '/mySpace/car-basics/:id', name: 'CarBasicsDetail', component: CarBasicsDetail },
+  { path: '/mySpace/brands', name: 'BrandList', component: BrandList },
+  { path: '/mySpace/brands/:name', name: 'BrandDetail', component: BrandDetail },
   {
     path: '/records',
     name: 'Records',

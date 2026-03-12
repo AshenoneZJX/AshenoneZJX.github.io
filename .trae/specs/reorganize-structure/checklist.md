@@ -1,0 +1,13 @@
+- [x] Project directory structure matches the spec
+- [x] `src/views` is organized by feature
+- [x] `src/content` contains markdown files
+- [x] `src/data` is organized by feature
+- [x] `src/components/Shared` contains shared components
+- [x] `npm run serve` starts without errors
+- [x] Home page loads
+- [x] MySpace -> Cars pages load (List, Detail, Basics)
+- [x] MySpace -> Digital/Photography pages load
+- [x] Records pages load (List, Detail)
+- [x] Learning pages load
+- [x] Navigation (NavBar) works
+- [x] Data loading (JSON/JS) works

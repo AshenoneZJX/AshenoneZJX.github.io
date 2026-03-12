@@ -64,8 +64,8 @@
 </template>
 
 <script>
-import cars from '../data/cars.json'
-import brandDetails from '../data/brandDetails.json'
+import cars from '@/data/car/cars.json'
+import brandDetails from '@/data/car/brandDetails.json'
 
 function getBrand (title) {
   if (!title) return '未知'
@@ -124,7 +124,7 @@ export default {
     }
   },
   created () {
-    import('@/data/brandLogos.json').then(mod => { this.brandLogoMap = mod.default })
+    import('@/data/car/brandLogos.json').then(mod => { this.brandLogoMap = mod.default })
   }
 }
 </script>

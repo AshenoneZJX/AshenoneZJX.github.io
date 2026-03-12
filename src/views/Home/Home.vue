@@ -155,7 +155,7 @@
 </template>
 
 <script>
-import ProfileCard from '@/components/ProfileCard.vue'
+import ProfileCard from '@/components/Shared/ProfileCard.vue'
 
 export default {
   name: 'Home',

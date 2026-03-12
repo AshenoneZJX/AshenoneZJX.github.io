@@ -33,7 +33,7 @@
 </template>
 
 <script>
-import carBasics from '@/data/carBasics'
+import carBasics from '@/data/car/carBasics.js'
 
 export default {
   name: 'CarBasics',
@@ -116,6 +116,7 @@ export default {
 @media (max-width: 768px) {
   .back-text { display: none; }
   .back-btn { padding: 6px; }
-  .record-list { padding: 0 20px; }
+  .record-list { padding: 0 10px; }
+  .section-header { padding: 0 10px; }
 }
 </style>

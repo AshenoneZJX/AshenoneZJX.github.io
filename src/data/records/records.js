@@ -14,7 +14,7 @@ const md = new MarkdownIt({
 })
 
 function loadMdRecords() {
-  const ctx = require.context('!!raw-loader!@/records', false, /\.md$/)
+  const ctx = require.context('!!raw-loader!@/content/records', false, /\.md$/)
   const items = ctx.keys().map(key => {
     const mod = ctx(key)
     const raw = typeof mod === 'string' ? mod : (mod && mod.default) || ''

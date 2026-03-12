@@ -1,7 +1,7 @@
 <template>
   <aside class="profile-card">
     <div class="avatar-frame">
-      <img src="../assets/images/toux.jpg" alt="Avatar" class="avatar">
+      <img src="@/assets/images/toux.jpg" alt="Avatar" class="avatar">
     </div>
     <div class="profile-info">
       <h3 class="username">AshenOne</h3>

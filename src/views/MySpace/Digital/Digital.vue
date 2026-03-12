@@ -46,7 +46,12 @@ export default {
 </script>
 
 <style scoped>
-.page-digital { padding-top: 20px; }
+.page-digital { 
+  padding-top: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+}
 .section-header { display: flex; justify-content: space-between; align-items: flex-end; }
 .section-header h2 { color: #fff; font-weight: 300; letter-spacing: 2px; }
 .actions .back-btn { background: transparent; border: 1px solid #3c4551; color: #c7d5e0; padding: 6px 12px; cursor: pointer; border-radius: 6px; display: inline-flex; align-items: center; gap: 6px; }

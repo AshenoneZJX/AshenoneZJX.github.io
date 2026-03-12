@@ -25,8 +25,8 @@
 </template>
 
 <script>
-import cars from '../data/cars.json'
-import brandLogos from '../data/brandLogos.json'
+import cars from '@/data/car/cars.json'
+import brandLogos from '@/data/car/brandLogos.json'
 
 function getBrand (title) {
   if (!title) return '未知'
