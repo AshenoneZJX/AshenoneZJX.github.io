@@ -42,7 +42,7 @@ export default {
 
 <style scoped>
 .page-ielts { padding-top: 20px; }
-.section-header h2 { color: #fff; font-weight: 700; letter-spacing: 2px; }
+.section-header h2 { color: #fff; font-weight: 400; letter-spacing: 2px; }
 .divider { height: 2px; background: #2a475e; margin: 10px 0 30px 0; }
 
 .title-row { display: flex; align-items: center; justify-content: space-between; }

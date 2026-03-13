@@ -278,16 +278,17 @@ export default {
 }
 
 .page-cars { 
-  padding-top: 20px;
+  padding: 20px;
   max-width: 1200px;
   margin: 0 auto;
   width: 100%;
+  box-sizing: border-box;
 }
 .section-header { display: flex; justify-content: space-between; align-items: center; }
 .section-header h2 { color: #fff; font-weight: normal; letter-spacing: 2px; }
 .header-left { display: flex; align-items: center; gap: 16px; }
 .header-left { position: relative; }
-.back-btn { background: transparent; border: 1px solid #3c4551; color: #c7d5e0; padding: 6px 12px; cursor: pointer; border-radius: 6px; font-size: 16px; display: inline-flex; align-items: center; gap: 6px; }
+.back-btn { background: transparent; border: 1px solid #3c4551; color: #c7d5e0; padding: 4px 10px; cursor: pointer; border-radius: 6px; font-size: 14px; display: inline-flex; align-items: center; gap: 6px; }
 .back-icon {
   width: 16px;
   height: 16px;
@@ -492,6 +493,6 @@ export default {
 
   @media (max-width: 768px) {
     .back-text { display: none; }
-    .back-btn { padding: 6px; }
+    .back-btn { padding: 4px; }
   }
 </style>

@@ -75,7 +75,7 @@ export default {
       const leftPad = Math.min(320, Math.max(100, Math.round(longest * 12)))
       this.chart.setOption({
         title: { text: this.title, left: 'center', textStyle: { color: '#fff' } },
-        grid: { left: leftPad, right: 30, top: 60, bottom: isNarrow ? 60 : 40 },
+        grid: { left: isNarrow ? 0 : leftPad, right: 30, top: 40, bottom: isNarrow ? 60 : 40, containLabel: isNarrow },
         tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' } },
         xAxis: {
           type: 'value',

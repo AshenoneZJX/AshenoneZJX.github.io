@@ -17,95 +17,98 @@
 
       <div class="middle-col content-panel">
         <div class="steam-article">
-           <p>这是一个采用 Steam 风格的个人网站，双栏布局与深色主题，模块化呈现个人资料、日志记录、车型数据库与主题空间。</p>
+           <p>这是一个采用 Steam 风格的个人网站，基于三栏响应式布局与深色主题构建。融合了 Windows 11 Mica 材质效果与 Motiva Sans 字体，模块化呈现个人资料、日志记录、车型数据库与主题空间。</p>
            <br>
            <h3>包含的功能与模块</h3>
            <p>• 个人资料卡片（左侧）：固定展示头像、昵称、签名与社交链接。</p>
-           <p>• 活动记录（Records）：列表呈现日志条目，支持按分类筛选与摘要查看，点击进入详情页。</p>
-           <p>• 记录详情：完整阅读内容并查看日期、分类等元信息，便于归档与检索。</p>
-           <p>• 车辆数据库（Cars）：车型列表与参数图片，包含基础知识（CarBasics）与车型详情（CarDetail）。</p>
-          <p>• 个人空间：汽车 / 电子数码 / 摄影主题页，聚合个人兴趣内容与记录。</p>
-          <p>• Learning：学习总览页，包含“雅思学习”等子模块，通过卡片进入二级页面。</p>
-          <p>• 主题与布局：自适应布局，深色视觉与浅蓝高亮；移动端自动切换为单栏以保证可读性。</p>
-          <br>
-          <h3>目的与作用</h3>
-           <p>以统一的视觉与交互规范，将“日志记录、车型数据、主题空间与个人资料”聚合在同一页面中，便于快速浏览与持续更新。</p>
+           <p>• 快捷入口（右侧）：提供车型总览、品牌介绍等快速导航功能。</p>
+           <p>• 活动记录（Records）：列表呈现日志条目，支持按分类筛选；详情页配备顶部工具栏与大纲导航。</p>
+           <p>• 车辆数据库（Cars）：包含车型列表、参数详情、品牌历史与汽车基础知识，支持移动端手势交互与沉浸式浏览。</p>
+           <p>• 个人空间（MySpace）：聚合汽车、电子数码、摄影等兴趣主题，展示评测与作品集。</p>
+           <p>• 学习中心（Learning）：包含雅思学习等子模块，提供结构化的知识梳理与练习入口。</p>
+           <p>• 主题与交互：全站采用深色视觉与浅蓝高亮；移动端自动切换为单栏布局，底部菜单与悬浮卡片适配触控操作。</p>
+           <br>
+           <h3>目的与作用</h3>
+           <p>以统一的视觉与交互规范，将“日志记录、车型数据、主题空间与个人资料”聚合在同一页面中，便于快速浏览与持续更新。底部 Footer 集成 GitHub 主页链接，方便访问源码与更多项目。</p>
            <br>
           <h3>个人空间</h3>
            <div class="site-structure-diagram">
-             <!-- 根节点 -->
-             <div class="node-root">
-               <div class="node-box root-box">
-                 <span class="node-title">MySpace</span>
-                 <span class="node-path">/mySpace</span>
-               </div>
-             </div>
-             
-             <!-- 连接线 -->
-             <div class="root-connector"></div>
-
-             <div class="tree-container">
-               <!-- 分支1：Overview -->
-               <div class="tree-branch">
-                 <div class="branch-line"></div>
-                 <div class="node-box sub-node">
-                   <span class="node-title">Overview</span>
-                   <span class="node-desc">总览 (默认)</span>
+             <div class="diagram-content">
+               <!-- Level 0: Root -->
+               <div class="tree-root">
+                 <div class="node-box root-box">
+                   <span class="node-title">MySpace</span>
+                   <span class="node-path">/mySpace</span>
                  </div>
                </div>
+               
+               <!-- Connector Line Root -> Children -->
+               <div class="root-connector"></div>
 
-               <!-- 分支2：Cars System -->
-               <div class="tree-branch">
-                 <div class="branch-line"></div>
-                 <div class="node-box sub-node highlight">
-                   <span class="node-title">Cars System</span>
-                   <span class="node-desc">汽车数据库</span>
+               <!-- Level 1: Children -->
+               <div class="tree-level-1">
+                 
+                 <!-- Branch 1: Overview -->
+                 <div class="tree-branch">
+                   <div class="branch-connector"></div>
+                   <div class="node-box sub-node">
+                     <span class="node-title">Overview</span>
+                     <span class="node-desc">总览 (默认)</span>
+                   </div>
+                 </div>
+
+                 <!-- Branch 2: Cars System -->
+                 <div class="tree-branch">
+                   <div class="branch-connector"></div>
+                   <div class="node-box sub-node highlight">
+                     <span class="node-title">Cars System</span>
+                     <span class="node-desc">汽车数据库</span>
+                   </div>
+                   <!-- Level 2: Sub-items -->
+                   <div class="sub-level">
+                     <div class="sub-item">CarsHome (专题总览)</div>
+                     <div class="sub-item flow-item">
+                       <span>Cars List</span><span class="arrow">↔</span><span class="leaf">Detail</span>
+                     </div>
+                     <div class="sub-item flow-item">
+                       <span>Brands</span><span class="arrow">↔</span><span class="leaf">Detail</span>
+                     </div>
+                     <div class="sub-item flow-item">
+                       <span>Basics</span><span class="arrow">→</span><span class="leaf">Detail</span>
+                     </div>
+                   </div>
+                 </div>
+
+                 <!-- Branch 3: Topics -->
+                 <div class="tree-branch">
+                   <div class="branch-connector"></div>
+                   <div class="node-group-vertical">
+                     <div class="node-box sub-node topic-node">Digital (数码)</div>
+                     <div class="node-box sub-node topic-node">Photography (摄影)</div>
+                   </div>
                  </div>
                  
-                 <div class="sub-tree">
-                    <div class="sub-branch">
-                       <div class="sub-line"></div>
-                       <div class="mini-node">CarsHome (专题总览)</div>
-                    </div>
-                    <div class="sub-branch">
-                       <div class="sub-line"></div>
-                       <div class="flow-group">
-                         <div class="mini-node">Cars List (列表)</div>
-                         <span class="arrow">↔</span>
-                         <div class="mini-node leaf">Detail (详情)</div>
-                       </div>
-                    </div>
-                    <div class="sub-branch">
-                        <div class="sub-line"></div>
-                        <div class="flow-group">
-                          <div class="mini-node">Brands (品牌)</div>
-                          <span class="arrow">↔</span>
-                          <div class="mini-node leaf">Detail (详情)</div>
-                        </div>
-                    </div>
-                     <div class="sub-branch">
-                        <div class="sub-line"></div>
-                        <div class="flow-group">
-                          <div class="mini-node">Basics (基础)</div>
-                          <span class="arrow">→</span>
-                          <div class="mini-node leaf">Detail (详情)</div>
-                        </div>
-                    </div>
-                 </div>
-               </div>
-
-               <!-- 分支3：Topics -->
-               <div class="tree-branch">
-                 <div class="branch-line"></div>
-                 <div class="node-group">
-                   <div class="node-box sub-node topic-node">Digital (数码)</div>
-                   <div class="node-box sub-node topic-node">Photography (摄影)</div>
-                 </div>
                </div>
              </div>
            </div>
            
-           <p>该架构图展示了 MySpace 模块的路由层级与页面跳转关系，涵盖了从总览到汽车数据库、数码及摄影专栏的完整内容体系。</p>
+          <div class="diagram-description">
+             <p>MySpace 模块采用层级化路由结构，分为三个核心分支：</p>
+             <ul class="desc-list">
+               <li>
+                 <span class="desc-label">Overview (总览)</span>
+                 <span class="desc-text">默认入口，聚合展示各子模块的精选内容与快捷导航。</span>
+               </li>
+               <li>
+                 <span class="desc-label">Cars System (汽车数据库)</span>
+                 <span class="desc-text">深度集成的车辆数据系统。包含车型列表与详情的双向交互，以及品牌历史与基础知识库。</span>
+               </li>
+               <li>
+                 <span class="desc-label">Topics (主题专栏)</span>
+                 <span class="desc-text">包含 <em>Digital (数码)</em> 与 <em>Photography (摄影)</em> 两个独立板块，记录生活与爱好。</span>
+               </li>
+             </ul>
+           </div>
 
            <div class="myspace-grid">
              <div class="myspace-card">
@@ -222,13 +225,14 @@ export default {
 }
 
 .left-col { width: 250px; flex-shrink: 0; position: sticky; top: 104px; }
-.middle-col { flex-grow: 1; background: rgba(0,0,0,0.2); padding: 20px; }
+.middle-col { flex-grow: 1; background: rgba(0,0,0,0.2); padding: 20px; border-radius: 6px; }
 .right-col { width: 280px; flex-shrink: 0; position: sticky; top: 104px; }
 
 /* Quick Access Styles */
 .quick-access-panel {
   background: rgba(0, 0, 0, 0.2);
   padding: 15px;
+  border-radius: 6px;
 }
 
 .quick-access-title {
@@ -320,7 +324,7 @@ export default {
 /* 站点结构图样式 */
 .site-structure-diagram {
   margin: 15px 0;
-  padding: 15px;
+  padding: 20px;
   background: rgba(0, 0, 0, 0.15);
   border-radius: 6px;
   border: 1px dashed #3c4551;
@@ -328,186 +332,256 @@ export default {
   overflow-x: auto;
 }
 
-.node-root {
+.diagram-content {
   display: flex;
-  justify-content: center;
-  margin-bottom: 10px;
+  flex-direction: column;
+  align-items: center;
+  min-width: fit-content; /* 保证在小屏幕下内容不折行，而是出现滚动条（如果需要） */
 }
 
+/* 节点通用样式 */
 .node-box {
   background: #1b2838;
   border: 1px solid #3c4551;
   border-radius: 4px;
-  padding: 6px 12px;
-  color: #c7d5e0;
-  font-size: 13px;
+  padding: 8px 12px;
   text-align: center;
   position: relative;
-  min-width: 100px;
+  z-index: 2;
+  min-width: 120px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
 }
 
 .root-box {
   background: linear-gradient(135deg, #1b2838 0%, #2a475e 100%);
   border-color: #66c0f4;
-  box-shadow: 0 0 8px rgba(102, 192, 244, 0.2);
+  box-shadow: 0 0 10px rgba(102, 192, 244, 0.15);
 }
 
-.node-title {
-  display: block;
-  font-weight: bold;
-  color: #e6f3ff;
+.sub-node { 
+  background: #171a21; 
+  width: 140px; 
+}
+.sub-node.highlight { 
+  border-color: #4b619d; 
+  background: rgba(75, 97, 157, 0.1); 
+}
+.topic-node { 
+  background: rgba(46, 75, 50, 0.2); 
+  border-color: #2e6b36; 
+  margin-bottom: 8px;
+  width: 140px;
+}
+.topic-node:last-child { margin-bottom: 0; }
+
+.node-title { display: block; font-weight: bold; color: #e6f3ff; font-size: 13px; }
+.node-path, .node-desc { display: block; font-size: 11px; color: #8f98a0; margin-top: 2px; }
+
+/* 桌面端树状布局 */
+.tree-root { position: relative; margin-bottom: 20px; }
+/* 根节点向下连线 */
+.root-connector {
+  width: 1px; height: 20px; background: #3c4551; margin-top: -20px; margin-bottom: 0;
 }
 
-.node-desc, .node-path {
-  display: block;
-  font-size: 11px;
-  color: #8f98a0;
-  margin-top: 2px;
-}
-
-.tree-container {
+.tree-level-1 {
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
+  gap: 20px;
+  padding-top: 20px; /* 留出横线位置 */
   position: relative;
-  padding-top: 15px;
-  gap: 10px;
 }
 
-/* 根节点到子节点的连线 */
-.tree-container::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 1px;
-  height: 15px;
-  background: #3c4551;
-}
-
-.tree-container::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 16%;
-  right: 16%;
-  height: 1px;
-  background: #3c4551;
-}
-
+/* 分支通用样式 */
 .tree-branch {
   display: flex;
   flex-direction: column;
   align-items: center;
   position: relative;
-  flex: 1;
+  padding: 0 10px;
 }
 
-.branch-line {
-  position: absolute;
-  top: -15px;
-  left: 50%;
-  width: 1px;
-  height: 15px;
-  background: #3c4551;
+/* 桌面端连线逻辑：使用伪元素绘制 */
+/* 向上垂直连线 */
+.tree-branch::before {
+  content: ''; position: absolute; top: -20px; left: 50%;
+  width: 1px; height: 20px; background: #3c4551;
 }
-
-.sub-node {
-  margin-bottom: 10px;
-  background: #171a21;
-  width: 90%;
+/* 顶部水平连线 */
+.tree-branch::after {
+  content: ''; position: absolute; top: -20px; height: 1px; background: #3c4551;
+  width: 100%; left: 0;
 }
+/* 第一个分支：线从中心向右 */
+.tree-branch:first-child::after { left: 50%; width: 50%; }
+/* 最后一个分支：线从左向中心 */
+.tree-branch:last-child::after { width: 50%; }
+/* 隐藏 HTML 中的辅助连线 div，仅在移动端使用或完全弃用 */
+.branch-connector { display: none; }
 
-.sub-node.highlight {
-  border-color: #4b619d;
-}
-
-.sub-tree {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
-  gap: 6px;
-}
-
-.sub-branch {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+/* 子级内容 (Cars System 下的列表) */
+.sub-level {
+  margin-top: 12px;
+  display: flex; flex-direction: column; gap: 6px;
+  width: 100%; align-items: center;
   position: relative;
-  width: 100%;
+}
+/* 连接 sub-level 到父节点的线 */
+.sub-level::before {
+  content: ''; position: absolute; top: -12px; left: 50%;
+  width: 1px; height: 12px; background: #3c4551;
 }
 
-.mini-node {
-  background: rgba(0,0,0,0.3);
-  border: 1px solid #3c4551;
-  border-radius: 3px;
-  padding: 4px 8px;
-  font-size: 11px;
-  color: #aebdc9;
-  width: 90%;
-  text-align: center;
+.sub-item {
+  font-size: 11px; color: #aebdc9; background: rgba(0,0,0,0.3);
+  padding: 4px 8px; border-radius: 3px; border: 1px solid #3c4551;
+  width: 100%; box-sizing: border-box; text-align: center;
+}
+.flow-item { display: flex; align-items: center; justify-content: center; gap: 4px; }
+.arrow { color: #66c0f4; font-size: 10px; }
+.leaf { color: #66c0f4; }
+
+.node-group-vertical { display: flex; flex-direction: column; align-items: center; width: 100%; }
+.node-group-vertical::before {
+  content: ''; position: absolute; top: 0; left: 50%;
+  width: 1px; height: 10px; background: #3c4551; display: none; /* Already handled by tree-branch */
 }
 
-.mini-node.leaf {
-  color: #66c0f4;
-}
+/* 移动端/窄屏 垂直布局重构 */
+@media (max-width: 768px) {
+  .site-structure-diagram { padding: 15px; overflow-x: hidden; }
+  .diagram-content { 
+    align-items: flex-start; 
+    min-width: auto; 
+  }
 
-.flow-group {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 4px;
-  width: 100%;
-}
+  /* Root */
+  .tree-root { margin-bottom: 15px; width: 100%; }
+  .root-box { width: 100%; box-sizing: border-box; text-align: left; display: flex; justify-content: space-between; align-items: center; }
+  .root-connector { display: none; }
 
-.arrow {
-  font-size: 10px;
-  color: #66c0f4;
-}
-
-.node-group {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  width: 100%;
-  align-items: center;
-}
-
-.topic-node {
-  background: rgba(46, 75, 50, 0.2);
-  border-color: #2e6b36;
-}
-
-/* 响应式调整 */
-@media (max-width: 600px) {
-  .tree-container {
+  /* Level 1 Container */
+  .tree-level-1 {
+    display: flex;
     flex-direction: column;
-    align-items: stretch;
+    padding-top: 0;
+    gap: 20px;
+    width: 100%;
+    position: relative;
+    /* 左侧大连线 */
+    border-left: 2px dashed #3c4551;
+    margin-left: 10px;
+    padding-left: 20px;
+    box-sizing: border-box;
   }
-  .tree-container::after { display: none; }
-  .tree-container::before { display: none; }
-  .branch-line { display: none; }
   
+  /* 清除桌面端连线 */
+  .tree-branch::before { display: none; }
+  .tree-branch::after { display: none; }
+
+  /* 移动端分支样式 */
   .tree-branch {
-    margin-bottom: 15px;
-    border-left: 2px solid #3c4551;
-    padding-left: 15px;
+    flex-direction: column;
     align-items: flex-start;
+    width: 100%;
+    padding: 0;
+    position: relative;
   }
   
-  .node-box, .sub-node, .mini-node {
-    width: auto;
+  /* 移动端水平连接线 */
+  .branch-connector {
+    display: block;
+    position: absolute;
+    top: 18px; /* 大约在节点中心高度 */
+    left: -22px; /* 连接到左侧大连线 */
+    width: 20px;
+    height: 1px;
+    background: #3c4551;
+  }
+
+  /* 节点样式调整 */
+  .node-box, .sub-node, .topic-node {
+    width: 100%;
     min-width: unset;
     text-align: left;
+    box-sizing: border-box;
   }
   
-  .flow-group {
-    justify-content: flex-start;
+  /* 子级列表调整 */
+  .sub-level {
+    margin-top: 10px;
+    padding-left: 15px;
+    border-left: 1px solid #3c4551;
+    margin-left: 10px;
+    width: calc(100% - 10px);
+    align-items: flex-start;
+    box-sizing: border-box;
   }
+  .sub-level::before { display: none; } /* 清除桌面端垂直线 */
+  
+  .sub-item {
+    text-align: left;
+    justify-content: flex-start;
+    background: rgba(255,255,255,0.03);
+  }
+  .flow-item { justify-content: flex-start; }
 }
 
 /* Learning 静态卡片展示 */
 .learning-grid { display: flex; gap: 12px; margin-top: 10px; }
 .learning-card { display: flex; flex-direction: column; justify-content: center; width: 33.333%; min-height: 90px; padding: 12px 14px; background: rgba(0,0,0,0.25); border: 1px solid #3c4551; color: #e6f3ff; cursor: default; border-radius: 8px; }
+
+/* 架构图描述样式 */
+.diagram-description {
+  margin-top: 20px;
+  background: rgba(0, 0, 0, 0.2);
+  padding: 15px;
+  border-radius: 6px;
+  border-left: 3px solid #66c0f4;
+  font-family: 'SourceHanSansSC', sans-serif;
+}
+
+.diagram-description p {
+  margin: 0 0 10px 0;
+  font-size: 14px;
+  color: #c7d5e0;
+}
+
+.desc-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 10px 0;
+}
+
+.desc-list li {
+  margin-bottom: 8px;
+  display: flex;
+  flex-direction: column;
+}
+
+.desc-label {
+  font-weight: bold;
+  color: #66c0f4;
+  font-size: 13px;
+  margin-bottom: 2px;
+}
+
+.desc-text {
+  font-size: 13px;
+  color: #8f98a0;
+  line-height: 1.5;
+}
+
+.desc-text em {
+  font-style: normal;
+  color: #e6f3ff;
+}
+
+.diagram-note {
+  font-size: 12px;
+  color: #67c1f5;
+  font-style: italic;
+  margin-top: 10px;
+  opacity: 0.8;
+}
 </style>

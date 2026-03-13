@@ -57,11 +57,12 @@ export default {
 }
 
 .page-myspace { 
-  padding-top: 20px;
+  padding: 20px;
   max-width: 1200px;
   margin: 0 auto;
   width: 100%;
   font-family: 'MotivaSans', sans-serif;
+  box-sizing: border-box;
 }
 .section-header h2 { color: #fff; font-weight: 400; letter-spacing: 2px; }
 .divider { height: 2px; background: #2a475e; margin: 10px 0 30px 0; }

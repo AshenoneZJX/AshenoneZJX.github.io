@@ -7,13 +7,41 @@
       <h3 class="username">AshenOne</h3>
       <div class="location">🇨🇳 Yunnan, China</div>
       <p class="bio">
-        Level 10 Developer.<br>
-        Vue.js Enthusiast.<br>
-        Steam Deck Owner.
+        Top-Tier Developer.<br>
+        Car Enthusiast – Honda Civic Owner.<br>
+        Photographer.<br>
       </p>
-      <div class="badge-row">
-          <span class="badge">10 Years</span>
-          <span class="badge">Contributor</span>
+      <div class="languages-section">
+        <h4 class="lang-title">Languages</h4>
+        <div class="lang-bar">
+          <span class="lang-segment vue"></span>
+          <span class="lang-segment css"></span>
+          <span class="lang-segment html"></span>
+          <span class="lang-segment js"></span>
+        </div>
+        <div class="lang-legend">
+          <div class="legend-item">
+            <span class="legend-dot vue"></span>
+            <span class="legend-text">Vue <span class="percent">57.1%</span></span>
+          </div>
+          <div class="legend-item">
+            <span class="legend-dot css"></span>
+            <span class="legend-text">CSS <span class="percent">17.2%</span></span>
+          </div>
+          <div class="legend-item">
+            <span class="legend-dot html"></span>
+            <span class="legend-text">HTML <span class="percent">14.3%</span></span>
+          </div>
+          <div class="legend-item">
+            <span class="legend-dot js"></span>
+            <span class="legend-text">JavaScript <span class="percent">11.4%</span></span>
+          </div>
+        </div>
+      </div>
+      <div class="social-links">
+        <a href="https://github.com/AshenoneZJX" target="_blank" rel="noopener noreferrer" class="social-link" title="GitHub">
+          <img src="@/assets/images/GitHub.svg" alt="GitHub" class="social-icon">
+        </a>
       </div>
     </div>
   </aside>
@@ -32,6 +60,7 @@
   padding: 15px;
   height: fit-content;
   font-family: 'RobotoMono', monospace;
+  border-radius: 6px;
 }
 
 .avatar-frame {
@@ -64,27 +93,105 @@
 }
 
 .bio {
-  font-size: 13px;
+  font-size: 12px;
   color: #c6d4df;
   line-height: 1.5;
   margin-bottom: 20px;
-  text-align: center;
+  text-align: left;
+  padding: 0 15px;
 }
 
-.badge-row {
+.languages-section {
+  margin-top: 20px;
+  text-align: left;
+  width: 100%;
+}
+
+.lang-title {
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 10px;
+  margin-top: 0;
+}
+
+.lang-bar {
   display: flex;
-  gap: 5px;
-  justify-content: center;
+  height: 10px;
+  border-radius: 5px;
+  overflow: hidden;
+  margin-bottom: 12px;
+  background-color: rgba(255, 255, 255, 0.1);
 }
 
-.badge {
-  background: rgba(102,192,244,0.16);
-  padding: 2px 8px;
+.lang-segment {
+  height: 100%;
+}
+
+.lang-segment.vue { width: 57.1%; background-color: #41b883; }
+.lang-segment.js { width: 11.4%; background-color: #f1e05a; }
+.lang-segment.html { width: 14.3%; background-color: #e34c26; }
+.lang-segment.css { width: 17.2%; background-color: #563d7c; }
+
+.lang-legend {
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: 16px;
+  row-gap: 8px;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
   font-size: 11px;
-  border-radius: 6px;
-  color: #fff;
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
-  box-shadow: inset 0 1px 0 rgba(255,255,255,0.06);
+}
+
+.legend-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.legend-dot.vue { background-color: #41b883; }
+.legend-dot.js { background-color: #f1e05a; }
+.legend-dot.html { background-color: #e34c26; }
+.legend-dot.css { background-color: #563d7c; }
+
+.legend-text {
+  color: #c9d1d9;
+  font-weight: 500;
+}
+
+.percent {
+  color: #8b949e;
+  margin-left: 4px;
+}
+
+.social-links {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+}
+
+.social-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.7;
+  transition: all 0.2s ease;
+}
+
+.social-link:hover {
+  opacity: 1;
+  transform: scale(1.1);
+}
+
+.social-icon {
+  width: 24px;
+  height: 24px;
+  display: block;
+  filter: invert(100%);
 }
 </style>

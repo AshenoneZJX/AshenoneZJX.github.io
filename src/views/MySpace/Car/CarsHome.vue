@@ -235,10 +235,11 @@ export default {
 
 <style scoped>
 .page-cars-home { 
-  padding-top: 20px;
+  padding: 20px;
   max-width: 1200px;
   margin: 0 auto;
   width: 100%;
+  box-sizing: border-box;
 }
 
 .dashboard-layout {
@@ -257,13 +258,14 @@ export default {
   background: transparent;
   border: none;
   color: #c7d5e0;
-  padding: 4px 8px;
+  padding: 4px 10px;
   border-radius: 6px;
   cursor: pointer;
   text-decoration: none;
   display: inline-flex;
   align-items: center;
   gap: 6px;
+  font-size: 14px;
 }
 .back-icon {
   width: 16px;
@@ -287,7 +289,7 @@ export default {
   flex-direction: column;
 }
 .charts-toolbar {
-  margin-bottom: 10px;
+  margin-bottom: 0;
   border-bottom: 1px solid #2a475e;
   padding-bottom: 10px;
   position: relative;
@@ -440,14 +442,16 @@ export default {
     grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
     gap: 20px;
     margin-top: 20px;
-    padding: 0 20px;
+    padding: 0;
     box-sizing: border-box;
   }
-  .card-image { height: 160px; }
-  .gallery-card.placeholder { height: 160px; }
+  .card-image { height: 106px; }
+  .gallery-card.placeholder { height: 106px; }
   
   .back-text { display: none; }
   .back-btn { padding: 4px; }
+  
+  .section-header { padding: 0; }
 }
 
 @media (max-width: 850px) {
@@ -499,6 +503,15 @@ export default {
   .sort-btn {
     width: 100%;
     max-width: 200px;
+  }
+  
+  .charts-toolbar {
+    border-bottom: none;
+  }
+  
+  .charts-area {
+    padding: 10px;
+    margin: 0;
   }
 }
 </style>

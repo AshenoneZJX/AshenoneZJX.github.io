@@ -14,9 +14,9 @@
         v-for="b in brands"
         :key="b.name"
         class="brand-card"
-        :style="cardStyle(b.name)"
         @click="$router.push({ name: 'BrandDetail', params: { name: b.name } })"
       >
+        <img v-if="getLogoUrl(b.name)" :src="getLogoUrl(b.name)" class="brand-logo" alt="" />
         <div class="brand-title">{{ b.name }}</div>
         <div class="brand-meta">车型数：{{ b.count }}</div>
       </div>
@@ -47,12 +47,8 @@ export default {
     }
   },
   methods: {
-    cardStyle (name) {
-      const url = brandLogos[name]
-      if (!url) return {}
-      return {
-        backgroundImage: `url(${url})`
-      }
+    getLogoUrl (name) {
+      return brandLogos[name] || ''
     }
   }
 }
@@ -60,15 +56,16 @@ export default {
 
 <style scoped>
 .page-brands { 
-  padding-top: 20px;
+  padding: 20px;
   max-width: 1200px;
   margin: 0 auto;
   width: 100%;
+  box-sizing: border-box;
 }
 .section-header { display: flex; justify-content: space-between; align-items: center; }
-.section-header h2 { color: #fff; font-weight: bold; letter-spacing: 2px; }
+.section-header h2 { color: #fff; font-weight: 400; letter-spacing: 2px; }
 .divider { height: 2px; background: #2a475e; margin: 10px 0 30px 0; }
-.back-btn { background: transparent; border: 1px solid #3c4551; color: #c7d5e0; padding: 6px 12px; cursor: pointer; border-radius: 6px; font-size: 16px; display: inline-flex; align-items: center; gap: 6px; }
+.back-btn { background: transparent; border: 1px solid #3c4551; color: #c7d5e0; padding: 4px 10px; cursor: pointer; border-radius: 6px; font-size: 14px; display: inline-flex; align-items: center; gap: 6px; }
 .back-icon {
   width: 16px;
   height: 16px;
@@ -83,11 +80,6 @@ export default {
 }
 .brand-card {
   background-color: #16202d;
-  background-repeat: no-repeat;
-  /* 品牌Logo定位：水平居中，垂直位于卡片65%位置，留出上方文字空间 */
-  background-position: center 20px;
-  /* 品牌Logo尺寸：占卡片宽度70%，保持比例缩放 */
-  background-size: 70%;
   padding: 14px;
   border-radius: 6px;
   box-shadow: 0 4px 15px rgba(0,0,0,0.4);
@@ -95,6 +87,17 @@ export default {
   transition: transform 0.2s;
   min-height: 120px;
   position: relative;
+  overflow: hidden;
+}
+.brand-logo {
+  position: absolute;
+  left: 50%;
+  top: 66.67%;
+  width: 70%;
+  transform: translate(-50%, -50%);
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.8;
 }
 .brand-card::before {
   content: "";
@@ -103,14 +106,35 @@ export default {
   background: rgba(0,0,0,0.35);
   border-radius: 6px;
   pointer-events: none;
+  z-index: 1;
 }
 /* 鼠标悬停时卡片上浮4px，产生轻微浮起效果 */
 .brand-card:hover { transform: translateY(-4px); }
-.brand-title { color: #fff; font-weight: 600; font-size: 18px; margin-bottom: 6px; position: relative; z-index: 1; }
-.brand-meta { color: #9cc9f5; font-size: 13px; position: relative; z-index: 1; }
+.brand-title { 
+  color: #fff; 
+  font-weight: 600; 
+  font-size: 18px; 
+  margin-bottom: 6px; 
+  position: relative; 
+  z-index: 2;
+  background: rgba(0, 0, 0, 0.6);
+  padding: 4px 8px;
+  border-radius: 4px;
+  width: fit-content;
+}
+.brand-meta { 
+  color: #9cc9f5; 
+  font-size: 13px; 
+  position: relative; 
+  z-index: 2;
+  background: rgba(0, 0, 0, 0.6);
+  padding: 2px 6px;
+  border-radius: 4px;
+  width: fit-content;
+}
 
 @media (max-width: 768px) {
   .back-text { display: none; }
-  .back-btn { padding: 6px; }
+  .back-btn { padding: 4px; }
 }
 </style>

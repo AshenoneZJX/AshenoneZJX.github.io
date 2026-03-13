@@ -37,18 +37,11 @@
         <!-- 左侧边栏：固定显示大纲 -->
         <aside class="left-sidebar" :class="{ 'mobile-open': showMobileToc }">
           <div class="sidebar-title">大纲</div>
-          <div class="toc-list">
-            <div class="toc-section" v-for="sec in toc" :key="sec.id">
-              <button class="toc-h2" @click="toggle(sec.id)">
-                <span v-if="sec.children && sec.children.length > 0" class="caret" :class="{ open: !sec.collapsed }"></span>
-                <span v-else class="caret-placeholder"></span>
-                <span class="toc-text">{{ sec.text }}</span>
-              </button>
-              <div class="toc-h3-list" v-show="!sec.collapsed && sec.children && sec.children.length > 0">
-                <button class="toc-h3" v-for="it in sec.children" :key="it.id" @click="scrollTo(it.id)">{{ it.text }}</button>
-              </div>
-            </div>
-          </div>
+          <ArticleCatalog 
+            ref="catalog" 
+            container-selector=".content" 
+            @toc-click="showMobileToc = false" 
+          />
         </aside>
 
         <!-- 中间内容区 -->
@@ -71,17 +64,20 @@
 <script>
 import records from '@/data/records/records.js'
 import MarkdownIt from 'markdown-it'
+import ArticleCatalog from '@/components/Shared/ArticleCatalog.vue'
 
 const MONTHS = ['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC']
 
 export default {
   name: 'RecordDetail',
+  components: {
+    ArticleCatalog
+  },
   data() {
     return {
       record: null,
       heading: '',
       displayHtml: '',
-      toc: [],
       showMobileToc: false
     }
   },
@@ -97,54 +93,6 @@ export default {
     yearOf(d) {
       const dt = new Date(d)
       return dt.getFullYear()
-    },
-    toggle(id) {
-      const sec = this.toc.find(s => s.id === id)
-      if (sec) {
-        if (!sec.children || sec.children.length === 0) {
-          this.scrollTo(sec.id)
-        } else {
-          sec.collapsed = !sec.collapsed
-        }
-      }
-    },
-    scrollTo(id) {
-      const el = document.getElementById(id)
-      if (el) {
-        // 关闭移动端目录
-        this.showMobileToc = false
-        el.scrollIntoView({ behavior: 'smooth', block: 'start' })
-      }
-    },
-    buildToc() {
-      const root = this.$refs.contentRef
-      if (!root) return
-      const used = {}
-      const makeId = (text) => {
-        const base = String(text).toLowerCase().replace(/\s+/g, '-').replace(/[^\w-]/g, '').slice(0, 64) || 'section'
-        let id = base
-        let i = 1
-        while (used[id]) { id = `${base}-${i++}` }
-        used[id] = true
-        return id
-      }
-      const nodes = Array.from(root.querySelectorAll('h2, h3'))
-      const toc = []
-      let current = null
-      nodes.forEach(n => {
-        const text = n.textContent.trim()
-        if (n.tagName.toLowerCase() === 'h2') {
-          const id = makeId(text)
-          n.id = id
-          current = { id, text, children: [], collapsed: true }
-          toc.push(current)
-        } else if (n.tagName.toLowerCase() === 'h3') {
-          const id = makeId(text)
-          n.id = id
-          if (current) current.children.push({ id, text })
-        }
-      })
-      this.toc = toc
     },
     prepareContent() {
       if (!this.record || !this.record.html) {
@@ -170,7 +118,7 @@ export default {
       this.displayHtml = tmp.innerHTML
       
       this.$nextTick(() => {
-        this.buildToc()
+        if (this.$refs.catalog) this.$refs.catalog.refresh()
       })
     }
   },
@@ -180,7 +128,7 @@ export default {
     this.prepareContent()
   },
   mounted() {
-    this.buildToc()
+    if (this.$refs.catalog) this.$refs.catalog.refresh()
   }
 }
 </script>
@@ -239,13 +187,13 @@ export default {
   justify-content: flex-start;
   padding: 20px 20px;
   min-height: 32px;
-  max-width: 1400px;
-  margin: 0 auto;
+  max-width: 100%;
+  margin: 0 auto 0;
   border-bottom: 1px solid #2a475e;
 }
 
 .header-placeholder {
-  width: 200px;
+  width: 20%;
   margin-right: 0;
   flex-shrink: 0;
 }
@@ -284,12 +232,12 @@ export default {
 /* 布局相关：三栏 Grid */
 .main-layout {
   display: grid;
-  grid-template-columns: 200px minmax(0, 1fr) 200px;
+  grid-template-columns: 20% minmax(0, 1fr) 20%;
   gap: 0;
   position: relative;
   align-items: start;
-  max-width: 1400px;
-  margin: 0 auto;
+  max-width: 100%;
+  margin: 0;
   padding: 0 20px;
 }
 
@@ -325,55 +273,8 @@ export default {
 }
 
 /* 目录样式 */
-.toc-list { display: flex; flex-direction: column; gap: 4px; }
-.toc-section { display: flex; flex-direction: column; }
-.toc-h2 {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  background: transparent;
-  border: none;
-  color: #c7d5e0;
-  padding: 6px 0;
-  cursor: pointer;
-  text-align: left;
-  font-size: 14px;
-  font-weight: 400;
-  letter-spacing: 0.3px;
-  width: 100%;
-  font-family: 'SourceHanSansSC', sans-serif;
-}
-.toc-h2:hover { color: #66c0f4; text-decoration: underline; }
-.caret {
-  width: 0; height: 0;
-  border-left: 5px solid #ffffff;
-  border-top: 4px solid transparent;
-  border-bottom: 4px solid transparent;
-  transform: rotate(-90deg);
-  transition: transform 0.15s;
-}
-.caret.open { transform: rotate(0deg); }
-.caret-placeholder {
-  width: 5px;
-  height: 10px;
-  display: inline-block;
-  margin-right: 0;
-}
-.toc-text { flex: 1; font-size: 13px; }
-.toc-h3-list { display: flex; flex-direction: column; margin: 4px 0 10px 16px; gap: 2px; }
-.toc-h3 {
-  background: transparent;
-  border: none;
-  color: #c7d5e0;
-  text-align: left;
-  padding: 4px 0;
-  cursor: pointer;
-  font-size: 12px;
-  font-weight: 400;
-  width: 100%;
-  font-family: 'SourceHanSansSC', sans-serif;
-}
-.toc-h3:hover { color: #66c0f4; text-decoration: underline; }
+/* 已封装到 ArticleCatalog 组件中 */
+
 
 /* 内容卡片区域：半透明黑色背景、内边距、边框和圆角，用于包裹正文内容 */
 .detail-body { 
@@ -411,10 +312,10 @@ export default {
 /* 响应式调整：当宽度不足以容纳三栏时（例如 < 1200px），隐藏右侧占位栏 */
 @media (max-width: 1200px) {
   .main-layout {
-    grid-template-columns: 200px minmax(0, 1fr);
+    grid-template-columns: 25% minmax(0, 1fr);
   }
   .header-placeholder {
-    width: 200px;
+    width: 25%;
   }
   .right-sidebar {
     display: none;
@@ -444,7 +345,7 @@ export default {
     top: 0;
     left: 0;
     bottom: 0;
-    width: 260px;
+    width: 26%;
     background: #1b2838;
     z-index: 2000;
     transform: translateX(-100%);
@@ -481,12 +382,15 @@ export default {
   /* Back button text hidden on mobile */
   .back-text { display: none; }
   .back-btn { padding: 6px; }
+  
+  /* Mobile Title Adjustment */
+  .top-title { font-size: 20px; letter-spacing: 0.5px; }
 
-  .content { font-size: 17px; line-height: 2.0; }
-  .content :deep(p) { font-size: 17px; line-height: 2.0; }
-  .content :deep(li) { font-size: 17px; line-height: 2.0; }
+  .content { font-size: 16px; line-height: 1.8; }
+  .content :deep(p) { font-size: 16px; line-height: 1.8; }
+  .content :deep(li) { font-size: 16px; line-height: 1.8; }
   .content :deep(h1) { font-size: 24px; margin: 16px 0 10px; }
-  .content :deep(h2) { font-size: 20px; margin: 14px 0 8px; }
+  .content :deep(h2) { font-size: 22px; margin: 14px 0 8px; }
   .content :deep(h3) { font-size: 18px; line-height: 1.2; font-weight: 700; }
   .content :deep(table) { display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; }
   .content :deep(th), .content :deep(td) { white-space: nowrap; }

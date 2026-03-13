@@ -40,18 +40,11 @@
         <aside class="left-sidebar" :class="{ 'mobile-open': showMobileToc }">
           <div class="sidebar-title">大纲</div>
           
-          <div class="toc-list">
-            <div class="toc-section" v-for="sec in toc" :key="sec.id">
-              <button class="toc-h2" @click="toggle(sec.id)">
-                <span v-if="sec.children && sec.children.length > 0" class="caret" :class="{ open: !sec.collapsed }"></span>
-                <span v-else class="caret-placeholder"></span>
-                <span class="toc-text">{{ sec.text }}</span>
-              </button>
-              <div class="toc-h3-list" v-show="!sec.collapsed && sec.children && sec.children.length > 0">
-                <button class="toc-h3" v-for="it in sec.children" :key="it.id" @click="scrollTo(it.id)">{{ it.text }}</button>
-              </div>
-            </div>
-          </div>
+          <ArticleCatalog 
+            ref="catalog" 
+            container-selector=".content" 
+            @toc-click="showMobileToc = false" 
+          />
         </aside>
 
         <!-- 中间内容区 -->
@@ -75,88 +68,22 @@
 <script>
 import carBasics from '@/data/car/carBasics.js'
 import MarkdownIt from 'markdown-it'
+import ArticleCatalog from '@/components/Shared/ArticleCatalog.vue'
 
 export default {
   name: 'CarBasicsDetail',
+  components: {
+    ArticleCatalog
+  },
   data() {
     return {
       article: null,
-      toc: [],
       displayHtml: '',
       heading: '',
       showMobileToc: false
     }
   },
   methods: {
-    toggle(id) {
-      const sec = this.toc.find(s => s.id === id)
-      if (sec) {
-        // 如果没有子标题，点击直接滚动到该位置
-        if (!sec.children || sec.children.length === 0) {
-          this.scrollTo(sec.id)
-        } else {
-          sec.collapsed = !sec.collapsed
-        }
-      }
-    },
-    // 大纲点击跳转正文对应标题位置功能：平滑滚动到指定 ID 的元素，自动减去顶部导航栏高度
-    scrollTo(id) {
-      const el = document.getElementById(id)
-      if (el) {
-        // 关闭移动端目录
-        this.showMobileToc = false
-        const headerOffset = 100 // 导航栏高度 80px + 20px 缓冲
-        const elementPosition = el.getBoundingClientRect().top
-        const offsetPosition = elementPosition + window.pageYOffset - headerOffset
-        window.scrollTo({
-          top: offsetPosition,
-          behavior: 'smooth'
-        })
-      }
-    },
-    handleAnchor() {
-      const text = this.$route && this.$route.query ? this.$route.query.anchor : ''
-      if (!text || !this.toc || this.toc.length === 0) return
-      const sec = this.toc.find(s => s.text === text)
-      if (sec) {
-        this.scrollTo(sec.id)
-        return
-      }
-      for (const s of this.toc) {
-        const h3 = (s.children || []).find(c => c.text === text)
-        if (h3) { this.scrollTo(h3.id); return }
-      }
-    },
-    buildToc() {
-      const root = this.$refs.contentRef
-      if (!root) return
-      const used = {}
-      const makeId = (text) => {
-        const base = String(text).toLowerCase().replace(/\s+/g, '-').replace(/[^\w-]/g, '').slice(0, 64) || 'section'
-        let id = base
-        let i = 1
-        while (used[id]) { id = `${base}-${i++}` }
-        used[id] = true
-        return id
-      }
-      const nodes = Array.from(root.querySelectorAll('h2, h3'))
-      const toc = []
-      let current = null
-      nodes.forEach(n => {
-        const text = n.textContent.trim()
-        if (n.tagName.toLowerCase() === 'h2') {
-          const id = makeId(text)
-          n.id = id
-          current = { id, text, children: [], collapsed: true }
-          toc.push(current)
-        } else if (n.tagName.toLowerCase() === 'h3') {
-          const id = makeId(text)
-          n.id = id
-          if (current) current.children.push({ id, text })
-        }
-      })
-      this.toc = toc
-    },
     loadMathJax() {
       return new Promise(resolve => {
         if (window.MathJax) { resolve(); return }
@@ -206,43 +133,21 @@ export default {
     this.article = carBasics.find(r => String(r.id) === id) || null
     this.prepareContent()
     this.$nextTick(async () => {
-      this.buildToc()
+      if (this.$refs.catalog) this.$refs.catalog.refresh()
       await this.loadMathJax()
       this.typesetMath()
-      this.handleAnchor()
     })
   },
   mounted() {
-    this.buildToc()
+    if (this.$refs.catalog) this.$refs.catalog.refresh()
     this.loadMathJax().then(() => {
       this.typesetMath()
-      this.handleAnchor()
     })
-  },
-  watch: {
-    '$route.query.anchor'() {
-      this.$nextTick(() => this.handleAnchor())
-    }
   }
 }
 </script>
 
 <style scoped>
-@font-face {
-  font-family: 'SourceHanSansSC';
-  src: url('~@/assets/fonts/SourceHanSansSC-Regular-2.otf') format('opentype');
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'RobotoMono';
-  src: url('~@/assets/fonts/RobotoMono-VariableFont_wght.ttf') format('truetype');
-  font-weight: 100 900;
-  font-display: swap;
-}
-
 @font-face {
   font-family: 'MotivaSans';
   src: url('~@/assets/fonts/MotivaSans-Regular_woff.ttf') format('truetype');
@@ -282,13 +187,13 @@ export default {
   justify-content: flex-start;
   padding: 20px 20px;
   min-height: 32px;
-  max-width: 1400px;
-  margin: -20px auto 0;
+  max-width: 100%;
+  margin: 0 auto 0;
   border-bottom: 1px solid #2a475e;
 }
 
 .header-placeholder {
-  width: 200px;
+  width: 20%;
   margin-right: 0;
   flex-shrink: 0;
 }
@@ -309,7 +214,7 @@ export default {
   font-weight: 400; 
   letter-spacing: 1.5px; 
   text-shadow: 0 2px 4px rgba(0,0,0,0.5);
-  font-family: 'SourceHanSansSC', sans-serif; 
+  font-family: 'MotivaSans', sans-serif;
 }
 
 .back-btn { background: transparent; border: none; color: #c7d5e0; padding: 6px 12px; cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; border-radius: 6px; margin-left: auto; }
@@ -323,11 +228,11 @@ export default {
 /* 下容器：布局相关：三栏 Grid */
 .main-layout {
   display: grid;
-  grid-template-columns: 200px minmax(0, 1fr) 200px;
+  grid-template-columns: 20% minmax(0, 1fr) 20%;
   gap: 0;
   position: relative;
   align-items: start;
-  max-width: 1400px;
+  max-width: 100%;
   margin: 0;
   padding: 0 20px;
 }
@@ -347,7 +252,6 @@ export default {
   margin-bottom: 12px;
   padding-bottom: 8px;
   letter-spacing: 0.5px;
-  font-family: 'SourceHanSansSC', sans-serif;
 }
 
 .right-sidebar {
@@ -364,55 +268,7 @@ export default {
 }
 
 /* 目录样式 */
-.toc-list { display: flex; flex-direction: column; gap: 4px; }
-.toc-section { display: flex; flex-direction: column; }
-.toc-h2 {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  background: transparent;
-  border: none;
-  color: #c7d5e0;
-  padding: 6px 0;
-  cursor: pointer;
-  text-align: left;
-  font-size: 14px;
-  font-weight: 400;
-  letter-spacing: 0.3px;
-  width: 100%;
-  font-family: 'SourceHanSansSC', sans-serif;
-}
-.toc-h2:hover { color: #66c0f4; text-decoration: underline; }
-.caret {
-  width: 0; height: 0;
-  border-left: 5px solid #ffffff;
-  border-top: 4px solid transparent;
-  border-bottom: 4px solid transparent;
-  transform: rotate(-90deg);
-  transition: transform 0.15s;
-}
-.caret.open { transform: rotate(0deg); }
-.caret-placeholder {
-  width: 5px;
-  height: 10px;
-  display: inline-block;
-  margin-right: 0;
-}
-.toc-text { flex: 1; font-size: 13px; }
-.toc-h3-list { display: flex; flex-direction: column; margin: 4px 0 10px 16px; gap: 2px; }
-.toc-h3 {
-  background: transparent;
-  border: none;
-  color: #c7d5e0;
-  text-align: left;
-  padding: 4px 0;
-  cursor: pointer;
-  font-size: 12px;
-  font-weight: 400;
-  width: 100%;
-  font-family: 'SourceHanSansSC', sans-serif;
-}
-.toc-h3:hover { color: #66c0f4; text-decoration: underline; }
+/* 已封装到 ArticleCatalog 组件中 */
 
 /* 内容主体 */
 .detail-body { 
@@ -422,23 +278,22 @@ export default {
   border-radius: 6px; 
 }
 
-.content { color: #cfe0ee; font-size: 16px; line-height: 1.9; overflow-wrap: anywhere; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; }
-.content :deep(p) { color: #cfe0ee; line-height: 1.9; margin: 12px 0; font-size: 16px; font-weight: 400; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; }
+.content { color: #cfe0ee; font-size: 16px; line-height: 1.9; overflow-wrap: anywhere; }
+.content :deep(p) { color: #cfe0ee; line-height: 1.9; margin: 12px 0; font-size: 16px; font-weight: 400; }
 .content :deep(h1) { color: #ffffff; font-size: 28px; line-height: 1.35; margin: 18px 0 12px; font-weight: 700; letter-spacing: 0.3px; }
 .content :deep(h2) { color: #66c0f4; font-size: 22px; line-height: 1.25; margin: 16px 0 10px; font-weight: 700; letter-spacing: 0.2px; }
 .content :deep(h2)::before { content: "¶"; display: inline-block; margin-right: 8px; color: #66c0f4; font-weight: 700; }
 .content :deep(h3) { color: #d9e9f7; font-size: 18px; line-height: 1.2; margin: 14px 0 8px; font-weight: 700; letter-spacing: 0.1px; }
-.content :deep(h4), .content :deep(h5), .content :deep(h6) { color: #cfe0ee; font-size: 14px; line-height: 1.9; margin: 12px 0; font-weight: 400; }
+.content :deep(h4) { color: #d9e9f7; font-size: 17px; line-height: 1.3; margin: 14px 0 8px; font-weight: 700; letter-spacing: 0.05px; }
+.content :deep(h5), .content :deep(h6) { color: #cfe0ee; font-size: 14px; line-height: 1.9; margin: 12px 0; font-weight: 400; }
 .content :deep(a) { color: #66c0f4; text-decoration: none; }
 .content :deep(a:hover) { text-decoration: underline; }
 .content :deep(ul), .content :deep(ol) { margin: 12px 0 12px 0; padding-left: 28px; }
-.content :deep(ol) { font-family: 'RobotoMono', Menlo, Monaco, Consolas, "Courier New", monospace; }
-.content :deep(li) { margin: 6px 0; line-height: 1.85; color: #cfe0ee; font-size: 16px; font-weight: 400; padding-left: 6px; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; }
-.content :deep(ul) :deep(li) { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; }
+.content :deep(li) { margin: 6px 0; line-height: 1.85; color: #cfe0ee; font-size: 16px; font-weight: 400; padding-left: 6px; }
 .content :deep(hr) { border: none; height: 1px; background: #2a475e; margin: 18px 0; }
-.content :deep(code) { background: #1b2838; border: 1px solid #38424e; padding: 2px 6px; border-radius: 4px; color: #e6f3ff; font-family: 'RobotoMono', Menlo, Monaco, Consolas, "Courier New", monospace; font-size: 13px; }
-.content :deep(pre) { background: #0f1b2a; border: 1px solid #38424e; border-radius: 6px; padding: 12px; overflow: auto; font-family: 'RobotoMono', Menlo, Monaco, Consolas, "Courier New", monospace; }
-.content :deep(pre code) { background: transparent; border: none; padding: 0; font-size: 13px; font-family: 'RobotoMono', Menlo, Monaco, Consolas, "Courier New", monospace; }
+.content :deep(code) { background: #1b2838; border: 1px solid #38424e; padding: 2px 6px; border-radius: 4px; color: #e6f3ff; font-size: 13px; }
+.content :deep(pre) { background: #0f1b2a; border: 1px solid #38424e; border-radius: 6px; padding: 12px; overflow: auto; }
+.content :deep(pre code) { background: transparent; border: none; padding: 0; font-size: 13px; }
 .content :deep(table) { width: 100%; border-collapse: collapse; border: 1px solid #38424e; margin: 14px 0; font-size: 14px; }
 .content :deep(th), .content :deep(td) { border: 1px solid #38424e; padding: 6px 8px; text-align: left; line-height: 2; vertical-align: top; }
 .content :deep(th) { background: #223447; color: #e6f3ff; font-weight: 600; }
@@ -453,10 +308,10 @@ export default {
 /* 响应式调整：当宽度不足以容纳三栏时（例如 < 1200px），隐藏右侧占位栏 */
 @media (max-width: 1200px) {
   .main-layout {
-    grid-template-columns: 200px minmax(0, 1fr);
+    grid-template-columns: 25% minmax(0, 1fr);
   }
   .header-placeholder {
-    width: 200px;
+    width: 25%;
   }
   .right-sidebar {
     display: none;
@@ -529,12 +384,15 @@ export default {
   .back-text { display: none; }
   .back-btn { padding: 6px; }
 
-  .content { font-size: 17px; line-height: 2.0; }
-  .content :deep(p) { font-size: 17px; line-height: 2.0; }
-  .content :deep(li) { font-size: 17px; line-height: 2.0; }
+  .top-title { font-size: 18px; }
+
+  .content { font-size: 14px; line-height: 1.8; }
+  .content :deep(p) { font-size: 14px; line-height: 1.8; }
+  .content :deep(li) { font-size: 14px; line-height: 1.8; }
   .content :deep(h1) { font-size: 24px; margin: 16px 0 10px; }
-  .content :deep(h2) { font-size: 20px; margin: 14px 0 8px; }
+  .content :deep(h2) { font-size: 22px; margin: 14px 0 8px; }
   .content :deep(h3) { font-size: 18px; line-height: 1.2; font-weight: 700; }
+  .content :deep(h4) { font-size: 16px; line-height: 1.3; font-weight: 700; margin: 12px 0 6px; }
   .content :deep(table) { display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; }
   .content :deep(th), .content :deep(td) { white-space: nowrap; }
   .content :deep(pre) { padding: 10px; }

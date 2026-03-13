@@ -327,12 +327,13 @@ export default {
 }
 
 .page-records { 
-  padding-top: 20px; 
+  padding: 20px; 
   font-family: "RobotoVar", "SourceHanSansSC", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans CJK SC", "Source Han Sans SC", sans-serif;
   max-width: 1200px;
   margin-left: auto;
   margin-right: auto;
   width: 100%;
+  box-sizing: border-box;
 }
 
 .section-header {
@@ -415,8 +416,8 @@ export default {
 @media (max-width: 768px) {
   .content-2col { flex-direction: column; }
   .col-left, .col-right { width: 100%; }
-  .record-list { padding: 0 10px; }
-  .section-header { padding: 0 10px; }
+  .record-list { padding: 0; }
+  .section-header { padding: 0 0 10px 0; margin-bottom: 24px; align-items: center; }
   .filter-toggle.mobile-only { display: inline-flex; }
   .filter-toggle.mobile-only {
     font-size: 14px;

@@ -69,7 +69,8 @@ export default {
   max-width: 1200px;
   margin: 0 auto;
   width: 100%;
-  padding-top: 20px;
+  padding: 20px;
+  box-sizing: border-box;
 }
 .section-header { display: flex; justify-content: space-between; align-items: center; }
 .section-header h2 { color: #fff; font-weight: 400; letter-spacing: 2px; }
@@ -116,7 +117,7 @@ export default {
 @media (max-width: 768px) {
   .back-text { display: none; }
   .back-btn { padding: 6px; }
-  .record-list { padding: 0 10px; }
-  .section-header { padding: 0 10px; }
+  .record-list { padding: 0; }
+  .section-header { padding: 0; }
 }
 </style>
