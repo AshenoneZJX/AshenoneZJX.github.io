@@ -67,17 +67,18 @@ export default {
 
 <style scoped>
 @font-face {
-  font-family: 'Motiva Sans';
-  src: url('~@/assets/fonts/MotivaSans-Regular_woff.ttf') format('truetype');
-  font-weight: 400;
+  font-family: 'Inter';
+  src: url('~@/assets/fonts/Inter-var.ttf') format('truetype');
+  /* 定义可变字体支持的粗细范围 */
+  font-weight: 100 900;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'msyhsb';
-  src: url('~@/assets/fonts/wryh/msyhsb.ttc') format('truetype');
-  font-weight: 400;
+  font-family: 'AlibabaPuHuiTi';
+  src: url('~@/assets/fonts/AlibabaPuHuiTi-3-65-Medium.woff2') format('woff2');
+  font-weight: 500;
   font-style: normal;
   font-display: swap;
 }
@@ -140,13 +141,13 @@ export default {
   border: none;
   color: #b8b6b4;
   font-size: 16px;
-  font-weight: bold;
+  font-weight: normal;
   text-transform: uppercase;
   padding: 10px 20px;
   cursor: pointer;
   transition: color 0.3s;
   outline: none;
-  font-family: 'Motiva Sans', 'msyhsb', sans-serif;
+  font-family: 'Inter', 'AlibabaPuHuiTi', sans-serif;
   letter-spacing: 1px;
 }
 
@@ -180,7 +181,7 @@ export default {
   padding: 12px 20px;
   text-align: left;
   cursor: pointer;
-  font-family: 'Motiva Sans', 'msyhsb', sans-serif;
+  font-family: 'Inter', 'AlibabaPuHuiTi', sans-serif;
   letter-spacing: 1px;
 }
 

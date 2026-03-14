@@ -6,6 +6,7 @@
 
 <script>
 import MarkdownIt from 'markdown-it'
+import markdownItMark from 'markdown-it-mark'
 
 export default {
   name: 'MarkdownViewer',
@@ -67,7 +68,7 @@ export default {
         html: true,
         linkify: true,
         breaks: false
-      })
+      }).use(markdownItMark)
 
       const sourceHtml = this.content ? md.render(this.content) : this.html
       const tmp = document.createElement('div')
@@ -100,6 +101,20 @@ export default {
 
 <style scoped>
 @font-face {
+  font-family: 'Inter';
+  src: url('~@/assets/fonts/Inter-var.ttf') format('truetype');
+  font-weight: 100 900;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'AlibabaPuHuiTi';
+  src: url('~@/assets/fonts/AlibabaPuHuiTi-3-55-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
   font-family: 'RobotoMono';
   src: url('~@/assets/fonts/RobotoMono-VariableFont_wght.ttf') format('truetype');
   font-weight: 100 900;
@@ -111,16 +126,16 @@ export default {
   font-size: 16px; 
   line-height: 1.9; 
   overflow-wrap: anywhere; 
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; 
+  font-family: 'Inter', 'AlibabaPuHuiTi', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; 
 }
 
 .content :deep(p) { 
   color: #cfe0ee; 
-  line-height: 1.9; 
+  line-height: 1.6; 
   margin: 12px 0; 
   font-size: 16px; 
   font-weight: 400; 
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; 
+  font-family: 'Inter', 'AlibabaPuHuiTi', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; 
 }
 
 .content :deep(h1) { 
@@ -204,11 +219,11 @@ export default {
   font-size: 16px; 
   font-weight: 400; 
   padding-left: 6px; 
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; 
+  font-family: 'Inter', 'AlibabaPuHuiTi', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; 
 }
 
 .content :deep(ul) :deep(li) { 
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; 
+  font-family: 'Inter', 'AlibabaPuHuiTi', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; 
 }
 
 .content :deep(hr) { 
@@ -340,5 +355,12 @@ export default {
   .content :deep(table) { display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; }
   .content :deep(th), .content :deep(td) { white-space: nowrap; }
   .content :deep(pre) { padding: 10px; }
+}
+
+.content :deep(mark) {
+  background-color: rgba(255, 215, 0, 0.2);
+  color: #ffd700;
+  padding: 0 2px;
+  border-radius: 2px;
 }
 </style>
