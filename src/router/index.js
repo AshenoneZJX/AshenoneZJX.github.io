@@ -60,7 +60,7 @@ const routes = [
 ]
 
 const router = new VueRouter({
-  mode: 'history', // 去掉 URL 中的 #
+  mode: 'hash', // history 模式会导致 github pages 刷新 404，所以使用 hash 模式
   routes
 })
 
