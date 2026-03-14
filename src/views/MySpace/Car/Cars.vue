@@ -403,6 +403,7 @@ export default {
 
 @media (max-width: 768px) {
   /* 移动端：隐藏桌面端横向筛选条，改用底部抽屉式筛选 */
+  .page-cars { padding: 10px; }
   .filters { display: none; }
   .filter-toggle.mobile-only { display: inline-flex; }
   .filters-panel.mobile-sheet {
@@ -446,7 +447,7 @@ export default {
   }
   .filters-panel .filter-group { flex-direction: column; align-items: stretch; gap: 6px; }
   .filters-panel .select { width: 100%; height: 32px; font-size: 13px; }
-  .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+  .gallery-grid { grid-template-columns: repeat(2, 1fr); gap: 6px; }
 }
 /* 分隔线：深色横线，用于区隔头部与内容区域 */
 .divider { height: 2px; background: #2a475e; margin: 10px 0 30px 0; }

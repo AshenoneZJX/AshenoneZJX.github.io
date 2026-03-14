@@ -2,14 +2,15 @@
 
 ![build](https://img.shields.io/badge/build-passing-brightgreen) ![license](https://img.shields.io/badge/license-MIT-blue)
 
-> 一个基于 Vue 2的 Steam 风格个人博客，追求极速、优雅与现代化内容展示。
+> 基于 Vue 3 + TypeScript + Vite 的 Steam 风格个人博客，追求极速、优雅与现代化内容展示。
 
 ## 1. 特性 (Features)
 
-- ⚡ 极速：基于 Vue 2 组合式 API 与 Vite，HMR 毫秒级热更新
+- ⚡ 极速：Vue 3 组合式 API + Vite 4，HMR 毫秒级热更新
 - 📦 零配置：内置 TypeScript、ESLint、Prettier、自动引入，克隆即可开发
 - 🎨 主题随心：CSS 变量 + UnoCSS 原子化，一键切换亮色 / 暗色 / Steam 经典绿
-- 🧩 组件即页面：Markdown 渲染、Shiki 代码高亮、Giscus 评论、标签云、归档、友链等全部封装为 `<Blog*>` 组件
+- 🧩 组件即页面：Markdown 渲染、Shiki 代码高亮、Giscus 评论、标签云、归档、友链、记录热力图、学习进度等全部封装为 `<Blog*>` 组件
+- 📱 多端适配：响应式布局，完美支持桌面与移动端
 - 📚 依赖精简：仅保留核心依赖，Tree-Shaking 后产物 < 150 kB（gzip）
 
 ## 2. 历史版本变化

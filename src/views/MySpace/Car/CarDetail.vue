@@ -45,17 +45,6 @@
         <div class="info-upper">
           <div class="section-header">
             <div class="title-with-logo">
-              <span
-                v-if="brandLogoFor && brandName"
-                class="brand-logo-link"
-                aria-label="品牌标识"
-              >
-                <img
-                  :class="['brand-logo', { 'brand-logo-xiaomi': brandName === '小米' }]"
-                  :src="brandLogoFor"
-                  :alt="car.brand || '品牌'"
-                />
-              </span>
               <h2>
                 <div
                   class="brand-hover-wrapper"
@@ -66,7 +55,15 @@
                   <router-link
                     class="brand-link"
                     :to="{ name: 'BrandDetail', params: { name: brandName } }"
-                  >{{ brandName }}</router-link>
+                  >
+                    <img
+                      v-if="brandLogoFor"
+                      :class="['brand-logo', { 'brand-logo-xiaomi': brandName === '小米' }]"
+                      :src="brandLogoFor"
+                      :alt="car.brand || '品牌'"
+                    />
+                    <span>{{ brandName }}</span>
+                  </router-link>
                   <div v-if="showBrandCard" class="brand-hover-card" role="tooltip" ref="hoverCard">
                     <img
                       v-if="brandLogoFor"
@@ -489,15 +486,15 @@ export default {
 }
 
 .page-car-detail {
-  padding-top: 0;
+  padding-top: 24px;
   font-family: 'SourceHanSansSC', sans-serif;
   height: 70vh; /* Reduced height to remove excess whitespace */
   min-height: 500px;
   box-sizing: border-box;
   padding-bottom: 24px; /* add spacing above footer */
-  max-width: 1500px;
-  margin: 0 auto;
-  width: 100%;
+  max-width: 1300px; /* 限制最大宽度，防止过宽 */
+  margin: 0 auto; /* 内容居中显示 */
+  width: 100%; /* 响应式宽度 */
 }
 
 .detail-layout {
@@ -654,7 +651,7 @@ export default {
   justify-content: space-between;
   align-items: center;
   border-bottom: 1px solid #38424e;
-  padding-bottom: 6px;
+  padding: 6px 0;
 }
 
 .title-with-logo {
@@ -664,6 +661,8 @@ export default {
 }
 
 .section-header h2 {
+  display: flex;
+  align-items: center;
   font-weight: 400;
   margin: 0;
   font-size: 24px;
@@ -673,15 +672,13 @@ export default {
 .brand-link {
   color: #66c0f4;
   text-decoration: none;
-}
-.brand-link:hover { text-decoration: underline; }
-.model-name { margin-left: 6px; font-family: 'MotivaSans', sans-serif; }
-
-.brand-logo-link {
-  display: inline-flex;
+  display: flex;
   align-items: center;
-  text-decoration: none;
+  gap: 8px;
 }
+.brand-link:hover { text-decoration: none; }
+.brand-link:hover span { text-decoration: underline; }
+.model-name { margin-left: 6px; font-family: 'MotivaSans', sans-serif; }
 
 .brand-logo {
   height: 24px;

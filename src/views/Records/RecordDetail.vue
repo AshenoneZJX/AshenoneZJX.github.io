@@ -47,7 +47,13 @@
         <!-- 中间内容区 -->
         <main class="center-content">
           <div class="detail-body">
-            <div ref="contentRef" class="content" v-html="displayHtml"></div>
+            <MarkdownViewer 
+              v-if="record"
+              :content="record.content" 
+              :html="record.html" 
+              @heading-extracted="h => heading = h" 
+              @content-updated="refreshCatalog"
+            />
           </div>
         </main>
 
@@ -63,21 +69,21 @@
 
 <script>
 import records from '@/data/records/records.js'
-import MarkdownIt from 'markdown-it'
 import ArticleCatalog from '@/components/Shared/ArticleCatalog.vue'
+import MarkdownViewer from '@/components/Shared/MarkdownViewer.vue'
 
 const MONTHS = ['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC']
 
 export default {
   name: 'RecordDetail',
   components: {
-    ArticleCatalog
+    ArticleCatalog,
+    MarkdownViewer
   },
   data() {
     return {
       record: null,
       heading: '',
-      displayHtml: '',
       showMobileToc: false
     }
   },
@@ -94,41 +100,16 @@ export default {
       const dt = new Date(d)
       return dt.getFullYear()
     },
-    prepareContent() {
-      if (!this.record || !this.record.html) {
-        this.heading = ''
-        this.displayHtml = ''
-        return
-      }
-      const md = new MarkdownIt({
-        html: true,
-        linkify: true,
-        breaks: false
-      })
-      const sourceHtml = this.record.content ? md.render(this.record.content) : this.record.html
-      const tmp = document.createElement('div')
-      tmp.innerHTML = sourceHtml
-      const h1 = tmp.querySelector('h1')
-      if (h1) {
-        this.heading = h1.textContent.trim()
-        h1.remove()
-      } else {
-        this.heading = ''
-      }
-      this.displayHtml = tmp.innerHTML
-      
-      this.$nextTick(() => {
-        if (this.$refs.catalog) this.$refs.catalog.refresh()
-      })
+    refreshCatalog() {
+      if (this.$refs.catalog) this.$refs.catalog.refresh()
     }
   },
   created() {
     const id = String(this.$route.params.id)
     this.record = records.find(r => String(r.id) === id) || null
-    this.prepareContent()
   },
   mounted() {
-    if (this.$refs.catalog) this.$refs.catalog.refresh()
+    this.refreshCatalog()
   }
 }
 </script>
@@ -279,34 +260,11 @@ export default {
 /* 内容卡片区域：半透明黑色背景、内边距、边框和圆角，用于包裹正文内容 */
 .detail-body { 
   background: rgba(0,0,0,0.2); /* 20% 透明度的黑色背景，使下方暗色主题更沉浸 */
-  padding: 40px;   /* 上下 40px、左右 40px 的内边距 */
+  padding: 10px 40px;   /* 上下 10px、左右 40px 的内边距 */
   border: none; /* 移除边框 */
   border-radius: 6px;        /* 6px 圆角，柔和视觉，避免生硬矩形 */
 }
 
-.content { color: #cfe0ee; font-size: 16px; line-height: 1.9; overflow-wrap: anywhere; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; }
-.content :deep(p) { color: #cfe0ee; line-height: 1.9; margin: 12px 0; font-size: 16px; font-weight: 400; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; }
-.content :deep(h1) { color: #ffffff; font-size: 28px; line-height: 1.35; margin: 18px 0 12px; font-weight: 700; letter-spacing: 0.3px; }
-.content :deep(h2) { color: #66c0f4; font-size: 22px; line-height: 1.25; margin: 16px 0 10px; font-weight: 700; letter-spacing: 0.2px; }
-.content :deep(h2)::before { content: "¶"; display: inline-block; margin-right: 8px; color: #66c0f4; font-weight: 700; }
-.content :deep(h3) { color: #d9e9f7; font-size: 18px; line-height: 1.2; margin: 14px 0 8px; font-weight: 700; letter-spacing: 0.1px; }
-.content :deep(h4), .content :deep(h5), .content :deep(h6) { color: #cfe0ee; font-size: 14px; line-height: 1.9; margin: 12px 0; font-weight: 400; }
-.content :deep(a) { color: #66c0f4; text-decoration: none; }
-.content :deep(a:hover) { text-decoration: underline; }
-.content :deep(ul), .content :deep(ol) { margin: 12px 0 12px 0; padding-left: 28px; }
-.content :deep(ol) { font-family: 'RobotoMono', Menlo, Monaco, Consolas, "Courier New", monospace; }
-.content :deep(li) { margin: 6px 0; line-height: 1.85; color: #cfe0ee; font-size: 16px; font-weight: 400; padding-left: 6px; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; }
-.content :deep(ul) :deep(li) { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; }
-.content :deep(hr) { border: none; height: 1px; background: #2a475e; margin: 18px 0; }
-.content :deep(code) { background: #1b2838; border: 1px solid #38424e; padding: 2px 6px; border-radius: 4px; color: #e6f3ff; font-family: 'RobotoMono', Menlo, Monaco, Consolas, "Courier New", monospace; font-size: 13px; }
-.content :deep(pre) { background: #0f1b2a; border: 1px solid #38424e; border-radius: 6px; padding: 12px; overflow: auto; font-family: 'RobotoMono', Menlo, Monaco, Consolas, "Courier New", monospace; }
-.content :deep(pre code) { background: transparent; border: none; padding: 0; font-size: 13px; font-family: 'RobotoMono', Menlo, Monaco, Consolas, "Courier New", monospace; }
-.content :deep(table) { width: 100%; border-collapse: collapse; border: 1px solid #38424e; margin: 14px 0; font-size: 14px; }
-.content :deep(th), .content :deep(td) { border: 1px solid #38424e; padding: 6px 8px; text-align: left; line-height: 2; vertical-align: top; }
-.content :deep(th) { background: #223447; color: #e6f3ff; font-weight: 600; }
-.content :deep(tr) { background: transparent; }
-.content :deep(blockquote) { border-left: 4px solid #66c0f4; background: rgba(27,40,56,0.5); padding: 10px 14px; margin: 12px 0; color: #cfe0ee; border-radius: 4px; }
-.content :deep(img) { max-width: 100%; height: auto; display: block; margin: 12px auto; border-radius: 6px; box-shadow: 0 4px 12px rgba(0,0,0,0.35); border: 1px solid #38424e; }
 .not-found { color: #8f98a0; }
 
 /* 响应式调整：当宽度不足以容纳三栏时（例如 < 1200px），隐藏右侧占位栏 */
@@ -385,15 +343,5 @@ export default {
   
   /* Mobile Title Adjustment */
   .top-title { font-size: 20px; letter-spacing: 0.5px; }
-
-  .content { font-size: 16px; line-height: 1.8; }
-  .content :deep(p) { font-size: 16px; line-height: 1.8; }
-  .content :deep(li) { font-size: 16px; line-height: 1.8; }
-  .content :deep(h1) { font-size: 24px; margin: 16px 0 10px; }
-  .content :deep(h2) { font-size: 22px; margin: 14px 0 8px; }
-  .content :deep(h3) { font-size: 18px; line-height: 1.2; font-weight: 700; }
-  .content :deep(table) { display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; }
-  .content :deep(th), .content :deep(td) { white-space: nowrap; }
-  .content :deep(pre) { padding: 10px; }
 }
 </style>

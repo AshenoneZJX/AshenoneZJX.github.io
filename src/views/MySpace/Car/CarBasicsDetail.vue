@@ -50,7 +50,13 @@
         <!-- 中间内容区 -->
         <main class="center-content">
           <div class="detail-body">
-            <div ref="contentRef" class="content" v-html="displayHtml"></div>
+            <MarkdownViewer 
+              v-if="article"
+              :content="article.content" 
+              :html="article.html" 
+              @heading-extracted="h => heading = h || (article ? article.title : '')" 
+              @content-updated="refreshCatalog"
+            />
           </div>
         </main>
 
@@ -67,82 +73,33 @@
 
 <script>
 import carBasics from '@/data/car/carBasics.js'
-import MarkdownIt from 'markdown-it'
 import ArticleCatalog from '@/components/Shared/ArticleCatalog.vue'
+import MarkdownViewer from '@/components/Shared/MarkdownViewer.vue'
 
 export default {
   name: 'CarBasicsDetail',
   components: {
-    ArticleCatalog
+    ArticleCatalog,
+    MarkdownViewer
   },
   data() {
     return {
       article: null,
-      displayHtml: '',
       heading: '',
       showMobileToc: false
     }
   },
   methods: {
-    loadMathJax() {
-      return new Promise(resolve => {
-        if (window.MathJax) { resolve(); return }
-        window.MathJax = {
-          tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] },
-          options: { skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'] },
-          startup: { typeset: false }
-        }
-        const s = document.createElement('script')
-        s.src = 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js'
-        s.async = true
-        s.onload = () => resolve()
-        document.head.appendChild(s)
-      })
-    },
-    typesetMath() {
-      if (!this.$refs.contentRef) return
-      if (window.MathJax && window.MathJax.typesetPromise) {
-        window.MathJax.typesetPromise([this.$refs.contentRef]).catch(() => {})
-      }
-    },
-    prepareContent() {
-      if (!this.article) {
-        this.heading = ''
-        this.displayHtml = ''
-        return
-      }
-      const md = new MarkdownIt({ html: true, linkify: true, breaks: false })
-      // 优先使用 content 重新渲染，以便统一处理 H1
-      const source = this.article.content || ''
-      const sourceHtml = source ? md.render(source) : (this.article.html || '')
-      
-      const tmp = document.createElement('div')
-      tmp.innerHTML = sourceHtml
-      const h1 = tmp.querySelector('h1')
-      if (h1) {
-        this.heading = h1.textContent.trim()
-        h1.remove()
-      } else {
-        this.heading = this.article.title || ''
-      }
-      this.displayHtml = tmp.innerHTML
+    refreshCatalog() {
+      if (this.$refs.catalog) this.$refs.catalog.refresh()
     }
   },
   created() {
     const id = String(this.$route.params.id)
     this.article = carBasics.find(r => String(r.id) === id) || null
-    this.prepareContent()
-    this.$nextTick(async () => {
-      if (this.$refs.catalog) this.$refs.catalog.refresh()
-      await this.loadMathJax()
-      this.typesetMath()
-    })
   },
   mounted() {
-    if (this.$refs.catalog) this.$refs.catalog.refresh()
-    this.loadMathJax().then(() => {
-      this.typesetMath()
-    })
+    this.refreshCatalog()
   }
 }
 </script>
@@ -273,35 +230,10 @@ export default {
 /* 内容主体 */
 .detail-body { 
   background: rgba(0,0,0,0.2); 
-  padding: 20px; 
+  padding: 10px 20px; 
   border: none; 
   border-radius: 6px; 
 }
-
-.content { color: #cfe0ee; font-size: 16px; line-height: 1.9; overflow-wrap: anywhere; }
-.content :deep(p) { color: #cfe0ee; line-height: 1.9; margin: 12px 0; font-size: 16px; font-weight: 400; }
-.content :deep(h1) { color: #ffffff; font-size: 28px; line-height: 1.35; margin: 18px 0 12px; font-weight: 700; letter-spacing: 0.3px; }
-.content :deep(h2) { color: #66c0f4; font-size: 22px; line-height: 1.25; margin: 16px 0 10px; font-weight: 700; letter-spacing: 0.2px; }
-.content :deep(h2)::before { content: "¶"; display: inline-block; margin-right: 8px; color: #66c0f4; font-weight: 700; }
-.content :deep(h3) { color: #d9e9f7; font-size: 18px; line-height: 1.2; margin: 14px 0 8px; font-weight: 700; letter-spacing: 0.1px; }
-.content :deep(h4) { color: #d9e9f7; font-size: 17px; line-height: 1.3; margin: 14px 0 8px; font-weight: 700; letter-spacing: 0.05px; }
-.content :deep(h5), .content :deep(h6) { color: #cfe0ee; font-size: 14px; line-height: 1.9; margin: 12px 0; font-weight: 400; }
-.content :deep(a) { color: #66c0f4; text-decoration: none; }
-.content :deep(a:hover) { text-decoration: underline; }
-.content :deep(ul), .content :deep(ol) { margin: 12px 0 12px 0; padding-left: 28px; }
-.content :deep(li) { margin: 6px 0; line-height: 1.85; color: #cfe0ee; font-size: 16px; font-weight: 400; padding-left: 6px; }
-.content :deep(hr) { border: none; height: 1px; background: #2a475e; margin: 18px 0; }
-.content :deep(code) { background: #1b2838; border: 1px solid #38424e; padding: 2px 6px; border-radius: 4px; color: #e6f3ff; font-size: 13px; }
-.content :deep(pre) { background: #0f1b2a; border: 1px solid #38424e; border-radius: 6px; padding: 12px; overflow: auto; }
-.content :deep(pre code) { background: transparent; border: none; padding: 0; font-size: 13px; }
-.content :deep(table) { width: 100%; border-collapse: collapse; border: 1px solid #38424e; margin: 14px 0; font-size: 14px; }
-.content :deep(th), .content :deep(td) { border: 1px solid #38424e; padding: 6px 8px; text-align: left; line-height: 2; vertical-align: top; }
-.content :deep(th) { background: #223447; color: #e6f3ff; font-weight: 600; }
-.content :deep(tr) { background: transparent; }
-.content :deep(blockquote) { border-left: 4px solid #66c0f4; background: rgba(27,40,56,0.5); padding: 10px 14px; margin: 12px 0; color: #cfe0ee; border-radius: 4px; }
-.content :deep(img) { max-width: 100%; height: auto; display: block; margin: 12px auto; border-radius: 6px; box-shadow: 0 4px 12px rgba(0,0,0,0.35); border: 1px solid #38424e; }
-.content :deep(.mjx-container) { color: #cfe0ee; background: rgba(27,40,56,0.5); border: 1px solid #38424e; border-radius: 6px; padding: 2px 6px; display: inline-block; margin: 0 2px; }
-.content :deep(.mjx-container[display="true"]) { display: block; padding: 10px 12px; margin: 10px 0; }
 
 .not-found { color: #8f98a0; }
 
@@ -385,16 +317,5 @@ export default {
   .back-btn { padding: 6px; }
 
   .top-title { font-size: 18px; }
-
-  .content { font-size: 14px; line-height: 1.8; }
-  .content :deep(p) { font-size: 14px; line-height: 1.8; }
-  .content :deep(li) { font-size: 14px; line-height: 1.8; }
-  .content :deep(h1) { font-size: 24px; margin: 16px 0 10px; }
-  .content :deep(h2) { font-size: 22px; margin: 14px 0 8px; }
-  .content :deep(h3) { font-size: 18px; line-height: 1.2; font-weight: 700; }
-  .content :deep(h4) { font-size: 16px; line-height: 1.3; font-weight: 700; margin: 12px 0 6px; }
-  .content :deep(table) { display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; }
-  .content :deep(th), .content :deep(td) { white-space: nowrap; }
-  .content :deep(pre) { padding: 10px; }
 }
 </style>

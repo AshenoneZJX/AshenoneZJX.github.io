@@ -277,11 +277,34 @@ export default {
 }
 .model-item { line-height: 1.8; margin: 4px 0; font-size: 15px; }
 .model-link {
-  color: #acb2b8;
+  color: #66c0f4;
   text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-weight: 500;
+  transition: all 0.2s ease;
 }
-.model-link:hover { color: #66c0f4; text-decoration: underline; }
-.model-link:focus { color: #66c0f4; text-decoration: underline; }
+.model-link::after {
+  content: "➜";
+  font-size: 10px;
+  opacity: 0.6;
+  transform: translateX(0);
+  transition: all 0.2s ease;
+}
+.model-link:hover { 
+  color: #fff; 
+  text-decoration: none; 
+  background: rgba(102, 192, 244, 0.1);
+  padding: 0 4px;
+  margin: 0 -4px;
+  border-radius: 4px;
+}
+.model-link:hover::after {
+  opacity: 1;
+  transform: translateX(2px);
+  color: #66c0f4;
+}
 .model-name {
   color: #acb2b8;
 }
