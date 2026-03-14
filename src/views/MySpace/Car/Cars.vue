@@ -448,6 +448,12 @@ export default {
   .filters-panel .filter-group { flex-direction: column; align-items: stretch; gap: 6px; }
   .filters-panel .select { width: 100%; height: 32px; font-size: 13px; }
   .gallery-grid { grid-template-columns: repeat(2, 1fr); gap: 6px; }
+  .card-image { height: 100px; }
+  .card-info { padding: 8px; }
+  .card-title { margin-bottom: 4px; gap: 4px; font-size: 13px; }
+  .brand-logo { width: 16px; height: 16px; }
+  .card-tags { flex-wrap: nowrap; overflow-x: hidden; gap: 4px; }
+  .card-tags .tag { padding: 1px 4px; font-size: 9px; white-space: nowrap; flex-shrink: 0; }
 }
 /* 分隔线：深色横线，用于区隔头部与内容区域 */
 .divider { height: 2px; background: #2a475e; margin: 10px 0 30px 0; }
