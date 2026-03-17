@@ -81,6 +81,23 @@ export default {
         h1.remove()
       }
       
+      // 处理图片排版
+      const blocks = tmp.querySelectorAll('p, div')
+      blocks.forEach(el => {
+        const imgs = el.querySelectorAll('img')
+        if (imgs.length > 0) {
+          // 检查是否只包含图片（忽略空白文本）
+          const clone = el.cloneNode(true)
+          clone.querySelectorAll('img').forEach(img => img.remove())
+          if (clone.textContent.trim() === '') {
+            el.classList.add('image-container')
+            if (imgs.length > 1) {
+              el.classList.add('multi-images')
+            }
+          }
+        }
+      })
+
       this.displayHtml = tmp.innerHTML
       this.$emit('heading-extracted', heading)
 
@@ -88,6 +105,64 @@ export default {
         this.$emit('content-updated')
         await this.loadMathJax()
         this.typesetMath()
+        this.adjustImageHeights()
+      })
+    },
+    adjustImageHeights() {
+      const containers = this.$refs.contentRef.querySelectorAll('.multi-images')
+      containers.forEach(container => {
+        const imgs = Array.from(container.querySelectorAll('img'))
+        if (imgs.length === 0) return
+
+        let loadedCount = 0
+        const total = imgs.length
+        
+        const applyHeight = () => {
+          imgs.forEach(img => {
+            img.style.height = ''
+            img.style.width = ''
+          })
+
+          window.requestAnimationFrame(() => {
+            const groups = new Map()
+            imgs.forEach(img => {
+              const rect = img.getBoundingClientRect()
+              const key = Math.round(rect.top)
+              if (!groups.has(key)) groups.set(key, [])
+              groups.get(key).push(img)
+            })
+
+            groups.forEach(rowImgs => {
+              if (rowImgs.length < 2) return
+              const totalHeight = rowImgs.reduce((sum, img) => sum + img.getBoundingClientRect().height, 0)
+              if (totalHeight <= 0) return
+              const avgHeight = totalHeight / rowImgs.length
+
+              rowImgs.forEach(img => {
+                img.style.maxHeight = ''
+                img.style.minHeight = ''
+                img.style.height = `${avgHeight}px`
+                img.style.width = 'auto'
+              })
+            })
+          })
+        }
+
+        imgs.forEach(img => {
+          if (img.complete) {
+            loadedCount++
+            if (loadedCount === total) applyHeight()
+          } else {
+            img.onload = () => {
+              loadedCount++
+              if (loadedCount === total) applyHeight()
+            }
+            img.onerror = () => {
+              loadedCount++
+              if (loadedCount === total) applyHeight()
+            }
+          }
+        })
       })
     }
   },
@@ -249,6 +324,7 @@ export default {
   border-radius: 6px; 
   padding: 12px; 
   overflow: auto; 
+  line-height: 1;
   font-family: 'RobotoMono', Menlo, Monaco, Consolas, "Courier New", monospace; 
 }
 
@@ -257,6 +333,7 @@ export default {
   border: none; 
   padding: 0; 
   font-size: 13px; 
+  line-height: 1;
   font-family: 'RobotoMono', Menlo, Monaco, Consolas, "Courier New", monospace; 
 }
 
@@ -318,13 +395,36 @@ export default {
 }
 
 .content :deep(img) { 
-  max-width: 100%; 
+  max-width: 100% !important; 
+  width: auto; 
   height: auto; 
   display: block; 
-  margin: 12px auto; 
+  margin: 0; 
   border-radius: 6px; 
   box-shadow: 0 4px 12px rgba(0,0,0,0.35); 
   border: 1px solid #38424e; 
+}
+
+.content :deep(.image-container) {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 2px;
+  margin: 10px auto;
+  width: fit-content;
+  max-width: 100%;
+  background: rgba(210, 210, 210, 0.12);
+  border: 1px solid rgba(56, 66, 78, 0.6);
+  border-radius: 8px;
+  padding: 4px;
+}
+
+.content :deep(.multi-images) :deep(img) {
+  margin: 0;
+  width: auto;
+  max-width: 100% !important;
+  border-radius: 4px;
 }
 
 .content :deep(.mjx-container) { 
@@ -348,6 +448,8 @@ export default {
   .content { font-size: 16px; line-height: 1.8; }
   .content :deep(p) { font-size: 16px; line-height: 1.8; }
   .content :deep(li) { font-size: 16px; line-height: 1.8; }
+  .content :deep(ul) { padding-left: 22px; }
+  .content :deep(ul) :deep(li) { padding-left: 1px; }
   .content :deep(h1) { font-size: 24px; margin: 16px 0 10px; }
   .content :deep(h2) { font-size: 22px; margin: 14px 0 8px; }
   .content :deep(h3) { font-size: 18px; line-height: 1.2; font-weight: 700; }

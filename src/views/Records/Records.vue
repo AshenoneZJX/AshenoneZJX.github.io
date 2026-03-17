@@ -469,7 +469,7 @@ export default {
 }
 .record-item:hover { 
   background: #1b2838; 
-  border-color: #66c0f4; 
+  border-color: rgba(255,255,255,0.18);
   box-shadow: 0 8px 20px rgba(0,0,0,0.35);
 }
 

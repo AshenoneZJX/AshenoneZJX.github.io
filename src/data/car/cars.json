@@ -4,13 +4,16 @@
     "title": "本田 思域",
     "brand": "本田",
     "brandLogo": "/brand-logos/honda.png",
-    "sizeClass": "紧凑型轿车",
+    "sizeClass": "紧凑型",
     "images": [
       "https://p3.dcarimg.com/img/motor-mis-img/43781dd9b828e478472d302877167f4e~2508x0.webp",
       "https://p3.dcarimg.com/img/motor-mis-img/DCP_26bed67c3999265b9697ed34bcc8630a~2508x0.webp",
       "https://p3.dcarimg.com/img/motor-mis-img/e0188b2adb8748363a304a30a66f40c6~2508x0.webp"
     ],
-    "energy": ["燃油", "混动"],
+    "energy": [
+      "燃油",
+      "混动"
+    ],
     "body": "轿车",
     "intro": "本田思域（Civic）是一款紧凑型轿车，以运动操控与高效节能著称。提供燃油与混合动力（e:HEV）版本，1.5T发动机与CVT/AT变速器，前麦弗逊/后多连杆悬架，配备Honda SENSING安全辅助与智能互联系统，兼顾日常通勤与驾控乐趣。",
     "specs": {
@@ -25,7 +28,7 @@
     "title": "特斯拉 Model 3",
     "brand": "特斯拉",
     "brandLogo": "/brand-logos/tesla.png",
-    "sizeClass": "中型轿车",
+    "sizeClass": "中型",
     "images": [
       "https://p3.dcarimg.com/img/motor-mis-img/DCP_22c73cf1b4ee18d4f1d338bf5a3c7e20~2508x0.webp",
       "https://p3.dcarimg.com/img/motor-mis-img/DCP_c8c6dd4cc8ea071c61ec83220663a241~2508x0.webp",
@@ -46,13 +49,16 @@
     "title": "本田 雅阁",
     "brand": "本田",
     "brandLogo": "/brand-logos/honda.png",
-    "sizeClass": "中型轿车",
+    "sizeClass": "中型",
     "images": [
       "https://p3.dcarimg.com/img/motor-mis-img/DCP_c7377bbfc31b691024e86003974cfd78~2508x0.webp",
       "https://p3.dcarimg.com/img/motor-mis-img/DCP_1edab071ad1c91933780882d9c04e834~2508x0.webp",
       "https://p3.dcarimg.com/img/motor-mis-img/DCP_6d0917828c27f8f9a7f13ddec72bc717~2508x0.webp"
     ],
-    "energy": ["燃油", "混动"],
+    "energy": [
+      "燃油",
+      "混动"
+    ],
     "body": "轿车",
     "intro": "本田雅阁（Accord）是一款中型轿车，以舒适空间与高效动力著称。提供燃油与混合动力（e:HEV）版本，1.5T/2.0L发动机匹配CVT/E-CVT变速器，前麦弗逊/后多连杆悬架，配备Honda SENSING安全辅助与Honda CONNECT智能互联，兼顾商务与家用需求。",
     "specs": {
@@ -67,7 +73,7 @@
     "title": "大众 速腾",
     "brand": "大众",
     "brandLogo": "/brand-logos/volkswagen.svg",
-    "sizeClass": "紧凑型轿车",
+    "sizeClass": "紧凑型",
     "images": [
       "https://p3.dcarimg.com/img/motor-mis-img/DCP_0092b5b95af205e296eb9fcd06376610~2508x0.webp",
       "https://p3.dcarimg.com/img/motor-mis-img/DCP_5330cc074fd22178111150408352b4c3~2508x0.webp",
@@ -88,7 +94,7 @@
     "title": "大众 迈腾",
     "brand": "大众",
     "brandLogo": "/brand-logos/volkswagen.svg",
-    "sizeClass": "中型轿车",
+    "sizeClass": "中型",
     "images": [
       "https://p3.dcarimg.com/img/motor-mis-img/DCP_a13b1bf7cc76b97e32e4f6e58b7cf234~2508x0.webp",
       "https://p3.dcarimg.com/img/motor-mis-img/DCP_08c237025a34549d1301c9bd67e39e25~2508x0.webp",
@@ -109,7 +115,7 @@
     "title": "长城 哈弗大狗",
     "brand": "长城",
     "brandLogo": "/brand-logos/Great_Wall_Motor.png",
-    "sizeClass": "紧凑型SUV",
+    "sizeClass": "紧凑型",
     "images": [
       "https://p3.dcarimg.com/img/motor-mis-img/DCP_379cc0453680553ee61d47a5ce8c13a2~2508x0.webp",
       "https://p3.dcarimg.com/img/motor-mis-img/DCP_89530b8cbf904a8a44f67995c993d87d~2508x0.webp",
@@ -130,7 +136,7 @@
     "title": "特斯拉 Model Y",
     "brand": "特斯拉",
     "brandLogo": "/brand-logos/tesla.png",
-    "sizeClass": "中型SUV",
+    "sizeClass": "中型",
     "images": [
       "https://p3.dcarimg.com/img/motor-mis-img/DCP_b3456e40d9b7e4f10c7247ecefbf6bcf~2508x0.webp",
       "https://p3.dcarimg.com/img/motor-mis-img/DCP_63fa19c3ff4d51d20708bdebf7a900d5~2508x0.webp",
@@ -151,7 +157,7 @@
     "title": "宝马 3系",
     "brand": "宝马",
     "brandLogo": "/brand-logos/bmw.png",
-    "sizeClass": "中型轿车",
+    "sizeClass": "中型",
     "images": [
       "https://p3.dcarimg.com/img/motor-mis-img/DCP_dc2fee0ead02dae0ceb4ace22724d562~2508x0.webp",
       "https://p3.dcarimg.com/img/motor-mis-img/DCP_7f3414f6ab44f03ad4ddc404ff3de45d~2508x0.webp",
@@ -166,13 +172,12 @@
       "transmission": "8AT",
       "chassis": "前双球节弹簧减振支柱、后多连杆，前置后驱/四驱"
     }
-  }
-  ,
+  },
   {
     "id": 9,
     "brand": "奥迪",
     "brandLogo": "/brand-logos/audi.png",
-    "sizeClass": "中型轿车",
+    "sizeClass": "中型",
     "title": "奥迪 A4L",
     "images": [
       "https://p3.dcarimg.com/img/motor-mis-img/DCP_dd46d6d9109405610ae49bd87825a3c8~2508x0.webp",
@@ -193,7 +198,7 @@
     "id": 10,
     "brand": "奔驰",
     "brandLogo": "/brand-logos/mercedes.png",
-    "sizeClass": "中型轿车",
+    "sizeClass": "中型",
     "title": "奔驰 C级L",
     "images": [
       "https://p3.dcarimg.com/img/motor-mis-img/DCP_9971a28555ae44a5c5d80ed2ad99a194~2508x0.webp",
@@ -214,7 +219,7 @@
     "id": 11,
     "brand": "奔驰",
     "brandLogo": "/brand-logos/mercedes.png",
-    "sizeClass": "中大型轿车",
+    "sizeClass": "中大型",
     "title": "奔驰 E级L",
     "images": [
       "https://p3.dcarimg.com/img/motor-mis-img/DCP_dfe9599b870c550cab688433d0f5f9a1~2508x0.webp"
@@ -233,7 +238,7 @@
     "id": 12,
     "brand": "奔驰",
     "brandLogo": "/brand-logos/mercedes.png",
-    "sizeClass": "大型轿车",
+    "sizeClass": "大型",
     "title": "奔驰 S级L",
     "images": [
       "https://p3.dcarimg.com/img/motor-mis-img/DCP_3e1b9733f3b9363d2a69d9c153b8cbca~2508x0.webp"
@@ -252,12 +257,15 @@
     "id": 13,
     "brand": "丰田",
     "brandLogo": null,
-    "sizeClass": "紧凑型SUV",
+    "sizeClass": "紧凑型",
     "title": "丰田 RAV4",
     "images": [
       "https://p3.dcarimg.com/img/motor-mis-img/DCP_13317b5eb90a17972ef0ba906d1ea6c3~2508x0.webp"
     ],
-    "energy": ["燃油", "混动"],
+    "energy": [
+      "燃油",
+      "混动"
+    ],
     "body": "SUV",
     "intro": "丰田RAV4是一款紧凑型SUV，以可靠耐用与均衡性能著称。提供燃油与混合动力（THS）版本，2.0L/2.5L发动机匹配CVT/E-CVT变速器，前麦弗逊/后多连杆悬架，配备Toyota Safety Sense安全辅助与TSS智能互联系统，兼顾城市通勤与轻度越野。",
     "specs": {
@@ -271,7 +279,7 @@
     "id": 14,
     "brand": "大众",
     "brandLogo": "/brand-logos/volkswagen.svg",
-    "sizeClass": "紧凑型SUV",
+    "sizeClass": "紧凑型",
     "title": "大众 途岳",
     "images": [
       "https://p3.dcarimg.com/img/motor-mis-img/1286901b6e05f036c8ba6a33a1bf7873~2508x0.webp",
@@ -292,7 +300,7 @@
     "id": 15,
     "brand": "小米",
     "brandLogo": null,
-    "sizeClass": "中大型轿车",
+    "sizeClass": "中大型",
     "title": "小米 SU7",
     "images": [
       "https://p3.dcarimg.com/img/motor-mis-img/522ee205908b4878408f5a03ebad1c55~2508x0.webp",
@@ -313,7 +321,7 @@
     "id": 16,
     "brand": "小米",
     "brandLogo": null,
-    "sizeClass": "中大型SUV",
+    "sizeClass": "中大型",
     "title": "小米 YU7",
     "images": [
       "https://p3.dcarimg.com/img/motor-mis-img/DCP_a78097465320cd00006fa3ed462326e5~2508x0.webp",
@@ -334,14 +342,17 @@
     "id": 17,
     "brand": "丰田",
     "brandLogo": null,
-    "sizeClass": "中型轿车",
+    "sizeClass": "中型",
     "title": "丰田 凯美瑞",
     "images": [
       "https://p3.dcarimg.com/img/motor-mis-img/DCP_7b6e61c0c0b518903985c992422a065d~2508x0.webp",
       "https://p3.dcarimg.com/img/motor-mis-img/DCP_185236f63930447ed24157810622ecc2~2508x0.webp",
       "https://p3.dcarimg.com/img/motor-mis-img/DCP_7c0f402aa8c69b11a62d31e0270de22a~2508x0.webp"
     ],
-    "energy": ["燃油", "混动"],
+    "energy": [
+      "燃油",
+      "混动"
+    ],
     "body": "轿车",
     "intro": "丰田凯美瑞（Camry）是一款中型轿车，以舒适可靠与高效节能著称。提供燃油与混合动力（THS）版本，2.0L/2.5L发动机匹配CVT/E-CVT变速器，前麦弗逊/后多连杆悬架，配备Toyota Safety Sense安全辅助与TSS智能互联，兼顾家用与商务出行。",
     "specs": {
@@ -355,7 +366,7 @@
     "id": 18,
     "brand": "大众",
     "brandLogo": "/brand-logos/volkswagen.svg",
-    "sizeClass": "中型轿车",
+    "sizeClass": "中型",
     "title": "大众 帕萨特",
     "images": [
       "https://p3.dcarimg.com/img/motor-mis-img/DCP_7160c3861fc58cc2e82aacbf09ff8107~2508x0.webp"
@@ -374,7 +385,7 @@
     "id": 19,
     "brand": "凯迪拉克",
     "brandLogo": null,
-    "sizeClass": "中型轿车",
+    "sizeClass": "中型",
     "title": "凯迪拉克 CT5",
     "images": [
       "https://p3.dcarimg.com/img/motor-mis-img/68950d58e0dd3eeb451678829079265e~2508x0.webp",
@@ -395,7 +406,7 @@
     "id": 20,
     "brand": "奥迪",
     "brandLogo": "/brand-logos/audi.png",
-    "sizeClass": "中大型轿车",
+    "sizeClass": "中大型",
     "title": "奥迪 A6L",
     "images": [
       "https://p3.dcarimg.com/img/motor-mis-img/DCP_6a37bf06e9a9b532ad052cccb49c5993~2508x0.webp"
@@ -414,7 +425,7 @@
     "id": 21,
     "brand": "大众",
     "brandLogo": "/brand-logos/volkswagen.svg",
-    "sizeClass": "紧凑型轿车",
+    "sizeClass": "紧凑型",
     "title": "大众 高尔夫",
     "images": [
       "https://p3.dcarimg.com/img/motor-mis-img/DCP_53516affa811cffe393d29e13784b827~2508x0.webp"
@@ -433,7 +444,7 @@
     "id": 22,
     "brand": "宝马",
     "brandLogo": "/brand-logos/bmw.png",
-    "sizeClass": "中大型轿车",
+    "sizeClass": "中大型",
     "title": "宝马 5系",
     "images": [
       "https://p3.dcarimg.com/img/motor-mis-img/DCP_7bf33a215bed978d401927d2b8ffde0e~2508x0.webp"
@@ -452,14 +463,17 @@
     "id": 23,
     "brand": "领克",
     "brandLogo": null,
-    "sizeClass": "紧凑型轿车",
+    "sizeClass": "紧凑型",
     "title": "领克 03",
     "images": [
       "https://p3.dcarimg.com/img/motor-mis-img/DCP_9ba605992e34fa8411d642f0ecf8e990~2508x0.webp",
       "https://p3.dcarimg.com/img/motor-mis-img/DCP_711ea2ab449b5f2240415995c749ec1b~2508x0.webp",
       "https://p3.dcarimg.com/img/motor-mis-img/DCP_76c0103afe2b9f17f34fde4bfaf2b10f~2508x0.webp"
     ],
-    "energy": ["燃油", "混动"],
+    "energy": [
+      "燃油",
+      "混动"
+    ],
     "body": "轿车",
     "intro": "领克03（Lynk & Co 03）是一款紧凑型轿车，以运动造型与智能科技著称。提供1.5T/2.0T燃油及1.5T混动版本，匹配7DCT/E-CVT变速器，前麦弗逊/后多连杆悬架，配备Lynk Co Pilot安全辅助与Lynk OS智能座舱，兼顾个性与家用需求。",
     "specs": {
@@ -473,7 +487,7 @@
     "id": 24,
     "brand": "奥迪",
     "brandLogo": "/brand-logos/audi.png",
-    "sizeClass": "紧凑型轿车",
+    "sizeClass": "紧凑型",
     "title": "奥迪 A3",
     "images": [
       "https://p3.dcarimg.com/img/motor-mis-img/DCP_ed5344e0d5eee0a43d90caed22d9d83c~2508x0.webp",
@@ -488,6 +502,28 @@
       "engine": "1.5T L4 涡轮增压 150PS，功率110kW，最大扭矩250N·m",
       "transmission": "7DCT",
       "chassis": "前麦弗逊、后多连杆，前置前驱"
+    }
+  },
+  {
+    "id": 25,
+    "brand": "小鹏",
+    "brandLogo": "/brand-logos/xpeng.svg",
+    "sizeClass": "中型",
+    "title": "小鹏 P7",
+    "images": [
+      "https://p3.dcarimg.com/img/motor-mis-img/DCP_ee0a173b6fb9a9f84ff3e086750194a6~2508x0.webp",
+      "https://p3.dcarimg.com/img/motor-mis-img/DCP_4d509e5d355f4fce8ac8c04ed08d3d7d~2508x0.webp",
+      "https://p3.dcarimg.com/img/motor-mis-img/DCP_8951373fdf42a2ecbbb917798e3d926f~2508x0.webp",
+      "https://p3.dcarimg.com/img/motor-mis-img/DCP_428d195ef5b6cad8a700e5d1fa1a14e8~2508x0.webp"
+    ],
+    "energy": "纯电",
+    "body": "轿车",
+    "intro": "小鹏P7是一款中型纯电轿车，以智能辅助驾驶与长续航著称。采用纯电平台与全铝车身，后置/双电机四驱，零百加速最快4.3s，CLTC续航最高706km，标配XPILOT智能驾驶与Xmart OS智能座舱，兼顾家用与科技体验。",
+    "specs": {
+      "dimensions": "长4880mm × 宽1896mm × 高1450mm，轴距2998mm，整备质量约1935kg",
+      "engine": "后置永磁同步电机 / 前后双电机（四驱） 267-430PS，功率196-316kW，最大扭矩390-655N·m",
+      "transmission": "单速固定齿比",
+      "chassis": "前双叉臂、后五连杆，后置后驱/双电机四驱"
     }
   }
 ]

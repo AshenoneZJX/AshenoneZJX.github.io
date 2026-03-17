@@ -142,8 +142,8 @@ export default {
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  padding: 20px 20px;
-  min-height: 32px;
+  padding: 12px 16px;
+  min-height: 28px;
   max-width: 100%;
   margin: 0 auto 0;
   border-bottom: 1px solid #2a475e;
@@ -165,8 +165,8 @@ export default {
 
 .top-title { 
   color: #ffffff; 
-  font-size: 30px; 
-  line-height: 1.4; 
+  font-size: 28px; 
+  line-height: 1.35; 
   margin: 0; 
   font-weight: 400; 
   letter-spacing: 1.5px; 
@@ -174,7 +174,7 @@ export default {
   font-family: 'MotivaSans', sans-serif;
 }
 
-.back-btn { background: transparent; border: none; color: #c7d5e0; padding: 6px 12px; cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; border-radius: 6px; margin-left: auto; }
+.back-btn { background: transparent; border: none; color: #c7d5e0; padding: 4px 10px; cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; border-radius: 6px; margin-left: auto; }
 .back-icon {
   width: 16px;
   height: 16px;
@@ -256,6 +256,10 @@ export default {
     display: block;
     padding: 0;
   }
+
+  .top-actions-row {
+    padding: 10px 12px;
+  }
   
   /* Show toggle button */
   .toc-toggle-btn {
@@ -274,13 +278,15 @@ export default {
     top: 0;
     left: 0;
     bottom: 0;
-    width: 260px;
+    width: fit-content;
+    max-width: 80vw;
     background: #1b2838;
     z-index: 2000;
     transform: translateX(-100%);
     transition: transform 0.3s ease;
     padding: 20px;
     overflow-y: auto;
+    overflow-x: auto;
     box-shadow: 2px 0 12px rgba(0,0,0,0.5);
     border-right: 1px solid #2a475e;
   }
@@ -300,6 +306,8 @@ export default {
     z-index: 1900;
     backdrop-filter: blur(2px);
   }
+
+  .sidebar-title { font-size: 19px; }
   
   /* Adjust detail body for full width */
   .detail-body { 
@@ -314,8 +322,8 @@ export default {
   
   /* Back button text hidden on mobile */
   .back-text { display: none; }
-  .back-btn { padding: 6px; }
+  .back-btn { padding: 4px; }
 
-  .top-title { font-size: 18px; }
+  .top-title { font-size: 16px; }
 }
 </style>

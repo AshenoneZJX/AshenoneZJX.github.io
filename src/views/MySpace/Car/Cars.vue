@@ -43,6 +43,50 @@
           </div>
           <button v-if="hasActiveFilters" class="chip clear-chip" @click="clearFilters">清除所有筛选</button>
         </div>
+        <div
+          class="search-wrap"
+          ref="searchWrap"
+          :class="{ expanded: searchExpanded }"
+          @mousedown.stop
+        >
+          <div class="search-panel">
+            <input
+              ref="searchInput"
+              class="search-input"
+              v-model.trim="searchText"
+              @focus="searchOpen = true"
+              @keydown.enter.prevent="applySearch"
+              @blur="onSearchBlur"
+              placeholder="搜索车型"
+              aria-label="搜索车型"
+            />
+            <button
+              v-if="appliedSearchText"
+              class="search-clear-btn"
+              @click="clearSearch"
+              aria-label="清除搜索"
+              type="button"
+            >×</button>
+            <div v-if="searchExpanded && searchOpen && searchText" class="search-suggest" role="listbox">
+              <button
+                v-for="name in searchSuggestions"
+                :key="name"
+                class="suggest-item"
+                type="button"
+                @mousedown.prevent.stop="chooseSuggestion(name)"
+              >{{ name }}</button>
+              <div v-if="!searchSuggestions.length" class="suggest-empty">无匹配车型</div>
+            </div>
+          </div>
+          <button class="search-icon-btn" @click="onSearchIconClick" aria-label="搜索">
+            <svg class="search-icon" viewBox="0 0 24 24" aria-hidden="true">
+              <path
+                fill="currentColor"
+                d="M10.5 3a7.5 7.5 0 0 1 5.93 12.1l3.24 3.24a1 1 0 1 1-1.42 1.42l-3.24-3.24A7.5 7.5 0 1 1 10.5 3Zm0 2a5.5 5.5 0 1 0 0 11a5.5 5.5 0 0 0 0-11Z"
+              />
+            </svg>
+          </button>
+        </div>
       </div>
       <button class="back-btn" @click="$router.push('/mySpace/cars-home')">
         <img src="@/assets/images/fanhui.svg" class="back-icon" alt="返回" />
@@ -114,6 +158,7 @@
         </div>
       </router-link>
     </div>
+    <div class="total-count">共-{{ totalCarCount }}-条记录</div>
     <div class="pagination" v-if="totalPages > 1">
       <button class="page-btn" :disabled="page === 1" @click="goPage(page - 1)" aria-label="上一页">‹</button>
       <button
@@ -144,10 +189,17 @@ export default {
       cars: [],
       page: 1,
       pageSize: 12,
-      filterOpen: false
+      filterOpen: false,
+      searchText: '',
+      appliedSearchText: '',
+      searchOpen: false,
+      searchExpanded: false
     }
   },
   computed: {
+    totalCarCount() {
+      return Array.isArray(this.cars) ? this.cars.length : 0
+    },
     hasActiveFilters() {
       return Boolean(this.selectedEnergy || this.selectedBody || this.selectedBrand || this.selectedSizeClass)
     },
@@ -159,7 +211,7 @@ export default {
       const set = new Set(this.cars.map(c => c.sizeClass).filter(Boolean))
       return Array.from(set)
     },
-    filteredCars() {
+    filteredCarsBase() {
       return this.cars.filter(c => {
         const selected = this.selectedEnergies
         const carEnergy = Array.isArray(c.energy) ? c.energy : [c.energy]
@@ -170,6 +222,9 @@ export default {
         return energyOk && bodyOk && brandOk && sizeOk
       })
     },
+    filteredCars() {
+      return this.filteredCarsBase.filter(c => this.matchBySearch(c && c.title, this.appliedSearchText))
+    },
     totalPages() {
       const len = this.filteredCars.length
       return Math.max(1, Math.ceil(len / this.pageSize))
@@ -177,9 +232,29 @@ export default {
     paginatedCars() {
       const start = (this.page - 1) * this.pageSize
       return this.filteredCars.slice(start, start + this.pageSize)
+    },
+    searchSuggestions() {
+      const list = this.filteredCarsBase
+        .filter(c => this.matchBySearch(c && c.title, this.searchText))
+        .map(c => c.title)
+        .filter(Boolean)
+      const set = new Set(list)
+      return Array.from(set).slice(0, 30)
     }
   },
   methods: {
+    normalizeText(s) {
+      return String(s || '').toLowerCase().replace(/\s+/g, '')
+    },
+    matchBySearch(title, query) {
+      const t = this.normalizeText(title)
+      const q = this.normalizeText(query)
+      if (!q) return true
+      if (!t) return false
+      if (t.includes(q)) return true
+      const chars = Array.from(new Set(Array.from(q))).filter(ch => ch && ch.trim())
+      return chars.every(ch => t.includes(ch))
+    },
     coverBg(car) {
       const imgs = Array.isArray(car.images) ? car.images : []
       const url = imgs.length ? imgs[0] : ''
@@ -200,6 +275,50 @@ export default {
     },
     closeFilters() {
       this.filterOpen = false
+    },
+    onSearchBlur() {
+      window.setTimeout(() => {
+        this.searchOpen = false
+      }, 120)
+    },
+    onSearchIconClick() {
+      if (!this.searchExpanded) {
+        this.openSearch()
+        return
+      }
+      this.applySearch()
+    },
+    openSearch() {
+      this.searchExpanded = true
+      this.searchOpen = true
+      this.$nextTick(() => {
+        const el = this.$refs.searchInput
+        if (el && typeof el.focus === 'function') el.focus()
+      })
+    },
+    closeSearch() {
+      this.searchOpen = false
+      this.searchExpanded = false
+    },
+    onDocumentPointerDown(e) {
+      if (!this.searchExpanded) return
+      const wrap = this.$refs.searchWrap
+      if (wrap && wrap.contains && wrap.contains(e.target)) return
+      this.closeSearch()
+    },
+    chooseSuggestion(name) {
+      this.searchText = name
+      this.searchOpen = false
+    },
+    applySearch() {
+      this.appliedSearchText = this.searchText || ''
+      this.page = 1
+      this.searchOpen = false
+    },
+    clearSearch() {
+      this.searchText = ''
+      this.appliedSearchText = ''
+      this.page = 1
     },
     toggleEnergy(opt) {
       if (this.selectedEnergies.includes(opt)) {
@@ -236,6 +355,12 @@ export default {
       if (n > this.totalPages) n = this.totalPages
       this.page = n
     }
+  },
+  mounted() {
+    document.addEventListener('mousedown', this.onDocumentPointerDown)
+  },
+  beforeDestroy() {
+    document.removeEventListener('mousedown', this.onDocumentPointerDown)
   },
   watch: {
     selectedEnergies() { this.page = 1 },
@@ -393,6 +518,121 @@ export default {
 
 .mobile-only { display: none; }
 .filters-panel { display: none; }
+.search-wrap {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  position: relative;
+}
+.search-panel {
+  position: relative;
+  width: 0;
+  opacity: 0;
+  pointer-events: none;
+  overflow: hidden;
+  transition: width 0.2s ease, opacity 0.2s ease;
+}
+.search-wrap.expanded .search-panel {
+  width: 200px;
+  opacity: 1;
+  pointer-events: auto;
+}
+.search-input {
+  background: transparent;
+  border: 1px solid #3c4551;
+  color: #c7d5e0;
+  padding: 0 34px 0 12px;
+  font-size: 12px;
+  border-radius: 12px;
+  height: 28px;
+  line-height: 28px;
+  width: 100%;
+  box-sizing: border-box;
+}
+.search-input:focus,
+.search-input:focus-visible {
+  outline: none;
+  border-color: #66c0f4;
+}
+.search-input:hover { border-color: #66c0f4; }
+.search-icon-btn {
+  height: 28px;
+  width: 28px;
+  padding: 0;
+  border-radius: 999px;
+  border: 1px solid rgba(102,192,244,0.55);
+  background: rgba(102,192,244,0.22);
+  color: #e6f3ff;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.search-icon-btn:hover {
+  background: rgba(102,192,244,0.32);
+  border-color: rgba(102,192,244,0.75);
+}
+.search-icon {
+  width: 16px;
+  height: 16px;
+  display: block;
+}
+.search-clear-btn {
+  position: absolute;
+  right: 6px;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 22px;
+  width: 22px;
+  padding: 0;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.08);
+  background: rgba(255,255,255,0.06);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  color: #c7d5e0;
+  cursor: pointer;
+  font-size: 14px;
+  line-height: 20px;
+}
+.search-clear-btn:hover {
+  background: rgba(102,192,244,0.12);
+  color: #e6f3ff;
+  border-color: rgba(102,192,244,0.6);
+}
+.search-suggest {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  width: 100%;
+  min-width: 0;
+  max-height: 320px;
+  overflow: auto;
+  background: #0f1a24;
+  border: 1px solid #38424e;
+  border-radius: 8px;
+  box-shadow: 0 10px 26px rgba(0,0,0,0.5);
+  padding: 6px;
+  z-index: 10;
+}
+.suggest-item {
+  width: 100%;
+  text-align: left;
+  background: transparent;
+  border: none;
+  color: #c7d5e0;
+  padding: 8px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 12px;
+  line-height: 1.2;
+}
+.suggest-item:hover { background: rgba(102,192,244,0.12); color: #e6f3ff; }
+.suggest-empty {
+  color: #8f98a0;
+  font-size: 12px;
+  padding: 10px;
+}
 
 /* Grid 布局核心 */
 .gallery-grid {
@@ -404,8 +644,16 @@ export default {
 @media (max-width: 768px) {
   /* 移动端：隐藏桌面端横向筛选条，改用底部抽屉式筛选 */
   .page-cars { padding: 10px; }
+  .header-left { flex-wrap: wrap; row-gap: 10px; }
+  .header-left h2 { order: 1; }
+  .filter-toggle.mobile-only { order: 2; }
+  .search-wrap { order: 3; }
+  .filters { order: 4; }
   .filters { display: none; }
   .filter-toggle.mobile-only { display: inline-flex; }
+  .search-wrap { flex: 0 0 auto; }
+  .search-wrap.expanded .search-panel { width: clamp(120px, 45vw, 180px); }
+  .search-suggest { width: 100%; }
   .filters-panel.mobile-sheet {
     position: fixed;
     top: 0;
@@ -415,7 +663,7 @@ export default {
     max-width: 360px;
     padding: 12px 14px;
     background: #0f1a24;
-    box-shadow: 10px 0 24px rgba(0,0,0,0.45);
+    box-shadow: none;
     transform: translateX(-100%);
     transition: transform 0.25s ease;
     z-index: 1001;
@@ -492,6 +740,7 @@ export default {
 .card-tags .tag-energy { background: #1a4d7a; color: #ffffff; font-weight: 600; }
 .card-tags .tag-body { background: #2e6b36; color: #ffffff; font-weight: 600; }
 .card-tags .tag-size { background: #3a3f45; color: #ffffff; font-weight: 600; }
+.total-count { margin-top: 26px; text-align: center; color: #8f98a0; font-size: 12px; letter-spacing: 0.5px; }
 .pagination { display: flex; align-items: center; justify-content: center; gap: 8px; margin-top: 32px; }
 .page-btn { background: none; border: none; color: #c7d5e0; padding: 6px 10px; cursor: pointer; border-radius: 4px; font-size: 12px; }
 .page-btn:hover { color: #fff; }

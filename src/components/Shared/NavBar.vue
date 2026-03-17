@@ -1,6 +1,6 @@
 <template>
   <div>
-    <nav class="steam-navbar">
+    <nav class="steam-navbar" :class="{ compact: isCompact }">
       <div class="nav-container">
         <div class="logo" @click="goHome">
           ASHENONE's Blog
@@ -12,7 +12,12 @@
           :aria-expanded="isOpen"
           aria-controls="navbar-mobile-menu"
         >
-          菜单
+          <svg class="menu-icon" viewBox="0 0 24 24" aria-hidden="true">
+            <path
+              fill="currentColor"
+              d="M4 6.5a1 1 0 0 1 1-1h14a1 1 0 1 1 0 2H5a1 1 0 0 1-1-1Zm0 5.5a1 1 0 0 1 1-1h14a1 1 0 1 1 0 2H5a1 1 0 0 1-1-1Zm1 4.5a1 1 0 0 0 0 2h14a1 1 0 1 0 0-2H5Z"
+            />
+          </svg>
         </button>
         <div class="nav-links">
           <router-link to="/" exact tag="button">主页</router-link>
@@ -25,7 +30,7 @@
     <div
       id="navbar-mobile-menu"
       class="mobile-menu"
-      :class="{ active: isOpen }"
+      :class="{ active: isOpen, compact: isCompact }"
       @click.stop
     >
       <router-link @click.native="closeMenu" to="/" exact tag="button">主页</router-link>
@@ -33,7 +38,7 @@
       <router-link @click.native="closeMenu" to="/records" tag="button">记录</router-link>
       <router-link @click.native="closeMenu" to="/learning" tag="button">Learning</router-link>
     </div>
-    <div v-if="isOpen" class="menu-mask" @click="closeMenu"></div>
+    <div v-if="isOpen" class="menu-mask" :class="{ compact: isCompact }" @click="closeMenu"></div>
   </div>
 </template>
 
@@ -42,7 +47,8 @@ export default {
   name: 'NavBar',
   data() {
     return {
-      isOpen: false
+      isOpen: false,
+      isCompact: false
     }
   },
   watch: {
@@ -50,7 +56,17 @@ export default {
       this.isOpen = false
     }
   },
+  mounted() {
+    window.addEventListener('scroll', this.onScroll, { passive: true })
+    this.onScroll()
+  },
+  beforeDestroy() {
+    window.removeEventListener('scroll', this.onScroll)
+  },
   methods: {
+    onScroll() {
+      this.isCompact = window.scrollY > 10
+    },
     toggleMenu() {
       this.isOpen = !this.isOpen
     },
@@ -93,11 +109,13 @@ export default {
   -webkit-backdrop-filter: blur(6px);
   backdrop-filter: blur(6px);
   z-index: 1000;
-  box-shadow: 0 0 10px rgba(0,0,0,0.5);
+  box-shadow: none;
   display: flex;
   justify-content: center;
   align-items: center;
+  transition: height 0.2s ease;
 }
+.steam-navbar.compact { height: 30px; }
 
 .nav-container {
   width: 100%;
@@ -116,7 +134,9 @@ export default {
   display: flex;
   align-items: center;
   cursor: pointer;
+  transition: font-size 0.2s ease;
 }
+.steam-navbar.compact .logo { font-size: 14px; }
 
 .menu-toggle {
   display: none;
@@ -129,7 +149,14 @@ export default {
   padding: 8px 14px;
   cursor: pointer;
   border-radius: 4px;
+  transition: padding 0.2s ease, font-size 0.2s ease;
+  line-height: 1;
+  align-items: center;
+  justify-content: center;
 }
+.steam-navbar.compact .menu-toggle { padding: 2px 8px; font-size: 11px; }
+.menu-icon { width: 18px; height: 18px; display: block; }
+.steam-navbar.compact .menu-icon { width: 14px; height: 14px; }
 
 .menu-toggle:hover {
   color: #ffffff;
@@ -149,6 +176,10 @@ export default {
   outline: none;
   font-family: 'Inter', 'AlibabaPuHuiTi', sans-serif;
   letter-spacing: 1px;
+}
+.steam-navbar.compact .nav-links button {
+  font-size: 12px;
+  padding: 4px 10px;
 }
 
 .nav-links button:hover {
@@ -170,6 +201,7 @@ export default {
   padding: 20px 0;
   z-index: 999;
 }
+.mobile-menu.compact { top: 30px; }
 
 .mobile-menu button {
   background: transparent;
@@ -201,6 +233,7 @@ export default {
   backdrop-filter: blur(2px);
   display: none;
 }
+.menu-mask.compact { top: 30px; }
 
 @media (max-width: 768px) {
   .nav-container {
@@ -211,7 +244,7 @@ export default {
     display: none;
   }
   .menu-toggle {
-    display: block;
+    display: inline-flex;
   }
   .mobile-menu {
     display: flex;

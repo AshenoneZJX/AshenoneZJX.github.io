@@ -93,6 +93,11 @@ body {
   overscroll-behavior-y: none; /* 阻止向上回弹出现空白 */
 }
 
+button {
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
 /* 页面通用容器，用于限制宽度 */
 .container {
   width: 100%;

@@ -91,9 +91,15 @@ export default {
   display: flex;
   background: rgba(0, 0, 0, 0.2);
   padding: 15px;
-  transition: background 0.2s;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  transition: background 0.2s, border-color 0.2s, box-shadow 0.2s;
 }
-.record-item:hover { background: #222b35; }
+.record-item:hover { 
+  background: #222b35;
+  border-color: rgba(255,255,255,0.18);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.35);
+}
 .record-item.clickable { cursor: pointer; }
 .record-logo {
   width: 60px;

@@ -246,4 +246,10 @@ export default {
   background: linear-gradient(90deg, rgba(102,192,244,0.1) 0%, transparent 100%);
   font-weight: 700;
 }
+
+@media (max-width: 768px) {
+  .toc-list { width: max-content; }
+  .toc-h2, .toc-h3 { width: max-content; margin-left: 0; }
+  .toc-h2, .toc-h3, .toc-text { white-space: nowrap; }
+}
 </style>
