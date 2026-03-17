@@ -12,117 +12,84 @@
     </div>
 
     <div class="dashboard-layout">
-      <div class="charts-area">
-      <div class="charts-toolbar" :class="{ 'is-expanded': isMobileMenuOpen }">
-        <div class="mobile-toggle-bar">
-          <button class="menu-toggle-btn" @click="toggleMobileMenu">
-            筛选条件
-          </button>
-        </div>
-        <div class="toolbar-controls">
-          <label>月份</label>
-          <select v-model="selectedMonth">
-            <option v-for="m in monthsOptions" :key="m" :value="m">{{ m }}</option>
-          </select>
-          <div class="price-pop" ref="pricePop">
-            <button class="filter-btn" @click="togglePriceFilter">价格</button>
-            <transition name="fade">
-              <div class="filter-popover" v-if="showPriceFilter" @click.stop>
-                <div class="range-header">
-                  <span class="value">{{ Math.min(selectedPriceMin, selectedPriceMax).toFixed(0) }}-{{ Math.max(selectedPriceMin, selectedPriceMax).toFixed(0) }}万</span>
-                </div>
-                <div class="range-ticks">
-                  <span v-for="t in ticks" :key="t">{{ t }}</span>
-                  <span>不限</span>
-                </div>
-                <div class="range-track" :style="trackStyle"></div>
-                <div class="range-inputs">
-                  <input
-                    class="range-thumb min"
-                    type="range"
-                    :min="0"
-                    :max="priceMax"
-                    step="1"
-                    v-model.number="selectedPriceMin"
-                  />
-                  <input
-                    class="range-thumb max"
-                    type="range"
-                    :min="0"
-                    :max="priceMax"
-                    step="1"
-                    v-model.number="selectedPriceMax"
-                  />
-                </div>
-              </div>
-            </transition>
-          </div>
-          <span class="price-summary"><span class="value">{{ Math.min(selectedPriceMin, selectedPriceMax).toFixed(0) }}-{{ Math.max(selectedPriceMin, selectedPriceMax).toFixed(0) }}万</span></span>
-          <button
-            class="sort-btn"
-            :aria-label="sortBy === 'sales' ? '销量倒序' : '名称排列'"
-            :title="sortBy === 'sales' ? '销量倒序' : '名称排列'"
-            @click="toggleSort"
-          >排序：{{ sortBy === 'sales' ? '销量倒序' : '名称排列' }}</button>
-          <label>车型</label>
-          <select v-model="selectedType">
-            <option v-for="t in typeOptions" :key="t" :value="t">{{ t }}</option>
-          </select>
-          <label>品牌</label>
-          <select v-model="selectedBrand">
-            <option v-for="b in brandOptions" :key="b" :value="b">{{ b }}</option>
-          </select>
+      <div class="entry-col">
+        <div class="gallery-grid">
+          <router-link class="gallery-card" to="/mySpace/car-basics">
+            <div class="card-image" :style="bg('https://images.unsplash.com/photo-1645549047893-b0c6447aec2b?q=80&w=774&auto=format&fit=crop&ixlib=rb-4.1.0')">
+              <div class="hover-overlay">汽车基础知识</div>
+            </div>
+          </router-link>
+
+          <router-link class="gallery-card" to="/mySpace/cars">
+            <div class="card-image" :style="bg('https://images.unsplash.com/photo-1692450931594-e076fcdb896f?q=80&w=1600&auto=format&fit=crop&ixlib=rb-4.1.0')">
+              <div class="hover-overlay">车型总览列表</div>
+            </div>
+          </router-link>
+
+          <router-link class="gallery-card" to="/mySpace/brands">
+            <div class="card-image" :style="bg('https://images.unsplash.com/photo-1518640467707-6811f4a6ab73?q=80&w=1600&auto=format&fit=crop&ixlib=rb-4.1.0')">
+              <div class="hover-overlay">品牌介绍</div>
+            </div>
+          </router-link>
         </div>
       </div>
-      <YearlySalesRankingChart
-        :title="`年度车型销量排名（${selectedMonth}）`"
-        :items="filteredItems"
-        :sort-by="sortBy"
-      />
-    </div>
 
-    <div class="gallery-grid">
-      <router-link class="gallery-card" to="/mySpace/car-basics">
-        <div class="card-image" :style="bg('https://images.unsplash.com/photo-1645549047893-b0c6447aec2b?q=80&w=774&auto=format&fit=crop&ixlib=rb-4.1.0')">
-          <div class="hover-overlay">汽车基础知识</div>
+      <div class="info-col">
+        <div class="info-browse">
+          <div class="chart-block">
+            <div class="charts-toolbar" :class="{ 'is-expanded': isMobileMenuOpen }">
+              <div class="mobile-toggle-bar">
+                <button class="menu-toggle-btn" @click="toggleMobileMenu">
+                  筛选条件
+                </button>
+              </div>
+              <div class="toolbar-controls">
+                <label>月份</label>
+                <select v-model="selectedMonth">
+                  <option v-for="m in monthsOptions" :key="m" :value="m">{{ m }}</option>
+                </select>
+                <button
+                  class="sort-btn"
+                  :aria-label="sortBy === 'sales' ? '销量升序' : '名称排列'"
+                  :title="sortBy === 'sales' ? '销量升序' : '名称排列'"
+                  @click="toggleSort"
+                >排序：{{ sortBy === 'sales' ? '销量升序' : '名称排列' }}</button>
+                <label>车型</label>
+                <select v-model="selectedType">
+                  <option v-for="t in typeOptions" :key="t" :value="t">{{ t }}</option>
+                </select>
+                <label>品牌</label>
+                <select v-model="selectedBrand">
+                  <option v-for="b in brandOptions" :key="b" :value="b">{{ b }}</option>
+                </select>
+              </div>
+            </div>
+            <YearlySalesRankingChart
+              :title="`年度车型销量排名（${selectedMonth}）`"
+              :items="filteredItems"
+              :sort-by="sortBy"
+              sort-order="asc"
+            />
+          </div>
+          <div class="chart-block">
+            <Top10SalesTabsChart :global-items="globalTop10" :china-items="chinaTop10" />
+          </div>
+          <div class="chart-block">
+            <PriceSegmentsTabsChart :segments="priceSegments" />
+          </div>
         </div>
-      </router-link>
-
-      <router-link class="gallery-card" to="/mySpace/cars">
-        <div class="card-image" :style="bg('https://images.unsplash.com/photo-1692450931594-e076fcdb896f?q=80&w=1600&auto=format&fit=crop&ixlib=rb-4.1.0')">
-          <div class="hover-overlay">车型总览列表</div>
-        </div>
-      </router-link>
-
-      <router-link class="gallery-card" to="/mySpace/brands">
-        <div class="card-image" :style="bg('https://images.unsplash.com/photo-1518640467707-6811f4a6ab73?q=80&w=1600&auto=format&fit=crop&ixlib=rb-4.1.0')">
-          <div class="hover-overlay">品牌介绍</div>
-        </div>
-      </router-link>
-      
-      <div class="gallery-card placeholder" aria-hidden="true"></div>
-    </div>
+      </div>
     </div>
   </div>
   </template>
 
+
 <script>
 import YearlySalesRankingChart from './YearlySalesRankingChart.vue'
+import Top10SalesTabsChart from './Top10SalesTabsChart.vue'
+import PriceSegmentsTabsChart from './PriceSegmentsTabsChart.vue'
 import sales2025 from '@/data/car/2025_dcd_sales_rank.json'
-
-function parsePriceRange (s) {
-  if (!s) return [NaN, NaN]
-  let t = String(s).trim()
-  t = t.replace(/万|万元/g, '').replace(/\s+/g, '')
-  const parts = t.split(/[-–—~至]/)
-  if (parts.length >= 2) {
-    const a = Number(String(parts[0]).replace(/[^\d.]/g, ''))
-    const b = Number(String(parts[1]).replace(/[^\d.]/g, ''))
-    return [isNaN(a) ? NaN : a, isNaN(b) ? NaN : b]
-  }
-  const v = Number(t.replace(/[^\d.]/g, ''))
-  return [isNaN(v) ? NaN : v, isNaN(v) ? NaN : v]
-}
+import sales from '@/data/car/sales.json'
 
 function typeFromSeries (s) {
   if (!s) return '其他'
@@ -135,18 +102,10 @@ function typeFromSeries (s) {
 
 export default {
   name: 'CarsHome',
-  components: { YearlySalesRankingChart },
+  components: { YearlySalesRankingChart, Top10SalesTabsChart, PriceSegmentsTabsChart },
   data () {
     const months = Array.from(new Set((sales2025.items || []).map(i => i.month))).sort().reverse()
     const brands = Array.from(new Set((sales2025.items || []).map(i => i.brand).filter(Boolean))).sort()
-    const maxPrice = (() => {
-      const nums = (sales2025.items || []).map(i => {
-        const r = parsePriceRange(i.priceRange)
-        return r[1]
-      }).filter(n => isFinite(n))
-      const m = Math.max(0, ...nums)
-      return Math.ceil(m * 10) / 10
-    })()
     return {
       monthsOptions: months,
       typeOptions: ['全部', '轿车', 'SUV', 'MPV', '其他'],
@@ -154,77 +113,37 @@ export default {
       selectedMonth: months[0] || '',
       selectedType: '全部',
       selectedBrand: '全部',
-      selectedPriceMin: 0,
-      selectedPriceMax: maxPrice,
-      priceMax: maxPrice,
-      showPriceFilter: false,
       sortBy: 'sales',
       isMobileMenuOpen: false
     }
-  },
-  mounted () {
-    document.addEventListener('click', this.handleDocClick)
-  },
-  beforeDestroy () {
-    document.removeEventListener('click', this.handleDocClick)
   },
   computed: {
     filteredItems () {
       const base = Array.isArray(sales2025.items) ? sales2025.items : []
       const filtered = base.filter(i => {
         const monthOk = this.selectedMonth ? i.month === this.selectedMonth : true
-        const [pmin, pmax] = parsePriceRange(i.priceRange)
-        const selMin = Math.min(this.selectedPriceMin, this.selectedPriceMax)
-        const selMax = Math.max(this.selectedPriceMin, this.selectedPriceMax)
-        const priceOk = isFinite(pmin) && isFinite(pmax)
-          ? (pmin <= selMax && pmax >= selMin)
-          : true
         const typeOk = this.selectedType === '全部' ? true : typeFromSeries(i.seriesType) === this.selectedType
         const brandOk = this.selectedBrand === '全部' ? true : String(i.brand || '') === this.selectedBrand
-        return monthOk && priceOk && typeOk && brandOk
+        return monthOk && typeOk && brandOk
       })
       return filtered.map(i => ({ modelName: i.seriesName || i.modelName, sales: i.sales }))
     },
-    trackStyle () {
-      const left = (this.selectedPriceMin / this.priceMax) * 100
-      const right = (this.selectedPriceMax / this.priceMax) * 100
-      const l = Math.min(left, right)
-      const r = Math.max(left, right)
-      return {
-        background: `linear-gradient(to right, #e5e9f2 ${l}%, #f5c400 ${l}%, #f5c400 ${r}%, #e5e9f2 ${r}%)`
-      }
+    globalTop10 () {
+      return sales && Array.isArray(sales.global_top10) ? sales.global_top10 : []
     },
-    ticks () {
-      const candidates = [0, 5, 10, 15, 20, 25, 40, 60, 80, 100, 120]
-      return candidates.filter(v => v <= this.priceMax)
+    chinaTop10 () {
+      return sales && Array.isArray(sales.china_top10) ? sales.china_top10 : []
+    },
+    priceSegments () {
+      return sales && sales.price_segments && typeof sales.price_segments === 'object' ? sales.price_segments : {}
     }
   },
   methods: {
     bg (url) {
       return { backgroundImage: `url(${url})` }
     },
-    togglePriceFilter () {
-      this.showPriceFilter = !this.showPriceFilter
-    },
-    handleDocClick (e) {
-      if (!this.showPriceFilter) return
-      const el = this.$refs.pricePop
-      if (el && !el.contains(e.target)) {
-        this.showPriceFilter = false
-      }
-    },
     toggleSort () {
       this.sortBy = this.sortBy === 'sales' ? 'name' : 'sales'
-    },
-    syncMin () {
-      if (this.selectedPriceMin > this.selectedPriceMax) {
-        this.selectedPriceMin = this.selectedPriceMax
-      }
-    },
-    syncMax () {
-      if (this.selectedPriceMax < this.selectedPriceMin) {
-        this.selectedPriceMax = this.selectedPriceMin
-      }
     },
     toggleMobileMenu () {
       this.isMobileMenuOpen = !this.isMobileMenuOpen
@@ -246,6 +165,16 @@ export default {
   display: flex;
   gap: 20px;
   align-items: stretch;
+}
+
+.entry-col {
+  flex: 0 0 20%;
+  min-width: 0;
+}
+
+.info-col {
+  flex: 1 1 80%;
+  min-width: 0;
 }
 
 .section-header h2 { color: #fff; font-weight: 400; letter-spacing: 2px; }
@@ -277,17 +206,22 @@ export default {
 .divider { height: 2px; background: #2a475e; margin: 10px 0 30px 0; }
 .divider.small { height: 2px; background: #2a475e; margin: 8px 0 20px 0; }
 
-.charts-area {
-  background: #16202d;
-  padding: 12px;
-  border-radius: 6px;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+.info-browse {
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 0;
+  padding-right: 0;
   margin-bottom: 0;
   flex: 1;
   min-width: 0;
   display: flex;
   flex-direction: column;
+  gap: 22px;
 }
+
+.chart-block { width: 100%; background: #16202d; box-shadow: 0 4px 15px rgba(0,0,0,0.4); border-radius: 6px; padding: 12px; }
+.chart-block > * + * { margin-top: 12px; }
+
 .charts-toolbar {
   margin-bottom: 0;
   border-bottom: 1px solid #2a475e;
@@ -326,31 +260,7 @@ export default {
 .sort-btn:hover { background: rgba(102,192,244,0.12); color: #e6f3ff; }
 .filter-btn { background: transparent; border: none; color: #c7d5e0; padding: 6px 10px; border-radius: 6px; cursor: pointer; }
 .filter-btn:hover { background: rgba(102,192,244,0.12); color: #e6f3ff; }
-.price-summary { color: #c7d5e0; font-size: 13px; margin-left: 8px; margin-right: 8px; }
-.price-summary .value { color: #ff5a5f; }
 .charts-toolbar { position: relative; }
-.price-pop { position: relative; display: inline-block; }
-.filter-popover {
-  position: absolute;
-  top: calc(100% + 8px);
-  left: 0;
-  width: 360px;
-  background: #1b2838;
-  border: 1px solid #3c4551;
-  border-radius: 10px;
-  padding: 12px;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.45);
-  z-index: 1000;
-}
-.filter-popover::before {
-  content: "";
-  position: absolute;
-  top: -8px;
-  left: 18px;
-  border-left: 8px solid transparent;
-  border-right: 8px solid transparent;
-  border-bottom: 8px solid #1b2838;
-}
 .drawer-close {
   background: transparent;
   border: none;
@@ -360,40 +270,6 @@ export default {
   cursor: pointer;
 }
 .popover-actions { display: flex; justify-content: flex-end; margin-top: 8px; }
-.price-filter { display: grid; gap: 8px; }
-.range-header { color: #c7d5e0; }
-.range-header .value { color: #ff5a5f; font-weight: 600; }
-.range-ticks { display: flex; justify-content: space-between; color: #c7d5e0; font-size: 12px; }
-.range-track {
-  position: relative;
-  height: 8px;
-  border-radius: 6px;
-  background: #e5e9f2;
-}
-.range-inputs { position: relative; height: 16px; margin-top: 4px; }
-.range-thumb {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  -webkit-appearance: none;
-  appearance: none;
-  background: transparent;
-  pointer-events: auto;
-}
-.range-inputs { height: 32px; }
-.range-thumb.min { top: 0; z-index: 2; }
-.range-thumb.max { top: 16px; z-index: 2; }
-.range-thumb::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  appearance: none;
-  width: 14px;
-  height: 14px;
-  border-radius: 50%;
-  background: #fff;
-  border: 1px solid #3c4551;
-  cursor: pointer;
-}
 .fade-enter-active,
 .fade-leave-active { transition: opacity 180ms ease; }
 .fade-enter-from,
@@ -402,39 +278,67 @@ export default {
 .fade-leave-from { opacity: 1; }
 
 .gallery-grid {
-  width: 280px;
+  width: 100%;
   display: flex;
   flex-direction: column;
   gap: 15px;
   margin-top: 0;
-  flex-shrink: 0;
 }
 
 .gallery-card {
   background: #16202d;
   box-shadow: 0 4px 15px rgba(0,0,0,0.4);
-  transition: transform 0.2s;
+  border: 1px solid rgba(255,255,255,0.06);
+  position: relative;
+  overflow: hidden;
+  transition: background 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
   cursor: pointer;
   text-decoration: none;
 }
-.gallery-card:hover { transform: translateY(-5px); }
-.card-image { height: 100px; background-size: cover; background-position: center; position: relative; }
-.hover-overlay { position: absolute; bottom: 0; left: 0; right: 0; padding: 8px 12px; background: rgba(0,0,0,0.5); color: #fff; font-weight: 400; letter-spacing: 1px; }
-
-.gallery-card.placeholder {
-  height: 100px;
-  cursor: default;
+.gallery-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(102,192,244,0.14);
+  opacity: 0;
+  transition: opacity 0.18s ease;
+  z-index: 1;
+  pointer-events: none;
 }
-.gallery-card.placeholder:hover { transform: none; }
+.gallery-card:hover {
+  background: #1b2838;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.45);
+}
+.gallery-card:hover::after { opacity: 1; }
+.card-image { height: 50px; background-size: cover; background-position: center; position: relative; }
+.hover-overlay { position: absolute; bottom: 0; left: 0; right: 0; padding: 6px 10px; background: rgba(0,0,0,0.5); color: #fff; font-weight: 400; letter-spacing: 1px; font-size: 12px; z-index: 2; }
 
-.charts-area >>> .chart-wrapper {
+.info-browse >>> .chart-wrapper {
   flex: 1 1 auto;
   height: auto;
+}
+.info-browse >>> .chart {
+  padding-left: 0;
+  padding-right: 0;
+  margin-left: 0;
+  margin-right: 0;
+}
+.info-browse >>> canvas {
+  padding-left: 0;
+  padding-right: 0;
+  margin-left: 0;
+  margin-right: 0;
+  display: block;
 }
 
 @media (max-width: 1000px) {
   .dashboard-layout {
     flex-direction: column;
+  }
+  .entry-col,
+  .info-col {
+    flex: 1 1 auto;
+    width: 100%;
   }
   .gallery-grid {
     width: 100%;
@@ -445,8 +349,7 @@ export default {
     padding: 0;
     box-sizing: border-box;
   }
-  .card-image { height: 106px; }
-  .gallery-card.placeholder { height: 106px; }
+  .card-image { height: 56px; }
   
   .back-text { display: none; }
   .back-btn { padding: 4px; }
@@ -509,7 +412,7 @@ export default {
     border-bottom: none;
   }
   
-  .charts-area {
+  .info-browse {
     padding: 10px;
     margin: 0;
   }

@@ -139,21 +139,23 @@
         :key="car.id"
         :to="{ name: 'CarDetail', params: { id: car.id } }"
       >
-        <div class="card-image" :style="coverBg(car)"></div>
-        <div class="card-info">
-          <div class="card-title">
-            <img
-              v-if="brandLogoFor(car)"
-              class="brand-logo"
-              :src="brandLogoFor(car)"
-              :alt="car.brand"
-            />
-            <span class="title-text">{{ car.title }}</span>
-          </div>
-          <div class="card-tags">
-            <span class="tag tag-energy" v-for="e in energyList(car)" :key="e">{{ e }}</span>
-            <span class="tag tag-body">{{ car.body }}</span>
-            <span class="tag tag-size" v-if="car.sizeClass">{{ car.sizeClass }}</span>
+        <div class="card-body">
+          <div class="card-image" :style="coverBg(car)"></div>
+          <div class="card-info">
+            <div class="card-title">
+              <img
+                v-if="brandLogoFor(car)"
+                class="brand-logo"
+                :src="brandLogoFor(car)"
+                :alt="car.brand"
+              />
+              <span class="title-text">{{ car.title }}</span>
+            </div>
+            <div class="card-tags">
+              <span class="tag tag-energy" v-for="e in energyList(car)" :key="e">{{ e }}</span>
+              <span class="tag tag-body">{{ car.body }}</span>
+              <span class="tag tag-size" v-if="car.sizeClass">{{ car.sizeClass }}</span>
+            </div>
           </div>
         </div>
       </router-link>
@@ -696,6 +698,7 @@ export default {
   .filters-panel .filter-group { flex-direction: column; align-items: stretch; gap: 6px; }
   .filters-panel .select { width: 100%; height: 32px; font-size: 13px; }
   .gallery-grid { grid-template-columns: repeat(2, 1fr); gap: 6px; }
+  .card-body { height: 160px; }
   .card-image { height: 80px; }
   .card-info { padding: 6px; }
   .card-title { margin-bottom: 4px; gap: 4px; font-size: 13px; }
@@ -723,6 +726,12 @@ export default {
   box-shadow: 0 10px 25px rgba(0,0,0,0.45);
 }
 
+.card-body {
+  height: 230px;
+  display: flex;
+  flex-direction: column;
+}
+
 .card-image {
   height: 160px;
   background-size: cover;
@@ -730,9 +739,9 @@ export default {
   position: relative;
 }
 
-.card-info { padding: 12px; background: #222e3b; }
+.card-info { padding: 12px; background: #222e3b; flex: 1 1 auto; min-height: 0; overflow: hidden; }
 .card-title { color: #ffffff; margin-bottom: 8px; font-weight: normal; font-family: 'Motiva Sans', sans-serif; display: flex; align-items: center; gap: 8px; }
-.card-title .title-text { display: inline-block; }
+.card-title .title-text { display: inline-block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .brand-logo { width: 24px; height: 24px; object-fit: contain; background: transparent; }
 .brand-logo { height: 1em; width: auto; object-fit: contain; background: transparent; }
 .card-tags { display: flex; align-items: center; gap: 6px; }

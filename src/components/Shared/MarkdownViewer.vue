@@ -449,6 +449,7 @@ export default {
   .content :deep(p) { font-size: 16px; line-height: 1.8; }
   .content :deep(li) { font-size: 16px; line-height: 1.8; }
   .content :deep(ul) { padding-left: 22px; }
+  .content :deep(ol) { padding-left: 32px; }
   .content :deep(ul) :deep(li) { padding-left: 1px; }
   .content :deep(h1) { font-size: 24px; margin: 16px 0 10px; }
   .content :deep(h2) { font-size: 22px; margin: 14px 0 8px; }

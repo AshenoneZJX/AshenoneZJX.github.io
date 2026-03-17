@@ -465,12 +465,15 @@ export default {
   padding: 15px;
   border: 1px solid transparent;
   border-radius: 8px;
-  transition: background 0.2s, border-color 0.2s, box-shadow 0.2s;
+  transition: background 0.2s, box-shadow 0.2s, transform 0.2s;
 }
 .record-item:hover { 
   background: #1b2838; 
-  border-color: rgba(255,255,255,0.18);
-  box-shadow: 0 8px 20px rgba(0,0,0,0.35);
+  box-shadow: inset 0 0 0 1px rgba(102,192,244,0.22), 0 10px 26px rgba(0,0,0,0.35), 0 0 22px rgba(102,192,244,0.12);
+  transform: translateY(-1px);
+}
+.record-item:active {
+  transform: translateY(0);
 }
 
 .month { color: #8f98a0; font-size: 12px; }

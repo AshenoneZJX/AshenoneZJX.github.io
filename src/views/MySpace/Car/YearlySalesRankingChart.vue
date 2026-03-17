@@ -17,19 +17,28 @@ export default {
       type: Array,
       default: () => []
     },
-    sortBy: { type: String, default: 'sales' }
+    sortBy: { type: String, default: 'sales' },
+    sortOrder: { type: String, default: 'desc' }
   },
   data () {
     return {
-      chart: null
+      chart: null,
+      ro: null
     }
   },
   mounted () {
     this.init()
     window.addEventListener('resize', this.resize)
+    if (typeof ResizeObserver !== 'undefined') {
+      this.ro = new ResizeObserver(() => {
+        this.resize()
+      })
+      if (this.$refs.chart) this.ro.observe(this.$refs.chart)
+    }
   },
   beforeDestroy () {
     window.removeEventListener('resize', this.resize)
+    if (this.ro) this.ro.disconnect()
     if (this.chart) this.chart.dispose()
   },
   watch: {
@@ -43,6 +52,9 @@ export default {
       this.render()
     },
     sortBy () {
+      this.render()
+    },
+    sortOrder () {
       this.render()
     }
   },
@@ -67,7 +79,9 @@ export default {
           const bn = String(b.modelName || b.seriesName || '')
           return an.localeCompare(bn, 'zh')
         }
-        return (b.sales - a.sales)
+        const av = Number(a.sales) || 0
+        const bv = Number(b.sales) || 0
+        return this.sortOrder === 'asc' ? (av - bv) : (bv - av)
       }).slice(0, 10)
       const names = sorted.map(i => i.modelName)
       const values = sorted.map(i => i.sales)

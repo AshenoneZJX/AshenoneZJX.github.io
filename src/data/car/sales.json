@@ -30,5 +30,214 @@
         { "modelId": 6, "modelName": "长城 哈弗大狗", "brand": "长城", "sales": 90000 }
       ]
     }
-  ]
+  ],
+
+  "global_top10": [
+    {
+      "rank": 1,
+      "model": "丰田卡罗拉",
+      "sales": 1350000,
+      "type": "紧凑型轿车",
+      "brand": "丰田"
+    },
+    {
+      "rank": 2,
+      "model": "丰田 RAV4",
+      "sales": 1280000,
+      "type": "紧凑型 SUV",
+      "brand": "丰田"
+    },
+    {
+      "rank": 3,
+      "model": "特斯拉 Model Y",
+      "sales": 1150000,
+      "type": "中型纯电 SUV",
+      "brand": "特斯拉"
+    },
+    {
+      "rank": 4,
+      "model": "本田 CR-V",
+      "sales": 980000,
+      "type": "紧凑型 SUV",
+      "brand": "本田"
+    },
+    {
+      "rank": 5,
+      "model": "大众 ID.4",
+      "sales": 890000,
+      "type": "紧凑型纯电 SUV",
+      "brand": "大众"
+    },
+    {
+      "rank": 6,
+      "model": "福特 F-150",
+      "sales": 860000,
+      "type": "皮卡",
+      "brand": "福特"
+    },
+    {
+      "rank": 7,
+      "model": "比亚迪宋 PLUS DM-i",
+      "sales": 820000,
+      "type": "紧凑型插混 SUV",
+      "brand": "比亚迪"
+    },
+    {
+      "rank": 8,
+      "model": "现代途胜",
+      "sales": 750000,
+      "type": "紧凑型 SUV",
+      "brand": "现代"
+    },
+    {
+      "rank": 9,
+      "model": "吉利星越 L",
+      "sales": 720000,
+      "type": "紧凑型 SUV",
+      "brand": "吉利"
+    },
+    {
+      "rank": 10,
+      "model": "雪佛兰索罗德",
+      "sales": 680000,
+      "type": "皮卡",
+      "brand": "雪佛兰"
+    }
+  ],
+
+  "china_top10": [
+    {
+      "rank": 1,
+      "model": "比亚迪海鸥",
+      "sales": 529000,
+      "price_range": "7-9万",
+      "type": "微型纯电轿车"
+    },
+    {
+      "rank": 2,
+      "model": "五菱宏光 MINIEV",
+      "sales": 440000,
+      "price_range": "3-10万",
+      "type": "微型纯电轿车"
+    },
+    {
+      "rank": 3,
+      "model": "比亚迪宋 PLUS",
+      "sales": 401000,
+      "price_range": "13-21万",
+      "type": "紧凑型插混 SUV"
+    },
+    {
+      "rank": 4,
+      "model": "比亚迪秦 PLUS DM-i",
+      "sales": 366000,
+      "price_range": "8-14万",
+      "type": "紧凑型插混轿车"
+    },
+    {
+      "rank": 5,
+      "model": "小米 SU7",
+      "sales": 411837,
+      "price_range": "21-30万",
+      "type": "中型纯电轿车"
+    },
+    {
+      "rank": 6,
+      "model": "问界 M7",
+      "sales": 200000,
+      "price_range": "24-32万",
+      "type": "中大型插混 SUV"
+    },
+    {
+      "rank": 7,
+      "model": "吉利星越 L",
+      "sales": 269000,
+      "price_range": "13-19万",
+      "type": "紧凑型 SUV"
+    },
+    {
+      "rank": 8,
+      "model": "日产轩逸",
+      "sales": 250000,
+      "price_range": "8-14万",
+      "type": "紧凑型燃油轿车"
+    },
+    {
+      "rank": 9,
+      "model": "大众朗逸",
+      "sales": 240000,
+      "price_range": "8-15万",
+      "type": "紧凑型燃油轿车"
+    },
+    {
+      "rank": 10,
+      "model": "大众速腾",
+      "sales": 256000,
+      "price_range": "12-17万",
+      "type": "紧凑型燃油轿车"
+    }
+  ],
+
+  "price_segments": {
+    "10万以下": [
+      { "rank": 1, "model": "五菱宏光 MINIEV", "sales": 440000 },
+      { "rank": 2, "model": "比亚迪海鸥", "sales": 529000 },
+      { "rank": 3, "model": "吉利星愿", "sales": 465775 },
+      { "rank": 4, "model": "长安 Lumin", "sales": 180000 },
+      { "rank": 5, "model": "奇瑞无界 Pro", "sales": 120000 },
+      { "rank": 6, "model": "朋克多多", "sales": 90000 },
+      { "rank": 7, "model": "雷丁芒果", "sales": 80000 },
+      { "rank": 8, "model": "东风纳米 BOX", "sales": 70000 },
+      { "rank": 9, "model": "江淮钇为 3", "sales": 65000 },
+      { "rank": 10, "model": "华晨新日 i03", "sales": 60000 }
+    ],
+    "10-15万": [
+      { "rank": 1, "model": "比亚迪秦 PLUS DM-i", "sales": 366000 },
+      { "rank": 2, "model": "日产轩逸", "sales": 250000 },
+      { "rank": 3, "model": "大众朗逸", "sales": 240000 },
+      { "rank": 4, "model": "吉利星瑞", "sales": 230000 },
+      { "rank": 5, "model": "丰田卡罗拉", "sales": 220000 },
+      { "rank": 6, "model": "本田思域", "sales": 210000 },
+      { "rank": 7, "model": "长安逸动 PLUS", "sales": 200000 },
+      { "rank": 8, "model": "荣威 i5", "sales": 190000 },
+      { "rank": 9, "model": "名爵 5", "sales": 180000 },
+      { "rank": 10, "model": "比亚迪海豚", "sales": 170000 }
+    ],
+    "15-20万": [
+      { "rank": 1, "model": "比亚迪宋 PLUS", "sales": 401000 },
+      { "rank": 2, "model": "吉利星越 L", "sales": 269000 },
+      { "rank": 3, "model": "大众速腾", "sales": 256000 },
+      { "rank": 4, "model": "丰田 RAV4 荣放", "sales": 240000 },
+      { "rank": 5, "model": "本田 CR-V", "sales": 230000 },
+      { "rank": 6, "model": "比亚迪唐 DM-i", "sales": 220000 },
+      { "rank": 7, "model": "领克 01", "sales": 210000 },
+      { "rank": 8, "model": "魏牌摩卡", "sales": 200000 },
+      { "rank": 9, "model": "长安 UNI-K", "sales": 190000 },
+      { "rank": 10, "model": "奇瑞瑞虎 8", "sales": 180000 }
+    ],
+    "20-30万": [
+      { "rank": 1, "model": "小米 SU7", "sales": 411837 },
+      { "rank": 2, "model": "特斯拉 Model Y", "sales": 380000 },
+      { "rank": 3, "model": "问界 M7", "sales": 200000 },
+      { "rank": 4, "model": "比亚迪汉 DM-i", "sales": 190000 },
+      { "rank": 5, "model": "理想 L7", "sales": 180000 },
+      { "rank": 6, "model": "蔚来 ET5", "sales": 170000 },
+      { "rank": 7, "model": "小鹏 G6", "sales": 160000 },
+      { "rank": 8, "model": "宝马 3 系", "sales": 150000 },
+      { "rank": 9, "model": "奔驰 C 级", "sales": 140000 },
+      { "rank": 10, "model": "奥迪 A4L", "sales": 130000 }
+    ],
+    "30万以上": [
+      { "rank": 1, "model": "宝马 5 系", "sales": 116200 },
+      { "rank": 2, "model": "奥迪 A6L", "sales": 110000 },
+      { "rank": 3, "model": "奔驰 E 级", "sales": 105000 },
+      { "rank": 4, "model": "理想 L9", "sales": 100000 },
+      { "rank": 5, "model": "蔚来 ES6", "sales": 95000 },
+      { "rank": 6, "model": "小鹏 G9", "sales": 90000 },
+      { "rank": 7, "model": "特斯拉 Model S", "sales": 85000 },
+      { "rank": 8, "model": "宝马 X5", "sales": 80000 },
+      { "rank": 9, "model": "奔驰 GLE", "sales": 75000 },
+      { "rank": 10, "model": "奥迪 Q5L", "sales": 70000 }
+    ]
+  }
 }
