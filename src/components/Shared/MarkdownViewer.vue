@@ -80,23 +80,67 @@ export default {
         heading = h1.textContent.trim()
         h1.remove()
       }
-      
-      // 处理图片排版
-      const blocks = tmp.querySelectorAll('p, div')
-      blocks.forEach(el => {
-        const imgs = el.querySelectorAll('img')
-        if (imgs.length > 0) {
-          // 检查是否只包含图片（忽略空白文本）
-          const clone = el.cloneNode(true)
-          clone.querySelectorAll('img').forEach(img => img.remove())
-          if (clone.textContent.trim() === '') {
-            el.classList.add('image-container')
+
+      const isImageOnlyParagraph = el => {
+        if (!el || el.nodeType !== 1) return false
+        if (el.tagName !== 'P') return false
+        if (!el.querySelector('img')) return false
+        if (el.textContent && el.textContent.trim()) return false
+        const nodes = Array.from(el.childNodes)
+        for (const n of nodes) {
+          if (n.nodeType === 1 && n.tagName === 'IMG') continue
+          if (n.nodeType === 3 && !n.textContent.trim()) continue
+          return false
+        }
+        return true
+      }
+
+      const groupConsecutiveImageParagraphs = container => {
+        if (!container || container.nodeType !== 1) return
+        const tag = container.tagName
+        if (tag === 'PRE' || tag === 'CODE' || tag === 'SCRIPT' || tag === 'STYLE') return
+
+        const children = Array.from(container.children)
+        let buffer = []
+        const flush = () => {
+          if (buffer.length <= 1) {
+            buffer = []
+            return
+          }
+          const first = buffer[0]
+          const gallery = document.createElement('div')
+          gallery.className = 'md-image-gallery'
+          container.insertBefore(gallery, first)
+          for (const p of buffer) {
+            const imgs = Array.from(p.querySelectorAll('img'))
+            for (const img of imgs) gallery.appendChild(img)
+            p.remove()
+          }
+          buffer = []
+        }
+
+        for (const child of children) {
+          if (isImageOnlyParagraph(child)) {
+            const imgs = Array.from(child.querySelectorAll('img'))
             if (imgs.length > 1) {
-              el.classList.add('multi-images')
+              flush()
+              const gallery = document.createElement('div')
+              gallery.className = 'md-image-gallery'
+              container.insertBefore(gallery, child)
+              for (const img of imgs) gallery.appendChild(img)
+              child.remove()
+              continue
             }
+            buffer.push(child)
+          } else {
+            flush()
+            groupConsecutiveImageParagraphs(child)
           }
         }
-      })
+        flush()
+      }
+
+      groupConsecutiveImageParagraphs(tmp)
 
       this.displayHtml = tmp.innerHTML
       this.$emit('heading-extracted', heading)
@@ -105,66 +149,8 @@ export default {
         this.$emit('content-updated')
         await this.loadMathJax()
         this.typesetMath()
-        this.adjustImageHeights()
       })
     },
-    adjustImageHeights() {
-      const containers = this.$refs.contentRef.querySelectorAll('.multi-images')
-      containers.forEach(container => {
-        const imgs = Array.from(container.querySelectorAll('img'))
-        if (imgs.length === 0) return
-
-        let loadedCount = 0
-        const total = imgs.length
-        
-        const applyHeight = () => {
-          imgs.forEach(img => {
-            img.style.height = ''
-            img.style.width = ''
-          })
-
-          window.requestAnimationFrame(() => {
-            const groups = new Map()
-            imgs.forEach(img => {
-              const rect = img.getBoundingClientRect()
-              const key = Math.round(rect.top)
-              if (!groups.has(key)) groups.set(key, [])
-              groups.get(key).push(img)
-            })
-
-            groups.forEach(rowImgs => {
-              if (rowImgs.length < 2) return
-              const totalHeight = rowImgs.reduce((sum, img) => sum + img.getBoundingClientRect().height, 0)
-              if (totalHeight <= 0) return
-              const avgHeight = totalHeight / rowImgs.length
-
-              rowImgs.forEach(img => {
-                img.style.maxHeight = ''
-                img.style.minHeight = ''
-                img.style.height = `${avgHeight}px`
-                img.style.width = 'auto'
-              })
-            })
-          })
-        }
-
-        imgs.forEach(img => {
-          if (img.complete) {
-            loadedCount++
-            if (loadedCount === total) applyHeight()
-          } else {
-            img.onload = () => {
-              loadedCount++
-              if (loadedCount === total) applyHeight()
-            }
-            img.onerror = () => {
-              loadedCount++
-              if (loadedCount === total) applyHeight()
-            }
-          }
-        })
-      })
-    }
   },
   mounted() {
     this.loadMathJax().then(() => {
@@ -394,39 +380,6 @@ export default {
   line-height: 1;
 }
 
-.content :deep(img) { 
-  max-width: 100% !important; 
-  width: auto; 
-  height: auto; 
-  display: block; 
-  margin: 0; 
-  border-radius: 6px; 
-  box-shadow: 0 4px 12px rgba(0,0,0,0.35); 
-  border: 1px solid #38424e; 
-}
-
-.content :deep(.image-container) {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  gap: 2px;
-  margin: 10px auto;
-  width: fit-content;
-  max-width: 100%;
-  background: rgba(210, 210, 210, 0.12);
-  border: 1px solid rgba(56, 66, 78, 0.6);
-  border-radius: 8px;
-  padding: 4px;
-}
-
-.content :deep(.multi-images) :deep(img) {
-  margin: 0;
-  width: auto;
-  max-width: 100% !important;
-  border-radius: 4px;
-}
-
 .content :deep(.mjx-container) { 
   color: #cfe0ee; 
   background: rgba(27,40,56,0.5); 
@@ -458,6 +411,9 @@ export default {
   .content :deep(table) { display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; }
   .content :deep(th), .content :deep(td) { white-space: nowrap; }
   .content :deep(pre) { padding: 10px; }
+  .content :deep(.md-image-gallery) { gap: 10px; }
+  .content :deep(img) { max-width: 100%; margin: 10px auto; }
+  .content :deep(.md-image-gallery img) { height: 160px; width: auto; max-width: 100%; flex: 0 0 auto; }
 }
 
 .content :deep(mark) {
@@ -465,5 +421,31 @@ export default {
   color: #ffd700;
   padding: 0 2px;
   border-radius: 2px;
+}
+
+.content :deep(img) {
+  max-width: 50%;
+  height: auto;
+  display: block;
+  margin: 12px auto;
+  box-sizing: border-box;
+}
+
+.content :deep(.md-image-gallery) {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+  align-items: flex-start;
+  margin: 14px 0;
+}
+
+.content :deep(.md-image-gallery img) {
+  margin: 0;
+  height: 200px;
+  width: auto;
+  max-width: 100%;
+  flex: 0 0 auto;
+  object-fit: contain;
 }
 </style>

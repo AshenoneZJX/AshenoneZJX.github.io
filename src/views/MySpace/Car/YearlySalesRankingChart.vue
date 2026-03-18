@@ -60,7 +60,7 @@ export default {
   },
   methods: {
     init () {
-      this.chart = echarts.init(this.$refs.chart)
+      this.chart = echarts.init(this.$refs.chart, null, { renderer: 'svg' })
       this.render()
     },
     resize () {
@@ -88,12 +88,15 @@ export default {
       const longest = names.reduce((m, s) => Math.max(m, String(s || '').length), 0)
       const leftPad = Math.min(320, Math.max(100, Math.round(longest * 12)))
       this.chart.setOption({
+        textStyle: {
+          fontFamily: 'Inter, "AlibabaPuHuiTi", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif'
+        },
         title: { text: this.title, left: 'center', textStyle: { color: '#fff' } },
-        grid: { left: isNarrow ? 0 : leftPad, right: 30, top: 40, bottom: isNarrow ? 60 : 40, containLabel: isNarrow },
+        grid: { left: isNarrow ? 0 : leftPad, right: 30, top: 40, bottom: 60, containLabel: isNarrow },
         tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' } },
         xAxis: {
           type: 'value',
-          axisLabel: { color: '#9cc9f5', rotate: isNarrow ? 35 : 0, hideOverlap: true, margin: 10 },
+          axisLabel: { color: '#9cc9f5', rotate: 35, hideOverlap: true, margin: 10 },
           splitLine: { show: true, lineStyle: { color: '#2a475e' } }
         },
         yAxis: {

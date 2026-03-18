@@ -228,6 +228,11 @@ export default {
 .middle-col { flex-grow: 1; background: rgba(0,0,0,0.2); padding: 20px; border-radius: 6px; }
 .right-col { width: 280px; flex-shrink: 0; position: sticky; top: 104px; }
 
+.left-col :deep(.languages-section) {
+  padding: 0 14px;
+  box-sizing: border-box;
+}
+
 /* Quick Access Styles */
 .quick-access-panel {
   background: rgba(0, 0, 0, 0.2);
@@ -300,6 +305,8 @@ export default {
 /* 响应式：手机端变为单栏 */
 @media (max-width: 768px) {
   .home-layout { flex-direction: column; }
+  .home-layout { padding: 0 12px; box-sizing: border-box; }
+  .home-layout :deep(.profile-info) { width: calc(100% - 60px); max-width: 520px; margin: 0 auto; box-sizing: border-box; }
   .left-col, .right-col { width: 100%; position: static; top: auto; }
   /* Reorder: Profile(1) -> Quick Access(2) -> Intro(3) */
   .left-col { order: 1; }

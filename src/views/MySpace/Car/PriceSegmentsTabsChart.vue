@@ -69,7 +69,7 @@ export default {
   },
   methods: {
     init () {
-      this.chart = echarts.init(this.$refs.chart)
+      this.chart = echarts.init(this.$refs.chart, null, { renderer: 'svg' })
       this.render()
     },
     resize () {
@@ -93,8 +93,11 @@ export default {
       const leftPad = Math.min(320, Math.max(110, Math.round(longest * 12)))
       const title = this.activeKey ? `价格区间销量 TOP10（${this.activeKey}）` : '价格区间销量 TOP10'
       this.chart.setOption({
+        textStyle: {
+          fontFamily: 'Inter, "AlibabaPuHuiTi", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif'
+        },
         title: { text: title, left: 'center', textStyle: { color: '#fff' } },
-        grid: { left: leftPad, right: 20, top: 44, bottom: 36, containLabel: false },
+        grid: { left: leftPad, right: 20, top: 44, bottom: 60, containLabel: false },
         tooltip: {
           trigger: 'axis',
           axisPointer: { type: 'shadow' },
@@ -109,7 +112,7 @@ export default {
         },
         xAxis: {
           type: 'value',
-          axisLabel: { color: '#9cc9f5', hideOverlap: true, margin: 10 },
+          axisLabel: { color: '#9cc9f5', rotate: 35, hideOverlap: true, margin: 10 },
           splitLine: { show: true, lineStyle: { color: '#2a475e' } }
         },
         yAxis: {
@@ -138,7 +141,9 @@ export default {
   display: flex;
   justify-content: center;
   gap: 8px;
-  margin: 10px 0 8px 0;
+  margin: 0;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #2a475e;
   flex-wrap: wrap;
 }
 .tab-btn {

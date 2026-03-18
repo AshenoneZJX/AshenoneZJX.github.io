@@ -71,11 +71,13 @@
               sort-order="asc"
             />
           </div>
-          <div class="chart-block">
-            <Top10SalesTabsChart :global-items="globalTop10" :china-items="chinaTop10" />
-          </div>
-          <div class="chart-block">
-            <PriceSegmentsTabsChart :segments="priceSegments" />
+          <div class="charts-row">
+            <div class="chart-block">
+              <Top10SalesTabsChart :global-items="globalTop10" :china-items="chinaTop10" />
+            </div>
+            <div class="chart-block">
+              <PriceSegmentsTabsChart :segments="priceSegments" />
+            </div>
           </div>
         </div>
       </div>
@@ -219,8 +221,18 @@ export default {
   gap: 22px;
 }
 
-.chart-block { width: 100%; background: #16202d; box-shadow: 0 4px 15px rgba(0,0,0,0.4); border-radius: 6px; padding: 12px; }
+.chart-block { width: 100%; background: #16202d; box-shadow: 0 4px 15px rgba(0,0,0,0.4); border-radius: 6px; padding: 12px; box-sizing: border-box; }
 .chart-block > * + * { margin-top: 12px; }
+
+.charts-row {
+  display: flex;
+  gap: 22px;
+  width: 100%;
+}
+.charts-row .chart-block {
+  flex: 1;
+  min-width: 0;
+}
 
 .charts-toolbar {
   margin-bottom: 0;
@@ -333,6 +345,9 @@ export default {
 
 @media (max-width: 1000px) {
   .dashboard-layout {
+    flex-direction: column;
+  }
+  .charts-row {
     flex-direction: column;
   }
   .entry-col,

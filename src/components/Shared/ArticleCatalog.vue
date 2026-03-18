@@ -1,13 +1,13 @@
 <template>
   <div class="toc-list">
     <div class="toc-section" v-for="sec in toc" :key="sec.id">
-      <button class="toc-h2" :class="{ active: activeId === sec.id }" @click="toggle(sec.id)">
+      <button class="toc-h2" :class="{ active: activeId === sec.id }" @click="toggle(sec.id)" :title="sec.text">
         <span v-if="sec.children && sec.children.length > 0" class="caret" :class="{ open: !sec.collapsed }"></span>
         <span v-else class="caret-placeholder"></span>
         <span class="toc-text">{{ sec.text }}</span>
       </button>
       <div class="toc-h3-list" v-show="!sec.collapsed && sec.children && sec.children.length > 0">
-        <button class="toc-h3" :class="{ active: activeId === it.id }" v-for="it in sec.children" :key="it.id" @click="handleClick(it.id)">{{ it.text }}</button>
+        <button class="toc-h3" :class="{ active: activeId === it.id }" v-for="it in sec.children" :key="it.id" @click="handleClick(it.id)" :title="it.text">{{ it.text }}</button>
       </div>
     </div>
   </div>
@@ -215,7 +215,13 @@ export default {
   display: inline-block;
   margin-right: 0;
 }
-.toc-text { flex: 1; font-size: 13px; }
+.toc-text { 
+  flex: 1; 
+  font-size: 13px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
 
 .toc-h3-list { 
   display: flex; 
@@ -238,6 +244,9 @@ export default {
   width: calc(100% + 2px);
   margin-left: -2px;
   transition: all 0.2s ease;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 .toc-h3:hover { color: #66c0f4; }
 .toc-h3.active {
@@ -248,8 +257,7 @@ export default {
 }
 
 @media (max-width: 768px) {
-  .toc-list { width: max-content; }
-  .toc-h2, .toc-h3 { width: max-content; margin-left: 0; }
-  .toc-h2, .toc-h3, .toc-text { white-space: nowrap; }
+  .toc-list { width: 100%; }
+  .toc-h2, .toc-h3 { width: 100%; margin-left: 0; }
 }
 </style>
