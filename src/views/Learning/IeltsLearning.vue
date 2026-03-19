@@ -41,7 +41,13 @@ export default {
 </script>
 
 <style scoped>
-.page-ielts { padding-top: 20px; }
+.page-ielts {
+  padding-top: 20px;
+  width: 1200px;
+  min-width: 1200px;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
 .section-header h2 { color: #fff; font-weight: 400; letter-spacing: 2px; }
 .divider { height: 2px; background: #2a475e; margin: 10px 0 30px 0; }
 

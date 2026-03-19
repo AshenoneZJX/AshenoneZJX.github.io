@@ -59,7 +59,7 @@
           </span>
           <span class="panel-title">筛选</span>
           <div class="panel-actions">
-            <button class="filter-btn clear-btn" @click="clearDateFilters">清除所有筛选</button>
+            <button class="filter-btn clear-btn" @click="clearDateFilters">clear</button>
           </div>
         </div>
         <div class="panel-section">
@@ -246,6 +246,7 @@ export default {
       this.filterYear = null
     },
     clearDateFilters() {
+      this.activeCategory = 'All'
       this.dateMode = 'none'
       this.dateStart = null
       this.dateEnd = null
@@ -315,6 +316,7 @@ export default {
   font-family: 'RobotoMono';
   src: url('~@/assets/fonts/RobotoMono-VariableFont_wght.ttf') format('truetype');
   font-weight: 100 900;
+  font-style: normal;
   font-display: swap;
 }
 
@@ -329,10 +331,10 @@ export default {
 .page-records { 
   padding: 20px; 
   font-family: "RobotoVar", "SourceHanSansSC", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans CJK SC", "Source Han Sans SC", sans-serif;
-  max-width: 1200px;
+  width: 1200px;
+  min-width: 1200px;
   margin-left: auto;
   margin-right: auto;
-  width: 100%;
   box-sizing: border-box;
 }
 
@@ -468,8 +470,9 @@ export default {
   transition: background 0.2s, box-shadow 0.2s, transform 0.2s;
 }
 .record-item:hover { 
-  background: #1b2838; 
-  box-shadow: inset 0 0 0 1px rgba(102,192,244,0.22), 0 10px 26px rgba(0,0,0,0.35), 0 0 22px rgba(102,192,244,0.12);
+  background: rgba(255,255,255,0.08);
+  border-color: rgba(255,255,255,0.16);
+  box-shadow: 0 10px 26px rgba(0,0,0,0.35);
   transform: translateY(-1px);
 }
 .record-item:active {
@@ -505,7 +508,7 @@ export default {
   padding: 0;
   color: #c7d5e0;
   pointer-events: none; /* 禁止鼠标事件 */
-  font-family: 'RobotoMono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  font-family: 'RobotoMono', monospace;
   font-variant-numeric: tabular-nums;
 }
 
@@ -519,7 +522,7 @@ export default {
   -webkit-backdrop-filter: blur(6px);
   box-shadow: inset 0 1px 0 rgba(255,255,255,0.06); /* 顶部内阴影 */
   pointer-events: none; /* 禁止鼠标事件 */
-  font-family: 'RobotoMono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace, 'SourceHanSansSC', sans-serif;
+  font-family: 'RobotoMono', monospace;
 }
 .record-item.clickable { cursor: pointer; }
 .record-excerpt { font-size: 13px; color: #8f98a0; }

@@ -69,12 +69,15 @@
   margin: 0 auto 15px;
   padding: 2px;
   background: linear-gradient(to bottom right, #4e697d, #27303d);
+  border-radius: 50%;
+  overflow: hidden;
 }
 
 .avatar {
   width: 100%;
   height: 100%;
   display: block;
+  border-radius: 50%;
 }
 
 .username {

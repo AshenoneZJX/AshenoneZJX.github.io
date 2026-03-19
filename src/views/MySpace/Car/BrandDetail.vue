@@ -140,7 +140,8 @@ export default {
 
 .page-brand-detail {
   padding-top: 20px;
-  max-width: 1200px;
+  width: 1200px;
+  min-width: 1200px;
   margin: 0 auto;
   box-sizing: border-box;
   padding-left: 20px;

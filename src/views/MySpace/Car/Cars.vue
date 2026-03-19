@@ -49,6 +49,14 @@
           :class="{ expanded: searchExpanded }"
           @mousedown.stop
         >
+          <button class="search-icon-btn" @click="onSearchIconClick" aria-label="搜索">
+            <svg class="search-icon" viewBox="0 0 24 24" aria-hidden="true">
+              <path
+                fill="currentColor"
+                d="M10.5 3a7.5 7.5 0 0 1 5.93 12.1l3.24 3.24a1 1 0 1 1-1.42 1.42l-3.24-3.24A7.5 7.5 0 1 1 10.5 3Zm0 2a5.5 5.5 0 1 0 0 11a5.5 5.5 0 0 0 0-11Z"
+              />
+            </svg>
+          </button>
           <div class="search-panel">
             <input
               ref="searchInput"
@@ -78,14 +86,6 @@
               <div v-if="!searchSuggestions.length" class="suggest-empty">无匹配车型</div>
             </div>
           </div>
-          <button class="search-icon-btn" @click="onSearchIconClick" aria-label="搜索">
-            <svg class="search-icon" viewBox="0 0 24 24" aria-hidden="true">
-              <path
-                fill="currentColor"
-                d="M10.5 3a7.5 7.5 0 0 1 5.93 12.1l3.24 3.24a1 1 0 1 1-1.42 1.42l-3.24-3.24A7.5 7.5 0 1 1 10.5 3Zm0 2a5.5 5.5 0 1 0 0 11a5.5 5.5 0 0 0 0-11Z"
-              />
-            </svg>
-          </button>
         </div>
       </div>
       <button class="back-btn" @click="$router.push('/mySpace/cars-home')">
@@ -404,11 +404,19 @@ export default {
   font-display: swap;
 }
 
+@font-face {
+  font-family: 'PuHuiTi';
+  src: url('~@/assets/fonts/AlibabaPuHuiTi-3-65-Medium.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
 .page-cars { 
   padding: 20px;
-  max-width: 1200px;
+  width: 1200px;
+  min-width: 1200px;
   margin: 0 auto;
-  width: 100%;
   box-sizing: border-box;
 }
 .section-header { display: flex; justify-content: space-between; align-items: center; }
@@ -523,20 +531,27 @@ export default {
 .search-wrap {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: 0;
   position: relative;
 }
 .search-panel {
   position: relative;
   width: 0;
+  max-width: 0;
+  margin-left: 0;
   opacity: 0;
+  transform: scaleX(0.88);
+  transform-origin: left center;
   pointer-events: none;
   overflow: hidden;
-  transition: width 0.2s ease, opacity 0.2s ease;
+  transition: width 0.28s ease, max-width 0.28s ease, margin-left 0.28s ease, opacity 0.22s ease, transform 0.28s ease;
 }
 .search-wrap.expanded .search-panel {
   width: 200px;
+  max-width: 200px;
+  margin-left: 8px;
   opacity: 1;
+  transform: scaleX(1);
   pointer-events: auto;
 }
 .search-input {
@@ -741,7 +756,7 @@ export default {
 
 .card-info { padding: 12px; background: #222e3b; flex: 1 1 auto; min-height: 0; overflow: hidden; }
 .card-title { color: #ffffff; margin-bottom: 8px; font-weight: normal; font-family: 'Motiva Sans', sans-serif; display: flex; align-items: center; gap: 8px; }
-.card-title .title-text { display: inline-block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.card-title .title-text { display: inline-block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-family: 'PuHuiTi', 'SourceHanSansSC', sans-serif; }
 .brand-logo { width: 24px; height: 24px; object-fit: contain; background: transparent; }
 .brand-logo { height: 1em; width: auto; object-fit: contain; background: transparent; }
 .card-tags { display: flex; align-items: center; gap: 6px; }

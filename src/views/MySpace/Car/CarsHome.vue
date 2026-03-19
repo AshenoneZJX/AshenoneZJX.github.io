@@ -157,9 +157,9 @@ export default {
 <style scoped>
 .page-cars-home { 
   padding: 20px;
-  max-width: 1200px;
+  width: 1200px;
+  min-width: 1200px;
   margin: 0 auto;
-  width: 100%;
   box-sizing: border-box;
 }
 
@@ -301,6 +301,7 @@ export default {
   background: #16202d;
   box-shadow: 0 4px 15px rgba(0,0,0,0.4);
   border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 4px;
   position: relative;
   overflow: hidden;
   transition: background 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
@@ -343,7 +344,7 @@ export default {
   display: block;
 }
 
-@media (max-width: 1000px) {
+@media (max-width: 768px) {
   .dashboard-layout {
     flex-direction: column;
   }
@@ -372,7 +373,7 @@ export default {
   .section-header { padding: 0; }
 }
 
-@media (max-width: 850px) {
+@media (max-width: 768px) {
   .mobile-toggle-bar {
     display: flex;
     justify-content: flex-start;

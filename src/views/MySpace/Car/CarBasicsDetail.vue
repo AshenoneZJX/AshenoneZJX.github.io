@@ -237,19 +237,6 @@ export default {
 
 .not-found { color: #8f98a0; }
 
-/* 响应式调整：当宽度不足以容纳三栏时（例如 < 1200px），隐藏右侧占位栏 */
-@media (max-width: 1200px) {
-  .main-layout {
-    grid-template-columns: 25% minmax(0, 1fr);
-  }
-  .header-placeholder {
-    width: 25%;
-  }
-  .right-sidebar {
-    display: none;
-  }
-}
-
 /* 移动端适配 */
 @media (max-width: 768px) {
   .main-layout {

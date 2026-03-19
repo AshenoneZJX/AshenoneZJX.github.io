@@ -11,20 +11,41 @@
 
     
 
-    <div class="record-list">
-      <div
-        class="record-item clickable"
-        v-for="art in items"
-        :key="art.id"
-        @click="goDetail(art)"
-      >
-        <div class="record-logo" v-if="getLogo(art.title)">
-          <img :src="getLogo(art.title)" :alt="art.title" />
+    <div class="content-2col">
+      <aside class="col-left">
+        <div class="filters-panel">
+          <div class="panel-subtitle">
+            <img src="@/assets/images/shaixuan.svg" alt="分类" class="subtitle-icon" />
+            <span>分类</span>
+          </div>
+          <div class="panel-buttons">
+            <button
+              v-for="cat in categories"
+              :key="cat"
+              class="filter-btn"
+              :class="{ active: activeCategory === cat }"
+              @click="setCategory(cat)"
+            >{{ cat }}</button>
+          </div>
         </div>
-        <div class="record-content">
-          <div class="record-title">{{ art.title }}</div>
-          <div class="record-excerpt">
-            {{ art.excerpt || toExcerpt(art.content) }}
+      </aside>
+      <div class="col-right">
+        <div class="record-list">
+          <div
+            class="record-item clickable"
+            v-for="art in filteredItems"
+            :key="art.id"
+            @click="goDetail(art)"
+          >
+            <div class="record-logo" v-if="getLogo(art.title)">
+              <img :src="getLogo(art.title)" :alt="art.title" />
+            </div>
+            <div class="record-content">
+              <div class="record-title">{{ art.title }}</div>
+              <div class="record-excerpt">
+                {{ art.excerpt || toExcerpt(art.content) }}
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -39,10 +60,19 @@ export default {
   name: 'CarBasics',
   data() {
     return {
-      items: carBasics
+      items: carBasics,
+      activeCategory: '全部'
     }
   },
   computed: {
+    categories() {
+      const set = new Set((this.items || []).map(i => i.category).filter(Boolean))
+      return ['全部', ...Array.from(set)]
+    },
+    filteredItems() {
+      if (this.activeCategory === '全部') return this.items
+      return (this.items || []).filter(i => i.category === this.activeCategory)
+    }
   },
   methods: {
     toExcerpt(text) {
@@ -52,6 +82,9 @@ export default {
     },
     goDetail(art) {
       this.$router.push({ name: 'CarBasicsDetail', params: { id: art.id } })
+    },
+    setCategory(cat) {
+      this.activeCategory = cat
     },
     getLogo(title) {
       try {
@@ -66,9 +99,9 @@ export default {
 
 <style scoped>
 .page-car-basics {
-  max-width: 1200px;
+  width: 1200px;
+  min-width: 1200px;
   margin: 0 auto;
-  width: 100%;
   padding: 20px;
   box-sizing: border-box;
 }
@@ -84,8 +117,52 @@ export default {
 .back-btn:hover { color: #e6f3ff; background: rgba(102,192,244,0.12); }
 .back-btn:active, .back-btn.router-link-active { background: rgba(102,192,244,0.22); color: #ffffff; }
 
- 
-
+.content-2col { display: flex; gap: 16px; align-items: flex-start; }
+.col-left { width: 20%; }
+.col-right { width: 80%; }
+.filters-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background: transparent;
+  border-radius: 8px;
+  padding: 0 12px;
+}
+.panel-subtitle {
+  font-size: 16px;
+  font-weight: 500;
+  color: #ffffff;
+  letter-spacing: 1px;
+  line-height: 1;
+  padding-bottom: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.subtitle-icon {
+  width: 1em;
+  height: 1em;
+  display: block;
+}
+.panel-buttons { display: flex; flex-direction: column; gap: 8px; }
+.filter-btn {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  min-height: 38px;
+  padding: 10px 12px;
+  border-radius: 6px;
+  border: none;
+  background: rgba(102,192,244,0.08);
+  color: #c7d5e0;
+  font-size: 15px;
+  cursor: pointer;
+  text-align: left;
+  box-sizing: border-box;
+  transition: background 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+}
+.filter-btn.active { background: rgba(102,192,244,0.42); color: #ffffff; box-shadow: inset 0 0 0 1px rgba(102,192,244,0.85); }
 .record-list { display: flex; flex-direction: column; gap: 8px; }
 .record-item {
   display: flex;
@@ -96,8 +173,8 @@ export default {
   transition: background 0.2s, border-color 0.2s, box-shadow 0.2s;
 }
 .record-item:hover { 
-  background: #222b35;
-  border-color: rgba(255,255,255,0.18);
+  background: rgba(255,255,255,0.08);
+  border-color: rgba(255,255,255,0.16);
   box-shadow: 0 8px 20px rgba(0,0,0,0.35);
 }
 .record-item.clickable { cursor: pointer; }
@@ -125,5 +202,7 @@ export default {
   .back-btn { padding: 6px; }
   .record-list { padding: 0; }
   .section-header { padding: 0; }
+  .content-2col { flex-direction: column; }
+  .col-left, .col-right { width: 100%; }
 }
 </style>

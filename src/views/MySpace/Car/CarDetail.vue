@@ -989,7 +989,7 @@ export default {
   display: none;
 }
 
-@media (max-width: 900px) {
+@media (max-width: 768px) {
   .page-car-detail {
     height: auto;
   }

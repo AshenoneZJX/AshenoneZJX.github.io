@@ -58,9 +58,9 @@ export default {
 
 .page-myspace { 
   padding: 20px;
-  max-width: 1200px;
+  width: 1200px;
+  min-width: 1200px;
   margin: 0 auto;
-  width: 100%;
   font-family: 'MotivaSans', sans-serif;
   box-sizing: border-box;
 }
@@ -79,6 +79,8 @@ export default {
   transition: transform 0.2s;
   cursor: pointer;
   text-decoration: none;
+  border-radius: 10px;
+  overflow: hidden;
 }
 .gallery-card:hover { transform: translateY(-5px); }
 
