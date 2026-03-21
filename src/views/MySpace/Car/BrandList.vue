@@ -55,6 +55,37 @@ export default {
 </script>
 
 <style scoped>
+.back-btn {
+  background: transparent;
+  border: 1px solid var(--c-border-strong);
+  color: var(--c-text-body-alt);
+  padding: 6px 12px;
+  cursor: pointer;
+  border-radius: 6px;
+  font-size: 14px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-left: auto; /* Ensure right alignment in flex container */
+  transition: all 0.2s ease;
+  text-decoration: none;
+}
+.back-icon {
+  width: 16px;
+  height: 16px;
+  display: block;
+}
+.back-btn:hover {
+  color: var(--c-text-emphasis);
+  background: var(--c-primary-alpha-10);
+  border-color: var(--c-border-hover);
+}
+.back-btn:active, .back-btn.router-link-active {
+  background: var(--c-bg-l1);
+  border-color: var(--c-primary);
+  color: var(--c-text-title);
+}
+
 .page-brands { 
   padding: 20px;
   max-width: 1200px;
@@ -63,15 +94,8 @@ export default {
   box-sizing: border-box;
 }
 .section-header { display: flex; justify-content: space-between; align-items: center; }
-.section-header h2 { color: #fff; font-weight: 400; letter-spacing: 2px; }
-.divider { height: 2px; background: #2a475e; margin: 10px 0 30px 0; }
-.back-btn { background: transparent; border: 1px solid #3c4551; color: #c7d5e0; padding: 4px 10px; cursor: pointer; border-radius: 6px; font-size: 14px; display: inline-flex; align-items: center; gap: 6px; }
-.back-icon {
-  width: 16px;
-  height: 16px;
-  display: block;
-}
-.back-btn:hover { color: #e6f3ff; background: rgba(102,192,244,0.12); }
+.section-header h2 { color: var(--c-text-title); font-weight: 400; letter-spacing: 2px; }
+.divider { height: 2px; background: var(--c-border-strong); margin: 10px 0 30px 0; }
 
 .brands-grid {
   display: grid;
@@ -79,10 +103,10 @@ export default {
   gap: 16px;
 }
 .brand-card {
-  background-color: #16202d;
+  background-color: var(--c-bg-l2);
   padding: 14px;
   border-radius: 6px;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+  box-shadow: 0 4px 15px var(--c-shadow-medium);
   cursor: pointer;
   transition: transform 0.2s;
   min-height: 120px;
@@ -103,7 +127,7 @@ export default {
   content: "";
   position: absolute;
   inset: 0;
-  background: rgba(0,0,0,0.35);
+  background: var(--c-shadow-medium);
   border-radius: 6px;
   pointer-events: none;
   z-index: 1;
@@ -111,23 +135,23 @@ export default {
 /* 鼠标悬停时卡片上浮4px，产生轻微浮起效果 */
 .brand-card:hover { transform: translateY(-4px); }
 .brand-title { 
-  color: #fff; 
+  color: var(--c-text-title); 
   font-weight: 600; 
   font-size: 18px; 
   margin-bottom: 6px; 
   position: relative; 
   z-index: 2;
-  background: rgba(0, 0, 0, 0.6);
+  background: var(--c-shadow-heavy);
   padding: 4px 8px;
   border-radius: 4px;
   width: fit-content;
 }
 .brand-meta { 
-  color: #9cc9f5; 
+  color: var(--c-primary); 
   font-size: 13px; 
   position: relative; 
   z-index: 2;
-  background: rgba(0, 0, 0, 0.6);
+  background: var(--c-shadow-heavy);
   padding: 2px 6px;
   border-radius: 4px;
   width: fit-content;
@@ -135,6 +159,12 @@ export default {
 
 @media (max-width: 768px) {
   .back-text { display: none; }
-  .back-btn { padding: 4px; }
+}
+
+
+
+
+@media (max-width: 768px) {
+  
 }
 </style>

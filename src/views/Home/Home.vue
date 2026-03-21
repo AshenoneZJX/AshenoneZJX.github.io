@@ -195,7 +195,7 @@ export default {
 
 .hero-overlay {
   text-align: center;
-  background: rgba(0, 0, 0, 0.5);
+  background: var(--c-shadow-heavy);
   padding: 20px 40px;
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
@@ -207,12 +207,12 @@ export default {
 }
 
 .quote { 
-  color: #fff; 
+  color: var(--c-text-title); 
   font-style: italic; 
   margin-bottom: 8px;
   font-size: 18px; /* 在这里调整字体大小 */
 }
-.quote-author { color: #66c0f4; font-weight: bold; font-family: serif; font-size: 18px; }
+.quote-author { color: var(--c-primary); font-weight: bold; font-family: serif; font-size: 18px; }
 
 /* 三栏布局 */
 .home-layout {
@@ -225,7 +225,7 @@ export default {
 }
 
 .left-col { width: 250px; flex-shrink: 0; position: sticky; top: 104px; }
-.middle-col { flex-grow: 1; background: rgba(0,0,0,0.2); padding: 20px; border-radius: 6px; }
+.middle-col { flex-grow: 1; background: var(--c-shadow-light); padding: 20px; border-radius: 6px; }
 .right-col { width: 280px; flex-shrink: 0; position: sticky; top: 104px; }
 
 .left-col :deep(.languages-section) {
@@ -235,14 +235,14 @@ export default {
 
 /* Quick Access Styles */
 .quick-access-panel {
-  background: rgba(0, 0, 0, 0.2);
+  background: var(--c-shadow-light);
   padding: 15px;
   border-radius: 6px;
 }
 
 .quick-access-title {
   font-size: 16px;
-  color: #66c0f4;
+  color: var(--c-primary);
   margin-bottom: 12px;
   font-weight: bold;
   font-family: 'SourceHanSansSC', sans-serif;
@@ -262,7 +262,7 @@ export default {
   border-radius: 6px;
   text-decoration: none;
   transition: all 0.2s;
-  border-left: 3px solid #66c0f4;
+  border-left: 3px solid var(--c-primary);
 }
 
 .quick-access-item:hover {
@@ -275,27 +275,27 @@ export default {
   align-items: center;
   justify-content: center;
   margin-right: 12px;
-  color: #66c0f4;
+  color: var(--c-primary);
 }
 
 .quick-access-item .label {
-  color: #e6f3ff;
+  color: var(--c-text-emphasis);
   font-size: 14px;
   font-weight: 500;
 }
 
 .showcase-box {
   margin-top: 20px;
-  border: 1px solid #3c4551;
+  border: 1px solid var(--c-border-hover);
   padding: 10px;
 }
-.showcase-img { height: 160px; background: #000; margin-top: 5px; background-size: cover; background-position: center; border: 1px solid #3c4551;}
-.showcase-desc { margin-top: 8px; color: #c7d5e0; font-size: 13px; }
+.showcase-img { height: 160px; background: #000; margin-top: 5px; background-size: cover; background-position: center; border: 1px solid var(--c-border-hover);}
+.showcase-desc { margin-top: 8px; color: var(--c-text-body-alt); font-size: 13px; }
 
 .myspace-grid { display: flex; gap: 12px; margin-top: 10px; }
-.myspace-card { display: flex; flex-direction: column; justify-content: center; width: 33.333%; min-height: 90px; padding: 12px 14px; background: rgba(0,0,0,0.25); border: 1px solid #3c4551; color: #e6f3ff; cursor: default; border-radius: 8px; }
-.card-title { font-size: 16px; font-weight: 600; margin-bottom: 6px; color: #66c0f4; }
-.card-desc { font-size: 13px; color: #c7d5e0; }
+.myspace-card { display: flex; flex-direction: column; justify-content: center; width: 33.333%; min-height: 90px; padding: 12px 14px; background: rgba(0,0,0,0.25); border: 1px solid var(--c-border-hover); color: var(--c-text-emphasis); cursor: default; border-radius: 8px; }
+.card-title { font-size: 16px; font-weight: 600; margin-bottom: 6px; color: var(--c-primary); }
+.card-desc { font-size: 13px; color: var(--c-text-body-alt); }
 
 @media (max-width: 768px) {
   .myspace-grid { flex-direction: column; }
@@ -334,7 +334,7 @@ export default {
   padding: 20px;
   background: rgba(0, 0, 0, 0.15);
   border-radius: 6px;
-  border: 1px dashed #3c4551;
+  border: 1px dashed var(--c-border-hover);
   font-family: 'SourceHanSansSC', sans-serif;
   overflow-x: auto;
 }
@@ -348,25 +348,25 @@ export default {
 
 /* 节点通用样式 */
 .node-box {
-  background: #1b2838;
-  border: 1px solid #3c4551;
+  background: var(--c-bg-l1);
+  border: 1px solid var(--c-border-hover);
   border-radius: 4px;
   padding: 8px 12px;
   text-align: center;
   position: relative;
   z-index: 2;
   min-width: 120px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  box-shadow: 0 2px 6px var(--c-shadow-light);
 }
 
 .root-box {
-  background: linear-gradient(135deg, #1b2838 0%, #2a475e 100%);
-  border-color: #66c0f4;
+  background: linear-gradient(135deg, var(--c-bg-l1) 0%, var(--c-border-strong) 100%);
+  border-color: var(--c-primary);
   box-shadow: 0 0 10px rgba(102, 192, 244, 0.15);
 }
 
 .sub-node { 
-  background: #171a21; 
+  background: var(--c-bg-l0); 
   width: 140px; 
 }
 .sub-node.highlight { 
@@ -381,14 +381,14 @@ export default {
 }
 .topic-node:last-child { margin-bottom: 0; }
 
-.node-title { display: block; font-weight: bold; color: #e6f3ff; font-size: 13px; }
-.node-path, .node-desc { display: block; font-size: 11px; color: #8f98a0; margin-top: 2px; }
+.node-title { display: block; font-weight: bold; color: var(--c-text-emphasis); font-size: 13px; }
+.node-path, .node-desc { display: block; font-size: 11px; color: var(--c-text-muted); margin-top: 2px; }
 
 /* 桌面端树状布局 */
 .tree-root { position: relative; margin-bottom: 20px; }
 /* 根节点向下连线 */
 .root-connector {
-  width: 1px; height: 20px; background: #3c4551; margin-top: -20px; margin-bottom: 0;
+  width: 1px; height: 20px; background: var(--c-border-hover); margin-top: -20px; margin-bottom: 0;
 }
 
 .tree-level-1 {
@@ -412,11 +412,11 @@ export default {
 /* 向上垂直连线 */
 .tree-branch::before {
   content: ''; position: absolute; top: -20px; left: 50%;
-  width: 1px; height: 20px; background: #3c4551;
+  width: 1px; height: 20px; background: var(--c-border-hover);
 }
 /* 顶部水平连线 */
 .tree-branch::after {
-  content: ''; position: absolute; top: -20px; height: 1px; background: #3c4551;
+  content: ''; position: absolute; top: -20px; height: 1px; background: var(--c-border-hover);
   width: 100%; left: 0;
 }
 /* 第一个分支：线从中心向右 */
@@ -436,22 +436,22 @@ export default {
 /* 连接 sub-level 到父节点的线 */
 .sub-level::before {
   content: ''; position: absolute; top: -12px; left: 50%;
-  width: 1px; height: 12px; background: #3c4551;
+  width: 1px; height: 12px; background: var(--c-border-hover);
 }
 
 .sub-item {
-  font-size: 11px; color: #aebdc9; background: rgba(0,0,0,0.3);
-  padding: 4px 8px; border-radius: 3px; border: 1px solid #3c4551;
+  font-size: 11px; color: var(--c-text-muted); background: rgba(0,0,0,0.3);
+  padding: 4px 8px; border-radius: 3px; border: 1px solid var(--c-border-hover);
   width: 100%; box-sizing: border-box; text-align: center;
 }
 .flow-item { display: flex; align-items: center; justify-content: center; gap: 4px; }
-.arrow { color: #66c0f4; font-size: 10px; }
-.leaf { color: #66c0f4; }
+.arrow { color: var(--c-primary); font-size: 10px; }
+.leaf { color: var(--c-primary); }
 
 .node-group-vertical { display: flex; flex-direction: column; align-items: center; width: 100%; }
 .node-group-vertical::before {
   content: ''; position: absolute; top: 0; left: 50%;
-  width: 1px; height: 10px; background: #3c4551; display: none; /* Already handled by tree-branch */
+  width: 1px; height: 10px; background: var(--c-border-hover); display: none; /* Already handled by tree-branch */
 }
 
 /* 移动端/窄屏 垂直布局重构 */
@@ -476,7 +476,7 @@ export default {
     width: 100%;
     position: relative;
     /* 左侧大连线 */
-    border-left: 2px dashed #3c4551;
+    border-left: 2px dashed var(--c-border-hover);
     margin-left: 10px;
     padding-left: 20px;
     box-sizing: border-box;
@@ -503,7 +503,7 @@ export default {
     left: -22px; /* 连接到左侧大连线 */
     width: 20px;
     height: 1px;
-    background: #3c4551;
+    background: var(--c-border-hover);
   }
 
   /* 节点样式调整 */
@@ -518,7 +518,7 @@ export default {
   .sub-level {
     margin-top: 10px;
     padding-left: 15px;
-    border-left: 1px solid #3c4551;
+    border-left: 1px solid var(--c-border-hover);
     margin-left: 10px;
     width: calc(100% - 10px);
     align-items: flex-start;
@@ -536,22 +536,22 @@ export default {
 
 /* Learning 静态卡片展示 */
 .learning-grid { display: flex; gap: 12px; margin-top: 10px; }
-.learning-card { display: flex; flex-direction: column; justify-content: center; width: 33.333%; min-height: 90px; padding: 12px 14px; background: rgba(0,0,0,0.25); border: 1px solid #3c4551; color: #e6f3ff; cursor: default; border-radius: 8px; }
+.learning-card { display: flex; flex-direction: column; justify-content: center; width: 33.333%; min-height: 90px; padding: 12px 14px; background: rgba(0,0,0,0.25); border: 1px solid var(--c-border-hover); color: var(--c-text-emphasis); cursor: default; border-radius: 8px; }
 
 /* 架构图描述样式 */
 .diagram-description {
   margin-top: 20px;
-  background: rgba(0, 0, 0, 0.2);
+  background: var(--c-shadow-light);
   padding: 15px;
   border-radius: 6px;
-  border-left: 3px solid #66c0f4;
+  border-left: 3px solid var(--c-primary);
   font-family: 'SourceHanSansSC', sans-serif;
 }
 
 .diagram-description p {
   margin: 0 0 10px 0;
   font-size: 14px;
-  color: #c7d5e0;
+  color: var(--c-text-body-alt);
 }
 
 .desc-list {
@@ -568,25 +568,25 @@ export default {
 
 .desc-label {
   font-weight: bold;
-  color: #66c0f4;
+  color: var(--c-primary);
   font-size: 13px;
   margin-bottom: 2px;
 }
 
 .desc-text {
   font-size: 13px;
-  color: #8f98a0;
+  color: var(--c-text-muted);
   line-height: 1.5;
 }
 
 .desc-text em {
   font-style: normal;
-  color: #e6f3ff;
+  color: var(--c-text-emphasis);
 }
 
 .diagram-note {
   font-size: 12px;
-  color: #67c1f5;
+  color: var(--c-primary);
   font-style: italic;
   margin-top: 10px;
   opacity: 0.8;

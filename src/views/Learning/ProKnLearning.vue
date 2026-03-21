@@ -1,15 +1,13 @@
 <template>
-  <div class="page-car-basics container">
+  <div class="page-professional">
     <div class="section-header">
-      <h2>汽车基础知识</h2>
-      <button class="back-btn" @click="$router.push('/mySpace/cars-home')">
+      <h2>专业知识</h2>
+      <button class="back-btn" @click="$router.push('/learning')">
         <img src="@/assets/images/fanhui.svg" class="back-icon" alt="返回" />
-        <span class="back-text">返回汽车主页</span>
+        <span class="back-text">返回总览</span>
       </button>
     </div>
     <div class="divider"></div>
-
-    
 
     <div class="content-2col">
       <aside class="col-left">
@@ -37,9 +35,6 @@
             :key="art.id"
             @click="goDetail(art)"
           >
-            <div class="record-logo" v-if="getLogo(art.title)">
-              <img :src="getLogo(art.title)" :alt="art.title" />
-            </div>
             <div class="record-content">
               <div class="record-title">{{ art.title }}</div>
               <div class="record-excerpt">
@@ -54,13 +49,13 @@
 </template>
 
 <script>
-import carBasics from '@/data/car/carBasics.js'
+import professionalKnowledge from '@/data/learning/professionalKnowledge.js'
 
 export default {
-  name: 'CarBasics',
+  name: 'ProKnLearning',
   data() {
     return {
-      items: carBasics,
+      items: professionalKnowledge,
       activeCategory: '全部'
     }
   },
@@ -81,17 +76,10 @@ export default {
       return t.length > 120 ? t.slice(0, 120) + '…' : t
     },
     goDetail(art) {
-      this.$router.push({ name: 'CarBasicsDetail', params: { id: art.id } })
+      this.$router.push({ name: 'ProKnDetail', params: { id: art.id } })
     },
     setCategory(cat) {
       this.activeCategory = cat
-    },
-    getLogo(title) {
-      try {
-        return require(`@/assets/images/carbasicLOGO/${title}.png`)
-      } catch (e) {
-        return ''
-      }
     }
   }
 }
@@ -129,11 +117,11 @@ export default {
   color: var(--c-text-title);
 }
 
-.page-car-basics {
+.page-professional {
+  padding: 20px 16px 0;
   width: 1200px;
   min-width: 1200px;
   margin: 0 auto;
-  padding: 20px;
   box-sizing: border-box;
 }
 .section-header { display: flex; justify-content: space-between; align-items: center; }
@@ -178,54 +166,43 @@ export default {
   border-radius: 6px;
   border: none;
   background: var(--c-primary-alpha-10);
-  color: var(--c-text-body-alt);
+  color: var(--c-text-body);
   font-size: 15px;
   cursor: pointer;
   text-align: left;
   box-sizing: border-box;
   transition: background 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
 }
-.filter-btn.active { background: var(--c-primary-alpha-40); color: var(--c-text-title); box-shadow: inset 0 0 0 1px rgba(102,192,244,0.85); }
+.filter-btn.active { background: var(--c-primary-alpha-40); color: var(--c-text-title); box-shadow: inset 0 0 0 1px var(--c-primary-alpha-80); }
 .record-list { display: flex; flex-direction: column; gap: 8px; }
 .record-item {
   display: flex;
-  background: var(--c-shadow-light);
+  background: var(--c-bg-l2);
   padding: 15px;
-  border: 1px solid transparent;
+  border: 1px solid var(--c-border-default);
   border-radius: 10px;
   transition: background 0.2s, border-color 0.2s, box-shadow 0.2s;
 }
-.record-item:hover { 
+.record-item:hover {
   background: var(--c-primary-alpha-10);
-  border-color: var(--c-primary-alpha-20);
+  border-color: var(--c-primary);
   box-shadow: 0 8px 20px var(--c-shadow-medium);
 }
 .record-item.clickable { cursor: pointer; }
-.record-logo {
-  width: 60px;
-  height: 60px;
-  margin-right: 15px;
-  padding: 5px;
-  flex-shrink: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.record-logo img {
-  max-width: 100%;
-  max-height: 100%;
-  object-fit: contain;
-}
 .record-content { flex: 1; }
 .record-title { color: var(--c-primary); font-size: 20px; font-weight: 400; margin-bottom: 4px; }
 .record-excerpt { font-size: 13px; color: var(--c-text-muted); }
 
 @media (max-width: 768px) {
   .back-text { display: none; }
+  
   .record-list { padding: 0; }
   .section-header { padding: 0; }
-  .content-2col { flex-direction: column; }
+  .content-2col { flex-direction: column; gap: 16px; }
   .col-left, .col-right { width: 100%; }
+}
+
+@media (max-width: 768px) {
 }
 
 

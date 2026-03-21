@@ -96,7 +96,7 @@ export default {
         textStyle: {
           fontFamily: 'Inter, "AlibabaPuHuiTi", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif'
         },
-        title: { text: title, left: 'center', textStyle: { color: '#fff' } },
+        title: { text: title, left: 'center', textStyle: { color: 'var(--c-text-title)' } },
         grid: { left: leftPad, right: 20, top: 44, bottom: 60, containLabel: false },
         tooltip: {
           trigger: 'axis',
@@ -112,18 +112,18 @@ export default {
         },
         xAxis: {
           type: 'value',
-          axisLabel: { color: '#9cc9f5', rotate: 35, hideOverlap: true, margin: 10 },
-          splitLine: { show: true, lineStyle: { color: '#2a475e' } }
+          axisLabel: { color: 'var(--c-primary)', rotate: 35, hideOverlap: true, margin: 10 },
+          splitLine: { show: true, lineStyle: { color: 'var(--c-border-strong)' } }
         },
         yAxis: {
           type: 'category',
           data: names,
-          axisLabel: { color: '#9cc9f5', margin: 8 }
+          axisLabel: { color: 'var(--c-primary)', margin: 8 }
         },
         series: [{
           type: 'bar',
           data: values,
-          itemStyle: { color: '#66c0f4' },
+          itemStyle: { color: 'var(--c-primary)' },
           barWidth: 16
         }],
         backgroundColor: 'transparent'
@@ -143,13 +143,13 @@ export default {
   gap: 8px;
   margin: 0;
   padding-bottom: 10px;
-  border-bottom: 1px solid #2a475e;
+  border-bottom: 1px solid var(--c-border-strong);
   flex-wrap: wrap;
 }
 .tab-btn {
   background: rgba(255,255,255,0.06);
   border: 1px solid rgba(255,255,255,0.12);
-  color: #c7d5e0;
+  color: var(--c-text-body-alt);
   height: 28px;
   padding: 0 12px;
   border-radius: 999px;
@@ -157,14 +157,14 @@ export default {
   font-size: 12px;
 }
 .tab-btn:hover {
-  background: rgba(102,192,244,0.12);
+  background: var(--c-primary-alpha-10);
   border-color: rgba(102,192,244,0.6);
-  color: #e6f3ff;
+  color: var(--c-text-emphasis);
 }
 .tab-btn.active {
-  background: rgba(102,192,244,0.22);
+  background: var(--c-primary-alpha-20);
   border-color: rgba(102,192,244,0.8);
-  color: #e6f3ff;
+  color: var(--c-text-emphasis);
 }
 .chart {
   width: 100%;

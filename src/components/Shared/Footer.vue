@@ -23,9 +23,9 @@ export default {
   flex-shrink: 0;
   margin-top: 50px;
   padding: 40px 0;
-  background: #171a21;
+  background: var(--c-bg-l0);
   text-align: center;
-  color: #8f98a0;
+  color: var(--c-text-muted);
   font-size: 12px;
   border-top: 1px solid #2e353f;
   position: relative;
@@ -77,7 +77,7 @@ export default {
 }
 
 .footer-link-text {
-  color: #8f98a0;
+  color: var(--c-text-muted);
   font-size: 10px;
   transition: color 0.2s;
 }
@@ -87,7 +87,7 @@ export default {
 }
 
 .footer-link:hover .footer-link-text {
-  color: #66c0f4;
+  color: var(--c-primary);
   text-decoration: underline;
 }
 

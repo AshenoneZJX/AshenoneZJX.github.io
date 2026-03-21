@@ -5,10 +5,10 @@
     <div class="section-header">
       <div class="title-row">
         <h2>雅思学习</h2>
-        <router-link class="back-btn" to="/learning">
+        <button class="back-btn" @click="$router.push('/learning')">
           <img src="@/assets/images/fanhui.svg" class="back-icon" alt="返回" />
           <span class="back-text">返回总览</span>
-        </router-link>
+        </button>
       </div>
       <div class="divider"></div>
     </div>
@@ -41,28 +41,20 @@ export default {
 </script>
 
 <style scoped>
-.page-ielts {
-  padding-top: 20px;
-  width: 1200px;
-  min-width: 1200px;
-  margin: 0 auto;
-  box-sizing: border-box;
-}
-.section-header h2 { color: #fff; font-weight: 400; letter-spacing: 2px; }
-.divider { height: 2px; background: #2a475e; margin: 10px 0 30px 0; }
-
-.title-row { display: flex; align-items: center; justify-content: space-between; }
 .back-btn {
   background: transparent;
-  border: none;
-  color: #c7d5e0;
-  padding: 4px 8px;
-  border-radius: 6px;
+  border: 1px solid var(--c-border-strong);
+  color: var(--c-text-body-alt);
+  padding: 6px 12px;
   cursor: pointer;
-  text-decoration: none;
+  border-radius: 6px;
+  font-size: 14px;
   display: inline-flex;
   align-items: center;
   gap: 6px;
+  margin-left: auto; /* Ensure right alignment in flex container */
+  transition: all 0.2s ease;
+  text-decoration: none;
 }
 .back-icon {
   width: 16px;
@@ -70,9 +62,27 @@ export default {
   display: block;
 }
 .back-btn:hover {
-  background: rgba(102,192,244,0.12);
-  color: #e6f3ff;
+  color: var(--c-text-emphasis);
+  background: var(--c-primary-alpha-10);
+  border-color: var(--c-border-hover);
 }
+.back-btn:active, .back-btn.router-link-active {
+  background: var(--c-bg-l1);
+  border-color: var(--c-primary);
+  color: var(--c-text-title);
+}
+
+.page-ielts {
+  padding-top: 20px;
+  width: 1200px;
+  min-width: 1200px;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+.section-header h2 { color: var(--c-text-title); font-weight: 400; letter-spacing: 2px; }
+.divider { height: 2px; background: var(--c-border-strong); margin: 10px 0 30px 0; }
+
+.title-row { display: flex; align-items: center; justify-content: space-between; }
 
 .modules-grid {
   display: grid;
@@ -81,14 +91,14 @@ export default {
 }
 
 .module-card {
-  background: #16202d;
-  border: 1px solid #1b2838;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.35);
+  background: var(--c-bg-l2);
+  border: 1px solid var(--c-bg-l1);
+  box-shadow: 0 4px 12px var(--c-shadow-medium);
   padding: 16px;
-  color: #b8b6b4;
+  color: var(--c-text-nav);
 }
 .card-title {
-  color: #ffffff;
+  color: var(--c-text-title);
   font-weight: 600;
   letter-spacing: 1px;
   margin-bottom: 8px;
@@ -97,6 +107,12 @@ export default {
 
 @media (max-width: 768px) {
   .back-text { display: none; }
-  .back-btn { padding: 6px; }
+}
+
+
+
+
+@media (max-width: 768px) {
+  
 }
 </style>

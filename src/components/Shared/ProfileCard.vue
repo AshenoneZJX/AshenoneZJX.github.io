@@ -56,7 +56,7 @@
 }
 
 .profile-card {
-  background-color: rgba(0, 0, 0, 0.2); /* 稍微深一点的背景 */
+  background-color: var(--c-shadow-light); /* 稍微深一点的背景 */
   padding: 15px;
   height: fit-content;
   font-family: 'RobotoMono', monospace;
@@ -81,7 +81,7 @@
 }
 
 .username {
-  color: #ffffff;
+  color: var(--c-text-title);
   font-size: 24px;
   margin-bottom: 5px;
   text-align: center;
@@ -90,14 +90,14 @@
 
 .location {
   font-size: 13px;
-  color: #8f98a0;
+  color: var(--c-text-muted);
   text-align: center;
   margin-bottom: 15px;
 }
 
 .bio {
   font-size: 12px;
-  color: #c6d4df;
+  color: var(--c-text-body);
   line-height: 1.5;
   margin-bottom: 20px;
   text-align: left;
@@ -111,7 +111,7 @@
 }
 
 .lang-title {
-  color: #ffffff;
+  color: var(--c-text-title);
   font-size: 14px;
   font-weight: 600;
   margin-bottom: 10px;

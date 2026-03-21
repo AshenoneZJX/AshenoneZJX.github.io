@@ -5,17 +5,17 @@
         <img v-if="brandLogoFor" class="brand-logo" :src="brandLogoFor" :alt="brandName" />
         <h2>{{ brandName }}</h2>
       </div>
-      <router-link class="back-btn" to="/mySpace/brands">
+      <button class="back-btn" @click="$router.push('/mySpace/brands')">
         <img src="@/assets/images/fanhui.svg" class="back-icon" alt="返回" />
         <span class="back-text">返回</span>
-      </router-link>
+      </button>
     </div>
     <div class="divider span-full"></div>
 
     <!-- 简介 -->
-    <div class="wiki-box span-full" v-if="brandInfo && brandInfo.description">
+    <blockquote class="wiki-box span-full" v-if="brandInfo && brandInfo.description">
       <p class="summary">{{ brandInfo.description }}</p>
-    </div>
+    </blockquote>
 
     <!-- 历史 -->
     <section class="brand-section span-full" v-if="brandInfo && brandInfo.history">
@@ -52,7 +52,7 @@
         <span class="icon">🔬</span> 核心技术
       </h3>
       <div v-for="(tech, index) in brandInfo.technology" :key="index" class="tech-card">
-        <div class="tech-header">{{ tech.title }}</div>
+        <h4 class="tech-header">{{ tech.title }}</h4>
         <div class="tech-body">{{ tech.content }}</div>
       </div>
     </section>
@@ -130,12 +130,55 @@ export default {
 </script>
 
 <style scoped>
+.back-btn {
+  background: transparent;
+  border: 1px solid var(--c-border-strong);
+  color: var(--c-text-body-alt);
+  padding: 6px 12px;
+  cursor: pointer;
+  border-radius: 6px;
+  font-size: 14px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-left: auto; /* Ensure right alignment in flex container */
+  transition: all 0.2s ease;
+  text-decoration: none;
+}
+.back-icon {
+  width: 16px;
+  height: 16px;
+  display: block;
+}
+.back-btn:hover {
+  color: var(--c-text-emphasis);
+  background: var(--c-primary-alpha-10);
+  border-color: var(--c-border-hover);
+}
+.back-btn:active, .back-btn.router-link-active {
+  background: var(--c-bg-l1);
+  border-color: var(--c-primary);
+  color: var(--c-text-title);
+}
+
 @font-face {
   font-family: 'Motiva Sans';
   src: url('~@/assets/fonts/MotivaSans-Regular_woff.ttf') format('truetype');
   font-weight: 400;
   font-style: normal;
   font-display: swap;
+}
+
+@font-face {
+  font-family: 'AlibabaPuHuiTi';
+  src: url('~@/assets/fonts/AlibabaPuHuiTi-3-65-Medium.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+h2, h3, h4 {
+  font-family: 'AlibabaPuHuiTi', 'Motiva Sans', sans-serif;
 }
 
 .page-brand-detail {
@@ -171,11 +214,12 @@ export default {
 }
 
 .section-header h2 {
-  color: #fff;
-  font-weight: normal;
+  color: var(--c-text-title);
+  font-weight: 500;
   letter-spacing: 2px;
   font-size: var(--brand-title-size);
-  font-family: 'Motiva Sans', sans-serif;
+  font-family: 'AlibabaPuHuiTi', 'Motiva Sans', sans-serif;
+  margin: 0;
 }
 
 .brand-logo {
@@ -188,27 +232,19 @@ export default {
 
 .divider {
   height: 2px;
-  background: #2a475e;
+  background: var(--c-border-strong);
   margin: 10px 0 30px 0;
 }
-
-.back-btn { background: transparent; border: 1px solid #3c4551; color: #c7d5e0; padding: 6px 12px; cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; border-radius: 6px; }
-.back-icon {
-  width: 16px;
-  height: 16px;
-  display: block;
-}
-.back-btn:hover { color: #e6f3ff; background: rgba(102,192,244,0.12); }
 
 .brand-section {
   margin-bottom: 40px;
 }
 
 .section-title {
-  color: #fff;
+  color: var(--c-text-title);
   font-size: 20px;
-  font-weight: normal;
-  font-family: 'Motiva Sans', sans-serif;
+  font-weight: 500;
+  font-family: 'AlibabaPuHuiTi', 'Motiva Sans', sans-serif;
   margin-bottom: 20px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   padding-bottom: 10px;
@@ -222,50 +258,105 @@ export default {
 }
 
 .wiki-box {
-  background: rgba(22, 32, 45, 0.5);
-  border-left: 4px solid #66c0f4;
-  padding: 16px 20px;
-  border-radius: 0 4px 4px 0;
-  margin-bottom: 30px;
+  margin: 0 0 30px 0;
+  padding: 24px 100px;
+  background: linear-gradient(135deg, var(--c-primary-alpha-20) 0%, transparent 100%);
+  border-left: 4px solid var(--c-primary);
+  border-radius: 0;
+  color: var(--c-text-body-alt);
+  position: relative;
+  box-shadow: 0 4px 12px var(--c-shadow-light);
+  overflow: hidden;
+  z-index: 1;
 }
 
-.summary {
-  color: #c6d4df;
-  font-size: 16px;
-  line-height: 1.6;
+.wiki-box::before {
+  content: '“';
+  position: absolute;
+  top: -10px;
+  left: 10px;
+  font-size: 100px;
+  color: var(--c-primary-alpha-20);
+  font-family: Georgia, serif;
+  line-height: 1;
+  z-index: -1;
+  pointer-events: none;
+}
+
+.wiki-box::after {
+  content: '”';
+  position: absolute;
+  bottom: -50px;
+  right: 10px;
+  font-size: 100px;
+  color: var(--c-primary-alpha-20);
+  font-family: Georgia, serif;
+  line-height: 1;
+  z-index: -1;
+  pointer-events: none;
+}
+
+.wiki-box p {
   margin: 0;
+  line-height: 1.8;
+  font-size: 16px;
+  font-style: italic;
+  color: var(--c-text-title);
+  letter-spacing: 0.5px;
 }
 
 .history-text {
-  color: #acb2b8;
+  color: var(--c-text-muted);
   line-height: 1.8;
   font-size: 15px;
   text-indent: 2em;
 }
 
 .tech-card {
-  background: #1b2838;
+  background: var(--c-bg-l1);
   border-radius: 8px;
-  padding: 20px;
-  border: 1px solid #2a475e;
+  padding: 10px;
+  border: 1px solid var(--c-primary-alpha-20);
+  box-shadow: 0 4px 12px var(--c-shadow-light);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.tech-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px var(--c-shadow-medium);
+  border-color: var(--c-primary-alpha-40);
 }
 
 .tech-header {
-  color: #fff;
-  font-weight: bold;
-  font-size: 16px;
-  margin-bottom: 10px;
-  color: #66c0f4;
+  color: var(--c-text-title);
+  font-weight: 500;
+  font-family: 'AlibabaPuHuiTi', 'Motiva Sans', sans-serif;
+  font-size: 18px;
+  margin: 0 0 12px 0;
+  display: inline-block;
+  position: relative;
+  z-index: 1;
+}
+
+.tech-header::after {
+  content: '';
+  position: absolute;
+  bottom: 2px;
+  left: 0;
+  width: 100%;
+  height: 8px;
+  background: var(--c-primary-alpha-40);
+  z-index: -1;
+  border-radius: 2px;
 }
 
 .tech-body {
-  color: #8f98a0;
+  color: var(--c-text-muted);
   font-size: 14px;
   line-height: 1.6;
 }
 
 .empty-state {
-  color: #666;
+  color: var(--c-text-muted);
   text-align: center;
   padding: 40px;
 }
@@ -278,7 +369,7 @@ export default {
 }
 .model-item { line-height: 1.8; margin: 4px 0; font-size: 15px; }
 .model-link {
-  color: #66c0f4;
+  color: var(--c-primary);
   text-decoration: none;
   display: inline-flex;
   align-items: center;
@@ -294,9 +385,9 @@ export default {
   transition: all 0.2s ease;
 }
 .model-link:hover { 
-  color: #fff; 
+  color: var(--c-text-title); 
   text-decoration: none; 
-  background: rgba(102, 192, 244, 0.1);
+  background: var(--c-primary-alpha-10);
   padding: 0 4px;
   margin: 0 -4px;
   border-radius: 4px;
@@ -304,10 +395,10 @@ export default {
 .model-link:hover::after {
   opacity: 1;
   transform: translateX(2px);
-  color: #66c0f4;
+  color: var(--c-primary);
 }
 .model-name {
-  color: #acb2b8;
+  color: var(--c-text-muted);
 }
 
 .col-left {
@@ -337,6 +428,12 @@ export default {
   }
   
   .back-text { display: none; }
-  .back-btn { padding: 6px; }
+}
+
+
+
+
+@media (max-width: 768px) {
+  
 }
 </style>

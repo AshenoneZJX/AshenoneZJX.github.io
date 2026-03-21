@@ -35,8 +35,8 @@ export default {
   margin: 0 auto;
   width: 100%;
 }
-.section-header h2 { color: #fff; font-weight: 300; letter-spacing: 2px; }
-.divider { height: 2px; background: #2a475e; margin: 10px 0 30px 0; }
+.section-header h2 { color: var(--c-text-title); font-weight: 300; letter-spacing: 2px; }
+.divider { height: 2px; background: var(--c-border-strong); margin: 10px 0 30px 0; }
 
 .gallery-grid {
   display: grid;
@@ -44,13 +44,13 @@ export default {
   gap: 20px;
 }
 .gallery-card {
-  background: #16202d;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+  background: var(--c-bg-l2);
+  box-shadow: 0 4px 15px var(--c-shadow-medium);
   transition: transform 0.2s;
   cursor: pointer;
   text-decoration: none;
 }
 .gallery-card:hover { transform: translateY(-5px); }
 .card-image { height: 160px; background-size: cover; background-position: center; position: relative; }
-.hover-overlay { position: absolute; bottom: 0; left: 0; right: 0; padding: 8px 12px; background: rgba(0,0,0,0.5); color: #fff; font-weight: 600; letter-spacing: 1px; }
+.hover-overlay { position: absolute; bottom: 0; left: 0; right: 0; padding: 8px 12px; background: var(--c-shadow-heavy); color: var(--c-text-title); font-weight: 600; letter-spacing: 1px; }
 </style>

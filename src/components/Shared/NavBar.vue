@@ -19,11 +19,17 @@
             />
           </svg>
         </button>
-        <div class="nav-links">
-          <router-link to="/" exact tag="button">主页</router-link>
-          <router-link to="/mySpace" tag="button">个人空间</router-link>
-          <router-link to="/records" tag="button">记录</router-link>
-          <router-link to="/learning" tag="button">Learning</router-link>
+        <div class="nav-right">
+          <div class="nav-links">
+            <router-link to="/" exact tag="button">主页</router-link>
+            <router-link to="/mySpace" tag="button">个人空间</router-link>
+            <router-link to="/records" tag="button">记录</router-link>
+            <router-link to="/learning" tag="button">Learning</router-link>
+          </div>
+          <button class="theme-toggle" @click="toggleTheme" :title="isLightMode ? '切换到暗色模式' : '切换到浅色模式'">
+            <svg v-if="!isLightMode" viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="theme-icon"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+            <svg v-else viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="theme-icon"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+          </button>
         </div>
       </div>
     </nav>
@@ -37,6 +43,9 @@
       <router-link @click.native="closeMenu" to="/mySpace" tag="button">个人空间</router-link>
       <router-link @click.native="closeMenu" to="/records" tag="button">记录</router-link>
       <router-link @click.native="closeMenu" to="/learning" tag="button">Learning</router-link>
+      <button @click="toggleTheme" class="mobile-theme-toggle">
+        {{ isLightMode ? '切换到暗色模式' : '切换到浅色模式' }}
+      </button>
     </div>
     <div v-if="isOpen" class="menu-mask" :class="{ compact: isCompact }" @click="closeMenu"></div>
   </div>
@@ -48,7 +57,8 @@ export default {
   data() {
     return {
       isOpen: false,
-      isCompact: false
+      isCompact: false,
+      isLightMode: false
     }
   },
   watch: {
@@ -59,6 +69,15 @@ export default {
   mounted() {
     window.addEventListener('scroll', this.onScroll, { passive: true })
     this.onScroll()
+    
+    // Check saved theme or system preference
+    const savedTheme = localStorage.getItem('theme')
+    if (savedTheme) {
+      this.isLightMode = savedTheme === 'light'
+    } else {
+      this.isLightMode = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches
+    }
+    this.applyTheme()
   },
   beforeDestroy() {
     window.removeEventListener('scroll', this.onScroll)
@@ -76,6 +95,15 @@ export default {
     goHome() {
       this.isOpen = false
       this.$router.push('/')
+    },
+    toggleTheme() {
+      this.isLightMode = !this.isLightMode
+      this.applyTheme()
+    },
+    applyTheme() {
+      const theme = this.isLightMode ? 'light' : 'dark'
+      document.documentElement.setAttribute('data-theme', theme)
+      localStorage.setItem('theme', theme)
     }
   }
 }
@@ -105,7 +133,7 @@ export default {
   left: 0;
   width: 100%;
   height: 80px;
-  background-color: rgba(23, 26, 33, 0.9);
+  background-color: var(--c-nav-bg);
   -webkit-backdrop-filter: blur(6px);
   backdrop-filter: blur(6px);
   z-index: 1000;
@@ -129,7 +157,7 @@ export default {
   font-family: var(--title-font);
   font-size: 24px;
   font-weight: 300;
-  color: #ffffff;
+  color: var(--c-text-title);
   letter-spacing: 2px;
   display: flex;
   align-items: center;
@@ -141,8 +169,8 @@ export default {
 .menu-toggle {
   display: none;
   background: transparent;
-  border: 1px solid #2a2e36;
-  color: #b8b6b4;
+  border: 1px solid var(--c-border-strong);
+  color: var(--c-text-nav);
   font-size: 14px;
   font-weight: bold;
   text-transform: uppercase;
@@ -159,14 +187,24 @@ export default {
 .steam-navbar.compact .menu-icon { width: 14px; height: 14px; }
 
 .menu-toggle:hover {
-  color: #ffffff;
+  color: var(--c-text-title);
   border-color: #3a3f49;
+}
+
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.nav-links {
+  display: flex;
 }
 
 .nav-links button {
   background: transparent;
   border: none;
-  color: #b8b6b4;
+  color: var(--c-text-nav);
   font-size: 16px;
   font-weight: normal;
   text-transform: uppercase;
@@ -183,20 +221,45 @@ export default {
 }
 
 .nav-links button:hover {
-  color: #ffffff;
+  color: var(--c-text-title);
 }
 
 /* Vue Router 激活时的类名 */
 .nav-links button.router-link-active {
-  color: #66c0f4;
-  background-color: rgba(102, 192, 244, 0.2);
+  color: var(--c-primary);
+  background-color: var(--c-primary-alpha-20);
   border-radius: 4px;
-  border-bottom: 3px solid #66c0f4;
+  border-bottom: 3px solid var(--c-primary);
+}
+
+.theme-toggle {
+  background: transparent;
+  border: none;
+  color: var(--c-text-nav);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+}
+.theme-toggle:hover {
+  color: var(--c-text-title);
+  background: var(--c-primary-alpha-10);
+}
+.theme-icon {
+  width: 20px;
+  height: 20px;
+}
+.steam-navbar.compact .theme-icon {
+  width: 16px;
+  height: 16px;
 }
 
 .mobile-menu {
   display: none;
-  background-color: #171a21;
+  background-color: var(--c-bg-l0);
   flex-direction: column;
   padding: 20px 0;
   z-index: 999;
@@ -206,7 +269,7 @@ export default {
 .mobile-menu button {
   background: transparent;
   border: none;
-  color: #b8b6b4;
+  color: var(--c-text-nav);
   font-size: 16px;
   font-weight: bold;
   text-transform: uppercase;
@@ -219,7 +282,7 @@ export default {
 
 .mobile-menu button:hover,
 .mobile-menu button.router-link-active {
-  color: #ffffff;
+  color: var(--c-text-title);
 }
 
 .menu-mask {
@@ -228,7 +291,7 @@ export default {
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0,0,0,0.4);
+  background: var(--c-shadow-medium);
   z-index: 998;
   backdrop-filter: blur(2px);
   display: none;
@@ -264,6 +327,14 @@ export default {
   }
   .menu-mask {
     display: block;
+  }
+  .theme-toggle {
+    display: none;
+  }
+  .mobile-theme-toggle {
+    margin-top: 10px;
+    border-top: 1px solid var(--c-border-strong) !important;
+    color: var(--c-primary) !important;
   }
 }
 </style>

@@ -98,10 +98,10 @@
               </h2>
             </div>
             <div class="actions">
-              <router-link to="/mySpace/cars" class="back-btn">
+              <button  class="back-btn" @click="$router.push('/mySpace/cars')">
                 <img src="@/assets/images/fanhui.svg" class="back-icon" alt="返回" />
                 <span class="back-text">返回</span>
-              </router-link>
+              </button>
             </div>
           </div>
           
@@ -153,12 +153,6 @@
       <!-- Mobile Specs Drawer (Keep for compatibility) -->
       <button class="fab-specs" aria-label="查看参数" @click="toggleSpecs">参数</button>
 
-      <!-- Mobile Pager (Narrow Screen) -->
-      <div class="detail-pager-mobile">
-        <button class="nav-icon" :disabled="!hasPrev" @click="goPrev" aria-label="上一辆">‹</button>
-        <button class="nav-icon" :disabled="!hasNext" @click="goNext" aria-label="下一辆">›</button>
-      </div>
-
       <transition name="fade">
         <div class="specs-overlay" v-if="showSpecs" @click="toggleSpecs"></div>
       </transition>
@@ -198,7 +192,6 @@
           </div>
         </div>
       </transition>
-      <!-- 详情页内不再显示翻页按钮，改为全局 footer 上方显示 -->
     </div>
 
     <div v-else class="not-found">
@@ -227,29 +220,6 @@ export default {
     }
   },
   computed: {
-    sortedCars() {
-      return [...cars].sort((a, b) => Number(a.id) - Number(b.id))
-    },
-    currentIndex() {
-      if (!this.car) return -1
-      return this.sortedCars.findIndex(c => Number(c.id) === Number(this.car.id))
-    },
-    prevId() {
-      const i = this.currentIndex
-      if (i > 0) return this.sortedCars[i - 1].id
-      return null
-    },
-    nextId() {
-      const i = this.currentIndex
-      if (i >= 0 && i < this.sortedCars.length - 1) return this.sortedCars[i + 1].id
-      return null
-    },
-    hasPrev() {
-      return this.prevId !== null
-    },
-    hasNext() {
-      return this.nextId !== null
-    },
     energyList() {
       if (!this.car) return []
       return Array.isArray(this.car.energy) ? this.car.energy : [this.car.energy]
@@ -318,19 +288,6 @@ export default {
     }
   },
   methods: {
-    carDetailPath(id) {
-      return `/mySpace/cars/${id}`
-    },
-    goPrev() {
-      if (this.hasPrev) {
-        this.$router.push(this.carDetailPath(this.prevId))
-      }
-    },
-    goNext() {
-      if (this.hasNext) {
-        this.$router.push(this.carDetailPath(this.nextId))
-      }
-    },
     nextImage() {
       const len = this.images.length
       if (len <= 1) return
@@ -454,6 +411,37 @@ export default {
 </script>
 
 <style scoped>
+.back-btn {
+  background: transparent;
+  border: 1px solid var(--c-border-strong);
+  color: var(--c-text-body-alt);
+  padding: 6px 12px;
+  cursor: pointer;
+  border-radius: 6px;
+  font-size: 14px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-left: auto; /* Ensure right alignment in flex container */
+  transition: all 0.2s ease;
+  text-decoration: none;
+}
+.back-icon {
+  width: 16px;
+  height: 16px;
+  display: block;
+}
+.back-btn:hover {
+  color: var(--c-text-emphasis);
+  background: var(--c-primary-alpha-10);
+  border-color: var(--c-border-hover);
+}
+.back-btn:active, .back-btn.router-link-active {
+  background: var(--c-bg-l1);
+  border-color: var(--c-primary);
+  color: var(--c-text-title);
+}
+
 @font-face {
   font-family: 'SourceHanSansSC';
   src: url('~@/assets/fonts/SourceHanSansSC-Regular-2.otf') format('opentype');
@@ -503,57 +491,27 @@ export default {
   gap: 20px;
 }
 
-.detail-pager {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 8px;
-  margin: 0;
-}
-
-.nav-icon {
-  background: rgba(102,192,244,0.12);
-  border: none;
-  color: #c7d5e0;
-  padding: 8px 14px;
-  min-width: 40px;
-  cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 6px;
-  font-size: 18px;
-  line-height: 1;
-}
-.nav-icon:hover {
-  color: #e6f3ff;
-  background: rgba(102,192,244,0.22);
-}
-.nav-icon:disabled {
-  opacity: 0.6;
-  cursor: default;
-  pointer-events: none;
-  background: rgba(102,192,244,0.06);
-}
-
 /* Left Section: 70% */
 .left-section {
   flex: 0 0 60%;
   position: relative;
   overflow: hidden;
-  border-radius: 0;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5); /* Added shadow for depth */
+  border-radius: 8px; /* 添加圆角让阴影更自然 */
+  height: fit-content;
+  max-height: 100%;
+  box-shadow: 0 12px 32px var(--c-shadow-heavy), 0 4px 12px rgba(0, 0, 0, 0.3); /* 添加凸显立体感的边缘阴影 */
   /* Merged hero styles */
 }
 
 .gallery-image {
-  position: absolute;
-  inset: 0;
+  position: relative;
   display: block;
   width: 100%;
-  height: 100%;
+  height: auto;
+  max-height: 100%;
   object-fit: cover;
   user-select: none;
+  box-shadow: 0 8px 24px var(--c-shadow-heavy), 0 2px 8px var(--c-shadow-medium);
 }
 
 .gallery-nav {
@@ -566,7 +524,7 @@ export default {
   border-radius: 8px;
   border: none;
   background: rgba(27,40,56,0.55);
-  color: #ffffff;
+  color: var(--c-text-title);
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -607,11 +565,11 @@ export default {
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  border: 1px solid #e6f3ff;
+  border: 1px solid var(--c-text-emphasis);
   background: transparent;
 }
 .dot.active {
-  background: #e6f3ff;
+  background: var(--c-text-emphasis);
 }
 
 .slide-next-enter-active, .slide-next-leave-active { transition: transform 0.25s ease, opacity 0.25s ease; }
@@ -650,7 +608,7 @@ export default {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 1px solid #38424e;
+  border-bottom: 1px solid var(--c-border-default);
   padding: 6px 0;
 }
 
@@ -666,11 +624,11 @@ export default {
   font-weight: 400;
   margin: 0;
   font-size: 24px;
-  color: #e6f3ff;
+  color: var(--c-text-emphasis);
 }
 
 .brand-link {
-  color: #66c0f4;
+  color: var(--c-primary);
   text-decoration: none;
   display: flex;
   align-items: center;
@@ -697,8 +655,9 @@ export default {
 }
 .brand-hover-card {
   position: absolute;
-  top: 120%;
-  left: 0;
+  top: calc(100% + 14px);
+  left: 50%;
+  transform: translateX(-50%);
   z-index: 2000;
   --hover-card-width: 280px;
   width: var(--hover-card-width);
@@ -711,12 +670,23 @@ export default {
   display: flex;
   flex-direction: column;
   box-shadow:
-    0 12px 32px rgba(0,0,0,0.4),
-    0 4px 12px rgba(0,0,0,0.2),
+    0 12px 32px var(--c-shadow-medium),
+    0 4px 12px var(--c-shadow-light),
     0 0 0 1px rgba(255,255,255,0.05);
   overflow: visible;
   will-change: box-shadow, transform, opacity;
 }
+
+.brand-hover-card::after {
+  content: "";
+  position: absolute;
+  top: -14px;
+  left: 0;
+  width: 100%;
+  height: 14px;
+  background: transparent;
+}
+
 .hover-card-logo {
   width: 100%;
   height: var(--hover-logo-height, 120px);
@@ -736,17 +706,20 @@ export default {
 .brand-hover-card::before {
   content: "";
   position: absolute;
-  left: 20px;
+  left: calc(50% + 16px);
+  margin-left: -6px;
   top: -7px;
-  width: 12px;
-  height: 12px;
+  width: 14px;
+  height: 14px;
   background: rgba(32, 43, 58, 0.6);
   border-left: 1px solid rgba(255, 255, 255, 0.12);
   border-top: 1px solid rgba(255, 255, 255, 0.12);
   transform: rotate(45deg);
-  backdrop-filter: blur(24px) saturate(120%);
-  -webkit-backdrop-filter: blur(24px) saturate(120%);
-  z-index: 1;
+  z-index: -1;
+  border-radius: 2px 0 0 0;
+  box-shadow: 
+    inset 0 0 0 1px rgba(255, 255, 255, 0.05),
+    -2px -2px 6px rgba(0, 0, 0, 0.1);
 }
 .hover-section-desc {
   flex: 0 0 75%;
@@ -759,7 +732,7 @@ export default {
   padding-top: 6px;
 }
 .hover-card-desc {
-  color: #c6d4df;
+  color: var(--c-text-body);
   font-size: 14px;
   line-height: 1.6;
   margin: 0 0 6px 0;
@@ -772,7 +745,7 @@ export default {
   text-overflow: ellipsis;
 }
 .hover-card-models {
-  color: #66c0f4;
+  color: var(--c-primary);
   font-size: 12px;
   margin: 0;
   overflow: hidden;
@@ -784,61 +757,8 @@ export default {
   text-overflow: ellipsis;
 }
 
-.actions .back-btn { 
-  background: transparent; 
-  border: 1px solid #3c4551; 
-  color: #c7d5e0; 
-  padding: 6px 12px; 
-  cursor: pointer; 
-  text-decoration: none; 
-  display: inline-flex; 
-  align-items: center; 
-  gap: 6px; 
-  border-radius: 6px; 
-  flex-shrink: 0; /* 防止被压缩 */
-  white-space: nowrap; /* 防止文字换行 */
-  height: 32px; /* 固定高度 */
-  box-sizing: border-box;
-}
-.back-icon {
-  width: 16px;
-  height: 16px;
-  display: block;
-}
 
-.actions .back-btn:hover {
-  color: #e6f3ff;
-  background: rgba(102,192,244,0.12);
-}
 
-.actions .nav-icon {
-  background: rgba(102,192,244,0.12);
-  border: 1px solid rgba(102,192,244,0.25);
-  border: none;
-  color: #c7d5e0;
-  padding: 6px 10px;
-  cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 6px;
-  margin-right: 6px;
-  font-size: 18px;
-  line-height: 1;
-}
-
-.actions .nav-icon:hover {
-  color: #e6f3ff;
-  background: rgba(102,192,244,0.22);
-}
-
-.actions .nav-icon:disabled {
-  opacity: 0.6;
-  cursor: default;
-  pointer-events: none;
-  background: rgba(102,192,244,0.06);
-  border-color: rgba(255,255,255,0.1);
-}
 .meta-block {
   display: flex;
   align-items: center;
@@ -856,19 +776,19 @@ export default {
   padding: 4px 8px;
   border-radius: 4px;
   background: rgba(62, 128, 182, 0.4); /* Lighter theme blue background */
-  color: #ffffff; /* White text */
+  color: var(--c-text-title); /* White text */
   font-weight: 600;
   backdrop-filter: blur(4px); /* Blur effect */
   -webkit-backdrop-filter: blur(4px);
 }
 
 .tag-energy {
-  color: #ffffff;
+  color: var(--c-text-title);
   background: rgba(62, 128, 182, 0.4);
 }
 
 .intro-text {
-  color: #c7d5e0;
+  color: var(--c-text-body-alt);
   line-height: 1.6;
   font-size: 16px;
   margin: 0;
@@ -905,7 +825,7 @@ export default {
 }
 
 .specs-hint {
-  color: #8f98a0;
+  color: var(--c-text-muted);
   font-size: 12px;
   padding: 0 16px;
   text-align: right;
@@ -918,7 +838,8 @@ export default {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: rgba(0, 0, 0, 0.2);
+  gap: 16px; /* 增加 .row-label 和 .row-value 之间的间距 */
+  background: var(--c-shadow-light);
   padding: 8px 16px;
   transition: background 0.2s;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
@@ -930,7 +851,7 @@ export default {
 
 .row-label {
   background: transparent;
-  color: #ffffff; /* White text */
+  color: var(--c-text-title); /* White text */
   font-size: 12px;
   padding: 0;
   width: auto;
@@ -940,7 +861,7 @@ export default {
 }
 
 .row-value {
-  color: #ffffff; /* White text */
+  color: var(--c-text-title); /* White text */
   font-size: 12px;
   text-align: right;
   padding: 0;
@@ -949,12 +870,12 @@ export default {
 }
 
 .row-label:hover {
-  color: #66c0f4;
+  color: var(--c-primary);
   text-decoration: underline;
 }
 
 .not-found {
-  color: #8f98a0;
+  color: var(--c-text-muted);
   text-align: center;
   margin-top: 40px;
 }
@@ -971,9 +892,9 @@ export default {
   background: rgba(32, 43, 58, 0.6);
   backdrop-filter: blur(24px) saturate(120%);
   -webkit-backdrop-filter: blur(24px) saturate(120%);
-  color: #e6f3ff;
+  color: var(--c-text-emphasis);
   font-weight: 700;
-  box-shadow: 0 8px 32px rgba(0,0,0,0.35);
+  box-shadow: 0 8px 32px var(--c-shadow-medium);
   z-index: 1000;
   display: none; /* Hidden on desktop */
   align-items: center;
@@ -985,26 +906,24 @@ export default {
   display: none;
 }
 
-.detail-pager-mobile {
-  display: none;
-}
-
 @media (max-width: 768px) {
   .page-car-detail {
     height: auto;
+    padding: 20px 16px; /* 添加移动端左右 padding，产生 margin 效果 */
   }
   
   .detail-layout {
     flex-direction: column;
     height: auto;
+    gap: 16px; /* 减小移动端模块之间的间距 */
   }
   
-  .detail-pager-mobile {
+  .right-section {
+    flex: 0 0 auto;
     display: flex;
-    justify-content: center;
-    gap: 12px;
-    margin: 4px 0;
-    order: 4;
+    flex-direction: column;
+    gap: 16px;
+    padding: 0; /* 移除桌面端左右 40px 的 padding */
   }
 
   .right-section, .info-upper {
@@ -1021,8 +940,8 @@ export default {
     flex: none;
   }
 
-  .intro-text { order: 5; }
-  .info-lower { order: 6; }
+  .intro-text { order: 4; }
+  .info-lower { order: 5; }
   
   /* On very small screens, hide the specs box in column and show FAB */
   @media (max-width: 600px) {
@@ -1034,6 +953,14 @@ export default {
     }
     .specs-overlay {
       display: block; /* But hidden by v-if */
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: var(--c-shadow-heavy);
+      z-index: 1000;
+      backdrop-filter: blur(2px);
     }
     .specs-drawer {
       display: block; /* But hidden by v-if */
@@ -1048,7 +975,7 @@ export default {
       -webkit-backdrop-filter: blur(24px) saturate(120%);
       border-top: 1px solid rgba(255, 255, 255, 0.12);
       border-radius: 16px 16px 0 0;
-      box-shadow: 0 -4px 24px rgba(0,0,0,0.4);
+      box-shadow: 0 -4px 24px var(--c-shadow-medium);
       padding: 20px;
       z-index: 1001;
       overflow-y: auto;
@@ -1058,21 +985,31 @@ export default {
     .drawer-header {
       display: flex;
       justify-content: space-between;
-      margin-bottom: 15px;
-      color: #fff;
+      margin-bottom: 4px;
+      color: var(--c-text-title);
       font-weight: bold;
     }
     
     .drawer-close {
       background: none;
       border: none;
-      color: #8f98a0;
+      color: var(--c-text-muted);
       cursor: pointer;
     }
 
     .specs-box-mobile {
        /* Style for mobile drawer specs */
-       color: #fff;
+       color: var(--c-text-title);
+    }
+
+    .specs-box-mobile .specs-hint {
+      margin: 0;
+      padding: 0;
+      text-align: left;
+    }
+
+    .specs-box-mobile .spec-grid {
+      margin-top: 16px;
     }
   }
 }
@@ -1085,8 +1022,7 @@ export default {
 .fade-enter-active, .fade-leave-active { transition: opacity 0.3s; }
 .fade-enter, .fade-leave-to { opacity: 0; }
 
-  @media (max-width: 768px) {
-    .back-text { display: none; }
-    .back-btn { padding: 6px; }
-  }
+@media (max-width: 768px) {
+  .back-text { display: none; }
+}
 </style>

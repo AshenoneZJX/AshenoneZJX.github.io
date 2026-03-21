@@ -91,24 +91,24 @@ export default {
         textStyle: {
           fontFamily: 'Inter, "AlibabaPuHuiTi", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif'
         },
-        title: { text: this.title, left: 'center', textStyle: { color: '#fff' } },
+        title: { text: this.title, left: 'center', textStyle: { color: 'var(--c-text-title)' } },
         grid: { left: isNarrow ? 0 : leftPad, right: 30, top: 40, bottom: 60, containLabel: isNarrow },
         tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' } },
         xAxis: {
           type: 'value',
-          axisLabel: { color: '#9cc9f5', rotate: 35, hideOverlap: true, margin: 10 },
-          splitLine: { show: true, lineStyle: { color: '#2a475e' } }
+          axisLabel: { color: 'var(--c-primary)', rotate: 35, hideOverlap: true, margin: 10 },
+          splitLine: { show: true, lineStyle: { color: 'var(--c-border-strong)' } }
         },
         yAxis: {
           type: 'category',
           data: names,
           inverse: false,
-          axisLabel: { color: '#9cc9f5', margin: 6 }
+          axisLabel: { color: 'var(--c-primary)', margin: 6 }
         },
         series: [{
           type: 'bar',
           data: values,
-          itemStyle: { color: '#66c0f4' },
+          itemStyle: { color: 'var(--c-primary)' },
           barWidth: 16
         }],
         backgroundColor: 'transparent'

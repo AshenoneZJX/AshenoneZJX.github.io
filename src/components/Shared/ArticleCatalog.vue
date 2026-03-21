@@ -166,7 +166,7 @@ export default {
   flex-direction: column; 
   gap: 0; 
   position: relative; 
-  border-left: 2px solid #38424e; 
+  border-left: 2px solid var(--c-border-default); 
   padding: 0;
 }
 .toc-section { 
@@ -180,7 +180,7 @@ export default {
   background: transparent;
   border: none;
   border-left: 2px solid transparent;
-  color: #c7d5e0;
+  color: var(--c-text-body);
   /* 二级标题按钮内边距：上下8px，左侧4px，右侧0，保证与左侧高亮边框对齐 */
   padding: 8px 0 8px 4px;
   cursor: pointer;
@@ -192,17 +192,17 @@ export default {
   margin-left: -2px;
   transition: all 0.2s ease;
 }
-.toc-h2:hover { color: #66c0f4; }
+.toc-h2:hover { color: var(--c-primary); }
 .toc-h2.active {
-  color: #66c0f4;
-  border-left-color: #66c0f4;
-  background: linear-gradient(90deg, rgba(102,192,244,0.1) 0%, transparent 100%);
+  color: var(--c-primary);
+  border-left-color: var(--c-primary);
+  background: linear-gradient(90deg, var(--c-primary-alpha-10) 0%, transparent 100%);
   font-weight: 700;
 }
 
 .caret {
   width: 0; height: 0;
-  border-left: 5px solid #ffffff;
+  border-left: 5px solid var(--c-text-title);
   border-top: 4px solid transparent;
   border-bottom: 4px solid transparent;
   transform: rotate(-90deg);
@@ -234,10 +234,10 @@ export default {
   background: transparent;
   border: none;
   border-left: 2px solid transparent;
-  color: #c7d5e0;
+  color: var(--c-text-body);
   text-align: left;
-  /* 三级标题按钮内边距：上下6px，左侧20px，右侧0，保证与左侧高亮边框对齐 */
-  padding: 6px 0 6px 26px;
+  /* 三级标题按钮内边距：减小左侧padding使其更紧凑 */
+  padding: 6px 0 6px 16px;
   cursor: pointer;
   font-size: 12px;
   font-weight: 400;
@@ -248,11 +248,11 @@ export default {
   text-overflow: ellipsis;
   white-space: nowrap;
 }
-.toc-h3:hover { color: #66c0f4; }
+.toc-h3:hover { color: var(--c-primary); }
 .toc-h3.active {
-  color: #66c0f4;
-  border-left-color: #66c0f4;
-  background: linear-gradient(90deg, rgba(102,192,244,0.1) 0%, transparent 100%);
+  color: var(--c-primary);
+  border-left-color: var(--c-primary);
+  background: linear-gradient(90deg, var(--c-primary-alpha-10) 0%, transparent 100%);
   font-weight: 700;
 }
 

@@ -3,10 +3,10 @@
     <div class="section-header">
       <div class="header-row">
         <h2>汽车主页</h2>
-        <router-link class="back-btn" to="/mySpace" aria-label="返回 MySpace" title="返回 MySpace">
+        <button class="back-btn" aria-label="返回 MySpace" title="返回 MySpace" @click="$router.push('/mySpace')">
           <img src="@/assets/images/fanhui.svg" class="back-icon" alt="返回" />
           <span class="back-text">返回总览</span>
-        </router-link>
+        </button>
       </div>
       <div class="divider"></div>
     </div>
@@ -85,7 +85,6 @@
   </div>
   </template>
 
-
 <script>
 import YearlySalesRankingChart from './YearlySalesRankingChart.vue'
 import Top10SalesTabsChart from './Top10SalesTabsChart.vue'
@@ -155,6 +154,37 @@ export default {
 </script>
 
 <style scoped>
+.back-btn {
+  background: transparent;
+  border: 1px solid var(--c-border-strong);
+  color: var(--c-text-body-alt);
+  padding: 6px 12px;
+  cursor: pointer;
+  border-radius: 6px;
+  font-size: 14px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-left: auto; /* Ensure right alignment in flex container */
+  transition: all 0.2s ease;
+  text-decoration: none;
+}
+.back-icon {
+  width: 16px;
+  height: 16px;
+  display: block;
+}
+.back-btn:hover {
+  color: var(--c-text-emphasis);
+  background: var(--c-primary-alpha-10);
+  border-color: var(--c-border-hover);
+}
+.back-btn:active, .back-btn.router-link-active {
+  background: var(--c-bg-l1);
+  border-color: var(--c-primary);
+  color: var(--c-text-title);
+}
+
 .page-cars-home { 
   padding: 20px;
   width: 1200px;
@@ -179,34 +209,15 @@ export default {
   min-width: 0;
 }
 
-.section-header h2 { color: #fff; font-weight: 400; letter-spacing: 2px; }
+.section-header h2 { color: var(--c-text-title); font-weight: 400; letter-spacing: 2px; }
 .header-row {
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
-.back-btn {
-  background: transparent;
-  border: none;
-  color: #c7d5e0;
-  padding: 4px 10px;
-  border-radius: 6px;
-  cursor: pointer;
-  text-decoration: none;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 14px;
-}
-.back-icon {
-  width: 16px;
-  height: 16px;
-  display: block;
-}
-.back-btn:hover { background: rgba(102,192,244,0.12); color: #e6f3ff; }
-.section-subheader h3 { color: #fff; font-weight: 400; letter-spacing: 1px; margin-top: 30px; }
-.divider { height: 2px; background: #2a475e; margin: 10px 0 30px 0; }
-.divider.small { height: 2px; background: #2a475e; margin: 8px 0 20px 0; }
+.section-subheader h3 { color: var(--c-text-title); font-weight: 400; letter-spacing: 1px; margin-top: 30px; }
+.divider { height: 2px; background: var(--c-border-strong); margin: 10px 0 30px 0; }
+.divider.small { height: 2px; background: var(--c-border-strong); margin: 8px 0 20px 0; }
 
 .info-browse {
   padding-top: 0;
@@ -221,7 +232,7 @@ export default {
   gap: 22px;
 }
 
-.chart-block { width: 100%; background: #16202d; box-shadow: 0 4px 15px rgba(0,0,0,0.4); border-radius: 6px; padding: 12px; box-sizing: border-box; }
+.chart-block { width: 100%; background: var(--c-bg-l2); box-shadow: 0 4px 15px var(--c-shadow-medium); border-radius: 6px; padding: 12px; box-sizing: border-box; }
 .chart-block > * + * { margin-top: 12px; }
 
 .charts-row {
@@ -236,7 +247,7 @@ export default {
 
 .charts-toolbar {
   margin-bottom: 0;
-  border-bottom: 1px solid #2a475e;
+  border-bottom: 1px solid var(--c-border-strong);
   padding-bottom: 10px;
   position: relative;
 }
@@ -249,18 +260,18 @@ export default {
   gap: 10px;
   flex-wrap: wrap;
 }
-.charts-toolbar label { color: #8a9aa8; font-size: 13px; }
+.charts-toolbar label { color: var(--c-text-label); font-size: 13px; }
 .charts-toolbar select {
-  background: #0f1924;
-  color: #fff;
-  border: 1px solid #2a475e;
+  background: var(--c-bg-input);
+  color: var(--c-text-title);
+  border: 1px solid var(--c-border-strong);
   padding: 4px 8px;
   border-radius: 4px;
 }
 .sort-btn {
   background: transparent;
   border: none;
-  color: #c7d5e0;
+  color: var(--c-text-body-alt);
   padding: 4px 6px;
   border-radius: 6px;
   cursor: pointer;
@@ -269,14 +280,14 @@ export default {
   justify-content: center;
   height: 28px;
 }
-.sort-btn:hover { background: rgba(102,192,244,0.12); color: #e6f3ff; }
-.filter-btn { background: transparent; border: none; color: #c7d5e0; padding: 6px 10px; border-radius: 6px; cursor: pointer; }
-.filter-btn:hover { background: rgba(102,192,244,0.12); color: #e6f3ff; }
+.sort-btn:hover { background: var(--c-primary-alpha-10); color: var(--c-text-emphasis); }
+.filter-btn { background: transparent; border: none; color: var(--c-text-body-alt); padding: 6px 10px; border-radius: 6px; cursor: pointer; }
+.filter-btn:hover { background: var(--c-primary-alpha-10); color: var(--c-text-emphasis); }
 .charts-toolbar { position: relative; }
 .drawer-close {
   background: transparent;
   border: none;
-  color: #c7d5e0;
+  color: var(--c-text-body-alt);
   padding: 6px 10px;
   border-radius: 6px;
   cursor: pointer;
@@ -298,8 +309,8 @@ export default {
 }
 
 .gallery-card {
-  background: #16202d;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+  background: var(--c-bg-l2);
+  box-shadow: 0 4px 15px var(--c-shadow-medium);
   border: 1px solid rgba(255,255,255,0.06);
   border-radius: 4px;
   position: relative;
@@ -319,12 +330,12 @@ export default {
   pointer-events: none;
 }
 .gallery-card:hover {
-  background: #1b2838;
+  background: var(--c-bg-l1);
   box-shadow: 0 6px 18px rgba(0,0,0,0.45);
 }
 .gallery-card:hover::after { opacity: 1; }
 .card-image { height: 50px; background-size: cover; background-position: center; position: relative; }
-.hover-overlay { position: absolute; bottom: 0; left: 0; right: 0; padding: 6px 10px; background: rgba(0,0,0,0.5); color: #fff; font-weight: 400; letter-spacing: 1px; font-size: 12px; z-index: 2; }
+.hover-overlay { position: absolute; bottom: 0; left: 0; right: 0; padding: 6px 10px; background: var(--c-shadow-heavy); color: var(--c-text-title); font-weight: 400; letter-spacing: 1px; font-size: 12px; z-index: 2; }
 
 .info-browse >>> .chart-wrapper {
   flex: 1 1 auto;
@@ -368,7 +379,6 @@ export default {
   .card-image { height: 56px; }
   
   .back-text { display: none; }
-  .back-btn { padding: 4px; }
   
   .section-header { padding: 0; }
 }
@@ -381,9 +391,9 @@ export default {
     padding: 10px 0;
   }
   .menu-toggle-btn {
-    background: rgba(102,192,244,0.12);
-    border: 1px solid #3c4551;
-    color: #66c0f4;
+    background: var(--c-primary-alpha-10);
+    border: 1px solid var(--c-border-hover);
+    color: var(--c-primary);
     padding: 6px 14px;
     border-radius: 4px;
     cursor: pointer;
@@ -411,7 +421,7 @@ export default {
     padding: 15px;
     border: 1px solid rgba(60, 69, 81, 0.5);
     border-radius: 6px;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 8px 32px var(--c-shadow-medium);
     box-sizing: border-box;
   }
   /* 让 select 和 button 在移动端占满宽度或更易点击 */
@@ -432,5 +442,12 @@ export default {
     padding: 10px;
     margin: 0;
   }
+}
+
+
+
+
+@media (max-width: 768px) {
+  
 }
 </style>

@@ -25,10 +25,10 @@
         <div class="header-info">
           <div class="top-title" v-if="heading">{{ heading }}</div>
         </div>
-        <router-link to="/mySpace/car-basics" class="back-btn">
+        <button  class="back-btn" @click="$router.push('/mySpace/car-basics')">
           <img src="@/assets/images/fanhui.svg" class="back-icon" alt="返回" />
           <span class="back-text">返回</span>
-        </router-link>
+        </button>
       </div>
 
       <!-- 下容器：内容布局 -->
@@ -105,6 +105,37 @@ export default {
 </script>
 
 <style scoped>
+.back-btn {
+  background: transparent;
+  border: 1px solid var(--c-border-strong);
+  color: var(--c-text-body-alt);
+  padding: 6px 12px;
+  cursor: pointer;
+  border-radius: 6px;
+  font-size: 14px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-left: auto; /* Ensure right alignment in flex container */
+  transition: all 0.2s ease;
+  text-decoration: none;
+}
+.back-icon {
+  width: 16px;
+  height: 16px;
+  display: block;
+}
+.back-btn:hover {
+  color: var(--c-text-emphasis);
+  background: var(--c-primary-alpha-10);
+  border-color: var(--c-border-hover);
+}
+.back-btn:active, .back-btn.router-link-active {
+  background: var(--c-bg-l1);
+  border-color: var(--c-primary);
+  color: var(--c-text-title);
+}
+
 @font-face {
   font-family: 'MotivaSans';
   src: url('~@/assets/fonts/MotivaSans-Regular_woff.ttf') format('truetype');
@@ -124,8 +155,8 @@ export default {
 .toc-toggle-btn {
   display: none;
   background: transparent;
-  border: 1px solid #38424e;
-  color: #c7d5e0;
+  border: 1px solid var(--c-border-default);
+  color: var(--c-text-body-alt);
   padding: 6px 12px;
   cursor: pointer;
   align-items: center;
@@ -146,7 +177,7 @@ export default {
   min-height: 28px;
   max-width: 100%;
   margin: 0 auto 0;
-  border-bottom: 1px solid #2a475e;
+  border-bottom: 1px solid var(--c-border-strong);
 }
 
 .header-placeholder {
@@ -164,23 +195,15 @@ export default {
 }
 
 .top-title { 
-  color: #ffffff; 
+  color: var(--c-text-title); 
   font-size: 28px; 
   line-height: 1.35; 
   margin: 0; 
   font-weight: 400; 
   letter-spacing: 1.5px; 
-  text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+  text-shadow: 0 2px 4px var(--c-shadow-heavy);
   font-family: 'MotivaSans', sans-serif;
 }
-
-.back-btn { background: transparent; border: none; color: #c7d5e0; padding: 4px 10px; cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; border-radius: 6px; margin-left: auto; }
-.back-icon {
-  width: 16px;
-  height: 16px;
-  display: block;
-}
-.back-btn:hover { color: #e6f3ff; background: rgba(102,192,244,0.12); }
 
 /* 下容器：布局相关：三栏 Grid */
 .main-layout {
@@ -203,7 +226,7 @@ export default {
 }
 
 .sidebar-title {
-  color: #ffffff;
+  color: var(--c-text-title);
   font-size: 17px;
   font-weight: 700;
   margin-bottom: 12px;
@@ -220,7 +243,7 @@ export default {
 
 .center-content {
   min-width: 0;
-  border-left: 1px solid #2a475e;
+  border-left: 1px solid var(--c-border-strong);
   padding-left: 0;
 }
 
@@ -229,13 +252,13 @@ export default {
 
 /* 内容主体 */
 .detail-body { 
-  background: rgba(0,0,0,0.2); 
+  background: var(--c-shadow-light); 
   padding: 10px 20px; 
   border: none; 
   border-radius: 6px; 
 }
 
-.not-found { color: #8f98a0; }
+.not-found { color: var(--c-text-muted); }
 
 /* 移动端适配 */
 @media (max-width: 768px) {
@@ -267,15 +290,15 @@ export default {
     bottom: 0;
     width: fit-content;
     max-width: 80vw;
-    background: #1b2838;
+    background: var(--c-bg-l1);
     z-index: 2000;
     transform: translateX(-100%);
     transition: transform 0.3s ease;
     padding: 20px;
     overflow-y: auto;
     overflow-x: auto;
-    box-shadow: 2px 0 12px rgba(0,0,0,0.5);
-    border-right: 1px solid #2a475e;
+    box-shadow: 2px 0 12px var(--c-shadow-heavy);
+    border-right: 1px solid var(--c-border-strong);
   }
   
   .left-sidebar.mobile-open {
@@ -289,7 +312,7 @@ export default {
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(0,0,0,0.6);
+    background: var(--c-shadow-heavy);
     z-index: 1900;
     backdrop-filter: blur(2px);
   }
@@ -309,8 +332,14 @@ export default {
   
   /* Back button text hidden on mobile */
   .back-text { display: none; }
-  .back-btn { padding: 4px; }
 
   .top-title { font-size: 16px; }
+}
+
+
+
+
+@media (max-width: 768px) {
+  
 }
 </style>
