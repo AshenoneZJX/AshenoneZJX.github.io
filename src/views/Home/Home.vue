@@ -200,6 +200,7 @@ export default {
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   width: 100%;
+  max-width: 100%;
   max-width: 1180px;
   box-sizing: border-box;
   -webkit-mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
@@ -218,7 +219,8 @@ export default {
 .home-layout {
   display: flex;
   gap: 20px;
-  width: 1180px;
+  width: 100%;
+  max-width: 1180px;
   max-width: 100%;
   margin: 0 auto;
   align-items: flex-start; /* 使得各栏高度随内容自适应，不被拉伸 */

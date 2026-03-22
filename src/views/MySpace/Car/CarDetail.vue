@@ -480,6 +480,7 @@ export default {
   min-height: 500px;
   box-sizing: border-box;
   padding-bottom: 24px; /* add spacing above footer */
+  max-width: 100%;
   max-width: 1300px; /* 限制最大宽度，防止过宽 */
   margin: 0 auto; /* 内容居中显示 */
   width: 100%; /* 响应式宽度 */

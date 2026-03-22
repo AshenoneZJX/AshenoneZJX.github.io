@@ -1,7 +1,12 @@
 <template>
   <div class="page-car-basics container">
     <div class="section-header">
-      <h2>汽车基础知识</h2>
+      <div class="header-left">
+        <button class="mobile-filter-btn" @click="toggleMobileFilter" v-if="isMobile">
+          <img src="@/assets/images/shaixuan.svg" alt="分类" class="filter-icon" />
+        </button>
+        <h2>汽车基础知识</h2>
+      </div>
       <button class="back-btn" @click="$router.push('/mySpace/cars-home')">
         <img src="@/assets/images/fanhui.svg" class="back-icon" alt="返回" />
         <span class="back-text">返回汽车主页</span>
@@ -12,11 +17,19 @@
     
 
     <div class="content-2col">
-      <aside class="col-left">
+      <!-- 移动端遮罩层 -->
+      <div 
+        class="mobile-filter-overlay" 
+        v-show="isMobile && isMobileFilterOpen" 
+        @click="closeMobileFilter"
+      ></div>
+
+      <aside class="col-left" :class="{ 'is-open': isMobileFilterOpen }">
         <div class="filters-panel">
           <div class="panel-subtitle">
             <img src="@/assets/images/shaixuan.svg" alt="分类" class="subtitle-icon" />
             <span>分类</span>
+            <button class="close-filter-btn" @click="closeMobileFilter" v-if="isMobile">✕</button>
           </div>
           <div class="panel-buttons">
             <button
@@ -61,7 +74,9 @@ export default {
   data() {
     return {
       items: carBasics,
-      activeCategory: '全部'
+      activeCategory: '全部',
+      isMobileFilterOpen: false,
+      isMobile: false
     }
   },
   computed: {
@@ -75,6 +90,18 @@ export default {
     }
   },
   methods: {
+    checkMobile() {
+      this.isMobile = window.innerWidth <= 768
+      if (!this.isMobile) {
+        this.isMobileFilterOpen = false
+      }
+    },
+    toggleMobileFilter() {
+      this.isMobileFilterOpen = !this.isMobileFilterOpen
+    },
+    closeMobileFilter() {
+      this.isMobileFilterOpen = false
+    },
     toExcerpt(text) {
       if (!text) return ''
       const t = String(text).replace(/\n/g, ' ')
@@ -93,6 +120,13 @@ export default {
         return ''
       }
     }
+  },
+  mounted() {
+    this.checkMobile()
+    window.addEventListener('resize', this.checkMobile)
+  },
+  beforeUnmount() {
+    window.removeEventListener('resize', this.checkMobile)
   }
 }
 </script>
@@ -130,14 +164,35 @@ export default {
 }
 
 .page-car-basics {
-  width: 1200px;
-  min-width: 1200px;
+  width: 100%;
+  max-width: 1200px;
+  
   margin: 0 auto;
   padding: 20px;
   box-sizing: border-box;
 }
 .section-header { display: flex; justify-content: space-between; align-items: center; }
-.section-header h2 { color: var(--c-text-title); font-weight: 400; letter-spacing: 2px; }
+.section-header h2 { color: var(--c-text-title); font-weight: 400; letter-spacing: 2px; margin: 0; }
+.header-left { display: flex; align-items: center; gap: 10px; }
+
+.mobile-filter-btn {
+  display: none;
+}
+@media (max-width: 768px) {
+  .mobile-filter-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--c-primary-alpha-10);
+    border: 1px solid var(--c-border-strong);
+    color: var(--c-primary);
+    padding: 6px;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+}
+.filter-icon { width: 18px; height: 18px; }
+
 .divider { height: 2px; background: var(--c-border-strong); margin: 10px 0 20px 0; }
 
 .content-2col { display: flex; gap: 16px; align-items: flex-start; }
@@ -220,12 +275,62 @@ export default {
 .record-title { color: var(--c-primary); font-size: 20px; font-weight: 400; margin-bottom: 4px; }
 .record-excerpt { font-size: 13px; color: var(--c-text-muted); }
 
+.close-filter-btn { display: none; }
+
 @media (max-width: 768px) {
+  .page-car-basics { padding: 16px; }
   .back-text { display: none; }
   .record-list { padding: 0; }
-  .section-header { padding: 0; }
-  .content-2col { flex-direction: column; }
-  .col-left, .col-right { width: 100%; }
+  .section-header { padding: 0; margin-bottom: 15px; }
+  .content-2col { flex-direction: column; position: relative; }
+  
+  .col-left { 
+    position: fixed;
+    top: 0;
+    left: -280px;
+    width: 260px;
+    height: 100vh;
+    background: var(--c-bg-l2);
+    z-index: 9999;
+    padding: 20px;
+    box-shadow: 2px 0 15px rgba(0,0,0,0.5);
+    transition: left 0.3s ease;
+    overflow-y: auto;
+  }
+  .col-left.is-open {
+    left: 0;
+  }
+  .filters-panel {
+    background: transparent;
+    padding: 0;
+  }
+  .panel-subtitle {
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 20px;
+  }
+  .close-filter-btn {
+    display: block;
+    background: transparent;
+    border: none;
+    color: var(--c-text-muted);
+    font-size: 20px;
+    cursor: pointer;
+    padding: 0 5px;
+  }
+  
+  .mobile-filter-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(2px);
+    z-index: 9998;
+  }
+
+  .col-right { width: 100%; }
 }
 
 

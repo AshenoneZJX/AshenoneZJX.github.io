@@ -34,6 +34,7 @@ export default {
   max-width: 1200px;
   margin: 0 auto;
   width: 100%;
+  box-sizing: border-box;
 }
 .section-header h2 { color: var(--c-text-title); font-weight: 300; letter-spacing: 2px; }
 .divider { height: 2px; background: var(--c-border-strong); margin: 10px 0 30px 0; }
@@ -53,4 +54,14 @@ export default {
 .gallery-card:hover { transform: translateY(-5px); }
 .card-image { height: 160px; background-size: cover; background-position: center; position: relative; }
 .hover-overlay { position: absolute; bottom: 0; left: 0; right: 0; padding: 8px 12px; background: var(--c-shadow-heavy); color: var(--c-text-title); font-weight: 600; letter-spacing: 1px; }
+
+@media (max-width: 768px) {
+  .page-learning {
+    padding: 20px 16px;
+  }
+  .gallery-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
 </style>

@@ -82,6 +82,7 @@ export default {
   max-width: 1200px;
   margin: 0 auto;
   width: 100%;
+  box-sizing: border-box;
 }
 .section-header { display: flex; justify-content: space-between; align-items: flex-end; }
 .section-header h2 { color: var(--c-text-title); font-weight: 300; letter-spacing: 2px; }
@@ -97,7 +98,9 @@ export default {
 .card-tags .tag { display: inline-block; background: #344658; color: var(--c-text-title); font-size: 10px; padding: 2px 5px; margin-right: 5px; }
 
 @media (max-width: 768px) {
+  .page-digital { padding: 20px 16px; box-sizing: border-box; }
   .back-text { display: none; }
+  .gallery-grid { grid-template-columns: 1fr; }
 }
 
 

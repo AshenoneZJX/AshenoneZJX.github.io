@@ -446,6 +446,7 @@ export default {
 .page-cars { 
   padding: 20px;
   width: 100%;
+  max-width: 100%;
   max-width: 1200px;
   margin: 0 auto;
   box-sizing: border-box;
@@ -702,8 +703,11 @@ export default {
     width: 50%;
     max-width: 360px;
     padding: 12px 14px;
-    background: var(--c-bg-panel-deep);
+    background: rgba(27, 40, 56, 0.75);
+    backdrop-filter: blur(24px) saturate(120%);
+    -webkit-backdrop-filter: blur(24px) saturate(120%);
     box-shadow: none;
+    border-right: 1px solid rgba(255, 255, 255, 0.12);
     transform: translateX(-100%);
     transition: transform 0.25s ease;
     z-index: 1001;

@@ -331,8 +331,9 @@ export default {
 .page-records { 
   padding: 20px; 
   font-family: "RobotoVar", "SourceHanSansSC", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans CJK SC", "Source Han Sans SC", sans-serif;
-  width: 1200px;
-  min-width: 1200px;
+  width: 100%;
+  max-width: 1200px;
+  
   margin-left: auto;
   margin-right: auto;
   box-sizing: border-box;
@@ -438,14 +439,19 @@ export default {
     top: 0;
     right: 0;
     height: 100%;
-    width: 50%;
+    width: 65%;
     max-width: 360px;
-    padding: 12px 14px;
-    background: var(--c-bg-panel-deep);
-    box-shadow: -10px 0 24px rgba(0,0,0,0.45);
+    padding: 20px 16px;
+    background: rgba(27, 40, 56, 0.75);
+    backdrop-filter: blur(24px) saturate(120%);
+    -webkit-backdrop-filter: blur(24px) saturate(120%);
+    box-shadow: none;
+    border-left: 1px solid rgba(255, 255, 255, 0.12);
     transform: translateX(100%);
     transition: transform 0.25s ease;
     z-index: 1001;
+    display: block;
+    overflow-y: auto;
   }
   .filters-panel.mobile-sheet.active { transform: translateX(0); }
   .sheet-mask.mobile-only {

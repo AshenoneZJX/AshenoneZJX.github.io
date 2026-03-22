@@ -1,6 +1,6 @@
 <template>
-  <div class="seg-wrap">
-    <div class="tab-bar">
+  <div class="seg-wrap" style="display: flex; flex-direction: column; height: 100%; flex: 1; min-width: 0;">
+    <div class="tab-bar" style="background: var(--c-bg-l2); padding: 12px 12px 0 12px; border-radius: 6px 6px 0 0; position: relative; z-index: 1;">
       <button
         v-for="k in segmentKeys"
         :key="k"
@@ -10,7 +10,9 @@
         @click="setKey(k)"
       >{{ k }}</button>
     </div>
-    <div ref="chart" class="chart"></div>
+    <div class="chart-container" style="flex: 1; background: var(--c-bg-l2); border-radius: 0 0 6px 6px; padding-bottom: 12px; margin-top: 0; position: relative; z-index: 0;">
+      <div ref="chart" class="chart"></div>
+    </div>
   </div>
 </template>
 
@@ -139,32 +141,30 @@ export default {
 }
 .tab-bar {
   display: flex;
-  justify-content: center;
-  gap: 8px;
+  justify-content: flex-start;
+  gap: 10px;
   margin: 0;
   padding-bottom: 10px;
-  border-bottom: 1px solid var(--c-border-strong);
   flex-wrap: wrap;
 }
 .tab-btn {
-  background: rgba(255,255,255,0.06);
-  border: 1px solid rgba(255,255,255,0.12);
+  background: transparent;
+  border: none;
   color: var(--c-text-body-alt);
   height: 28px;
-  padding: 0 12px;
-  border-radius: 999px;
+  padding: 0 8px; /* 减小内边距 */
+  border-radius: 4px;
   cursor: pointer;
-  font-size: 12px;
+  font-size: 12px; /* 加大一号字体，原为 12px */
 }
 .tab-btn:hover {
   background: var(--c-primary-alpha-10);
-  border-color: rgba(102,192,244,0.6);
   color: var(--c-text-emphasis);
 }
 .tab-btn.active {
   background: var(--c-primary-alpha-20);
-  border-color: rgba(102,192,244,0.8);
   color: var(--c-text-emphasis);
+  font-weight: 500;
 }
 .chart {
   width: 100%;

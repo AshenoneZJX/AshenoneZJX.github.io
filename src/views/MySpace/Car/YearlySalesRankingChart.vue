@@ -77,7 +77,7 @@ export default {
         if (this.sortBy === 'name') {
           const an = String(a.modelName || a.seriesName || '')
           const bn = String(b.modelName || b.seriesName || '')
-          return an.localeCompare(bn, 'zh')
+          return this.sortOrder === 'asc' ? an.localeCompare(bn, 'zh') : bn.localeCompare(an, 'zh')
         }
         const av = Number(a.sales) || 0
         const bv = Number(b.sales) || 0
@@ -102,7 +102,7 @@ export default {
         yAxis: {
           type: 'category',
           data: names,
-          inverse: false,
+          inverse: true, // 这样数值最高的或者字母靠前的会排在最上面
           axisLabel: { color: 'var(--c-primary)', margin: 6 }
         },
         series: [{

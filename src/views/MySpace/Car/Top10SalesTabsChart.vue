@@ -1,10 +1,12 @@
 <template>
-  <div class="top10-wrap">
-    <div class="tab-bar">
+  <div class="top10-wrap" style="display: flex; flex-direction: column; height: 100%; flex: 1; min-width: 0;">
+    <div class="tab-bar" style="background: var(--c-bg-l2); padding: 12px 12px 0 12px; border-radius: 6px 6px 0 0; position: relative; z-index: 1;">
       <button class="tab-btn" :class="{ active: activeTab === 'global' }" type="button" @click="setTab('global')">全球</button>
       <button class="tab-btn" :class="{ active: activeTab === 'china' }" type="button" @click="setTab('china')">中国</button>
     </div>
-    <div ref="chart" class="chart"></div>
+    <div class="chart-container" style="flex: 1; background: var(--c-bg-l2); border-radius: 0 0 6px 6px; padding-bottom: 12px; margin-top: 0; position: relative; z-index: 0;">
+      <div ref="chart" class="chart"></div>
+    </div>
   </div>
 </template>
 
@@ -81,48 +83,66 @@ export default {
       if (!this.chart) return
       const src = Array.isArray(this.currentItems) ? this.currentItems : []
       const sorted = [...src].sort((a, b) => (Number(a.sales) || 0) - (Number(b.sales) || 0)).slice(0, 10)
-      const names = sorted.map(i => String(i.model || ''))
-      const values = sorted.map(i => Number(i.sales) || 0)
-      const longest = names.reduce((m, s) => Math.max(m, String(s || '').length), 0)
-      const leftPad = Math.min(320, Math.max(110, Math.round(longest * 12)))
+      const data = sorted.map(i => ({
+        name: String(i.model || ''),
+        value: Number(i.sales) || 0
+      }))
+      
+      // 添加这段清理代码
+      this.chart.clear() // 切换图表类型前先清空旧的配置
+
+      const title = this.activeTab === 'global' ? '全球销量 TOP10' : '中国销量 TOP10'
       this.chart.setOption({
         textStyle: {
           fontFamily: 'Inter, "AlibabaPuHuiTi", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif'
         },
-        title: { text: this.currentTitle, left: 'center', textStyle: { color: 'var(--c-text-title)' } },
-        grid: { left: leftPad, right: 20, top: 44, bottom: 60, containLabel: false },
+        title: { text: title, left: 'center', textStyle: { color: 'var(--c-text-title)' } },
         tooltip: {
-          trigger: 'axis',
-          axisPointer: { type: 'shadow' },
+          trigger: 'item',
           formatter: (params) => {
-            const p = Array.isArray(params) ? params[0] : params
-            const idx = p && typeof p.dataIndex === 'number' ? p.dataIndex : -1
-            const it = idx >= 0 ? sorted[idx] : null
-            const n = it ? String(it.model || '') : ''
-            const s = it ? Number(it.sales) || 0 : 0
-            const brand = it && it.brand ? String(it.brand) : ''
-            const type = it && it.type ? String(it.type) : ''
-            const price = it && it.price_range ? String(it.price_range) : ''
-            const extra = [brand, type, price].filter(Boolean).join(' · ')
-            return `${n}<br/>${s.toLocaleString()}${extra ? `<br/>${extra}` : ''}`
+            return `${params.name}<br/>${params.value.toLocaleString()} 辆 (${params.percent}%)`
           }
         },
-        xAxis: {
-          type: 'value',
-          axisLabel: { color: 'var(--c-primary)', rotate: 35, hideOverlap: true, margin: 10 },
-          splitLine: { show: true, lineStyle: { color: 'var(--c-border-strong)' } }
+        legend: {
+          orient: 'horizontal',
+          bottom: 'bottom',
+          textStyle: { color: 'var(--c-text-body-alt)' },
+          type: 'scroll' // 添加滚动以防标签过多溢出
         },
-        yAxis: {
-          type: 'category',
-          data: names,
-          axisLabel: { color: 'var(--c-primary)', margin: 8 }
-        },
-        series: [{
-          type: 'bar',
-          data: values,
-          itemStyle: { color: 'var(--c-primary)' },
-          barWidth: 16
-        }],
+        series: [
+          {
+            name: title,
+            type: 'pie',
+            radius: ['35%', '60%'], // 进一步缩小半径给外部引导线留出空间
+            center: ['50%', '45%'],
+            avoidLabelOverlap: true,
+            padAngle: 3, // 添加扇区之间的间隙角度
+            itemStyle: {
+              borderRadius: 4, // 配合 padAngle 加上一点微圆角效果更好看
+            },
+            label: {
+              show: true,
+              position: 'outside',
+              formatter: '{b}\n{d}%',
+              color: 'var(--c-text-body-alt)'
+            },
+            emphasis: {
+              label: {
+                show: true,
+                fontSize: 14,
+                fontWeight: 'bold',
+                color: 'var(--c-text-emphasis)'
+              }
+            },
+            labelLine: {
+              show: true,
+              length: 10,
+              length2: 15,
+              smooth: true
+            },
+            data: data
+          }
+        ],
         backgroundColor: 'transparent'
       })
     }
@@ -136,31 +156,30 @@ export default {
 }
 .tab-bar {
   display: flex;
-  justify-content: center;
-  gap: 8px;
+  justify-content: flex-start;
+  gap: 10px;
   margin: 0;
   padding-bottom: 10px;
-  border-bottom: 1px solid var(--c-border-strong);
+  flex-wrap: wrap;
 }
 .tab-btn {
-  background: rgba(255,255,255,0.06);
-  border: 1px solid rgba(255,255,255,0.12);
+  background: transparent;
+  border: none;
   color: var(--c-text-body-alt);
   height: 28px;
-  padding: 0 12px;
-  border-radius: 999px;
+  padding: 0 8px; /* 减小内边距 */
+  border-radius: 4px;
   cursor: pointer;
-  font-size: 12px;
+  font-size: 14px; /* 加大一号字体，原为 12px */
 }
 .tab-btn:hover {
   background: var(--c-primary-alpha-10);
-  border-color: rgba(102,192,244,0.6);
   color: var(--c-text-emphasis);
 }
 .tab-btn.active {
   background: var(--c-primary-alpha-20);
-  border-color: rgba(102,192,244,0.8);
   color: var(--c-text-emphasis);
+  font-weight: 500;
 }
 .chart {
   width: 100%;

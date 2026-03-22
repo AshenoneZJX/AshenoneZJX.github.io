@@ -5,21 +5,21 @@
         <div class="logo" @click="goHome">
           ASHENONE's Blog
         </div>
-        <button
-          class="menu-toggle"
-          @click="toggleMenu"
-          aria-label="打开导航"
-          :aria-expanded="isOpen"
-          aria-controls="navbar-mobile-menu"
-        >
-          <svg class="menu-icon" viewBox="0 0 24 24" aria-hidden="true">
-            <path
-              fill="currentColor"
-              d="M4 6.5a1 1 0 0 1 1-1h14a1 1 0 1 1 0 2H5a1 1 0 0 1-1-1Zm0 5.5a1 1 0 0 1 1-1h14a1 1 0 1 1 0 2H5a1 1 0 0 1-1-1Zm1 4.5a1 1 0 0 0 0 2h14a1 1 0 1 0 0-2H5Z"
-            />
-          </svg>
-        </button>
         <div class="nav-right">
+          <button
+            class="menu-toggle"
+            @click="toggleMenu"
+            aria-label="打开导航"
+            :aria-expanded="isOpen"
+            aria-controls="navbar-mobile-menu"
+          >
+            <svg class="menu-icon" viewBox="0 0 24 24" aria-hidden="true">
+              <path
+                fill="currentColor"
+                d="M4 6.5a1 1 0 0 1 1-1h14a1 1 0 1 1 0 2H5a1 1 0 0 1-1-1Zm0 5.5a1 1 0 0 1 1-1h14a1 1 0 1 1 0 2H5a1 1 0 0 1-1-1Zm1 4.5a1 1 0 0 0 0 2h14a1 1 0 1 0 0-2H5Z"
+              />
+            </svg>
+          </button>
           <div class="nav-links">
             <router-link to="/" exact tag="button">主页</router-link>
             <router-link to="/mySpace" tag="button">个人空间</router-link>
@@ -301,13 +301,19 @@ export default {
 @media (max-width: 768px) {
   .nav-container {
     max-width: 100%;
-    padding: 0 12px;
+    padding: 0 16px;
+    justify-content: space-between;
   }
   .nav-links {
     display: none;
   }
+  .nav-right {
+    flex: 1;
+    justify-content: flex-end;
+  }
   .menu-toggle {
     display: inline-flex;
+    margin-left: auto;
   }
   .mobile-menu {
     display: flex;

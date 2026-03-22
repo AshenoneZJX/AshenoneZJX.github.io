@@ -158,7 +158,9 @@ export default {
 }
 
 @media (max-width: 768px) {
+  .page-brands { padding: 20px 16px; }
   .back-text { display: none; }
+  .brands-grid { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); }
 }
 
 

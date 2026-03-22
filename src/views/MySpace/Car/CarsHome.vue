@@ -36,7 +36,7 @@
 
       <div class="info-col">
         <div class="info-browse">
-          <div class="chart-block">
+          <div class="chart-block" style="margin-bottom: 0; border-bottom-left-radius: 0; border-bottom-right-radius: 0; padding-bottom: 0; ">
             <div class="charts-toolbar" :class="{ 'is-expanded': isMobileMenuOpen }">
               <div class="mobile-toggle-bar">
                 <button class="menu-toggle-btn" @click="toggleMobileMenu">
@@ -50,10 +50,10 @@
                 </select>
                 <button
                   class="sort-btn"
-                  :aria-label="sortBy === 'sales' ? '销量升序' : '名称排列'"
-                  :title="sortBy === 'sales' ? '销量升序' : '名称排列'"
+                  :aria-label="sortLabel"
+                  :title="sortLabel"
                   @click="toggleSort"
-                >排序：{{ sortBy === 'sales' ? '销量升序' : '名称排列' }}</button>
+                >排序：{{ sortLabel }}</button>
                 <label>车型</label>
                 <select v-model="selectedType">
                   <option v-for="t in typeOptions" :key="t" :value="t">{{ t }}</option>
@@ -64,20 +64,18 @@
                 </select>
               </div>
             </div>
+          </div>
+          <div class="chart-container" style="background: var(--c-bg-l2); border-radius: 0 0 6px 6px; padding-bottom: 12px; margin-top: 0;">
             <YearlySalesRankingChart
               :title="`年度车型销量排名（${selectedMonth}）`"
               :items="filteredItems"
               :sort-by="sortBy"
-              sort-order="asc"
+              :sort-order="sortOrder"
             />
           </div>
           <div class="charts-row">
-            <div class="chart-block">
-              <Top10SalesTabsChart :global-items="globalTop10" :china-items="chinaTop10" />
-            </div>
-            <div class="chart-block">
-              <PriceSegmentsTabsChart :segments="priceSegments" />
-            </div>
+            <Top10SalesTabsChart :global-items="globalTop10" :china-items="chinaTop10" />
+            <PriceSegmentsTabsChart :segments="priceSegments" />
           </div>
         </div>
       </div>
@@ -114,7 +112,8 @@ export default {
       selectedMonth: months[0] || '',
       selectedType: '全部',
       selectedBrand: '全部',
-      sortBy: 'sales',
+      sortBy: 'sales', // 当前排序字段：'sales' 或 'name'
+      sortOrder: 'desc', // 当前排序方向：'desc' 或 'asc'
       isMobileMenuOpen: false
     }
   },
@@ -137,6 +136,13 @@ export default {
     },
     priceSegments () {
       return sales && sales.price_segments && typeof sales.price_segments === 'object' ? sales.price_segments : {}
+    },
+    sortLabel () {
+      if (this.sortBy === 'sales') {
+        return this.sortOrder === 'desc' ? '销量降序' : '销量升序'
+      } else {
+        return this.sortOrder === 'desc' ? '名称降序' : '名称升序'
+      }
     }
   },
   methods: {
@@ -144,7 +150,18 @@ export default {
       return { backgroundImage: `url(${url})` }
     },
     toggleSort () {
-      this.sortBy = this.sortBy === 'sales' ? 'name' : 'sales'
+      // 排序切换逻辑：销量降序 -> 销量升序 -> 名称升序 -> 名称降序 -> 销量降序
+      if (this.sortBy === 'sales' && this.sortOrder === 'desc') {
+        this.sortOrder = 'asc'
+      } else if (this.sortBy === 'sales' && this.sortOrder === 'asc') {
+        this.sortBy = 'name'
+        this.sortOrder = 'asc'
+      } else if (this.sortBy === 'name' && this.sortOrder === 'asc') {
+        this.sortOrder = 'desc'
+      } else {
+        this.sortBy = 'sales'
+        this.sortOrder = 'desc'
+      }
     },
     toggleMobileMenu () {
       this.isMobileMenuOpen = !this.isMobileMenuOpen
@@ -187,8 +204,9 @@ export default {
 
 .page-cars-home { 
   padding: 20px;
-  width: 1200px;
-  min-width: 1200px;
+  width: 100%;
+  max-width: 1200px;
+  
   margin: 0 auto;
   box-sizing: border-box;
 }
@@ -229,26 +247,21 @@ export default {
   min-width: 0;
   display: flex;
   flex-direction: column;
-  gap: 22px;
+  gap: 0; /* 移除外层 gap，通过内部元素控制间距 */
 }
 
-.chart-block { width: 100%; background: var(--c-bg-l2); box-shadow: 0 4px 15px var(--c-shadow-medium); border-radius: 6px; padding: 12px; box-sizing: border-box; }
-.chart-block > * + * { margin-top: 12px; }
+.chart-block { width: 100%; background: var(--c-bg-l2); border-radius: 6px; padding: 12px; box-sizing: border-box; }
+.chart-container { width: 100%; box-sizing: border-box; margin-bottom: 22px; }
 
 .charts-row {
   display: flex;
   gap: 22px;
   width: 100%;
-}
-.charts-row .chart-block {
-  flex: 1;
-  min-width: 0;
+  margin-bottom: 22px;
 }
 
 .charts-toolbar {
   margin-bottom: 0;
-  border-bottom: 1px solid var(--c-border-strong);
-  padding-bottom: 10px;
   position: relative;
 }
 .mobile-toggle-bar {
@@ -369,14 +382,27 @@ export default {
   }
   .gallery-grid {
     width: 100%;
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-    gap: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 15px;
     margin-top: 20px;
     padding: 0;
     box-sizing: border-box;
   }
-  .card-image { height: 56px; }
+  .gallery-card {
+    flex: 1;
+    min-width: 0;
+    border-radius: 8px; /* 增加一点圆角让卡片感更强 */
+  }
+  .card-image { 
+    height: 120px; /* 增加高度使其近似竖向卡牌比例 */
+  }
+  .hover-overlay {
+    padding: 8px 6px;
+    font-size: 13px;
+    text-align: center; /* 文字居中更像卡牌标题 */
+  }
   
   .back-text { display: none; }
   
@@ -432,10 +458,6 @@ export default {
   .sort-btn {
     width: 100%;
     max-width: 200px;
-  }
-  
-  .charts-toolbar {
-    border-bottom: none;
   }
   
   .info-browse {

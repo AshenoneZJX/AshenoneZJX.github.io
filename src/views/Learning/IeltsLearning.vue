@@ -74,8 +74,9 @@ export default {
 
 .page-ielts {
   padding-top: 20px;
-  width: 1200px;
-  min-width: 1200px;
+  width: 100%;
+  max-width: 1200px;
+  
   margin: 0 auto;
   box-sizing: border-box;
 }
@@ -106,7 +107,9 @@ export default {
 .card-desc { font-size: 13px; }
 
 @media (max-width: 768px) {
+  .page-ielts { padding: 20px 16px; }
   .back-text { display: none; }
+  .modules-grid { grid-template-columns: 1fr; }
 }
 
 

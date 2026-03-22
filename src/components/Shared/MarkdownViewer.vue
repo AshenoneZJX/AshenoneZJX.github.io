@@ -185,16 +185,16 @@ export default {
 .content { 
   color: #cfe0ee; 
   font-size: 16px; 
-  line-height: 1.9; 
+  line-height: 1.4; /* 全局默认行距同步缩小 */
   overflow-wrap: anywhere; 
   font-family: 'Inter', 'AlibabaPuHuiTi', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; 
 }
 
 .content :deep(p) { 
   color: #cfe0ee; 
-  line-height: 1.6; 
-  margin: 12px 0; 
-  font-size: 16px; 
+  line-height: 1.4; /* 缩小行距，原为 1.6 */
+  margin: 8px 0; /* 减小段落间距，原为 12px */
+  font-size: 16px;
   font-weight: 400; 
   font-family: 'Inter', 'AlibabaPuHuiTi', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; 
 }
@@ -229,13 +229,24 @@ export default {
   color: #d9e9f7; 
   font-size: 18px; 
   line-height: 1.2; 
-  margin: 28px 0 16px; 
+  margin: 8px 0 6px; /* 减小前后行距，原为 28px 0 16px */
   font-weight: 700; 
   letter-spacing: 0.1px; 
-  background: linear-gradient(90deg, var(--c-primary-alpha-10) 0%, transparent 100%);
-  padding: 4px 8px;
-  border-left: 3px solid rgba(102, 192, 244, 0.5);
-  border-radius: 0 4px 4px 0;
+  display: inline-block;
+  position: relative;
+  z-index: 1;
+}
+
+.content :deep(h3)::after {
+  content: "";
+  position: absolute;
+  bottom: 0px;
+  left: 0;
+  width: 100%;
+  height: 8px;
+  background-color: rgba(102, 192, 244, 0.4); /* 使用主题色作为强调线颜色 */
+  z-index: -1;
+  border-radius: 2px;
 }
 
 .content :deep(h4) { 
@@ -274,10 +285,10 @@ export default {
 }
 
 .content :deep(li) { 
-  margin: 6px 0; 
-  line-height: 1.85; 
+  margin: 4px 0; /* 减小列表项间距 */
+  line-height: 1.4; /* 列表项行距也同步缩小 */
   color: #cfe0ee; 
-  font-size: 16px; 
+  font-size: 16px; /* 为了和 p 标签保持一致，这里也缩小到 14px */
   font-weight: 400; 
   padding-left: 6px; 
   font-family: 'Inter', 'AlibabaPuHuiTi', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; 
@@ -398,9 +409,9 @@ export default {
 
 /* 移动端适配 */
 @media (max-width: 768px) {
-  .content { font-size: 16px; line-height: 1.8; }
-  .content :deep(p) { font-size: 16px; line-height: 1.8; }
-  .content :deep(li) { font-size: 16px; line-height: 1.8; }
+  .content { font-size: 14px; line-height: 1.4; }
+  .content :deep(p) { font-size: 14px; line-height: 1.4; }
+  .content :deep(li) { font-size: 14px; line-height: 1.4; }
   .content :deep(ul) { padding-left: 22px; }
   .content :deep(ol) { padding-left: 32px; }
   .content :deep(ul) :deep(li) { padding-left: 1px; }

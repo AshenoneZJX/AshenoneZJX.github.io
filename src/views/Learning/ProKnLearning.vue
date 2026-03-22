@@ -119,8 +119,9 @@ export default {
 
 .page-professional {
   padding: 20px 16px 0;
-  width: 1200px;
-  min-width: 1200px;
+  width: 100%;
+  max-width: 1200px;
+  
   margin: 0 auto;
   box-sizing: border-box;
 }
@@ -194,6 +195,7 @@ export default {
 .record-excerpt { font-size: 13px; color: var(--c-text-muted); }
 
 @media (max-width: 768px) {
+  .page-professional { padding: 20px 16px; }
   .back-text { display: none; }
   
   .record-list { padding: 0; }

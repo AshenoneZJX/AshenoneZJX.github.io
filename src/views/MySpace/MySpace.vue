@@ -58,8 +58,9 @@ export default {
 
 .page-myspace { 
   padding: 20px;
-  width: 1200px;
-  min-width: 1200px;
+  width: 100%;
+  max-width: 1200px;
+  
   margin: 0 auto;
   font-family: 'MotivaSans', sans-serif;
   box-sizing: border-box;
@@ -86,5 +87,12 @@ export default {
 
 .card-image { height: 160px; background-size: cover; background-position: center; position: relative; }
 .hover-overlay { position: absolute; bottom: 0; left: 0; right: 0; padding: 8px 12px; background: var(--c-shadow-heavy); color: var(--c-text-title); font-weight: 400; letter-spacing: 1px; }
+
+@media (max-width: 768px) {
+  .gallery-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
 
 </style>

@@ -183,8 +183,8 @@ h2, h3, h4 {
 
 .page-brand-detail {
   padding-top: 20px;
-  width: 1200px;
-  min-width: 1200px;
+  width: 100%;
+  max-width: 1200px;
   margin: 0 auto;
   box-sizing: border-box;
   padding-left: 20px;
@@ -425,6 +425,20 @@ h2, h3, h4 {
   }
   .col-left, .col-right {
     grid-column: 1;
+  }
+  
+  .wiki-box {
+    padding: 24px 20px;
+  }
+  .wiki-box::before {
+    font-size: 60px;
+    top: -5px;
+    left: 5px;
+  }
+  .wiki-box::after {
+    font-size: 60px;
+    bottom: -30px;
+    right: 5px;
   }
   
   .back-text { display: none; }

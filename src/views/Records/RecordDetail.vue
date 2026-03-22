@@ -358,7 +358,14 @@ export default {
   .back-text { display: none; }
   
   /* Mobile Title Adjustment */
-  .top-title { font-size: 18px; letter-spacing: 0.5px; }
+  .top-title { font-size: 18px; letter-spacing: 0.5px; margin-bottom: 0; width: 100%; }
+  
+  .header-info { gap: 4px; flex-direction: column; align-items: flex-start; }
+  .meta { gap: 8px; margin-top: 4px; }
+  .month { font-size: 10px; }
+  .day { font-size: 16px; }
+  .year { font-size: 10px; }
+  .cat { font-size: 10px; padding: 1px 6px; }
 }
 
 
