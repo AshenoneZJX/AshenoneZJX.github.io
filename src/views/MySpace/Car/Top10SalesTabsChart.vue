@@ -1,6 +1,6 @@
 <template>
   <div class="top10-wrap" style="display: flex; flex-direction: column; height: 100%; flex: 1; min-width: 0;">
-    <div class="tab-bar" style="background: var(--c-bg-l2); padding: 12px 12px 0 12px; border-radius: 6px 6px 0 0; position: relative; z-index: 1;">
+    <div class="tab-bar" style="background: var(--c-bg-l2); padding: 0 12px; border-radius: 6px 6px 0 0; position: relative; z-index: 1; margin-bottom: 0; min-height: 44px;">
       <button class="tab-btn" :class="{ active: activeTab === 'global' }" type="button" @click="setTab('global')">全球</button>
       <button class="tab-btn" :class="{ active: activeTab === 'china' }" type="button" @click="setTab('china')">中国</button>
     </div>
@@ -157,9 +157,10 @@ export default {
 .tab-bar {
   display: flex;
   justify-content: flex-start;
-  gap: 10px;
+  align-items: center;
+  gap: 4px;
   margin: 0;
-  padding-bottom: 10px;
+  border-bottom: 1px solid var(--c-border-strong);
   flex-wrap: wrap;
 }
 .tab-btn {

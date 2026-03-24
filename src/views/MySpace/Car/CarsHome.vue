@@ -263,6 +263,8 @@ export default {
 .charts-toolbar {
   margin-bottom: 0;
   position: relative;
+  border-bottom: 1px solid var(--c-border-strong);
+  padding-bottom: 10px;
 }
 .mobile-toggle-bar {
   display: none;
