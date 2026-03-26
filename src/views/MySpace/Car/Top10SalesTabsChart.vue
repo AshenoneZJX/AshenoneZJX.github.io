@@ -1,10 +1,10 @@
 <template>
-  <div class="top10-wrap" style="display: flex; flex-direction: column; height: 100%; flex: 1; min-width: 0;">
-    <div class="tab-bar" style="background: var(--c-bg-l2); padding: 0 12px; border-radius: 6px 6px 0 0; position: relative; z-index: 1; margin-bottom: 0; min-height: 44px;">
+  <div class="top10-wrap">
+    <div class="tab-bar panel-head">
       <button class="tab-btn" :class="{ active: activeTab === 'global' }" type="button" @click="setTab('global')">全球</button>
       <button class="tab-btn" :class="{ active: activeTab === 'china' }" type="button" @click="setTab('china')">中国</button>
     </div>
-    <div class="chart-container" style="flex: 1; background: var(--c-bg-l2); border-radius: 0 0 6px 6px; padding-bottom: 12px; margin-top: 0; position: relative; z-index: 0;">
+    <div class="chart-container panel-body">
       <div ref="chart" class="chart"></div>
     </div>
   </div>
@@ -97,13 +97,19 @@ export default {
           fontFamily: 'Inter, "AlibabaPuHuiTi", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif'
         },
         title: { text: title, left: 'center', textStyle: { color: 'var(--c-text-title)' } },
+        color: ['#4E79A7', '#F28E2B', '#E15759', '#76B7B2', '#59A14F', '#EDC948', '#B07AA1', '#FF9DA7', '#9C755F', '#BAB0AC'],
         tooltip: {
           trigger: 'item',
+          backgroundColor: 'var(--c-bg-panel-deep)',
+          borderColor: 'var(--c-border-default)',
+          borderWidth: 1,
+          textStyle: { color: 'var(--c-text-emphasis)' },
           formatter: (params) => {
             return `${params.name}<br/>${params.value.toLocaleString()} 辆 (${params.percent}%)`
           }
         },
         legend: {
+          show: false,
           orient: 'horizontal',
           bottom: 'bottom',
           textStyle: { color: 'var(--c-text-body-alt)' },
@@ -153,34 +159,63 @@ export default {
 <style scoped>
 .top10-wrap {
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  flex: 1;
+  min-width: 0;
 }
 .tab-bar {
+  background: var(--c-bg-l2);
+  padding: 0 12px;
+  margin-bottom: 0;
+  min-height: 44px;
   display: flex;
   justify-content: flex-start;
   align-items: center;
   gap: 4px;
-  margin: 0;
-  border-bottom: 1px solid var(--c-border-strong);
+  border-bottom: 1px solid var(--c-border-default);
   flex-wrap: wrap;
+}
+.panel-head {
+  border: 1px solid var(--c-border-default);
+  border-bottom: none;
+  border-radius: 10px 10px 0 0;
+  box-shadow: 0 4px 15px var(--c-shadow-medium);
+}
+.panel-body {
+  flex: 1;
+  background: var(--c-bg-l2);
+  border: 1px solid var(--c-border-default);
+  border-top: none;
+  border-radius: 0 0 10px 10px;
+  padding-bottom: 12px;
+  margin-top: 0;
+  box-shadow: 0 4px 15px var(--c-shadow-medium);
+  position: relative;
+  z-index: 0;
 }
 .tab-btn {
   background: transparent;
-  border: none;
+  border: 1px solid transparent;
   color: var(--c-text-body-alt);
-  height: 28px;
-  padding: 0 8px; /* 减小内边距 */
-  border-radius: 4px;
+  height: 30px;
+  padding: 0 12px;
+  border-radius: 6px;
   cursor: pointer;
-  font-size: 14px; /* 加大一号字体，原为 12px */
+  font-size: 14px;
+  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
 }
 .tab-btn:hover {
   background: var(--c-primary-alpha-10);
   color: var(--c-text-emphasis);
+  border-color: var(--c-border-hover);
 }
 .tab-btn.active {
   background: var(--c-primary-alpha-20);
-  color: var(--c-text-emphasis);
+  color: var(--c-text-title);
   font-weight: 500;
+  border-color: var(--c-primary);
 }
 .chart {
   width: 100%;

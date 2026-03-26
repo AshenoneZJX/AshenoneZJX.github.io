@@ -1,6 +1,6 @@
 <template>
-  <div class="seg-wrap" style="display: flex; flex-direction: column; height: 100%; flex: 1; min-width: 0;">
-    <div class="tab-bar" style="background: var(--c-bg-l2); padding: 0 12px; border-radius: 6px 6px 0 0; position: relative; z-index: 1; margin-bottom: 0; min-height: 44px;">
+  <div class="seg-wrap">
+    <div class="tab-bar panel-head">
       <button
         v-for="k in segmentKeys"
         :key="k"
@@ -10,7 +10,7 @@
         @click="setKey(k)"
       >{{ k }}</button>
     </div>
-    <div class="chart-container" style="flex: 1; background: var(--c-bg-l2); border-radius: 0 0 6px 6px; padding-bottom: 12px; margin-top: 0; position: relative; z-index: 0;">
+    <div class="chart-container panel-body">
       <div ref="chart" class="chart"></div>
     </div>
   </div>
@@ -103,6 +103,10 @@ export default {
         tooltip: {
           trigger: 'axis',
           axisPointer: { type: 'shadow' },
+          backgroundColor: 'var(--c-bg-panel-deep)',
+          borderColor: 'var(--c-border-default)',
+          borderWidth: 1,
+          textStyle: { color: 'var(--c-text-emphasis)' },
           formatter: (params) => {
             const p = Array.isArray(params) ? params[0] : params
             const idx = p && typeof p.dataIndex === 'number' ? p.dataIndex : -1
@@ -114,18 +118,18 @@ export default {
         },
         xAxis: {
           type: 'value',
-          axisLabel: { color: 'var(--c-primary)', rotate: 35, hideOverlap: true, margin: 10 },
-          splitLine: { show: true, lineStyle: { color: 'var(--c-border-strong)' } }
+          axisLabel: { color: 'var(--c-text-body-alt)', rotate: 35, hideOverlap: true, margin: 10 },
+          splitLine: { show: true, lineStyle: { color: 'var(--c-border-default)' } }
         },
         yAxis: {
           type: 'category',
           data: names,
-          axisLabel: { color: 'var(--c-primary)', margin: 8 }
+          axisLabel: { color: 'var(--c-text-emphasis)', margin: 8 }
         },
         series: [{
           type: 'bar',
           data: values,
-          itemStyle: { color: 'var(--c-primary)' },
+          itemStyle: { color: '#6ea8fe' },
           barWidth: 16
         }],
         backgroundColor: 'transparent'
@@ -138,34 +142,63 @@ export default {
 <style scoped>
 .seg-wrap {
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  flex: 1;
+  min-width: 0;
 }
 .tab-bar {
+  background: var(--c-bg-l2);
+  padding: 0 12px;
+  margin: 0;
+  min-height: 44px;
   display: flex;
   justify-content: flex-start;
   align-items: center;
   gap: 4px;
-  margin: 0;
-  border-bottom: 1px solid var(--c-border-strong);
+  border-bottom: 1px solid var(--c-border-default);
   flex-wrap: wrap;
+}
+.panel-head {
+  border: 1px solid var(--c-border-default);
+  border-bottom: none;
+  border-radius: 10px 10px 0 0;
+  box-shadow: 0 4px 15px var(--c-shadow-medium);
+}
+.panel-body {
+  flex: 1;
+  background: var(--c-bg-l2);
+  border: 1px solid var(--c-border-default);
+  border-top: none;
+  border-radius: 0 0 10px 10px;
+  padding-bottom: 12px;
+  margin-top: 0;
+  box-shadow: 0 4px 15px var(--c-shadow-medium);
+  position: relative;
+  z-index: 0;
 }
 .tab-btn {
   background: transparent;
-  border: none;
+  border: 1px solid transparent;
   color: var(--c-text-body-alt);
-  height: 28px;
-  padding: 0 8px; /* 减小内边距 */
-  border-radius: 4px;
+  height: 30px;
+  padding: 0 12px;
+  border-radius: 6px;
   cursor: pointer;
-  font-size: 14px; /* 加大一号字体，原为 12px */
+  font-size: 14px;
+  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
 }
 .tab-btn:hover {
   background: var(--c-primary-alpha-10);
   color: var(--c-text-emphasis);
+  border-color: var(--c-border-hover);
 }
 .tab-btn.active {
   background: var(--c-primary-alpha-20);
-  color: var(--c-text-emphasis);
+  color: var(--c-text-title);
   font-weight: 500;
+  border-color: var(--c-primary);
 }
 .chart {
   width: 100%;

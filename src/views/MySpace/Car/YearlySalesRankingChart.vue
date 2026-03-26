@@ -93,22 +93,29 @@ export default {
         },
         title: { text: this.title, left: 'center', textStyle: { color: 'var(--c-text-title)' } },
         grid: { left: isNarrow ? 0 : leftPad, right: 30, top: 40, bottom: 60, containLabel: isNarrow },
-        tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' } },
+        tooltip: {
+          trigger: 'axis',
+          axisPointer: { type: 'shadow' },
+          backgroundColor: 'var(--c-bg-panel-deep)',
+          borderColor: 'var(--c-border-default)',
+          borderWidth: 1,
+          textStyle: { color: 'var(--c-text-emphasis)' }
+        },
         xAxis: {
           type: 'value',
-          axisLabel: { color: 'var(--c-primary)', rotate: 35, hideOverlap: true, margin: 10 },
-          splitLine: { show: true, lineStyle: { color: 'var(--c-border-strong)' } }
+          axisLabel: { color: 'var(--c-text-body-alt)', rotate: 35, hideOverlap: true, margin: 10 },
+          splitLine: { show: true, lineStyle: { color: 'var(--c-border-default)' } }
         },
         yAxis: {
           type: 'category',
           data: names,
           inverse: true, // 这样数值最高的或者字母靠前的会排在最上面
-          axisLabel: { color: 'var(--c-primary)', margin: 6 }
+          axisLabel: { color: 'var(--c-text-emphasis)', margin: 6 }
         },
         series: [{
           type: 'bar',
           data: values,
-          itemStyle: { color: 'var(--c-primary)' },
+          itemStyle: { color: '#6ea8fe' },
           barWidth: 16
         }],
         backgroundColor: 'transparent'

@@ -150,6 +150,7 @@ export default {
   width: 100%;
   max-width: 100%;
   box-sizing: border-box;
+  background: #191919;
 }
 
 .toc-toggle-btn {
@@ -177,7 +178,7 @@ export default {
   min-height: 28px;
   max-width: 100%;
   margin: 0 auto 0;
-  border-bottom: 1px solid var(--c-border-strong);
+  border-bottom: 1px solid var(--c-border-default);
 }
 
 .header-placeholder {
@@ -243,7 +244,7 @@ export default {
 
 .center-content {
   min-width: 0;
-  border-left: 1px solid var(--c-border-strong);
+  border-left: 1px solid var(--c-border-default);
   padding-left: 0;
 }
 
@@ -252,7 +253,7 @@ export default {
 
 /* 内容主体 */
 .detail-body { 
-  background: var(--c-shadow-light); 
+  background: #191919;
   padding: 10px 20px; 
   border: none; 
   border-radius: 6px; 
@@ -298,7 +299,7 @@ export default {
     overflow-y: auto;
     overflow-x: auto;
     box-shadow: 2px 0 12px var(--c-shadow-heavy);
-    border-right: 1px solid var(--c-border-strong);
+    border-right: 1px solid var(--c-border-default);
   }
   
   .left-sidebar.mobile-open {

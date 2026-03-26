@@ -174,6 +174,7 @@ export default {
   width: 100%;
   max-width: 100%;
   box-sizing: border-box;
+  background: #191919;
 }
 
 .toc-toggle-btn {
@@ -201,7 +202,7 @@ export default {
   min-height: 28px;
   max-width: 100%;
   margin: 0 auto 0;
-  border-bottom: 1px solid var(--c-border-strong);
+  border-bottom: 1px solid var(--c-border-default);
 }
 
 .header-placeholder {
@@ -230,7 +231,7 @@ export default {
 .month { color: var(--c-text-muted); font-size: 11px; }
 .day { color: var(--c-primary); font-size: 18px; font-weight: bold; font-family: 'RobotoMono', Menlo, Monaco, Consolas, "Courier New", monospace; }
 .year { color: var(--c-text-muted); font-size: 11px; }
-.cat { color: var(--c-primary); font-size: 11px; display: inline-block; padding: 2px 8px; border: 1px solid var(--c-border-default); border-radius: 12px; background: var(--c-primary-alpha-20); font-family: 'RobotoMono', monospace; }
+.cat { color: #4da6ff; font-size: 11px; display: inline-flex; align-items: center; justify-content: center; padding: 3px 12px; border: none; border-radius: 8px; background-color: #1a2a3a; font-family: Helvetica, Arial, sans-serif; text-transform: uppercase; letter-spacing: 1.2px; font-weight: 400; }
 .content-divider { height: 1px; background: var(--c-border-default); margin: 8px 0 14px; }
 
 /* 布局相关：三栏 Grid */
@@ -272,7 +273,7 @@ export default {
 
 .center-content {
   min-width: 0;
-  border-left: 1px solid var(--c-border-strong);
+  border-left: 1px solid var(--c-border-default);
   padding-left: 0;
 }
 
@@ -281,7 +282,7 @@ export default {
 
 /* 内容卡片区域：半透明黑色背景、内边距、边框和圆角，用于包裹正文内容 */
 .detail-body { 
-  background: var(--c-shadow-light); /* 20% 透明度的黑色背景，使下方暗色主题更沉浸 */
+  background: #191919;
   padding: 10px 40px;   /* 上下 10px、左右 40px 的内边距 */
   border: none; /* 移除边框 */
   border-radius: 6px;        /* 6px 圆角，柔和视觉，避免生硬矩形 */
@@ -326,7 +327,7 @@ export default {
     overflow-y: auto;
     overflow-x: auto;
     box-shadow: 2px 0 12px var(--c-shadow-heavy);
-    border-right: 1px solid var(--c-border-strong);
+    border-right: 1px solid var(--c-border-default);
   }
   
   .left-sidebar.mobile-open {

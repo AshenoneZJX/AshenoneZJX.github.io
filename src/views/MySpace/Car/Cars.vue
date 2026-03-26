@@ -763,7 +763,7 @@ export default {
   display: block;
 }
 .gallery-card:hover {
-  transform: translateY(-8px);
+  transform: scale(1.03);
   filter: brightness(1.15);
   box-shadow: 0 10px 25px rgba(0,0,0,0.45);
 }
@@ -772,6 +772,7 @@ export default {
   height: 230px;
   display: flex;
   flex-direction: column;
+  border: 1px solid var(--c-border-default);
 }
 
 .card-image {
@@ -781,7 +782,7 @@ export default {
   position: relative;
 }
 
-.card-info { padding: 12px; background: var(--c-bg-l3); flex: 1 1 auto; min-height: 0; overflow: hidden; }
+.card-info { padding: 12px; background: #171B21; flex: 1 1 auto; min-height: 0; overflow: hidden; }
 .card-title { color: var(--c-text-title); margin-bottom: 8px; font-weight: normal; font-family: 'Motiva Sans', sans-serif; display: flex; align-items: center; gap: 8px; }
 .card-title .title-text { display: inline-block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-family: 'PuHuiTi', 'SourceHanSansSC', sans-serif; }
 .brand-logo { width: 24px; height: 24px; object-fit: contain; background: transparent; }

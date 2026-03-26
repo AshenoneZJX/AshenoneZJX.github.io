@@ -38,6 +38,7 @@
                 <span class="stat-label">标签数</span>
              </div>
           </div>
+          <div class="stats-divider"></div>
           <div class="heatmap-container">
              <div class="heatmap-header">
                 <button class="heatmap-nav" @click="changeYear(-1)">&lt;</button>
@@ -379,18 +380,14 @@ export default {
   display: flex;
   flex-direction: column;
   gap: 14px;
-  background: transparent;
-  border: none;
-  border-radius: 8px;
-  padding: 0 12px;
 }
-.panel-header { display: flex; align-items: center; gap: 6px; color: var(--c-text-body-alt); }
+.panel-header { display: flex; align-items: center; gap: 6px; color: var(--c-text-body); }
 .panel-actions { margin-left: auto; display: flex; align-items: center; }
-.panel-title { font-size: 16px; color: var(--c-text-muted); }
-.panel-section { display: flex; flex-direction: column; gap: 8px; }
-.panel-subtitle { font-size: 13px; color: var(--c-text-muted); display: block; background: transparent; padding: 2px 0; border-bottom: 1px solid var(--c-border-default); }
+.panel-title { font-size: 16px; color: var(--c-text-emphasis); }
+.panel-section { display: flex; flex-direction: column; gap: 8px; background: transparent; border: none; border-radius: 8px; padding: 10px; }
+.panel-subtitle { font-size: 13px; color: var(--c-text-body-alt); display: block; background: transparent; padding: 2px 0; border-bottom: 1px solid var(--c-border-hover); }
 .panel-buttons { display: flex; flex-wrap: wrap; column-gap: 8px; row-gap: 2px; }
-.panel-buttons.compact { flex-wrap: wrap; gap: 6px; white-space: normal; overflow-x: visible; background: var(--c-shadow-light); border-radius: 8px; padding: 10px; }
+.panel-buttons.compact { flex-wrap: wrap; gap: 6px; white-space: normal; overflow-x: visible; background: #16191C; border: 1px solid var(--c-border-default); border-radius: 8px; padding: 10px; }
 .panel-buttons.compact::-webkit-scrollbar { display: none; }
 .panel-buttons.compact .filter-btn {
   height: 24px;
@@ -412,8 +409,8 @@ export default {
 .date-sep { color: var(--c-text-muted); }
 .date-label { color: var(--c-text-muted); font-size: 12px; }
 .clear-btn { padding: 0 10px; }
-.panel-hint { font-size: 12px; color: #d7a05f; }
-.panel-header { background: transparent; padding: 8px 0; border-bottom: 1px solid var(--c-border-default); }
+.panel-hint { font-size: 12px; color: #e3b061; }
+.panel-header { background: transparent; padding: 10px 0; border: none; border-bottom: 1px solid var(--c-border-default); border-radius: 0; }
 .mobile-only { display: none; }
 
 @media (max-width: 768px) {
@@ -442,11 +439,11 @@ export default {
     width: 65%;
     max-width: 360px;
     padding: 20px 16px;
-    background: rgba(27, 40, 56, 0.75);
+    background: rgba(13, 17, 23, 0.88);
     backdrop-filter: blur(24px) saturate(120%);
     -webkit-backdrop-filter: blur(24px) saturate(120%);
     box-shadow: none;
-    border-left: 1px solid rgba(255, 255, 255, 0.12);
+    border-left: 1px solid var(--c-border-default);
     transform: translateX(100%);
     transition: transform 0.25s ease;
     z-index: 1001;
@@ -469,25 +466,25 @@ export default {
 .record-item {
   display: flex;
   flex-direction: column;
-  background: var(--c-bg-l2);
+  background: #16191C;
   padding: 15px;
-  border: none;
+  border: 1px solid var(--c-border-default);
   border-radius: 8px;
   transition: background 0.2s, box-shadow 0.2s, transform 0.2s;
 }
 .record-item:hover { 
-  background: var(--c-primary-alpha-10);
+  background: #1D2126;
   box-shadow: 0 10px 26px var(--c-shadow-medium);
-  transform: translateY(-1px);
+  transform: scale(1.02);
 }
 .record-item:active {
-  transform: translateY(0);
+  transform: scale(1);
 }
 
 .month { color: var(--c-text-muted); font-size: 12px; }
 .day { color: var(--c-primary); font-size: 24px; font-weight: bold; }
 
-.record-title { color: var(--c-text-title); background: transparent; border-radius: 6px; font-size: 20px; font-weight: normal; letter-spacing: 2px; margin: 0; display: inline-block; font-family: 'MotivaSans', sans-serif; }
+.record-title { color: var(--c-text-emphasis); background: transparent; border-radius: 6px; font-size: 20px; font-weight: 500; letter-spacing: 2px; margin: 0; display: inline-block; font-family: 'MotivaSans', sans-serif; }
 .record-title::after {
   content: "";
   display: block;
@@ -502,7 +499,7 @@ export default {
 .record-tags { display: flex; gap: 8px; flex-wrap: wrap; margin: 0 0 10px; }
 
 /* 基础标签样式：圆角、边框、淡蓝背景 */
-.tag { display: inline-flex; align-items: center; padding: 4px 10px; border-radius: 2px; font-size: 12px; border: 1px solid var(--c-border-hover); color: var(--c-text-body-alt); background: var(--c-primary-alpha-50); }
+.tag { display: inline-flex; align-items: center; padding: 4px 10px; border-radius: 2px; font-size: 12px; border: 1px solid var(--c-border-hover); color: var(--c-text-body-alt); background: var(--c-bg-input); }
 /* 标题标签：高亮边框与背景 */
 .tag-title { border-color: var(--c-primary); color: var(--c-text-title); background: rgba(102,192,244,0.18); }
 
@@ -519,33 +516,44 @@ export default {
 
 /* 分类标签：胶囊形、毛玻璃效果、内阴影 */
 .tag-cat {
-  background: var(--c-primary-alpha-20);
-  color: var(--c-primary);
-  border-radius: 12px;
-  padding: 2px 12px;
-  backdrop-filter: blur(6px); /* 背景模糊 */
-  -webkit-backdrop-filter: blur(6px);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06); /* 顶部内阴影 */
+  background-color: #1a2a3a;
+  color: #4da6ff;
+  border: none;
+  border-radius: 8px;
+  padding: 3px 12px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  font-weight: 400;
   pointer-events: none; /* 禁止鼠标事件 */
-  font-family: 'RobotoMono', monospace;
+  font-family: Helvetica, Arial, sans-serif;
 }
 .record-item.clickable { cursor: pointer; }
-.record-excerpt { font-size: 13px; color: var(--c-text-muted); }
+.record-excerpt { font-size: 13px; color: var(--c-text-body-alt); line-height: 1.6; }
 
 /* Stats & Heatmap */
 .stats-card {
   margin-bottom: 14px;
-  /* background: var(--c-shadow-light); handled by panel-section if needed, but adding specific bg */
-  background: transparent; /* match other panels */
-  padding: 0;
+  background: #16191C;
+  border: 1px solid var(--c-border-default);
+  border-radius: 8px;
+  padding: 12px;
 }
 .stats-row {
   display: flex;
   justify-content: space-around;
-  margin-bottom: 16px;
+  margin-bottom: 0;
   padding: 10px 0;
-  background: var(--c-shadow-light);
-  border-radius: 8px;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+}
+.stats-divider {
+  height: 1px;
+  background: var(--c-border-default);
+  margin: 8px 0 10px;
 }
 .stat-item {
   display: flex;
@@ -568,9 +576,10 @@ export default {
   display: flex;
   flex-direction: column;
   gap: 8px;
-  padding: 12px;
-  background: var(--c-shadow-light);
-  border-radius: 8px;
+  padding: 0;
+  background: transparent;
+  border: none;
+  border-radius: 0;
 }
 .heatmap-header {
   display: flex;
@@ -605,13 +614,13 @@ export default {
 }
 .week-box {
   aspect-ratio: 1;
-  background: rgba(255,255,255,0.05);
+  background: #1f2937;
   border-radius: 2px;
   transition: background 0.2s;
 }
-.intensity-1 { background: rgba(102,192,244,0.3); }
-.intensity-2 { background: rgba(102,192,244,0.5); }
-.intensity-3 { background: rgba(102,192,244,0.7); }
-.intensity-4 { background: var(--c-primary); box-shadow: 0 0 4px rgba(102,192,244,0.5); }
+.intensity-1 { background: rgba(88,166,255,0.28); }
+.intensity-2 { background: rgba(88,166,255,0.45); }
+.intensity-3 { background: rgba(88,166,255,0.62); }
+.intensity-4 { background: #58a6ff; box-shadow: 0 0 4px rgba(88,166,255,0.5); }
 
 </style>

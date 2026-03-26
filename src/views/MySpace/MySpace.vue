@@ -12,7 +12,7 @@
 
     <div class="gallery-grid">
       <router-link class="gallery-card" to="/mySpace/cars-home">
-        <div class="card-image" :style="bg('https://images.unsplash.com/photo-1692450931594-e076fcdb896f?q=80&w=2832&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')">
+        <div class="card-image" :style="bg('https://images.unsplash.com/photo-1611651186486-415f04eb78e4?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')">
           <div class="hover-overlay">汽车 CarsIndex</div>
         </div>
         
@@ -77,13 +77,19 @@ export default {
 .gallery-card {
   background: var(--c-bg-l2);
   box-shadow: 0 4px 15px var(--c-shadow-medium);
-  transition: transform 0.2s;
+  border: 1px solid var(--c-border-default);
+  transition: transform 0.2s, box-shadow 0.2s, filter 0.2s;
   cursor: pointer;
   text-decoration: none;
   border-radius: 10px;
   overflow: hidden;
+  display: block;
 }
-.gallery-card:hover { transform: translateY(-5px); }
+.gallery-card:hover {
+  transform: scale(1.03);
+  filter: brightness(1.15);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.45);
+}
 
 .card-image { height: 160px; background-size: cover; background-position: center; position: relative; }
 .hover-overlay { position: absolute; bottom: 0; left: 0; right: 0; padding: 8px 12px; background: var(--c-shadow-heavy); color: var(--c-text-title); font-weight: 400; letter-spacing: 1px; }

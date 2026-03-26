@@ -36,6 +36,55 @@ export default {
     }
   },
   methods: {
+    async copyText(text) {
+      if (!text) return false
+      if (navigator.clipboard && window.isSecureContext) {
+        const copiedByClipboardApi = await navigator.clipboard.writeText(text).then(() => true).catch(() => false)
+        if (copiedByClipboardApi) return true
+      }
+      const textarea = document.createElement('textarea')
+      textarea.value = text
+      textarea.setAttribute('readonly', '')
+      textarea.style.position = 'fixed'
+      textarea.style.opacity = '0'
+      document.body.appendChild(textarea)
+      textarea.select()
+      let copied = false
+      try {
+        copied = document.execCommand('copy')
+      } catch (_) {
+        copied = false
+      }
+      document.body.removeChild(textarea)
+      return copied
+    },
+    async handleContentClick(e) {
+      const button = e.target && e.target.closest ? e.target.closest('.md-copy-btn') : null
+      if (!button) return
+      const pre = button.closest('pre')
+      if (!pre) return
+      const code = pre.querySelector('code')
+      const text = (code ? code.innerText : pre.innerText).trim()
+      if (!text) return
+      const copied = await this.copyText(text)
+      button.textContent = copied ? '已复制' : '复制失败'
+      if (button.__copyTimer) clearTimeout(button.__copyTimer)
+      button.__copyTimer = setTimeout(() => {
+        button.textContent = '复制'
+      }, 1200)
+    },
+    addCopyButtons(container) {
+      if (!container || container.nodeType !== 1) return
+      const blocks = container.querySelectorAll('pre')
+      for (const pre of blocks) {
+        if (pre.querySelector('.md-copy-btn')) continue
+        const button = document.createElement('button')
+        button.type = 'button'
+        button.className = 'md-copy-btn'
+        button.textContent = '复制'
+        pre.appendChild(button)
+      }
+    },
     loadMathJax() {
       return new Promise(resolve => {
         if (window.MathJax) { resolve(); return }
@@ -141,6 +190,7 @@ export default {
       }
 
       groupConsecutiveImageParagraphs(tmp)
+      this.addCopyButtons(tmp)
 
       this.displayHtml = tmp.innerHTML
       this.$emit('heading-extracted', heading)
@@ -153,9 +203,17 @@ export default {
     },
   },
   mounted() {
+    if (this.$refs.contentRef) {
+      this.$refs.contentRef.addEventListener('click', this.handleContentClick)
+    }
     this.loadMathJax().then(() => {
       this.typesetMath()
     })
+  },
+  beforeDestroy() {
+    if (this.$refs.contentRef) {
+      this.$refs.contentRef.removeEventListener('click', this.handleContentClick)
+    }
   }
 }
 </script>
@@ -183,7 +241,7 @@ export default {
 }
 
 .content { 
-  color: #cfe0ee; 
+  color: var(--c-text-body); 
   font-size: 16px; 
   line-height: 1.4; /* 全局默认行距同步缩小 */
   overflow-wrap: anywhere; 
@@ -191,7 +249,7 @@ export default {
 }
 
 .content :deep(p) { 
-  color: #cfe0ee; 
+  color: var(--c-text-body); 
   line-height: 1.4; /* 缩小行距，原为 1.6 */
   margin: 8px 0; /* 减小段落间距，原为 12px */
   font-size: 16px;
@@ -209,7 +267,7 @@ export default {
 }
 
 .content :deep(h2) { 
-  color: var(--c-primary); 
+  color: #58d68d; 
   font-size: 22px; 
   line-height: 1.25; 
   margin: 32px 0 20px; 
@@ -221,12 +279,12 @@ export default {
   content: "¶"; 
   display: inline-block; 
   margin-right: 8px; 
-  color: var(--c-primary); 
+  color: #58d68d; 
   font-weight: 700; 
 }
 
 .content :deep(h3) { 
-  color: #d9e9f7; 
+  color: var(--c-text-emphasis); 
   font-size: 18px; 
   line-height: 1.2; 
   margin: 8px 0 6px; /* 减小前后行距，原为 28px 0 16px */
@@ -244,13 +302,13 @@ export default {
   left: 0;
   width: 100%;
   height: 8px;
-  background-color: rgba(102, 192, 244, 0.4); /* 使用主题色作为强调线颜色 */
+  background-color: rgba(88, 214, 141, 0.42);
   z-index: -1;
   border-radius: 2px;
 }
 
 .content :deep(h4) { 
-  color: #d9e9f7; 
+  color: var(--c-text-emphasis); 
   font-size: 17px; 
   line-height: 1.3; 
   margin: 24px 0 12px; 
@@ -259,7 +317,7 @@ export default {
 }
 
 .content :deep(h5), .content :deep(h6) { 
-  color: #cfe0ee; 
+  color: var(--c-text-body); 
   font-size: 14px; 
   line-height: 1.9; 
   margin: 20px 0 8px; 
@@ -267,11 +325,12 @@ export default {
 }
 
 .content :deep(a) { 
-  color: var(--c-primary); 
+  color: #6fe09f; 
   text-decoration: none; 
 }
 
 .content :deep(a:hover) { 
+  color: #96f0bd;
   text-decoration: underline; 
 }
 
@@ -287,7 +346,7 @@ export default {
 .content :deep(li) { 
   margin: 4px 0; /* 减小列表项间距 */
   line-height: 1.4; /* 列表项行距也同步缩小 */
-  color: #cfe0ee; 
+  color: var(--c-text-body); 
   font-size: 16px; /* 为了和 p 标签保持一致，这里也缩小到 14px */
   font-weight: 400; 
   padding-left: 6px; 
@@ -301,14 +360,14 @@ export default {
 .content :deep(hr) { 
   border: none; 
   height: 1px; 
-  background: var(--c-border-strong); 
+  background: #2f5c45; 
   margin: 18px 0; 
 }
 
 .content :deep(code) { 
-  background: var(--c-bg-l1); 
+  background: #2a3f33; 
   border: 1px solid var(--c-border-default); 
-  padding: 2px 6px; 
+  padding: 1px; 
   border-radius: 4px; 
   color: var(--c-text-emphasis); 
   font-family: 'RobotoMono', Menlo, Monaco, Consolas, "Courier New", monospace; 
@@ -316,13 +375,14 @@ export default {
 }
 
 .content :deep(pre) { 
-  background: #0f1b2a; 
+  background: #181A1F; 
   border: 1px solid var(--c-border-default); 
   border-radius: 6px; 
-  padding: 12px; 
+  padding: 36px 12px 12px; 
   overflow: auto; 
   line-height: 1;
   font-family: 'RobotoMono', Menlo, Monaco, Consolas, "Courier New", monospace; 
+  position: relative;
 }
 
 .content :deep(pre code) { 
@@ -334,16 +394,34 @@ export default {
   font-family: 'RobotoMono', Menlo, Monaco, Consolas, "Courier New", monospace; 
 }
 
+.content :deep(.md-copy-btn) {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  border: 1px solid var(--c-border-default);
+  background: #2a2d34;
+  color: var(--c-text-emphasis);
+  border-radius: 4px;
+  font-size: 12px;
+  line-height: 1;
+  padding: 6px 8px;
+  cursor: pointer;
+}
+
+.content :deep(.md-copy-btn:hover) {
+  background: #343842;
+}
+
 .content :deep(table) { 
   width: 100%; 
   border-collapse: collapse; 
-  border: 1px solid var(--c-border-default); 
+  border: 1px solid #2f5c45; 
   margin: 14px 0; 
   font-size: 14px; 
 }
 
 .content :deep(th), .content :deep(td) { 
-  border: 1px solid var(--c-border-default); 
+  border: 1px solid #2f5c45; 
   padding: 6px 8px; 
   text-align: left; 
   line-height: 2; 
@@ -351,7 +429,7 @@ export default {
 }
 
 .content :deep(th) { 
-  background: var(--c-bg-l4); 
+  background: #1f3d2f; 
   color: var(--c-text-emphasis); 
   font-weight: 600; 
 }
@@ -362,14 +440,14 @@ export default {
 
 .content :deep(blockquote) { 
   border-left: 4px solid var(--c-primary); 
-  background: linear-gradient(90deg, rgba(102, 192, 244, 0.15) 0%, rgba(102, 192, 244, 0.05) 100%);
+  background: linear-gradient(90deg, rgba(88, 214, 141, 0.20) 0%, rgba(88, 214, 141, 0.08) 100%);
   padding: 6px 20px 6px 32px;
   margin: 16px 0;
-  color: #dbeaf9;
+  color: var(--c-text-emphasis);
   border-radius: 0 6px 6px 0;
   font-style: italic;
   position: relative;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 4px 12px var(--c-shadow-light);
   line-height: 1;
   font-size: 14px;
 }
@@ -386,14 +464,14 @@ export default {
   top: -6px;
   left: 6px;
   font-size: 40px;
-  color: rgba(102, 192, 244, 0.3);
+  color: rgba(88, 214, 141, 0.3);
   font-family: "Times New Roman", serif;
   line-height: 1;
 }
 
 .content :deep(.mjx-container) { 
-  color: #cfe0ee; 
-  background: rgba(27,40,56,0.5); 
+  color: var(--c-text-body); 
+  background: #15241b; 
   border: 1px solid var(--c-border-default); 
   border-radius: 6px; 
   padding: 2px 6px; 
@@ -428,8 +506,8 @@ export default {
 }
 
 .content :deep(mark) {
-  background-color: rgba(255, 215, 0, 0.2);
-  color: #ffd700;
+  background-color: rgba(88, 214, 141, 0.24);
+  color: #58d68d;
   padding: 0 2px;
   border-radius: 2px;
 }

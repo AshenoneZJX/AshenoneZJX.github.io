@@ -6,10 +6,6 @@
         <transition name="fade" mode="out-in">
           <router-view />
         </transition>
-        <div v-if="$route.name === 'CarDetail'" class="detail-pager-global">
-          <button class="nav-icon" :disabled="!hasPrev" @click="goPrev" aria-label="上一辆">‹</button>
-          <button class="nav-icon" :disabled="!hasNext" @click="goNext" aria-label="下一辆">›</button>
-        </div>
       </main>
       <Footer />
     </div>
@@ -19,47 +15,12 @@
 <script>
 import NavBar from '@/components/Shared/NavBar.vue'
 import Footer from '@/components/Shared/Footer.vue'
-import cars from '@/data/car/cars.json'
 
 export default {
   name: 'App',
   components: {
     NavBar,
     Footer
-  },
-  computed: {
-    isCarDetail() {
-      return this.$route && this.$route.name === 'CarDetail'
-    },
-    sortedCars() {
-      if (!this.isCarDetail) return []
-      return [...cars].sort((a, b) => Number(a.id) - Number(b.id))
-    },
-    currentIndex() {
-      if (!this.isCarDetail) return -1
-      const id = Number(this.$route.params.id)
-      return this.sortedCars.findIndex(c => Number(c.id) === id)
-    },
-    prevId() {
-      const i = this.currentIndex
-      if (i > 0) return this.sortedCars[i - 1].id
-      return null
-    },
-    nextId() {
-      const i = this.currentIndex
-      if (i >= 0 && i < this.sortedCars.length - 1) return this.sortedCars[i + 1].id
-      return null
-    },
-    hasPrev() { return this.prevId !== null },
-    hasNext() { return this.nextId !== null }
-  },
-  methods: {
-    goPrev() {
-      if (this.hasPrev) this.$router.push({ name: 'CarDetail', params: { id: this.prevId } })
-    },
-    goNext() {
-      if (this.hasNext) this.$router.push({ name: 'CarDetail', params: { id: this.nextId } })
-    }
   }
 }
 </script>
@@ -67,87 +28,87 @@ export default {
 <style>
 :root {
   /* Core Dark Mode (Default) */
-  --c-primary: #66c0f4;
-  --c-primary-alpha-10: rgba(102, 192, 244, 0.10);
-  --c-primary-alpha-20: rgba(102, 192, 244, 0.20);
-  --c-primary-alpha-30: rgba(102, 192, 244, 0.30);
-  --c-primary-alpha-40: rgba(102, 192, 244, 0.40);
-  --c-primary-alpha-50: rgba(102, 192, 244, 0.50);
-  --c-primary-alpha-60: rgba(102, 192, 244, 0.60);
-  --c-primary-alpha-80: rgba(102, 192, 244, 0.80);
+  --c-primary: #58a6ff;
+  --c-primary-alpha-10: rgba(88, 166, 255, 0.10);
+  --c-primary-alpha-20: rgba(88, 166, 255, 0.20);
+  --c-primary-alpha-30: rgba(88, 166, 255, 0.30);
+  --c-primary-alpha-40: rgba(88, 166, 255, 0.40);
+  --c-primary-alpha-50: rgba(88, 166, 255, 0.50);
+  --c-primary-alpha-60: rgba(88, 166, 255, 0.60);
+  --c-primary-alpha-80: rgba(88, 166, 255, 0.80);
   
   /* Background Levels */
-  --c-bg-l0: #171a21;
-  --c-bg-l1: #1b2838;
-  --c-bg-l2: #16202d;
-  --c-bg-l3: #222e3b;
-  --c-bg-l4: #223447;
-  --c-bg-panel-deep: var(--c-bg-panel-deep);
-  --c-bg-input: var(--c-bg-input);
+  --c-bg-l0: #1E1E1F;
+  --c-bg-l1: #1E1E1F;
+  --c-bg-l2: #161b22;
+  --c-bg-l3: #1f2937;
+  --c-bg-l4: #243244;
+  --c-bg-panel-deep: #0f1623;
+  --c-bg-input: #111827;
   
   /* Text */
-  --c-text-title: #ffffff;
-  --c-text-emphasis: #e6f3ff;
-  --c-text-body: #c6d4df;
-  --c-text-body-alt: #c7d5e0;
-  --c-text-muted: #8f98a0;
-  --c-text-label: #8a9aa8;
-  --c-text-nav: #b8b6b4;
+  --c-text-title: #e6edf3;
+  --c-text-emphasis: #c9d1d9;
+  --c-text-body: #adbac7;
+  --c-text-body-alt: #9da7b3;
+  --c-text-muted: #8b949e;
+  --c-text-label: #7d8590;
+  --c-text-nav: #adbac7;
   
   /* Border */
-  --c-border-default: #38424e;
-  --c-border-hover: #3c4551;
-  --c-border-strong: #2a475e;
+  --c-border-default: #2d333b;
+  --c-border-hover: #30363d;
+  --c-border-strong: #388bfd;
   
   /* Shadow Overlay */
-  --c-shadow-light: rgba(0, 0, 0, 0.20);
-  --c-shadow-medium: rgba(0, 0, 0, 0.40);
-  --c-shadow-heavy: rgba(0, 0, 0, 0.60);
+  --c-shadow-light: rgba(1, 4, 9, 0.20);
+  --c-shadow-medium: rgba(1, 4, 9, 0.45);
+  --c-shadow-heavy: rgba(1, 4, 9, 0.65);
   
   /* Navbar */
-  --c-nav-bg: rgba(23, 26, 33, 0.9);
-  --c-nav-mask: rgba(0, 0, 0, 0.4);
+  --c-nav-bg: rgba(13, 17, 23, 0.9);
+  --c-nav-mask: rgba(1, 4, 9, 0.45);
   
   --title-font: 'MotivaTitle', "Motiva Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 [data-theme="light"] {
   /* Light Mode - Steam Inspired but bright */
-  --c-primary: #1999ff; /* Brighter blue for visibility */
-  --c-primary-alpha-10: rgba(25, 153, 255, 0.10);
-  --c-primary-alpha-20: rgba(25, 153, 255, 0.20);
-  --c-primary-alpha-30: rgba(25, 153, 255, 0.30);
-  --c-primary-alpha-40: rgba(25, 153, 255, 0.40);
-  --c-primary-alpha-50: rgba(25, 153, 255, 0.50);
-  --c-primary-alpha-60: rgba(25, 153, 255, 0.60);
-  --c-primary-alpha-80: rgba(25, 153, 255, 0.80);
+  --c-primary: #58a6ff;
+  --c-primary-alpha-10: rgba(88, 166, 255, 0.10);
+  --c-primary-alpha-20: rgba(88, 166, 255, 0.20);
+  --c-primary-alpha-30: rgba(88, 166, 255, 0.30);
+  --c-primary-alpha-40: rgba(88, 166, 255, 0.40);
+  --c-primary-alpha-50: rgba(88, 166, 255, 0.50);
+  --c-primary-alpha-60: rgba(88, 166, 255, 0.60);
+  --c-primary-alpha-80: rgba(88, 166, 255, 0.80);
   
-  --c-bg-l0: #e4e9f0; /* Darker than l1, like footer */
-  --c-bg-l1: #f2f5f7; /* Main body */
-  --c-bg-l2: #ffffff; /* Card / Panel */
-  --c-bg-l3: #f8f9fa; /* Elevated */
-  --c-bg-l4: #e1e7ed; /* TableHead */
-  --c-bg-panel-deep: #f2f5f7;
-  --c-bg-input: #ffffff;
+  --c-bg-l0: #1E1E1F;
+  --c-bg-l1: #1E1E1F;
+  --c-bg-l2: #161b22;
+  --c-bg-l3: #1f2937;
+  --c-bg-l4: #243244;
+  --c-bg-panel-deep: #0f1623;
+  --c-bg-input: #111827;
   
-  --c-text-title: #171a21;
-  --c-text-emphasis: #0078d7;
-  --c-text-body: #38424e;
-  --c-text-body-alt: #465463;
-  --c-text-muted: #7a8b99;
-  --c-text-label: #5c6b7a;
-  --c-text-nav: #38424e;
+  --c-text-title: #e6edf3;
+  --c-text-emphasis: #c9d1d9;
+  --c-text-body: #adbac7;
+  --c-text-body-alt: #9da7b3;
+  --c-text-muted: #8b949e;
+  --c-text-label: #7d8590;
+  --c-text-nav: #adbac7;
   
-  --c-border-default: #d0d7de;
-  --c-border-hover: #b8c2cc;
-  --c-border-strong: #a0abb6;
+  --c-border-default: #2d333b;
+  --c-border-hover: #30363d;
+  --c-border-strong: #388bfd;
   
-  --c-shadow-light: rgba(0, 0, 0, 0.05);
-  --c-shadow-medium: rgba(0, 0, 0, 0.10);
-  --c-shadow-heavy: rgba(0, 0, 0, 0.20);
+  --c-shadow-light: rgba(1, 4, 9, 0.20);
+  --c-shadow-medium: rgba(1, 4, 9, 0.45);
+  --c-shadow-heavy: rgba(1, 4, 9, 0.65);
   
-  --c-nav-bg: rgba(242, 245, 247, 0.9);
-  --c-nav-mask: rgba(255, 255, 255, 0.6);
+  --c-nav-bg: rgba(13, 17, 23, 0.9);
+  --c-nav-mask: rgba(1, 4, 9, 0.45);
 }
 
 @font-face { font-family: 'MotivaTitle'; font-style: normal; font-weight: 400; font-display: swap; src: url('./assets/fonts/MotivaSans-Regular_woff.ttf') format('truetype'); }
@@ -170,9 +131,27 @@ body {
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
+div.divider {
+  height: 1px !important;
+  background-color: var(--c-border-default) !important;
+  border: 0 !important;
+}
+
 button {
   white-space: nowrap;
   flex-shrink: 0;
+}
+
+.back-btn {
+  background: var(--c-primary-alpha-10) !important;
+  color: var(--c-text-emphasis) !important;
+  border-color: var(--c-border-hover) !important;
+}
+
+.back-btn:hover {
+  background: #1A2736 !important;
+  color: var(--c-text-emphasis) !important;
+  border-color: var(--c-border-hover) !important;
 }
 
 /* 页面通用容器，用于限制宽度 */
@@ -191,38 +170,6 @@ button {
 .main-content {
   flex: 1 0 auto;
   padding-top: 80px; /* 为固定导航栏留出空间，紧贴导航栏底部 */
-}
-
-.detail-pager-global {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 8px;
-  margin-top: 16px;
-}
-.detail-pager-global .nav-icon {
-  background: var(--c-primary-alpha-10);
-  border: none;
-  color: var(--c-text-body-alt);
-  padding: 0;
-  width: 80px;
-  height: 32px;
-  min-width: unset;
-  cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 6px;
-  font-size: 24px;
-  line-height: 1;
-}
-.detail-pager-global .nav-icon:hover { color: var(--c-text-emphasis); background: var(--c-primary-alpha-20); }
-.detail-pager-global .nav-icon[disabled] { opacity: 0.6; cursor: default; pointer-events: none; background: var(--c-primary-alpha-10); }
-
-@media (max-width: 768px) {
-  .detail-pager-global {
-    display: none;
-  }
 }
 
 /* 页面切换动画 */

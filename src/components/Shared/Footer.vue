@@ -21,13 +21,12 @@ export default {
 <style scoped>
 .steam-footer {
   flex-shrink: 0;
-  margin-top: 50px;
   padding: 40px 0;
-  background: var(--c-bg-l0);
+  background: #1A1A1B;
   text-align: center;
   color: var(--c-text-muted);
   font-size: 12px;
-  border-top: 1px solid #2e353f;
+  border-top: 1px solid var(--c-border-hover);
   position: relative;
   width: 100%;
 }

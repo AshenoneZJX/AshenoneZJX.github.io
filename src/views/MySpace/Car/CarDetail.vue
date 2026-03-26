@@ -498,18 +498,18 @@ export default {
   position: relative;
   overflow: hidden;
   border-radius: 8px; /* 添加圆角让阴影更自然 */
-  height: fit-content;
-  max-height: 100%;
+  height: 100%;
   box-shadow: 0 12px 32px var(--c-shadow-heavy), 0 4px 12px rgba(0, 0, 0, 0.3); /* 添加凸显立体感的边缘阴影 */
   /* Merged hero styles */
 }
 
 .gallery-image {
-  position: relative;
+  position: absolute;
+  top: 0;
+  left: 0;
   display: block;
   width: 100%;
-  height: auto;
-  max-height: 100%;
+  height: 100%;
   object-fit: cover;
   user-select: none;
   box-shadow: 0 8px 24px var(--c-shadow-heavy), 0 2px 8px var(--c-shadow-medium);
@@ -774,18 +774,18 @@ export default {
 
 .tag {
   font-size: 11px;
-  padding: 4px 8px;
-  border-radius: 4px;
-  background: rgba(62, 128, 182, 0.4); /* Lighter theme blue background */
+  padding: 4px 10px;
+  border-radius: 12px;
+  background: rgba(62, 128, 182, 0.3); /* 统一为同一种亚克力背景色 */
   color: var(--c-text-title); /* White text */
   font-weight: 600;
-  backdrop-filter: blur(4px); /* Blur effect */
-  -webkit-backdrop-filter: blur(4px);
+  border: 1px solid rgba(102, 192, 244, 0.2); /* 统一边框色 */
+  backdrop-filter: blur(12px) saturate(120%);
+  -webkit-backdrop-filter: blur(12px) saturate(120%);
 }
 
 .tag-energy {
   color: var(--c-text-title);
-  background: rgba(62, 128, 182, 0.4);
 }
 
 .intro-text {
@@ -889,18 +889,23 @@ export default {
   width: 72px;
   height: 72px;
   border-radius: 50%;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  background: rgba(32, 43, 58, 0.6);
+  border: 1px solid var(--c-border-hover);
+  background: rgba(15, 22, 35, 0.82);
   backdrop-filter: blur(24px) saturate(120%);
   -webkit-backdrop-filter: blur(24px) saturate(120%);
   color: var(--c-text-emphasis);
   font-weight: 700;
-  box-shadow: 0 8px 32px var(--c-shadow-medium);
+  box-shadow: 0 8px 32px var(--c-shadow-medium); /* 移除发光阴影，恢复原本的阴影 */
   z-index: 1000;
   display: none; /* Hidden on desktop */
   align-items: center;
   justify-content: center;
   cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.fab-specs:active {
+  transform: scale(0.95);
 }
 
 .specs-overlay, .specs-drawer {
@@ -916,14 +921,14 @@ export default {
   .detail-layout {
     flex-direction: column;
     height: auto;
-    gap: 16px; /* 减小移动端模块之间的间距 */
+    gap: 0; /* 减小移动端模块之间的间距 */
   }
   
   .right-section {
     flex: 0 0 auto;
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: 0;
     padding: 0; /* 移除桌面端左右 40px 的 padding */
   }
 
@@ -932,7 +937,11 @@ export default {
   }
 
   .section-header { order: 1; }
-  .meta-block { order: 2; }
+  .meta-block { 
+    order: 2; 
+    margin-top: 16px;
+    margin-bottom: 16px;
+  }
 
   .left-section {
     order: 3;
@@ -941,7 +950,10 @@ export default {
     flex: none;
   }
 
-  .intro-text { order: 4; }
+  .intro-text { 
+    order: 4; 
+    margin-top: 16px;
+  }
   .info-lower { order: 5; }
   
   /* On very small screens, hide the specs box in column and show FAB */
@@ -971,10 +983,10 @@ export default {
       position: fixed;
       left: 0; right: 0; bottom: 0;
       max-height: 70vh;
-      background: rgba(32, 43, 58, 0.75);
+      background: rgba(15, 22, 35, 0.88);
       backdrop-filter: blur(24px) saturate(120%);
       -webkit-backdrop-filter: blur(24px) saturate(120%);
-      border-top: 1px solid rgba(255, 255, 255, 0.12);
+      border-top: 1px solid var(--c-border-default);
       border-radius: 16px 16px 0 0;
       box-shadow: 0 -4px 24px var(--c-shadow-medium);
       padding: 20px;

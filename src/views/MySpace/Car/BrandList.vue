@@ -103,12 +103,13 @@ export default {
   gap: 16px;
 }
 .brand-card {
-  background-color: var(--c-bg-l2);
+  background: #171B21;
+  border: 1px solid var(--c-border-default);
   padding: 14px;
-  border-radius: 6px;
+  border-radius: 10px;
   box-shadow: 0 4px 15px var(--c-shadow-medium);
   cursor: pointer;
-  transition: transform 0.2s;
+  transition: transform 0.2s, box-shadow 0.2s, filter 0.2s;
   min-height: 120px;
   position: relative;
   overflow: hidden;
@@ -121,19 +122,14 @@ export default {
   transform: translate(-50%, -50%);
   z-index: 0;
   pointer-events: none;
-  opacity: 0.8;
-}
-.brand-card::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: var(--c-shadow-medium);
-  border-radius: 6px;
-  pointer-events: none;
-  z-index: 1;
+  opacity: 0.72;
 }
 /* 鼠标悬停时卡片上浮4px，产生轻微浮起效果 */
-.brand-card:hover { transform: translateY(-4px); }
+.brand-card:hover {
+  transform: scale(1.03);
+  filter: brightness(1.15);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.45);
+}
 .brand-title { 
   color: var(--c-text-title); 
   font-weight: 600; 
@@ -147,13 +143,15 @@ export default {
   width: fit-content;
 }
 .brand-meta { 
-  color: var(--c-primary); 
-  font-size: 13px; 
+  display: inline-block;
+  color: var(--c-text-title); 
+  font-size: 11px; 
+  font-weight: 600;
   position: relative; 
   z-index: 2;
-  background: var(--c-shadow-heavy);
-  padding: 2px 6px;
-  border-radius: 4px;
+  background: #3a3f45;
+  padding: 2px 8px;
+  border-radius: 3px;
   width: fit-content;
 }
 

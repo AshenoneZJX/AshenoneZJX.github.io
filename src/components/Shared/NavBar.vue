@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="navbar-wrapper">
     <nav class="steam-navbar" :class="{ compact: isCompact }">
       <div class="nav-container">
         <div class="logo" @click="goHome">
@@ -110,6 +110,12 @@ export default {
 </script>
 
 <style scoped>
+/* 强制 Navbar 保持深色模式的变量 */
+.navbar-wrapper {
+  position: relative;
+  z-index: 1200;
+}
+
 @font-face {
   font-family: 'Inter';
   src: url('~@/assets/fonts/Inter-var.ttf') format('truetype');
@@ -133,11 +139,12 @@ export default {
   left: 0;
   width: 100%;
   height: 80px;
-  background-color: var(--c-nav-bg);
+  background-color: #1A1A1B;
   -webkit-backdrop-filter: blur(6px);
   backdrop-filter: blur(6px);
-  z-index: 1000;
+  z-index: 1200;
   box-shadow: none;
+  border-bottom: 1px solid var(--c-border-default);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -188,7 +195,7 @@ export default {
 
 .menu-toggle:hover {
   color: var(--c-text-title);
-  border-color: #3a3f49;
+  border-color: var(--c-border-hover);
 }
 
 .nav-right {

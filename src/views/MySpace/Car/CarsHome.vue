@@ -27,7 +27,7 @@
           </router-link>
 
           <router-link class="gallery-card" to="/mySpace/brands">
-            <div class="card-image" :style="bg('https://images.unsplash.com/photo-1518640467707-6811f4a6ab73?q=80&w=1600&auto=format&fit=crop&ixlib=rb-4.1.0')">
+            <div class="card-image" :style="bg('https://images.unsplash.com/photo-1578148190071-173c57e882bd?q=80&w=774&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')">
               <div class="hover-overlay">品牌介绍</div>
             </div>
           </router-link>
@@ -36,7 +36,7 @@
 
       <div class="info-col">
         <div class="info-browse">
-          <div class="chart-block" style="margin-bottom: 0; border-bottom-left-radius: 0; border-bottom-right-radius: 0; padding-bottom: 0; ">
+          <div class="chart-block chart-block-head">
             <div class="charts-toolbar" :class="{ 'is-expanded': isMobileMenuOpen }">
               <div class="mobile-toggle-bar">
                 <button class="menu-toggle-btn" @click="toggleMobileMenu">
@@ -65,7 +65,7 @@
               </div>
             </div>
           </div>
-          <div class="chart-container" style="background: var(--c-bg-l2); border-radius: 0 0 6px 6px; padding-bottom: 12px; margin-top: 0;">
+          <div class="chart-container chart-container-main">
             <YearlySalesRankingChart
               :title="`年度车型销量排名（${selectedMonth}）`"
               :items="filteredItems"
@@ -250,8 +250,36 @@ export default {
   gap: 0; /* 移除外层 gap，通过内部元素控制间距 */
 }
 
-.chart-block { width: 100%; background: var(--c-bg-l2); border-radius: 6px; padding: 12px; box-sizing: border-box; }
-.chart-container { width: 100%; box-sizing: border-box; margin-bottom: 22px; }
+.chart-block {
+  width: 100%;
+  background: var(--c-bg-l2);
+  border: 1px solid var(--c-border-default);
+  border-radius: 10px;
+  padding: 12px;
+  box-sizing: border-box;
+  box-shadow: 0 4px 15px var(--c-shadow-medium);
+}
+.chart-block-head {
+  margin-bottom: 0;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  border-bottom: none;
+  padding-bottom: 0;
+}
+.chart-container {
+  width: 100%;
+  box-sizing: border-box;
+  margin-bottom: 22px;
+}
+.chart-container-main {
+  background: var(--c-bg-l2);
+  border: 1px solid var(--c-border-default);
+  border-top: none;
+  border-radius: 0 0 10px 10px;
+  padding-bottom: 12px;
+  margin-top: 0;
+  box-shadow: 0 4px 15px var(--c-shadow-medium);
+}
 
 .charts-row {
   display: flex;
@@ -263,7 +291,7 @@ export default {
 .charts-toolbar {
   margin-bottom: 0;
   position: relative;
-  border-bottom: 1px solid var(--c-border-strong);
+  border-bottom: 1px solid var(--c-border-default);
   padding-bottom: 10px;
 }
 .mobile-toggle-bar {
@@ -277,25 +305,38 @@ export default {
 }
 .charts-toolbar label { color: var(--c-text-label); font-size: 13px; }
 .charts-toolbar select {
-  background: var(--c-bg-input);
-  color: var(--c-text-title);
-  border: 1px solid var(--c-border-strong);
-  padding: 4px 8px;
-  border-radius: 4px;
+  background: transparent;
+  color: var(--c-text-body-alt);
+  border: 1px solid var(--c-border-hover);
+  padding: 0 10px;
+  border-radius: 6px;
+  height: 30px;
+}
+.charts-toolbar select:hover {
+  border-color: var(--c-primary);
+}
+.charts-toolbar select:focus,
+.charts-toolbar select:focus-visible {
+  outline: none;
+  border-color: var(--c-primary);
 }
 .sort-btn {
   background: transparent;
-  border: none;
+  border: 1px solid var(--c-border-hover);
   color: var(--c-text-body-alt);
-  padding: 4px 6px;
+  padding: 0 12px;
   border-radius: 6px;
   cursor: pointer;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  height: 28px;
+  height: 30px;
 }
-.sort-btn:hover { background: var(--c-primary-alpha-10); color: var(--c-text-emphasis); }
+.sort-btn:hover {
+  background: var(--c-primary-alpha-10);
+  color: var(--c-text-emphasis);
+  border-color: var(--c-primary);
+}
 .filter-btn { background: transparent; border: none; color: var(--c-text-body-alt); padding: 6px 10px; border-radius: 6px; cursor: pointer; }
 .filter-btn:hover { background: var(--c-primary-alpha-10); color: var(--c-text-emphasis); }
 .charts-toolbar { position: relative; }
@@ -326,31 +367,22 @@ export default {
 .gallery-card {
   background: var(--c-bg-l2);
   box-shadow: 0 4px 15px var(--c-shadow-medium);
-  border: 1px solid rgba(255,255,255,0.06);
-  border-radius: 4px;
+  border: 1px solid var(--c-border-default);
+  border-radius: 8px; /* 增加一点圆角让卡片感更强 */
   position: relative;
   overflow: hidden;
-  transition: background 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+  transition: transform 0.2s, box-shadow 0.2s, filter 0.2s;
   cursor: pointer;
   text-decoration: none;
-}
-.gallery-card::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: rgba(102,192,244,0.14);
-  opacity: 0;
-  transition: opacity 0.18s ease;
-  z-index: 1;
-  pointer-events: none;
+  display: block;
 }
 .gallery-card:hover {
-  background: var(--c-bg-l1);
-  box-shadow: 0 6px 18px rgba(0,0,0,0.45);
+  transform: scale(1.03);
+  filter: brightness(1.15);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.45);
 }
-.gallery-card:hover::after { opacity: 1; }
-.card-image { height: 50px; background-size: cover; background-position: center; position: relative; }
-.hover-overlay { position: absolute; bottom: 0; left: 0; right: 0; padding: 6px 10px; background: var(--c-shadow-heavy); color: var(--c-text-title); font-weight: 400; letter-spacing: 1px; font-size: 12px; z-index: 2; }
+.card-image { height: 160px; background-size: cover; background-position: center; position: relative; }
+.hover-overlay { position: absolute; bottom: 0; left: 0; right: 0; padding: 12px 10px; background: var(--c-shadow-heavy); color: var(--c-text-title); font-weight: 500; letter-spacing: 1px; font-size: 14px; text-align: center; z-index: 2; }
 
 .info-browse >>> .chart-wrapper {
   flex: 1 1 auto;
@@ -409,9 +441,15 @@ export default {
   .back-text { display: none; }
   
   .section-header { padding: 0; }
+
+  .info-browse {
+    padding: 2px;
+    margin: 0;
+  }
 }
 
-@media (max-width: 768px) {
+/* 仅在横向空间不足（例如小于 600px）时才退化为按钮折叠模式 */
+@media (max-width: 600px) {
   .mobile-toggle-bar {
     display: flex;
     justify-content: flex-start;
@@ -443,11 +481,11 @@ export default {
     left: 0;
     width: fit-content;
     z-index: 999;
-    background: rgba(27, 40, 56, 0.7);
+    background: var(--c-bg-l3);
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
     padding: 15px;
-    border: 1px solid rgba(60, 69, 81, 0.5);
+    border: 1px solid var(--c-border-default);
     border-radius: 6px;
     box-shadow: 0 8px 32px var(--c-shadow-medium);
     box-sizing: border-box;
@@ -461,17 +499,5 @@ export default {
     width: 100%;
     max-width: 200px;
   }
-  
-  .info-browse {
-    padding: 10px;
-    margin: 0;
-  }
-}
-
-
-
-
-@media (max-width: 768px) {
-  
 }
 </style>
