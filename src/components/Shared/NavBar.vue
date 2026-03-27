@@ -43,9 +43,6 @@
       <router-link @click.native="closeMenu" to="/mySpace" tag="button">个人空间</router-link>
       <router-link @click.native="closeMenu" to="/records" tag="button">记录</router-link>
       <router-link @click.native="closeMenu" to="/learning" tag="button">Learning</router-link>
-      <button @click="toggleTheme" class="mobile-theme-toggle">
-        {{ isLightMode ? '切换到暗色模式' : '切换到浅色模式' }}
-      </button>
     </div>
     <div v-if="isOpen" class="menu-mask" :class="{ compact: isCompact }" @click="closeMenu"></div>
   </div>
@@ -233,10 +230,10 @@ export default {
 
 /* Vue Router 激活时的类名 */
 .nav-links button.router-link-active {
-  color: var(--c-primary);
-  background-color: var(--c-primary-alpha-20);
+  color: #9aa0a6;
+  background-color: rgba(154, 160, 166, 0.2);
   border-radius: 4px;
-  border-bottom: 3px solid var(--c-primary);
+  border-bottom: 3px solid #9aa0a6;
 }
 
 .theme-toggle {
@@ -321,6 +318,8 @@ export default {
   .menu-toggle {
     display: inline-flex;
     margin-left: auto;
+    border: none;
+    padding: 6px;
   }
   .mobile-menu {
     display: flex;
@@ -342,12 +341,8 @@ export default {
     display: block;
   }
   .theme-toggle {
-    display: none;
-  }
-  .mobile-theme-toggle {
-    margin-top: 10px;
-    border-top: 1px solid var(--c-border-strong) !important;
-    color: var(--c-primary) !important;
+    display: inline-flex;
+    padding: 6px;
   }
 }
 </style>

@@ -162,7 +162,7 @@
     </div>
     <div class="total-count">共-{{ totalCarCount }}-条记录</div>
     <div class="pagination" v-if="totalPages > 1">
-      <button class="page-btn" :disabled="page === 1" @click="goPage(page - 1)" aria-label="上一页">‹</button>
+      <button class="page-btn page-nav-btn" :disabled="page === 1" @click="goPage(page - 1)" aria-label="上一页">‹</button>
       <button
         class="page-btn"
         v-for="n in totalPages"
@@ -170,7 +170,7 @@
         :class="{ active: page === n }"
         @click="goPage(n)"
       >{{ n }}</button>
-      <button class="page-btn" :disabled="page === totalPages" @click="goPage(page + 1)" aria-label="下一页">›</button>
+      <button class="page-btn page-nav-btn" :disabled="page === totalPages" @click="goPage(page + 1)" aria-label="下一页">›</button>
     </div>
   </div>
 </template>
@@ -754,7 +754,7 @@ export default {
 .gallery-card {
   background: var(--c-bg-l2);
   box-shadow: 0 4px 15px var(--c-shadow-medium);
-  border: none;
+  border: 1px solid var(--c-border-default);
   border-radius: 10px;
   overflow: hidden;
   transition: transform 0.2s, box-shadow 0.2s, filter 0.2s;
@@ -772,17 +772,21 @@ export default {
   height: 230px;
   display: flex;
   flex-direction: column;
-  border: 1px solid var(--c-border-default);
+  width: 100%;
+  box-sizing: border-box;
+  border-radius: inherit;
+  overflow: hidden;
 }
 
 .card-image {
   height: 160px;
+  width: 100%;
   background-size: cover;
   background-position: center;
   position: relative;
 }
 
-.card-info { padding: 12px; background: #171B21; flex: 1 1 auto; min-height: 0; overflow: hidden; }
+.card-info { padding: 12px; width: 100%; box-sizing: border-box; background: #171B21; flex: 1 1 auto; min-height: 0; overflow: hidden; }
 .card-title { color: var(--c-text-title); margin-bottom: 8px; font-weight: normal; font-family: 'Motiva Sans', sans-serif; display: flex; align-items: center; gap: 8px; }
 .card-title .title-text { display: inline-block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-family: 'PuHuiTi', 'SourceHanSansSC', sans-serif; }
 .brand-logo { width: 24px; height: 24px; object-fit: contain; background: transparent; }
@@ -793,11 +797,44 @@ export default {
 .card-tags .tag-body { background: #2e6b36; color: var(--c-text-title); font-weight: 600; }
 .card-tags .tag-size { background: #3a3f45; color: var(--c-text-title); font-weight: 600; }
 .total-count { margin-top: 26px; text-align: center; color: var(--c-text-muted); font-size: 12px; letter-spacing: 0.5px; }
-.pagination { display: flex; align-items: center; justify-content: center; gap: 8px; margin-top: 32px; }
-.page-btn { background: none; border: none; color: var(--c-text-body-alt); padding: 6px 10px; cursor: pointer; border-radius: 4px; font-size: 12px; }
-.page-btn:hover { color: var(--c-text-title); }
-.page-btn.active { background: var(--c-border-strong); color: var(--c-text-title); }
-.page-btn[disabled] { opacity: 0.5; cursor: not-allowed; }
+.pagination { display: flex; align-items: center; justify-content: center; gap: 10px; margin-top: 32px; }
+.page-btn {
+  min-width: 32px;
+  height: 32px;
+  background: transparent;
+  border: 1px solid var(--c-border-default);
+  color: var(--c-text-body-alt);
+  padding: 0 10px;
+  cursor: pointer;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+.page-btn:hover {
+  background: rgba(154, 160, 166, 0.16);
+  color: var(--c-text-title);
+  border-color: #8a9098;
+}
+.page-btn.active {
+  background: #8a9098;
+  color: #ffffff;
+  border-color: #8a9098;
+  box-shadow: 0 4px 10px rgba(138, 144, 152, 0.35);
+}
+.page-nav-btn {
+  min-width: 40px;
+  font-size: 16px;
+  font-weight: 700;
+  color: #d3d7dd;
+}
+.page-btn[disabled] {
+  opacity: 0.4;
+  cursor: not-allowed;
+  background: transparent;
+  border-color: var(--c-border-default);
+  box-shadow: none;
+}
 
   @media (max-width: 768px) {
     .back-text { display: none; }

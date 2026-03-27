@@ -396,6 +396,14 @@ export default {
   font-family: 'RobotoMono', monospace;
   margin-bottom: 4px;
 }
+.panel-buttons.compact .filter-btn:hover {
+  background: rgba(154, 160, 166, 0.16);
+  color: #d3d7dd;
+}
+.panel-buttons.compact .filter-btn.active {
+  background: rgba(154, 160, 166, 0.28);
+  color: #e1e4e8;
+}
 .date-range { display: flex; flex-direction: column; align-items: flex-start; gap: 8px; }
 .date-row { display: flex; align-items: center; gap: 8px; }
 .date-input {
@@ -516,8 +524,8 @@ export default {
 
 /* 分类标签：胶囊形、毛玻璃效果、内阴影 */
 .tag-cat {
-  background-color: #1a2a3a;
-  color: #4da6ff;
+  background-color: #8a9098;
+  color: #ffffff;
   border: none;
   border-radius: 8px;
   padding: 3px 12px;
@@ -592,7 +600,7 @@ export default {
 .heatmap-nav {
   background: transparent;
   border: 1px solid transparent;
-  color: var(--c-primary);
+  color: #9aa0a6;
   cursor: pointer;
   padding: 0 6px;
   font-weight: bold;
@@ -600,7 +608,7 @@ export default {
   line-height: 1;
 }
 .heatmap-nav:hover {
-  background: var(--c-primary-alpha-10);
+  background: rgba(154, 160, 166, 0.16);
 }
 .heatmap-year {
   font-family: 'RobotoMono', monospace;
@@ -614,13 +622,14 @@ export default {
 }
 .week-box {
   aspect-ratio: 1;
-  background: #1f2937;
+  background: #24282d;
   border-radius: 2px;
   transition: background 0.2s;
 }
-.intensity-1 { background: rgba(88,166,255,0.28); }
-.intensity-2 { background: rgba(88,166,255,0.45); }
-.intensity-3 { background: rgba(88,166,255,0.62); }
-.intensity-4 { background: #58a6ff; box-shadow: 0 0 4px rgba(88,166,255,0.5); }
+.intensity-0 { background: #24282d; }
+.intensity-1 { background: #3a3f45; }
+.intensity-2 { background: #525860; }
+.intensity-3 { background: #6d737c; }
+.intensity-4 { background: #8a919b; box-shadow: 0 0 4px rgba(138, 145, 155, 0.45); }
 
 </style>

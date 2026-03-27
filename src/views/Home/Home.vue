@@ -253,7 +253,7 @@ export default {
   margin-bottom: 8px;
   font-size: 18px; /* 在这里调整字体大小 */
 }
-.quote-author { color: var(--c-primary); font-weight: bold; font-family: serif; font-size: 18px; }
+.quote-author { color: var(--c-text-emphasis); font-weight: bold; font-family: serif; font-size: 18px; }
 
 /* 三栏布局 */
 .home-layout {
@@ -281,11 +281,11 @@ export default {
 }
 .middle-col { 
   flex-grow: 1; 
-  background: #161b22;
+  background: linear-gradient(180deg, var(--c-bg-l2) 0%, var(--c-bg-panel-deep) 100%);
   padding: 20px; 
   border-radius: 6px; 
-  border: 1px solid #2d333b;
-  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.28);
+  border: 1px solid var(--c-border-hover);
+  box-shadow: 0 10px 28px var(--c-shadow-medium);
 }
 .right-col { width: 280px; flex-shrink: 0; position: sticky; top: 104px; }
 
@@ -296,16 +296,16 @@ export default {
 
 /* Quick Access Styles */
 .quick-access-panel {
-  background: #161b22;
+  background: linear-gradient(180deg, var(--c-bg-l2) 0%, var(--c-bg-panel-deep) 100%);
   padding: 15px;
   border-radius: 6px;
-  border: 1px solid #2d333b;
-  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.28);
+  border: 1px solid var(--c-border-hover);
+  box-shadow: 0 10px 28px var(--c-shadow-medium);
 }
 
 .quick-access-title {
   font-size: 16px;
-  color: var(--c-primary);
+  color: #d3d7dd;
   margin-bottom: 12px;
   font-weight: bold;
   font-family: 'SourceHanSansSC', sans-serif;
@@ -320,16 +320,16 @@ export default {
 .quick-access-item {
   display: flex;
   align-items: center;
-  background: linear-gradient(to right, rgba(56, 139, 253, 0.22), rgba(56, 139, 253, 0.08));
+  background: linear-gradient(to right, rgba(138, 144, 152, 0.34), rgba(138, 144, 152, 0.16));
   padding: 12px 14px;
   border-radius: 6px;
   text-decoration: none;
   transition: all 0.2s;
-  border-left: 3px solid #58a6ff;
+  border-left: 3px solid #8a9098;
 }
 
 .quick-access-item:hover {
-  background: linear-gradient(to right, rgba(56, 139, 253, 0.34), rgba(56, 139, 253, 0.16));
+  background: linear-gradient(to right, rgba(138, 144, 152, 0.46), rgba(138, 144, 152, 0.24));
   transform: translateX(4px);
 }
 
@@ -338,7 +338,7 @@ export default {
   align-items: center;
   justify-content: center;
   margin-right: 12px;
-  color: var(--c-primary);
+  color: #d3d7dd;
 }
 
 .quick-access-item .label {
@@ -357,7 +357,7 @@ export default {
 
 .myspace-grid { display: flex; gap: 12px; margin-top: 10px; }
 .myspace-card { display: flex; flex-direction: column; justify-content: center; width: 33.333%; min-height: 90px; padding: 12px 14px; background: #0f1623; border: 1px solid #2d333b; color: var(--c-text-emphasis); cursor: default; border-radius: 8px; }
-.card-title { font-size: 16px; font-weight: 600; margin-bottom: 6px; color: var(--c-primary); }
+.card-title { font-size: 16px; font-weight: 600; margin-bottom: 6px; color: #d3d7dd; }
 .card-desc { font-size: 13px; color: var(--c-text-body-alt); }
 
 @media (max-width: 768px) {
@@ -392,21 +392,23 @@ export default {
   line-height: 1.5;
   margin: 6px 0;
   font-family: 'SourceHanSansSC', sans-serif;
+  color: var(--c-text-body);
 }
 .steam-article h3 {
   font-size: 20px;
   line-height: 1.4;
   margin: 12px 0 8px;
   font-family: 'SourceHanSansSC', sans-serif;
+  color: var(--c-text-title);
 }
 
 /* 站点结构图样式 */
 .site-structure-diagram {
   margin: 15px 0;
   padding: 20px;
-  background: #0f1623;
+  background: #161b22;
   border-radius: 6px;
-  border: 1px solid #2d333b;
+  border: 1px solid #3f4650;
   font-family: 'SourceHanSansSC', sans-serif;
   overflow-x: auto;
 }
@@ -420,8 +422,8 @@ export default {
 
 /* 节点通用样式 */
 .node-box {
-  background: #111827;
-  border: 1px solid #2d333b;
+  background: #1b2128;
+  border: 1px solid #3f4650;
   border-radius: 4px;
   padding: 8px 12px;
   text-align: center;
@@ -432,22 +434,22 @@ export default {
 }
 
 .root-box {
-  background: linear-gradient(135deg, #131c29 0%, #1e2b3b 100%);
-  border-color: #388bfd;
-  box-shadow: 0 0 10px rgba(56, 139, 253, 0.18);
+  background: linear-gradient(135deg, #1f2a38 0%, #2f425a 100%);
+  border-color: #58a6ff;
+  box-shadow: 0 0 10px rgba(88, 166, 255, 0.22);
 }
 
 .sub-node { 
-  background: #0d1117; 
+  background: #1b222d; 
   width: 140px; 
 }
 .sub-node.highlight { 
-  border-color: #388bfd; 
-  background: rgba(56, 139, 253, 0.14); 
+  border-color: #58a6ff; 
+  background: rgba(88, 166, 255, 0.18); 
 }
 .topic-node { 
-  background: rgba(46, 160, 67, 0.12); 
-  border-color: #2ea043; 
+  background: rgba(155, 120, 255, 0.16); 
+  border-color: #9b78ff; 
   margin-bottom: 8px;
   width: 140px;
 }
@@ -512,13 +514,13 @@ export default {
 }
 
 .sub-item {
-  font-size: 11px; color: var(--c-text-muted); background: #0d1117;
-  padding: 4px 8px; border-radius: 3px; border: 1px solid #2d333b;
+  font-size: 11px; color: var(--c-text-muted); background: #1a212c;
+  padding: 4px 8px; border-radius: 3px; border: 1px solid #3f4d5f;
   width: 100%; box-sizing: border-box; text-align: center;
 }
 .flow-item { display: flex; align-items: center; justify-content: center; gap: 4px; }
-.arrow { color: var(--c-primary); font-size: 10px; }
-.leaf { color: var(--c-primary); }
+.arrow { color: #8ab4ff; font-size: 10px; }
+.leaf { color: #c5d9ff; }
 
 .node-group-vertical { display: flex; flex-direction: column; align-items: center; width: 100%; }
 .node-group-vertical::before {
@@ -601,22 +603,22 @@ export default {
   .sub-item {
     text-align: left;
     justify-content: flex-start;
-    background: #111827;
+    background: #1a212c;
   }
   .flow-item { justify-content: flex-start; }
 }
 
 /* Learning 静态卡片展示 */
 .learning-grid { display: flex; gap: 12px; margin-top: 10px; }
-.learning-card { display: flex; flex-direction: column; justify-content: center; width: 33.333%; min-height: 90px; padding: 12px 14px; background: #0f1623; border: 1px solid #2d333b; color: var(--c-text-emphasis); cursor: default; border-radius: 8px; }
+.learning-card { display: flex; flex-direction: column; justify-content: center; width: 33.333%; min-height: 90px; padding: 12px 14px; background: #1b2128; border: 1px solid #4a5058; color: var(--c-text-emphasis); cursor: default; border-radius: 8px; }
 
 /* 架构图描述样式 */
 .diagram-description {
   margin-top: 20px;
-  background: #0f1623;
+  background: #1b2128;
   padding: 15px;
   border-radius: 6px;
-  border-left: 3px solid var(--c-primary);
+  border-left: 3px solid #8a9098;
   font-family: 'SourceHanSansSC', sans-serif;
 }
 
@@ -640,7 +642,7 @@ export default {
 
 .desc-label {
   font-weight: bold;
-  color: var(--c-primary);
+  color: #c6cbd3;
   font-size: 13px;
   margin-bottom: 2px;
 }
@@ -658,7 +660,7 @@ export default {
 
 .diagram-note {
   font-size: 12px;
-  color: var(--c-primary);
+  color: #b7bcc5;
   font-style: italic;
   margin-top: 10px;
   opacity: 0.8;

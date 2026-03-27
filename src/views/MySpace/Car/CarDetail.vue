@@ -520,30 +520,38 @@ export default {
   top: 50%;
   transform: translateY(-50%);
   z-index: 2;
-  width: 46px;
-  height: 92px;
-  border-radius: 8px;
-  border: none;
-  background: rgba(27,40,56,0.55);
-  color: var(--c-text-title);
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid var(--c-border-hover);
+  background: var(--c-primary-alpha-20);
+  color: var(--c-text-emphasis);
+  box-shadow: 0 6px 16px var(--c-shadow-medium);
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  font-size: 28px;
+  font-size: 24px;
+  font-weight: 600;
   line-height: 1;
   cursor: pointer;
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.15s ease;
+  transition: opacity 0.15s ease, background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
 }
-.gallery-nav.prev { left: 8px; }
-.gallery-nav.next { right: 8px; }
+.gallery-nav.prev { left: 10px; }
+.gallery-nav.next { right: 10px; }
 .left-section:hover .gallery-nav {
   opacity: 1;
   pointer-events: auto;
 }
 .gallery-nav:hover {
-  background: rgba(27,40,56,0.75);
+  background: var(--c-primary-alpha-30);
+  border-color: var(--c-primary);
+  transform: translateY(-50%) scale(1.04);
+}
+.gallery-nav:active {
+  background: var(--c-primary-alpha-40);
+  transform: translateY(-50%) scale(0.98);
 }
 
 .dot-indicators {
@@ -663,7 +671,7 @@ export default {
   --hover-card-width: 280px;
   width: var(--hover-card-width);
   max-height: calc(var(--hover-card-width) * 1.5);
-  background: rgba(32, 43, 58, 0.6);
+  background: var(--c-bg-l3);
   backdrop-filter: blur(24px) saturate(120%);
   -webkit-backdrop-filter: blur(24px) saturate(120%);
   border: 1px solid rgba(255, 255, 255, 0.12);
@@ -712,7 +720,7 @@ export default {
   top: -7px;
   width: 14px;
   height: 14px;
-  background: rgba(32, 43, 58, 0.6);
+  background: var(--c-bg-l3);
   border-left: 1px solid rgba(255, 255, 255, 0.12);
   border-top: 1px solid rgba(255, 255, 255, 0.12);
   transform: rotate(45deg);

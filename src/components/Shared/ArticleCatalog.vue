@@ -192,11 +192,13 @@ export default {
   margin-left: -2px;
   transition: all 0.2s ease;
 }
-.toc-h2:hover { color: var(--c-primary); }
+.toc-h2:hover {
+  color: #d3d7dd;
+}
 .toc-h2.active {
-  color: var(--c-primary);
-  border-left-color: var(--c-primary);
-  background: linear-gradient(90deg, var(--c-primary-alpha-10) 0%, transparent 100%);
+  color: #e1e4e8;
+  border-left-color: #d3d7dd;
+  background: linear-gradient(90deg, rgba(211, 215, 221, 0.2) 0%, transparent 100%);
   font-weight: 700;
 }
 
@@ -248,11 +250,13 @@ export default {
   text-overflow: ellipsis;
   white-space: nowrap;
 }
-.toc-h3:hover { color: var(--c-primary); }
+.toc-h3:hover {
+  color: #d3d7dd;
+}
 .toc-h3.active {
-  color: var(--c-primary);
-  border-left-color: var(--c-primary);
-  background: linear-gradient(90deg, var(--c-primary-alpha-10) 0%, transparent 100%);
+  color: #e1e4e8;
+  border-left-color: #d3d7dd;
+  background: linear-gradient(90deg, rgba(211, 215, 221, 0.2) 0%, transparent 100%);
   font-weight: 700;
 }
 

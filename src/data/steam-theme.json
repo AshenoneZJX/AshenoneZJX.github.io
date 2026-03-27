@@ -16,8 +16,12 @@
       "L4": "#223447"
     },
     "primaryAlpha": {
+      "0.06": "rgba(102, 192, 244, 0.06)",
       "0.10": "rgba(102, 192, 244, 0.10)",
+      "0.12": "rgba(102, 192, 244, 0.12)",
+      "0.15": "rgba(102, 192, 244, 0.15)",
       "0.20": "rgba(102, 192, 244, 0.20)",
+      "0.22": "rgba(102, 192, 244, 0.22)",
       "0.30": "rgba(102, 192, 244, 0.30)",
       "0.40": "rgba(102, 192, 244, 0.40)",
       "0.50": "rgba(102, 192, 244, 0.50)",
@@ -31,23 +35,47 @@
       "base": "#1b2838",
       "deep": "#171a21",
       "panel": "#16202d",
+      "input": "#0f1924",
+      "panelDeep": "#0f1a24",
+      "codeBlock": "#0f1b2a",
       "elevated": "#222e3b",
+      "elevatedAlt": "#222b35",
       "tableHead": "#223447"
     },
     "text": {
       "title": "#ffffff",
       "emphasis": "#e6f3ff",
       "body": "#c6d4df",
+      "bodyAlt": "#c7d5e0",
+      "markdownBody": "#cfe0ee",
+      "subtitle": "#d9e9f7",
+      "mutedAlt": "#acb2b8",
       "secondary": "#8a9aa8",
-      "muted": "#8f98a0"
+      "muted": "#8f98a0",
+      "navDefault": "#b8b6b4",
+      "chartAxis": "#9cc9f5"
     },
     "border": {
       "default": "#38424e",
-      "strong": "#2a475e"
+      "strong": "#2a475e",
+      "hover": "#3c4551",
+      "footerDivider": "#2e353f",
+      "mobileBtn": "#2a2e36",
+      "mobileHover": "#3a3f49"
+    },
+    "whiteOverlayAlpha": {
+      "0.05": "rgba(255, 255, 255, 0.05)",
+      "0.08": "rgba(255, 255, 255, 0.08)",
+      "0.10": "rgba(255, 255, 255, 0.10)",
+      "0.12": "rgba(255, 255, 255, 0.12)",
+      "0.15": "rgba(255, 255, 255, 0.15)",
+      "0.18": "rgba(255, 255, 255, 0.18)"
     },
     "shadowOverlay": {
       "light": "rgba(0, 0, 0, 0.20)",
+      "soft": "rgba(0, 0, 0, 0.35)",
       "medium": "rgba(0, 0, 0, 0.40)",
+      "strong": "rgba(0, 0, 0, 0.50)",
       "heavy": "rgba(0, 0, 0, 0.60)"
     },
     "semantic": {

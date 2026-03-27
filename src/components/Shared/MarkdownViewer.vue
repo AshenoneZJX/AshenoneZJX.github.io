@@ -240,6 +240,14 @@ export default {
   font-display: swap;
 }
 
+@font-face {
+  font-family: 'GeorgiaSerif';
+  src: url('~@/assets/fonts/Georgia.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
 .content { 
   color: var(--c-text-body); 
   font-size: 16px; 
@@ -267,19 +275,20 @@ export default {
 }
 
 .content :deep(h2) { 
-  color: #58d68d; 
+  color: #9aa0a6; 
   font-size: 22px; 
   line-height: 1.25; 
   margin: 32px 0 20px; 
   font-weight: 700; 
   letter-spacing: 0.2px; 
+  font-family: 'GeorgiaSerif', 'Times New Roman', 'AlibabaPuHuiTi', serif;
 }
 
 .content :deep(h2)::before { 
   content: "¶"; 
   display: inline-block; 
   margin-right: 8px; 
-  color: #58d68d; 
+  color: #9aa0a6; 
   font-weight: 700; 
 }
 
@@ -290,6 +299,7 @@ export default {
   margin: 8px 0 6px; /* 减小前后行距，原为 28px 0 16px */
   font-weight: 700; 
   letter-spacing: 0.1px; 
+  font-family: 'GeorgiaSerif', 'Times New Roman', 'AlibabaPuHuiTi', serif;
   display: inline-block;
   position: relative;
   z-index: 1;
@@ -302,7 +312,7 @@ export default {
   left: 0;
   width: 100%;
   height: 8px;
-  background-color: rgba(88, 214, 141, 0.42);
+  background-color: rgba(154, 160, 166, 0.42);
   z-index: -1;
   border-radius: 2px;
 }
@@ -325,12 +335,12 @@ export default {
 }
 
 .content :deep(a) { 
-  color: #6fe09f; 
+  color: #58a6ff; 
   text-decoration: none; 
 }
 
 .content :deep(a:hover) { 
-  color: #96f0bd;
+  color: #58a6ff;
   text-decoration: underline; 
 }
 
@@ -360,13 +370,13 @@ export default {
 .content :deep(hr) { 
   border: none; 
   height: 1px; 
-  background: #2f5c45; 
+  background: #2E333A; 
   margin: 18px 0; 
 }
 
 .content :deep(code) { 
-  background: #2a3f33; 
-  border: 1px solid var(--c-border-default); 
+  background: #282A2C; 
+  border: none; 
   padding: 1px; 
   border-radius: 4px; 
   color: var(--c-text-emphasis); 
@@ -375,7 +385,7 @@ export default {
 }
 
 .content :deep(pre) { 
-  background: #181A1F; 
+  background: var(--c-bg-panel-deep); 
   border: 1px solid var(--c-border-default); 
   border-radius: 6px; 
   padding: 36px 12px 12px; 
@@ -415,13 +425,13 @@ export default {
 .content :deep(table) { 
   width: 100%; 
   border-collapse: collapse; 
-  border: 1px solid #2f5c45; 
+  border: 1px solid #4a5058; 
   margin: 14px 0; 
   font-size: 14px; 
 }
 
 .content :deep(th), .content :deep(td) { 
-  border: 1px solid #2f5c45; 
+  border: 1px solid #4a5058; 
   padding: 6px 8px; 
   text-align: left; 
   line-height: 2; 
@@ -429,7 +439,7 @@ export default {
 }
 
 .content :deep(th) { 
-  background: #1f3d2f; 
+  background: #32373d; 
   color: var(--c-text-emphasis); 
   font-weight: 600; 
 }

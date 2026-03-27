@@ -89,13 +89,13 @@ export default {
 .divider { height: 2px; background: var(--c-border-strong); margin: 10px 0 30px 0; }
 
 .gallery-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 20px; }
-.gallery-card { background: var(--c-bg-l2); box-shadow: 0 4px 15px var(--c-shadow-medium); transition: transform 0.2s; cursor: pointer; }
-.gallery-card:hover { transform: translateY(-5px); }
-.card-image { height: 160px; background-size: cover; background-position: center; position: relative; }
+.gallery-card { background: var(--c-bg-l2); box-shadow: 0 4px 15px var(--c-shadow-medium); border: 1px solid var(--c-border-default); border-radius: 10px; overflow: hidden; transition: transform 0.2s, box-shadow 0.2s, filter 0.2s; cursor: pointer; }
+.gallery-card:hover { transform: scale(1.03); filter: brightness(1.15); box-shadow: 0 10px 25px rgba(0, 0, 0, 0.45); }
+.card-image { height: 160px; width: 100%; background-size: cover; background-position: center; position: relative; overflow: hidden; }
 .hover-overlay { position: absolute; bottom: 0; left: 0; right: 0; padding: 8px 12px; background: var(--c-shadow-heavy); color: var(--c-text-title); font-weight: 600; letter-spacing: 1px; }
-.card-info { padding: 12px; }
-.card-title { color: var(--c-primary); margin-bottom: 5px; font-weight: bold; }
-.card-tags .tag { display: inline-block; background: #344658; color: var(--c-text-title); font-size: 10px; padding: 2px 5px; margin-right: 5px; }
+.card-info { padding: 12px; width: 100%; box-sizing: border-box; background: #171B21; }
+.card-title { color: var(--c-text-title); margin-bottom: 5px; font-weight: bold; }
+.card-tags .tag { display: inline-block; background: #3a3f45; color: var(--c-text-title); font-size: 10px; padding: 2px 5px; margin-right: 5px; border-radius: 4px; }
 
 @media (max-width: 768px) {
   .page-photography { padding: 20px 16px; box-sizing: border-box; }

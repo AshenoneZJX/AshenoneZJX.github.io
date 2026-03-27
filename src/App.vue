@@ -38,8 +38,8 @@ export default {
   --c-primary-alpha-80: rgba(88, 166, 255, 0.80);
   
   /* Background Levels */
-  --c-bg-l0: #1E1E1F;
-  --c-bg-l1: #1E1E1F;
+  --c-bg-l0: #131314;
+  --c-bg-l1: #131314;
   --c-bg-l2: #161b22;
   --c-bg-l3: #1f2937;
   --c-bg-l4: #243244;
@@ -83,8 +83,8 @@ export default {
   --c-primary-alpha-60: rgba(88, 166, 255, 0.60);
   --c-primary-alpha-80: rgba(88, 166, 255, 0.80);
   
-  --c-bg-l0: #1E1E1F;
-  --c-bg-l1: #1E1E1F;
+  --c-bg-l0: #131314;
+  --c-bg-l1: #131314;
   --c-bg-l2: #161b22;
   --c-bg-l3: #1f2937;
   --c-bg-l4: #243244;

@@ -174,7 +174,7 @@ export default {
   width: 100%;
   max-width: 100%;
   box-sizing: border-box;
-  background: #191919;
+  background: #131314;
 }
 
 .toc-toggle-btn {
@@ -202,6 +202,7 @@ export default {
   min-height: 28px;
   max-width: 100%;
   margin: 0 auto 0;
+  background: #131314;
   border-bottom: 1px solid var(--c-border-default);
 }
 
@@ -229,9 +230,9 @@ export default {
   margin-bottom: 0;
 }
 .month { color: var(--c-text-muted); font-size: 11px; }
-.day { color: var(--c-primary); font-size: 18px; font-weight: bold; font-family: 'RobotoMono', Menlo, Monaco, Consolas, "Courier New", monospace; }
+.day { color: #9aa0a6; font-size: 18px; font-weight: bold; font-family: 'RobotoMono', Menlo, Monaco, Consolas, "Courier New", monospace; }
 .year { color: var(--c-text-muted); font-size: 11px; }
-.cat { color: #4da6ff; font-size: 11px; display: inline-flex; align-items: center; justify-content: center; padding: 3px 12px; border: none; border-radius: 8px; background-color: #1a2a3a; font-family: Helvetica, Arial, sans-serif; text-transform: uppercase; letter-spacing: 1.2px; font-weight: 400; }
+.cat { color: #ffffff; font-size: 11px; display: inline-flex; align-items: center; justify-content: center; padding: 3px 12px; border: none; border-radius: 8px; background-color: #8a9098; font-family: Helvetica, Arial, sans-serif; text-transform: uppercase; letter-spacing: 1.2px; font-weight: 400; }
 .content-divider { height: 1px; background: var(--c-border-default); margin: 8px 0 14px; }
 
 /* 布局相关：三栏 Grid */
@@ -244,12 +245,13 @@ export default {
   max-width: 100%;
   margin: 0;
   padding: 0 20px;
+  background: #131314;
 }
 
 .left-sidebar {
   position: sticky;
   top: 80px;
-  background: transparent;
+  background: #131314;
   padding: 20px 0 20px 20px;
   min-height: 200px;
 }
@@ -268,7 +270,7 @@ export default {
   position: sticky;
   top: 80px;
   min-height: 200px;
-  background: transparent; 
+  background: #131314; 
 }
 
 .center-content {
@@ -282,7 +284,7 @@ export default {
 
 /* 内容卡片区域：半透明黑色背景、内边距、边框和圆角，用于包裹正文内容 */
 .detail-body { 
-  background: #191919;
+  background: #131314;
   padding: 10px 40px;   /* 上下 10px、左右 40px 的内边距 */
   border: none; /* 移除边框 */
   border-radius: 6px;        /* 6px 圆角，柔和视觉，避免生硬矩形 */
