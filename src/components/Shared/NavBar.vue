@@ -318,7 +318,7 @@ export default {
   .menu-toggle {
     display: inline-flex;
     margin-left: auto;
-    border: none;
+    border: 1px solid var(--c-border-default);
     padding: 6px;
   }
   .mobile-menu {

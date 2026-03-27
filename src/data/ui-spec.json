@@ -1,0 +1,77 @@
+{
+  "canvas": {
+    "min": "1280×800",
+    "best": "1440×900",
+    "max": "1920×1080",
+    "note": "核心考虑最低适配大小，小画布往大适配容易，大画布往小适配问题多，慎用1920宽画布"
+  },
+  "layout": {
+    "navigation_width": 300,
+    "page_width": 1440,
+    "gutter": 12,
+    "margin": 20,
+    "grid": {
+      "count": "12-24",
+      "gutter": "8-20",
+      "margin": "12-40",
+      "element_spacing": "2-20",
+      "note": "24为最主流栅格数量，栅格间距需小于页面边距且最大不超过20"
+    }
+  },
+  "typography": {
+    "font": {
+      "chinese": ["苹方", "微软雅黑", "思源黑体", "其它黑体"],
+      "english": ["Arial", "Helvetial", "SF Pro", "Roboto"],
+      "note": "中文字体通常调用系统默认，设计稿仅为效果示意"
+    },
+    "font_size": {
+      "min_chinese": 12,
+      "min_english": 10,
+      "body": "13-16",
+      "title": "13-24",
+      "annotation": "10-13"
+    },
+    "font_weight": ["Light", "Medium", "Bold"],
+    "letter_spacing": 0,
+    "line_height": "1.2-1.8倍字号"
+  },
+  "icon": {
+    "small": "12-20",
+    "normal": "24-40",
+    "large": "36-80",
+    "note": "小图标用于控件内，常规图标为高频工具图标，大图标多为装饰用"
+  },
+  "button": {
+    "large": {
+      "height": "36-44",
+      "note": "用于权重最高、需重点关注的操作，使用频次低"
+    },
+    "normal": {
+      "height": "28-36",
+      "note": "高频常用按钮，鼠标操作较舒适的尺寸"
+    },
+    "small": {
+      "height": "20-28",
+      "note": "极限尺寸，不推荐更小"
+    },
+    "tag": {
+      "height": "16-32",
+      "note": "样式接近按钮，最大不超过常规按钮尺寸"
+    }
+  },
+  "input": {
+    "small": {
+      "height": "20-28",
+      "note": "与小按钮保持一致，可水平并排"
+    },
+    "large": {
+      "height": "32-44",
+      "note": "由常规按钮或大按钮尺寸决定"
+    },
+    "other": {
+      "height": "20-44",
+      "note": "下拉菜单、日期选择等需沿用输入框高度以保证表单统一"
+    },
+    "note": "常规项目仅需2种输入框尺寸，尽量复用至同类控件"
+  }
+}

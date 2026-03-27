@@ -523,9 +523,11 @@ export default {
   width: 44px;
   height: 44px;
   border-radius: 50%;
-  border: 1px solid var(--c-border-hover);
-  background: var(--c-primary-alpha-20);
-  color: var(--c-text-emphasis);
+  border: 1px solid var(--c-border-default);
+  background: rgba(22, 27, 34, 0.88);
+  color: var(--c-text-title);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
   box-shadow: 0 6px 16px var(--c-shadow-medium);
   display: inline-flex;
   align-items: center;
@@ -545,12 +547,15 @@ export default {
   pointer-events: auto;
 }
 .gallery-nav:hover {
-  background: var(--c-primary-alpha-30);
-  border-color: var(--c-primary);
+  background: var(--c-primary-alpha-20);
+  border-color: transparent;
+  color: var(--c-text-emphasis);
   transform: translateY(-50%) scale(1.04);
 }
 .gallery-nav:active {
-  background: var(--c-primary-alpha-40);
+  background: rgba(19, 19, 20, 0.92);
+  border-color: var(--c-border-default);
+  color: var(--c-text-title);
   transform: translateY(-50%) scale(0.98);
 }
 
@@ -897,8 +902,8 @@ export default {
   width: 72px;
   height: 72px;
   border-radius: 50%;
-  border: 1px solid var(--c-border-hover);
-  background: rgba(15, 22, 35, 0.82);
+  border: 1px solid var(--c-border-default);
+  background: var(--c-bg-l2);
   backdrop-filter: blur(24px) saturate(120%);
   -webkit-backdrop-filter: blur(24px) saturate(120%);
   color: var(--c-text-emphasis);
@@ -913,6 +918,8 @@ export default {
 }
 
 .fab-specs:active {
+  background: var(--c-bg-l3);
+  border-color: var(--c-border-hover);
   transform: scale(0.95);
 }
 
@@ -991,7 +998,7 @@ export default {
       position: fixed;
       left: 0; right: 0; bottom: 0;
       max-height: 70vh;
-      background: rgba(15, 22, 35, 0.88);
+      background: var(--c-bg-l2);
       backdrop-filter: blur(24px) saturate(120%);
       -webkit-backdrop-filter: blur(24px) saturate(120%);
       border-top: 1px solid var(--c-border-default);

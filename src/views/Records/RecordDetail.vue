@@ -23,6 +23,20 @@
             <span class="cat">{{ record.category }}</span>
           </div>
         </div>
+        <div class="font-size-controls" role="group" aria-label="字号大小">
+          <button type="button" class="font-size-btn" :class="{ active: fontSizePreset === 'small' }" @click="fontSizePreset = 'small'">
+            <span class="label-full">小</span>
+            <span class="label-short">小</span>
+          </button>
+          <button type="button" class="font-size-btn" :class="{ active: fontSizePreset === 'standard' }" @click="fontSizePreset = 'standard'">
+            <span class="label-full">标准</span>
+            <span class="label-short">标</span>
+          </button>
+          <button type="button" class="font-size-btn" :class="{ active: fontSizePreset === 'large' }" @click="fontSizePreset = 'large'">
+            <span class="label-full">大</span>
+            <span class="label-short">大</span>
+          </button>
+        </div>
         <button  class="back-btn" @click="$router.push('/records')">
           <img src="@/assets/images/fanhui.svg" class="back-icon" alt="返回" />
           <span class="back-text">返回</span>
@@ -51,6 +65,7 @@
               v-if="record"
               :content="record.content" 
               :html="record.html" 
+              :font-size-preset="fontSizePreset"
               @heading-extracted="h => heading = h" 
               @content-updated="refreshCatalog"
             />
@@ -84,7 +99,8 @@ export default {
     return {
       record: null,
       heading: '',
-      showMobileToc: false
+      showMobileToc: false,
+      fontSizePreset: 'standard'
     }
   },
   methods: {
@@ -126,7 +142,7 @@ export default {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  margin-left: auto; /* Ensure right alignment in flex container */
+  margin-left: 8px;
   transition: all 0.2s ease;
   text-decoration: none;
 }
@@ -234,6 +250,38 @@ export default {
 .year { color: var(--c-text-muted); font-size: 11px; }
 .cat { color: #ffffff; font-size: 11px; display: inline-flex; align-items: center; justify-content: center; padding: 3px 12px; border: none; border-radius: 8px; background-color: #8a9098; font-family: Helvetica, Arial, sans-serif; text-transform: uppercase; letter-spacing: 1.2px; font-weight: 400; }
 .content-divider { height: 1px; background: var(--c-border-default); margin: 8px 0 14px; }
+.font-size-controls {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-left: auto;
+  margin-right: 2px;
+  padding: 5px 8px;
+  min-height: 40px;
+}
+.font-size-btn {
+  border: none;
+  background: transparent;
+  color: var(--c-text-body-alt);
+  border-radius: 8px;
+  padding: 4px 10px;
+  font-size: 12px;
+  line-height: 1;
+  cursor: pointer;
+  min-width: 32px;
+  transition: color 0.2s ease, background-color 0.2s ease;
+}
+.font-size-btn:hover {
+  color: var(--c-text-emphasis);
+  background: var(--c-primary-alpha-10);
+}
+.font-size-btn.active {
+  background: rgba(255, 255, 255, 0.12);
+  font-weight: 700;
+}
+.label-short {
+  display: none;
+}
 
 /* 布局相关：三栏 Grid */
 .main-layout {
@@ -305,6 +353,12 @@ export default {
   /* Show toggle button */
   .toc-toggle-btn {
     display: flex;
+    width: 34px;
+    height: 34px;
+    padding: 0;
+    border-radius: 50%;
+    justify-content: center;
+    margin-right: 8px;
   }
   
   /* Hide right sidebar and placeholder */
@@ -359,6 +413,20 @@ export default {
 
   /* Back button text hidden on mobile */
   .back-text { display: none; }
+  .back-btn {
+    width: 34px;
+    height: 34px;
+    padding: 0;
+    border-radius: 50%;
+    justify-content: center;
+    gap: 0;
+    background: transparent;
+  }
+  .back-btn:hover,
+  .back-btn:active,
+  .back-btn.router-link-active {
+    background: transparent;
+  }
   
   /* Mobile Title Adjustment */
   .top-title { font-size: 18px; letter-spacing: 0.5px; margin-bottom: 0; width: 100%; }
@@ -369,6 +437,30 @@ export default {
   .day { font-size: 16px; }
   .year { font-size: 10px; }
   .cat { font-size: 10px; padding: 1px 6px; }
+  .font-size-controls {
+    margin-left: auto;
+    margin-right: 6px;
+    gap: 4px;
+    padding: 4px 6px;
+    min-height: 38px;
+  }
+  .font-size-btn {
+    width: 34px;
+    height: 34px;
+    border-radius: 10px;
+    padding: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    min-width: 0;
+  }
+  .label-full {
+    display: none;
+  }
+  .label-short {
+    display: inline;
+  }
 }
 
 

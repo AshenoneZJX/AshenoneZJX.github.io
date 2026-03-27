@@ -1,6 +1,6 @@
 <template>
   <div class="markdown-viewer">
-    <div ref="contentRef" class="content" v-html="displayHtml"></div>
+    <div ref="contentRef" :class="['content', fontSizeClass]" v-html="displayHtml"></div>
   </div>
 </template>
 
@@ -18,6 +18,10 @@ export default {
     html: {
       type: String,
       default: ''
+    },
+    fontSizePreset: {
+      type: String,
+      default: 'standard'
     }
   },
   data() {
@@ -35,7 +39,26 @@ export default {
       handler: 'prepareContent'
     }
   },
+  computed: {
+    fontSizeClass() {
+      if (this.fontSizePreset === 'small') return 'size-small'
+      if (this.fontSizePreset === 'large') return 'size-large'
+      return 'size-standard'
+    }
+  },
   methods: {
+    setCopyButtonState(button, state = 'default') {
+      if (!button) return
+      const icons = {
+        default: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>',
+        copied: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"></path></svg>',
+        error: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>'
+      }
+      const nextState = icons[state] ? state : 'default'
+      button.innerHTML = icons[nextState]
+      button.dataset.state = nextState
+      button.setAttribute('aria-label', nextState === 'copied' ? '已复制' : nextState === 'error' ? '复制失败' : '复制代码')
+    },
     async copyText(text) {
       if (!text) return false
       if (navigator.clipboard && window.isSecureContext) {
@@ -67,10 +90,10 @@ export default {
       const text = (code ? code.innerText : pre.innerText).trim()
       if (!text) return
       const copied = await this.copyText(text)
-      button.textContent = copied ? '已复制' : '复制失败'
+      this.setCopyButtonState(button, copied ? 'copied' : 'error')
       if (button.__copyTimer) clearTimeout(button.__copyTimer)
       button.__copyTimer = setTimeout(() => {
-        button.textContent = '复制'
+        this.setCopyButtonState(button, 'default')
       }, 1200)
     },
     addCopyButtons(container) {
@@ -81,7 +104,7 @@ export default {
         const button = document.createElement('button')
         button.type = 'button'
         button.className = 'md-copy-btn'
-        button.textContent = '复制'
+        this.setCopyButtonState(button, 'default')
         pre.appendChild(button)
       }
     },
@@ -249,6 +272,10 @@ export default {
 }
 
 .content { 
+  --md-body-font-size: 17px;
+  --md-body-line-height: 1.65;
+  --md-body-font-size-mobile: 15px;
+  --md-body-line-height-mobile: 1.6;
   color: var(--c-text-body); 
   font-size: 16px; 
   line-height: 1.4; /* 全局默认行距同步缩小 */
@@ -256,11 +283,25 @@ export default {
   font-family: 'Inter', 'AlibabaPuHuiTi', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; 
 }
 
+.content.size-small {
+  --md-body-font-size: 16px;
+  --md-body-line-height: 1.55;
+  --md-body-font-size-mobile: 14px;
+  --md-body-line-height-mobile: 1.5;
+}
+
+.content.size-large {
+  --md-body-font-size: 18px;
+  --md-body-line-height: 1.75;
+  --md-body-font-size-mobile: 16px;
+  --md-body-line-height-mobile: 1.7;
+}
+
 .content :deep(p) { 
   color: var(--c-text-body); 
-  line-height: 1.4; /* 缩小行距，原为 1.6 */
+  line-height: var(--md-body-line-height);
   margin: 8px 0; /* 减小段落间距，原为 12px */
-  font-size: 16px;
+  font-size: var(--md-body-font-size);
   font-weight: 400; 
   font-family: 'Inter', 'AlibabaPuHuiTi', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; 
 }
@@ -355,9 +396,9 @@ export default {
 
 .content :deep(li) { 
   margin: 4px 0; /* 减小列表项间距 */
-  line-height: 1.4; /* 列表项行距也同步缩小 */
+  line-height: var(--md-body-line-height);
   color: var(--c-text-body); 
-  font-size: 16px; /* 为了和 p 标签保持一致，这里也缩小到 14px */
+  font-size: var(--md-body-font-size);
   font-weight: 400; 
   padding-left: 6px; 
   font-family: 'Inter', 'AlibabaPuHuiTi', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; 
@@ -385,7 +426,7 @@ export default {
 }
 
 .content :deep(pre) { 
-  background: var(--c-bg-panel-deep); 
+  background: #181818; 
   border: 1px solid var(--c-border-default); 
   border-radius: 6px; 
   padding: 36px 12px 12px; 
@@ -412,14 +453,24 @@ export default {
   background: #2a2d34;
   color: var(--c-text-emphasis);
   border-radius: 4px;
-  font-size: 12px;
-  line-height: 1;
-  padding: 6px 8px;
+  width: 26px;
+  height: 26px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
   cursor: pointer;
 }
 
 .content :deep(.md-copy-btn:hover) {
   background: #343842;
+}
+
+.content :deep(.md-copy-btn svg) {
+  width: 14px;
+  height: 14px;
+  display: block;
+  pointer-events: none;
 }
 
 .content :deep(table) { 
@@ -498,8 +549,8 @@ export default {
 /* 移动端适配 */
 @media (max-width: 768px) {
   .content { font-size: 14px; line-height: 1.4; }
-  .content :deep(p) { font-size: 14px; line-height: 1.4; }
-  .content :deep(li) { font-size: 14px; line-height: 1.4; }
+  .content :deep(p) { font-size: var(--md-body-font-size-mobile); line-height: var(--md-body-line-height-mobile); }
+  .content :deep(li) { font-size: var(--md-body-font-size-mobile); line-height: var(--md-body-line-height-mobile); }
   .content :deep(ul) { padding-left: 22px; }
   .content :deep(ol) { padding-left: 32px; }
   .content :deep(ul) :deep(li) { padding-left: 1px; }

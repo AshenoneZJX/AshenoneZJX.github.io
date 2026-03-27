@@ -275,13 +275,13 @@ export default {
   top: 104px; 
 }
 .left-col :deep(.profile-card) {
-  background: #161b22;
+  background: #1E1F20;
   border: 1px solid #2d333b;
   box-shadow: 0 10px 28px rgba(0, 0, 0, 0.28);
 }
 .middle-col { 
   flex-grow: 1; 
-  background: linear-gradient(180deg, var(--c-bg-l2) 0%, var(--c-bg-panel-deep) 100%);
+  background: #1E1F20;
   padding: 20px; 
   border-radius: 6px; 
   border: 1px solid var(--c-border-hover);
@@ -296,7 +296,7 @@ export default {
 
 /* Quick Access Styles */
 .quick-access-panel {
-  background: linear-gradient(180deg, var(--c-bg-l2) 0%, var(--c-bg-panel-deep) 100%);
+  background: #1E1F20;
   padding: 15px;
   border-radius: 6px;
   border: 1px solid var(--c-border-hover);
@@ -356,7 +356,7 @@ export default {
 .showcase-desc { margin-top: 8px; color: var(--c-text-body-alt); font-size: 13px; }
 
 .myspace-grid { display: flex; gap: 12px; margin-top: 10px; }
-.myspace-card { display: flex; flex-direction: column; justify-content: center; width: 33.333%; min-height: 90px; padding: 12px 14px; background: #0f1623; border: 1px solid #2d333b; color: var(--c-text-emphasis); cursor: default; border-radius: 8px; }
+.myspace-card { display: flex; flex-direction: column; justify-content: center; width: 33.333%; min-height: 90px; padding: 12px 14px; background: #252729; border: 1px solid #3a3d41; color: var(--c-text-emphasis); cursor: default; border-radius: 8px; }
 .card-title { font-size: 16px; font-weight: 600; margin-bottom: 6px; color: #d3d7dd; }
 .card-desc { font-size: 13px; color: var(--c-text-body-alt); }
 
@@ -406,7 +406,7 @@ export default {
 .site-structure-diagram {
   margin: 15px 0;
   padding: 20px;
-  background: #161b22;
+  background: #242628;
   border-radius: 6px;
   border: 1px solid #3f4650;
   font-family: 'SourceHanSansSC', sans-serif;
@@ -610,15 +610,15 @@ export default {
 
 /* Learning 静态卡片展示 */
 .learning-grid { display: flex; gap: 12px; margin-top: 10px; }
-.learning-card { display: flex; flex-direction: column; justify-content: center; width: 33.333%; min-height: 90px; padding: 12px 14px; background: #1b2128; border: 1px solid #4a5058; color: var(--c-text-emphasis); cursor: default; border-radius: 8px; }
+.learning-card { display: flex; flex-direction: column; justify-content: center; width: 33.333%; min-height: 90px; padding: 12px 14px; background: #252729; border: 1px solid #3a3d41; color: var(--c-text-emphasis); cursor: default; border-radius: 8px; }
 
 /* 架构图描述样式 */
 .diagram-description {
   margin-top: 20px;
-  background: #1b2128;
+  background: transparent;
   padding: 15px;
   border-radius: 6px;
-  border-left: 3px solid #8a9098;
+  border-left: none;
   font-family: 'SourceHanSansSC', sans-serif;
 }
 

@@ -25,6 +25,20 @@
         <div class="header-info">
           <div class="top-title" v-if="heading">{{ heading }}</div>
         </div>
+        <div class="font-size-controls" role="group" aria-label="字号大小">
+          <button type="button" class="font-size-btn" :class="{ active: fontSizePreset === 'small' }" @click="fontSizePreset = 'small'">
+            <span class="label-full">小</span>
+            <span class="label-short">小</span>
+          </button>
+          <button type="button" class="font-size-btn" :class="{ active: fontSizePreset === 'standard' }" @click="fontSizePreset = 'standard'">
+            <span class="label-full">标准</span>
+            <span class="label-short">标</span>
+          </button>
+          <button type="button" class="font-size-btn" :class="{ active: fontSizePreset === 'large' }" @click="fontSizePreset = 'large'">
+            <span class="label-full">大</span>
+            <span class="label-short">大</span>
+          </button>
+        </div>
         <button  class="back-btn" @click="$router.push('/mySpace/car-basics')">
           <img src="@/assets/images/fanhui.svg" class="back-icon" alt="返回" />
           <span class="back-text">返回</span>
@@ -54,6 +68,7 @@
               v-if="article"
               :content="article.content" 
               :html="article.html" 
+              :font-size-preset="fontSizePreset"
               @heading-extracted="h => heading = h || (article ? article.title : '')" 
               @content-updated="refreshCatalog"
             />
@@ -86,7 +101,8 @@ export default {
     return {
       article: null,
       heading: '',
-      showMobileToc: false
+      showMobileToc: false,
+      fontSizePreset: 'standard'
     }
   },
   methods: {
@@ -116,7 +132,7 @@ export default {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  margin-left: auto; /* Ensure right alignment in flex container */
+  margin-left: 8px;
   transition: all 0.2s ease;
   text-decoration: none;
 }
@@ -205,6 +221,38 @@ export default {
   text-shadow: 0 2px 4px var(--c-shadow-heavy);
   font-family: 'MotivaSans', sans-serif;
 }
+.font-size-controls {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-left: auto;
+  margin-right: 2px;
+  padding: 5px 8px;
+  min-height: 40px;
+}
+.font-size-btn {
+  border: none;
+  background: transparent;
+  color: var(--c-text-body-alt);
+  border-radius: 8px;
+  padding: 4px 10px;
+  font-size: 12px;
+  line-height: 1;
+  cursor: pointer;
+  min-width: 32px;
+  transition: color 0.2s ease, background-color 0.2s ease;
+}
+.font-size-btn:hover {
+  color: var(--c-text-emphasis);
+  background: var(--c-primary-alpha-10);
+}
+.font-size-btn.active {
+  background: rgba(255, 255, 255, 0.12);
+  font-weight: 700;
+}
+.label-short {
+  display: none;
+}
 
 /* 下容器：布局相关：三栏 Grid */
 .main-layout {
@@ -275,6 +323,12 @@ export default {
   /* Show toggle button */
   .toc-toggle-btn {
     display: flex;
+    width: 34px;
+    height: 34px;
+    padding: 0;
+    border-radius: 50%;
+    justify-content: center;
+    margin-right: 8px;
   }
   
   /* Hide right sidebar and placeholder */
@@ -333,8 +387,46 @@ export default {
   
   /* Back button text hidden on mobile */
   .back-text { display: none; }
+  .back-btn {
+    width: 34px;
+    height: 34px;
+    padding: 0;
+    border-radius: 50%;
+    justify-content: center;
+    gap: 0;
+    background: transparent;
+  }
+  .back-btn:hover,
+  .back-btn:active,
+  .back-btn.router-link-active {
+    background: transparent;
+  }
 
   .top-title { font-size: 16px; }
+  .font-size-controls {
+    margin-left: auto;
+    margin-right: 6px;
+    gap: 4px;
+    padding: 4px 6px;
+    min-height: 38px;
+  }
+  .font-size-btn {
+    width: 34px;
+    height: 34px;
+    border-radius: 10px;
+    padding: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    min-width: 0;
+  }
+  .label-full {
+    display: none;
+  }
+  .label-short {
+    display: inline;
+  }
 }
 
 
