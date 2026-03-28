@@ -222,7 +222,11 @@ export default {
   height: 1em;
   display: block;
 }
-.panel-buttons { display: flex; flex-direction: column; gap: 8px; }
+.panel-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
 .filter-btn {
   display: flex;
   align-items: center;
@@ -232,7 +236,7 @@ export default {
   padding: 10px 12px;
   border-radius: 6px;
   border: none;
-  background: var(--c-primary-alpha-10);
+  background: transparent;
   color: var(--c-text-body-alt);
   font-size: 15px;
   cursor: pointer;
@@ -240,21 +244,24 @@ export default {
   box-sizing: border-box;
   transition: background 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
 }
-.filter-btn.active { background: var(--c-primary-alpha-40); color: var(--c-text-title); box-shadow: inset 0 0 0 1px rgba(102,192,244,0.85); }
+.filter-btn:hover { background: rgba(154, 160, 166, 0.16); color: #d3d7dd; }
+.filter-btn.active { background: rgba(154, 160, 166, 0.28); color: #e1e4e8; }
 .record-list { display: flex; flex-direction: column; gap: 8px; }
 .record-item {
   display: flex;
-  background: var(--c-shadow-light);
+  background: #16191C;
   padding: 15px;
-  border: 1px solid transparent;
-  border-radius: 10px;
-  transition: background 0.2s, border-color 0.2s, box-shadow 0.2s;
+  border: 1px solid var(--c-border-default);
+  border-radius: 8px;
+  transition: background 0.2s, border-color 0.2s, box-shadow 0.2s, transform 0.2s;
 }
 .record-item:hover { 
-  background: var(--c-primary-alpha-10);
-  border-color: var(--c-primary-alpha-20);
+  background: #1D2126;
+  border-color: var(--c-border-default);
   box-shadow: 0 8px 20px var(--c-shadow-medium);
+  transform: scale(1.02);
 }
+.record-item:active { transform: scale(1); }
 .record-item.clickable { cursor: pointer; }
 .record-logo {
   width: 60px;
@@ -300,10 +307,7 @@ export default {
   .col-left.is-open {
     left: 0;
   }
-  .filters-panel {
-    background: transparent;
-    padding: 0;
-  }
+  .filters-panel { padding: 0; }
   .panel-subtitle {
     justify-content: space-between;
     width: 100%;

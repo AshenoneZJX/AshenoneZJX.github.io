@@ -7,12 +7,14 @@
 
         <!-- 左侧边栏：固定显示大纲 -->
         <aside class="left-sidebar" :class="{ 'mobile-open': showMobileToc }">
-          <div class="sidebar-title">大纲</div>
-          <ArticleCatalog 
-            ref="catalog" 
-            container-selector=".content" 
-            @toc-click="showMobileToc = false" 
-          />
+          <div class="outline-panel">
+            <div class="sidebar-title">大纲</div>
+            <ArticleCatalog 
+              ref="catalog" 
+              container-selector=".content" 
+              @toc-click="showMobileToc = false" 
+            />
+          </div>
         </aside>
 
         <div class="top-actions-row">
@@ -301,14 +303,22 @@ export default {
 }
 
 .left-sidebar {
-  position: sticky;
-  top: 80px;
+  position: relative;
   background: transparent;
   padding: 20px 0 20px 20px;
   min-height: calc(100vh - 80px);
   grid-column: 1;
   grid-row: 1 / span 2;
   border-right: none;
+}
+.outline-panel {
+  position: sticky;
+  top: 80px;
+  max-height: calc(100vh - 80px);
+  padding: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  box-sizing: border-box;
 }
 
 .top-actions-row {
@@ -420,6 +430,11 @@ export default {
   
   .left-sidebar.mobile-open {
     transform: translateX(0);
+  }
+  .outline-panel {
+    position: static;
+    max-height: none;
+    overflow: visible;
   }
 
   .mobile-overlay {

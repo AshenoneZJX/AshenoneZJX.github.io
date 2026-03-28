@@ -8,84 +8,75 @@
 
 <template>
   <div class="container page-car-basics-detail">
-    <div v-if="article">
-      <!-- 上容器：顶部工具栏 -->
-      <div class="top-actions-row">
-        <!-- 移动端：目录切换按钮 -->
-        <button class="toc-toggle-btn" @click="showMobileToc = !showMobileToc">
-          <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
-            <line x1="3" y1="12" x2="21" y2="12"></line>
-            <line x1="3" y1="6" x2="21" y2="6"></line>
-            <line x1="3" y1="18" x2="21" y2="18"></line>
-          </svg>
-          <span style="margin-left: 4px; display: none;">目录</span>
-        </button>
-
-        <div class="header-placeholder"></div>
-        <div class="header-info">
-          <div class="top-title" v-if="heading">{{ heading }}</div>
-        </div>
-        <div class="font-size-controls" role="group" aria-label="字号大小">
-          <button type="button" class="font-size-btn" :class="{ active: fontSizePreset === 'small' }" @click="fontSizePreset = 'small'">
-            <span class="label-full">小</span>
-            <span class="label-short">小</span>
-          </button>
-          <button type="button" class="font-size-btn" :class="{ active: fontSizePreset === 'standard' }" @click="fontSizePreset = 'standard'">
-            <span class="label-full">标准</span>
-            <span class="label-short">标</span>
-          </button>
-          <button type="button" class="font-size-btn" :class="{ active: fontSizePreset === 'large' }" @click="fontSizePreset = 'large'">
-            <span class="label-full">大</span>
-            <span class="label-short">大</span>
-          </button>
-        </div>
-        <button  class="back-btn" @click="$router.push('/mySpace/car-basics')">
-          <img src="@/assets/images/fanhui.svg" class="back-icon" alt="返回" />
-          <span class="back-text">返回</span>
-        </button>
-      </div>
-
-      <!-- 下容器：内容布局 -->
-      <div class="main-layout">
-        <!-- 移动端：遮罩层 -->
-        <div class="mobile-overlay" v-if="showMobileToc" @click="showMobileToc = false"></div>
-
-        <!-- 左侧边栏：固定显示大纲 -->
-        <aside class="left-sidebar" :class="{ 'mobile-open': showMobileToc }">
+    <div v-if="article" class="three-col-layout">
+      <aside class="left-sidebar" :class="{ 'mobile-open': showMobileToc }">
+        <div class="outline-panel">
           <div class="sidebar-title">大纲</div>
-          
           <ArticleCatalog 
             ref="catalog" 
             container-selector=".content" 
             @toc-click="showMobileToc = false" 
           />
-        </aside>
+        </div>
+      </aside>
 
-        <!-- 中间内容区 -->
-        <main class="center-content">
-          <div class="detail-body">
-            <MarkdownViewer 
-              v-if="article"
-              :content="article.content" 
-              :html="article.html" 
-              :font-size-preset="fontSizePreset"
-              @heading-extracted="h => heading = h || (article ? article.title : '')" 
-              @content-updated="refreshCatalog"
-            />
+      <section class="right-area">
+        <div class="top-actions-row">
+          <button class="toc-toggle-btn" @click="showMobileToc = !showMobileToc">
+            <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="3" y1="12" x2="21" y2="12"></line>
+              <line x1="3" y1="6" x2="21" y2="6"></line>
+              <line x1="3" y1="18" x2="21" y2="18"></line>
+            </svg>
+            <span style="margin-left: 4px; display: none;">目录</span>
+          </button>
+          <div class="header-info">
+            <div class="top-title" v-if="heading">{{ heading }}</div>
           </div>
-        </main>
+          <div class="font-size-controls" role="group" aria-label="字号大小">
+            <button type="button" class="font-size-btn" :class="{ active: fontSizePreset === 'small' }" @click="fontSizePreset = 'small'">
+              <span class="label-full">小</span>
+              <span class="label-short">小</span>
+            </button>
+            <button type="button" class="font-size-btn" :class="{ active: fontSizePreset === 'standard' }" @click="fontSizePreset = 'standard'">
+              <span class="label-full">标准</span>
+              <span class="label-short">标</span>
+            </button>
+            <button type="button" class="font-size-btn" :class="{ active: fontSizePreset === 'large' }" @click="fontSizePreset = 'large'">
+              <span class="label-full">大</span>
+              <span class="label-short">大</span>
+            </button>
+          </div>
+          <button class="back-btn" @click="$router.push('/mySpace/car-basics')">
+            <img src="@/assets/images/fanhui.svg" class="back-icon" alt="返回" />
+            <span class="back-text">返回</span>
+          </button>
+        </div>
 
-        <!-- 右侧边栏：占位，无内容 -->
-        <aside class="right-sidebar"></aside>
-      </div>
+        <div class="content-layout">
+          <main class="center-content">
+            <div class="detail-body">
+              <MarkdownViewer 
+                v-if="article"
+                :content="article.content" 
+                :html="article.html" 
+                :font-size-preset="fontSizePreset"
+                @heading-extracted="h => heading = h || (article ? article.title : '')" 
+                @content-updated="refreshCatalog"
+              />
+            </div>
+          </main>
+          <aside class="right-sidebar"></aside>
+        </div>
+      </section>
+
+      <div class="mobile-overlay" v-if="showMobileToc" @click="showMobileToc = false"></div>
     </div>
-
     <div v-else class="not-found">
       <p>抱歉，没有找到该内容。</p>
     </div>
   </div>
 </template>
-
 <script>
 import carBasics from '@/data/car/carBasics.js'
 import ArticleCatalog from '@/components/Shared/ArticleCatalog.vue'
@@ -161,6 +152,10 @@ export default {
 }
 
 .page-car-basics-detail { 
+  --layout-max-width: 1680px;
+  --layout-gutter: 20px;
+  --header-bar-height: 52px;
+  --side-col-width: 280px;
   padding: 0;
   margin: 0;
   width: 100%;
@@ -190,17 +185,15 @@ export default {
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  padding: 12px 16px;
-  min-height: 28px;
-  max-width: 100%;
-  margin: 0 auto 0;
+  padding: 12px var(--layout-gutter);
+  min-height: var(--header-bar-height);
   border-bottom: 1px solid var(--c-border-default);
-}
-
-.header-placeholder {
-  width: 20%;
-  margin-right: 0;
-  flex-shrink: 0;
+  width: 100%;
+  box-sizing: border-box;
+  background: var(--c-bg-l1);
+  position: sticky;
+  top: 80px; /* 避开导航栏高度 */
+  z-index: 100;
 }
 
 .header-info {
@@ -209,6 +202,7 @@ export default {
   align-items: baseline;
   gap: 12px;
   flex-wrap: wrap;
+  min-width: 0;
 }
 
 .top-title { 
@@ -255,45 +249,82 @@ export default {
 }
 
 /* 下容器：布局相关：三栏 Grid */
-.main-layout {
+.three-col-layout {
   display: grid;
-  grid-template-columns: 20% minmax(0, 1fr) 20%;
+  grid-template-columns: var(--side-col-width) minmax(0, 1fr);
+  min-height: 100vh;
+  width: min(100%, var(--layout-max-width));
+  margin: 0 auto;
+  align-items: stretch;
+}
+
+.right-area {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  width: 100%;
+}
+
+.content-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) var(--side-col-width);
   gap: 0;
-  position: relative;
   align-items: start;
-  max-width: 100%;
-  margin: 0;
-  padding: 0 20px;
+  min-height: 0;
+  width: 100%;
 }
 
 .left-sidebar {
   position: sticky;
-  top: 80px;
-  background: transparent;
-  padding: 20px 0 20px 20px;
-  min-height: 200px;
+  top: 80px; /* 避开导航栏高度 */
+  width: var(--side-col-width);
+  height: calc(100vh - 80px); /* 减去导航栏高度 */
+  background: var(--c-bg-l1);
+  padding: 0 20px;
+  border-right: 1px solid var(--c-border-default);
+  overflow-y: auto;
+  overflow-x: hidden;
+  box-sizing: border-box;
+  z-index: 90;
+}
+.outline-panel {
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.left-sidebar > * {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
 }
 
 .sidebar-title {
   color: var(--c-text-title);
   font-size: 17px;
   font-weight: 700;
-  margin-bottom: 12px;
-  padding-bottom: 8px;
+  margin: 0 0 12px;
+  min-height: 65px;
+  padding: 0;
+  display: flex;
+  align-items: center;
   letter-spacing: 0.5px;
+  border-bottom: 1px solid var(--c-border-default);
+  box-sizing: border-box;
 }
 
 .right-sidebar {
   position: sticky;
-  top: 80px;
-  min-height: 200px;
-  background: transparent; 
+  top: 80px; /* 避开导航栏高度 */
+  width: var(--side-col-width);
+  height: calc(100vh - 80px);
+  background: var(--c-bg-l1); 
+  box-sizing: border-box;
 }
 
 .center-content {
   min-width: 0;
-  border-left: 1px solid var(--c-border-default);
-  padding-left: 0;
+  border-left: none;
+  padding: 0;
 }
 
 /* 目录样式 */
@@ -302,20 +333,48 @@ export default {
 /* 内容主体 */
 .detail-body { 
   background: #191919;
-  padding: 10px 20px; 
+  padding: 10px var(--layout-gutter); 
   border: none; 
   border-radius: 6px; 
+  box-sizing: border-box;
+}
+
+.left-sidebar :deep(.toc-list) {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  margin: 0;
+  padding: 0 0 12px;
+  box-sizing: border-box;
+}
+
+.left-sidebar :deep(.toc-section),
+.left-sidebar :deep(.toc-h3-list) {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+}
+
+.left-sidebar :deep(.toc-h2),
+.left-sidebar :deep(.toc-h3) {
+  width: 100%;
+  margin-left: 0;
 }
 
 .not-found { color: var(--c-text-muted); }
 
-/* 移动端适配 */
-@media (max-width: 768px) {
-  .main-layout {
-    display: block;
-    padding: 0;
+@media (max-width: 1240px) and (min-width: 769px) {
+  .content-layout {
+    grid-template-columns: minmax(0, 1fr);
   }
 
+  .right-sidebar {
+    display: none;
+  }
+}
+
+/* 移动端适配 */
+@media (max-width: 768px) {
   .top-actions-row {
     padding: 10px 12px;
   }
@@ -332,24 +391,32 @@ export default {
   }
   
   /* Hide right sidebar and placeholder */
-  .right-sidebar, .header-placeholder {
+  .three-col-layout {
+    display: block;
+    min-height: 0;
+  }
+
+  .content-layout {
+    display: block;
+  }
+
+  .right-sidebar {
     display: none !important;
   }
 
-  /* Mobile Sidebar (Slide-out) */
   .left-sidebar {
     display: block !important;
     position: fixed;
     top: 0;
     left: 0;
     bottom: 0;
-    width: fit-content;
-    max-width: 80vw;
+    width: min(82vw, 360px);
+    max-width: 82vw;
     background: var(--c-bg-l1);
     z-index: 2000;
     transform: translateX(-100%);
     transition: transform 0.3s ease;
-    padding: 20px;
+    padding: 0;
     overflow-y: auto;
     overflow-x: auto;
     box-shadow: 2px 0 12px var(--c-shadow-heavy);
@@ -358,6 +425,11 @@ export default {
   
   .left-sidebar.mobile-open {
     transform: translateX(0);
+  }
+  .outline-panel {
+    position: static;
+    max-height: none;
+    overflow: visible;
   }
   
   .mobile-overlay {
@@ -374,7 +446,6 @@ export default {
 
   .sidebar-title { font-size: 19px; }
   
-  /* Adjust detail body for full width */
   .detail-body { 
     padding: 10px; 
     border-radius: 0; 
@@ -383,6 +454,7 @@ export default {
   
   .center-content {
     border-left: none;
+    padding: 0;
   }
   
   /* Back button text hidden on mobile */
@@ -427,12 +499,5 @@ export default {
   .label-short {
     display: inline;
   }
-}
-
-
-
-
-@media (max-width: 768px) {
-  
 }
 </style>

@@ -25,12 +25,14 @@
         <div class="mobile-overlay" v-if="showMobileToc" @click="showMobileToc = false"></div>
 
         <aside class="left-sidebar" :class="{ 'mobile-open': showMobileToc }">
-          <div class="sidebar-title">大纲</div>
-          <ArticleCatalog
-            ref="catalog"
-            container-selector=".content"
-            @toc-click="showMobileToc = false"
-          />
+          <div class="outline-panel">
+            <div class="sidebar-title">大纲</div>
+            <ArticleCatalog
+              ref="catalog"
+              container-selector=".content"
+              @toc-click="showMobileToc = false"
+            />
+          </div>
         </aside>
 
         <main class="center-content">
@@ -197,11 +199,19 @@ export default {
   padding: 0 20px;
 }
 .left-sidebar {
-  position: sticky;
-  top: 80px;
+  position: relative;
   background: transparent;
   padding: 20px 0 20px 4px;
   min-height: 200px;
+}
+.outline-panel {
+  position: sticky;
+  top: 80px;
+  max-height: calc(100vh - 80px);
+  padding: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  box-sizing: border-box;
 }
 .sidebar-title {
   color: var(--c-text-title);
@@ -277,6 +287,11 @@ export default {
   }
   .left-sidebar.mobile-open {
     transform: translateX(0);
+  }
+  .outline-panel {
+    position: static;
+    max-height: none;
+    overflow: visible;
   }
   .mobile-overlay {
     display: block;
