@@ -1,49 +1,6 @@
 <template>
   <div class="container page-record-detail">
     <div v-if="record">
-      <!-- 上容器：顶部工具栏 -->
-      <div class="top-actions-row">
-        <!-- 移动端：目录切换按钮 -->
-        <button class="toc-toggle-btn" @click="showMobileToc = !showMobileToc">
-          <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
-            <line x1="3" y1="12" x2="21" y2="12"></line>
-            <line x1="3" y1="6" x2="21" y2="6"></line>
-            <line x1="3" y1="18" x2="21" y2="18"></line>
-          </svg>
-          <span style="margin-left: 4px; display: none;">目录</span>
-        </button>
-
-        <div class="header-placeholder"></div>
-        <div class="header-info">
-          <div class="top-title" v-if="heading">{{ heading }}</div>
-          <div class="meta">
-            <span class="month">{{ monthAbbr(record.date) }}</span>
-            <span class="day">{{ dayOfMonth(record.date) }}</span>
-            <span class="year">{{ yearOf(record.date) }}</span>
-            <span class="cat">{{ record.category }}</span>
-          </div>
-        </div>
-        <div class="font-size-controls" role="group" aria-label="字号大小">
-          <button type="button" class="font-size-btn" :class="{ active: fontSizePreset === 'small' }" @click="fontSizePreset = 'small'">
-            <span class="label-full">小</span>
-            <span class="label-short">小</span>
-          </button>
-          <button type="button" class="font-size-btn" :class="{ active: fontSizePreset === 'standard' }" @click="fontSizePreset = 'standard'">
-            <span class="label-full">标准</span>
-            <span class="label-short">标</span>
-          </button>
-          <button type="button" class="font-size-btn" :class="{ active: fontSizePreset === 'large' }" @click="fontSizePreset = 'large'">
-            <span class="label-full">大</span>
-            <span class="label-short">大</span>
-          </button>
-        </div>
-        <button  class="back-btn" @click="$router.push('/records')">
-          <img src="@/assets/images/fanhui.svg" class="back-icon" alt="返回" />
-          <span class="back-text">返回</span>
-        </button>
-      </div>
-
-      <!-- 下容器：内容布局 -->
       <div class="main-layout">
         <!-- 移动端：遮罩层 -->
         <div class="mobile-overlay" v-if="showMobileToc" @click="showMobileToc = false"></div>
@@ -57,6 +14,45 @@
             @toc-click="showMobileToc = false" 
           />
         </aside>
+
+        <div class="top-actions-row">
+          <button class="toc-toggle-btn" @click="showMobileToc = !showMobileToc">
+            <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="3" y1="12" x2="21" y2="12"></line>
+              <line x1="3" y1="6" x2="21" y2="6"></line>
+              <line x1="3" y1="18" x2="21" y2="18"></line>
+            </svg>
+            <span style="margin-left: 4px; display: none;">目录</span>
+          </button>
+          <div class="header-placeholder"></div>
+          <div class="header-info">
+            <div class="top-title" v-if="heading">{{ heading }}</div>
+            <div class="meta">
+              <span class="month">{{ monthAbbr(record.date) }}</span>
+              <span class="day">{{ dayOfMonth(record.date) }}</span>
+              <span class="year">{{ yearOf(record.date) }}</span>
+              <span class="cat">{{ record.category }}</span>
+            </div>
+          </div>
+          <div class="font-size-controls" role="group" aria-label="字号大小">
+            <button type="button" class="font-size-btn" :class="{ active: fontSizePreset === 'small' }" @click="fontSizePreset = 'small'">
+              <span class="label-full">小</span>
+              <span class="label-short">小</span>
+            </button>
+            <button type="button" class="font-size-btn" :class="{ active: fontSizePreset === 'standard' }" @click="fontSizePreset = 'standard'">
+              <span class="label-full">标准</span>
+              <span class="label-short">标</span>
+            </button>
+            <button type="button" class="font-size-btn" :class="{ active: fontSizePreset === 'large' }" @click="fontSizePreset = 'large'">
+              <span class="label-full">大</span>
+              <span class="label-short">大</span>
+            </button>
+          </div>
+          <button class="back-btn" @click="$router.push('/records')">
+            <img src="@/assets/images/fanhui.svg" class="back-icon" alt="返回" />
+            <span class="back-text">返回</span>
+          </button>
+        </div>
 
         <!-- 中间内容区 -->
         <main class="center-content">
@@ -186,9 +182,9 @@ export default {
 
 .page-record-detail { 
   padding: 0;
-  margin: 0;
-  width: 100%;
-  max-width: 100%;
+  margin: 0 auto;
+  width: 1320px;
+  max-width: 1320px;
   box-sizing: border-box;
   background: #131314;
 }
@@ -214,16 +210,19 @@ export default {
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  padding: 12px 16px;
+  padding: 12px 0;
+  width: 100%;
+  box-sizing: border-box;
   min-height: 28px;
   max-width: 100%;
-  margin: 0 auto 0;
+  margin: 0;
   background: #131314;
-  border-bottom: 1px solid var(--c-border-default);
+  border-left: 1px solid var(--c-border-default);
+  border-bottom: none;
 }
 
 .header-placeholder {
-  width: 20%;
+  width: 0;
   margin-right: 0;
   flex-shrink: 0;
 }
@@ -234,6 +233,9 @@ export default {
   align-items: baseline;
   gap: 12px;
   flex-wrap: wrap;
+  flex: 1;
+  min-width: 0;
+  padding-left: 32px;
 }
 
 .title-row { display: flex; align-items: flex-start; margin: 0 0 10px; }
@@ -286,22 +288,32 @@ export default {
 /* 布局相关：三栏 Grid */
 .main-layout {
   display: grid;
-  grid-template-columns: 20% minmax(0, 1fr) 20%;
+  grid-template-columns: 260px 760px 260px;
+  grid-template-rows: auto 1fr;
   gap: 0;
   position: relative;
   align-items: start;
-  max-width: 100%;
-  margin: 0;
-  padding: 0 20px;
+  width: 1280px;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0;
   background: #131314;
 }
 
 .left-sidebar {
   position: sticky;
   top: 80px;
-  background: #131314;
+  background: transparent;
   padding: 20px 0 20px 20px;
-  min-height: 200px;
+  min-height: calc(100vh - 80px);
+  grid-column: 1;
+  grid-row: 1 / span 2;
+  border-right: none;
+}
+
+.top-actions-row {
+  grid-column: 2 / 4;
+  grid-row: 1;
 }
 
 .sidebar-title {
@@ -319,12 +331,16 @@ export default {
   top: 80px;
   min-height: 200px;
   background: #131314; 
+  grid-column: 3;
+  grid-row: 2;
 }
 
 .center-content {
   min-width: 0;
   border-left: 1px solid var(--c-border-default);
   padding-left: 0;
+  grid-column: 2;
+  grid-row: 2;
 }
 
 /* 目录样式 */
@@ -332,8 +348,8 @@ export default {
 
 /* 内容卡片区域：半透明黑色背景、内边距、边框和圆角，用于包裹正文内容 */
 .detail-body { 
-  background: #131314;
-  padding: 10px 40px;   /* 上下 10px、左右 40px 的内边距 */
+  background: #1a1b1e;
+  padding: 10px 32px;
   border: none; /* 移除边框 */
   border-radius: 6px;        /* 6px 圆角，柔和视觉，避免生硬矩形 */
 }
@@ -341,13 +357,29 @@ export default {
 .not-found { color: var(--c-text-muted); }
 
 @media (max-width: 768px) {
+  .page-record-detail {
+    width: 100%;
+    max-width: 100%;
+  }
   .main-layout {
     display: block;
+    width: 100%;
+    max-width: 100%;
     padding: 0;
+  }
+  .left-sidebar,
+  .top-actions-row,
+  .center-content,
+  .right-sidebar {
+    grid-column: auto;
+    grid-row: auto;
   }
 
   .top-actions-row {
     padding: 10px 12px;
+    width: 100%;
+    box-sizing: border-box;
+    border-left: none;
   }
   
   /* Show toggle button */
@@ -383,7 +415,7 @@ export default {
     overflow-y: auto;
     overflow-x: auto;
     box-shadow: 2px 0 12px var(--c-shadow-heavy);
-    border-right: 1px solid var(--c-border-default);
+    border-right: none;
   }
   
   .left-sidebar.mobile-open {
@@ -410,6 +442,9 @@ export default {
     border-radius: 0;
     margin: 0;
   }
+  .center-content {
+    border-left: none;
+  }
 
   /* Back button text hidden on mobile */
   .back-text { display: none; }
@@ -432,6 +467,9 @@ export default {
   .top-title { font-size: 18px; letter-spacing: 0.5px; margin-bottom: 0; width: 100%; }
   
   .header-info { gap: 4px; flex-direction: column; align-items: flex-start; }
+  .header-info {
+    padding-left: 0;
+  }
   .meta { gap: 8px; margin-top: 4px; }
   .month { font-size: 10px; }
   .day { font-size: 16px; }
@@ -461,12 +499,5 @@ export default {
   .label-short {
     display: inline;
   }
-}
-
-
-
-
-@media (max-width: 768px) {
-  
 }
 </style>

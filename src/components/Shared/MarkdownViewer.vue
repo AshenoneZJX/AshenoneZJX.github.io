@@ -108,6 +108,17 @@ export default {
         pre.appendChild(button)
       }
     },
+    wrapTables(container) {
+      if (!container || container.nodeType !== 1) return
+      const tables = container.querySelectorAll('table')
+      for (const table of tables) {
+        if (table.parentElement && table.parentElement.classList.contains('md-table-wrap')) continue
+        const wrapper = document.createElement('div')
+        wrapper.className = 'md-table-wrap'
+        table.parentNode.insertBefore(wrapper, table)
+        wrapper.appendChild(table)
+      }
+    },
     loadMathJax() {
       return new Promise(resolve => {
         if (window.MathJax) { resolve(); return }
@@ -213,6 +224,7 @@ export default {
       }
 
       groupConsecutiveImageParagraphs(tmp)
+      this.wrapTables(tmp)
       this.addCopyButtons(tmp)
 
       this.displayHtml = tmp.innerHTML
@@ -479,14 +491,17 @@ export default {
   border: 1px solid #4a5058; 
   margin: 14px 0; 
   font-size: 14px; 
+  min-width: 520px;
 }
 
 .content :deep(th), .content :deep(td) { 
   border: 1px solid #4a5058; 
   padding: 6px 8px; 
   text-align: left; 
-  line-height: 2; 
+  line-height: 1.6; 
   vertical-align: top; 
+  white-space: normal;
+  word-break: break-word;
 }
 
 .content :deep(th) { 
@@ -547,6 +562,12 @@ export default {
 }
 
 /* 移动端适配 */
+.content :deep(.md-table-wrap) {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
 @media (max-width: 768px) {
   .content { font-size: 14px; line-height: 1.4; }
   .content :deep(p) { font-size: var(--md-body-font-size-mobile); line-height: var(--md-body-line-height-mobile); }
@@ -558,8 +579,7 @@ export default {
   .content :deep(h2) { font-size: 22px; margin: 14px 0 8px; }
   .content :deep(h3) { font-size: 18px; line-height: 1.2; font-weight: 700; }
   .content :deep(h4) { font-size: 16px; line-height: 1.3; font-weight: 700; margin: 12px 0 6px; }
-  .content :deep(table) { display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; }
-  .content :deep(th), .content :deep(td) { white-space: nowrap; }
+  .content :deep(table) { min-width: 420px; }
   .content :deep(pre) { padding: 10px; }
   .content :deep(.md-image-gallery) { gap: 10px; }
   .content :deep(img) { max-width: 100%; margin: 10px auto; }

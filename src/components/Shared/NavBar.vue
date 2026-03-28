@@ -1,6 +1,6 @@
 <template>
   <div class="navbar-wrapper">
-    <nav class="steam-navbar" :class="{ compact: isCompact }">
+    <nav class="steam-navbar">
       <div class="nav-container">
         <div class="logo" @click="goHome">
           ASHENONE's Blog
@@ -36,7 +36,7 @@
     <div
       id="navbar-mobile-menu"
       class="mobile-menu"
-      :class="{ active: isOpen, compact: isCompact }"
+      :class="{ active: isOpen }"
       @click.stop
     >
       <router-link @click.native="closeMenu" to="/" exact tag="button">主页</router-link>
@@ -44,7 +44,7 @@
       <router-link @click.native="closeMenu" to="/records" tag="button">记录</router-link>
       <router-link @click.native="closeMenu" to="/learning" tag="button">Learning</router-link>
     </div>
-    <div v-if="isOpen" class="menu-mask" :class="{ compact: isCompact }" @click="closeMenu"></div>
+    <div v-if="isOpen" class="menu-mask" @click="closeMenu"></div>
   </div>
 </template>
 
@@ -54,7 +54,6 @@ export default {
   data() {
     return {
       isOpen: false,
-      isCompact: false,
       isLightMode: false
     }
   },
@@ -64,9 +63,6 @@ export default {
     }
   },
   mounted() {
-    window.addEventListener('scroll', this.onScroll, { passive: true })
-    this.onScroll()
-    
     // Check saved theme or system preference
     const savedTheme = localStorage.getItem('theme')
     if (savedTheme) {
@@ -76,13 +72,8 @@ export default {
     }
     this.applyTheme()
   },
-  beforeDestroy() {
-    window.removeEventListener('scroll', this.onScroll)
-  },
+  beforeDestroy() {},
   methods: {
-    onScroll() {
-      this.isCompact = window.scrollY > 10
-    },
     toggleMenu() {
       this.isOpen = !this.isOpen
     },
