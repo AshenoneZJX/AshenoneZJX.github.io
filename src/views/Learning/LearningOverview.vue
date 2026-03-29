@@ -30,14 +30,17 @@ export default {
 
 <style scoped>
 .page-learning { 
-  padding-top: 20px;
-  max-width: 1200px;
-  margin: 0 auto;
   width: 100%;
   box-sizing: border-box;
 }
-.section-header h2 { color: var(--c-text-title); font-weight: 300; letter-spacing: 2px; }
-.divider { height: 2px; background: var(--c-border-strong); margin: 10px 0 30px 0; }
+.section-header h2 { 
+  color: var(--c-text-title); 
+  font-size: 24px;
+  font-weight: bold; 
+  letter-spacing: 0; 
+  margin: 0 0 12px 0;
+}
+.divider { height: 2px; background: var(--c-border-strong); margin: 12px 0 20px 0; }
 
 .gallery-grid {
   display: grid;
@@ -47,21 +50,24 @@ export default {
 .gallery-card {
   background: var(--c-bg-l2);
   box-shadow: 0 4px 15px var(--c-shadow-medium);
-  transition: transform 0.2s;
+  border-radius: 10px;
+  overflow: hidden;
+  transition: transform 0.2s, box-shadow 0.2s;
   cursor: pointer;
   text-decoration: none;
+  display: block;
 }
-.gallery-card:hover { transform: translateY(-5px); }
+.gallery-card:hover { 
+  transform: translateY(-5px); 
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.45);
+}
 .card-image { height: 160px; background-size: cover; background-position: center; position: relative; }
-.hover-overlay { position: absolute; bottom: 0; left: 0; right: 0; padding: 8px 12px; background: var(--c-shadow-heavy); color: var(--c-text-title); font-weight: 600; letter-spacing: 1px; }
+.hover-overlay { position: absolute; bottom: 0; left: 0; right: 0; padding: 12px; background: var(--c-shadow-heavy); color: var(--c-text-title); font-size: 16px; font-weight: bold; }
 
 @media (max-width: 768px) {
-  .page-learning {
-    padding: 20px 16px;
-  }
   .gallery-grid {
     grid-template-columns: 1fr;
+    gap: 16px;
   }
 }
-
 </style>

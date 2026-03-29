@@ -14,11 +14,12 @@ export default {
 
 <style scoped>
 .learning-view {
-  padding-top: 20px;
+  padding: 20px;
   width: 100%;
-  max-width: 1200px;
+  max-width: 1440px;
   margin: 0 auto;
   box-sizing: border-box;
+  font-family: "SF Pro", "Helvetica", "Arial", "Roboto", "PingFang SC", "Microsoft YaHei", "Source Han Sans SC", sans-serif;
 }
 .learning-view >>> .gallery-card,
 .learning-view >>> .module-card {
@@ -47,10 +48,14 @@ export default {
 }
 .learning-view >>> .card-title {
   color: var(--c-text-title);
+  font-size: 16px;
+  font-weight: bold;
 }
 .learning-view >>> .card-tags .tag {
   background: #3a3f45;
   color: var(--c-text-title);
   border-radius: 4px;
+  font-size: 12px;
+  padding: 2px 6px;
 }
 </style>

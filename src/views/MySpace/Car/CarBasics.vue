@@ -115,7 +115,19 @@ export default {
     },
     getLogo(title) {
       try {
-        return require(`@/assets/images/carbasicLOGO/${title}.png`)
+        const logoMap = {
+          '世界汽车工业发展史': '世界汽车工业史.png',
+          '动力与传动系统详解': '动力与传动.png',
+          '汽车底盘与悬架系统详解': '底盘与悬架.png',
+          '汽车能源类型全解析：燃油｜混动｜纯电': '能源类型.png',
+          '车身与尺寸': '车身与尺寸.png',
+          '车身与尺寸详解': '车身与尺寸.png'
+        }
+        const fileName = logoMap[title]
+        if (fileName) {
+          return require(`@/assets/images/carbasicLOGO/${fileName}`)
+        }
+        return ''
       } catch (e) {
         return ''
       }
@@ -183,11 +195,13 @@ export default {
     display: flex;
     align-items: center;
     justify-content: center;
-    background: var(--c-primary-alpha-10);
+    background: transparent;
     border: 1px solid var(--c-border-strong);
     color: var(--c-primary);
-    padding: 6px;
-    border-radius: 6px;
+    padding: 0;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
     cursor: pointer;
   }
 }
@@ -254,6 +268,7 @@ export default {
   border: 1px solid var(--c-border-default);
   border-radius: 8px;
   transition: background 0.2s, border-color 0.2s, box-shadow 0.2s, transform 0.2s;
+  align-items: center;
 }
 .record-item:hover { 
   background: #1D2126;
@@ -286,7 +301,20 @@ export default {
 
 @media (max-width: 768px) {
   .page-car-basics { padding: 16px; }
-  .back-text { display: none; }
+  .back-btn {
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    border-radius: 50%;
+    justify-content: center;
+    background: transparent;
+  }
+  .back-btn .back-text { display: none; }
+  .back-btn:hover,
+  .back-btn:active,
+  .back-btn.router-link-active {
+    background: transparent;
+  }
   .record-list { padding: 0; }
   .section-header { padding: 0; margin-bottom: 15px; }
   .content-2col { flex-direction: column; position: relative; }

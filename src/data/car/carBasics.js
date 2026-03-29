@@ -14,7 +14,8 @@ function loadMdBasics() {
     const raw = typeof mod === 'string' ? mod : (mod && mod.default) || ''
     const parsed = matter(raw, { excerpt_separator: '<!-- more -->' })
     const id = key.replace('./', '').replace(/\.md$/, '')
-    const title = parsed.data.title || id
+    const h1Match = parsed.content.match(/^#\s+(.+)$/m)
+    const title = h1Match ? h1Match[1].trim() : id
     const category = parsed.data.category || 'Basics'
     const content = parsed.content
     const excerpt = parsed.data.excerpt || (parsed.excerpt ? parsed.excerpt.trim() : content.replace(/\n/g, ' ').slice(0, 120))

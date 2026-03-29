@@ -260,8 +260,8 @@ h2, h3, h4 {
 .wiki-box {
   margin: 0 0 30px 0;
   padding: 24px 100px;
-  background: linear-gradient(135deg, var(--c-primary-alpha-20) 0%, transparent 100%);
-  border-left: 4px solid var(--c-primary);
+  background: linear-gradient(135deg, var(--c-bg-l3) 0%, transparent 100%);
+  border-left: 4px solid var(--c-border-hover);
   border-radius: 0;
   color: var(--c-text-body-alt);
   position: relative;
@@ -276,7 +276,7 @@ h2, h3, h4 {
   top: -10px;
   left: 10px;
   font-size: 100px;
-  color: var(--c-primary-alpha-20);
+  color: var(--c-border-default);
   font-family: Georgia, serif;
   line-height: 1;
   z-index: -1;
@@ -289,7 +289,7 @@ h2, h3, h4 {
   bottom: -50px;
   right: 10px;
   font-size: 100px;
-  color: var(--c-primary-alpha-20);
+  color: var(--c-border-default);
   font-family: Georgia, serif;
   line-height: 1;
   z-index: -1;
@@ -316,14 +316,14 @@ h2, h3, h4 {
   background: var(--c-bg-l1);
   border-radius: 8px;
   padding: 10px;
-  border: 1px solid var(--c-primary-alpha-20);
+  border: 1px solid var(--c-border-default);
   box-shadow: 0 4px 12px var(--c-shadow-light);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 .tech-card:hover {
   transform: translateY(-2px);
   box-shadow: 0 6px 16px var(--c-shadow-medium);
-  border-color: var(--c-primary-alpha-40);
+  border-color: var(--c-border-hover);
 }
 
 .tech-header {
@@ -344,7 +344,7 @@ h2, h3, h4 {
   left: 0;
   width: 100%;
   height: 8px;
-  background: var(--c-primary-alpha-40);
+  background: var(--c-border-hover);
   z-index: -1;
   border-radius: 2px;
 }

@@ -7,74 +7,71 @@
 -->
 
 <template>
-  <div class="container page-car-basics-detail">
-    <div v-if="article" class="three-col-layout">
-      <aside class="left-sidebar" :class="{ 'mobile-open': showMobileToc }">
-        <div class="outline-panel">
-          <div class="sidebar-title">大纲</div>
-          <ArticleCatalog 
-            ref="catalog" 
-            container-selector=".content" 
-            @toc-click="showMobileToc = false" 
-          />
-        </div>
-      </aside>
+  <div class="container page-car-basics-detail" v-if="article">
+    <aside class="left-sidebar" :class="{ 'mobile-open': showMobileToc }">
+      <div class="outline-panel">
+        <div class="sidebar-title">大纲</div>
+        <ArticleCatalog 
+          ref="catalog" 
+          container-selector=".content" 
+          @toc-click="showMobileToc = false" 
+        />
+      </div>
+    </aside>
 
-      <section class="right-area">
-        <div class="top-actions-row">
-          <button class="toc-toggle-btn" @click="showMobileToc = !showMobileToc">
-            <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
-              <line x1="3" y1="12" x2="21" y2="12"></line>
-              <line x1="3" y1="6" x2="21" y2="6"></line>
-              <line x1="3" y1="18" x2="21" y2="18"></line>
-            </svg>
-            <span style="margin-left: 4px; display: none;">目录</span>
+    <section class="right-area">
+      <div class="top-actions-row">
+        <button class="toc-toggle-btn" @click="showMobileToc = !showMobileToc">
+          <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
+          <span style="margin-left: 4px; display: none;">目录</span>
+        </button>
+        <div class="header-info">
+          <div class="top-title" v-if="heading">{{ heading }}</div>
+        </div>
+        <div class="font-size-controls desktop-controls" role="group" aria-label="字号大小">
+          <button type="button" class="font-size-btn" :class="{ active: fontSizePreset === 'small' }" @click="fontSizePreset = 'small'">小</button>
+          <button type="button" class="font-size-btn" :class="{ active: fontSizePreset === 'standard' }" @click="fontSizePreset = 'standard'">标准</button>
+          <button type="button" class="font-size-btn" :class="{ active: fontSizePreset === 'large' }" @click="fontSizePreset = 'large'">大</button>
+        </div>
+        <div class="font-size-controls mobile-controls" role="group" aria-label="字号大小">
+          <button type="button" class="font-size-btn" @click="decreaseFontSize" :class="{ disabled: fontSizePreset === 'small' }">
+            <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line></svg>
           </button>
-          <div class="header-info">
-            <div class="top-title" v-if="heading">{{ heading }}</div>
-          </div>
-          <div class="font-size-controls" role="group" aria-label="字号大小">
-            <button type="button" class="font-size-btn" :class="{ active: fontSizePreset === 'small' }" @click="fontSizePreset = 'small'">
-              <span class="label-full">小</span>
-              <span class="label-short">小</span>
-            </button>
-            <button type="button" class="font-size-btn" :class="{ active: fontSizePreset === 'standard' }" @click="fontSizePreset = 'standard'">
-              <span class="label-full">标准</span>
-              <span class="label-short">标</span>
-            </button>
-            <button type="button" class="font-size-btn" :class="{ active: fontSizePreset === 'large' }" @click="fontSizePreset = 'large'">
-              <span class="label-full">大</span>
-              <span class="label-short">大</span>
-            </button>
-          </div>
-          <button class="back-btn" @click="$router.push('/mySpace/car-basics')">
-            <img src="@/assets/images/fanhui.svg" class="back-icon" alt="返回" />
-            <span class="back-text">返回</span>
+          <button type="button" class="font-size-btn" @click="increaseFontSize" :class="{ disabled: fontSizePreset === 'large' }">
+            <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
           </button>
         </div>
+        <button class="back-btn" @click="$router.push('/mySpace/car-basics')">
+          <img src="@/assets/images/fanhui.svg" class="back-icon" alt="返回" />
+          <span class="back-text">返回</span>
+        </button>
+      </div>
 
-        <div class="content-layout">
-          <main class="center-content">
-            <div class="detail-body">
-              <MarkdownViewer 
-                v-if="article"
-                :content="article.content" 
-                :html="article.html" 
-                :font-size-preset="fontSizePreset"
-                @heading-extracted="h => heading = h || (article ? article.title : '')" 
-                @content-updated="refreshCatalog"
-              />
-            </div>
-          </main>
-          <aside class="right-sidebar"></aside>
-        </div>
-      </section>
+      <div class="content-layout">
+        <main class="center-content">
+          <div class="detail-body">
+            <MarkdownViewer 
+              v-if="article"
+              :content="article.content" 
+              :html="article.html" 
+              :font-size-preset="fontSizePreset"
+              @heading-extracted="h => heading = h || (article ? article.title : '')" 
+              @content-updated="refreshCatalog"
+            />
+          </div>
+        </main>
+        <aside class="right-sidebar"></aside>
+      </div>
+    </section>
 
-      <div class="mobile-overlay" v-if="showMobileToc" @click="showMobileToc = false"></div>
-    </div>
-    <div v-else class="not-found">
-      <p>抱歉，没有找到该内容。</p>
-    </div>
+    <div class="mobile-overlay" v-if="showMobileToc" @click="showMobileToc = false"></div>
+  </div>
+  <div v-else class="not-found container">
+    <p>抱歉，没有找到该内容。</p>
   </div>
 </template>
 <script>
@@ -97,6 +94,14 @@ export default {
     }
   },
   methods: {
+    decreaseFontSize() {
+      if (this.fontSizePreset === 'large') this.fontSizePreset = 'standard';
+      else if (this.fontSizePreset === 'standard') this.fontSizePreset = 'small';
+    },
+    increaseFontSize() {
+      if (this.fontSizePreset === 'small') this.fontSizePreset = 'standard';
+      else if (this.fontSizePreset === 'standard') this.fontSizePreset = 'large';
+    },
     refreshCatalog() {
       if (this.$refs.catalog) this.$refs.catalog.refresh()
     }
@@ -152,16 +157,21 @@ export default {
 }
 
 .page-car-basics-detail { 
-  --layout-max-width: 1680px;
+  --layout-max-width: 1440px;
   --layout-gutter: 20px;
   --header-bar-height: 52px;
-  --side-col-width: 280px;
-  padding: 0;
+  --side-col-width: 260px;
+  padding: 0 20px;
   margin: 0;
   width: 100%;
-  max-width: 100%;
+  max-width: 1440px;
   box-sizing: border-box;
-  background: #191919;
+  background: #131314;
+  
+  display: grid;
+  grid-template-columns: var(--side-col-width) minmax(0, 1fr);
+  min-height: 100vh;
+  align-items: stretch;
 }
 
 .toc-toggle-btn {
@@ -203,14 +213,16 @@ export default {
   gap: 12px;
   flex-wrap: wrap;
   min-width: 0;
+  padding: 2px 8px;
+  margin-left: 20px;
 }
 
 .top-title { 
-  color: var(--c-text-title); 
+  color: #d1d5da; 
   font-size: 28px; 
   line-height: 1.35; 
   margin: 0; 
-  font-weight: 400; 
+  font-weight: 700; 
   letter-spacing: 1.5px; 
   text-shadow: 0 2px 4px var(--c-shadow-heavy);
   font-family: 'MotivaSans', sans-serif;
@@ -218,44 +230,68 @@ export default {
 .font-size-controls {
   display: inline-flex;
   align-items: center;
-  gap: 4px;
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 6px;
+  padding: 2px;
   margin-left: auto;
-  margin-right: 2px;
-  padding: 5px 8px;
-  min-height: 40px;
+  margin-right: 12px;
+  height: 26px;
+  box-sizing: border-box;
 }
 .font-size-btn {
+  position: relative;
   border: none;
   background: transparent;
   color: var(--c-text-body-alt);
-  border-radius: 8px;
+  border-radius: 4px;
   padding: 4px 10px;
   font-size: 12px;
   line-height: 1;
   cursor: pointer;
-  min-width: 32px;
-  transition: color 0.2s ease, background-color 0.2s ease;
+  min-width: 36px;
+  height: 22px;
+  transition: all 0.2s ease;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.font-size-btn::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 25%;
+  bottom: 25%;
+  width: 1px;
+  background-color: rgba(255, 255, 255, 0.1);
+  transition: opacity 0.2s;
+}
+.font-size-btn:first-child::before {
+  display: none;
+}
+.font-size-btn.active::before,
+.font-size-btn.active + .font-size-btn::before {
+  opacity: 0;
 }
 .font-size-btn:hover {
   color: var(--c-text-emphasis);
-  background: var(--c-primary-alpha-10);
 }
 .font-size-btn.active {
-  background: rgba(255, 255, 255, 0.12);
-  font-weight: 700;
+  background: rgba(255, 255, 255, 0.15);
+  color: var(--c-text-title);
+  font-weight: 500;
+  height: 22px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3), 0 1px 2px rgba(0, 0, 0, 0.2), inset 0 1px 1px rgba(255, 255, 255, 0.1);
 }
-.label-short {
+.mobile-controls {
   display: none;
 }
-
-/* 下容器：布局相关：三栏 Grid */
-.three-col-layout {
-  display: grid;
-  grid-template-columns: var(--side-col-width) minmax(0, 1fr);
-  min-height: 100vh;
-  width: min(100%, var(--layout-max-width));
-  margin: 0 auto;
-  align-items: stretch;
+.font-size-btn.disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+.font-size-btn.disabled:hover {
+  color: var(--c-text-body-alt);
 }
 
 .right-area {
@@ -325,6 +361,7 @@ export default {
   min-width: 0;
   border-left: none;
   padding: 0;
+  background: var(--c-bg-l1);
 }
 
 /* 目录样式 */
@@ -333,7 +370,8 @@ export default {
 /* 内容主体 */
 .detail-body { 
   background: #191919;
-  padding: 10px var(--layout-gutter); 
+  padding: 16px var(--layout-gutter) var(--layout-gutter);
+  margin-right: 20px;
   border: none; 
   border-radius: 6px; 
   box-sizing: border-box;
@@ -369,33 +407,39 @@ export default {
   }
 
   .right-sidebar {
-    display: none;
+    display: none !important;
   }
 }
 
 /* 移动端适配 */
 @media (max-width: 768px) {
+  .page-car-basics-detail {
+    display: block;
+    max-width: 100%;
+    padding: 0;
+  }
+
   .top-actions-row {
-    padding: 10px 12px;
+    position: sticky;
+    top: 80px; /* 避开导航栏高度 */
+    padding: 8px 12px;
+    height: 60px;
+    z-index: 100;
   }
   
   /* Show toggle button */
   .toc-toggle-btn {
     display: flex;
-    width: 34px;
-    height: 34px;
+    height: 100%;
+    aspect-ratio: 1 / 1;
     padding: 0;
-    border-radius: 50%;
+    border-radius: 8px;
     justify-content: center;
-    margin-right: 8px;
+    align-items: center;
+    margin-right: 16px;
   }
   
   /* Hide right sidebar and placeholder */
-  .three-col-layout {
-    display: block;
-    min-height: 0;
-  }
-
   .content-layout {
     display: block;
   }
@@ -460,11 +504,12 @@ export default {
   /* Back button text hidden on mobile */
   .back-text { display: none; }
   .back-btn {
-    width: 34px;
-    height: 34px;
+    height: 100%;
+    aspect-ratio: 1 / 1;
     padding: 0;
     border-radius: 50%;
     justify-content: center;
+    align-items: center;
     gap: 0;
     background: transparent;
   }
@@ -474,30 +519,31 @@ export default {
     background: transparent;
   }
 
-  .top-title { font-size: 16px; }
+  .header-info { gap: 0; flex-direction: column; align-items: flex-start; margin-left: 0; }
+  .top-title { font-size: 20px; }
+  .desktop-controls {
+    display: none !important;
+  }
+  .mobile-controls {
+    display: inline-flex !important;
+  }
   .font-size-controls {
     margin-left: auto;
     margin-right: 6px;
-    gap: 4px;
-    padding: 4px 6px;
-    min-height: 38px;
+    height: 24px;
+    padding: 1px;
+    border-radius: 6px;
   }
   .font-size-btn {
-    width: 34px;
-    height: 34px;
-    border-radius: 10px;
+    width: 32px;
+    height: 22px;
+    border-radius: 4px;
     padding: 0;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 12px;
     min-width: 0;
   }
-  .label-full {
-    display: none;
-  }
-  .label-short {
-    display: inline;
+  .font-size-btn svg {
+    width: 14px;
+    height: 14px;
   }
 }
 </style>

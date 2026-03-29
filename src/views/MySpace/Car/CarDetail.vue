@@ -670,25 +670,30 @@ export default {
 .brand-hover-card {
   position: absolute;
   top: calc(100% + 14px);
-  left: 50%;
-  transform: translateX(-50%);
+  left: 0; /* 修改移动端下悬浮框位置，使其默认靠左对齐，防止超出左边界 */
   z-index: 2000;
   --hover-card-width: 280px;
   width: var(--hover-card-width);
   max-height: calc(var(--hover-card-width) * 1.5);
-  background: var(--c-bg-l3);
+  background: var(--c-bg-l3); /* 进一步提高背景明度至浅灰色 */
   backdrop-filter: blur(24px) saturate(120%);
   -webkit-backdrop-filter: blur(24px) saturate(120%);
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  border: 1px solid var(--c-border-default); /* 修改边框颜色适应主题 */
   border-radius: 8px;
   display: flex;
   flex-direction: column;
   box-shadow:
     0 12px 32px var(--c-shadow-medium),
-    0 4px 12px var(--c-shadow-light),
-    0 0 0 1px rgba(255,255,255,0.05);
+    0 4px 12px var(--c-shadow-light);
   overflow: visible;
   will-change: box-shadow, transform, opacity;
+}
+
+@media (min-width: 769px) {
+  .brand-hover-card {
+    left: 50%;
+    transform: translateX(-50%);
+  }
 }
 
 .brand-hover-card::after {
@@ -720,20 +725,25 @@ export default {
 .brand-hover-card::before {
   content: "";
   position: absolute;
-  left: calc(50% + 16px);
+  left: 24px; /* 移动端下小箭头靠左显示 */
   margin-left: -6px;
   top: -7px;
   width: 14px;
   height: 14px;
-  background: var(--c-bg-l3);
-  border-left: 1px solid rgba(255, 255, 255, 0.12);
-  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  background: var(--c-bg-l3); /* 同步提高小箭头背景明度 */
+  border-left: 1px solid var(--c-border-default); /* 同步修改小箭头边框色 */
+  border-top: 1px solid var(--c-border-default);
   transform: rotate(45deg);
   z-index: -1;
   border-radius: 2px 0 0 0;
   box-shadow: 
-    inset 0 0 0 1px rgba(255, 255, 255, 0.05),
     -2px -2px 6px rgba(0, 0, 0, 0.1);
+}
+
+@media (min-width: 769px) {
+  .brand-hover-card::before {
+    left: calc(50% + 16px);
+  }
 }
 .hover-section-desc {
   flex: 0 0 75%;
@@ -1051,6 +1061,19 @@ export default {
 .fade-enter, .fade-leave-to { opacity: 0; }
 
 @media (max-width: 768px) {
-  .back-text { display: none; }
-}
+    .back-btn {
+      width: 32px;
+      height: 32px;
+      padding: 0;
+      border-radius: 50%;
+      justify-content: center;
+      background: transparent;
+    }
+    .back-btn .back-text { display: none; }
+    .back-btn:hover,
+    .back-btn:active,
+    .back-btn.router-link-active {
+      background: transparent;
+    }
+  }
 </style>

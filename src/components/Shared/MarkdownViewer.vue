@@ -84,7 +84,8 @@ export default {
     async handleContentClick(e) {
       const button = e.target && e.target.closest ? e.target.closest('.md-copy-btn') : null
       if (!button) return
-      const pre = button.closest('pre')
+      const wrapper = button.closest('.md-code-wrap')
+      const pre = wrapper ? wrapper.querySelector('pre') : button.closest('pre')
       if (!pre) return
       const code = pre.querySelector('code')
       const text = (code ? code.innerText : pre.innerText).trim()
@@ -100,12 +101,18 @@ export default {
       if (!container || container.nodeType !== 1) return
       const blocks = container.querySelectorAll('pre')
       for (const pre of blocks) {
-        if (pre.querySelector('.md-copy-btn')) continue
+        if (pre.parentElement && pre.parentElement.classList.contains('md-code-wrap')) continue
+        
+        const wrapper = document.createElement('div')
+        wrapper.className = 'md-code-wrap'
+        pre.parentNode.insertBefore(wrapper, pre)
+        wrapper.appendChild(pre)
+        
         const button = document.createElement('button')
         button.type = 'button'
         button.className = 'md-copy-btn'
         this.setCopyButtonState(button, 'default')
-        pre.appendChild(button)
+        wrapper.appendChild(button)
       }
     },
     wrapTables(container) {
@@ -256,28 +263,29 @@ export default {
 <style scoped>
 @font-face {
   font-family: 'Inter';
-  src: url('~@/assets/fonts/Inter-var.ttf') format('truetype');
+  src: url('../../assets/fonts/Inter-var.ttf') format('truetype');
   font-weight: 100 900;
   font-display: swap;
 }
 
 @font-face {
   font-family: 'AlibabaPuHuiTi';
-  src: url('~@/assets/fonts/AlibabaPuHuiTi-3-55-Regular.woff2') format('woff2');
+  src: url('../../assets/fonts/AlibabaPuHuiTi-3-55-Regular.woff2') format('woff2');
   font-weight: 400;
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'RobotoMono';
-  src: url('~@/assets/fonts/RobotoMono-VariableFont_wght.ttf') format('truetype');
-  font-weight: 100 900;
+  font-family: 'FiraCode';
+  src: url('../../assets/fonts/FiraCode-VF.woff2') format('woff2');
+  font-weight: 300 700;
+  font-style: normal;
   font-display: swap;
 }
 
 @font-face {
   font-family: 'GeorgiaSerif';
-  src: url('~@/assets/fonts/Georgia.woff2') format('woff2');
+  src: url('../../assets/fonts/Georgia.woff2') format('woff2');
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -286,8 +294,8 @@ export default {
 .content { 
   --md-body-font-size: 17px;
   --md-body-line-height: 1.65;
-  --md-body-font-size-mobile: 15px;
-  --md-body-line-height-mobile: 1.6;
+  --md-body-font-size-mobile: 17px;
+  --md-body-line-height-mobile: 1.75;
   color: var(--c-text-body); 
   font-size: 16px; 
   line-height: 1.4; /* 全局默认行距同步缩小 */
@@ -298,15 +306,15 @@ export default {
 .content.size-small {
   --md-body-font-size: 16px;
   --md-body-line-height: 1.55;
-  --md-body-font-size-mobile: 14px;
-  --md-body-line-height-mobile: 1.5;
+  --md-body-font-size-mobile: 15px;
+  --md-body-line-height-mobile: 1.6;
 }
 
 .content.size-large {
   --md-body-font-size: 18px;
   --md-body-line-height: 1.75;
-  --md-body-font-size-mobile: 16px;
-  --md-body-line-height-mobile: 1.7;
+  --md-body-font-size-mobile: 18px;
+  --md-body-line-height-mobile: 1.85;
 }
 
 .content :deep(p) { 
@@ -328,7 +336,7 @@ export default {
 }
 
 .content :deep(h2) { 
-  color: #9aa0a6; 
+  color: #b5b9bd; 
   font-size: 22px; 
   line-height: 1.25; 
   margin: 32px 0 20px; 
@@ -341,13 +349,13 @@ export default {
   content: "¶"; 
   display: inline-block; 
   margin-right: 8px; 
-  color: #9aa0a6; 
+  color: #b5b9bd; 
   font-weight: 700; 
 }
 
 .content :deep(h3) { 
-  color: var(--c-text-emphasis); 
-  font-size: 18px; 
+  color: #b5b9bd; 
+  font-size: 20px; 
   line-height: 1.2; 
   margin: 8px 0 6px; /* 减小前后行距，原为 28px 0 16px */
   font-weight: 700; 
@@ -365,7 +373,7 @@ export default {
   left: 0;
   width: 100%;
   height: 8px;
-  background-color: rgba(154, 160, 166, 0.42);
+  background-color: rgba(181, 185, 189, 0.42);
   z-index: -1;
   border-radius: 2px;
 }
@@ -397,13 +405,14 @@ export default {
   text-decoration: underline; 
 }
 
-.content :deep(ul), .content :deep(ol) { 
+.content :deep(ul) { 
   margin: 12px 0 12px 0; 
-  padding-left: 28px; 
+  padding-left: 22px; 
 }
 
 .content :deep(ol) { 
-  font-family: 'RobotoMono', Menlo, Monaco, Consolas, "Courier New", monospace; 
+  margin: 12px 0 12px 0; 
+  padding-left: 22px; 
 }
 
 .content :deep(li) { 
@@ -427,37 +436,50 @@ export default {
   margin: 18px 0; 
 }
 
-.content :deep(code) { 
+.content >>> code { 
   background: #282A2C; 
   border: none; 
   padding: 1px; 
   border-radius: 4px; 
   color: var(--c-text-emphasis); 
-  font-family: 'RobotoMono', Menlo, Monaco, Consolas, "Courier New", monospace; 
+  font-family: 'FiraCode', monospace !important; 
   font-size: 13px; 
 }
 
-.content :deep(pre) { 
+.content >>> code * {
+  font-family: 'FiraCode', monospace !important; 
+}
+
+.content >>> pre { 
   background: #181818; 
   border: 1px solid var(--c-border-default); 
   border-radius: 6px; 
   padding: 36px 12px 12px; 
   overflow: auto; 
-  line-height: 1;
-  font-family: 'RobotoMono', Menlo, Monaco, Consolas, "Courier New", monospace; 
-  position: relative;
+  line-height: 1.5;
+  font-family: 'FiraCode', monospace !important; 
+  margin: 0;
 }
 
-.content :deep(pre code) { 
+.content >>> .md-code-wrap {
+  position: relative;
+  margin: 16px 0;
+}
+
+.content >>> pre code { 
   background: transparent; 
   border: none; 
   padding: 0; 
   font-size: 13px; 
-  line-height: 1;
-  font-family: 'RobotoMono', Menlo, Monaco, Consolas, "Courier New", monospace; 
+  line-height: 1.5;
+  font-family: 'FiraCode', monospace !important; 
 }
 
-.content :deep(.md-copy-btn) {
+.content >>> pre code * {
+  font-family: 'FiraCode', monospace !important; 
+}
+
+.content >>> .md-copy-btn {
   position: absolute;
   top: 8px;
   right: 8px;
@@ -472,13 +494,14 @@ export default {
   justify-content: center;
   padding: 0;
   cursor: pointer;
+  z-index: 10;
 }
 
-.content :deep(.md-copy-btn:hover) {
+.content >>> .md-copy-btn:hover {
   background: #343842;
 }
 
-.content :deep(.md-copy-btn svg) {
+.content >>> .md-copy-btn svg {
   width: 14px;
   height: 14px;
   display: block;
@@ -524,14 +547,14 @@ export default {
   font-style: italic;
   position: relative;
   box-shadow: 0 4px 12px var(--c-shadow-light);
-  line-height: 1;
-  font-size: 14px;
+  line-height: 1.6;
+  font-size: 15px;
 }
 
 .content :deep(blockquote) :deep(p) {
   margin: 6px 0;
-  line-height: 1;
-  font-size: 14px;
+  line-height: 1.6;
+  font-size: 15px;
 }
 
 .content :deep(blockquote)::before {
@@ -569,18 +592,20 @@ export default {
 }
 
 @media (max-width: 768px) {
-  .content { font-size: 14px; line-height: 1.4; }
+  .content { font-size: 15px; line-height: 1.5; }
   .content :deep(p) { font-size: var(--md-body-font-size-mobile); line-height: var(--md-body-line-height-mobile); }
   .content :deep(li) { font-size: var(--md-body-font-size-mobile); line-height: var(--md-body-line-height-mobile); }
-  .content :deep(ul) { padding-left: 22px; }
-  .content :deep(ol) { padding-left: 32px; }
+  .content :deep(blockquote) { font-size: var(--md-body-font-size-mobile); line-height: var(--md-body-line-height-mobile); }
+  .content :deep(blockquote) :deep(p) { font-size: var(--md-body-font-size-mobile); line-height: var(--md-body-line-height-mobile); }
+  .content :deep(ul) { padding-left: 20px; }
+  .content :deep(ol) { padding-left: 20px; }
   .content :deep(ul) :deep(li) { padding-left: 1px; }
   .content :deep(h1) { font-size: 24px; margin: 16px 0 10px; }
   .content :deep(h2) { font-size: 22px; margin: 14px 0 8px; }
-  .content :deep(h3) { font-size: 18px; line-height: 1.2; font-weight: 700; }
-  .content :deep(h4) { font-size: 16px; line-height: 1.3; font-weight: 700; margin: 12px 0 6px; }
+  .content :deep(h3) { font-size: 20px; line-height: 1.2; font-weight: 700; }
+  .content :deep(h4) { font-size: 17px; line-height: 1.3; font-weight: 700; margin: 12px 0 6px; }
   .content :deep(table) { min-width: 420px; }
-  .content :deep(pre) { padding: 10px; }
+  .content >>> pre { padding: 10px; }
   .content :deep(.md-image-gallery) { gap: 10px; }
   .content :deep(img) { max-width: 100%; margin: 10px auto; }
   .content :deep(.md-image-gallery img) { height: 160px; width: auto; max-width: 100%; flex: 0 0 auto; }
@@ -594,7 +619,7 @@ export default {
 }
 
 .content :deep(img) {
-  max-width: 50%;
+  max-width: 80%;
   height: auto;
   display: block;
   margin: 12px auto;

@@ -30,9 +30,10 @@ export default {
       type: Number,
       default: 120
     },
+    // 滚动偏移量：点击目录项后滚动到目标元素时，额外向上偏移的像素值，用于留出顶部空间
     scrollOffset: {
       type: Number,
-      default: 100
+      default: 150
     }
   },
   data() {
@@ -224,8 +225,8 @@ export default {
   border: none;
   border-left: 2px solid transparent;
   color: var(--c-text-body);
-  /* 二级标题按钮内边距：上下8px，左侧4px，右侧0，保证与左侧高亮边框对齐 */
-  padding: 8px 0;
+  /* 二级标题按钮内边距：增大左侧间距 */
+  padding: 8px 0 8px 12px;
   cursor: pointer;
   text-align: left;
   font-size: 14px;
@@ -252,7 +253,7 @@ export default {
   border-bottom: 2px solid #a8a8a8;
   transform: rotate(45deg);
   transition: transform 0.15s ease, border-color 0.2s ease;
-  margin-right: 10px;
+  margin-right: 20px;
   flex-shrink: 0;
 }
 .caret.open { transform: rotate(225deg); }
@@ -261,7 +262,7 @@ export default {
   height: 8px;
   display: inline-block;
   margin-left: 8px;
-  margin-right: 8px;
+  margin-right: 20px;
   flex-shrink: 0;
 }
 .toc-text { 
@@ -291,8 +292,8 @@ export default {
   border-left: 2px solid transparent;
   color: var(--c-text-body);
   text-align: left;
-  /* 三级标题按钮内边距：减小左侧padding使其更紧凑 */
-  padding: 6px 0;
+  /* 三级标题按钮内边距：缩小左侧间距使其更靠近二级标题 */
+  padding: 6px 0 6px 20px;
   cursor: pointer;
   font-size: 12px;
   font-weight: 400;

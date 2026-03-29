@@ -264,7 +264,7 @@ export default {
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
   border-bottom: none;
-  padding-bottom: 0;
+  padding: 0;
 }
 .chart-container {
   width: 100%;
@@ -292,7 +292,11 @@ export default {
   margin-bottom: 0;
   position: relative;
   border-bottom: 1px solid var(--c-border-default);
-  padding-bottom: 10px;
+  padding: 0 16px;
+  min-height: 48px;
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
 }
 .mobile-toggle-bar {
   display: none;
@@ -300,8 +304,9 @@ export default {
 .toolbar-controls {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
   flex-wrap: wrap;
+  width: 100%;
 }
 .charts-toolbar label { color: var(--c-text-label); font-size: 13px; }
 .charts-toolbar select {
@@ -310,7 +315,9 @@ export default {
   border: 1px solid var(--c-border-hover);
   padding: 0 10px;
   border-radius: 6px;
-  height: 30px;
+  height: 32px;
+  width: auto;
+  box-sizing: border-box;
 }
 .charts-toolbar select:hover {
   border-color: var(--c-primary);
@@ -330,7 +337,9 @@ export default {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  height: 30px;
+  height: 32px;
+  width: auto;
+  box-sizing: border-box;
 }
 .sort-btn:hover {
   background: var(--c-primary-alpha-10);

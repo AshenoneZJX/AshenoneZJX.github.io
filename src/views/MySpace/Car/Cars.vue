@@ -288,7 +288,7 @@ export default {
         this.openSearch()
         return
       }
-      this.applySearch()
+      this.closeSearch()
     },
     openSearch() {
       this.searchExpanded = true
@@ -553,65 +553,84 @@ export default {
 .mobile-only { display: none; }
 .filters-panel { display: none; }
 .search-wrap {
-  display: inline-flex;
-  align-items: center;
-  gap: 0;
-  position: relative;
-}
+    display: inline-flex;
+    align-items: center;
+    gap: 0;
+    position: relative;
+    max-width: 100%;
+    padding: 0 4px;
+    margin-right: 10px;
+    box-sizing: border-box;
+  }
 .search-panel {
   position: relative;
   width: 0;
   max-width: 0;
   margin-left: 0;
   opacity: 0;
-  transform: scaleX(0.88);
+  transform: scaleX(0);
   transform-origin: left center;
   pointer-events: none;
   overflow: hidden;
-  transition: width 0.28s ease, max-width 0.28s ease, margin-left 0.28s ease, opacity 0.22s ease, transform 0.28s ease;
+  z-index: 1;
+  transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1), max-width 0.3s cubic-bezier(0.4, 0, 0.2, 1), margin-left 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.2s ease, transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 .search-wrap.expanded .search-panel {
   width: 200px;
   max-width: 200px;
-  margin-left: 8px;
+  margin-left: -28px; /* 修改这里，使输入框左侧与按钮左侧完全对齐 */
   opacity: 1;
   transform: scaleX(1);
   pointer-events: auto;
 }
 .search-input {
-  background: transparent;
-  border: 1px solid var(--c-border-hover);
-  color: var(--c-text-body-alt);
-  padding: 0 34px 0 12px;
-  font-size: 12px;
-  border-radius: 12px;
-  height: 28px;
-  line-height: 28px;
+  background: var(--c-bg-l2);
+  border: 1px solid var(--c-border-default);
+  color: var(--c-text-title);
+  padding: 0 34px 0 34px; /* 修改左侧内边距，避开覆盖在上面的按钮 */
+  font-size: 13px;
+  border-radius: 14px;
+  height: 30px;
+  line-height: 30px;
   width: 100%;
   box-sizing: border-box;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2);
+  transition: all 0.25s ease;
 }
 .search-input:focus,
 .search-input:focus-visible {
   outline: none;
-  border-color: var(--c-primary);
+  border-color: var(--c-border-hover);
 }
-.search-input:hover { border-color: var(--c-primary); }
+.search-input:hover { border-color: var(--c-border-hover); }
 .search-icon-btn {
   height: 28px;
   width: 28px;
   padding: 0;
   border-radius: 999px;
-  border: 1px solid rgba(102,192,244,0.55);
-  background: var(--c-primary-alpha-20);
+  border: 1px solid var(--c-border-default);
+  background: var(--c-bg-l1);
   color: var(--c-text-emphasis);
   cursor: pointer;
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  position: relative;
+  z-index: 2;
+  transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), background 0.2s, border-color 0.2s, color 0.2s;
 }
 .search-icon-btn:hover {
-  background: rgba(102,192,244,0.32);
-  border-color: rgba(102,192,244,0.75);
+  background: var(--c-bg-l2);
+  border-color: var(--c-border-hover);
+  color: #fff;
+}
+.search-icon-btn:active {
+  transform: scale(0.9);
+}
+.search-wrap.expanded .search-icon-btn {
+  transform: scale(1.1);
+  color: var(--c-text-title);
+  border-color: var(--c-border-hover);
 }
 .search-icon {
   width: 16px;
@@ -685,15 +704,19 @@ export default {
 @media (max-width: 768px) {
   /* 移动端：隐藏桌面端横向筛选条，改用底部抽屉式筛选 */
   .page-cars { padding: 10px; }
-  .header-left { flex-wrap: wrap; row-gap: 10px; }
-  .header-left h2 { order: 1; }
-  .filter-toggle.mobile-only { order: 2; }
-  .search-wrap { order: 3; }
-  .filters { order: 4; }
+  .header-left { flex-wrap: nowrap; gap: 10px; width: 100%; min-width: 0; align-items: center; justify-content: flex-start; }
+  .header-left h2 { flex: 0 0 auto; margin: 0; }
+  .filter-toggle.mobile-only { flex: 0 0 auto; display: inline-flex; }
+  .search-wrap { flex: 0 0 auto; justify-content: flex-start; min-width: 0; display: flex; }
+  .search-wrap.expanded { width: 60%; max-width: 240px; }
   .filters { display: none; }
-  .filter-toggle.mobile-only { display: inline-flex; }
-  .search-wrap { flex: 0 0 auto; }
-  .search-wrap.expanded .search-panel { width: clamp(120px, 45vw, 180px); }
+  .search-wrap.expanded .search-panel { 
+    width: 100%; 
+    max-width: none; 
+    flex: 1 1 auto; 
+    margin-left: -28px; /* 移动端同样修改，使输入框左侧与按钮左侧完全对齐 */
+    min-width: 0; 
+  }
   .search-suggest { width: 100%; }
   .filters-panel.mobile-sheet {
     position: fixed;
@@ -703,14 +726,15 @@ export default {
     width: 50%;
     max-width: 360px;
     padding: 12px 14px;
-    background: rgba(27, 40, 56, 0.75);
-    backdrop-filter: blur(24px) saturate(120%);
-    -webkit-backdrop-filter: blur(24px) saturate(120%);
-    box-shadow: none;
-    border-right: 1px solid rgba(255, 255, 255, 0.12);
+    background: rgba(30, 32, 35, 0.65);
+    background-image: radial-gradient(at top left, rgba(255, 255, 255, 0.05) 0%, transparent 70%);
+    backdrop-filter: blur(40px) saturate(150%);
+    -webkit-backdrop-filter: blur(40px) saturate(150%);
+    box-shadow: inset 1px 1px 0 rgba(255, 255, 255, 0.1);
+    border-right: 1px solid rgba(255, 255, 255, 0.08);
     transform: translateX(-100%);
     transition: transform 0.25s ease;
-    z-index: 1001;
+    z-index: 2000;
     display: block;
   }
   .filters-panel.mobile-sheet.active { transform: translateX(0); }
@@ -718,11 +742,11 @@ export default {
     position: fixed;
     inset: 0;
     background: var(--c-shadow-medium);
-    z-index: 1000;
+    z-index: 1999;
     display: block;
   }
   .sheet-header { display: flex; align-items: center; justify-content: space-between; padding: 10px 12px; border-bottom: 1px solid var(--c-border-default); }
-  .sheet-title { color: var(--c-text-muted); font-size: 14px; font-weight: 600; }
+  .sheet-title { color: var(--c-text-title); font-size: 16px; font-weight: 600; }
   .sheet-content { padding: 12px; display: flex; flex-direction: column; gap: 10px; }
   .sheet-subtitle { color: var(--c-text-muted); font-size: 13px; margin-top: 6px; }
   .filter-toggle.mobile-only {
@@ -741,9 +765,9 @@ export default {
   .filters-panel .select { width: 100%; height: 32px; font-size: 13px; }
   .gallery-grid { grid-template-columns: repeat(2, 1fr); gap: 6px; }
   .card-body { height: 160px; }
-  .card-image { height: 80px; }
-  .card-info { padding: 6px; }
-  .card-title { margin-bottom: 4px; gap: 4px; font-size: 13px; }
+  .card-image { height: 140px; }
+  .card-info { padding: 4px; min-height: 80px; }
+  .card-title { margin-bottom: 0; gap: 4px; font-size: max(13px, min(4vw, 15px)); min-height: 32px; padding: 4px; box-sizing: border-box; }
   .brand-logo { width: 16px; height: 16px; }
   .card-tags { flex-wrap: nowrap; overflow-x: hidden; gap: 2px; }
   .card-tags .tag { padding: 1px 2px; font-size: 9px; white-space: nowrap; flex-shrink: 0; }
@@ -838,8 +862,10 @@ export default {
 
   @media (max-width: 768px) {
     .back-text { display: none; }
-    .card-body { height: auto; min-height: 140px; }
-    .card-image { height: 100px; }
+    .card-body { height: auto; min-height: 150px; }
+    .card-image { height: 120px; }
+    .card-info { padding: 4px; min-height: 50px; }
+    .card-title { min-height: 32px; padding: 4px; margin-bottom: 0; box-sizing: border-box; font-size: max(13px, min(4vw, 15px)); }
   }
 
 

@@ -36,18 +36,17 @@
               <span class="cat">{{ record.category }}</span>
             </div>
           </div>
-          <div class="font-size-controls" role="group" aria-label="字号大小">
-            <button type="button" class="font-size-btn" :class="{ active: fontSizePreset === 'small' }" @click="fontSizePreset = 'small'">
-              <span class="label-full">小</span>
-              <span class="label-short">小</span>
+          <div class="font-size-controls desktop-controls" role="group" aria-label="字号大小">
+            <button type="button" class="font-size-btn" :class="{ active: fontSizePreset === 'small' }" @click="fontSizePreset = 'small'">小</button>
+            <button type="button" class="font-size-btn" :class="{ active: fontSizePreset === 'standard' }" @click="fontSizePreset = 'standard'">标准</button>
+            <button type="button" class="font-size-btn" :class="{ active: fontSizePreset === 'large' }" @click="fontSizePreset = 'large'">大</button>
+          </div>
+          <div class="font-size-controls mobile-controls" role="group" aria-label="字号大小">
+            <button type="button" class="font-size-btn" @click="decreaseFontSize" :class="{ disabled: fontSizePreset === 'small' }">
+              <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line></svg>
             </button>
-            <button type="button" class="font-size-btn" :class="{ active: fontSizePreset === 'standard' }" @click="fontSizePreset = 'standard'">
-              <span class="label-full">标准</span>
-              <span class="label-short">标</span>
-            </button>
-            <button type="button" class="font-size-btn" :class="{ active: fontSizePreset === 'large' }" @click="fontSizePreset = 'large'">
-              <span class="label-full">大</span>
-              <span class="label-short">大</span>
+            <button type="button" class="font-size-btn" @click="increaseFontSize" :class="{ disabled: fontSizePreset === 'large' }">
+              <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
             </button>
           </div>
           <button class="back-btn" @click="$router.push('/records')">
@@ -64,7 +63,7 @@
               :content="record.content" 
               :html="record.html" 
               :font-size-preset="fontSizePreset"
-              @heading-extracted="h => heading = h" 
+              @heading-extracted="h => heading = h || (record ? record.title : '')" 
               @content-updated="refreshCatalog"
             />
           </div>
@@ -102,6 +101,14 @@ export default {
     }
   },
   methods: {
+    decreaseFontSize() {
+      if (this.fontSizePreset === 'large') this.fontSizePreset = 'standard';
+      else if (this.fontSizePreset === 'standard') this.fontSizePreset = 'small';
+    },
+    increaseFontSize() {
+      if (this.fontSizePreset === 'small') this.fontSizePreset = 'standard';
+      else if (this.fontSizePreset === 'standard') this.fontSizePreset = 'large';
+    },
     monthAbbr(d) {
       const dt = new Date(d)
       return MONTHS[dt.getMonth()]
@@ -181,12 +188,19 @@ export default {
   font-style: normal;
   font-display: swap;
 }
+@font-face {
+  font-family: 'Georgia';
+  src: url('~@/assets/fonts/Georgia.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
 
 .page-record-detail { 
-  padding: 0;
+  padding: 0 20px;
   margin: 0 auto;
-  width: 1320px;
-  max-width: 1320px;
+  width: 100%;
+  max-width: 1440px;
   box-sizing: border-box;
   background: #131314;
 }
@@ -212,7 +226,7 @@ export default {
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  padding: 12px 0;
+  padding: 12px 20px;
   width: 100%;
   box-sizing: border-box;
   min-height: 28px;
@@ -221,6 +235,9 @@ export default {
   background: #131314;
   border-left: 1px solid var(--c-border-default);
   border-bottom: none;
+  position: sticky;
+  top: 80px;
+  z-index: 100;
 }
 
 .header-placeholder {
@@ -237,79 +254,116 @@ export default {
   flex-wrap: wrap;
   flex: 1;
   min-width: 0;
-  padding-left: 32px;
+  padding: 2px 8px;
+  margin-left: 20px;
 }
 
 .title-row { display: flex; align-items: flex-start; margin: 0 0 10px; }
 
-.top-title { color: var(--c-text-title); font-size: 28px; line-height: 1.35; margin: 0; font-weight: 400; letter-spacing: 1.5px; text-shadow: 0 2px 4px var(--c-shadow-heavy); font-family: 'SourceHanSansSC', sans-serif; }
+.top-title { color: #d1d5da; font-size: 28px; line-height: 1.35; margin: 0; font-weight: 700; letter-spacing: 1.5px; text-shadow: 0 2px 4px var(--c-shadow-heavy); font-family: 'SourceHanSansSC', sans-serif; }
 .meta {
   display: flex;
-  align-items: baseline;
+  align-items: flex-end;
   gap: 12px;
   margin-bottom: 0;
 }
 .month { color: var(--c-text-muted); font-size: 11px; }
-.day { color: #9aa0a6; font-size: 18px; font-weight: bold; font-family: 'RobotoMono', Menlo, Monaco, Consolas, "Courier New", monospace; }
+.day { color: #9aa0a6; font-size: 20px; font-weight: bold; font-family: 'Georgia', 'RobotoMono', Menlo, Monaco, Consolas, "Courier New", monospace; line-height: 1; }
 .year { color: var(--c-text-muted); font-size: 11px; }
 .cat { color: #ffffff; font-size: 11px; display: inline-flex; align-items: center; justify-content: center; padding: 3px 12px; border: none; border-radius: 8px; background-color: #8a9098; font-family: Helvetica, Arial, sans-serif; text-transform: uppercase; letter-spacing: 1.2px; font-weight: 400; }
 .content-divider { height: 1px; background: var(--c-border-default); margin: 8px 0 14px; }
 .font-size-controls {
   display: inline-flex;
   align-items: center;
-  gap: 4px;
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 6px;
+  padding: 2px;
   margin-left: auto;
-  margin-right: 2px;
-  padding: 5px 8px;
-  min-height: 40px;
+  margin-right: 12px;
+  height: 26px;
+  box-sizing: border-box;
 }
 .font-size-btn {
+  position: relative;
   border: none;
   background: transparent;
   color: var(--c-text-body-alt);
-  border-radius: 8px;
+  border-radius: 4px;
   padding: 4px 10px;
   font-size: 12px;
   line-height: 1;
   cursor: pointer;
-  min-width: 32px;
-  transition: color 0.2s ease, background-color 0.2s ease;
+  min-width: 36px;
+  height: 22px;
+  transition: all 0.2s ease;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.font-size-btn::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 25%;
+  bottom: 25%;
+  width: 1px;
+  background-color: rgba(255, 255, 255, 0.1);
+  transition: opacity 0.2s;
+}
+.font-size-btn:first-child::before {
+  display: none;
+}
+.font-size-btn.active::before,
+.font-size-btn.active + .font-size-btn::before {
+  opacity: 0;
 }
 .font-size-btn:hover {
   color: var(--c-text-emphasis);
-  background: var(--c-primary-alpha-10);
 }
 .font-size-btn.active {
-  background: rgba(255, 255, 255, 0.12);
-  font-weight: 700;
+  background: rgba(255, 255, 255, 0.15);
+  color: var(--c-text-title);
+  font-weight: 500;
+  height: 22px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3), 0 1px 2px rgba(0, 0, 0, 0.2), inset 0 1px 1px rgba(255, 255, 255, 0.1);
 }
-.label-short {
+.mobile-controls {
   display: none;
+}
+.font-size-btn.disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+.font-size-btn.disabled:hover {
+  color: var(--c-text-body-alt);
 }
 
 /* 布局相关：三栏 Grid */
 .main-layout {
   display: grid;
-  grid-template-columns: 260px 760px 260px;
+  grid-template-columns: 260px minmax(0, 1fr) 260px;
   grid-template-rows: auto 1fr;
   gap: 0;
   position: relative;
   align-items: start;
-  width: 1280px;
-  max-width: 1280px;
+  width: 100%;
+  max-width: 100%;
   margin: 0 auto;
   padding: 0;
   background: #131314;
 }
 
 .left-sidebar {
-  position: relative;
+  position: sticky;
+  top: 80px;
   background: transparent;
   padding: 20px 0 20px 20px;
-  min-height: calc(100vh - 80px);
+  height: calc(100vh - 80px);
   grid-column: 1;
   grid-row: 1 / span 2;
   border-right: none;
+  z-index: 90;
 }
 .outline-panel {
   position: sticky;
@@ -359,17 +413,34 @@ export default {
 /* 内容卡片区域：半透明黑色背景、内边距、边框和圆角，用于包裹正文内容 */
 .detail-body { 
   background: #1a1b1e;
-  padding: 10px 32px;
+  padding: 32px;
+  margin-right: 20px;
   border: none; /* 移除边框 */
   border-radius: 6px;        /* 6px 圆角，柔和视觉，避免生硬矩形 */
 }
 
 .not-found { color: var(--c-text-muted); }
 
+@media (max-width: 1240px) and (min-width: 769px) {
+  .main-layout {
+    grid-template-columns: 260px minmax(0, 1fr);
+  }
+  .right-sidebar {
+    display: none !important;
+  }
+  .top-actions-row {
+    grid-column: 2 / 3;
+  }
+  .center-content {
+    grid-column: 2;
+  }
+}
+
 @media (max-width: 768px) {
   .page-record-detail {
     width: 100%;
     max-width: 100%;
+    padding: 0;
   }
   .main-layout {
     display: block;
@@ -386,21 +457,26 @@ export default {
   }
 
   .top-actions-row {
-    padding: 10px 12px;
+    position: sticky;
+    top: 80px; /* 避开导航栏高度 */
+    padding: 8px 12px;
     width: 100%;
     box-sizing: border-box;
     border-left: none;
+    height: 60px;
+    z-index: 100;
   }
   
   /* Show toggle button */
   .toc-toggle-btn {
     display: flex;
-    width: 34px;
-    height: 34px;
+    height: 100%;
+    aspect-ratio: 1 / 1;
     padding: 0;
-    border-radius: 50%;
+    border-radius: 8px;
     justify-content: center;
-    margin-right: 8px;
+    align-items: center;
+    margin-right: 16px;
   }
   
   /* Hide right sidebar and placeholder */
@@ -453,7 +529,7 @@ export default {
   
   /* Adjust detail body for full width */
   .detail-body { 
-    padding: 20px; 
+    padding: 20px 20px 20px 20px; 
     border-radius: 0;
     margin: 0;
   }
@@ -464,11 +540,12 @@ export default {
   /* Back button text hidden on mobile */
   .back-text { display: none; }
   .back-btn {
-    width: 34px;
-    height: 34px;
+    height: 100%;
+    aspect-ratio: 1 / 1;
     padding: 0;
     border-radius: 50%;
     justify-content: center;
+    align-items: center;
     gap: 0;
     background: transparent;
   }
@@ -479,40 +556,40 @@ export default {
   }
   
   /* Mobile Title Adjustment */
-  .top-title { font-size: 18px; letter-spacing: 0.5px; margin-bottom: 0; width: 100%; }
+  .top-title { font-size: 20px; letter-spacing: 0.5px; margin-bottom: 0; width: 100%; }
   
-  .header-info { gap: 4px; flex-direction: column; align-items: flex-start; }
+  .header-info { gap: 0; flex-direction: column; align-items: flex-start; margin-left: 0; }
   .header-info {
     padding-left: 0;
   }
-  .meta { gap: 8px; margin-top: 4px; }
-  .month { font-size: 10px; }
+  .meta { gap: 6px; margin-top: 2px; }
+  .month { font-size: 9px; }
   .day { font-size: 16px; }
-  .year { font-size: 10px; }
-  .cat { font-size: 10px; padding: 1px 6px; }
+  .year { font-size: 9px; }
+  .cat { font-size: 9px; padding: 1px 4px; border-radius: 4px; }
+  .desktop-controls {
+    display: none !important;
+  }
+  .mobile-controls {
+    display: inline-flex !important;
+  }
   .font-size-controls {
     margin-left: auto;
     margin-right: 6px;
-    gap: 4px;
-    padding: 4px 6px;
-    min-height: 38px;
+    height: 24px;
+    padding: 1px;
+    border-radius: 6px;
   }
   .font-size-btn {
-    width: 34px;
-    height: 34px;
-    border-radius: 10px;
+    width: 32px;
+    height: 22px;
+    border-radius: 4px;
     padding: 0;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 12px;
     min-width: 0;
   }
-  .label-full {
-    display: none;
-  }
-  .label-short {
-    display: inline;
+  .font-size-btn svg {
+    width: 14px;
+    height: 14px;
   }
 }
 </style>

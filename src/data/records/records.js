@@ -20,7 +20,8 @@ function loadMdRecords() {
     const raw = typeof mod === 'string' ? mod : (mod && mod.default) || ''
     const parsed = matter(raw, { excerpt_separator: '<!-- more -->' })
     const id = key.replace('./', '').replace(/\.md$/, '')
-    const title = parsed.data.title || id
+    const h1Match = parsed.content.match(/^#\s+(.+)$/m)
+    const title = h1Match ? h1Match[1].trim() : id
     const date = parsed.data.date || new Date().toISOString().slice(0, 10) // 确保日期格式为 YYYY-MM-DD
     const category = parsed.data.category || 'Dev'
     const content = parsed.content

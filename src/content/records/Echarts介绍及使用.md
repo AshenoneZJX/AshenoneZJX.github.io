@@ -1,5 +1,4 @@
 ---
-title: "ECharts 介绍及使用指南（新手向）"
 date: 2026-03-19
 description: "通俗易懂的 ECharts 数据可视化入门教程"
 tags: ["ECharts", "数据可视化", "前端开发"]

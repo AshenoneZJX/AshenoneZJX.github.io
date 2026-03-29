@@ -150,15 +150,16 @@ export default {
 }
 .tab-bar {
   background: var(--c-bg-l2);
-  padding: 0 12px;
+  padding: 0 16px;
   margin: 0;
-  min-height: 44px;
+  min-height: 48px;
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  gap: 4px;
+  gap: 12px;
   border-bottom: 1px solid var(--c-border-default);
   flex-wrap: wrap;
+  box-sizing: border-box;
 }
 .panel-head {
   border: 1px solid var(--c-border-default);
@@ -182,12 +183,17 @@ export default {
   background: transparent;
   border: 1px solid transparent;
   color: var(--c-text-body-alt);
-  height: 30px;
+  height: 32px;
   padding: 0 12px;
   border-radius: 6px;
   cursor: pointer;
   font-size: 14px;
   transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+  width: auto;
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 .tab-btn:hover {
   background: var(--c-primary-alpha-10);
