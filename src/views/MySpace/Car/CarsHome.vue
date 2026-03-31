@@ -171,36 +171,6 @@ export default {
 </script>
 
 <style scoped>
-.back-btn {
-  background: transparent;
-  border: 1px solid var(--c-border-strong);
-  color: var(--c-text-body-alt);
-  padding: 6px 12px;
-  cursor: pointer;
-  border-radius: 6px;
-  font-size: 14px;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  margin-left: auto; /* Ensure right alignment in flex container */
-  transition: all 0.2s ease;
-  text-decoration: none;
-}
-.back-icon {
-  width: 16px;
-  height: 16px;
-  display: block;
-}
-.back-btn:hover {
-  color: var(--c-text-emphasis);
-  background: var(--c-primary-alpha-10);
-  border-color: var(--c-border-hover);
-}
-.back-btn:active, .back-btn.router-link-active {
-  background: var(--c-bg-l1);
-  border-color: var(--c-primary);
-  color: var(--c-text-title);
-}
 
 .page-cars-home { 
   padding: 20px;
@@ -292,8 +262,8 @@ export default {
   margin-bottom: 0;
   position: relative;
   border-bottom: 1px solid var(--c-border-default);
-  padding: 0 16px;
-  min-height: 48px;
+  padding: 12px 16px;
+  min-height: auto;
   display: flex;
   align-items: center;
   box-sizing: border-box;
@@ -345,6 +315,48 @@ export default {
   background: var(--c-primary-alpha-10);
   color: var(--c-text-emphasis);
   border-color: var(--c-primary);
+}
+.info-browse :deep(.charts-toolbar) {
+  margin-bottom: 0;
+  position: relative;
+  border-bottom: 1px solid var(--c-border-default);
+  padding: 8px 16px;
+  min-height: auto;
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+}
+.info-browse :deep(.charts-toolbar .toolbar-controls) {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  width: 100%;
+}
+.info-browse :deep(.charts-toolbar button) {
+  background: transparent;
+  border: 1px solid var(--c-border-hover);
+  color: var(--c-text-body-alt);
+  padding: 0 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 28px;
+  width: auto;
+  box-sizing: border-box;
+}
+.info-browse :deep(.charts-toolbar button:hover) {
+  background: var(--c-primary-alpha-10);
+  color: var(--c-text-emphasis);
+  border-color: var(--c-primary);
+}
+.info-browse :deep(.charts-toolbar .tab-btn.active) {
+  background: var(--c-primary-alpha-20);
+  color: var(--c-text-title);
+  border-color: var(--c-primary);
+  font-weight: 500;
 }
 .filter-btn { background: transparent; border: none; color: var(--c-text-body-alt); padding: 6px 10px; border-radius: 6px; cursor: pointer; }
 .filter-btn:hover { background: var(--c-primary-alpha-10); color: var(--c-text-emphasis); }
@@ -446,8 +458,6 @@ export default {
     font-size: 13px;
     text-align: center; /* 文字居中更像卡牌标题 */
   }
-  
-  .back-text { display: none; }
   
   .section-header { padding: 0; }
 

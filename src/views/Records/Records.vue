@@ -90,7 +90,8 @@
           <div class="panel-hint" v-if="invalidRange">起止日期不合法</div>
         </div>
         <div class="panel-section" v-if="uniqueYears.length">
-          <div class="panel-buttons">
+          <div class="panel-subtitle">快速筛选</div>
+          <div class="panel-buttons compact">
             <button
               v-for="y in uniqueYears"
               :key="y"
@@ -98,11 +99,7 @@
               :class="{ active: dateMode === 'year' && filterYear === y }"
               @click="setYear(y)"
             >{{ y }}</button>
-          </div>
-        </div>
-        <div class="panel-section">
-          <div class="panel-buttons">
-            <button class="filter-btn" :class="{ active: dateMode === 'thisMonth' }" @click="setThisMonth">筛选本月</button>
+            <button class="filter-btn" :class="{ active: dateMode === 'thisMonth' }" @click="setThisMonth">本月</button>
           </div>
         </div>
       </aside>
@@ -372,9 +369,9 @@ export default {
 
 .filters::-webkit-scrollbar { display: none; }
 
-.content-2col { display: flex; gap: 16px; }
-.col-left { width: 70%; }
-.col-right { width: 30%; }
+.content-2col { display: flex; gap: 40px; }
+.col-left { width: 70%; margin-right: 10px; }
+.col-right { width: 30%; margin-left: 10px; }
 
 .filters-panel {
   display: flex;
@@ -393,15 +390,14 @@ export default {
   height: 24px;
   padding: 0 10px;
   font-size: 12px;
-  font-family: 'RobotoMono', monospace;
   margin-bottom: 4px;
 }
 .panel-buttons.compact .filter-btn:hover {
-  background: rgba(154, 160, 166, 0.16);
-  color: #d3d7dd;
+  background: transparent;
+  color: #fff;
 }
 .panel-buttons.compact .filter-btn.active {
-  background: rgba(154, 160, 166, 0.28);
+  background: #222D36;
   color: #e1e4e8;
 }
 .date-range { display: flex; flex-direction: column; align-items: flex-start; gap: 8px; }
@@ -474,7 +470,7 @@ export default {
 .record-item {
   display: flex;
   flex-direction: column;
-  background: #16191C;
+  background: #1E2329;
   padding: 15px;
   border: 1px solid var(--c-border-default);
   border-radius: 8px;
@@ -492,15 +488,7 @@ export default {
 .month { color: var(--c-text-muted); font-size: 12px; }
 .day { color: var(--c-primary); font-size: 24px; font-weight: bold; }
 
-.record-title { color: var(--c-text-emphasis); background: transparent; border-radius: 6px; font-size: 20px; font-weight: 500; letter-spacing: 2px; margin: 0; display: inline-block; font-family: 'MotivaSans', sans-serif; }
-.record-title::after {
-  content: "";
-  display: block;
-  height: 1px;
-  background: var(--c-border-default);
-  margin: 8px 0 10px 0;
-  width: 100%;
-}
+.record-title { color: var(--c-text-emphasis); background: transparent; border-radius: 6px; font-size: 20px; font-weight: 500; letter-spacing: 2px; margin: 0 0 10px 0; display: inline-block; font-family: 'MotivaSans', sans-serif; }
 .record-divider { display: none; }
 
 /* 标签容器：水平排列，自动换行，上下间距 */
@@ -522,21 +510,20 @@ export default {
   font-variant-numeric: tabular-nums;
 }
 
-/* 分类标签：胶囊形、毛玻璃效果、内阴影 */
+/* 分类标签：符合当前暗黑科技风主题的胶囊样式 */
 .tag-cat {
-  background-color: #8a9098;
-  color: #ffffff;
-  border: none;
-  border-radius: 8px;
-  padding: 3px 12px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
+  display: inline-block;
+  padding: 2px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  color: var(--c-text-emphasis);
+  background: rgba(102, 192, 244, 0.12); /* 使用带透明度的品牌色提亮背景 */
+  border: 1px solid rgba(102, 192, 244, 0.3); /* 使用半透明品牌色边框增强立体感 */
   text-transform: uppercase;
-  letter-spacing: 1.2px;
-  font-weight: 400;
+  letter-spacing: 1px;
+  white-space: nowrap;
   pointer-events: none; /* 禁止鼠标事件 */
-  font-family: Helvetica, Arial, sans-serif;
+  font-family: 'MotivaSans', sans-serif;
 }
 .record-item.clickable { cursor: pointer; }
 .record-excerpt { font-size: 13px; color: var(--c-text-body-alt); line-height: 1.6; }

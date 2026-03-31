@@ -143,15 +143,51 @@ button {
 }
 
 .back-btn {
+  background: transparent !important;
+  border: 1px solid var(--c-border-default);
+  color: var(--c-text-body-alt);
+  padding: 6px 12px;
+  cursor: pointer;
+  border-radius: 6px;
+  font-size: 14px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.2s ease;
+  text-decoration: none;
+}
+
+.back-icon {
+  width: 16px;
+  height: 16px;
+  display: block;
+}
+
+.back-btn:hover {
   background: var(--c-primary-alpha-10) !important;
   color: var(--c-text-emphasis) !important;
   border-color: var(--c-border-hover) !important;
 }
 
-.back-btn:hover {
-  background: #1A2736 !important;
-  color: var(--c-text-emphasis) !important;
-  border-color: var(--c-border-hover) !important;
+.back-btn:active,
+.back-btn.router-link-active {
+  background: transparent !important;
+  border-color: var(--c-primary) !important;
+  color: var(--c-text-title) !important;
+}
+
+@media (max-width: 768px) {
+  .back-btn {
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    border-radius: 50%;
+    justify-content: center;
+    gap: 0;
+  }
+  .back-btn .back-text {
+    display: none;
+  }
 }
 
 /* 页面通用容器，用于限制宽度 */

@@ -75,12 +75,12 @@
                     <div class="hover-card-text" ref="hoverText">
                       <div class="hover-section-desc" ref="hoverDescSection">
                         <p
-                          v-if="brandInfo && brandInfo.description"
+                          v-if="brandInfo && (brandInfo.quote || brandInfo.description)"
                           class="hover-card-desc"
                           ref="hoverDesc"
                           :class="{ clamp: descClamp > 0 }"
                           :style="descClampStyle"
-                        >{{ brandInfo.description }}</p>
+                        >{{ brandInfo.quote || brandInfo.description }}</p>
                       </div>
                       <div class="hover-section-models" ref="hoverModelsSection">
                         <p
@@ -411,36 +411,6 @@ export default {
 </script>
 
 <style scoped>
-.back-btn {
-  background: transparent;
-  border: 1px solid var(--c-border-strong);
-  color: var(--c-text-body-alt);
-  padding: 6px 12px;
-  cursor: pointer;
-  border-radius: 6px;
-  font-size: 14px;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  margin-left: auto; /* Ensure right alignment in flex container */
-  transition: all 0.2s ease;
-  text-decoration: none;
-}
-.back-icon {
-  width: 16px;
-  height: 16px;
-  display: block;
-}
-.back-btn:hover {
-  color: var(--c-text-emphasis);
-  background: var(--c-primary-alpha-10);
-  border-color: var(--c-border-hover);
-}
-.back-btn:active, .back-btn.router-link-active {
-  background: var(--c-bg-l1);
-  border-color: var(--c-primary);
-  color: var(--c-text-title);
-}
 
 @font-face {
   font-family: 'SourceHanSansSC';
@@ -1061,19 +1031,5 @@ export default {
 .fade-enter, .fade-leave-to { opacity: 0; }
 
 @media (max-width: 768px) {
-    .back-btn {
-      width: 32px;
-      height: 32px;
-      padding: 0;
-      border-radius: 50%;
-      justify-content: center;
-      background: transparent;
-    }
-    .back-btn .back-text { display: none; }
-    .back-btn:hover,
-    .back-btn:active,
-    .back-btn.router-link-active {
-      background: transparent;
-    }
   }
 </style>

@@ -117,36 +117,6 @@ export default {
 </script>
 
 <style scoped>
-.back-btn {
-  background: transparent;
-  border: 1px solid var(--c-border-strong);
-  color: var(--c-text-body-alt);
-  padding: 6px 12px;
-  cursor: pointer;
-  border-radius: 6px;
-  font-size: 14px;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  margin-left: 8px;
-  transition: all 0.2s ease;
-  text-decoration: none;
-}
-.back-icon {
-  width: 16px;
-  height: 16px;
-  display: block;
-}
-.back-btn:hover {
-  color: var(--c-text-emphasis);
-  background: var(--c-primary-alpha-10);
-  border-color: var(--c-border-hover);
-}
-.back-btn:active, .back-btn.router-link-active {
-  background: var(--c-bg-l1);
-  border-color: var(--c-primary);
-  color: var(--c-text-title);
-}
 
 @font-face {
   font-family: 'MotivaSans';
@@ -161,7 +131,7 @@ export default {
   --layout-gutter: 20px;
   --header-bar-height: 52px;
   --side-col-width: 260px;
-  padding: 0 20px;
+  padding: 0;
   margin: 0;
   width: 100%;
   max-width: 1440px;
@@ -183,7 +153,7 @@ export default {
   cursor: pointer;
   align-items: center;
   border-radius: 6px;
-  margin-right: 12px;
+  margin-right: 16px;
 }
 
 .mobile-overlay {
@@ -214,7 +184,7 @@ export default {
   flex-wrap: wrap;
   min-width: 0;
   padding: 2px 8px;
-  margin-left: 20px;
+  margin-left: 8px;
 }
 
 .top-title { 
@@ -230,26 +200,31 @@ export default {
 .font-size-controls {
   display: inline-flex;
   align-items: center;
+  justify-content: space-between;
   background: rgba(255, 255, 255, 0.06);
-  border-radius: 6px;
+  border: 1px solid var(--c-border-default);
+  border-radius: 999px;
   padding: 2px;
+  gap: 0;
   margin-left: auto;
   margin-right: 12px;
-  height: 26px;
+  height: 30px;
+  width: 132px;
   box-sizing: border-box;
 }
 .font-size-btn {
   position: relative;
-  border: none;
+  border: 1px solid transparent;
   background: transparent;
   color: var(--c-text-body-alt);
-  border-radius: 4px;
-  padding: 4px 10px;
+  border-radius: 999px;
+  padding: 0 6px;
   font-size: 12px;
   line-height: 1;
   cursor: pointer;
-  min-width: 36px;
-  height: 22px;
+  flex: 1 1 0;
+  min-width: 0;
+  height: 24px;
   transition: all 0.2s ease;
   z-index: 1;
   display: flex;
@@ -257,31 +232,20 @@ export default {
   justify-content: center;
 }
 .font-size-btn::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 25%;
-  bottom: 25%;
-  width: 1px;
-  background-color: rgba(255, 255, 255, 0.1);
-  transition: opacity 0.2s;
+  display: none;
 }
 .font-size-btn:first-child::before {
   display: none;
-}
-.font-size-btn.active::before,
-.font-size-btn.active + .font-size-btn::before {
-  opacity: 0;
 }
 .font-size-btn:hover {
   color: var(--c-text-emphasis);
 }
 .font-size-btn.active {
-  background: rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.18);
   color: var(--c-text-title);
   font-weight: 500;
-  height: 22px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3), 0 1px 2px rgba(0, 0, 0, 0.2), inset 0 1px 1px rgba(255, 255, 255, 0.1);
+  border-color: var(--c-border-hover);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.28), inset 0 1px 1px rgba(255, 255, 255, 0.08);
 }
 .mobile-controls {
   display: none;
@@ -370,7 +334,7 @@ export default {
 /* 内容主体 */
 .detail-body { 
   background: #191919;
-  padding: 16px var(--layout-gutter) var(--layout-gutter);
+  padding: 8px var(--layout-gutter) var(--layout-gutter);
   margin-right: 20px;
   border: none; 
   border-radius: 6px; 
@@ -423,20 +387,40 @@ export default {
     position: sticky;
     top: 80px; /* 避开导航栏高度 */
     padding: 8px 12px;
-    height: 60px;
+    height: 72px;
     z-index: 100;
   }
   
   /* Show toggle button */
   .toc-toggle-btn {
     display: flex;
-    height: 100%;
-    aspect-ratio: 1 / 1;
+    width: 44px;
+    height: 44px;
     padding: 0;
-    border-radius: 8px;
+    border-radius: 50%;
     justify-content: center;
     align-items: center;
-    margin-right: 16px;
+    margin-right: 12px;
+    flex-shrink: 0;
+  }
+
+  .back-btn {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    padding: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 12px;
+    flex-shrink: 0;
+  }
+  .back-btn .back-text {
+    display: none;
+  }
+  .back-btn .back-icon {
+    width: 18px;
+    height: 18px;
   }
   
   /* Hide right sidebar and placeholder */
@@ -453,7 +437,9 @@ export default {
     position: fixed;
     top: 0;
     left: 0;
-    bottom: 0;
+    bottom: auto;
+    height: 100dvh;
+    min-height: 100vh;
     width: min(82vw, 360px);
     max-width: 82vw;
     background: var(--c-bg-l1);
@@ -491,7 +477,7 @@ export default {
   .sidebar-title { font-size: 19px; }
   
   .detail-body { 
-    padding: 10px; 
+    padding: 8px 10px 10px; 
     border-radius: 0; 
     margin: 0;
   }
@@ -501,24 +487,6 @@ export default {
     padding: 0;
   }
   
-  /* Back button text hidden on mobile */
-  .back-text { display: none; }
-  .back-btn {
-    height: 100%;
-    aspect-ratio: 1 / 1;
-    padding: 0;
-    border-radius: 50%;
-    justify-content: center;
-    align-items: center;
-    gap: 0;
-    background: transparent;
-  }
-  .back-btn:hover,
-  .back-btn:active,
-  .back-btn.router-link-active {
-    background: transparent;
-  }
-
   .header-info { gap: 0; flex-direction: column; align-items: flex-start; margin-left: 0; }
   .top-title { font-size: 20px; }
   .desktop-controls {
@@ -529,15 +497,16 @@ export default {
   }
   .font-size-controls {
     margin-left: auto;
-    margin-right: 6px;
-    height: 24px;
+    margin-right: 10px;
+    height: 26px;
     padding: 1px;
-    border-radius: 6px;
+    border-radius: 999px;
+    width: 66px;
   }
   .font-size-btn {
-    width: 32px;
+    width: auto;
     height: 22px;
-    border-radius: 4px;
+    border-radius: 999px;
     padding: 0;
     min-width: 0;
   }

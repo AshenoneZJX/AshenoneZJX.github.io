@@ -13,24 +13,116 @@
     <div class="divider span-full"></div>
 
     <!-- 简介 -->
-    <blockquote class="wiki-box span-full" v-if="brandInfo && brandInfo.description">
-      <p class="summary">{{ brandInfo.description }}</p>
+    <blockquote class="wiki-box span-full" v-if="brandInfo && brandInfo.quote">
+      <p class="summary">{{ brandInfo.quote }}</p>
     </blockquote>
+    <div class="introduction-box span-full" v-if="brandInfo && brandInfo.introduction">
+      <p class="history-text">{{ brandInfo.introduction }}</p>
+    </div>
 
     <!-- 历史 -->
     <section class="brand-section span-full" v-if="brandInfo && brandInfo.history">
       <h3 class="section-title">
         <span class="icon">📜</span> 品牌历史
       </h3>
+      
+      <!-- 经典车型展示模块 -->
+      <div class="classic-models-module" v-if="(brandModels && brandModels.length) || (brandInfo && brandInfo.classic_models && brandInfo.classic_models.list)">
+        <h4 class="sub-section-title">
+          经典车型 
+          <span class="sub-title-desc" v-if="brandInfo && brandInfo.classic_models && brandInfo.classic_models.description">
+            ({{ brandInfo.classic_models.description }})
+          </span>
+        </h4>
+        <div class="classic-cards-wrapper">
+          <button class="scroll-btn left" @click="scrollCards('left')" v-show="showScrollButtons">‹</button>
+          <div class="classic-cards-scroll" ref="cardsScroll" @scroll="checkScroll">
+            
+            <!-- 渲染从brandDetails.json中获取的历史经典车型 -->
+            <template v-if="brandInfo && brandInfo.classic_models && brandInfo.classic_models.list">
+              <div 
+                class="classic-card historical-card" 
+                v-for="(car, idx) in brandInfo.classic_models.list" 
+                :key="'historical-'+idx"
+              >
+                <!-- 历史车型可能没有图片，使用渐变背景占位 -->
+                <div class="classic-img placeholder-bg">
+                  <span class="placeholder-text">{{ car.model_name }}</span>
+                </div>
+                <div class="classic-overlay">
+                   <div class="classic-overlay-name">{{ getDisplayName(car) }}</div>
+                   <div class="classic-overlay-intro">
+                     <p class="intro-line"><strong>年份:</strong> {{ car.production_years }}</p>
+                     <p class="intro-line" :title="car.historical_significance"><strong>意义:</strong> {{ car.historical_significance }}</p>
+                   </div>
+                 </div>
+                 <div class="classic-name-bottom">{{ getDisplayName(car) }}</div>
+                 <div class="status-badge" v-if="car.status">{{ car.status }}</div>
+              </div>
+            </template>
+
+            <!-- 渲染从cars.json中获取的在售代表车型 -->
+            <div 
+              class="classic-card" 
+              v-for="car in filteredBrandModels" 
+              :key="car.id"
+              @click="$router.push({ name: 'CarDetail', params: { id: car.id } })"
+            >
+              <img class="classic-img" :src="car.images && car.images[0] ? car.images[0] : ''" :alt="car.title" />
+              <div class="classic-overlay">
+                <div class="classic-overlay-name">{{ modelNameOf(car) }}</div>
+                <div class="classic-overlay-intro">{{ car.intro || '暂无介绍' }}</div>
+              </div>
+              <div class="classic-name-bottom">{{ modelNameOf(car) }}</div>
+            </div>
+
+          </div>
+          <button class="scroll-btn right" @click="scrollCards('right')" v-show="showScrollButtons">›</button>
+        </div>
+      </div>
+
       <p class="history-text">{{ brandInfo.history }}</p>
+
+      <!-- 品牌架构图 (Mermaid) -->
+      <div class="brand-architecture-module" v-if="brandInfo && brandInfo.sub_brands && brandInfo.sub_brands.list">
+        <h4 class="sub-section-title">
+          <span class="icon">🏢</span> {{ brandInfo.sub_brands.description || '品牌架构' }}
+        </h4>
+        <div class="mermaid-container">
+          <div class="mermaid" ref="mermaidDiagram"></div>
+        </div>
+      </div>
     </section>
 
-    <!-- 左侧：代表车型 (30%) -->
-    <section class="brand-section col-left" v-if="brandModels.length">
+    <!-- 左侧：在售车型 (30%) -->
+    <section class="brand-section col-left" v-if="currentLineupCategories.length || representativeModelNames.length">
       <h3 class="section-title">
-        <span class="icon">🚗</span> 代表车型
+        <span class="icon">🚗</span> 在售车型
       </h3>
-      <ul class="models-list">
+      
+      <!-- 如果有详细的分类数据 -->
+      <template v-if="currentLineupCategories.length">
+        <div v-for="cat in currentLineupCategories" :key="cat.key" class="lineup-category">
+          <h4 class="lineup-cat-title">{{ cat.name }} <span class="lineup-cat-en">{{ cat.nameEn }}</span></h4>
+          <ul class="models-list">
+            <li
+              v-for="m in cat.models"
+              :key="m.model_name"
+              class="model-item"
+            >
+              <router-link
+                v-if="carIdOfModelName(m.model_name_zh || m.model_name) !== null"
+                class="model-link"
+                :to="{ name: 'CarDetail', params: { id: carIdOfModelName(m.model_name_zh || m.model_name) } }"
+              >{{ m.model_name_zh || m.model_name }}</router-link>
+              <span v-else class="model-name">{{ m.model_name_zh || m.model_name }}</span>
+            </li>
+          </ul>
+        </div>
+      </template>
+
+      <!-- 降级方案：如果没有分类数据，使用原来的列表 -->
+      <ul class="models-list fallback-list" v-else>
         <li
           v-for="m in representativeModelNames"
           :key="m"
@@ -66,6 +158,7 @@
 <script>
 import cars from '@/data/car/cars.json'
 import brandDetails from '@/data/car/brandDetails.json'
+import mermaid from 'mermaid'
 
 function getBrand (title) {
   if (!title) return '未知'
@@ -81,6 +174,29 @@ export default {
     },
     brandModels () {
       return cars.filter(c => getBrand(c.title) === this.brandName)
+    },
+    currentLineupCategories () {
+      if (this.brandInfo && this.brandInfo.current_lineup && this.brandInfo.current_lineup.categories) {
+        const cats = this.brandInfo.current_lineup.categories
+        return Object.keys(cats).map(key => ({
+          key,
+          name: cats[key].category_name,
+          nameEn: cats[key].category_name_en,
+          models: cats[key].models || []
+        }))
+      }
+      return []
+    },
+    filteredBrandModels () {
+      // 过滤掉已经在 classic_models 列表中展示过的车型
+      if (!this.brandInfo || !this.brandInfo.classic_models || !this.brandInfo.classic_models.list) {
+        return this.brandModels
+      }
+      const classicNames = this.brandInfo.classic_models.list.map(c => c.model_name_zh || c.model_name)
+      return this.brandModels.filter(car => {
+        const name = this.modelNameOf(car)
+        return !classicNames.includes(name)
+      })
     },
     brandInfo () {
       return brandDetails[this.brandName] || null
@@ -101,10 +217,149 @@ export default {
   },
   data () {
     return {
-      brandLogoMap: {}
+      brandLogoMap: {},
+      showScrollButtons: false
     }
   },
+  mounted () {
+    this.checkScroll()
+    window.addEventListener('resize', this.checkScroll)
+    this.renderMermaid()
+  },
+  updated () {
+    this.renderMermaid()
+  },
+  beforeDestroy () {
+    window.removeEventListener('resize', this.checkScroll)
+  },
   methods: {
+    renderMermaid () {
+      this.$nextTick(() => {
+        if (this.$refs.mermaidDiagram) {
+          try {
+            // 确保每次重新渲染前清理旧的内容和属性
+            this.$refs.mermaidDiagram.removeAttribute('data-processed')
+            this.$refs.mermaidDiagram.innerHTML = this.generateMermaidCode(this.brandInfo)
+            
+            mermaid.initialize({
+              startOnLoad: false,
+              theme: 'dark',
+              themeVariables: {
+                primaryColor: '#1F2631',
+                primaryTextColor: '#E2E8F0',
+                primaryBorderColor: '#3A4A6B',
+                lineColor: '#4A5568',
+                secondaryColor: '#151A23',
+                tertiaryColor: '#1A202C',
+                fontSize: '12px',
+                fontFamily: "'AlibabaPuHuiTi', 'Motiva Sans', sans-serif"
+              },
+              flowchart: {
+                curve: 'basis',
+                padding: 10,
+                nodeSpacing: 15,
+                rankSpacing: 35,
+                htmlLabels: true // 启用 HTML 标签渲染
+              }
+            })
+            mermaid.init(undefined, this.$refs.mermaidDiagram)
+          } catch (e) {
+            console.error('Mermaid render error:', e)
+          }
+        }
+      })
+    },
+    generateMermaidCode (brandInfo) {
+      if (!brandInfo || !brandInfo.sub_brands || !brandInfo.sub_brands.list) return ''
+      
+      const parentBrand = this.brandName
+      // 强制设置为纵向绘制：Top to Down
+      let code = 'graph TD\n'
+      // Create an invisible root node to act as the true parent.
+      code += `  Root["${parentBrand} 品牌架构"]\n`
+      
+      brandInfo.sub_brands.list.forEach((subBrand, index) => {
+        const brandId = `SubBrand${index}`
+        // Connect invisible root to each brand (Honda, Acura, etc)
+        code += `  Root --> ${brandId}["${subBrand.brand_name_zh} (${subBrand.brand_name})<br/>${subBrand.positioning}"]\n`
+        
+        // Add performance division if exists
+        if (subBrand.performance_division) {
+          const perfId = `${brandId}_Perf`
+          code += `  ${brandId} -.-> ${perfId}["${subBrand.performance_division.name}<br/>${subBrand.performance_division.description}"]\n`
+          
+          if (subBrand.performance_division.models && subBrand.performance_division.models.length > 0) {
+            subBrand.performance_division.models.forEach((model, mIndex) => {
+              const modelId = `${perfId}_Model${mIndex}`
+              code += `  ${perfId} --- ${modelId}("${model}")\n`
+              code += `  class ${modelId} model;\n`
+            })
+          }
+        }
+        
+        // Add current models
+        if (subBrand.current_models && subBrand.current_models.length > 0) {
+          const modelsGroupId = `${brandId}_Models`
+          code += `  ${brandId} --> ${modelsGroupId}["在售车型"]\n`
+          
+          subBrand.current_models.forEach((model, mIndex) => {
+            const modelId = `${modelsGroupId}_${mIndex}`
+            code += `  ${modelsGroupId} --- ${modelId}("${model}")\n`
+            code += `  class ${modelId} model;\n`
+          })
+        }
+      })
+      
+      // Styling
+      // 全新美观深色科技配色，根节点增加宽度（使用不可见的空格撑开或让其自然包裹）并调整为更暗的颜色
+      code += `  classDef rootNode fill:#1E293B,stroke:#2D3748,stroke-width:2px,color:#E2E8F0,font-weight:bold,font-size:15px,rx:6,ry:6;\n`
+      code += `  classDef subBrand fill:#1F2631,stroke:#3A4A6B,stroke-width:2px,color:#E2E8F0,font-weight:bold,font-size:13px,rx:4,ry:4;\n`
+      code += `  classDef perf fill:#2D1A20,stroke:#E53935,stroke-width:1px,stroke-dasharray: 4 4,color:#FFB4B4,font-size:12px,rx:4,ry:4;\n`
+      code += `  classDef group fill:#151A23,stroke:#2D3748,stroke-width:1px,color:#A0AEC0,font-size:12px,rx:4,ry:4;\n`
+      code += `  classDef model fill:#1A202C,stroke:#4A5568,stroke-width:1px,color:#E2E8F0,font-size:11px,rx:10,ry:10;\n`
+      
+      code += `  class Root rootNode;\n`
+      
+      brandInfo.sub_brands.list.forEach((subBrand, index) => {
+        const brandId = `SubBrand${index}`
+        code += `  class ${brandId} subBrand;\n`
+        if (subBrand.performance_division) {
+          code += `  class ${brandId}_Perf perf;\n`
+        }
+        if (subBrand.current_models && subBrand.current_models.length > 0) {
+          code += `  class ${brandId}_Models group;\n`
+        }
+      })
+      
+      return code
+    },
+    checkScroll () {
+      this.$nextTick(() => {
+        const el = this.$refs.cardsScroll
+        if (el) {
+          this.showScrollButtons = el.scrollWidth > el.clientWidth
+        }
+      })
+    },
+    scrollCards (direction) {
+      const el = this.$refs.cardsScroll
+      if (el) {
+        const cardWidth = 240 // 更新为新的卡片宽度
+        const gap = 20 // 间距
+        const scrollAmount = (cardWidth + gap) * 2 // 每次滑动两张卡片
+        
+        el.scrollBy({
+          left: direction === 'left' ? -scrollAmount : scrollAmount,
+          behavior: 'smooth'
+        })
+      }
+    },
+    getDisplayName (car) {
+      if (car.model_name_zh && car.model_name && car.model_name_zh !== car.model_name) {
+        return `${car.model_name_zh} / ${car.model_name}`
+      }
+      return car.model_name_zh || car.model_name
+    },
     modelNameOf (car) {
       const t = car && car.title ? String(car.title) : ''
       const b = getBrand(t)
@@ -130,36 +385,6 @@ export default {
 </script>
 
 <style scoped>
-.back-btn {
-  background: transparent;
-  border: 1px solid var(--c-border-strong);
-  color: var(--c-text-body-alt);
-  padding: 6px 12px;
-  cursor: pointer;
-  border-radius: 6px;
-  font-size: 14px;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  margin-left: auto; /* Ensure right alignment in flex container */
-  transition: all 0.2s ease;
-  text-decoration: none;
-}
-.back-icon {
-  width: 16px;
-  height: 16px;
-  display: block;
-}
-.back-btn:hover {
-  color: var(--c-text-emphasis);
-  background: var(--c-primary-alpha-10);
-  border-color: var(--c-border-hover);
-}
-.back-btn:active, .back-btn.router-link-active {
-  background: var(--c-bg-l1);
-  border-color: var(--c-primary);
-  color: var(--c-text-title);
-}
 
 @font-face {
   font-family: 'Motiva Sans';
@@ -191,7 +416,7 @@ h2, h3, h4 {
   padding-right: 20px;
   /* Layout: Grid for 2-column support */
   display: grid;
-  grid-template-columns: 3fr 7fr;
+  grid-template-columns: 1fr 1fr; /* 修改为各占一半宽度 (50% 50%) */
   column-gap: 40px;
   align-items: start;
 }
@@ -313,17 +538,11 @@ h2, h3, h4 {
 }
 
 .tech-card {
-  background: var(--c-bg-l1);
+  background: #16191C;
   border-radius: 8px;
-  padding: 10px;
+  padding: 8px;
   border: 1px solid var(--c-border-default);
   box-shadow: 0 4px 12px var(--c-shadow-light);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-.tech-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 16px var(--c-shadow-medium);
-  border-color: var(--c-border-hover);
 }
 
 .tech-header {
@@ -344,7 +563,7 @@ h2, h3, h4 {
   left: 0;
   width: 100%;
   height: 8px;
-  background: var(--c-border-hover);
+  background: #486A9D;
   z-index: -1;
   border-radius: 2px;
 }
@@ -362,12 +581,37 @@ h2, h3, h4 {
 }
 
 /* 仅显示车型名称的列表样式 */
+.lineup-category {
+  margin-bottom: 24px;
+}
+.lineup-cat-title {
+  color: var(--c-text-title);
+  font-size: 16px; /* 加大一号 */
+  font-weight: 500;
+  margin: 0 0 8px 0; /* 保持不变 */
+  padding-bottom: 4px; /* 保持不变 */
+  border-bottom: 1px dashed rgba(255, 255, 255, 0.2);
+  font-family: 'AlibabaPuHuiTi', 'Motiva Sans', sans-serif;
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+}
+.lineup-cat-en {
+  font-size: 13px; /* 加大一号 */
+  color: var(--c-text-muted);
+  font-weight: 400;
+  font-family: 'Motiva Sans', sans-serif;
+}
+
 .models-list {
   list-style: disc;
   margin: 0;
-  padding-left: 22px;
+  padding-left: 20px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px 12px;
 }
-.model-item { line-height: 1.8; margin: 4px 0; font-size: 15px; }
+.model-item { line-height: 1.5; margin: 2px 0; font-size: 15px; } /* 加大字体一号 */
 .model-link {
   color: var(--c-primary);
   text-decoration: none;
@@ -410,7 +654,7 @@ h2, h3, h4 {
   min-width: 0;
   
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  grid-template-columns: repeat(2, 1fr); /* 因为宽度变为一半，三列可能太挤，改为双列布局 */
   gap: 20px;
 }
 
@@ -419,12 +663,289 @@ h2, h3, h4 {
   margin-bottom: 0;
 }
 
+.sub-section-title {
+  color: var(--c-text-title);
+  font-size: 18px;
+  font-weight: 500;
+  margin-bottom: 6px;
+  font-family: 'AlibabaPuHuiTi', 'Motiva Sans', sans-serif;
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.sub-title-desc {
+  font-size: 13px;
+  color: var(--c-text-muted);
+  font-weight: 400;
+  font-family: 'Motiva Sans', sans-serif;
+}
+
+/* 品牌架构模块 */
+.brand-architecture-module {
+  margin-top: 30px;
+  margin-bottom: 20px;
+}
+
+.mermaid-container {
+  background: var(--c-bg-l1);
+  border: 1px solid var(--c-border-default);
+  border-radius: 12px;
+  padding: 10px;
+  box-shadow: 0 4px 12px var(--c-shadow-light);
+  overflow-x: auto;
+  display: flex;
+  justify-content: center;
+}
+
+.mermaid {
+  background: transparent;
+  width: 100%;
+  /* 允许SVG自动缩放，不再限制最小宽度 */
+  display: flex;
+  justify-content: center;
+}
+.mermaid :deep(svg) {
+  max-width: 100%;
+  height: auto;
+}
+
+/* 强制覆盖 SVG 内部节点的间距，适应文字尺寸并设置极小内边距 */
+.mermaid :deep(.label) {
+  padding: 4px 8px !important;
+  margin: 0 !important;
+  line-height: 1.2 !important;
+  white-space: nowrap !important;
+}
+
+.mermaid :deep(.node foreignObject) {
+  overflow: visible;
+  text-align: center;
+}
+
+/* 经典车型模块 */
+.classic-models-module {
+  margin: 8px 0;
+  background: #1F2631;
+  padding: 8px 16px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px var(--c-shadow-light);
+}
+
+.classic-cards-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.scroll-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--c-bg-l2);
+  border: 1px solid #666; /* 默认灰色边框 */
+  color: var(--c-text-title);
+  font-size: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  transition: all 0.2s ease;
+  line-height: 1;
+  padding-bottom: 4px; /* Adjust optical center of arrow character */
+}
+
+.scroll-btn:hover {
+  background: #888; /* hover亮灰色填充 */
+  color: #fff;
+  border-color: #888;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.2);
+}
+
+.scroll-btn.left {
+  left: -20px;
+}
+
+.scroll-btn.right {
+  right: -20px;
+}
+
+.classic-cards-scroll {
+  display: flex;
+  gap: 20px;
+  overflow-x: auto;
+  padding-bottom: 4px; /* Reduced padding */
+  scrollbar-width: none; /* Hide scrollbar for a cleaner look with buttons */
+  -ms-overflow-style: none;
+  scroll-behavior: smooth;
+  width: 100%;
+}
+
+.classic-cards-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+.classic-card {
+  flex: 0 0 auto;
+  width: 240px; /* Reduced width */
+  height: 140px; /* Reduced height */
+  border-radius: 8px;
+  overflow: hidden;
+  position: relative;
+  cursor: pointer;
+  box-shadow: 0 4px 12px var(--c-shadow-light);
+  border: 1px solid var(--c-border-default);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  background: var(--c-bg-l1);
+}
+
+.classic-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px var(--c-shadow-medium);
+  border-color: var(--c-border-hover);
+}
+
+.classic-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.placeholder-bg {
+  background: linear-gradient(135deg, var(--c-primary-alpha-10) 0%, var(--c-bg-l2) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.placeholder-text {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--c-text-muted);
+  opacity: 0.5;
+  font-family: 'Motiva Sans', sans-serif;
+  letter-spacing: 2px;
+}
+
+.classic-card:hover .classic-img {
+  transform: scale(1.05);
+}
+
+.classic-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  padding: 16px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  z-index: 2;
+  overflow-y: auto; /* 允许在hover状态下垂直滚动 */
+  scrollbar-width: thin;
+}
+
+.classic-overlay::-webkit-scrollbar {
+  width: 4px;
+}
+.classic-overlay::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 2px;
+}
+
+.classic-card:hover .classic-overlay {
+  opacity: 1;
+}
+
+.classic-overlay-name {
+  color: #fff;
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  font-family: 'AlibabaPuHuiTi', 'Motiva Sans', sans-serif;
+  flex-shrink: 0; /* 确保标题不会被压缩 */
+}
+
+.classic-overlay-intro {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 13px;
+  line-height: 1.5;
+  /* 移除溢出隐藏，允许完整显示 */
+}
+
+.intro-line {
+  margin: 0 0 4px 0;
+  /* 移除行数限制，允许换行显示完整信息 */
+}
+.intro-line:last-child {
+  margin-bottom: 0;
+}
+.intro-line strong {
+  color: var(--c-primary);
+  font-weight: 500;
+  margin-right: 4px;
+}
+
+.classic-name-bottom {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 12px 16px;
+  background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 100%);
+  color: #fff;
+  font-size: 15px;
+  font-weight: 500;
+  transition: opacity 0.3s ease;
+  z-index: 1;
+}
+
+.classic-card:hover .classic-name-bottom {
+  opacity: 0;
+}
+
+.status-badge {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: rgba(0, 0, 0, 0.6);
+  color: #fff;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 500;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  z-index: 1; /* 降低层级，使其在hover（z-index: 2）的下层 */
+  border: 1px solid rgba(255,255,255,0.1);
+}
+
 @media (max-width: 768px) {
   .page-brand-detail {
     grid-template-columns: 1fr;
   }
   .col-left, .col-right {
     grid-column: 1;
+  }
+  
+  .col-right {
+    grid-template-columns: 1fr; /* 移动端核心技术恢复单列 */
+  }
+  
+  .models-list {
+    grid-template-columns: 1fr; /* 移动端代表车型恢复单列 */
   }
   
   .wiki-box {
@@ -441,7 +962,6 @@ h2, h3, h4 {
     right: 5px;
   }
   
-  .back-text { display: none; }
 }
 
 

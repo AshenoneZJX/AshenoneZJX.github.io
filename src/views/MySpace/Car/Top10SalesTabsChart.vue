@@ -1,10 +1,14 @@
 <template>
   <div class="top10-wrap">
-    <div class="tab-bar panel-head">
-      <button class="tab-btn" :class="{ active: activeTab === 'global' }" type="button" @click="setTab('global')">全球</button>
-      <button class="tab-btn" :class="{ active: activeTab === 'china' }" type="button" @click="setTab('china')">中国</button>
+    <div class="chart-block chart-block-head">
+      <div class="charts-toolbar">
+        <div class="toolbar-controls">
+          <button class="tab-btn" :class="{ active: activeTab === 'global' }" type="button" @click="setTab('global')">全球</button>
+          <button class="tab-btn" :class="{ active: activeTab === 'china' }" type="button" @click="setTab('china')">中国</button>
+        </div>
+      </div>
     </div>
-    <div class="chart-container panel-body">
+    <div class="chart-container chart-container-main">
       <div ref="chart" class="chart"></div>
     </div>
   </div>
@@ -165,27 +169,28 @@ export default {
   flex: 1;
   min-width: 0;
 }
-.tab-bar {
+.chart-block {
+  width: 100%;
   background: var(--c-bg-l2);
-  padding: 0 16px;
-  margin-bottom: 0;
-  min-height: 48px;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  gap: 12px;
-  border-bottom: 1px solid var(--c-border-default);
-  flex-wrap: wrap;
-  box-sizing: border-box;
-}
-.panel-head {
   border: 1px solid var(--c-border-default);
-  border-bottom: none;
-  border-radius: 10px 10px 0 0;
+  border-radius: 10px;
+  padding: 12px;
+  box-sizing: border-box;
   box-shadow: 0 4px 15px var(--c-shadow-medium);
 }
-.panel-body {
-  flex: 1;
+.chart-block-head {
+  margin-bottom: 0;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  border-bottom: none;
+  padding: 0;
+}
+.chart-container {
+  width: 100%;
+  box-sizing: border-box;
+  margin-bottom: 22px;
+}
+.chart-container-main {
   background: var(--c-bg-l2);
   border: 1px solid var(--c-border-default);
   border-top: none;
@@ -193,8 +198,25 @@ export default {
   padding-bottom: 12px;
   margin-top: 0;
   box-shadow: 0 4px 15px var(--c-shadow-medium);
+  flex: 1;
   position: relative;
   z-index: 0;
+}
+.charts-toolbar {
+  margin-bottom: 0;
+  position: relative;
+  border-bottom: 1px solid var(--c-border-default);
+  padding: 0 16px;
+  min-height: 48px;
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+}
+.toolbar-controls {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  width: 100%;
 }
 .tab-btn {
   background: transparent;

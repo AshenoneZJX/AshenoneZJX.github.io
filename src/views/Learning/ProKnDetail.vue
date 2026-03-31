@@ -98,36 +98,6 @@ export default {
 </script>
 
 <style scoped>
-.back-btn {
-  background: transparent;
-  border: 1px solid var(--c-border-strong);
-  color: var(--c-text-body-alt);
-  padding: 6px 12px;
-  cursor: pointer;
-  border-radius: 6px;
-  font-size: 14px;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  margin-left: auto; /* Ensure right alignment in flex container */
-  transition: all 0.2s ease;
-  text-decoration: none;
-}
-.back-icon {
-  width: 16px;
-  height: 16px;
-  display: block;
-}
-.back-btn:hover {
-  color: var(--c-text-emphasis);
-  background: var(--c-primary-alpha-10);
-  border-color: var(--c-border-hover);
-}
-.back-btn:active, .back-btn.router-link-active {
-  background: var(--c-bg-l1);
-  border-color: var(--c-primary);
-  color: var(--c-text-title);
-}
 
 @font-face {
   font-family: 'MotivaSans';
@@ -313,8 +283,6 @@ export default {
   .center-content {
     border-left: none;
   }
-  .back-text { display: none; }
-  
   .top-title { font-size: 16px; }
 }
 

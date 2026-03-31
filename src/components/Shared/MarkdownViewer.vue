@@ -291,6 +291,14 @@ export default {
   font-display: swap;
 }
 
+@font-face {
+  font-family: 'SarasaMonoSCNerd';
+  src: url('../../assets/fonts/sarasa-mono-sc-nerd-regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
 .content { 
   --md-body-font-size: 17px;
   --md-body-line-height: 1.65;
@@ -515,6 +523,7 @@ export default {
   margin: 14px 0; 
   font-size: 14px; 
   min-width: 520px;
+  font-family: 'SarasaMonoSCNerd', 'Inter', 'AlibabaPuHuiTi', monospace;
 }
 
 .content :deep(th), .content :deep(td) { 

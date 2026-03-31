@@ -30,10 +30,12 @@
           <div class="header-info">
             <div class="top-title" v-if="heading">{{ heading }}</div>
             <div class="meta">
-              <span class="month">{{ monthAbbr(record.date) }}</span>
-              <span class="day">{{ dayOfMonth(record.date) }}</span>
-              <span class="year">{{ yearOf(record.date) }}</span>
-              <span class="cat">{{ record.category }}</span>
+              <span class="date-group">
+                <span class="month">{{ monthAbbr(record.date) }}</span>
+                <span class="day">{{ dayOfMonth(record.date) }}</span>
+                <span class="year">{{ yearOf(record.date) }}</span>
+              </span>
+              <span class="tag tag-cat">{{ record.category }}</span>
             </div>
           </div>
           <div class="font-size-controls desktop-controls" role="group" aria-label="字号大小">
@@ -136,36 +138,6 @@ export default {
 </script>
 
 <style scoped>
-.back-btn {
-  background: transparent;
-  border: 1px solid var(--c-border-strong);
-  color: var(--c-text-body-alt);
-  padding: 6px 12px;
-  cursor: pointer;
-  border-radius: 6px;
-  font-size: 14px;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  margin-left: 8px;
-  transition: all 0.2s ease;
-  text-decoration: none;
-}
-.back-icon {
-  width: 16px;
-  height: 16px;
-  display: block;
-}
-.back-btn:hover {
-  color: var(--c-text-emphasis);
-  background: var(--c-primary-alpha-10);
-  border-color: var(--c-border-hover);
-}
-.back-btn:active, .back-btn.router-link-active {
-  background: var(--c-bg-l1);
-  border-color: var(--c-primary);
-  color: var(--c-text-title);
-}
 
 @font-face {
   font-family: 'SourceHanSansSC';
@@ -197,7 +169,7 @@ export default {
 }
 
 .page-record-detail { 
-  padding: 0 20px;
+  padding: 0;
   margin: 0 auto;
   width: 100%;
   max-width: 1440px;
@@ -214,7 +186,7 @@ export default {
   cursor: pointer;
   align-items: center;
   border-radius: 6px;
-  margin-right: 12px;
+  margin-right: 16px;
 }
 
 .mobile-overlay {
@@ -249,13 +221,13 @@ export default {
 .header-info {
   display: flex;
   flex-direction: row;
-  align-items: baseline;
+  align-items: center;
   gap: 12px;
   flex-wrap: wrap;
   flex: 1;
   min-width: 0;
   padding: 2px 8px;
-  margin-left: 20px;
+  margin-left: 8px;
 }
 
 .title-row { display: flex; align-items: flex-start; margin: 0 0 10px; }
@@ -263,38 +235,62 @@ export default {
 .top-title { color: #d1d5da; font-size: 28px; line-height: 1.35; margin: 0; font-weight: 700; letter-spacing: 1.5px; text-shadow: 0 2px 4px var(--c-shadow-heavy); font-family: 'SourceHanSansSC', sans-serif; }
 .meta {
   display: flex;
-  align-items: flex-end;
+  align-items: center;
   gap: 12px;
   margin-bottom: 0;
+}
+.date-group {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
 }
 .month { color: var(--c-text-muted); font-size: 11px; }
 .day { color: #9aa0a6; font-size: 20px; font-weight: bold; font-family: 'Georgia', 'RobotoMono', Menlo, Monaco, Consolas, "Courier New", monospace; line-height: 1; }
 .year { color: var(--c-text-muted); font-size: 11px; }
-.cat { color: #ffffff; font-size: 11px; display: inline-flex; align-items: center; justify-content: center; padding: 3px 12px; border: none; border-radius: 8px; background-color: #8a9098; font-family: Helvetica, Arial, sans-serif; text-transform: uppercase; letter-spacing: 1.2px; font-weight: 400; }
+.tag { display: inline-flex; align-items: center; padding: 4px 10px; border-radius: 2px; font-size: 12px; border: 1px solid var(--c-border-hover); color: var(--c-text-body-alt); background: var(--c-bg-input); }
+.tag-cat {
+  display: inline-block;
+  padding: 2px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  color: var(--c-text-emphasis);
+  background: rgba(102, 192, 244, 0.12);
+  border: 1px solid rgba(102, 192, 244, 0.3);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  white-space: nowrap;
+  pointer-events: none;
+  font-family: 'MotivaSans', sans-serif;
+}
 .content-divider { height: 1px; background: var(--c-border-default); margin: 8px 0 14px; }
 .font-size-controls {
   display: inline-flex;
   align-items: center;
+  justify-content: space-between;
   background: rgba(255, 255, 255, 0.06);
-  border-radius: 6px;
+  border: 1px solid var(--c-border-default);
+  border-radius: 999px;
   padding: 2px;
+  gap: 0;
   margin-left: auto;
   margin-right: 12px;
-  height: 26px;
+  height: 30px;
+  width: 132px;
   box-sizing: border-box;
 }
 .font-size-btn {
   position: relative;
-  border: none;
+  border: 1px solid transparent;
   background: transparent;
   color: var(--c-text-body-alt);
-  border-radius: 4px;
-  padding: 4px 10px;
+  border-radius: 999px;
+  padding: 0 6px;
   font-size: 12px;
   line-height: 1;
   cursor: pointer;
-  min-width: 36px;
-  height: 22px;
+  flex: 1 1 0;
+  min-width: 0;
+  height: 24px;
   transition: all 0.2s ease;
   z-index: 1;
   display: flex;
@@ -302,31 +298,20 @@ export default {
   justify-content: center;
 }
 .font-size-btn::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 25%;
-  bottom: 25%;
-  width: 1px;
-  background-color: rgba(255, 255, 255, 0.1);
-  transition: opacity 0.2s;
+  display: none;
 }
 .font-size-btn:first-child::before {
   display: none;
-}
-.font-size-btn.active::before,
-.font-size-btn.active + .font-size-btn::before {
-  opacity: 0;
 }
 .font-size-btn:hover {
   color: var(--c-text-emphasis);
 }
 .font-size-btn.active {
-  background: rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.18);
   color: var(--c-text-title);
   font-weight: 500;
-  height: 22px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3), 0 1px 2px rgba(0, 0, 0, 0.2), inset 0 1px 1px rgba(255, 255, 255, 0.1);
+  border-color: var(--c-border-hover);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.28), inset 0 1px 1px rgba(255, 255, 255, 0.08);
 }
 .mobile-controls {
   display: none;
@@ -413,7 +398,7 @@ export default {
 /* 内容卡片区域：半透明黑色背景、内边距、边框和圆角，用于包裹正文内容 */
 .detail-body { 
   background: #1a1b1e;
-  padding: 32px;
+  padding: 8px 32px 32px;
   margin-right: 20px;
   border: none; /* 移除边框 */
   border-radius: 6px;        /* 6px 圆角，柔和视觉，避免生硬矩形 */
@@ -463,20 +448,40 @@ export default {
     width: 100%;
     box-sizing: border-box;
     border-left: none;
-    height: 60px;
+    height: 72px;
     z-index: 100;
   }
   
   /* Show toggle button */
   .toc-toggle-btn {
     display: flex;
-    height: 100%;
-    aspect-ratio: 1 / 1;
+    width: 44px;
+    height: 44px;
     padding: 0;
-    border-radius: 8px;
+    border-radius: 50%;
     justify-content: center;
     align-items: center;
-    margin-right: 16px;
+    margin-right: 12px;
+    flex-shrink: 0;
+  }
+
+  .back-btn {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    padding: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 12px;
+    flex-shrink: 0;
+  }
+  .back-btn .back-text {
+    display: none;
+  }
+  .back-btn .back-icon {
+    width: 18px;
+    height: 18px;
   }
   
   /* Hide right sidebar and placeholder */
@@ -490,7 +495,9 @@ export default {
     position: fixed;
     top: 0;
     left: 0;
-    bottom: 0;
+    bottom: auto;
+    height: 100dvh;
+    min-height: 100vh;
     width: fit-content;
     max-width: 80vw;
     background: var(--c-bg-l1);
@@ -529,7 +536,7 @@ export default {
   
   /* Adjust detail body for full width */
   .detail-body { 
-    padding: 20px 20px 20px 20px; 
+    padding: 8px 20px 20px 20px; 
     border-radius: 0;
     margin: 0;
   }
@@ -537,24 +544,6 @@ export default {
     border-left: none;
   }
 
-  /* Back button text hidden on mobile */
-  .back-text { display: none; }
-  .back-btn {
-    height: 100%;
-    aspect-ratio: 1 / 1;
-    padding: 0;
-    border-radius: 50%;
-    justify-content: center;
-    align-items: center;
-    gap: 0;
-    background: transparent;
-  }
-  .back-btn:hover,
-  .back-btn:active,
-  .back-btn.router-link-active {
-    background: transparent;
-  }
-  
   /* Mobile Title Adjustment */
   .top-title { font-size: 20px; letter-spacing: 0.5px; margin-bottom: 0; width: 100%; }
   
@@ -562,7 +551,7 @@ export default {
   .header-info {
     padding-left: 0;
   }
-  .meta { gap: 6px; margin-top: 2px; }
+  .meta { gap: 6px; margin-top: 6px; }
   .month { font-size: 9px; }
   .day { font-size: 16px; }
   .year { font-size: 9px; }
@@ -575,15 +564,16 @@ export default {
   }
   .font-size-controls {
     margin-left: auto;
-    margin-right: 6px;
-    height: 24px;
+    margin-right: 10px;
+    height: 26px;
     padding: 1px;
-    border-radius: 6px;
+    border-radius: 999px;
+    width: 66px;
   }
   .font-size-btn {
-    width: 32px;
+    width: auto;
     height: 22px;
-    border-radius: 4px;
+    border-radius: 999px;
     padding: 0;
     min-width: 0;
   }
