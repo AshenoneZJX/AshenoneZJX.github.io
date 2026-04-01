@@ -577,6 +577,7 @@ export default {
   overflow: visible;
   padding: 0 40px;
   box-sizing: border-box;
+  min-width: 400px; /* 设置右侧最小宽度，防止参数框内文字换行 */
 }
 
 /* Upper Part */
@@ -925,6 +926,7 @@ export default {
     flex-direction: column;
     gap: 0;
     padding: 0; /* 移除桌面端左右 40px 的 padding */
+    min-width: 0; /* 取消移动端下的最小宽度限制 */
   }
 
   .right-section, .info-upper {

@@ -467,6 +467,10 @@ export default {
 /* 列表布局核心 */
 .record-list { display: flex; flex-direction: column; gap: 8px; }
 
+@media (max-width: 768px) {
+  .record-list { gap: 16px; }
+}
+
 .record-item {
   display: flex;
   flex-direction: column;

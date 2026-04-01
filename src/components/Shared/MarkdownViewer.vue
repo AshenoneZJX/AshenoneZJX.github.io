@@ -523,6 +523,7 @@ export default {
   margin: 14px 0; 
   font-size: 14px; 
   min-width: 520px;
+  table-layout: auto; /* 恢复为 auto 布局，让浏览器根据内容分配 */
   font-family: 'SarasaMonoSCNerd', 'Inter', 'AlibabaPuHuiTi', monospace;
 }
 
@@ -534,6 +535,8 @@ export default {
   vertical-align: top; 
   white-space: normal;
   word-break: break-word;
+  min-width: 80px; /* 设置最小宽度，防止内容少的列被压缩得太窄 */
+  max-width: 400px; /* 设置最大宽度，防止内容过多的列无限撑开 */
 }
 
 .content :deep(th) { 

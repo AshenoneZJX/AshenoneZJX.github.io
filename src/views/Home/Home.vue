@@ -22,16 +22,29 @@
            <h3>包含的功能与模块</h3>
            <p>• 个人资料卡片（左侧）：固定展示头像、昵称、签名与社交链接。</p>
            <p>• 快捷入口（右侧）：提供车型总览、品牌介绍等快速导航功能。</p>
-           <p>• 活动记录（Records）：列表呈现日志条目，支持按分类筛选；详情页配备顶部工具栏与大纲导航。</p>
-           <p>• 车辆数据库（Cars）：包含车型列表、参数详情、品牌历史与汽车基础知识，支持移动端手势交互与沉浸式浏览。</p>
-           <p>• 个人空间（MySpace）：聚合汽车、电子数码、摄影等兴趣主题，展示评测与作品集。</p>
-           <p>• 学习中心（Learning）：包含雅思学习等子模块，提供结构化的知识梳理与练习入口。</p>
-           <p>• 主题与交互：全站采用深色视觉与浅蓝高亮；移动端自动切换为单栏布局，底部菜单与悬浮卡片适配触控操作。</p>
+           <p>• 活动记录（Records）：两栏响应式设计，列表呈现日志条目，支持按分类与日期筛选；详情页配备顶部工具栏与大纲导航。</p>
+           <p>• 车辆数据库（Cars）：作为子系统深度集成，包含数据大盘（可视化图表）、车型列表、参数详情、品牌历史与汽车基础知识，支持移动端手势交互与沉浸式浏览。</p>
+           <p>• 个人空间（MySpace）：层级化路由架构，聚合汽车、电子数码、摄影等兴趣主题的评测与作品集。</p>
+           <p>• 主题与交互：全站采用深色视觉与浅蓝高亮；移动端自动切换为单栏布局，底部菜单、悬浮卡片及侧边抽屉适配触控操作。</p>
            <br>
-           <h3>目的与作用</h3>
-           <p>以统一的视觉与交互规范，将“日志记录、车型数据、主题空间与个人资料”聚合在同一页面中，便于快速浏览与持续更新。底部 Footer 集成 GitHub 主页链接，方便访问源码与更多项目。</p>
+           <h3>活动记录 (Records)</h3>
+           <p>近期重构了 <strong>Records</strong> 页面，使其具备了更为专业的后台管理系统风格：</p>
+           <ul class="desc-list" style="margin-top: 10px;">
+             <li>
+               <span class="desc-label">两栏响应式布局</span>
+               <span class="desc-text">桌面端采用“左内容-右筛选”的双栏布局，充分利用宽屏空间；移动端自动折叠为单栏，并通过悬浮抽屉呼出筛选面板。</span>
+             </li>
+             <li>
+               <span class="desc-label">多维组合筛选</span>
+               <span class="desc-text">在原有标签分类的基础上，新增了“按时间维度”过滤（包括年度筛选、自定义时间范围等），筛选逻辑联动更加智能。</span>
+             </li>
+             <li>
+               <span class="desc-label">动态数据提取</span>
+               <span class="desc-text">年度筛选选项不再硬编码，而是通过解析 Markdown 元数据，自动提取文章存在的年份进行聚合。</span>
+             </li>
+           </ul>
            <br>
-          <h3>个人空间</h3>
+           <h3>个人空间 (MySpace)</h3>
            <div class="site-structure-diagram">
              <div class="diagram-content">
                <!-- Level 0: Root -->
@@ -48,30 +61,21 @@
                <!-- Level 1: Children -->
                <div class="tree-level-1">
                  
-                 <!-- Branch 1: Overview -->
-                 <div class="tree-branch">
-                   <div class="branch-connector"></div>
-                   <div class="node-box sub-node">
-                     <span class="node-title">Overview</span>
-                     <span class="node-desc">总览 (默认)</span>
-                   </div>
-                 </div>
-
-                 <!-- Branch 2: Cars System -->
+                 <!-- Branch 1: Cars System -->
                  <div class="tree-branch">
                    <div class="branch-connector"></div>
                    <div class="node-box sub-node highlight">
-                     <span class="node-title">Cars System</span>
-                     <span class="node-desc">汽车数据库</span>
+                     <span class="node-title">Cars (汽车)</span>
+                     <span class="node-desc">独立数据系统</span>
                    </div>
                    <!-- Level 2: Sub-items -->
                    <div class="sub-level">
-                     <div class="sub-item">CarsHome (专题总览)</div>
+                     <div class="sub-item">CarsHome (数据大盘)</div>
                      <div class="sub-item flow-item">
                        <span>Cars List</span><span class="arrow">↔</span><span class="leaf">Detail</span>
                      </div>
                      <div class="sub-item flow-item">
-                       <span>Brands</span><span class="arrow">↔</span><span class="leaf">Detail</span>
+                       <span>Brands List</span><span class="arrow">↔</span><span class="leaf">Detail</span>
                      </div>
                      <div class="sub-item flow-item">
                        <span>Basics</span><span class="arrow">→</span><span class="leaf">Detail</span>
@@ -79,12 +83,21 @@
                    </div>
                  </div>
 
-                 <!-- Branch 3: Topics -->
+                 <!-- Branch 2: Digital -->
                  <div class="tree-branch">
                    <div class="branch-connector"></div>
-                   <div class="node-group-vertical">
-                     <div class="node-box sub-node topic-node">Digital (数码)</div>
-                     <div class="node-box sub-node topic-node">Photography (摄影)</div>
+                   <div class="node-box sub-node topic-node">
+                     <span class="node-title">Digital (数码)</span>
+                     <span class="node-desc">设备与选型</span>
+                   </div>
+                 </div>
+
+                 <!-- Branch 3: Photography -->
+                 <div class="tree-branch">
+                   <div class="branch-connector"></div>
+                   <div class="node-box sub-node topic-node">
+                     <span class="node-title">Photography (摄影)</span>
+                     <span class="node-desc">作品集与器材</span>
                    </div>
                  </div>
                  
@@ -93,44 +106,35 @@
            </div>
            
           <div class="diagram-description">
-             <p>MySpace 模块采用层级化路由结构，分为三个核心分支：</p>
+             <p>MySpace 模块采用并列入口结构，目前包含三个核心专栏：</p>
              <ul class="desc-list">
                <li>
-                 <span class="desc-label">Overview (总览)</span>
-                 <span class="desc-text">默认入口，聚合展示各子模块的精选内容与快捷导航。</span>
+                 <span class="desc-label">Cars (汽车)</span>
+                 <span class="desc-text">深度集成的车辆数据系统。包含可视化数据大盘、车型检索与参数详情，以及品牌库和汽车基础知识。</span>
                </li>
                <li>
-                 <span class="desc-label">Cars System (汽车数据库)</span>
-                 <span class="desc-text">深度集成的车辆数据系统。包含车型列表与详情的双向交互，以及品牌历史与基础知识库。</span>
+                 <span class="desc-label">Digital (数码)</span>
+                 <span class="desc-text">个人常用数码设备的清单、使用评测与选型指南。</span>
                </li>
                <li>
-                 <span class="desc-label">Topics (主题专栏)</span>
-                 <span class="desc-text">包含 <em>Digital (数码)</em> 与 <em>Photography (摄影)</em> 两个独立板块，记录生活与爱好。</span>
+                 <span class="desc-label">Photography (摄影)</span>
+                 <span class="desc-text">摄影作品集与器材记录，展示精选照片与拍摄参数信息。</span>
                </li>
              </ul>
            </div>
 
            <div class="myspace-grid">
              <div class="myspace-card">
-               <div class="card-title">汽车</div>
-               <div class="card-desc">车型数据库与评测，支持详情页查看参数与图片。</div>
+               <div class="card-title">汽车 (Cars)</div>
+               <div class="card-desc">独立数据系统，含可视化大盘、车型检索、配置详情与品牌百科。</div>
              </div>
              <div class="myspace-card">
-               <div class="card-title">电子数码</div>
+               <div class="card-title">数码 (Digital)</div>
                <div class="card-desc">设备清单与短评，聚合常用数码设备与选型记录。</div>
              </div>
              <div class="myspace-card">
-               <div class="card-title">摄影</div>
+               <div class="card-title">摄影 (Photography)</div>
                <div class="card-desc">作品集与器材记录，展示精选照片与拍摄信息。</div>
-             </div>
-           </div>
-           <br>
-           <h3>Learning</h3>
-           <p>学习总览模块，包含“雅思学习”等子模块。以下为静态展示卡片（不含跳转）：</p>
-           <div class="learning-grid">
-             <div class="learning-card">
-               <div class="card-title">雅思学习</div>
-               <div class="card-desc">总览与练习入口展示（无跳转）。</div>
              </div>
            </div>
          </div>
@@ -493,6 +497,8 @@ export default {
   content: ''; position: absolute; top: -20px; height: 1px; background: var(--c-border-hover);
   width: 100%; left: 0;
 }
+/* 居中分支：线贯穿 */
+.tree-branch:nth-child(2)::after { left: 0; width: 100%; }
 /* 第一个分支：线从中心向右 */
 .tree-branch:first-child::after { left: 50%; width: 50%; }
 /* 最后一个分支：线从左向中心 */
@@ -608,9 +614,7 @@ export default {
   .flow-item { justify-content: flex-start; }
 }
 
-/* Learning 静态卡片展示 */
-.learning-grid { display: flex; gap: 12px; margin-top: 10px; }
-.learning-card { display: flex; flex-direction: column; justify-content: center; width: 33.333%; min-height: 90px; padding: 12px 14px; background: #252729; border: 1px solid #3a3d41; color: var(--c-text-emphasis); cursor: default; border-radius: 8px; }
+/* Learning 静态卡片展示已移除，此处清除无关 CSS 以保持整洁 */
 
 /* 架构图描述样式 */
 .diagram-description {
