@@ -143,9 +143,11 @@
       <h3 class="section-title">
         <span class="icon">🔬</span> 核心技术
       </h3>
-      <div v-for="(tech, index) in brandInfo.technology" :key="index" class="tech-card">
-        <h4 class="tech-header">{{ tech.title }}</h4>
-        <div class="tech-body">{{ tech.content }}</div>
+      <div class="tech-cards-wrapper">
+        <div v-for="(tech, index) in brandInfo.technology" :key="index" class="tech-card">
+          <h4 class="tech-header">{{ tech.title }}</h4>
+          <div class="tech-body">{{ tech.content }}</div>
+        </div>
       </div>
     </section>
     
@@ -652,15 +654,16 @@ h2, h3, h4 {
 .col-right {
   grid-column: 2;
   min-width: 0;
-  
-  display: grid;
-  grid-template-columns: repeat(2, 1fr); /* 因为宽度变为一半，三列可能太挤，改为双列布局 */
-  gap: 20px;
 }
 
 .col-right .section-title {
-  grid-column: 1 / -1;
-  margin-bottom: 0;
+  margin-bottom: 20px;
+}
+
+.tech-cards-wrapper {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* 双列布局 */
+  gap: 20px;
 }
 
 .sub-section-title {
@@ -934,22 +937,116 @@ h2, h3, h4 {
 
 @media (max-width: 768px) {
   .page-brand-detail {
-    grid-template-columns: 1fr;
+    display: flex;
+    flex-direction: column;
+    padding-left: 12px;
+    padding-right: 12px;
+    padding-top: 12px;
+    width: 100%;
+    max-width: 100vw;
+    box-sizing: border-box;
+    overflow-x: hidden;
   }
-  .col-left, .col-right {
-    grid-column: 1;
+  .span-full, .col-left, .col-right {
+    width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
   }
-  
+  .section-header {
+    align-items: flex-start;
+    gap: 10px;
+  }
+  .title-with-logo {
+    min-width: 0;
+    --brand-title-size: 22px;
+  }
+  .section-header h2 {
+    letter-spacing: 1px;
+    line-height: 1.25;
+    word-break: break-word;
+  }
+  .back-btn {
+    flex-shrink: 0;
+    padding: 6px 10px;
+  }
+  .divider {
+    margin: 8px 0 18px 0;
+  }
+  .brand-section {
+    margin-bottom: 24px;
+  }
+  .section-title {
+    font-size: 18px;
+    margin-bottom: 14px;
+    padding-bottom: 8px;
+  }
+  .sub-section-title {
+    font-size: 16px;
+  }
+  .history-text {
+    font-size: 14px;
+    line-height: 1.7;
+    text-indent: 1.5em;
+  }
+  .col-left {
+    order: 2;
+  }
   .col-right {
-    grid-template-columns: 1fr; /* 移动端核心技术恢复单列 */
+    order: 1;
   }
-  
+  .empty-state {
+    order: 3;
+    width: 100%;
+  }
+  .tech-cards-wrapper {
+    display: flex;
+    overflow-x: auto;
+    gap: 12px;
+    padding-bottom: 8px;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    scroll-behavior: smooth;
+  }
+  .tech-cards-wrapper::-webkit-scrollbar {
+    display: none;
+  }
+  .tech-card {
+    padding: 12px;
+    flex: 0 0 auto;
+    width: 76vw;
+    max-width: 280px;
+    min-width: 240px;
+  }
+  .tech-header {
+    font-size: 16px;
+    margin: 0 0 10px 0;
+  }
+  .tech-body {
+    font-size: 13px;
+    line-height: 1.65;
+  }
   .models-list {
-    grid-template-columns: 1fr; /* 移动端代表车型恢复单列 */
+    grid-template-columns: 1fr;
+    gap: 6px 0;
+    padding-left: 16px;
   }
-  
+  .model-item {
+    line-height: 1.6;
+    font-size: 14px;
+  }
+  .lineup-category {
+    margin-bottom: 16px;
+  }
+  .lineup-cat-title {
+    font-size: 15px;
+    margin-bottom: 6px;
+  }
+  .lineup-cat-en {
+    font-size: 12px;
+  }
   .wiki-box {
     padding: 24px 20px;
+    margin: 0 0 20px 0;
   }
   .wiki-box::before {
     font-size: 60px;
@@ -961,13 +1058,95 @@ h2, h3, h4 {
     bottom: -30px;
     right: 5px;
   }
-  
+  .wiki-box p {
+    font-size: 14px;
+    line-height: 1.7;
+  }
+  .classic-models-module {
+    padding: 10px 10px;
+    border-radius: 10px;
+  }
+  .classic-cards-wrapper {
+    display: block;
+  }
+  .scroll-btn {
+    display: none;
+  }
+  .classic-cards-scroll {
+    gap: 12px;
+    padding: 2px 2px 8px 2px;
+  }
+  .classic-card {
+    width: 76vw;
+    max-width: 280px;
+    min-width: 220px;
+    height: 132px;
+  }
+  .classic-overlay {
+    opacity: 1;
+    padding: 10px;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.7));
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+  .classic-overlay-name {
+    font-size: 14px;
+    margin-bottom: 4px;
+  }
+  .classic-overlay-intro {
+    font-size: 12px;
+    line-height: 1.4;
+  }
+  .classic-name-bottom {
+    opacity: 0;
+  }
+  .status-badge {
+    font-size: 11px;
+    padding: 3px 6px;
+  }
+  .mermaid-container {
+    padding: 6px;
+    border-radius: 10px;
+    justify-content: flex-start;
+  }
+  .mermaid :deep(svg) {
+    min-width: 560px;
+  }
 }
 
-
-
-
-@media (max-width: 768px) {
-  
+@media (max-width: 360px) {
+  .page-brand-detail {
+    padding-left: 8px;
+    padding-right: 8px;
+    padding-top: 10px;
+  }
+  .section-header h2 {
+    font-size: 20px;
+  }
+  .back-btn {
+    padding: 5px 8px;
+  }
+  .wiki-box {
+    padding: 18px 14px;
+  }
+  .wiki-box p {
+    font-size: 13px;
+  }
+  .history-text {
+    font-size: 13px;
+    text-indent: 1.2em;
+  }
+  .classic-card {
+    width: 82vw;
+    min-width: 200px;
+    height: 124px;
+  }
+  .tech-card {
+    width: 82vw;
+    min-width: 200px;
+  }
+  .models-list {
+    padding-left: 14px;
+  }
 }
 </style>

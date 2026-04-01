@@ -1,5 +1,4 @@
 ---
-title: Vue.js 简介与入门指南
 date: 2026-03-17
 categories: Dev
 excerpt: 介绍 Vue.js 框架的基本概念、核心特性和 API 风格，帮助开发者快速入门 Vue 开发。
@@ -86,6 +85,149 @@ const greeting = ref('Hello Vue!')
 }
 </style>
 ```
+
+## Vue 文件标准结构（.vue 单文件组件）
+
+Vue 的 **.vue 单文件组件** 是 Vue 最核心的文件格式，把**模板、样式、逻辑**写在同一个文件里，结构清晰、易于维护。
+
+一个标准的 Vue 文件分为 **3 个核心部分** + **1 个可选部分**：
+
+```vue
+<!-- 1. 模板部分：HTML 结构 -->
+<template>
+  <!-- 只能有一个根节点 -->
+  <div class="container">
+    <h1>{{ title }}</h1>
+  </div>
+</template>
+
+<!-- 2. 脚本部分：JS/TS 逻辑 -->
+<script>
+export default {
+  name: 'ComponentName',
+  data() {
+    return {
+      title: 'Hello Vue'
+    }
+  }
+}
+</script>
+
+<!-- 3. 样式部分：CSS 样式 -->
+<style scoped>
+.container {
+  color: #333;
+}
+</style>
+
+<!-- 4. 自定义块（可选）：极少用 -->
+<custom-block>
+  自定义内容
+</custom-block>
+```
+
+---
+
+## 一、`<template>` 模板部分（必须）
+
+### 含义
+负责**页面的 HTML 结构**，是组件最终渲染到页面上的内容。
+
+### 核心规则
+1. **必须有且仅有一个根节点**（Vue2 强制；Vue3 支持多根节点，但推荐用一个根节点）
+2. 支持 Vue 模板语法：
+   - 插值 `{{ 变量 }}`
+   - 指令 `v-if` / `v-for` / `v-bind` / `v-on` 等
+3. 不写原生 `html/body` 标签，只写页面片段
+
+### 作用
+- 定义组件的**视图结构**
+- 绑定数据、事件，实现页面渲染
+
+---
+
+## 二、`<script>` 脚本部分（必须）
+
+### 含义
+负责**组件的逻辑功能**，包括数据、方法、生命周期、组件引入等。
+
+### 两种写法
+
+#### 1. 选项式 API（Vue2 / Vue3 通用）
+
+```javascript
+export default {
+  name: '组件名',
+  components: {},
+  props: [],
+  data() { return {} },
+  methods: {},
+  computed: {},
+  watch: {},
+  created() {}
+}
+```
+
+#### 2. 组合式 API（Vue3 推荐，`<script setup>`）
+
+```vue
+<script setup>
+import { ref } from 'vue'
+const title = ref('Hello Vue3')
+</script>
+```
+
+### 作用
+- 管理**数据状态**
+- 编写**业务逻辑、事件处理**
+- 引入/注册子组件
+- 使用生命周期、监听、计算属性等
+
+---
+
+## 三、`<style>` 样式部分（可选）
+
+### 含义
+负责**组件的样式**，支持 CSS、Less、Sass、Scss 等。
+
+### 两个关键特性
+1. **`scoped` 属性（最常用）**
+
+   ```vue
+   <style scoped>
+   ```
+
+   - 样式**只作用于当前组件**，不会污染全局 / 其他组件
+   - 原理：Vue 会给组件内的 DOM 添加唯一属性，样式自动带上属性选择器
+
+2. **不加 scoped**
+   - 样式**全局生效**，容易造成样式冲突，不推荐
+
+### 作用
+- 美化组件外观
+- 控制布局、颜色、响应式等样式
+- 配合预处理器（Less / Sass）编写更高效的样式
+
+---
+
+## 四、`<custom-block>` 自定义块（可选）
+
+极少使用，一般用于**文档、测试、自定义功能扩展**，普通开发几乎不会用到。
+
+---
+
+## 完整记忆总结
+
+| 部分 | 标签 | 作用 | 必须？ |
+|------|------|------|--------|
+| 模板 | `<template>` | 写 HTML 结构、视图渲染 | ✅ 必须 |
+| 脚本 | `<script>` | 写 JS/TS 逻辑、数据、方法 | ✅ 必须 |
+| 样式 | `<style>` | 写 CSS/样式，scoped 隔离 | ❌ 可选 |
+| 自定义 | `<custom-block>` | 扩展用途 | ❌ 几乎不用 |
+
+一句话概括：  
+**template 管页面长什么样，script 管功能怎么实现，style 管页面好不好看。**
+
 ## 特点
 
 Vue.js 的独特之处在于“渐进式”与“轻量级”兼得：  

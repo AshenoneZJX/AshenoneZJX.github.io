@@ -29,7 +29,6 @@
           <div class="panel-subtitle">
             <img src="@/assets/images/shaixuan.svg" alt="分类" class="subtitle-icon" />
             <span>分类</span>
-            <button class="close-filter-btn" @click="closeMobileFilter" v-if="isMobile">✕</button>
           </div>
           <div class="panel-buttons">
             <button
@@ -91,7 +90,7 @@ export default {
   },
   methods: {
     checkMobile() {
-      this.isMobile = window.innerWidth <= 768
+      this.isMobile = window.matchMedia('(max-width: 768px)').matches
       if (!this.isMobile) {
         this.isMobileFilterOpen = false
       }
@@ -166,7 +165,7 @@ export default {
     align-items: center;
     justify-content: center;
     background: transparent;
-    border: 1px solid var(--c-border-strong);
+    border: 1px solid var(--c-border-hover);
     color: var(--c-primary);
     padding: 0;
     width: 32px;
@@ -267,8 +266,6 @@ export default {
 .record-title { color: var(--c-primary); font-size: 20px; font-weight: 400; margin-bottom: 4px; }
 .record-excerpt { font-size: 13px; color: var(--c-text-muted); }
 
-.close-filter-btn { display: none; }
-
 @media (max-width: 768px) {
   .page-car-basics { padding: 16px; }
   .record-list { padding: 0; }
@@ -293,18 +290,8 @@ export default {
   }
   .filters-panel { padding: 0; }
   .panel-subtitle {
-    justify-content: space-between;
     width: 100%;
     margin-bottom: 20px;
-  }
-  .close-filter-btn {
-    display: block;
-    background: transparent;
-    border: none;
-    color: var(--c-text-muted);
-    font-size: 20px;
-    cursor: pointer;
-    padding: 0 5px;
   }
   
   .mobile-filter-overlay {
@@ -319,12 +306,5 @@ export default {
   }
 
   .col-right { width: 100%; }
-}
-
-
-
-
-@media (max-width: 768px) {
-  
 }
 </style>

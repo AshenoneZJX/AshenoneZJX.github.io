@@ -37,13 +37,17 @@
       <div class="info-col">
         <div class="info-browse">
           <div class="chart-block chart-block-head">
-            <div class="charts-toolbar" :class="{ 'is-expanded': isMobileMenuOpen }">
-              <div class="mobile-toggle-bar">
+            <div
+              ref="chartsToolbar"
+              class="charts-toolbar"
+              :class="{ 'is-expanded': isMobileMenuOpen, 'use-collapse': shouldCollapseToolbar }"
+            >
+              <div v-if="shouldCollapseToolbar" class="mobile-toggle-bar">
                 <button class="menu-toggle-btn" @click="toggleMobileMenu">
-                  筛选条件
+                  {{ isMobileMenuOpen ? '收起筛选条件' : '筛选条件' }}
                 </button>
               </div>
-              <div class="toolbar-controls">
+              <div ref="toolbarControls" class="toolbar-controls">
                 <label>月份</label>
                 <select v-model="selectedMonth">
                   <option v-for="m in monthsOptions" :key="m" :value="m">{{ m }}</option>
@@ -114,7 +118,32 @@ export default {
       selectedBrand: '全部',
       sortBy: 'sales', // 当前排序字段：'sales' 或 'name'
       sortOrder: 'desc', // 当前排序方向：'desc' 或 'asc'
-      isMobileMenuOpen: false
+      isMobileMenuOpen: false,
+      shouldCollapseToolbar: false,
+      controlsRequiredWidth: 0,
+      toolbarResizeObserver: null
+    }
+  },
+  mounted () {
+    this.$nextTick(() => {
+      this.cacheControlsRequiredWidth()
+      this.updateToolbarCollapse()
+    })
+    window.addEventListener('resize', this.updateToolbarCollapse, { passive: true })
+    document.addEventListener('pointerdown', this.handleDocumentPointerDown)
+    if (typeof ResizeObserver !== 'undefined' && this.$refs.chartsToolbar) {
+      this.toolbarResizeObserver = new ResizeObserver(() => {
+        this.updateToolbarCollapse()
+      })
+      this.toolbarResizeObserver.observe(this.$refs.chartsToolbar)
+    }
+  },
+  beforeDestroy () {
+    window.removeEventListener('resize', this.updateToolbarCollapse)
+    document.removeEventListener('pointerdown', this.handleDocumentPointerDown)
+    if (this.toolbarResizeObserver) {
+      this.toolbarResizeObserver.disconnect()
+      this.toolbarResizeObserver = null
     }
   },
   computed: {
@@ -162,9 +191,58 @@ export default {
         this.sortBy = 'sales'
         this.sortOrder = 'desc'
       }
+      this.$nextTick(() => {
+        this.cacheControlsRequiredWidth()
+        this.updateToolbarCollapse()
+      })
     },
     toggleMobileMenu () {
       this.isMobileMenuOpen = !this.isMobileMenuOpen
+    },
+    handleDocumentPointerDown (event) {
+      if (!this.shouldCollapseToolbar || !this.isMobileMenuOpen) return
+      const controls = this.$refs.toolbarControls
+      if (!controls) return
+      const target = event.target
+      const clickedToggleBar = target instanceof Element && target.closest('.mobile-toggle-bar')
+      if (clickedToggleBar) return
+      if (!controls.contains(target)) {
+        this.isMobileMenuOpen = false
+      }
+    },
+    cacheControlsRequiredWidth () {
+      const controls = this.$refs.toolbarControls
+      if (!controls) return
+      const children = Array.from(controls.children || [])
+      if (children.length === 0) return
+      const style = window.getComputedStyle(controls)
+      const gap = Number.parseFloat(style.columnGap || style.gap || '0') || 0
+      const width = children.reduce((sum, el) => sum + el.getBoundingClientRect().width, 0) + gap * (children.length - 1)
+      if (width > this.controlsRequiredWidth) {
+        this.controlsRequiredWidth = Math.ceil(width)
+      }
+    },
+    updateToolbarCollapse () {
+      const toolbar = this.$refs.chartsToolbar
+      const controls = this.$refs.toolbarControls
+      if (!toolbar || !controls) return
+      const isMobile = window.matchMedia('(max-width: 768px)').matches
+      if (!isMobile) {
+        this.shouldCollapseToolbar = false
+        this.isMobileMenuOpen = false
+        return
+      }
+      if (!this.controlsRequiredWidth) {
+        this.cacheControlsRequiredWidth()
+      }
+      const style = window.getComputedStyle(toolbar)
+      const horizontalPadding = (Number.parseFloat(style.paddingLeft) || 0) + (Number.parseFloat(style.paddingRight) || 0)
+      const availableWidth = toolbar.clientWidth - horizontalPadding
+      const nextCollapse = this.controlsRequiredWidth > availableWidth
+      this.shouldCollapseToolbar = nextCollapse
+      if (!nextCollapse) {
+        this.isMobileMenuOpen = false
+      }
     }
   }
 }
@@ -441,22 +519,23 @@ export default {
     flex-direction: row;
     justify-content: center;
     gap: 15px;
-    margin-top: 20px;
+    margin-top: 0;
+    margin-bottom: 20px;
     padding: 0;
     box-sizing: border-box;
   }
   .gallery-card {
     flex: 1;
     min-width: 0;
-    border-radius: 8px; /* 增加一点圆角让卡片感更强 */
+    border-radius: 8px;
   }
   .card-image { 
-    height: 120px; /* 增加高度使其近似竖向卡牌比例 */
+    height: 120px;
   }
   .hover-overlay {
     padding: 8px 6px;
     font-size: 13px;
-    text-align: center; /* 文字居中更像卡牌标题 */
+    text-align: center;
   }
   
   .section-header { padding: 0; }
@@ -465,11 +544,8 @@ export default {
     padding: 2px;
     margin: 0;
   }
-}
 
-/* 仅在横向空间不足（例如小于 600px）时才退化为按钮折叠模式 */
-@media (max-width: 600px) {
-  .mobile-toggle-bar {
+  .charts-toolbar.use-collapse .mobile-toggle-bar {
     display: flex;
     justify-content: flex-start;
     align-items: center;
@@ -484,29 +560,32 @@ export default {
     cursor: pointer;
     font-size: 14px;
   }
-  .toolbar-controls {
+  .charts-toolbar.use-collapse .toolbar-controls {
     display: none;
+  }
+  .charts-toolbar.use-collapse.is-expanded .toolbar-controls {
+    display: flex;
     flex-direction: column;
     align-items: flex-start;
     gap: 15px;
     padding-top: 10px;
-    width: 100%;
-  }
-  .charts-toolbar.is-expanded .toolbar-controls {
-    display: flex;
     position: absolute;
     top: 100%;
     margin-top: -15px;
     left: 0;
     width: fit-content;
     z-index: 999;
-    background: var(--c-bg-l3);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
+    background:
+      linear-gradient(145deg, rgba(255, 255, 255, 0.22), rgba(255, 255, 255, 0.06)),
+      linear-gradient(180deg, rgba(34, 40, 52, 0.76), rgba(26, 31, 42, 0.64));
+    backdrop-filter: blur(24px) saturate(180%);
+    -webkit-backdrop-filter: blur(24px) saturate(180%);
     padding: 15px;
-    border: 1px solid var(--c-border-default);
+    border: 1px solid rgba(255, 255, 255, 0.22);
     border-radius: 6px;
-    box-shadow: 0 8px 32px var(--c-shadow-medium);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.22),
+      0 12px 36px rgba(0, 0, 0, 0.35);
     box-sizing: border-box;
   }
   /* 让 select 和 button 在移动端占满宽度或更易点击 */

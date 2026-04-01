@@ -70,6 +70,7 @@ export default {
   --c-nav-mask: rgba(1, 4, 9, 0.45);
   
   --title-font: 'MotivaTitle', "Motiva Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --bp-mobile-max: 480px;
 }
 
 [data-theme="light"] {
@@ -176,7 +177,19 @@ button {
   color: var(--c-text-title) !important;
 }
 
-@media (max-width: 768px) {
+.is-mobile .back-btn {
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border-radius: 50%;
+  justify-content: center;
+  gap: 0;
+}
+.is-mobile .back-btn .back-text {
+  display: none;
+}
+
+@media (max-width: 480px) {
   .back-btn {
     width: 32px;
     height: 32px;
