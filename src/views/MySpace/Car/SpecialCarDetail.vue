@@ -62,7 +62,6 @@
                       :src="brandLogoFor"
                       :alt="car.brand || '品牌'"
                     />
-                    <span>{{ brandName }}</span>
                   </router-link>
                   <div v-if="showBrandCard" class="brand-hover-card" role="tooltip" ref="hoverCard">
                     <img
@@ -98,9 +97,9 @@
               </h2>
             </div>
             <div class="actions">
-              <button  class="back-btn" @click="$router.push('/mySpace/cars')">
+              <button  class="back-btn" @click="$router.push(`/mySpace/cars/${baseCarId}`)">
                 <img src="@/assets/images/fanhui.svg" class="back-icon" alt="返回" />
-                <span class="back-text">返回</span>
+                <span class="back-text">返回主款</span>
               </button>
             </div>
           </div>
@@ -111,12 +110,6 @@
               <span class="tag tag-body">{{ car.body }}</span>
               <span class="tag tag-size" v-if="car.sizeClass">{{ car.sizeClass }}</span>
             </div>
-          </div>
-
-          <div class="special-action-block" v-if="car.specialEdition">
-            <button class="special-btn" @click="$router.push(`/mySpace/cars/${car.id}/special`)">
-              <span class="special-text">{{ specialModelName }}</span>
-            </button>
           </div>
           
           <p class="intro-text">{{ introText }}</p>
@@ -210,9 +203,10 @@
 import cars from '@/data/car/cars.json'
 import brandDetails from '@/data/car/brandDetails.json'
 export default {
-  name: 'CarDetail',
+  name: 'SpecialCarDetail',
   data() {
     return {
+      baseCarId: null,
       car: null,
       showSpecs: false,
       brandLogoMap: {},
@@ -269,15 +263,6 @@ export default {
       }
       return t
     },
-    specialModelName() {
-      if (!this.car || !this.car.specialEdition) return ''
-      const brand = this.car.specialEdition.brand || ''
-      const t = this.car.specialEdition.title || ''
-      if (brand && t.startsWith(brand)) {
-        return t.slice(brand.length).trim()
-      }
-      return t
-    },
     images() {
       if (!this.car) return []
       const imgs = Array.isArray(this.car.images) ? this.car.images : []
@@ -323,7 +308,13 @@ export default {
     },
     loadCar(id) {
       const n = Number(id)
-      this.car = cars.find(c => Number(c.id) === n) || null
+      const baseCar = cars.find(c => Number(c.id) === n)
+      if (baseCar) {
+        this.baseCarId = baseCar.id
+        this.car = baseCar.specialEdition || null
+      } else {
+        this.car = null
+      }
       this.currentImageIndex = 0
     },
     toggleSpecs() {
@@ -631,20 +622,6 @@ export default {
   min-width: 0;
 }
 
-.brand-hover-wrapper {
-  position: relative;
-  display: inline-flex;
-  flex-shrink: 0; /* 品牌 logo 和名称不收缩 */
-}
-
-.model-name { 
-  margin-left: 6px; 
-  font-family: 'MotivaSans', sans-serif;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
 .brand-link {
   color: var(--c-primary);
   text-decoration: none;
@@ -655,6 +632,14 @@ export default {
 .brand-link:hover { text-decoration: none; }
 .brand-link:hover span { text-decoration: underline; }
 
+.model-name { 
+  margin-left: 6px; 
+  font-family: 'MotivaSans', sans-serif;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 .actions {
   display: flex;
   align-items: center;
@@ -662,68 +647,24 @@ export default {
   flex-shrink: 0;
 }
 
-.special-action-block {
-  margin-top: 8px;
-}
-
 .special-btn {
-  position: relative;
-  background: linear-gradient(135deg, #1a1a1a 0%, #2c2c2c 100%);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 6px;
-  color: #e0e0e0;
-  padding: 8px 16px;
+  background: linear-gradient(135deg, var(--c-primary), #1a6b9c);
+  border: none;
+  border-radius: 4px;
+  color: #fff;
+  padding: 6px 12px;
   font-size: 13px;
-  font-weight: 500;
-  letter-spacing: 0.5px;
+  font-weight: bold;
   cursor: pointer;
-  overflow: hidden;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.05);
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
 }
-
-.special-btn::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 50%;
-  height: 100%;
-  background: linear-gradient(
-    to right,
-    rgba(255, 255, 255, 0) 0%,
-    rgba(255, 255, 255, 0.08) 50%,
-    rgba(255, 255, 255, 0) 100%
-  );
-  transform: skewX(-20deg);
-  transition: all 0.5s ease;
-}
-
 .special-btn:hover {
-  transform: scale(1.05);
-  color: #ffffff;
-  background: linear-gradient(135deg, #242424 0%, #363636 100%);
-  border-color: rgba(255, 255, 255, 0.2);
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.5), 0 0 12px rgba(255, 255, 255, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(102, 192, 244, 0.4);
 }
-
-.special-btn:hover::before {
-  left: 200%;
-}
-
 .special-btn:active {
-  transform: translateY(0);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4), inset 0 1px 2px rgba(0, 0, 0, 0.2);
-  background: #1a1a1a;
-}
-
-.special-text {
-  position: relative;
-  z-index: 1;
-  font-family: 'MotivaSans', sans-serif;
+  transform: translateY(1px);
 }
 
 .brand-logo {
@@ -736,6 +677,12 @@ export default {
 }
 .brand-logo-xiaomi {
   height: 1em;
+}
+
+.brand-hover-wrapper {
+  position: relative;
+  display: inline-flex;
+  flex-shrink: 0; /* 品牌 logo 和名称不收缩 */
 }
 .brand-hover-card {
   position: absolute;
@@ -1045,17 +992,11 @@ export default {
     flex: none;
   }
 
-  .special-action-block {
-    order: 4;
-    margin-top: 16px;
-    margin-bottom: 0;
-  }
-
   .intro-text { 
-    order: 5; 
+    order: 4; 
     margin-top: 16px;
   }
-  .info-lower { order: 6; }
+  .info-lower { order: 5; }
   
   /* On very small screens, hide the specs box in column and show FAB */
   @media (max-width: 600px) {

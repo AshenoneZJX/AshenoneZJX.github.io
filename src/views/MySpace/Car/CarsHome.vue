@@ -22,7 +22,7 @@
 
           <router-link class="gallery-card" to="/mySpace/cars">
             <div class="card-image" :style="bg('https://images.unsplash.com/photo-1692450931594-e076fcdb896f?q=80&w=1600&auto=format&fit=crop&ixlib=rb-4.1.0')">
-              <div class="hover-overlay">车型总览列表</div>
+              <div class="hover-overlay">车型总览</div>
             </div>
           </router-link>
 

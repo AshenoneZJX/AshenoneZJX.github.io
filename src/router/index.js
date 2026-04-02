@@ -9,6 +9,7 @@ import MySpace from '@/views/MySpace/MySpace.vue'
 import Digital from '@/views/MySpace/Digital/Digital.vue'
 import Photography from '@/views/MySpace/Photography/Photography.vue'
 import CarDetail from '@/views/MySpace/Car/CarDetail.vue'
+import SpecialCarDetail from '@/views/MySpace/Car/SpecialCarDetail.vue'
 import CarBasics from '@/views/MySpace/Car/CarBasics.vue'
 import CarBasicsDetail from '@/views/MySpace/Car/CarBasicsDetail.vue'
 import BrandList from '@/views/MySpace/Car/BrandList.vue'
@@ -33,6 +34,7 @@ const routes = [
   { path: '/mySpace/cars-home', name: 'CarsHome', component: CarsHome },
   { path: '/mySpace/cars', name: 'CarsModels', component: Cars },
   { path: '/mySpace/cars/:id', name: 'CarDetail', component: CarDetail },
+  { path: '/mySpace/cars/:id/special', name: 'SpecialCarDetail', component: SpecialCarDetail },
   { path: '/mySpace/digital', name: 'Digital', component: Digital },
   { path: '/mySpace/photography', name: 'Photography', component: Photography },
   { path: '/mySpace/car-basics', name: 'CarBasics', component: CarBasics },

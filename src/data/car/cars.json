@@ -22,6 +22,26 @@
       "engine": "1.5T L4 VTEC Turbo 182PS，功率134kW，最大扭矩240N·m",
       "transmission": "CVT/6AT",
       "chassis": "前麦弗逊、后多连杆，前置前驱"
+    },
+    "specialEdition": {
+      "id": 101,
+      "title": "思域 TYPE R",
+      "brand": "本田",
+      "sizeClass": "紧凑型",
+      "images": [
+        "https://p3.dcarimg.com/img/motor-mis-img/8abd78c1073dde19cc8218dd43aeb8ab~2508x0.webp",
+        "https://p3.dcarimg.com/img/motor-mis-img/3595859749435594a093c71c228ce248~2508x0.webp",
+        "https://p3.dcarimg.com/img/motor-mis-img/923d904d3059132e33c9e147e3a4d7e8~2508x0.webp"
+      ],
+      "energy": "燃油",
+      "body": "轿车",
+      "intro": "本田思域 TYPE R 是一款高性能前驱跑车，以纯粹的驾驶乐趣与赛道基因著称。搭载2.0T红头发动机，匹配6速手动变速器，配备LSD限滑差速器与Brembo刹车卡钳，兼顾赛道竞技与日常激情。",
+      "specs": {
+        "dimensions": "长4595mm × 宽1890mm × 高1405mm，轴距2735mm，整备质量约1430kg",
+        "engine": "2.0T L4 VTEC Turbo 300PS，功率221kW，最大扭矩420N·m",
+        "transmission": "6MT",
+        "chassis": "前双轴麦弗逊、后多连杆，前置前驱"
+      }
     }
   },
   {
@@ -429,7 +449,9 @@
     "sizeClass": "紧凑型",
     "title": "大众 高尔夫",
     "images": [
-      "https://p3.dcarimg.com/img/motor-mis-img/DCP_53516affa811cffe393d29e13784b827~2508x0.webp"
+      "https://p3.dcarimg.com/img/motor-mis-img/DCP_53516affa811cffe393d29e13784b827~2508x0.webp",
+      "https://p3.dcarimg.com/img/motor-mis-img/DCP_dc991f867fc8d683696ef3549db77a14~2508x0.webp",
+      "https://p3.dcarimg.com/img/motor-mis-img/DCP_f4e0e82bfe2a2430bd40a242c14a99c2~2508x0.webp"
     ],
     "energy": "燃油",
     "body": "轿车",
@@ -439,6 +461,26 @@
       "engine": "1.2T/1.4T L4 涡轮增压 116PS / 150PS，功率85kW / 110kW，最大扭矩175N·m / 250N·m",
       "transmission": "5MT / 7DSG",
       "chassis": "前麦弗逊、后多连杆，前置前驱"
+    },
+    "specialEdition": {
+      "id": 121,
+      "title": "高尔夫 GTI",
+      "brand": "大众",
+      "sizeClass": "紧凑型",
+      "images": [
+        "https://p3.dcarimg.com/img/motor-mis-img/DCP_3f47df56d8fadd55919321c83b7e9427~2508x0.webp",
+        "https://p3.dcarimg.com/img/motor-mis-img/DCP_c4f0632c257643afdc5f06992af373dd~2508x0.webp",
+        "https://p3.dcarimg.com/img/motor-mis-img/DCP_c29f703017555e14d75cc918ff7e8bad~2508x0.webp"
+      ],
+      "energy": "燃油",
+      "body": "轿车",
+      "intro": "大众高尔夫 GTI 是一款经典的性能钢炮，以出色的底盘调校与强劲的动力响应著称。搭载第三代EA888 2.0T发动机，匹配7速湿式双离合变速箱，配备XDS电子限滑差速器，兼顾日常实用性与纯粹的驾驶乐趣。",
+      "specs": {
+        "dimensions": "长4296mm × 宽1788mm × 高1471mm，轴距2631mm，整备质量约1430kg",
+        "engine": "2.0T L4 涡轮增压 220PS，功率162kW，最大扭矩350N·m",
+        "transmission": "7DSG湿式",
+        "chassis": "前麦弗逊、后多连杆，前置前驱"
+      }
     }
   },
   {
@@ -525,6 +567,52 @@
       "engine": "后置永磁同步电机 / 前后双电机（四驱） 267-430PS，功率196-316kW，最大扭矩390-655N·m",
       "transmission": "单速固定齿比",
       "chassis": "前双叉臂、后五连杆，后置后驱/双电机四驱"
+    }
+  },
+  {
+    "id": 26,
+    "brand": "日产",
+    "brandLogo": "/brand-logos/nissan.svg",
+    "sizeClass": "紧凑型",
+    "title": "日产 轩逸",
+    "images": [
+      "https://p3.dcarimg.com/img/motor-mis-img/DCP_1019517839b32c8ca3cf7bd0e97f46bd~2508x0.webp",
+      "https://p3.dcarimg.com/img/motor-mis-img/DCP_e6573e716868b93bd0d940ccdc8b37b0~2508x0.webp",
+      "https://p3.dcarimg.com/img/motor-mis-img/DCP_12133fccff33e0261208880f90206c70~2508x0.webp",
+      "https://p3.dcarimg.com/img/motor-mis-img/DCP_f0898193c81a1b5b909e64de766fe051~2508x0.webp"
+    ],
+    "energy": [
+      "燃油",
+      "混动"
+    ],
+    "body": "轿车",
+    "intro": "日产轩逸（Sylphy）是一款紧凑型家用轿车，以极致舒适的“大沙发”座椅与出色的燃油经济性著称。提供1.6L燃油版与e-POWER超混动版本，匹配CVT无级变速器，前麦弗逊/后扭力梁悬架，配备ProPILOT超智驾系统，是国内家轿市场的销量常青树。",
+    "specs": {
+      "dimensions": "长4652mm × 宽1815mm × 高1450mm，轴距2712mm，整备质量约1243kg",
+      "engine": "1.6L L4 自然吸气 / 1.2L L3 + 电机（e-POWER） 135PS / 136PS，功率99kW / 100kW，最大扭矩159N·m / 300N·m",
+      "transmission": "CVT / 单速固定齿比",
+      "chassis": "前麦弗逊、后扭力梁，前置前驱"
+    }
+  },
+  {
+    "id": 27,
+    "brand": "日产",
+    "brandLogo": "/brand-logos/nissan.svg",
+    "sizeClass": "中型",
+    "title": "日产 天籁",
+    "images": [
+      "https://p3.dcarimg.com/img/motor-mis-img/DCP_bcb3289d03d19174628139b6928ef578~2508x0.webp",
+      "https://p3.dcarimg.com/img/motor-mis-img/DCP_b7d432e8c7f50b97067a0385c84ad1cc~2508x0.webp",
+      "https://p3.dcarimg.com/img/motor-mis-img/DCP_aaab46665f3f56341b95e5c237542453~2508x0.webp"
+    ],
+    "energy": "燃油",
+    "body": "轿车",
+    "intro": "日产天籁（Altima）是一款中型旗舰轿车，以“移动大沙发”的舒适体验与出色的静谧性著称。搭载日产全球首款量产的 VC-Turbo 超变擎 2.0T 可变压缩比发动机，或成熟的 2.0L 自然吸气发动机，匹配全新智能无级变速器（CVT），配备 ProPILOT 超智驾与 ANC 主动降噪系统，完美兼顾强劲动力与行政级舒适。",
+    "specs": {
+      "dimensions": "长4906mm × 宽1850mm × 高1447mm，轴距2825mm，整备质量约1466kg",
+      "engine": "2.0L L4 自然吸气 / 2.0T L4 可变压缩比涡轮增压 156PS / 243PS，功率115kW / 179kW，最大扭矩197N·m / 371N·m",
+      "transmission": "CVT / 模拟8挡CVT",
+      "chassis": "前麦弗逊、后多连杆（梯形控制臂），前置前驱"
     }
   }
 ]

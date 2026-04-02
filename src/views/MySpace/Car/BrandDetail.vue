@@ -13,11 +13,13 @@
     <div class="divider span-full"></div>
 
     <!-- 简介 -->
-    <blockquote class="wiki-box span-full" v-if="brandInfo && brandInfo.quote">
-      <p class="summary">{{ brandInfo.quote }}</p>
-    </blockquote>
-    <div class="introduction-box span-full" v-if="brandInfo && brandInfo.introduction">
-      <p class="history-text">{{ brandInfo.introduction }}</p>
+    <div class="brand-intro-wrapper span-full" v-if="brandInfo && (brandInfo.quote || brandInfo.introduction)">
+      <blockquote class="wiki-box" v-if="brandInfo.quote">
+        <p class="summary">{{ brandInfo.quote }}</p>
+      </blockquote>
+      <div class="introduction-box" v-if="brandInfo.introduction">
+        <p class="history-text">{{ brandInfo.introduction }}</p>
+      </div>
     </div>
 
     <!-- 历史 -->
@@ -83,11 +85,11 @@
 
       <p class="history-text">{{ brandInfo.history }}</p>
 
-      <!-- 品牌架构图 (Mermaid) -->
+      <!-- 品牌&车型架构图 (Mermaid) -->
       <div class="brand-architecture-module" v-if="brandInfo && brandInfo.sub_brands && brandInfo.sub_brands.list">
-        <h4 class="sub-section-title">
-          <span class="icon">🏢</span> {{ brandInfo.sub_brands.description || '品牌架构' }}
-        </h4>
+        <h3 class="section-title">
+          <span class="icon">🏢</span> 品牌&车型架构图
+        </h3>
         <div class="mermaid-container">
           <div class="mermaid" ref="mermaidDiagram"></div>
         </div>
@@ -190,15 +192,8 @@ export default {
       return []
     },
     filteredBrandModels () {
-      // 过滤掉已经在 classic_models 列表中展示过的车型
-      if (!this.brandInfo || !this.brandInfo.classic_models || !this.brandInfo.classic_models.list) {
-        return this.brandModels
-      }
-      const classicNames = this.brandInfo.classic_models.list.map(c => c.model_name_zh || c.model_name)
-      return this.brandModels.filter(car => {
-        const name = this.modelNameOf(car)
-        return !classicNames.includes(name)
-      })
+      // 不再将 cars.json 的数据追加到经典车型列表中
+      return []
     },
     brandInfo () {
       return brandDetails[this.brandName] || null
@@ -275,25 +270,45 @@ export default {
       if (!brandInfo || !brandInfo.sub_brands || !brandInfo.sub_brands.list) return ''
       
       const parentBrand = this.brandName
+      const rootTitle = brandInfo.sub_brands.title || `  ${parentBrand} 品牌架构  `
+      
       // 强制设置为纵向绘制：Top to Down
       let code = 'graph TD\n'
-      // Create an invisible root node to act as the true parent.
-      code += `  Root["${parentBrand} 品牌架构"]\n`
+      // 给品牌名字两边加上适当的不可见空格来确保框能撑开
+      code += `  Root["${rootTitle}"]\n`
+      
+      const groupMap = new Map()
+      let groupCounter = 0
       
       brandInfo.sub_brands.list.forEach((subBrand, index) => {
         const brandId = `SubBrand${index}`
-        // Connect invisible root to each brand (Honda, Acura, etc)
-        code += `  Root --> ${brandId}["${subBrand.brand_name_zh} (${subBrand.brand_name})<br/>${subBrand.positioning}"]\n`
+        
+        let parentNode = 'Root'
+        if (subBrand.brand_group) {
+          if (!groupMap.has(subBrand.brand_group)) {
+            const groupId = 'Group_' + groupCounter++
+            code += `  Root --> ${groupId}["  ${subBrand.brand_group}  "]\n`
+            code += `  class ${groupId} groupNode;\n`
+            groupMap.set(subBrand.brand_group, groupId)
+          }
+          parentNode = groupMap.get(subBrand.brand_group)
+        }
+        
+        // Connect parent to each brand
+        const posText = subBrand.positioning ? `<br/>${subBrand.positioning}` : ''
+        code += `  ${parentNode} --> ${brandId}["  ${subBrand.brand_name_zh} (${subBrand.brand_name})${posText}  "]\n`
         
         // Add performance division if exists
         if (subBrand.performance_division) {
           const perfId = `${brandId}_Perf`
-          code += `  ${brandId} -.-> ${perfId}["${subBrand.performance_division.name}<br/>${subBrand.performance_division.description}"]\n`
+          // 使用HTML换行或空格来防止文本过长撑破
+          const safeDesc = subBrand.performance_division.description ? subBrand.performance_division.description.replace(/(.{10})/g, '$1<br/>') : ''
+          code += `  ${brandId} -.-> ${perfId}["${subBrand.performance_division.name}<br/>${safeDesc}"]\n`
           
           if (subBrand.performance_division.models && subBrand.performance_division.models.length > 0) {
             subBrand.performance_division.models.forEach((model, mIndex) => {
               const modelId = `${perfId}_Model${mIndex}`
-              code += `  ${perfId} --- ${modelId}("${model}")\n`
+              code += `  ${perfId} --- ${modelId}("  ${model}  ")\n`
               code += `  class ${modelId} model;\n`
             })
           }
@@ -301,24 +316,29 @@ export default {
         
         // Add current models
         if (subBrand.current_models && subBrand.current_models.length > 0) {
-          const modelsGroupId = `${brandId}_Models`
-          code += `  ${brandId} --> ${modelsGroupId}["在售车型"]\n`
-          
           subBrand.current_models.forEach((model, mIndex) => {
-            const modelId = `${modelsGroupId}_${mIndex}`
-            code += `  ${modelsGroupId} --- ${modelId}("${model}")\n`
+            const modelId = `${brandId}_Model_${mIndex}`
+            // 用更宽的空格或换行来防止文本超出（mermaid 支持使用 <br> 换行，或者直接靠 CSS 调整）
+            // 但最可靠的是限制文字长度或让 mermaid 自动适应
+            code += `  ${brandId} --- ${modelId}("  ${model}  ")\n`
             code += `  class ${modelId} model;\n`
           })
         }
       })
       
-      // Styling
-      // 全新美观深色科技配色，根节点增加宽度（使用不可见的空格撑开或让其自然包裹）并调整为更暗的颜色
-      code += `  classDef rootNode fill:#1E293B,stroke:#2D3748,stroke-width:2px,color:#E2E8F0,font-weight:bold,font-size:15px,rx:6,ry:6;\n`
-      code += `  classDef subBrand fill:#1F2631,stroke:#3A4A6B,stroke-width:2px,color:#E2E8F0,font-weight:bold,font-size:13px,rx:4,ry:4;\n`
-      code += `  classDef perf fill:#2D1A20,stroke:#E53935,stroke-width:1px,stroke-dasharray: 4 4,color:#FFB4B4,font-size:12px,rx:4,ry:4;\n`
-      code += `  classDef group fill:#151A23,stroke:#2D3748,stroke-width:1px,color:#A0AEC0,font-size:12px,rx:4,ry:4;\n`
-      code += `  classDef model fill:#1A202C,stroke:#4A5568,stroke-width:1px,color:#E2E8F0,font-size:11px,rx:10,ry:10;\n`
+      // Defining styles
+      // Root Node (e.g. Volkswagen Group) - Deep distinct blue-grey
+      code += `  classDef rootNode fill:#0F172A,stroke:#38BDF8,stroke-width:2px,color:#F8FAFC,font-weight:bold,font-size:16px,rx:8,ry:8,padding:24px;\n`
+      // Group Node (e.g. Core Brand Group) - Indigo/purple tint
+      code += `  classDef groupNode fill:#312E81,stroke:#6366F1,stroke-width:2px,color:#E0E7FF,font-weight:bold,font-size:14px,rx:6,ry:6,padding:18px;\n`
+      // Brand Node (e.g. Audi, Porsche) - Teal/Cyan tint
+      code += `  classDef subBrand fill:#134E4A,stroke:#2DD4BF,stroke-width:2px,color:#CCFBF1,font-weight:bold,font-size:13px,rx:4,ry:4,padding:16px;\n`
+      // Performance Division (e.g. VW R) - Red tint
+      code += `  classDef perf fill:#450A0A,stroke:#F87171,stroke-width:1px,stroke-dasharray: 4 4,color:#FECACA,font-size:12px,rx:4,ry:4,padding:12px;\n`
+      // Models Label (e.g. "主要车型") - Slate dark
+      code += `  classDef group fill:#1E293B,stroke:#475569,stroke-width:1px,color:#94A3B8,font-size:12px,rx:4,ry:4,padding:12px;\n`
+      // Individual Model (e.g. Golf, Q5L) - Slate light
+      code += `  classDef model fill:#334155,stroke:#64748B,stroke-width:1px,color:#F1F5F9,font-size:12px,rx:10,ry:10,padding:12px;\n`
       
       code += `  class Root rootNode;\n`
       
@@ -327,9 +347,6 @@ export default {
         code += `  class ${brandId} subBrand;\n`
         if (subBrand.performance_division) {
           code += `  class ${brandId}_Perf perf;\n`
-        }
-        if (subBrand.current_models && subBrand.current_models.length > 0) {
-          code += `  class ${brandId}_Models group;\n`
         }
       })
       
@@ -404,6 +421,14 @@ export default {
   font-display: swap;
 }
 
+@font-face {
+  font-family: 'SarasaMonoSC';
+  src: url('~@/assets/fonts/sarasa-mono-sc-nerd-regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
 h2, h3, h4 {
   font-family: 'AlibabaPuHuiTi', 'Motiva Sans', sans-serif;
 }
@@ -472,6 +497,7 @@ h2, h3, h4 {
   font-size: 20px;
   font-weight: 500;
   font-family: 'AlibabaPuHuiTi', 'Motiva Sans', sans-serif;
+  margin-top: 30px;
   margin-bottom: 20px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   padding-bottom: 10px;
@@ -691,26 +717,27 @@ h2, h3, h4 {
 }
 
 .mermaid-container {
-  background: var(--c-bg-l1);
-  border: 1px solid var(--c-border-default);
+  background: #141414; /* 纯深灰/炭黑背景，去除蓝色调 */
+  border: 1px solid #2C2C2C; /* 调整边框颜色配合深背景 */
   border-radius: 12px;
-  padding: 10px;
-  box-shadow: 0 4px 12px var(--c-shadow-light);
+  padding: 20px; /* 增加一点内边距让图表不那么拥挤 */
+  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.6), 0 4px 12px var(--c-shadow-light); /* 添加内阴影增强纵深感 */
   overflow-x: auto;
-  display: flex;
-  justify-content: center;
+  display: block; /* 取消 flex 居中，允许自然溢出滚动 */
+  -webkit-overflow-scrolling: touch;
 }
 
 .mermaid {
   background: transparent;
-  width: 100%;
-  /* 允许SVG自动缩放，不再限制最小宽度 */
-  display: flex;
-  justify-content: center;
+  min-width: min-content; /* 保证内部内容宽度撑开 */
+  display: block; /* 取消 flex，完全交给 svg 自带尺寸 */
+  margin: 0 auto; /* 没超宽时居中 */
 }
 .mermaid :deep(svg) {
-  max-width: 100%;
-  height: auto;
+  max-width: none; /* 允许超出容器 */
+  width: auto !important; /* 强制使用原始内容计算出的绝对宽度，不要被父容器压缩 */
+  height: auto !important; /* 强制自适应高度 */
+  display: block;
 }
 
 /* 强制覆盖 SVG 内部节点的间距，适应文字尺寸并设置极小内边距 */
@@ -1026,9 +1053,9 @@ h2, h3, h4 {
     line-height: 1.65;
   }
   .models-list {
-    grid-template-columns: 1fr;
-    gap: 6px 0;
-    padding-left: 16px;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    padding-left: 20px; /* 恢复适当的左侧缩进，确保列表圆点和文字不超出边界 */
   }
   .model-item {
     line-height: 1.6;
@@ -1107,10 +1134,13 @@ h2, h3, h4 {
   .mermaid-container {
     padding: 6px;
     border-radius: 10px;
-    justify-content: flex-start;
+  }
+  .mermaid {
+    min-width: 100%;
+    margin: 0;
   }
   .mermaid :deep(svg) {
-    min-width: 560px;
+    min-width: auto; /* 移除以前设置的固定最小宽度，让 svg 自己决定 */
   }
 }
 
