@@ -4,7 +4,9 @@
     <div class="content-wrapper">
       <main class="main-content">
         <transition name="fade" mode="out-in">
-          <router-view />
+          <keep-alive include="Cars">
+            <router-view />
+          </keep-alive>
         </transition>
       </main>
       <Footer />

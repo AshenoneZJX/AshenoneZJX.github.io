@@ -203,13 +203,13 @@ export default {
   justify-content: space-between;
   background: rgba(255, 255, 255, 0.06);
   border: 1px solid var(--c-border-default);
-  border-radius: 999px;
+  border-radius: 6px;
   padding: 2px;
   gap: 0;
   margin-left: auto;
-  margin-right: 12px;
-  height: 30px;
-  width: 132px;
+  margin-right: 24px;
+  height: 26px;
+  width: 108px;
   box-sizing: border-box;
 }
 .font-size-btn {
@@ -217,14 +217,14 @@ export default {
   border: 1px solid transparent;
   background: transparent;
   color: var(--c-text-body-alt);
-  border-radius: 999px;
-  padding: 0 6px;
-  font-size: 12px;
+  border-radius: 4px;
+  padding: 0 4px;
+  font-size: 11px;
   line-height: 1;
   cursor: pointer;
   flex: 1 1 0;
   min-width: 0;
-  height: 24px;
+  height: 20px;
   transition: all 0.2s ease;
   z-index: 1;
   display: flex;
@@ -244,7 +244,7 @@ export default {
   background: rgba(255, 255, 255, 0.18);
   color: var(--c-text-title);
   font-weight: 500;
-  border-color: var(--c-border-hover);
+  border-color: transparent;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.28), inset 0 1px 1px rgba(255, 255, 255, 0.08);
 }
 .mobile-controls {

@@ -86,7 +86,7 @@
       <p class="history-text">{{ brandInfo.history }}</p>
 
       <!-- 品牌&车型架构图 (Mermaid) -->
-      <div class="brand-architecture-module" v-if="brandInfo && brandInfo.sub_brands && brandInfo.sub_brands.list">
+      <div class="brand-architecture-module" v-if="brandInfo && (brandInfo.sub_brands && brandInfo.sub_brands.list || brandInfo.mermaid)">
         <h3 class="section-title">
           <span class="icon">🏢</span> 品牌&车型架构图
         </h3>
@@ -113,9 +113,9 @@
               class="model-item"
             >
               <router-link
-                v-if="carIdOfModelName(m.model_name_zh || m.model_name) !== null"
+                v-if="carIdOfModelName(m.model_name) !== null || carIdOfModelName(m.model_name_zh) !== null"
                 class="model-link"
-                :to="{ name: 'CarDetail', params: { id: carIdOfModelName(m.model_name_zh || m.model_name) } }"
+                :to="{ name: 'CarDetail', params: { id: carIdOfModelName(m.model_name) || carIdOfModelName(m.model_name_zh) } }"
               >{{ m.model_name_zh || m.model_name }}</router-link>
               <span v-else class="model-name">{{ m.model_name_zh || m.model_name }}</span>
             </li>
@@ -248,7 +248,7 @@ export default {
                 lineColor: '#4A5568',
                 secondaryColor: '#151A23',
                 tertiaryColor: '#1A202C',
-                fontSize: '12px',
+                fontSize: '13px',
                 fontFamily: "'AlibabaPuHuiTi', 'Motiva Sans', sans-serif"
               },
               flowchart: {
@@ -256,7 +256,10 @@ export default {
                 padding: 10,
                 nodeSpacing: 15,
                 rankSpacing: 35,
-                htmlLabels: true // 启用 HTML 标签渲染
+                htmlLabels: true
+              },
+              mindmap: {
+                padding: 20
               }
             })
             mermaid.init(undefined, this.$refs.mermaidDiagram)
@@ -267,7 +270,14 @@ export default {
       })
     },
     generateMermaidCode (brandInfo) {
-      if (!brandInfo || !brandInfo.sub_brands || !brandInfo.sub_brands.list) return ''
+      if (!brandInfo) return ''
+      
+      // 如果直接存在 mermaid 属性，说明是预先手写的代码，直接返回并添加自定义样式
+      if (brandInfo.mermaid) {
+        return brandInfo.mermaid
+      }
+
+      if (!brandInfo.sub_brands || !brandInfo.sub_brands.list) return ''
       
       const parentBrand = this.brandName
       const rootTitle = brandInfo.sub_brands.title || `  ${parentBrand} 品牌架构  `

@@ -195,7 +195,8 @@ export default {
       searchText: '',
       appliedSearchText: '',
       searchOpen: false,
-      searchExpanded: false
+      searchExpanded: false,
+      savedScrollPosition: 0
     }
   },
   computed: {
@@ -360,6 +361,35 @@ export default {
   },
   mounted() {
     document.addEventListener('mousedown', this.onDocumentPointerDown)
+  },
+  beforeRouteEnter(to, from, next) {
+    if (from.name === 'CarDetail' || from.name === 'SpecialCarDetail') {
+      to.meta.isBackFromDetail = true
+    } else {
+      to.meta.isBackFromDetail = false
+    }
+    next()
+  },
+  activated() {
+    document.addEventListener('mousedown', this.onDocumentPointerDown)
+    if (this.$route.meta.isBackFromDetail) {
+      window.setTimeout(() => {
+        window.scrollTo(0, this.savedScrollPosition || 0)
+      }, 50)
+    } else {
+      // Reset state when not returning from detail page
+      this.clearFilters()
+      this.clearSearch()
+      this.savedScrollPosition = 0
+      window.scrollTo(0, 0)
+    }
+  },
+  deactivated() {
+    document.removeEventListener('mousedown', this.onDocumentPointerDown)
+  },
+  beforeRouteLeave(to, from, next) {
+    this.savedScrollPosition = window.scrollY || document.documentElement.scrollTop
+    next()
   },
   beforeDestroy() {
     document.removeEventListener('mousedown', this.onDocumentPointerDown)

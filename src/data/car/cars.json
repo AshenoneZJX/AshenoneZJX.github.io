@@ -177,7 +177,7 @@
     "id": 8,
     "title": "宝马 3系",
     "brand": "宝马",
-    "brandLogo": "/brand-logos/bmw.png",
+    "brandLogo": "/brand-logos/bmw.svg",
     "sizeClass": "中型",
     "images": [
       "https://p3.dcarimg.com/img/motor-mis-img/DCP_dc2fee0ead02dae0ceb4ace22724d562~2508x0.webp",
@@ -199,18 +199,18 @@
     "brand": "奥迪",
     "brandLogo": "/brand-logos/audi.png",
     "sizeClass": "中型",
-    "title": "奥迪 A4L",
+    "title": "奥迪 A4",
     "images": [
-      "https://p3.dcarimg.com/img/motor-mis-img/DCP_dd46d6d9109405610ae49bd87825a3c8~2508x0.webp",
-      "https://p3.dcarimg.com/img/motor-mis-img/DCP_e2b5b7bc75002ebc9a3fef342e7e18ba~2508x0.webp",
-      "https://p3.dcarimg.com/img/motor-mis-img/DCP_6cb8b851bb69de2e594f40eef68a1845~2508x0.webp"
+      "https://p3.dcarimg.com/img/motor-mis-img/DCP_6ecb631d87e3845b40e4f2b96abdb8c4~2508x0.webp",
+      "https://p3.dcarimg.com/img/motor-mis-img/DCP_0d45a91cfdb9a35e4ec894958f8b7252~2508x0.webp",
+      "https://p3.dcarimg.com/img/motor-mis-img/DCP_728b49e29ab9f743c4a2118f67e5a8fb~2508x0.webp"
     ],
     "energy": "燃油",
     "body": "轿车",
-    "intro": "奥迪A4L（Audi A4L）是一款中型豪华轿车，以科技感与舒适驾乘著称。提供2.0T发动机匹配7DCT变速器，前五连杆/后五连杆悬架，配备Audi Pre Sense安全辅助与MMI智能互联，兼顾商务与家用需求。",
+    "intro": "奥迪A4（Audi A4）标准轴距版是一款中型豪华轿车，以紧凑的车身比例与纯粹的德系操控感著称。提供2.0T发动机匹配7DCT变速器，前五连杆/后五连杆悬架，配备Audi Pre Sense安全辅助与MMI智能互联，带来更原汁原味的驾驶体验。",
     "specs": {
-      "dimensions": "长4858mm × 宽1847mm × 高1439mm，轴距2908mm，整备质量约1645kg",
-      "engine": "2.0T L4 涡轮增压 190PS / 245PS，功率140kW / 185kW，最大扭矩280N·m / 380N·m",
+      "dimensions": "长4762mm × 宽1847mm × 高1433mm，轴距2820mm，整备质量约1600kg",
+      "engine": "2.0T L4 涡轮增压 190PS / 245PS，功率140kW / 180kW，最大扭矩320N·m / 370N·m",
       "transmission": "7DCT",
       "chassis": "前五连杆、后五连杆，前置前驱/四驱"
     }
@@ -220,7 +220,7 @@
     "brand": "奔驰",
     "brandLogo": "/brand-logos/mercedes.png",
     "sizeClass": "中型",
-    "title": "奔驰 C级L",
+    "title": "奔驰 C级",
     "images": [
       "https://p3.dcarimg.com/img/motor-mis-img/DCP_9971a28555ae44a5c5d80ed2ad99a194~2508x0.webp",
       "https://p3.dcarimg.com/img/motor-mis-img/DCP_9a5376d267887bb707995aa8872fc150~2508x0.webp",
@@ -228,9 +228,9 @@
     ],
     "energy": "燃油",
     "body": "轿车",
-    "intro": "奔驰C级L（Mercedes-Benz C-Class L）是一款中型豪华轿车，以优雅设计与舒适驾乘著称。提供1.5T/2.0T发动机匹配9AT变速器，前多连杆/后多连杆悬架，配备MBUX智能互联与主动安全辅助，兼顾商务与家用需求。",
+    "intro": "奔驰C级（Mercedes-Benz C-Class）标准轴距版是一款中型豪华运动轿车，以紧凑动感的身姿与原汁原味的操控乐趣著称。提供1.5T/2.0T发动机匹配9AT变速器，前多连杆/后多连杆悬架，配备MBUX智能互联与主动安全辅助，兼顾驾驶激情与日常通勤。",
     "specs": {
-      "dimensions": "长4882mm × 宽1820mm × 高1461mm，轴距2954mm，整备质量约1650kg",
+      "dimensions": "长4751mm × 宽1820mm × 高1437mm，轴距2865mm，整备质量约1650kg",
       "engine": "1.5T/2.0T L4 涡轮增压 170PS / 204PS / 258PS，功率120kW / 150kW / 180kW，最大扭矩240N·m / 290N·m / 350N·m",
       "transmission": "9AT",
       "chassis": "前多连杆、后多连杆，前置后驱/四驱"
@@ -241,16 +241,16 @@
     "brand": "奔驰",
     "brandLogo": "/brand-logos/mercedes.png",
     "sizeClass": "中大型",
-    "title": "奔驰 E级L",
+    "title": "奔驰 E级",
     "images": [
       "https://p3.dcarimg.com/img/motor-mis-img/DCP_dfe9599b870c550cab688433d0f5f9a1~2508x0.webp"
     ],
     "energy": "燃油",
     "body": "轿车",
-    "intro": "奔驰E级L（Mercedes-Benz E-Class L）是一款中大型豪华轿车，以豪华质感与行政舒适著称。提供2.0T发动机匹配9AT变速器，前多连杆/后多连杆悬架，配备MBUX智能互联与L2级驾驶辅助，兼顾商务接待与高端家用。",
+    "intro": "奔驰E级（Mercedes-Benz E-Class）标准轴距版是一款中大型豪华运动轿车，保留了原汁原味的欧洲车身比例与操控质感。搭载2.0T发动机匹配9AT变速器，前多连杆/后多连杆悬架，配备最新一代MBUX智能互联系统与L2级驾驶辅助，在商务稳重中注入更多运动活力。",
     "specs": {
-      "dimensions": "长5078mm × 宽1860mm × 高1490mm，轴距3079mm，整备质量约1780kg",
-      "engine": "2.0T L4 涡轮增压 197PS / 258PS，功率140kW / 185kW，最大扭矩280N·m / 380N·m",
+      "dimensions": "长4959mm × 宽1880mm × 高1479mm，轴距2961mm，整备质量约1780kg",
+      "engine": "2.0T L4 涡轮增压 197PS / 258PS，功率140kW / 185kW，最大扭矩320N·m / 400N·m",
       "transmission": "9AT",
       "chassis": "前多连杆、后多连杆，前置后驱/四驱"
     }
@@ -260,16 +260,16 @@
     "brand": "奔驰",
     "brandLogo": "/brand-logos/mercedes.png",
     "sizeClass": "大型",
-    "title": "奔驰 S级L",
+    "title": "奔驰 S级",
     "images": [
       "https://p3.dcarimg.com/img/motor-mis-img/DCP_3e1b9733f3b9363d2a69d9c153b8cbca~2508x0.webp"
     ],
     "energy": "燃油",
     "body": "轿车",
-    "intro": "奔驰S级L（Mercedes-Benz S-Class L）是一款大型旗舰豪华轿车，以极致舒适与尖端科技著称。提供3.0T L6发动机匹配9AT变速器，前双叉臂/后多连杆悬架，配备MBUX后排娱乐与L3级驾驶辅助，定义行政与豪华出行新标准。",
+    "intro": "奔驰S级（Mercedes-Benz S-Class）标准轴距版是一款大型旗舰豪华轿车，相比长轴版拥有更匀称紧凑的车身线条与更佳的动态响应。提供3.0T L6发动机匹配9AT变速器，前双叉臂/后多连杆悬架，同样配备MBUX智能交互与L3级驾驶辅助硬件，定义纯正的欧洲旗舰标准。",
     "specs": {
-      "dimensions": "长5320mm × 宽1921mm × 高1503mm，轴距3216mm，整备质量约2130kg",
-      "engine": "3.0T L6 涡轮增压 + 48V轻混 313PS / 367PS，功率200kW / 240kW，最大扭矩350N·m / 420N·m",
+      "dimensions": "长5179mm × 宽1954mm × 高1503mm，轴距3106mm，整备质量约2060kg",
+      "engine": "3.0T L6 涡轮增压 + 48V轻混 313PS / 367PS / 435PS，最大扭矩450N·m / 500N·m / 520N·m",
       "transmission": "9AT",
       "chassis": "前双叉臂、后多连杆，前置后驱/四驱"
     }
@@ -277,7 +277,7 @@
   {
     "id": 13,
     "brand": "丰田",
-    "brandLogo": null,
+    "brandLogo": "/brand-logos/toyota.png",
     "sizeClass": "紧凑型",
     "title": "丰田 RAV4",
     "images": [
@@ -320,7 +320,7 @@
   {
     "id": 15,
     "brand": "小米",
-    "brandLogo": null,
+    "brandLogo": "/brand-logos/xiaomi.png",
     "sizeClass": "中大型",
     "title": "小米 SU7",
     "images": [
@@ -341,7 +341,7 @@
   {
     "id": 16,
     "brand": "小米",
-    "brandLogo": null,
+    "brandLogo": "/brand-logos/xiaomi.png",
     "sizeClass": "中大型",
     "title": "小米 YU7",
     "images": [
@@ -362,7 +362,7 @@
   {
     "id": 17,
     "brand": "丰田",
-    "brandLogo": null,
+    "brandLogo": "/brand-logos/toyota.png",
     "sizeClass": "中型",
     "title": "丰田 凯美瑞",
     "images": [
@@ -405,7 +405,7 @@
   {
     "id": 19,
     "brand": "凯迪拉克",
-    "brandLogo": null,
+    "brandLogo": "/brand-logos/cadillac.png",
     "sizeClass": "中型",
     "title": "凯迪拉克 CT5",
     "images": [
@@ -428,16 +428,16 @@
     "brand": "奥迪",
     "brandLogo": "/brand-logos/audi.png",
     "sizeClass": "中大型",
-    "title": "奥迪 A6L",
+    "title": "奥迪 A6",
     "images": [
       "https://p3.dcarimg.com/img/motor-mis-img/DCP_6a37bf06e9a9b532ad052cccb49c5993~2508x0.webp"
     ],
     "energy": "燃油",
     "body": "轿车",
-    "intro": "奥迪A6L（Audi A6L）是一款中大型豪华轿车，以行政级空间与前沿科技著称。提供2.0T/3.0T发动机匹配7DCT变速器，前五连杆/后五连杆悬架，配备Audi Pre Sense 360安全辅助与MMI Touch智能互联，定义豪华商务出行新标杆。",
+    "intro": "奥迪A6（Audi A6）标准轴距版是一款中大型豪华轿车，相比长轴距版更强调运动姿态与原汁原味的动态操控。提供2.0T/3.0T发动机匹配7DCT变速器，前五连杆/后五连杆悬架，配备Audi Pre Sense 360安全辅助与MMI Touch智能互联，将科技感与运动属性完美结合。",
     "specs": {
-      "dimensions": "长5038mm × 宽1886mm × 高1475mm，轴距3024mm，整备质量约1800kg",
-      "engine": "2.0T L4 涡轮增压 190PS / 245PS；3.0T V6 涡轮增压 + 48V轻混 340PS，功率140kW / 185kW / 250kW，最大扭矩320N·m / 370N·m / 500N·m",
+      "dimensions": "长4939mm × 宽1886mm × 高1457mm，轴距2924mm，整备质量约1780kg",
+      "engine": "2.0T L4 涡轮增压 190PS / 245PS；3.0T V6 涡轮增压 + 48V轻混 340PS，功率140kW / 180kW / 250kW，最大扭矩320N·m / 370N·m / 500N·m",
       "transmission": "7DCT",
       "chassis": "前五连杆、后五连杆，前置前驱/四驱"
     }
@@ -486,7 +486,7 @@
   {
     "id": 22,
     "brand": "宝马",
-    "brandLogo": "/brand-logos/bmw.png",
+    "brandLogo": "/brand-logos/bmw.svg",
     "sizeClass": "中大型",
     "title": "宝马 5系",
     "images": [
@@ -505,7 +505,7 @@
   {
     "id": 23,
     "brand": "领克",
-    "brandLogo": null,
+    "brandLogo": "/brand-logos/lingke.svg",
     "sizeClass": "紧凑型",
     "title": "领克 03",
     "images": [
@@ -613,6 +613,102 @@
       "engine": "2.0L L4 自然吸气 / 2.0T L4 可变压缩比涡轮增压 156PS / 243PS，功率115kW / 179kW，最大扭矩197N·m / 371N·m",
       "transmission": "CVT / 模拟8挡CVT",
       "chassis": "前麦弗逊、后多连杆（梯形控制臂），前置前驱"
+    }
+  },
+  {
+    "id": 28,
+    "brand": "雷克萨斯",
+    "brandLogo": "/brand-logos/lexus.svg",
+    "sizeClass": "中大型",
+    "title": "雷克萨斯 ES300",
+    "images": [
+      "https://p3.dcarimg.com/img/motor-mis-img/bc99ffb700982fb51fa260e342e2cfbd~2508x0.webp",
+      "https://p3.dcarimg.com/img/motor-mis-img/23c8e419975269cd1e9de6b7a9f3b0b9~2508x0.webp",
+      "https://p3.dcarimg.com/img/motor-mis-img/bc69232cfe3a846ab0005b036d477487~2508x0.webp",
+      "https://p3.dcarimg.com/img/motor-mis-img/445b62503e4df5a2e8a87339bde4b216~2508x0.webp"
+    ],
+    "energy": [
+      "燃油",
+      "混动"
+    ],
+    "body": "轿车",
+    "intro": "雷克萨斯ES（Lexus ES）是雷克萨斯品牌旗下一款中大型豪华行政轿车，以卓越的舒适性、静谧性以及全混动科技（ES300h）著称。其拥有优雅锐利的外观设计与东方匠心内饰，兼具平顺充沛的动力与极佳的燃油经济性，是豪华家轿与行政座驾的标杆之选。",
+    "specs": {
+      "dimensions": "长4975mm × 宽1866mm × 高1447mm，轴距2870mm，整备质量约1620kg",
+      "engine": "2.5L 阿特金森循环发动机 + 永磁同步电机，系统综合功率160kW（218PS），最大扭矩221N·m",
+      "transmission": "E-CVT 无级变速器",
+      "chassis": "前麦弗逊、后多连杆，前置前驱"
+    }
+  },
+  {
+    "id": 29,
+    "brand": "理想",
+    "brandLogo": "/brand-logos/lixiang.svg",
+    "sizeClass": "中大型",
+    "title": "理想 L6",
+    "images": [
+      "https://p3.dcarimg.com/img/motor-mis-img/DCP_bc7a059ea5117d390b722b912d34a230~2508x0.webp",
+      "https://p3.dcarimg.com/img/motor-mis-img/DCP_09d6ca72bcb7ff42472945484348acc0~2508x0.webp",
+      "https://p3.dcarimg.com/img/motor-mis-img/DCP_4ce56817b8957f203e31708e13bec753~2508x0.webp"
+    ],
+    "energy": [
+      "增程"
+    ],
+    "body": "SUV",
+    "intro": "理想L6是理想汽车专为年轻家庭打造的豪华中大型五座SUV。它继承了L系列标志性的星环灯设计与高辨识度外观，搭载最新的增程电动技术和智能驾驶辅助系统，提供极佳的驾乘舒适性与智能化体验，是家庭首购或增换购的理想之选。",
+    "specs": {
+      "dimensions": "长4925mm × 宽1960mm × 高1735mm，轴距2920mm",
+      "engine": "1.5T四缸增程器 + 前后双电机智能四驱系统，综合功率300kW，综合扭矩529N·m",
+      "transmission": "电动车单速变速箱",
+      "chassis": "前双叉臂、后五连杆独立悬架，配备CDC连续可变阻尼减振器，电动四驱"
+    }
+  },
+  {
+    "id": 30,
+    "brand": "理想",
+    "brandLogo": "/brand-logos/lixiang.svg",
+    "sizeClass": "中型",
+    "title": "理想 i6",
+    "images": [
+      "https://p3.dcarimg.com/img/motor-mis-img/DCP_b26d2e700ca6f3adc91cb4f544f7dd6c~2508x0.webp",
+      "https://p3.dcarimg.com/img/motor-mis-img/DCP_fbdc104b565f8eda44ec72d223898ffb~2508x0.webp",
+      "https://p3.dcarimg.com/img/motor-mis-img/DCP_c5214efcd0a84bcf4db71d7396bbe990~2508x0.webp"
+    ],
+    "energy": [
+      "纯电"
+    ],
+    "body": "SUV",
+    "intro": "理想i6是理想汽车专为年轻家庭打造的全新中型纯电五座SUV，作为纯电i系列的首发走量车型，它基于理想最新的800V高压纯电平台开发。不仅继承了品牌标志性的科技感设计语言，更通过优化车内空间布局和搭载新一代5C超充技术，致力于提供无里程焦虑的高品质纯电出行体验。",
+    "specs": {
+      "dimensions": "长4950mm × 宽1935mm × 高1670mm，轴距3000mm，整备质量约2380kg，后备厢容积728L",
+      "engine": "800V高压平台，87.3kWh宁德时代5C磷酸铁锂电池。后驱版单电机250kW(340马力)/425N·m；四驱版双电机400kW(544马力)/660N·m",
+      "transmission": "电动车单速变速箱",
+      "chassis": "前双叉臂、后五连杆独立悬架，标配CDC连续可变阻尼减振器，可选装双腔魔毯空气悬架"
+    }
+  },
+  {
+    "id": 31,
+    "brand": "问界",
+    "brandLogo": "/brand-logos/aito.svg",
+    "sizeClass": "大型",
+    "title": "问界 M9",
+    "images": [
+      "https://p3.dcarimg.com/img/motor-mis-img/DCP_90167d1fcb0f7c66fa627cda97c9b5bd~2508x0.webp",
+      "https://p3.dcarimg.com/img/motor-mis-img/DCP_ddd55dc37dfd59da22d0dd2fdef248a0~2508x0.webp",
+      "https://p3.dcarimg.com/img/motor-mis-img/DCP_60af1932aa051f6c8ae8389e31bd8767~2508x0.webp",
+      "https://p3.dcarimg.com/img/motor-mis-img/DCP_8e72c9bb02400a3392c4600690cabd33~2508x0.webp"
+    ],
+    "energy": [
+      "增程",
+      "纯电"
+    ],
+    "body": "SUV",
+    "intro": "问界M9是赛力斯汽车与华为联合打造的全景智慧旗舰SUV。被誉为“科技车皇”的它，搭载了华为途灵智能底盘、百万像素智慧投影大灯以及HUAWEI ADS 3.0高阶智驾系统。其六座均权的大空间布局和百变魔术座椅设计，为家庭出行提供了顶级的豪华、安全与智能化体验。",
+    "specs": {
+      "dimensions": "长5230mm × 宽1999mm × 高1800mm，轴距3110mm",
+      "engine": "增程版：1.5T增程器(152马力) + 前后双电机(综合496马力)；纯电版：800V高压平台，前后双电机(综合530马力)",
+      "transmission": "电动车单速变速箱",
+      "chassis": "全铝合金底盘，前双叉臂、后多连杆独立悬架，标配闭式空气悬架与CDC可变阻尼减振器（华为途灵底盘）"
     }
   }
 ]

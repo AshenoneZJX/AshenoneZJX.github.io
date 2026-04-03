@@ -668,12 +668,14 @@ export default {
 }
 
 .brand-logo {
-  height: 1em; /* 设置高度为 1em，使其与文字高度一致 */
+  height: 1.2em; /* 稍微增加一点高度以更好地匹配文字的视觉高度 */
   width: auto;
   object-fit: contain;
   border-radius: 3px;
   background: transparent;
-  vertical-align: middle; /* 确保垂直居中对齐 */
+  vertical-align: middle;
+  position: relative;
+  top: -1px; /* 微调垂直对齐 */
 }
 .brand-logo-xiaomi {
   height: 1em;

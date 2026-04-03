@@ -421,43 +421,71 @@
     }
   },
   "特斯拉": {
-    "description": "特斯拉公司（Tesla, Inc.）是美国最大的电动汽车及太阳能公司，总部位于得克萨斯州奥斯汀，与Panasonic合作开展电池业务，产品覆盖纯电动车、太阳能板、太阳能屋顶（Solar Roof）与储能设备（Powerwall）。公司以软件定义汽车与全栈自研为核心能力，构建车载电脑（FSD系统）、全球超级充电网络与超级工厂群（Gigafactory），致力于加速世界向可持续能源的转型。",
-    "history": "2003年由马丁·艾伯哈德和马克·塔彭宁创立，随后Ian Wright与JB·史特劳贝尔加入；2004年伊隆·马斯克以A轮投资人身份出任董事长，2008年起担任CEO。2008年推出以Lotus Elise为基础的纯电跑车Roadster，首款采用锂离子电池且续航超过200英里的量产电动车，0-60mph加速3.7秒，至2012年在31个国家累计销售超过2250辆。2009年发布豪华电动轿车Model S雏形，2010年收购NUMMI工厂并在纳斯达克上市；随后推出Model X、Model 3与Model Y，至2018年成为全球最畅销充电式汽车公司。2014年与松下合作在美国建设锂电池超级工厂以降低成本；2016年获得Tesla.com域名并宣布收购SolarCity，转型为垂直整合的能源公司；2025年与三星电子达成大型芯片长期合作。",
+    "region": "其他",
+    "quote": "特斯拉（Tesla, Inc.）是全球领先的电动汽车及可持续能源公司，以“加速世界向可持续能源的转变”为企业使命。其业务涵盖纯电动车设计与制造、太阳能产品以及储能设备，是当今全球市值最高、最具影响力的汽车制造商之一。",
+    "introduction": "特斯拉总部位于美国得克萨斯州奥斯汀，由马丁·艾伯哈德和马克·塔彭宁于2003年创立，随后伊隆·马斯克作为A轮投资人加入并最终成为核心领导者。特斯拉不仅是世界上最早的自动驾驶汽车生产商之一，也是软件定义汽车（Software Defined Vehicle）和垂直整合供应链的先驱。其构建的全球超级工厂（Gigafactory）和超级充电网络（Supercharger）确立了其在电动车行业的霸主地位。",
+    "history": "2003年7月1日，马丁·艾伯哈德和马克·塔彭宁创立公司，将公司命名为“特斯拉汽车”（Tesla Motors），以纪念物理学家尼古拉·特斯拉。2004年，伊隆·马斯克以A轮投资人身份加入并出任董事长，随后成为核心领导者。2008年，推出了基于路特斯Elise底盘打造的全球首款采用锂离子电池且续航超过200英里的量产电动跑车——Roadster。2010年，特斯拉成功在纳斯达克上市，并收购了位于加州的NUMMI工厂。2012年，划时代的豪华电动轿车Model S开启交付，彻底改变了公众对电动车的认知。随后在2015年推出了配备鹰翼门的豪华SUV Model X。2016年，特斯拉收购了SolarCity，正式转型为垂直整合的能源公司。2017年，面向大众市场的Model 3开启交付，迅速成为全球最畅销的电动车型之一；随后在2020年推出的Model Y更是登顶全球单一车型销量冠军。随着上海、柏林及得州等超级工厂的陆续投产，特斯拉实现了全球产能的巨大飞跃。2023年底，极具未来感的不锈钢纯电皮卡Cybertruck正式开启交付。",
     "technology": [
       {
-        "title": "Autopilot/FSD",
-        "content": "自动辅助与高阶驾驶系统，依托车载摄像头与计算平台，具备持续OTA迭代能力。"
-      },
-      {
-        "title": "Supercharger",
-        "content": "全球超级充电网络，提供高功率直流快充与远途补能体验。"
+        "title": "FSD",
+        "content": "完全自动驾驶，特斯拉的核心竞争优势。基于纯视觉算法与自研车载高性能计算平台（如HW 3.0/4.0），实现高阶城市与高速道路的自动辅助驾驶，并通过海量真实路测数据持续训练和进化神经网络。"
       },
       {
         "title": "OTA",
-        "content": "空中升级与远程诊断，持续提升功能与性能，无需到店刷写。"
+        "content": "Over the air 空中升级，特斯拉是首个将整车OTA技术大规模商业化的车企。车辆具备全生命周期的远程软件更新能力，可不断解锁新功能、提升性能表现或修复底层故障，让汽车“越开越新”。"
       },
       {
-        "title": "Gigafactory",
-        "content": "超级工厂与规模化制造，联合松下建设锂电池产线，降低成本。"
+        "title": "一体化压铸",
+        "content": "颠覆传统汽车制造工艺的技术。采用超大型压铸机将几十甚至上百个车身零部件一体压铸成型，大幅降低了制造成本、减轻了车身重量，同时显著提升了车身刚性。"
       },
       {
-        "title": "电池与能量管理",
-        "content": "多电芯包与热管理技术，提升续航、充电效率与安全性。"
+        "title": "超级充电网络",
+        "content": "特斯拉自建并运营的全球规模最大、布局最广的直流快充网络。配合先进的车辆电池热管理系统，支持极高功率的充电速度，彻底打通了电动车的长途出行痛点。"
       },
       {
-        "title": "能源一体化",
-        "content": "太阳能板、Solar Roof 与 Powerwall 协同，构建端到端清洁能源解决方案。"
+        "title": "电芯与电池",
+        "content": "自研的无极耳4680大圆柱电芯，结合将电池包直接作为车身结构件的CTC（Cell to Chassis）技术，进一步提升了车辆的续航里程并降低了生产成本。"
       }
     ],
     "models": [
-      "Roadster",
       "Model S",
-      "Model X",
       "Model 3",
+      "Model X",
       "Model Y",
       "Cybertruck",
+      "Roadster",
       "Semi"
-    ]
+    ],
+    "current_lineup": {
+      "description": "特斯拉全球“S3XY”核心产品线及商用/皮卡系列",
+      "categories": {
+        "sedan": {
+          "category_name": "轿车",
+          "category_name_en": "Sedan",
+          "models": [
+            { "model_name": "Model 3", "model_name_zh": "Model 3" },
+            { "model_name": "Model S", "model_name_zh": "Model S" }
+          ]
+        },
+        "suv": {
+          "category_name": "SUV",
+          "category_name_en": "SUV",
+          "models": [
+            { "model_name": "Model Y", "model_name_zh": "Model Y" },
+            { "model_name": "Model X", "model_name_zh": "Model X" }
+          ]
+        },
+        "pickup_commercial": {
+          "category_name": "皮卡 & 商用车",
+          "category_name_en": "Pickup & Commercial",
+          "models": [
+            { "model_name": "Cybertruck", "model_name_zh": "Cybertruck" },
+            { "model_name": "Semi", "model_name_zh": "Semi" }
+          ]
+        }
+      }
+    },
+    "mermaid": "graph TD\n  Root[\"  Tesla 特斯拉  \"] --> S3XY[\"  S3XY 核心乘用车系列  \"]\n  S3XY --- Model_3(\"  Model 3 (中型纯电轿车)  \")\n  S3XY --- Model_Y(\"  Model Y (中型纯电SUV)  \")\n  S3XY --- Model_S(\"  Model S (旗舰豪华轿车)  \")\n  S3XY --- Model_X(\"  Model X (旗舰豪华SUV)  \")\n\n  Root --> Commercial[\"  商用与越野系列  \"]\n  Commercial --- Cybertruck(\"  Cybertruck (赛博越野旅行车)  \")\n  Commercial --- Semi(\"  Semi (纯电半挂卡车)  \")\n\n  Root --> Performance[\"  高性能跑车  \"]\n  Performance --- Roadster(\"  Roadster (纯电超跑)  \")\n\n  classDef rootNode fill:#0F172A,stroke:#38BDF8,stroke-width:2px,color:#F8FAFC,font-weight:bold,font-size:16px,rx:8,ry:8,padding:24px;\n  classDef groupNode fill:#312E81,stroke:#6366F1,stroke-width:2px,color:#E0E7FF,font-weight:bold,font-size:14px,rx:6,ry:6,padding:18px;\n  classDef modelNode fill:#334155,stroke:#64748B,stroke-width:1px,color:#F1F5F9,font-size:12px,rx:10,ry:10,padding:12px;\n\n  class Root rootNode;\n  class S3XY,Commercial,Performance groupNode;\n  class Model_3,Model_Y,Model_S,Model_X,Cybertruck,Semi,Roadster modelNode;"
   },
   "大众": {
     "region": "德系车",
@@ -472,7 +500,7 @@
       "朗逸",
       "帕萨特",
       "迈腾",
-      "大众 CC",
+      "CC",
       "途观L",
       "探岳",
       "途昂",
@@ -559,7 +587,7 @@
             { "model_name": "Lavida", "model_name_zh": "朗逸" },
             { "model_name": "Passat", "model_name_zh": "帕萨特" },
             { "model_name": "Magotan", "model_name_zh": "迈腾" },
-            { "model_name": "CC", "model_name_zh": "大众 CC" }
+            { "model_name": "CC", "model_name_zh": "CC" }
           ]
         },
         "suv": {
@@ -968,60 +996,276 @@
   },
   "小米": {
     "region": "自主品牌",
-    "description": "小米汽车（Xiaomi EV）是小米集团旗下的智能电动汽车业务板块。秉承“人车家全生态”的战略愿景，小米汽车致力于将消费电子领域的智能化经验与深厚的供应链整合能力引入汽车行业，打造具备极致科技体验与性能表现的智能出行终端。",
-    "history": "2021年小米集团宣布进军智能电动汽车并成立小米汽车有限公司与小米汽车科技有限公司，建设北京经开区工厂并逐步获得生产资质。2023年发布首款车型SU7，2024年量产并引入800V平台与高阶智能座舱与智驾方案，持续扩展产品序列与研发团队。",
+    "quote": "小米汽车是小米集团运营的智能电动汽车制造业务。该业务下设小米汽车有限公司与小米汽车科技有限公司。秉承“人车家全生态”的战略愿景，小米汽车致力于将消费电子领域的智能化经验与深厚的供应链整合能力引入汽车行业，打造具备极致科技体验与性能表现的智能出行终端。",
+    "introduction": "小米汽车的造车项目于2021年3月正式宣布，雷军兼任智能电动汽车业务的首席执行官，首期投资100亿元人民币，预计未来10年投资100亿美元。2021年9月，小米汽车有限公司注册成立，标志着造车项目正式开上快车道。小米汽车工厂落户北京经开区，分两期建设，累计年产量达30万辆。小米自动驾驶技术采用全栈自研的技术布局策略，首期投入33亿元研发费用，组建了由顶级专家组成的研发团队。2023年12月，小米汽车首款车型SU7正式发布，定位为中大型纯电动轿车，以极致的性能、先进的智能座舱和自动驾驶技术引发广泛关注。",
+    "history": "2021年3月，雷军宣布小米集团进军智能电动汽车行业并成立全资子公司，首期投资100亿元人民币；同年9月小米汽车有限公司注册成立，落户北京经开区。通过收购深动科技（DeepMotion）等动作，小米在自动驾驶领域全栈自研。2023年12月正式发布首款中大型纯电轿车SU7，于2024年上半年实现量产，并于同年7月取得独立生产资质。2024年底更将推出Xiaomi HAD端到端大模型智驾系统。",
     "technology": [
       {
-        "title": "800V高压平台",
-        "content": "高压电驱与快充架构，支持高功率充电与高效能量传输。"
+        "title": "小米澎湃OS智能座舱",
+        "content": "基于高通骁龙8295车规级芯片打造的车机系统，实现手机、智能家居与车机的无缝跨端互联互通。"
       },
       {
-        "title": "Xiaomi HAD端到端智驾",
-        "content": "以大模型驱动的端到端智能驾驶方案，覆盖行车与泊车全场景持续进化。"
+        "title": "Xiaomi HAD 端到端智驾",
+        "content": "全栈自研的端到端大模型智驾系统（Xiaomi Hyper Autonomous Driving），可实现行车和泊车全场景智能驾驶体验。"
       },
       {
-        "title": "HyperOS智能座舱",
-        "content": "跨设备融合的车机操作系统，支持多设备互联与生态应用。"
+        "title": "800V超级快充平台",
+        "content": "高压电驱与快充架构，支持高功率充电与高效能量传输，实现充电5分钟续航220km。"
       },
       {
-        "title": "骁龙8295座舱平台",
-        "content": "车规级高算力芯片，提升图形处理与多媒体交互体验。"
+        "title": "极致空气动力学设计",
+        "content": "通过溜背式车身等优化设计，首款车型SU7风阻系数低至0.195，兼顾美学与能耗表现。"
       }
     ],
     "models": [
       "SU7",
       "YU7"
-    ]
+    ],
+    "classic_models": {
+      "description": "小米汽车首发即巅峰，以强大的科技实力和极致的性能表现，重新定义了智能电动轿车的标杆。",
+      "list": [
+        {
+          "model_name": "SU7",
+          "model_name_zh": "SU7",
+          "production_years": "2024-至今",
+          "historical_significance": "小米汽车的首款量产车型，标志着小米正式进入汽车制造领域，展现了其在智能座舱、自动驾驶和三电系统方面的深厚积累。",
+          "key_features": [
+            "风阻系数0.195",
+            "百公里加速2.78秒",
+            "最高续航800公里",
+            "小米澎湃OS车机系统"
+          ],
+          "status": "在售"
+        }
+      ]
+    }
   },
   "丰田": {
     "region": "日系车",
-    "description": "丰田汽车公司（Toyota Motor Corporation）是日本跨国汽车制造商，总部位于爱知县丰田市，是雷克萨斯、大发、日野与世纪等品牌的母公司，并持有斯巴鲁重要股权。以可靠耐用、精益生产与全价值链质量管理著称，提出“Start Your Impossible”等全球化品牌口号。",
-    "history": "1933年自丰田自动织机制作所分立，1935年生产首款量产乘用车AA，并于1936年将“トヨダ（Toyoda）”更名为“トヨタ（Toyota）”；1937年正式成立丰田自动车工业株式会社。战后经历经营危机与重组，逐步形成独特的丰田生产方式（TPS）。1960年代推出卡罗拉并大规模出口，1982年完成制造与销售部门合并，1989年成立豪华品牌雷克萨斯。此后持续全球化布局，在中国、日本、北美与欧洲等地建立制造与研发体系。",
+    "quote": "丰田汽车公司（Toyota Motor Corporation）是日本的一家跨国汽车制造公司，总部位于爱知县丰田市，是雷克萨斯、大发、日野与世纪等品牌的母公司，并持有斯巴鲁重要股权。丰田以可靠耐用、精益生产（TPS）与全价值链质量管理著称，长期位居全球汽车销量榜首。",
+    "introduction": "丰田汽车的历史可以追溯到1933年丰田喜一郎在丰田佐吉创办的“丰田自动织机制作所”内设立的汽车部。1935年生产出首款乘用量产车丰田AA，并在1937年正式独立为“丰田自动车工业株式会社”。从早期的模仿与探索，到战后确立独特的“丰田生产方式（Toyota Production System）”，丰田逐步成长为全球最大的汽车制造商之一。目前，丰田在全球范围内提供从紧凑型轿车到大型SUV、商用车以及混合动力和燃料电池汽车的全面产品线，并提出了“Start Your Impossible”的全球品牌口号，致力于向移动出行公司转型。",
+    "history": "丰田汽车于1937年正式独立建厂。二战期间工厂转为军工生产，战后日本经济萧条，丰田在1950年陷入经营危机，丰田喜一郎辞去社长职务，公司在此期间逐步摸索出消除浪费的“精益生产（TPS）”体系。1966年推出的卡罗拉（Corolla）伴随日本经济腾飞而畅销全球，至今累计销量已突破5000万辆，成为世界最畅销车系。1980年代，丰田大举进军北美市场，并于1989年创立豪华品牌雷克萨斯（Lexus）。1997年，全球首款量产混合动力汽车普锐斯（Prius）问世，奠定了丰田在新能源领域的先发优势。进入21世纪，丰田在全球范围内推行TNGA（Toyota New Global Architecture）架构，全面提升车辆的基础性能与安全性。近年来，丰田提出了多路径新能源战略，在持续发展混动、插电混动的同时，积极布局纯电动（bZ系列）和氢燃料电池（Mirai）技术。",
+    "models": [
+      "卡罗拉",
+      "雷凌",
+      "凯美瑞",
+      "亚洲龙",
+      "皇冠",
+      "RAV4荣放",
+      "威兰达",
+      "汉兰达",
+      "皇冠陆放",
+      "普拉多",
+      "兰德酷路泽",
+      "埃尔法",
+      "赛那",
+      "格瑞维亚",
+      "Supra",
+      "86",
+      "普锐斯",
+      "bZ4X",
+      "bZ3"
+    ],
+    "classic_models": {
+      "description": "从经济型家轿到全地形越野车，丰田的经典车型以其卓越的可靠性和耐用性赢得了全球用户的信赖。",
+      "list": [
+        {
+          "model_name": "Corolla",
+          "model_name_zh": "卡罗拉",
+          "production_years": "1966-至今",
+          "historical_significance": "全球最畅销的汽车系列，累计销量超过5000万辆，以极高的经济性和耐用性成为全球无数家庭的首选。",
+          "key_features": [
+            "经济耐用",
+            "全球累计销量第一",
+            "衍生车型丰富",
+            "家用轿车标杆"
+          ],
+          "status": "在售"
+        },
+        {
+          "model_name": "Land Cruiser",
+          "model_name_zh": "兰德酷路泽 (陆地巡洋舰)",
+          "production_years": "1951-至今",
+          "historical_significance": "丰田的传奇越野车系列，以其在恶劣环境下的卓越可靠性和强大越野能力闻名于世，被誉为“越野之王”。",
+          "key_features": [
+            "非承载式车身",
+            "强悍越野能力",
+            "极致可靠性",
+            "全球越野图腾"
+          ],
+          "status": "在售"
+        },
+        {
+          "model_name": "Camry",
+          "model_name_zh": "凯美瑞",
+          "production_years": "1982-至今",
+          "historical_significance": "全球中型轿车（B级车）市场的常青树，长期霸占北美最畅销乘用车宝座。",
+          "key_features": [
+            "均衡产品力",
+            "双擎混动技术",
+            "舒适平顺",
+            "北美销量冠军"
+          ],
+          "status": "在售"
+        },
+        {
+          "model_name": "Prius",
+          "model_name_zh": "普锐斯",
+          "production_years": "1997-至今",
+          "historical_significance": "全球首款量产混合动力汽车，引领了汽车工业的新能源环保潮流。",
+          "key_features": [
+            "首款量产混动",
+            "THS混动系统",
+            "超低油耗",
+            "独特空气动力学造型"
+          ],
+          "status": "在售"
+        },
+        {
+          "model_name": "AE86 (Corolla Levin/Sprinter Trueno)",
+          "model_name_zh": "AE86",
+          "production_years": "1983-1987",
+          "historical_significance": "凭借轻量化前置后驱布局和动漫《头文字D》的传播，成为全球漂移文化和JDM车迷心中的神车。",
+          "key_features": [
+            "前置后驱 (FR)",
+            "轻量化车身",
+            "4A-GE高转引擎",
+            "漂移神车"
+          ],
+          "status": "已停产"
+        }
+      ]
+    },
+    "current_lineup": {
+      "description": "当前在售主力车型（以中国及全球主要市场为主）",
+      "categories": {
+        "sedan": {
+          "category_name": "轿车",
+          "category_name_en": "Sedan",
+          "models": [
+            { "model_name": "Corolla", "model_name_zh": "卡罗拉 / 雷凌" },
+            { "model_name": "Camry", "model_name_zh": "凯美瑞" },
+            { "model_name": "Avalon", "model_name_zh": "亚洲龙" },
+            { "model_name": "Crown", "model_name_zh": "皇冠轿车" },
+            { "model_name": "Prius", "model_name_zh": "普锐斯" }
+          ]
+        },
+        "suv": {
+          "category_name": "SUV / 越野车",
+          "category_name_en": "SUV / Off-Road",
+          "models": [
+            { "model_name": "RAV4", "model_name_zh": "RAV4荣放 / 威兰达" },
+            { "model_name": "Highlander", "model_name_zh": "汉兰达 / 皇冠陆放" },
+            { "model_name": "Land Cruiser Prado", "model_name_zh": "普拉多" },
+            { "model_name": "Land Cruiser", "model_name_zh": "兰德酷路泽" },
+            { "model_name": "Crown Signia", "model_name_zh": "皇冠 Signia" }
+          ]
+        },
+        "mpv": {
+          "category_name": "MPV",
+          "category_name_en": "Minivan",
+          "models": [
+            { "model_name": "Alphard", "model_name_zh": "埃尔法" },
+            { "model_name": "Vellfire", "model_name_zh": "威尔法" },
+            { "model_name": "Sienna", "model_name_zh": "赛那 / 格瑞维亚" }
+          ]
+        },
+        "performance": {
+          "category_name": "性能跑车 (GR系列)",
+          "category_name_en": "Sports Cars",
+          "models": [
+            { "model_name": "GR Supra", "model_name_zh": "GR Supra" },
+            { "model_name": "GR86", "model_name_zh": "GR86" },
+            { "model_name": "GR Yaris", "model_name_zh": "GR Yaris" }
+          ]
+        },
+        "ev": {
+          "category_name": "纯电动车 (bZ系列)",
+          "category_name_en": "Electric Vehicles",
+          "models": [
+            { "model_name": "bZ4X", "model_name_zh": "bZ4X" },
+            { "model_name": "bZ3", "model_name_zh": "bZ3" }
+          ]
+        }
+      }
+    },
+    "sub_brands": {
+      "title": "丰田集团",
+      "list": [
+        {
+          "brand_group": "主品牌",
+          "brand_name": "Toyota",
+          "brand_name_zh": "丰田",
+          "current_models": [
+            "卡罗拉",
+            "凯美瑞",
+            "RAV4",
+            "汉兰达",
+            "兰德酷路泽"
+          ]
+        },
+        {
+          "brand_group": "豪华品牌",
+          "brand_name": "Lexus",
+          "brand_name_zh": "雷克萨斯",
+          "current_models": [
+            "ES 轿车",
+            "LS 旗舰轿车",
+            "RX 中型SUV",
+            "NX 豪华SUV",
+            "LX 全尺寸越野车",
+            "LM 豪华MPV"
+          ]
+        },
+        {
+          "brand_group": "高性能品牌",
+          "brand_name": "Gazoo Racing (GR)",
+          "brand_name_zh": "丰田GR",
+          "current_models": [
+            "GR Supra",
+            "GR86",
+            "GR Yaris",
+            "GR Corolla"
+          ]
+        },
+        {
+          "brand_group": "子品牌与关联企业",
+          "brand_name": "Daihatsu",
+          "brand_name_zh": "大发",
+          "positioning": "专注于小型车与K-Car",
+          "current_models": [
+            "Tanto",
+            "Move",
+            "Rocky"
+          ]
+        }
+      ]
+    },
     "technology": [
       {
         "title": "TNGA架构",
-        "content": "Toyota New Global Architecture 模块化平台，优化车身重心、刚性与动力匹配，提升操控与安全。"
+        "content": "Toyota New Global Architecture（丰田新全球架构）。这是一个涵盖汽车研发、设计、生产、采购等全产业链的创新体系。通过降低车辆重心、提升车身刚性、优化悬架设计，TNGA架构下的车型在操控性、舒适性和安全性上都得到了全面提升。"
       },
       {
-        "title": "THS混合动力",
-        "content": "Toyota Hybrid System 以行星齿轮耦合实现电机与发动机高效协同，兼顾节能与顺畅性。"
+        "title": "THS混合动力系统",
+        "content": "Toyota Hybrid System。全球最成熟的油电混合动力技术之一，核心是通过行星齿轮机构（E-CVT）实现发动机与电动机的无缝动力分配与耦合。具有极高的燃油经济性、平顺的驾驶体验以及卓越的可靠性。"
       },
       {
-        "title": "E‑Four电四驱",
-        "content": "后轴电机驱动的电控四驱系统，提升湿滑与冰雪工况的稳定性。"
+        "title": "TSS",
+        "content": "Toyota Safety Sense 丰田规避碰撞辅助套装。集成了PCS预碰撞安全系统、DRCC动态雷达巡航控制、LTA车道循迹辅助、AHB自动调节远光灯等多项主动安全配置，全方位守护行车安全。"
       },
       {
-        "title": "Toyota Safety Sense",
-        "content": "主动安全辅助体系，覆盖前碰撞预警/制动、车道保持与自适应巡航等功能。"
+        "title": "E-Four 电子四驱系统",
+        "content": "专为混动车型设计的电控四驱技术。取消了传统的中央传动轴，通过在后桥增加独立驱动电机，实现前后轴动力的智能分配，提升车辆在湿滑路面或起步时的稳定性和抓地力。"
+      },
+      {
+        "title": "氢燃料电池技术 (FCEV)",
+        "content": "以丰田Mirai为代表的终极环保技术。通过氢气与氧气的化学反应产生电能驱动车辆，排放物仅为纯水，加氢过程仅需几分钟即可实现长续航。"
+      },
+      {
+        "title": "D-4S 双喷射技术",
+        "content": "结合了进气歧管喷射和缸内直喷两种方式的发动机技术。根据不同的发动机工况智能切换喷油模式，兼顾低速平顺性、减少积碳以及高速时的大功率输出。"
       }
-    ],
-    "models": [
-      "卡罗拉",
-      "皇冠",
-      "Supra",
-      "Hilux",
-      "RAV4",
-      "凯美瑞"
     ]
   },
   "小鹏": {
@@ -1061,55 +1305,108 @@
   },
   "理想": {
     "region": "自主品牌",
-    "description": "理想汽车（Li Auto）是中国新能源汽车制造商，设计、研发、制造和销售豪华智能电动汽车，成立于2015年。品牌以“创造移动的家，创造幸福的家”为使命，率先在中国成功商业化增程式电动汽车（EREV），并逐步拓展至高压纯电市场。",
-    "history": "2015年由李想创立，原名车和家。2019年推出首款产品理想ONE，定位智能增程式中大型SUV。2020年在美国纳斯达克上市，2021年在香港联交所双重主要上市。2022年发布全尺寸旗舰SUV理想L9，随后相继推出理想L8和理想L7，形成L系列家庭SUV矩阵。2024年推出首款高压纯电MPV理想MEGA以及中大型SUV理想L6，持续深耕家庭用户市场。",
+    "quote": "理想汽车（Li Auto）是中国新能源汽车制造商，设计、研发、制造和销售豪华智能电动汽车，致力于为家庭用户提供安全、便捷、舒适的出行体验。",
+    "introduction": "理想汽车成立于2015年，原名车和家，由连续创业者李想创立，总部位于北京，生产基地位于江苏常州。品牌以“创造移动的家，创造幸福的家”为企业使命，率先在中国成功商业化增程式电动汽车（EREV），并逐步拓展至高压纯电市场。理想汽车不仅在产品定义上精准切中“家庭用车”的核心需求，其在智能座舱（首创“冰箱、彩电、大沙发”配置模式）和智能驾驶领域的持续研发，使其成为中国造车新势力中首家实现千亿年营收及稳定盈利的头部企业。",
+    "history": "2015年7月，李想创立“车和家”，最初探索SEV微型低速电动车项目，因法规受限后于2018年全面转型聚焦中大型SUV市场。2018年10月发布首款产品“理想智造ONE”，2019年3月更名为“理想汽车”，同年11月开始量产交付。这款定位智能增程式的中大型SUV凭借精准的“六座奶爸车”定位和解决里程焦虑的增程技术，迅速成为爆款，单车型累计交付超20万辆。2020年7月，理想汽车在美国纳斯达克挂牌上市；2021年8月在香港联交所实现双重主要上市。2022年起，理想汽车开启了第二代产品矩阵的布局，发布全尺寸旗舰SUV理想L9，随后相继推出理想L8和理想L7，形成强大的“L系列”家庭SUV矩阵。2024年，理想推出了首款高压纯电MPV理想MEGA，正式进军纯电市场，并随后发布了面向更广泛家庭用户的中大型SUV理想L6。凭借精准的产品定义和卓越的商业效率，2024年理想汽车累计交付量突破100万辆，成为中国首家达成此里程碑的新势力品牌。",
     "technology": [
       {
-        "title": "增程式电动技术 (EREV)",
-        "content": "采用大容量电池组与高效增程器结合的动力系统，解决纯电车的里程焦虑，提供接近纯电的平顺驾驶体验。"
+        "title": "智能增程电动系统 (EREV)",
+        "content": "理想汽车是增程路线的绝对引领者。采用大容量电池组与高效增程器结合的动力系统，城市通勤使用纯电，长途出行由增程器发电，彻底解决纯电车的里程焦虑，同时提供媲美纯电的平顺驾驶与极佳的NVH体验。"
       },
       {
         "title": "理想智能驾驶 (AD Max/Pro)",
-        "content": "全栈自研的智能驾驶系统，AD Max版本搭载激光雷达与高算力芯片，支持全场景智能驾驶（NOA）；基于端到端大模型持续进化。"
+        "content": "全栈自研的智能驾驶系统。AD Max版本搭载激光雷达与双英伟达Orin-X高算力芯片，全面升级至端到端（End-to-End）大模型和VLM视觉语言模型，支持全场景NOA；AD Pro则基于纯视觉方案提供高性价比的高阶智驾体验。"
       },
       {
         "title": "理想空间智能 (SS Max/Pro)",
-        "content": "基于多屏交互与全车语音的智能座舱系统，内置Mind GPT大模型，打造“移动的家”的车内交互体验。"
+        "content": "首创“冰箱、彩电、大沙发”的家庭座舱概念。基于高通骁龙8295芯片、多屏交互与全车语音系统，内置自研的Mind GPT大模型“理想同学”，打造沉浸式的“移动的家”娱乐体验。"
       },
       {
-        "title": "5C高压纯电平台",
-        "content": "800V高压平台与5C超充技术结合，配合自建超充网络，实现“充电12分钟续航500公里”的补能体验。"
+        "title": "5C高压纯电与热管理",
+        "content": "专为纯电车型（如MEGA）打造的800V高压平台，结合宁德时代5C麒麟电池与自研超充网络，实现“充电12分钟续航500公里”的极致补能体验，并配备先进的热泵空调系统。"
       }
     ],
     "models": [
-      "理想ONE",
-      "理想L9",
-      "理想L8",
-      "理想L7",
-      "理想L6",
-      "理想MEGA"
-    ]
+      "ONE",
+      "L9",
+      "L8",
+      "L7",
+      "L6",
+      "MEGA",
+      "i8",
+      "i6"
+    ],
+    "classic_models": {
+      "description": "已停产的里程碑车型",
+      "list": [
+        {
+          "model_name": "ONE",
+          "model_name_zh": "ONE",
+          "production_years": "2019-2022",
+          "historical_significance": "理想汽车的首款量产车，中国新势力中首个单款突破20万辆的爆款车型，成功开创了“奶爸车”这一细分市场并验证了增程路线的商业可行性。",
+          "key_features": [
+            "智能增程系统",
+            "四屏交互",
+            "六座大空间",
+            "标配辅助驾驶"
+          ],
+          "status": "已停产"
+        }
+      ]
+    },
+    "current_lineup": {
+      "description": "当前在售的“L系列”增程矩阵、“M系列”纯电矩阵及“i系列”纯电矩阵",
+      "categories": {
+        "erev_suv": {
+          "category_name": "增程 SUV (L系列)",
+          "category_name_en": "EREV SUV",
+          "models": [
+            { "model_name": "L9", "model_name_zh": "L9" },
+            { "model_name": "L8", "model_name_zh": "L8" },
+            { "model_name": "L7", "model_name_zh": "L7" },
+            { "model_name": "L6", "model_name_zh": "L6" }
+          ]
+        },
+        "ev_suv": {
+          "category_name": "纯电 SUV (i系列)",
+          "category_name_en": "BEV SUV",
+          "models": [
+            { "model_name": "i8", "model_name_zh": "i8" },
+            { "model_name": "i6", "model_name_zh": "i6" }
+          ]
+        },
+        "ev_mpv": {
+          "category_name": "纯电 MPV (M系列)",
+          "category_name_en": "BEV MPV",
+          "models": [
+            { "model_name": "MEGA", "model_name_zh": "MEGA" }
+          ]
+        }
+      }
+    },
+    "mermaid": "graph TD\n  Root[\"  Li Auto 理想汽车  \"] --> L_Series[\"  L Series (增程电动SUV)  \"]\n  L_Series --- L6(\"  L6 五座中大型SUV (入门旗舰)  \")\n  L_Series --- L7(\"  L7 五座旗舰SUV  \")\n  L_Series --- L8(\"  L8 六座中大型SUV  \")\n  L_Series --- L9(\"  L9 六座全尺寸旗舰SUV  \")\n\n  Root --> MEGA_Series[\"  MEGA Series (旗舰纯电MPV)  \"]\n  MEGA_Series --- MEGA(\"  MEGA 家庭科技旗舰MPV  \")\n\n  Root --> i_Series[\"  i Series (纯电SUV战略拓展)  \"]\n  i_Series --- i6(\"  i6 五座纯电SUV (中型)  \")\n  i_Series --- i8(\"  i8 六座纯电SUV (大型)  \")\n  i_Series --- i9(\"  i9 六座纯电SUV (全尺寸)  \")\n\n  classDef rootNode fill:#0F172A,stroke:#38BDF8,stroke-width:2px,color:#F8FAFC,font-weight:bold,font-size:16px,rx:8,ry:8,padding:24px;\n  classDef groupNode fill:#312E81,stroke:#6366F1,stroke-width:2px,color:#E0E7FF,font-weight:bold,font-size:14px,rx:6,ry:6,padding:18px;\n  classDef modelNode fill:#334155,stroke:#64748B,stroke-width:1px,color:#F1F5F9,font-size:12px,rx:10,ry:10,padding:12px;\n\n  class Root rootNode;\n  class L_Series,MEGA_Series,i_Series groupNode;\n  class L6,L7,L8,L9,MEGA,i6,i8,i9 modelNode;"
   },
   "蔚来": {
     "region": "自主品牌",
-    "description": "蔚来（NIO）是一家全球化的智能电动汽车公司，于2014年11月成立。蔚来致力于通过提供高性能的智能电动汽车与极致用户体验，为用户创造愉悦的生活方式。品牌以创新的换电模式（BaaS）、BaaS电池租用服务和蔚来中心（NIO House）等用户社区建设闻名。",
-    "history": "2014年由李斌发起创立。2016年在伦敦发布全球最快电动汽车之一的EP9。2017年发布首款量产车智能电动旗舰SUV ES8。2018年在纽交所上市。此后陆续推出ES6、EC6、ES7、ET7、ET5等车型，涵盖SUV和轿车市场。蔚来在全球多地设立研发与设计中心，并积极推进全球化布局，进入欧洲多个国家市场。同时，蔚来还发布了子品牌“乐道”（ONVO）和“萤火虫”（Firefly）以覆盖更广泛的大众市场。",
+    "quote": "蔚来（NIO）是一家全球化的智能电动汽车公司，致力于通过提供高性能的智能电动汽车与极致用户体验，为用户创造愉悦的生活方式。",
+    "introduction": "蔚来成立于2014年11月，总部位于中国上海，并在全球多地设立研发、设计及生产机构。蔚来的名字寓意“Blue Sky Coming（蔚蓝天空的到来）”，代表了其对环保与可持续发展的愿景。品牌以首创的换电模式（BaaS，电池租用服务）和超越传统的车主社区文化（NIO House）闻名于世。作为中国造车新势力的先驱，蔚来不仅在三电系统、智能座舱和自动驾驶领域坚持全栈自研，更建立了一套包含换电站、超充桩、移动充电车在内的全场景补能网络体系NIO Power。",
+    "history": "2014年11月，由李斌联合多位互联网及汽车界资深人士发起创立蔚来。2016年11月，在伦敦发布了刷新多条赛道纪录的全球最快电动超跑之一EP9。2017年4月，首款量产车——智能电动旗舰SUV ES8正式亮相，并于同年12月上市交付。2018年9月，蔚来在纽约证券交易所成功上市；随后于2022年3月和5月分别在香港及新加坡挂牌上市，成为首家在三地上市的智能电动车企。在发展过程中，蔚来曾于2019年底遭遇严峻的资金链危机，后于2020年初通过“合肥市政府”战略投资70亿元人民币的“蔚来中国”项目成功脱困，迎来高速发展。此后几年，蔚来基于NT1.0和NT2.0平台陆续推出了ES6、EC6、ES7、ET7、ET5及ET5T等涵盖中大型/中型SUV和轿车的完整产品矩阵。2021年起，蔚来正式开启全球化步伐，进入挪威及欧洲多国市场。为覆盖更广泛的大众市场，蔚来在2024年5月发布了面向主流家庭市场的子品牌“乐道”（ONVO），首款车型L60于9月上市；并积极筹备面向小型车市场的子品牌“萤火虫”（Firefly）。",
     "technology": [
       {
-        "title": "换电技术 (NIO Power)",
-        "content": "全球领先的充换电一体化网络，支持几分钟内完成电池更换，并实现电池的集中健康管理与升级。"
+        "title": "NIO Power (可充可换可升级)",
+        "content": "全球领先的充换电一体化网络，是蔚来最核心的护城河。支持最快3分钟内完成全自动电池更换，结合电池租用服务（BaaS），实现车电分离，不仅彻底消除了续航焦虑，还通过集中管理延长了电池寿命。"
       },
       {
-        "title": "蔚来智能驾驶 (NAD)",
-        "content": "基于Aquila蔚来超感系统与Adam蔚来超算平台，逐步实现高速、城区、泊车和换电等场景的点到点自动驾驶体验。"
+        "title": "NAD 蔚来自动驾驶",
+        "content": "NIO Autonomous Driving。基于由超远距激光雷达和800万像素高清摄像头组成的Aquila蔚来超感系统，以及搭载4颗英伟达Orin芯片、总算力达1016 TOPS的Adam蔚来超算平台，逐步实现高速、城区、泊车和换电等全场景点到点自动驾驶。"
       },
       {
-        "title": "NOMI智能语音助手",
-        "content": "全球首个量产的车载人工智能系统，具备情感化交互设计，结合大模型提供自然流畅的语音助手体验。"
+        "title": "NOMI 智能车载人工智能",
+        "content": "全球首个量产的车载人工智能系统，具备拟人化的实体表盘与情感化交互设计。最新版本深度融合了多模态大模型，提供极其自然、流畅且具备深层语境理解能力的交互体验。"
       },
       {
-        "title": "全铝车身与碳化硅电驱",
-        "content": "采用轻量化高强度全铝车身架构，结合自研高效碳化硅电驱系统，兼顾操控性能与能耗效率。"
+        "title": "高性能全铝车身与碳化硅电驱",
+        "content": "整车采用轻量化、高强度的高比例全铝车身架构。动力方面，蔚来坚持全栈自研自产高效碳化硅（SiC）电驱系统，兼顾了高性能轿跑级别的加速能力与优秀的能耗效率。"
       }
     ],
     "models": [
@@ -1122,34 +1419,145 @@
       "ET5",
       "ET5T",
       "EP9"
-    ]
+    ],
+    "current_lineup": {
+      "description": "当前在售主力车型（NIO主品牌）",
+      "categories": {
+        "suv": {
+          "category_name": "SUV / 轿跑SUV",
+          "category_name_en": "SUV / Coupe SUV",
+          "models": [
+            { "model_name": "ES8", "model_name_zh": "蔚来ES8 (旗舰六座SUV)" },
+            { "model_name": "ES7", "model_name_zh": "蔚来ES7 (中大型大五座SUV)" },
+            { "model_name": "ES6", "model_name_zh": "蔚来ES6 (全能中型SUV)" },
+            { "model_name": "EC7", "model_name_zh": "蔚来EC7 (旗舰轿跑SUV)" },
+            { "model_name": "EC6", "model_name_zh": "蔚来EC6 (智能轿跑SUV)" }
+          ]
+        },
+        "sedan": {
+          "category_name": "轿车 / 旅行车",
+          "category_name_en": "Sedan / Tourer",
+          "models": [
+            { "model_name": "ET7", "model_name_zh": "蔚来ET7 (高端行政轿车)" },
+            { "model_name": "ET5", "model_name_zh": "蔚来ET5 (中型智能轿跑)" },
+            { "model_name": "ET5T", "model_name_zh": "蔚来ET5T (智能纯电旅行车)" }
+          ]
+        }
+      }
+    },
+    "classic_models": {
+      "description": "具有里程碑意义的经典或特殊车型",
+      "list": [
+        {
+          "model_name": "EP9",
+          "model_name_zh": "蔚来EP9",
+          "production_years": "2016",
+          "historical_significance": "蔚来品牌的开山之作，全球最快电动汽车之一，曾刷新纽北赛道最快量产车圈速纪录。",
+          "key_features": [
+            "1360匹马力",
+            "碳纤维单体壳",
+            "3G重力加速度",
+            "换电设计"
+          ],
+          "status": "限量生产"
+        }
+      ]
+    },
+    "sub_brands": {
+      "title": "蔚来多品牌矩阵",
+      "list": [
+        {
+          "brand_group": "高端品牌",
+          "brand_name": "NIO",
+          "brand_name_zh": "蔚来",
+          "positioning": "面向30万以上的高端纯电市场",
+          "current_models": ["ES8", "ET7", "ES6", "ET5"]
+        },
+        {
+          "brand_group": "主流家庭品牌",
+          "brand_name": "ONVO",
+          "brand_name_zh": "乐道",
+          "positioning": "面向20万级主流家庭市场，共享换电网络",
+          "current_models": ["L60"]
+        }
+      ]
+    }
   },
   "问界": {
     "region": "自主品牌",
-    "description": "问界（AITO）是赛力斯汽车与华为联合打造的高端智能汽车品牌。AITO意为“Adding Intelligence to Auto”（将智能带入汽车），品牌深度融合赛力斯在纯电驱增程技术与制造方面的深厚积累，以及华为在ICT领域的领先技术，致力于为用户带来智慧出行体验。",
-    "history": "2021年12月，赛力斯与华为联合发布AITO问界品牌，并推出首款中型豪华SUV问界M5。2022年发布大型豪华SUV问界M7，迅速获得市场认可。2023年底推出全景智慧旗舰SUV问界M9，凭借华为全栈智能技术赋能，成为中国高端新能源汽车市场的爆款车型。问界系列通过华为鸿蒙智行（HIMA）模式，在华为渠道进行销售与服务。",
+    "quote": "问界（AITO）是赛力斯汽车与华为联合设计的高端智能新能源汽车品牌，AITO意为“Adding Intelligence to Auto”（将智能带入汽车）。",
+    "introduction": "问界品牌深度融合了赛力斯在纯电驱增程技术与整车智能制造方面的深厚积累，以及华为在ICT（信息与通信技术）领域的全球领先优势。作为华为“鸿蒙智行”（HIMA，Harmony Intelligent Mobility Alliance）生态模式下首个也是目前最成功的代表品牌，问界不仅由华为深度参与产品定义、ID设计、软硬件开发与质量管控，更通过华为遍布全国的门店渠道进行销售和营销，致力于为用户带来全场景的智慧出行体验。",
+    "history": "2021年12月2日，赛力斯汽车在重庆举行品牌发布会，正式发布AITO品牌；同年12月23日，在华为冬季旗舰新品发布会上，首款中型豪华增程SUV——问界M5正式发布，并成为首款搭载华为鸿蒙智能座舱的量产车型。2022年7月，定位中大型SUV的问界M7上市，并在次年9月推出焕新版，凭借大空间和领先的高阶智驾能力迅速爆单，成为现象级爆款。2023年12月底，被誉为“科技车皇”的全景智慧旗舰SUV问界M9正式上市，该车集成了华为多项尖端黑科技（如途灵底盘、百万像素智慧大灯、ADS 2.0/3.0无图智驾等），上市后销量持续走高，并在2024年长期霸榜中国50万级以上豪华车销量冠军，彻底奠定了问界在高端新能源市场的地位。2024年7月，赛力斯斥资25亿元人民币收购了华为持有的AITO问界相关商标及专利，标志着品牌资产向车企的进一步转移，但双方的“鸿蒙智行”联合设计与销售合作模式依然保持紧密且持续深化。",
     "technology": [
       {
-        "title": "HUAWEI ADS 智驾系统",
-        "content": "华为高阶智能驾驶系统，基于GOD（通用障碍物检测）网络和RCR（道路拓扑推理）网络，实现“全国都能开，有路就能开”的无图智驾体验。"
+        "title": "HUAWEI ADS 3.0 高阶智驾",
+        "content": "华为高阶智能驾驶系统。全面升级至端到端（End-to-End）大模型架构，基于GOD（通用障碍物检测）和RCR（道路拓扑推理）网络，实现了“全国都能开，有路就能开”的无图高阶智驾体验，其全向防碰撞等主动安全能力在业内享有极高声誉。"
       },
       {
-        "title": "HarmonyOS 智能座舱",
-        "content": "基于华为鸿蒙操作系统的智能座舱，实现车机与手机、智能家居的无缝流转，提供极致流畅的交互与丰富的应用生态。"
+        "title": "HarmonyOS 鸿蒙智能座舱",
+        "content": "被誉为“车机天花板”的智能座舱。基于华为HarmonyOS操作系统开发，实现了车机与华为手机、智能家居、穿戴设备的无缝流转与超级桌面互联，提供极致流畅的交互体验和庞大的应用生态。"
       },
       {
-        "title": "途灵智能底盘",
-        "content": "华为自研的智能底盘系统，集成多模态融合感知系统、HUAWEI DATS动态自适应扭矩系统和HUAWEI xMotion智能车身协同控制系统，提升操控与舒适性。"
+        "title": "途灵智能底盘 (Turing Chassis)",
+        "content": "华为自研的智能底盘系统。集成了多模态融合感知系统、HUAWEI DATS动态自适应扭矩系统和HUAWEI xMotion智能车身协同控制系统，通过智能算法提前预判路况并主动调节悬架阻尼与扭矩，大幅提升操控上限与乘坐舒适性。"
       },
       {
-        "title": "赛力斯魔方平台",
-        "content": "支持增程与纯电双技术路线的超级平台，具备高安全、高集成度和高拓展性，保障车辆基础性能与安全。"
+        "title": "HUAWEI DriveONE 纯电驱增程平台",
+        "content": "基于赛力斯魔方平台与华为DriveONE三合一电驱动系统打造。支持增程与纯电双技术路线，具备高效率、长续航和静谧性，配合超高强度的笼式车身，从底层架构上保障了性能与安全。"
       }
     ],
     "models": [
-      "问界M5",
-      "问界M7",
-      "问界M9"
+      "M5",
+      "M7",
+      "M9"
+    ],
+    "current_lineup": {
+      "description": "鸿蒙智行问界系列主力车型",
+      "categories": {
+        "suv": {
+          "category_name": "SUV",
+          "category_name_en": "SUV",
+          "models": [
+            { "model_name": "M9", "model_name_zh": "M9" },
+            { "model_name": "M7", "model_name_zh": "M7" },
+            { "model_name": "M5", "model_name_zh": "M5" }
+          ]
+        }
+      }
+    }
+  },
+  "雷克萨斯": {
+    "region": "日系车",
+    "quote": "雷克萨斯（Lexus）是丰田集团旗下的全球豪华汽车品牌，秉承“矢志不渝，追求完美”的品牌理念，以卓越的匠心工艺、极致的静谧性以及独树一帜的东方豪华体验享誉全球。",
+    "introduction": "雷克萨斯创立于1989年，是丰田为了进军北美豪华车市场而倾力打造的品牌。其首款旗舰车型LS 400凭借无与伦比的平顺性、静音性以及可靠性，迅速在北美市场站稳脚跟并屡获销量冠军。雷克萨斯不仅在传统燃油车领域展现出深厚的工程底蕴，更是豪华混合动力技术的先驱。如今，雷克萨斯正向全面电动化转型，致力于打造兼具环保与驾驶乐趣的下一代豪华座驾。",
+    "history": "1983年，丰田董事长丰田英二提出了打造“世界最顶级的豪华轿车”的“F1”计划，历经6年研发，1989年雷克萨斯品牌及首款车型LS 400在美国正式发布。凭借对品质的极致追求，雷克萨斯在1999年即成为美国销量最高的豪华车品牌。2005年，雷克萨斯正式进入日本本土及中国市场。同年，推出了全球首款豪华混合动力SUV——RX 400h，引领了豪华车市场的混动风潮。近年来，雷克萨斯发布了“Lexus Electrified”电气化愿景，并在2022年推出了首款基于专属纯电平台打造的车型RZ，开启了品牌发展的新篇章。",
+    "technology": [
+      {
+        "title": "Lexus Hybrid Drive",
+        "content": "全混动科技 ，业界领先的混合动力系统，通过行星齿轮机构智能分配发动机与电动机的动力，实现澎湃动力与极低油耗的完美平衡，并带来静谧平顺的驾驶体验。"
+      },
+      {
+        "title": "DIRECT4",
+        "content": " 电子动态四驱，专为电气化车型研发的智能四驱系统，能够实时、高频地独立控制前后轴的驱动力分配，提升车辆的操控极限与乘坐舒适度。"
+      },
+      {
+        "title": "LSS+",
+        "content": "Lexus Safety System+，高频迭代的主动安全系统，集成了预碰撞安全、车道循迹辅助、自适应巡航等先进功能，全面保障乘员安全。"
+      },
+      {
+        "title": "匠心工艺 (Takumi)",
+        "content": "雷克萨斯引以为傲的制造哲学。从内饰的缝线、木纹饰板的打磨到车漆的喷涂，均由经验丰富的“匠人”严格把控，赋予车辆独特的东方温度。"
+      }
+    ],
+    "models": [
+      "ES",
+      "LS",
+      "IS",
+      "NX",
+      "RX",
+      "LX",
+      "LM",
+      "RZ"
     ]
   }
 }

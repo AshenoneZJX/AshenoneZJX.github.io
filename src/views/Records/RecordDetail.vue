@@ -43,13 +43,27 @@
             <button type="button" class="font-size-btn" :class="{ active: fontSizePreset === 'standard' }" @click="fontSizePreset = 'standard'">标准</button>
             <button type="button" class="font-size-btn" :class="{ active: fontSizePreset === 'large' }" @click="fontSizePreset = 'large'">大</button>
           </div>
-          <div class="font-size-controls mobile-controls" role="group" aria-label="字号大小">
-            <button type="button" class="font-size-btn" @click="decreaseFontSize" :class="{ disabled: fontSizePreset === 'small' }">
-              <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line></svg>
-            </button>
-            <button type="button" class="font-size-btn" @click="increaseFontSize" :class="{ disabled: fontSizePreset === 'large' }">
-              <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
-            </button>
+          <div class="mobile-controls-wrapper">
+            <button type="button" class="font-size-btn mobile-font-btn" @click="showMobileFontSlider = !showMobileFontSlider">字</button>
+            <div class="mobile-font-slider-popup" v-if="showMobileFontSlider">
+              <span class="slider-label">小</span>
+              <div class="slider-track-container">
+                <input 
+                  type="range" 
+                  class="font-slider" 
+                  min="0" 
+                  max="2" 
+                  step="1" 
+                  v-model="mobileFontIndex"
+                >
+                <div class="slider-ticks">
+                  <span class="tick"></span>
+                  <span class="tick"></span>
+                  <span class="tick"></span>
+                </div>
+              </div>
+              <span class="slider-label">大</span>
+            </div>
           </div>
           <button class="back-btn" @click="$router.push('/records')">
             <img src="@/assets/images/fanhui.svg" class="back-icon" alt="返回" />
@@ -99,7 +113,19 @@ export default {
       record: null,
       heading: '',
       showMobileToc: false,
-      fontSizePreset: 'standard'
+      fontSizePreset: 'standard',
+      showMobileFontSlider: false,
+      fontPresets: ['small', 'standard', 'large']
+    }
+  },
+  computed: {
+    mobileFontIndex: {
+      get() {
+        return this.fontPresets.indexOf(this.fontSizePreset);
+      },
+      set(val) {
+        this.fontSizePreset = this.fontPresets[Number(val)];
+      }
     }
   },
   methods: {
@@ -125,6 +151,11 @@ export default {
     },
     refreshCatalog() {
       if (this.$refs.catalog) this.$refs.catalog.refresh()
+    },
+    handleClickOutside(event) {
+      if (this.showMobileFontSlider && !event.target.closest('.mobile-controls-wrapper')) {
+        this.showMobileFontSlider = false;
+      }
     }
   },
   created() {
@@ -133,6 +164,10 @@ export default {
   },
   mounted() {
     this.refreshCatalog()
+    document.addEventListener('click', this.handleClickOutside)
+  },
+  beforeDestroy() {
+    document.removeEventListener('click', this.handleClickOutside)
   }
 }
 </script>
@@ -269,13 +304,13 @@ export default {
   justify-content: space-between;
   background: rgba(255, 255, 255, 0.06);
   border: 1px solid var(--c-border-default);
-  border-radius: 999px;
+  border-radius: 6px;
   padding: 2px;
   gap: 0;
   margin-left: auto;
-  margin-right: 12px;
-  height: 30px;
-  width: 132px;
+  margin-right: 24px;
+  height: 26px;
+  width: 108px;
   box-sizing: border-box;
 }
 .font-size-btn {
@@ -283,14 +318,14 @@ export default {
   border: 1px solid transparent;
   background: transparent;
   color: var(--c-text-body-alt);
-  border-radius: 999px;
-  padding: 0 6px;
-  font-size: 12px;
+  border-radius: 4px;
+  padding: 0 4px;
+  font-size: 11px;
   line-height: 1;
   cursor: pointer;
   flex: 1 1 0;
   min-width: 0;
-  height: 24px;
+  height: 20px;
   transition: all 0.2s ease;
   z-index: 1;
   display: flex;
@@ -310,10 +345,10 @@ export default {
   background: rgba(255, 255, 255, 0.18);
   color: var(--c-text-title);
   font-weight: 500;
-  border-color: var(--c-border-hover);
+  border-color: transparent;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.28), inset 0 1px 1px rgba(255, 255, 255, 0.08);
 }
-.mobile-controls {
+.mobile-controls-wrapper {
   display: none;
 }
 .font-size-btn.disabled {
@@ -545,13 +580,43 @@ export default {
   }
 
   /* Mobile Title Adjustment */
-  .top-title { font-size: 20px; letter-spacing: 0.5px; margin-bottom: 0; width: 100%; }
-  
-  .header-info { gap: 0; flex-direction: column; align-items: flex-start; margin-left: 0; }
-  .header-info {
-    padding-left: 0;
+  .top-title { 
+    font-size: 20px; 
+    letter-spacing: 0.5px; 
+    margin-bottom: 0; 
+    width: 100%; 
+    white-space: nowrap; 
+    overflow: hidden; 
+    text-overflow: ellipsis; 
   }
-  .meta { gap: 6px; margin-top: 6px; }
+  
+  .header-info { 
+    gap: 0; 
+    flex-direction: column; 
+    align-items: flex-start; 
+    margin-left: 0; 
+    padding-left: 0;
+    min-width: 0;
+    flex: 1;
+    overflow: hidden;
+  }
+  .meta { 
+    gap: 6px; 
+    margin-top: 6px; 
+    width: 100%;
+    flex-wrap: nowrap;
+    overflow: hidden;
+  }
+  .date-group {
+    flex-shrink: 0;
+  }
+  .tag-cat {
+    flex-shrink: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    min-width: 0;
+  }
   .month { font-size: 9px; }
   .day { font-size: 16px; }
   .year { font-size: 9px; }
@@ -559,27 +624,125 @@ export default {
   .desktop-controls {
     display: none !important;
   }
-  .mobile-controls {
-    display: inline-flex !important;
-  }
-  .font-size-controls {
+  .mobile-controls-wrapper {
+    display: inline-block !important;
+    position: relative;
     margin-left: auto;
-    margin-right: 10px;
-    height: 26px;
-    padding: 1px;
-    border-radius: 999px;
-    width: 66px;
+    margin-right: 12px;
   }
-  .font-size-btn {
-    width: auto;
-    height: 22px;
-    border-radius: 999px;
-    padding: 0;
-    min-width: 0;
+  .mobile-font-btn {
+    width: 36px;
+    height: 32px;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid var(--c-border-default);
+    color: var(--c-text-body-alt);
+    font-size: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
   }
-  .font-size-btn svg {
-    width: 14px;
-    height: 14px;
+  .mobile-font-btn:active, .mobile-font-btn:focus {
+    background: rgba(255, 255, 255, 0.15);
+    color: var(--c-text-emphasis);
+  }
+  .mobile-font-slider-popup {
+    position: absolute;
+    top: calc(100% + 8px);
+    right: -10px;
+    background: #1e1e1e;
+    border: 1px solid var(--c-border-default);
+    border-radius: 8px;
+    padding: 12px 16px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 160px;
+    z-index: 1000;
+  }
+  /* 三角小箭头 */
+  .mobile-font-slider-popup::before {
+    content: '';
+    position: absolute;
+    top: -6px;
+    right: 20px;
+    width: 10px;
+    height: 10px;
+    background: #1e1e1e;
+    border-left: 1px solid var(--c-border-default);
+    border-top: 1px solid var(--c-border-default);
+    transform: rotate(45deg);
+  }
+  .slider-label {
+    color: var(--c-text-body-alt);
+    white-space: nowrap;
+    font-size: 14px;
+    user-select: none;
+  }
+  
+  .slider-track-container {
+    position: relative;
+    width: 100%;
+    height: 20px;
+    display: flex;
+    align-items: center;
+  }
+
+  .font-slider {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 2px;
+    outline: none;
+    margin: 0;
+    position: relative;
+    z-index: 2;
+  }
+  .font-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: var(--c-text-emphasis);
+    cursor: pointer;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+    transition: transform 0.1s;
+  }
+  .font-slider::-webkit-slider-thumb:active {
+    transform: scale(1.2);
+  }
+  .font-slider::-moz-range-thumb {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: var(--c-text-emphasis);
+    cursor: pointer;
+    border: none;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+  }
+
+  .slider-ticks {
+    position: absolute;
+    top: 50%;
+    left: 8px;
+    right: 8px;
+    transform: translateY(-50%);
+    display: flex;
+    justify-content: space-between;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .tick {
+    width: 2px;
+    height: 8px;
+    background: rgba(255, 255, 255, 0.4);
+    border-radius: 1px;
   }
 }
 </style>
