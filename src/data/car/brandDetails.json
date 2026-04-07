@@ -1589,26 +1589,26 @@
         }
       }
     },
-    "mermaid": "graph TD\n  Root[\"  Li Auto 理想汽车  \"] --> L_Series[\"  L Series (增程电动SUV)  \"]\n  L_Series --- L6(\"  L6 五座中大型SUV (入门旗舰)  \")\n  L_Series --- L7(\"  L7 五座旗舰SUV  \")\n  L_Series --- L8(\"  L8 六座中大型SUV  \")\n  L_Series --- L9(\"  L9 六座全尺寸旗舰SUV  \")\n\n  Root --> MEGA_Series[\"  MEGA Series (旗舰纯电MPV)  \"]\n  MEGA_Series --- MEGA(\"  MEGA 家庭科技旗舰MPV  \")\n\n  Root --> i_Series[\"  i Series (纯电SUV战略拓展)  \"]\n  i_Series --- i6(\"  i6 五座纯电SUV (中型)  \")\n  i_Series --- i8(\"  i8 六座纯电SUV (大型)  \")\n  i_Series --- i9(\"  i9 六座纯电SUV (全尺寸)  \")\n\n  classDef rootNode fill:#0F172A,stroke:#38BDF8,stroke-width:2px,color:#F8FAFC,font-weight:bold,font-size:16px,rx:8,ry:8,padding:24px;\n  classDef groupNode fill:#312E81,stroke:#6366F1,stroke-width:2px,color:#E0E7FF,font-weight:bold,font-size:14px,rx:6,ry:6,padding:18px;\n  classDef modelNode fill:#334155,stroke:#64748B,stroke-width:1px,color:#F1F5F9,font-size:12px,rx:10,ry:10,padding:12px;\n\n  class Root rootNode;\n  class L_Series,MEGA_Series,i_Series groupNode;\n  class L6,L7,L8,L9,MEGA,i6,i8,i9 modelNode;"
+    "mermaid": "graph TD\n  Root[\"  Li Auto 理想汽车  \"] --> L_Series[\"  L Series<br>(增程电动SUV)  \"]\n  L_Series --- L6(\"  L6<br>五座中大型SUV (入门旗舰)  \")\n  L_Series --- L7(\"  L7<br>五座旗舰SUV  \")\n  L_Series --- L8(\"  L8<br>六座中大型SUV  \")\n  L_Series --- L9(\"  L9<br>六座全尺寸旗舰SUV  \")\n\n  Root --> MEGA_Series[\"  MEGA Series<br>(旗舰纯电MPV)  \"]\n  MEGA_Series --- MEGA(\"  MEGA<br>家庭科技旗舰MPV  \")\n\n  Root --> i_Series[\"  i Series<br>(纯电SUV战略拓展)  \"]\n  i_Series --- i6(\"  i6<br>五座纯电SUV (中型)  \")\n  i_Series --- i8(\"  i8<br>六座纯电SUV (大型)  \")\n  i_Series --- i9(\"  i9<br>六座纯电SUV (全尺寸)  \")\n\n  classDef rootNode fill:#0F172A,stroke:#38BDF8,stroke-width:2px,color:#F8FAFC,font-weight:bold,font-size:16px,rx:8,ry:8,padding:24px;\n  classDef groupNode fill:#312E81,stroke:#6366F1,stroke-width:2px,color:#E0E7FF,font-weight:bold,font-size:14px,rx:6,ry:6,padding:18px;\n  classDef modelNode fill:#334155,stroke:#64748B,stroke-width:1px,color:#F1F5F9,font-size:12px,rx:10,ry:10,padding:12px;\n\n  class Root rootNode;\n  class L_Series,MEGA_Series,i_Series groupNode;\n  class L6,L7,L8,L9,MEGA,i6,i8,i9 modelNode;"
   },
   "蔚来": {
     "region": "自主品牌",
     "brandLogo": "/brand-logos/nio.svg",
     "quote": "蔚来（NIO）是一家全球化的智能电动汽车公司，致力于通过提供高性能的智能电动汽车与极致用户体验，为用户创造愉悦的生活方式。",
     "introduction": "蔚来成立于2014年11月，总部位于中国上海，并在全球多地设立研发、设计及生产机构。蔚来的名字寓意“Blue Sky Coming（蔚蓝天空的到来）”，代表了其对环保与可持续发展的愿景。品牌以首创的换电模式（BaaS，电池租用服务）和超越传统的车主社区文化（NIO House）闻名于世。作为中国造车新势力的先驱，蔚来不仅在三电系统、智能座舱和自动驾驶领域坚持全栈自研，更建立了一套包含换电站、超充桩、移动充电车在内的全场景补能网络体系NIO Power。",
-    "history": "2014年11月，由李斌联合多位互联网及汽车界资深人士发起创立蔚来。2016年11月，在伦敦发布了刷新多条赛道纪录的全球最快电动超跑之一EP9。2017年4月，首款量产车——智能电动旗舰SUV ES8正式亮相，并于同年12月上市交付。2018年9月，蔚来在纽约证券交易所成功上市；随后于2022年3月和5月分别在香港及新加坡挂牌上市，成为首家在三地上市的智能电动车企。在发展过程中，蔚来曾于2019年底遭遇严峻的资金链危机，后于2020年初通过“合肥市政府”战略投资70亿元人民币的“蔚来中国”项目成功脱困，迎来高速发展。此后几年，蔚来基于NT1.0和NT2.0平台陆续推出了ES6、EC6、ES7、ET7、ET5及ET5T等涵盖中大型/中型SUV和轿车的完整产品矩阵。2021年起，蔚来正式开启全球化步伐，进入挪威及欧洲多国市场。为覆盖更广泛的大众市场，蔚来在2024年5月发布了面向主流家庭市场的子品牌“乐道”（ONVO），首款车型L60于9月上市；并积极筹备面向小型车市场的子品牌“萤火虫”（Firefly）。",
+    "history": "2014年11月，由李斌联合多位互联网及汽车界资深人士发起创立蔚来。2016年11月，在伦敦发布了刷新多条赛道纪录的全球最快电动超跑之一EP9。2017年4月，首款量产车——智能电动旗舰SUV ES8正式亮相，并于同年12月上市交付。2018年9月，蔚来在纽约证券交易所成功上市；随后于2022年3月和5月分别在香港及新加坡挂牌上市，成为首家在三地上市的智能电动车企。在发展过程中，蔚来曾于2019年底遭遇严峻的资金链危机，后于2020年初通过“合肥市政府”战略投资70亿元人民币的“蔚来中国”项目成功脱困，迎来高速发展。此后几年，蔚来基于NT1.0和NT2.0平台陆续推出了ES6、EC6、ES7、ET7、ET5及ET5T等涵盖中大型/中型SUV和轿车的完整产品矩阵。2021年起，蔚来正式开启全球化步伐，进入挪威及欧洲多国市场。为覆盖更广泛的大众市场，蔚来在2024年5月发布了面向主流家庭市场的子品牌“乐道”（ONVO），首款车型L60于9月上市。2024年底的NIO Day上，蔚来正式发布面向精品智能小车市场的第三品牌“萤火虫”（Firefly）及其同名首款车型，并宣布行政旗舰轿车ET9正式上市，完成了覆盖高端、主流家庭及精品小车的三大品牌矩阵布局。",
     "technology": [
       {
-        "title": "NIO Power (可充可换可升级)",
+        "title": "NIO Power",
         "content": "全球领先的充换电一体化网络，是蔚来最核心的护城河。支持最快3分钟内完成全自动电池更换，结合电池租用服务（BaaS），实现车电分离，不仅彻底消除了续航焦虑，还通过集中管理延长了电池寿命。"
       },
       {
-        "title": "NAD 蔚来自动驾驶",
-        "content": "NIO Autonomous Driving。基于由超远距激光雷达和800万像素高清摄像头组成的Aquila蔚来超感系统，以及搭载4颗英伟达Orin芯片、总算力达1016 TOPS的Adam蔚来超算平台，逐步实现高速、城区、泊车和换电等全场景点到点自动驾驶。"
+        "title": "NAD",
+        "content": "蔚来自动驾驶，NIO Autonomous Driving。基于由超远距激光雷达和800万像素高清摄像头组成的Aquila蔚来超感系统，以及搭载4颗英伟达Orin芯片、总算力达1016 TOPS的Adam蔚来超算平台，逐步实现高速、城区、泊车和换电等全场景点到点自动驾驶。"
       },
       {
-        "title": "NOMI 智能车载人工智能",
-        "content": "全球首个量产的车载人工智能系统，具备拟人化的实体表盘与情感化交互设计。最新版本深度融合了多模态大模型，提供极其自然、流畅且具备深层语境理解能力的交互体验。"
+        "title": "NOMI",
+        "content": "蔚来智能车载人工智能，全球首个量产的车载人工智能系统，具备拟人化的实体表盘与情感化交互设计。最新版本深度融合了多模态大模型，提供极其自然、流畅且具备深层语境理解能力的交互体验。"
       },
       {
         "title": "高性能全铝车身与碳化硅电驱",
@@ -1616,6 +1616,7 @@
       }
     ],
     "models": [
+      "ET9",
       "ES8",
       "ES7",
       "ES6",
@@ -1635,23 +1636,23 @@
           "models": [
             {
               "model_name": "ES8",
-              "model_name_zh": "蔚来ES8 (旗舰六座SUV)"
+              "model_name_zh": "ES8 (旗舰六座SUV)"
             },
             {
               "model_name": "ES7",
-              "model_name_zh": "蔚来ES7 (中大型大五座SUV)"
+              "model_name_zh": "ES7 (中大型大五座SUV)"
             },
             {
               "model_name": "ES6",
-              "model_name_zh": "蔚来ES6 (全能中型SUV)"
+              "model_name_zh": "ES6 (全能中型SUV)"
             },
             {
               "model_name": "EC7",
-              "model_name_zh": "蔚来EC7 (旗舰轿跑SUV)"
+              "model_name_zh": "EC7 (旗舰轿跑SUV)"
             },
             {
               "model_name": "EC6",
-              "model_name_zh": "蔚来EC6 (智能轿跑SUV)"
+              "model_name_zh": "EC6 (智能轿跑SUV)"
             }
           ]
         },
@@ -1660,16 +1661,20 @@
           "category_name_en": "Sedan / Tourer",
           "models": [
             {
+              "model_name": "ET9",
+              "model_name_zh": "ET9 (行政旗舰轿车)"
+            },
+            {
               "model_name": "ET7",
-              "model_name_zh": "蔚来ET7 (高端行政轿车)"
+              "model_name_zh": "ET7 (高端行政轿车)"
             },
             {
               "model_name": "ET5",
-              "model_name_zh": "蔚来ET5 (中型智能轿跑)"
+              "model_name_zh": "ET5 (中型智能轿跑)"
             },
             {
               "model_name": "ET5T",
-              "model_name_zh": "蔚来ET5T (智能纯电旅行车)"
+              "model_name_zh": "ET5T (智能纯电旅行车)"
             }
           ]
         }
@@ -1680,7 +1685,7 @@
       "list": [
         {
           "model_name": "EP9",
-          "model_name_zh": "蔚来EP9",
+          "model_name_zh": "EP9",
           "production_years": "2016",
           "historical_significance": "蔚来品牌的开山之作，全球最快电动汽车之一，曾刷新纽北赛道最快量产车圈速纪录。",
           "key_features": [
@@ -1702,10 +1707,15 @@
           "brand_name_zh": "蔚来",
           "positioning": "面向30万以上的高端纯电市场",
           "current_models": [
+            "ET9",
             "ES8",
             "ET7",
+            "ES7",
             "ES6",
-            "ET5"
+            "EC7",
+            "EC6",
+            "ET5",
+            "ET5T"
           ]
         },
         {
@@ -1714,11 +1724,23 @@
           "brand_name_zh": "乐道",
           "positioning": "面向20万级主流家庭市场，共享换电网络",
           "current_models": [
-            "L60"
+            "L60",
+            "L80",
+            "L90"
+          ]
+        },
+        {
+          "brand_group": "精品智能小车品牌",
+          "brand_name": "Firefly",
+          "brand_name_zh": "萤火虫",
+          "positioning": "面向10-20万级的高端精品小车市场",
+          "current_models": [
+            "firefly 萤火虫"
           ]
         }
       ]
-    }
+    },
+    "mermaid": "graph TD\n  Root[\"  NIO 蔚来集团  \"] --> NIO_Brand[\"  NIO 蔚来<br>(高端纯电)  \"]\n  NIO_Brand --> NIO_SUV[\"  SUV 家族  \"]\n  NIO_SUV --- ES8(\"  ES8<br>旗舰六座SUV  \")\n  NIO_SUV --- ES7(\"  ES7<br>中大型大五座SUV  \")\n  NIO_SUV --- ES6(\"  ES6<br>全能中型SUV  \")\n  NIO_SUV --- EC7(\"  EC7<br>旗舰轿跑SUV  \")\n  NIO_SUV --- EC6(\"  EC6<br>智能轿跑SUV  \")\n  \n  NIO_Brand --> NIO_Sedan[\"  轿车/旅行车 家族  \"]\n  NIO_Sedan --- ET9(\"  ET9<br>行政旗舰轿车  \")\n  NIO_Sedan --- ET7(\"  ET7<br>高端行政轿车  \")\n  NIO_Sedan --- ET5(\"  ET5<br>中型智能轿跑  \")\n  NIO_Sedan --- ET5T(\"  ET5T<br>智能纯电旅行车  \")\n\n  Root --> ONVO_Brand[\"  ONVO 乐道<br>(主流家庭纯电)  \"]\n  ONVO_Brand --- L60(\"  L60<br>家庭智能大五座SUV  \")\n  ONVO_Brand --- L80(\"  L80<br>双舱超级大五座SUV  \")\n  ONVO_Brand --- L90(\"  L90<br>智能大空间旗舰SUV  \")\n\n  Root --> Firefly_Brand[\"  Firefly 萤火虫<br>(精品智能小车)  \"]\n  Firefly_Brand --- Firefly(\"  firefly<br>高端纯电小车  \")\n\n  classDef rootNode fill:#0F172A,stroke:#38BDF8,stroke-width:2px,color:#F8FAFC,font-weight:bold,font-size:16px,rx:8,ry:8,padding:24px;\n  classDef groupNode fill:#064E3B,stroke:#10B981,stroke-width:2px,color:#ECFDF5,font-weight:bold,font-size:14px,rx:6,ry:6,padding:18px;\n  classDef subGroupNode fill:#1E3A8A,stroke:#6366F1,stroke-width:1px,color:#E0E7FF,font-size:13px,rx:6,ry:6,padding:12px;\n  classDef modelNode fill:#334155,stroke:#64748B,stroke-width:1px,color:#F1F5F9,font-size:12px,rx:10,ry:10,padding:12px;\n\n  class Root rootNode;\n  class NIO_Brand,ONVO_Brand,Firefly_Brand groupNode;\n  class NIO_SUV,NIO_Sedan subGroupNode;\n  class ES8,ES7,ES6,EC7,EC6,ET9,ET7,ET5,ET5T,L60,L80,L90,Firefly modelNode;"
   },
   "问界": {
     "region": "自主品牌",
