@@ -345,7 +345,7 @@ export default {
   padding-bottom: 10px;
   margin-bottom: 20px;
 }
-.section-header h2 { font-weight: 400; }
+.section-header h2 { font-weight: 500; }
 
 .filters { display: flex; align-items: center; flex-wrap: nowrap; white-space: nowrap; }
 .filter-icon { display: inline-flex; align-items: center; color: var(--c-primary); margin-right: 4px; pointer-events: none; }
@@ -530,7 +530,16 @@ export default {
   font-family: 'MotivaSans', sans-serif;
 }
 .record-item.clickable { cursor: pointer; }
-.record-excerpt { font-size: 13px; color: var(--c-text-body-alt); line-height: 1.6; }
+.record-excerpt { 
+  margin-top: 12px;
+  font-size: 14px; 
+  color: var(--c-text-muted); 
+  line-height: 1.6; 
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+}
 
 /* Stats & Heatmap */
 .stats-card {

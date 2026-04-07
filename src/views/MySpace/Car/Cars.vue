@@ -412,7 +412,16 @@ export default {
   },
   created() {
     import('@/data/car/cars.json').then(mod => { this.cars = mod.default })
-    import('@/data/car/brandLogos.json').then(mod => { this.brandLogoMap = mod.default })
+    import('@/data/car/brandDetails.json').then(mod => { 
+      const details = mod.default
+      const map = {}
+      for (const brand in details) {
+        if (details[brand].brandLogo) {
+          map[brand] = details[brand].brandLogo
+        }
+      }
+      this.brandLogoMap = map
+    })
   }
 }
 </script>

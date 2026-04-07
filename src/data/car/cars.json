@@ -3,12 +3,12 @@
     "id": 1,
     "title": "本田 思域",
     "brand": "本田",
-    "brandLogo": "/brand-logos/honda.png",
     "sizeClass": "紧凑型",
     "images": [
       "https://p3.dcarimg.com/img/motor-mis-img/43781dd9b828e478472d302877167f4e~2508x0.webp",
-      "https://p3.dcarimg.com/img/motor-mis-img/DCP_26bed67c3999265b9697ed34bcc8630a~2508x0.webp",
+      "https://p3.dcarimg.com/img/motor-mis-img/648b0631898ebf2df0412febf6f19d37~2508x0.webp",
       "https://p3.dcarimg.com/img/motor-mis-img/e0188b2adb8748363a304a30a66f40c6~2508x0.webp",
+      "https://p3.dcarimg.com/img/motor-mis-img/204755afa5962c83390c34ccf6ebc1c0~2508x0.webp",
       "/images/carPic/CIVIC1.JPG"
     ],
     "energy": [
@@ -48,7 +48,6 @@
     "id": 2,
     "title": "特斯拉 Model 3",
     "brand": "特斯拉",
-    "brandLogo": "/brand-logos/tesla.png",
     "sizeClass": "中型",
     "images": [
       "https://p3.dcarimg.com/img/motor-mis-img/DCP_22c73cf1b4ee18d4f1d338bf5a3c7e20~2508x0.webp",
@@ -69,7 +68,6 @@
     "id": 3,
     "title": "本田 雅阁",
     "brand": "本田",
-    "brandLogo": "/brand-logos/honda.png",
     "sizeClass": "中型",
     "images": [
       "https://p3.dcarimg.com/img/motor-mis-img/DCP_c7377bbfc31b691024e86003974cfd78~2508x0.webp",
@@ -93,7 +91,6 @@
     "id": 4,
     "title": "大众 速腾",
     "brand": "大众",
-    "brandLogo": "/brand-logos/volkswagen.svg",
     "sizeClass": "紧凑型",
     "images": [
       "https://p3.dcarimg.com/img/motor-mis-img/DCP_0092b5b95af205e296eb9fcd06376610~2508x0.webp",
@@ -114,7 +111,6 @@
     "id": 5,
     "title": "大众 迈腾",
     "brand": "大众",
-    "brandLogo": "/brand-logos/volkswagen.svg",
     "sizeClass": "中型",
     "images": [
       "https://p3.dcarimg.com/img/motor-mis-img/DCP_a13b1bf7cc76b97e32e4f6e58b7cf234~2508x0.webp",
@@ -135,7 +131,6 @@
     "id": 6,
     "title": "长城 哈弗大狗",
     "brand": "长城",
-    "brandLogo": "/brand-logos/Great_Wall_Motor.png",
     "sizeClass": "紧凑型",
     "images": [
       "https://p3.dcarimg.com/img/motor-mis-img/DCP_379cc0453680553ee61d47a5ce8c13a2~2508x0.webp",
@@ -156,7 +151,6 @@
     "id": 7,
     "title": "特斯拉 Model Y",
     "brand": "特斯拉",
-    "brandLogo": "/brand-logos/tesla.png",
     "sizeClass": "中型",
     "images": [
       "https://p3.dcarimg.com/img/motor-mis-img/DCP_b3456e40d9b7e4f10c7247ecefbf6bcf~2508x0.webp",
@@ -177,7 +171,6 @@
     "id": 8,
     "title": "宝马 3系",
     "brand": "宝马",
-    "brandLogo": "/brand-logos/bmw.svg",
     "sizeClass": "中型",
     "images": [
       "https://p3.dcarimg.com/img/motor-mis-img/DCP_dc2fee0ead02dae0ceb4ace22724d562~2508x0.webp",
@@ -197,13 +190,12 @@
   {
     "id": 9,
     "brand": "奥迪",
-    "brandLogo": "/brand-logos/audi.png",
     "sizeClass": "中型",
     "title": "奥迪 A4",
     "images": [
-      "https://p3.dcarimg.com/img/motor-mis-img/DCP_6ecb631d87e3845b40e4f2b96abdb8c4~2508x0.webp",
-      "https://p3.dcarimg.com/img/motor-mis-img/DCP_0d45a91cfdb9a35e4ec894958f8b7252~2508x0.webp",
-      "https://p3.dcarimg.com/img/motor-mis-img/DCP_728b49e29ab9f743c4a2118f67e5a8fb~2508x0.webp"
+      "https://p3.dcarimg.com/img/motor-mis-img/DCP_5490a659606a25e4e3d1a4ff6dbdc71b~2508x0.webp",
+      "https://p3.dcarimg.com/img/motor-mis-img/DCP_0b7f5cf3f878ffccbe8b4712c527e8b9~2508x0.webp",
+      "https://p3.dcarimg.com/img/motor-mis-img/DCP_a187d4fc72ccc6b83473035f4dcabb84~2508x0.webp"
     ],
     "energy": "燃油",
     "body": "轿车",
@@ -218,7 +210,6 @@
   {
     "id": 10,
     "brand": "奔驰",
-    "brandLogo": "/brand-logos/mercedes.png",
     "sizeClass": "中型",
     "title": "奔驰 C级",
     "images": [
@@ -239,7 +230,6 @@
   {
     "id": 11,
     "brand": "奔驰",
-    "brandLogo": "/brand-logos/mercedes.png",
     "sizeClass": "中大型",
     "title": "奔驰 E级",
     "images": [
@@ -258,7 +248,6 @@
   {
     "id": 12,
     "brand": "奔驰",
-    "brandLogo": "/brand-logos/mercedes.png",
     "sizeClass": "大型",
     "title": "奔驰 S级",
     "images": [
@@ -277,7 +266,6 @@
   {
     "id": 13,
     "brand": "丰田",
-    "brandLogo": "/brand-logos/toyota.png",
     "sizeClass": "紧凑型",
     "title": "丰田 RAV4",
     "images": [
@@ -299,7 +287,6 @@
   {
     "id": 14,
     "brand": "大众",
-    "brandLogo": "/brand-logos/volkswagen.svg",
     "sizeClass": "紧凑型",
     "title": "大众 途岳",
     "images": [
@@ -320,7 +307,6 @@
   {
     "id": 15,
     "brand": "小米",
-    "brandLogo": "/brand-logos/xiaomi.png",
     "sizeClass": "中大型",
     "title": "小米 SU7",
     "images": [
@@ -341,7 +327,6 @@
   {
     "id": 16,
     "brand": "小米",
-    "brandLogo": "/brand-logos/xiaomi.png",
     "sizeClass": "中大型",
     "title": "小米 YU7",
     "images": [
@@ -362,7 +347,6 @@
   {
     "id": 17,
     "brand": "丰田",
-    "brandLogo": "/brand-logos/toyota.png",
     "sizeClass": "中型",
     "title": "丰田 凯美瑞",
     "images": [
@@ -386,7 +370,6 @@
   {
     "id": 18,
     "brand": "大众",
-    "brandLogo": "/brand-logos/volkswagen.svg",
     "sizeClass": "中型",
     "title": "大众 帕萨特",
     "images": [
@@ -405,7 +388,6 @@
   {
     "id": 19,
     "brand": "凯迪拉克",
-    "brandLogo": "/brand-logos/cadillac.png",
     "sizeClass": "中型",
     "title": "凯迪拉克 CT5",
     "images": [
@@ -426,7 +408,6 @@
   {
     "id": 20,
     "brand": "奥迪",
-    "brandLogo": "/brand-logos/audi.png",
     "sizeClass": "中大型",
     "title": "奥迪 A6",
     "images": [
@@ -445,7 +426,6 @@
   {
     "id": 21,
     "brand": "大众",
-    "brandLogo": "/brand-logos/volkswagen.svg",
     "sizeClass": "紧凑型",
     "title": "大众 高尔夫",
     "images": [
@@ -486,7 +466,6 @@
   {
     "id": 22,
     "brand": "宝马",
-    "brandLogo": "/brand-logos/bmw.svg",
     "sizeClass": "中大型",
     "title": "宝马 5系",
     "images": [
@@ -505,7 +484,6 @@
   {
     "id": 23,
     "brand": "领克",
-    "brandLogo": "/brand-logos/lingke.svg",
     "sizeClass": "紧凑型",
     "title": "领克 03",
     "images": [
@@ -529,7 +507,6 @@
   {
     "id": 24,
     "brand": "奥迪",
-    "brandLogo": "/brand-logos/audi.png",
     "sizeClass": "紧凑型",
     "title": "奥迪 A3",
     "images": [
@@ -550,7 +527,6 @@
   {
     "id": 25,
     "brand": "小鹏",
-    "brandLogo": "/brand-logos/xpeng.svg",
     "sizeClass": "中型",
     "title": "小鹏 P7",
     "images": [
@@ -572,7 +548,6 @@
   {
     "id": 26,
     "brand": "日产",
-    "brandLogo": "/brand-logos/nissan.svg",
     "sizeClass": "紧凑型",
     "title": "日产 轩逸",
     "images": [
@@ -597,7 +572,6 @@
   {
     "id": 27,
     "brand": "日产",
-    "brandLogo": "/brand-logos/nissan.svg",
     "sizeClass": "中型",
     "title": "日产 天籁",
     "images": [
@@ -618,7 +592,6 @@
   {
     "id": 28,
     "brand": "雷克萨斯",
-    "brandLogo": "/brand-logos/lexus.svg",
     "sizeClass": "中大型",
     "title": "雷克萨斯 ES300",
     "images": [
@@ -643,7 +616,6 @@
   {
     "id": 29,
     "brand": "理想",
-    "brandLogo": "/brand-logos/lixiang.svg",
     "sizeClass": "中大型",
     "title": "理想 L6",
     "images": [
@@ -666,7 +638,6 @@
   {
     "id": 30,
     "brand": "理想",
-    "brandLogo": "/brand-logos/lixiang.svg",
     "sizeClass": "中型",
     "title": "理想 i6",
     "images": [
@@ -689,7 +660,6 @@
   {
     "id": 31,
     "brand": "问界",
-    "brandLogo": "/brand-logos/aito.svg",
     "sizeClass": "大型",
     "title": "问界 M9",
     "images": [
@@ -709,6 +679,187 @@
       "engine": "增程版：1.5T增程器(152马力) + 前后双电机(综合496马力)；纯电版：800V高压平台，前后双电机(综合530马力)",
       "transmission": "电动车单速变速箱",
       "chassis": "全铝合金底盘，前双叉臂、后多连杆独立悬架，标配闭式空气悬架与CDC可变阻尼减振器（华为途灵底盘）"
+    }
+  },
+  {
+    "id": 32,
+    "brand": "小鹏",
+    "sizeClass": "紧凑型",
+    "title": "小鹏 MONA M03",
+    "images": [
+      "https://p3.dcarimg.com/img/motor-mis-img/DCP_f729c1c0675ffe9e69a2ffdc126faed8~2508x0.webp",
+      "https://p3.dcarimg.com/img/motor-mis-img/DCP_ee098f4d685bae8037eee63bddf39c6c~2508x0.webp",
+      "https://p3.dcarimg.com/img/motor-mis-img/DCP_f633176f6a92f255f4f2613b7e8d8cc7~2508x0.webp"
+    ],
+    "energy": [
+      "纯电"
+    ],
+    "body": "轿车",
+    "intro": "小鹏 MONA M03 是一款智能纯电掀背轿车，以高颜值、大空间和出色的智能化体验著称。它采用星芒大灯和低风阻设计，配备全景天幕和电动掀背尾门，并搭载小鹏领先的智能座舱与高阶辅助驾驶系统，为年轻用户带来高品质的纯电出行选择。",
+    "specs": {
+      "dimensions": "长4780mm × 宽1896mm × 高1445mm，轴距2815mm",
+      "engine": "前置单电机，最大功率140kW/160kW，最大扭矩225N·m/250N·m",
+      "transmission": "单速固定齿比",
+      "chassis": "前麦弗逊、后扭力梁非独立悬架，前置前驱"
+    }
+  },
+  {
+    "id": 33,
+    "brand": "福特",
+    "sizeClass": "中型",
+    "title": "福特 蒙迪欧",
+    "images": [
+      "https://p3.dcarimg.com/img/motor-mis-img/DCP_5c588a9dbf9063f31ab44e76c7ac5036~2508x0.webp",
+      "https://p3.dcarimg.com/img/motor-mis-img/DCP_acad3aecda5e320a7222be5d828e99a1~2508x0.webp",
+      "https://p3.dcarimg.com/img/motor-mis-img/DCP_4a89c1fb58094df8277e2dd4444ce2af~2508x0.webp"
+    ],
+    "energy": [
+      "燃油",
+      "混动"
+    ],
+    "body": "轿车",
+    "intro": "福特蒙迪欧（Mondeo）是一款中型轿车，以动感设计、宽敞空间与强劲动力著称。全新一代车型采用“势能美学”设计语言，配备超大尺寸贯穿式联屏与SYNC+智行互联系统，提供1.5T、2.0T燃油版及1.5T混动版，兼顾运动操控与智能体验。",
+    "specs": {
+      "dimensions": "长4935mm × 宽1875mm × 高1500mm，轴距2945mm",
+      "engine": "1.5T/2.0T L4 涡轮增压发动机 190PS/254PS，混动版1.5T发动机+电机",
+      "transmission": "8AT / E-CVT",
+      "chassis": "前麦弗逊、后多连杆独立悬架，前置前驱"
+    }
+  },
+  {
+    "id": 34,
+    "brand": "别克",
+    "sizeClass": "中大型",
+    "title": "别克 GL8",
+    "images": [
+      "https://p3.dcarimg.com/img/motor-mis-img/DCP_4da53c9e07a790631c47b3f94aa79026~2508x0.webp",
+      "https://p3.dcarimg.com/img/motor-mis-img/DCP_19efddf31bf3165715e6853fb494c3d2~2508x0.webp",
+      "https://p3.dcarimg.com/img/motor-mis-img/DCP_0e0d3132f51e28784a498e5355e1a00b~2508x0.webp"
+    ],
+    "energy": [
+      "燃油",
+      "混动",
+      "插混"
+    ],
+    "body": "MPV",
+    "intro": "别克GL8是通用汽车旗下的一款中大型MPV，在中国市场享有极高的声誉，被誉为“商务MPV标杆”。它以宽敞舒适的乘坐空间、静谧的NVH表现以及豪华的内饰氛围著称，现已推出燃油、混动及插电混动（PHEV）等多种动力版本，全面满足商务接待与家庭出行的需求。",
+    "specs": {
+      "dimensions": "长5219mm × 宽1878mm × 高1807mm，轴距3088mm",
+      "engine": "2.0T L4 涡轮增压发动机 + 48V轻混 / 1.5T插混系统",
+      "transmission": "9AT / 2挡DHT",
+      "chassis": "前麦弗逊、后多连杆独立悬架，前置前驱"
+    }
+  },
+  {
+    "id": 35,
+    "brand": "别克",
+    "sizeClass": "中型",
+    "title": "别克 君威",
+    "images": [
+      "https://p3.dcarimg.com/img/motor-mis-img/DCP_bec9f0f77732d20a1a30ad8a84099407~2508x0.webp",
+      "https://p3.dcarimg.com/img/motor-mis-img/DCP_295bc4612a6b381b4400331c88b19196~2508x0.webp",
+      "https://p3.dcarimg.com/img/motor-mis-img/b0ad6c2cd399c53ff91a2c37c8afc608~2508x0.webp"
+    ],
+    "energy": [
+      "燃油"
+    ],
+    "body": "轿车",
+    "intro": "别克君威（Regal）是一款中型高级轿车，从1999年开始在中国上海通用汽车制造并销售，是让别克在中国高收入阶层得到广泛认可的经典代表车型之一。它以出色的静谧性、扎实的底盘调校和优雅流线的设计风格深受用户喜爱，完美契合了别克注重舒适与品位的品牌定位。",
+    "specs": {
+      "dimensions": "长4904mm × 宽1863mm × 高1461mm，轴距2829mm",
+      "engine": "1.5T / 2.0T L4 涡轮增压发动机 169PS / 237PS",
+      "transmission": "9AT",
+      "chassis": "前麦弗逊、后多连杆独立悬架，前置前驱"
+    }
+  },
+  {
+    "id": 36,
+    "brand": "福特",
+    "sizeClass": "紧凑型",
+    "title": "福特 福克斯",
+    "images": [
+      "https://p3.dcarimg.com/img/motor-mis-img/b1f1bcd2d0943cd7356e43f703ab48f8~2508x0.webp",
+      "https://p3.dcarimg.com/img/motor-mis-img/41f11195b727737489df1e722907a035~2508x0.webp",
+      "https://p3.dcarimg.com/img/motor-mis-img/7a3fe8d54c8ef3b038473eef131d132a~2508x0.webp"
+    ],
+    "energy": [
+      "燃油"
+    ],
+    "body": "轿车",
+    "intro": "福特福克斯（Ford Focus）是福特汽车旗下的经典紧凑型家用轿车与掀背车。自1998年诞生以来，它凭借卓越的动态操控性能、扎实的底盘以及全球战略车的定位，在世界范围内屡获汽车大奖，成为高尔夫等车型的强力竞争对手。其中期改款车型因引入“马丁脸”设计和EcoBoost发动机而广受年轻消费者喜爱。",
+    "specs": {
+      "dimensions": "长4672mm × 宽1825mm × 高1460mm，轴距2705mm",
+      "engine": "1.5T EcoBoost 涡轮增压发动机 177PS",
+      "transmission": "6AT",
+      "chassis": "前麦弗逊、后多连杆独立悬架，前置前驱"
+    }
+  },
+  {
+    "id": 37,
+    "brand": "林肯",
+    "sizeClass": "紧凑型",
+    "title": "林肯 冒险家",
+    "images": [
+      "https://p3.dcarimg.com/img/motor-mis-img/DCP_956e80167c76a8e0c562fe6507b8ded4~2508x0.webp",
+      "https://p3.dcarimg.com/img/motor-mis-img/DCP_39094dc74f443e818f1bf0aaf92a7312~2508x0.webp",
+      "https://p3.dcarimg.com/img/motor-mis-img/DCP_f8a25206c544f26b3cb3608ea4e9017f~2508x0.webp"
+    ],
+    "energy": [
+      "燃油",
+      "混动"
+    ],
+    "body": "SUV",
+    "intro": "林肯冒险家（Corsair）是林肯品牌首款实现国产的豪华紧凑型SUV。它以“静谧之旅”为设计理念，全系标配高功率2.0T发动机，并配备了SYNC+智行互联系统以及出色的NVH隔音降噪技术。作为林肯在华销量的主力军，冒险家完美诠释了纯正的美式豪华体验与年轻化设计的结合。",
+    "specs": {
+      "dimensions": "长4612mm × 宽1887mm × 高1630mm，轴距2711mm",
+      "engine": "2.0T L4 涡轮增压发动机 261PS / 1.5T 混动",
+      "transmission": "8AT / E-CVT",
+      "chassis": "前麦弗逊、后多连杆独立悬架，前置前驱/适时四驱"
+    }
+  },
+  {
+    "id": 38,
+    "brand": "林肯",
+    "sizeClass": "中型",
+    "title": "林肯 Z",
+    "images": [
+      "https://p3.dcarimg.com/img/motor-mis-img/2bae68198564a8fe3cee2fae456a5753~2508x0.webp",
+      "https://p3.dcarimg.com/img/motor-mis-img/eea8c542cef3a99f8ff1a3d869cffb32~2508x0.webp",
+      "https://p3.dcarimg.com/img/motor-mis-img/430f6c5b06367a2aab50275eff4d3cc0~2508x0.webp"
+    ],
+    "energy": [
+      "燃油",
+      "混动"
+    ],
+    "body": "轿车",
+    "intro": "林肯 Z（曾用概念名 Lincoln Zephyr）是长安福特在中国专为年轻一代消费者打造的中型豪华轿车，于2022年正式上市，用于替代此前进口的MKZ与Continental车型。它基于福特C2平台开发，融合了林肯最新的“智领新生代”设计语言，并在2024年推出了搭载HF55 eCVT变速箱的混动版本，为用户带来更高效、智能的尊享体验。",
+    "specs": {
+      "dimensions": "长4982mm × 宽1865mm × 高1485mm，轴距2930mm",
+      "engine": "2.0T L4 涡轮增压发动机 246PS / 2.0T 混动",
+      "transmission": "8AT / eCVT",
+      "chassis": "前麦弗逊、后多连杆独立悬架，前置前驱"
+    }
+  },
+  {
+    "id": 39,
+    "brand": "别克",
+    "sizeClass": "中大型",
+    "title": "别克 君越",
+    "images": [
+      "https://p3.dcarimg.com/img/motor-mis-img/DCP_ef8b87fb461159d39d22ce954ea050ac~2508x0.webp",
+      "https://p3.dcarimg.com/img/motor-mis-img/DCP_f8fbe3fe421f083a5a8eb65ac6c49c03~2508x0.webp",
+      "https://p3.dcarimg.com/img/motor-mis-img/DCP_975c9d4ea18dcc2b25f6235619c71d54~2508x0.webp"
+    ],
+    "energy": [
+      "燃油"
+    ],
+    "body": "轿车",
+    "intro": "别克君越（Buick LaCrosse）是通用汽车旗下一款深受市场欢迎的中大型轿车，于2004年首次推出。作为别克品牌高端轿车的代表，君越始终以大气优雅的设计、图书馆级的静谧性以及超越同级的豪华配置著称。在中国市场，由上汽通用生产的君越更是成为商务与家庭出行的品质之选。",
+    "specs": {
+      "dimensions": "长4996mm × 宽1866mm × 高1472mm，轴距2905mm",
+      "engine": "1.5T / 2.0T 涡轮增压发动机 237PS",
+      "transmission": "9AT",
+      "chassis": "前麦弗逊、后多连杆独立悬架，前置前驱"
     }
   }
 ]

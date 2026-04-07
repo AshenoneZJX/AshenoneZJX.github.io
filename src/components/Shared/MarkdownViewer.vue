@@ -338,7 +338,7 @@ export default {
   color: var(--c-text-title); 
   font-size: 28px; 
   line-height: 1.35; 
-  margin: 32px 0 24px; 
+  margin: 46px 0 24px; 
   font-weight: 700; 
   letter-spacing: 0.3px; 
 }
@@ -347,7 +347,7 @@ export default {
   color: #b5b9bd; 
   font-size: 22px; 
   line-height: 1.25; 
-  margin: 32px 0 20px; 
+  margin: 40px 0 20px; 
   font-weight: 700; 
   letter-spacing: 0.2px; 
   font-family: 'GeorgiaSerif', 'Times New Roman', 'AlibabaPuHuiTi', serif;
@@ -365,7 +365,7 @@ export default {
   color: #b5b9bd; 
   font-size: 20px; 
   line-height: 1.2; 
-  margin: 8px 0 6px; /* 减小前后行距，原为 28px 0 16px */
+  margin: 28px 0 16px; 
   font-weight: 700; 
   letter-spacing: 0.1px; 
   font-family: 'GeorgiaSerif', 'Times New Roman', 'AlibabaPuHuiTi', serif;
@@ -603,7 +603,7 @@ export default {
   -webkit-overflow-scrolling: touch;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 480px) {
   .content { font-size: 15px; line-height: 1.5; }
   .content :deep(p) { font-size: var(--md-body-font-size-mobile); line-height: var(--md-body-line-height-mobile); }
   .content :deep(li) { font-size: var(--md-body-font-size-mobile); line-height: var(--md-body-line-height-mobile); }
@@ -614,7 +614,7 @@ export default {
   .content :deep(ul) :deep(li) { padding-left: 1px; }
   .content :deep(h1) { font-size: 24px; margin: 16px 0 10px; }
   .content :deep(h2) { font-size: 22px; margin: 14px 0 8px; }
-  .content :deep(h3) { font-size: 20px; line-height: 1.2; font-weight: 700; }
+  .content :deep(h3) { font-size: 20px; line-height: 1.2; font-weight: 700; margin: 14px 0 8px; }
   .content :deep(h4) { font-size: 17px; line-height: 1.3; font-weight: 700; margin: 12px 0 6px; }
   .content :deep(table) { min-width: 420px; }
   .content >>> pre { padding: 10px; }

@@ -393,7 +393,16 @@ export default {
   },
   created() {
     this.loadCar(this.$route.params.id)
-    import('@/data/car/brandLogos.json').then(mod => { this.brandLogoMap = mod.default })
+    import('@/data/car/brandDetails.json').then(mod => { 
+      const details = mod.default
+      const map = {}
+      for (const brand in details) {
+        if (details[brand].brandLogo) {
+          map[brand] = details[brand].brandLogo
+        }
+      }
+      this.brandLogoMap = map
+    })
     if (typeof window !== 'undefined' && window.scrollTo) {
       window.scrollTo({ top: 0, behavior: 'auto' })
     }
@@ -901,12 +910,13 @@ export default {
 }
 
 .specs-box {
-  background: transparent;
-  border: 1px solid rgba(255, 255, 255, 0.15); /* Outer border */
-  border-radius: 6px; /* Rounded corners */
+  background: var(--c-bg-l2);
+  border: 1px solid var(--c-border-default); /* Outer border */
+  border-radius: 8px; /* Rounded corners */
   padding: 0;
   font-family: 'MotivaSans', sans-serif;
   overflow: hidden; /* Clip children to border radius */
+  box-shadow: 0 4px 15px var(--c-shadow-medium);
 }
 
 .spec-grid {
@@ -919,7 +929,7 @@ export default {
 .specs-hint {
   color: var(--c-text-muted);
   font-size: 12px;
-  padding: 0 16px;
+  padding: 0 4px;
   text-align: right;
   margin: 6px 0 10px;
   background: transparent;
@@ -931,10 +941,14 @@ export default {
   justify-content: space-between;
   align-items: center;
   gap: 16px; /* 增加 .row-label 和 .row-value 之间的间距 */
-  background: var(--c-shadow-light);
-  padding: 8px 16px;
+  background: transparent;
+  padding: 10px 16px;
   transition: background 0.2s;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid var(--c-border-default);
+}
+
+.spec-row:hover {
+  background: rgba(255, 255, 255, 0.03);
 }
 
 .spec-row:last-child {
@@ -943,18 +957,19 @@ export default {
 
 .row-label {
   background: transparent;
-  color: var(--c-text-title); /* White text */
-  font-size: 12px;
+  color: var(--c-text-body-alt); /* White text */
+  font-size: 13px;
   padding: 0;
   width: auto;
   flex-shrink: 0;
   display: block;
   cursor: pointer;
+  transition: color 0.2s;
 }
 
 .row-value {
   color: var(--c-text-title); /* White text */
-  font-size: 12px;
+  font-size: 13px;
   text-align: right;
   padding: 0;
   flex-grow: 1;

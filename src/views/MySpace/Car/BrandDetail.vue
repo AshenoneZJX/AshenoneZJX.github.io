@@ -97,12 +97,12 @@
     </section>
 
     <!-- 左侧：在售车型 (30%) -->
-    <section class="brand-section col-left" v-if="currentLineupCategories.length || representativeModelNames.length">
+    <section class="brand-section col-left" v-if="currentLineupCategories.length || representativeModelNames.length || representativeModelCategories">
       <h3 class="section-title">
         <span class="icon">🚗</span> 在售车型
       </h3>
       
-      <!-- 如果有详细的分类数据 -->
+      <!-- 如果有详细的分类数据 (current_lineup) -->
       <template v-if="currentLineupCategories.length">
         <div v-for="cat in currentLineupCategories" :key="cat.key" class="lineup-category">
           <h4 class="lineup-cat-title">{{ cat.name }} <span class="lineup-cat-en">{{ cat.nameEn }}</span></h4>
@@ -118,6 +118,27 @@
                 :to="{ name: 'CarDetail', params: { id: carIdOfModelName(m.model_name) || carIdOfModelName(m.model_name_zh) } }"
               >{{ m.model_name_zh || m.model_name }}</router-link>
               <span v-else class="model-name">{{ m.model_name_zh || m.model_name }}</span>
+            </li>
+          </ul>
+        </div>
+      </template>
+
+      <!-- 按车型类别分组展示 (处理对象形式的 models 字段) -->
+      <template v-else-if="representativeModelCategories">
+        <div v-for="(models, category) in representativeModelCategories" :key="category" class="lineup-category">
+          <h4 class="lineup-cat-title">{{ category }}</h4>
+          <ul class="models-list">
+            <li
+              v-for="m in models"
+              :key="m"
+              class="model-item"
+            >
+              <router-link
+                v-if="carIdOfModelName(m) !== null"
+                class="model-link"
+                :to="{ name: 'CarDetail', params: { id: carIdOfModelName(m) } }"
+              >{{ m }}</router-link>
+              <span v-else class="model-name">{{ m }}</span>
             </li>
           </ul>
         </div>
@@ -205,11 +226,20 @@ export default {
       return ''
     },
     representativeModelNames () {
+      if (this.brandInfo && !Array.isArray(this.brandInfo.models) && typeof this.brandInfo.models === 'object') {
+        return []
+      }
       const listFromDetails = (this.brandInfo && Array.isArray(this.brandInfo.models)) ? this.brandInfo.models : []
       const listFromCars = this.brandModels.map(c => this.modelNameOf(c))
       const merged = [...listFromDetails, ...listFromCars]
       const dedup = Array.from(new Set(merged.filter(Boolean)))
       return dedup
+    },
+    representativeModelCategories () {
+      if (this.brandInfo && !Array.isArray(this.brandInfo.models) && typeof this.brandInfo.models === 'object') {
+        return this.brandInfo.models
+      }
+      return null
     }
   },
   data () {
@@ -398,17 +428,28 @@ export default {
     carIdOfModelName (name) {
       const brand = this.brandName
       if (!name || !brand) return null
+      
       const hit = cars.find(c => {
         const b = getBrand(c.title)
         if (b !== brand) return false
         const model = this.modelNameOf(c)
-        return model === name
+        // 增加更宽容的匹配：如果传入的 name 包含在全称里，或者全称包含 name
+        return model === name || model.includes(name) || name.includes(model)
       })
       return hit ? hit.id : null
     }
   },
   created () {
-    import('@/data/car/brandLogos.json').then(mod => { this.brandLogoMap = mod.default })
+    import('@/data/car/brandDetails.json').then(mod => { 
+      const details = mod.default
+      const map = {}
+      for (const brand in details) {
+        if (details[brand].brandLogo) {
+          map[brand] = details[brand].brandLogo
+        }
+      }
+      this.brandLogoMap = map
+    })
   }
 }
 </script>

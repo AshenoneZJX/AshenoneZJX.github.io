@@ -34,7 +34,6 @@
 
 <script>
 import cars from '@/data/car/cars.json'
-import brandLogos from '@/data/car/brandLogos.json'
 import brandDetails from '@/data/car/brandDetails.json'
 
 function getBrand (title) {
@@ -80,7 +79,7 @@ export default {
   },
   methods: {
     getLogoUrl (name) {
-      return brandLogos[name] || ''
+      return brandDetails[name] ? brandDetails[name].brandLogo : ''
     },
     getRegionClass (region) {
       const classMap = {

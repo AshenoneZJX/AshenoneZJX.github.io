@@ -65,7 +65,7 @@ export default {
   font-family: 'MotivaSans', sans-serif;
   box-sizing: border-box;
 }
-.section-header h2 { color: var(--c-text-title); font-weight: 400; letter-spacing: 2px; }
+.section-header h2 { color: var(--c-text-title); font-weight: 500; letter-spacing: 2px; }
 .divider { height: 2px; background: var(--c-border-strong); margin: 10px 0 30px 0; }
 
 .gallery-grid {
