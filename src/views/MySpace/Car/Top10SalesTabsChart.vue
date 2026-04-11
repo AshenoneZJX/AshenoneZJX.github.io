@@ -1,8 +1,17 @@
 <template>
   <div class="top10-wrap">
     <div class="chart-block chart-block-head">
-      <div class="charts-toolbar">
-        <div class="toolbar-controls">
+      <div
+        ref="chartsToolbar"
+        class="charts-toolbar"
+        :class="{ 'is-expanded': isMobileMenuOpen, 'use-collapse': shouldCollapseToolbar }"
+      >
+        <div v-if="shouldCollapseToolbar" class="mobile-toggle-bar">
+          <button class="menu-toggle-btn" type="button" @click="toggleMobileMenu">
+            {{ isMobileMenuOpen ? '收起选项' : '图表选项' }}
+          </button>
+        </div>
+        <div ref="toolbarControls" class="toolbar-controls">
           <button class="tab-btn" :class="{ active: activeTab === 'global' }" type="button" @click="setTab('global')">全球</button>
           <button class="tab-btn" :class="{ active: activeTab === 'china' }" type="button" @click="setTab('china')">中国</button>
         </div>
@@ -27,7 +36,11 @@ export default {
     return {
       activeTab: 'global',
       chart: null,
-      ro: null
+      ro: null,
+      isMobileMenuOpen: false,
+      shouldCollapseToolbar: false,
+      controlsRequiredWidth: 0,
+      toolbarResizeObserver: null
     }
   },
   computed: {
@@ -40,17 +53,30 @@ export default {
   },
   mounted () {
     this.init()
+    this.$nextTick(() => {
+      this.cacheControlsRequiredWidth()
+      this.updateToolbarCollapse()
+    })
     window.addEventListener('resize', this.resize)
+    window.addEventListener('resize', this.updateToolbarCollapse, { passive: true })
+    document.addEventListener('pointerdown', this.handleDocumentPointerDown)
     if (typeof ResizeObserver !== 'undefined') {
       this.ro = new ResizeObserver(() => {
         this.resize()
       })
       if (this.$refs.chart) this.ro.observe(this.$refs.chart)
+      this.toolbarResizeObserver = new ResizeObserver(() => {
+        this.updateToolbarCollapse()
+      })
+      if (this.$refs.chartsToolbar) this.toolbarResizeObserver.observe(this.$refs.chartsToolbar)
     }
   },
   beforeDestroy () {
     window.removeEventListener('resize', this.resize)
+    window.removeEventListener('resize', this.updateToolbarCollapse)
+    document.removeEventListener('pointerdown', this.handleDocumentPointerDown)
     if (this.ro) this.ro.disconnect()
+    if (this.toolbarResizeObserver) this.toolbarResizeObserver.disconnect()
     if (this.chart) this.chart.dispose()
   },
   watch: {
@@ -68,6 +94,48 @@ export default {
     }
   },
   methods: {
+    toggleMobileMenu () {
+      this.isMobileMenuOpen = !this.isMobileMenuOpen
+    },
+    handleDocumentPointerDown (event) {
+      if (!this.shouldCollapseToolbar || !this.isMobileMenuOpen) return
+      const controls = this.$refs.toolbarControls
+      if (!controls) return
+      const target = event.target
+      const clickedToggleBar = target instanceof Element && target.closest('.mobile-toggle-bar')
+      if (clickedToggleBar) return
+      if (!controls.contains(target)) {
+        this.isMobileMenuOpen = false
+      }
+    },
+    cacheControlsRequiredWidth () {
+      const controls = this.$refs.toolbarControls
+      if (!controls) return
+      const children = Array.from(controls.children || [])
+      if (children.length === 0) return
+      const style = window.getComputedStyle(controls)
+      const gap = Number.parseFloat(style.columnGap || style.gap || '0') || 0
+      const width = children.reduce((sum, el) => sum + el.getBoundingClientRect().width, 0) + gap * (children.length - 1)
+      if (width > this.controlsRequiredWidth) {
+        this.controlsRequiredWidth = Math.ceil(width)
+      }
+    },
+    updateToolbarCollapse () {
+      const toolbar = this.$refs.chartsToolbar
+      const controls = this.$refs.toolbarControls
+      if (!toolbar || !controls) return
+      if (!this.controlsRequiredWidth) {
+        this.cacheControlsRequiredWidth()
+      }
+      const style = window.getComputedStyle(toolbar)
+      const horizontalPadding = (Number.parseFloat(style.paddingLeft) || 0) + (Number.parseFloat(style.paddingRight) || 0)
+      const availableWidth = toolbar.clientWidth - horizontalPadding
+      const nextCollapse = this.controlsRequiredWidth > availableWidth
+      this.shouldCollapseToolbar = nextCollapse
+      if (!nextCollapse) {
+        this.isMobileMenuOpen = false
+      }
+    },
     init () {
       this.chart = echarts.init(this.$refs.chart, null, { renderer: 'svg' })
       this.render()
@@ -78,6 +146,7 @@ export default {
     setTab (tab) {
       if (this.activeTab === tab) return
       this.activeTab = tab
+      this.isMobileMenuOpen = false
       this.$nextTick(() => {
         this.render()
         this.resize()
@@ -214,8 +283,55 @@ export default {
 }
 .toolbar-controls {
   display: flex;
+  align-items: center;
   gap: 12px;
   flex-wrap: wrap;
+  width: 100%;
+}
+.mobile-toggle-bar {
+  display: none;
+}
+.charts-toolbar.use-collapse .mobile-toggle-bar {
+  display: flex;
+  align-items: center;
+  padding: 8px 0;
+}
+.menu-toggle-btn {
+  background: var(--c-primary-alpha-10);
+  border: 1px solid var(--c-border-hover);
+  color: var(--c-primary);
+  padding: 6px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+}
+.charts-toolbar.use-collapse .toolbar-controls {
+  display: none;
+}
+.charts-toolbar.use-collapse.is-expanded .toolbar-controls {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 8px;
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  min-width: min(220px, calc(100vw - 32px));
+  z-index: 20;
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.05)),
+    linear-gradient(180deg, rgba(34, 40, 52, 0.82), rgba(26, 31, 42, 0.72));
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  padding: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 8px;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.2),
+    0 12px 36px rgba(0, 0, 0, 0.35);
+  box-sizing: border-box;
+}
+.charts-toolbar.use-collapse.is-expanded .tab-btn {
   width: 100%;
 }
 .tab-btn {

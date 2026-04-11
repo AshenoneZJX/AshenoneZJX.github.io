@@ -12,22 +12,30 @@
     </div>
     <div class="divider"></div>
 
-    <div class="brands-grid">
-      <div
-        v-for="b in brands"
-        :key="b.name"
-        class="brand-card"
-        @click="$router.push({ name: 'BrandDetail', params: { name: b.name } })"
-      >
-        <div class="brand-card-header">
-          <div class="brand-title">
-            {{ b.name }}
-            <span class="brand-meta-sub">{{ b.count }}</span>
+    <div class="brand-groups">
+      <section v-for="group in brandGroups" :key="group.name" class="brand-group">
+        <h3 class="brand-group-title">
+          {{ group.name }}
+          <span class="brand-group-count">({{ group.items.length }})</span>
+        </h3>
+        <div class="brands-grid">
+          <div
+            v-for="b in group.items"
+            :key="b.name"
+            class="brand-card"
+            @click="$router.push({ name: 'BrandDetail', params: { name: b.name } })"
+          >
+            <div class="brand-card-header">
+              <div class="brand-title">
+                {{ b.name }}
+                <span class="brand-meta-sub">{{ b.count }}</span>
+              </div>
+              <span class="brand-region-tag" :class="getRegionClass(b.region)">{{ b.region }}</span>
+            </div>
+            <img v-if="getLogoUrl(b.name)" :src="getLogoUrl(b.name)" class="brand-logo" alt="" />
           </div>
-          <span class="brand-region-tag" :class="getRegionClass(b.region)">{{ b.region }}</span>
         </div>
-        <img v-if="getLogoUrl(b.name)" :src="getLogoUrl(b.name)" class="brand-logo" alt="" />
-      </div>
+      </section>
     </div>
   </div>
 </template>
@@ -45,11 +53,28 @@ function getBrand (title) {
 export default {
   name: 'BrandList',
   computed: {
+    brandCategoryMap () {
+      return {
+        仰望: '超豪华品牌',
+        奔驰: '一线豪华品牌',
+        宝马: '一线豪华品牌',
+        奥迪: '一线豪华品牌',
+        雷克萨斯: '二线豪华品牌',
+        特斯拉: '一线豪华品牌',
+        凯迪拉克: '二线豪华品牌',
+        林肯: '二线豪华品牌',
+        沃尔沃: '二线豪华品牌',
+        问界: '二线豪华品牌',
+        蔚来: '二线豪华品牌',
+        理想: '二线豪华品牌'
+      }
+    },
     brands () {
       const map = new Map()
       // 从 cars.json 统计车型数量
       cars.forEach(c => {
-        const brand = getBrand(c.title)
+        // 优先使用 car.brand 字段，如果不存在则回退到通过 title 解析
+        const brand = c.brand || getBrand(c.title)
         map.set(brand, (map.get(brand) || 0) + 1)
       })
       
@@ -68,13 +93,24 @@ export default {
           region: detail.region || '其他'
         }
       }).sort((a, b) => {
-        // 先按车系分类排序
-        if (a.region !== b.region) {
-          return a.region.localeCompare(b.region, 'zh-CN')
-        }
-        // 同车系内按车型数量降序排序
-        return b.count - a.count
+        if (b.count !== a.count) return b.count - a.count
+        return a.name.localeCompare(b.name, 'zh-CN')
       })
+    },
+    brandGroups () {
+      const order = ['超豪华品牌', '一线豪华品牌', '二线豪华品牌', '主流品牌']
+      const grouped = new Map(order.map(name => [name, []]))
+      this.brands.forEach(brand => {
+        const groupName = this.brandCategoryMap[brand.name] || '主流品牌'
+        grouped.get(groupName).push(brand)
+      })
+      return order.map(name => ({
+        name,
+        items: grouped.get(name).sort((a, b) => {
+          if (b.count !== a.count) return b.count - a.count
+          return a.name.localeCompare(b.name, 'zh-CN')
+        })
+      }))
     }
   },
   methods: {
@@ -110,6 +146,41 @@ export default {
 .section-header h2 { color: var(--c-text-title); font-weight: 400; letter-spacing: 2px; margin: 0; }
 .brand-count { color: var(--c-text-muted); font-size: 13px; letter-spacing: 1px; }
 .divider { height: 2px; background: var(--c-border-strong); margin: 10px 0 30px 0; }
+
+.brand-groups {
+  display: flex;
+  flex-direction: column;
+  gap: 26px;
+}
+.brand-group {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.brand-group-title {
+  margin: 0 0 8px 0;
+  padding-bottom: 8px;
+  position: relative;
+  color: var(--c-text-title);
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+.brand-group-title::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 1px;
+  background: var(--c-border-default);
+}
+.brand-group-count {
+  color: var(--c-text-muted);
+  font-size: 13px;
+  font-weight: 400;
+  margin-left: 6px;
+}
 
 .brands-grid {
   display: grid;
@@ -197,6 +268,7 @@ export default {
 
 @media (max-width: 768px) {
   .page-brands { padding: 20px 16px; }
+  .brand-groups { gap: 22px; }
   .brands-grid { 
     grid-template-columns: repeat(2, 1fr); 
     gap: 12px;

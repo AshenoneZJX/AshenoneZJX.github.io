@@ -1,5 +1,188 @@
 [
   {
+    "id": 201,
+    "title": "丰田 卡罗拉",
+    "brand": "丰田",
+    "sizeClass": "紧凑型",
+    "images": [
+      "https://p3.dcarimg.com/img/motor-mis-img/DCP_77e5e06368222522a1554c65e5852ac8~2508x0.webp",
+      "https://p3.dcarimg.com/img/motor-mis-img/DCP_8813503a37c615d608c47f542802e5b1~2508x0.webp",
+      "https://p3.dcarimg.com/img/motor-mis-img/DCP_698f499f36f9c58793a6f85b7ca0c07d~2508x0.webp",
+      "https://images.pexels.com/photos/31449869/pexels-photo-31449869.jpeg"
+    ],
+    "energy": [
+      "燃油",
+      "混动"
+    ],
+    "body": "轿车",
+    "intro": "丰田卡罗拉（Corolla）是全球最畅销的紧凑型家用轿车之一，基于TNGA架构打造。提供1.2T、1.5L燃油版以及1.8L双擎混动版，兼具极佳的燃油经济性与可靠性。全系标配Toyota Safety Sense智行安全系统，底盘采用前麦弗逊与后双叉臂式独立悬架，为家庭出行提供平稳舒适的驾乘体验。",
+    "specs": {
+      "dimensions": "长4635mm × 宽1780mm × 高1455mm，轴距2700mm",
+      "engine": "1.2T / 1.5L / 1.8L THS双擎混动",
+      "transmission": "CVT / E-CVT",
+      "chassis": "前麦弗逊、后双叉臂式独立悬架，前置前驱"
+    },
+    "specialEdition": {
+      "id": 2011,
+      "title": "AE86",
+      "brand": "丰田",
+      "sizeClass": "紧凑型",
+      "images": [
+        "https://p3.dcarimg.com/img/tos-cn-i-dcdx/7068e0105d5f4a2b9d734bf4a7d5a39c~2508x0.webp",
+        "https://p3.dcarimg.com/img/tos-cn-i-dcdx/70baca7afc584c36ab8d00786bc8a622~2508x0.webp",
+        "https://p3.dcarimg.com/img/tos-cn-i-dcdx/2a6636f48b5448629f2b54f1b3f59a86~2508x0.webp",
+        "https://images.pexels.com/photos/36591061/pexels-photo-36591061.jpeg"
+      ],
+      "energy": "燃油",
+      "body": "轿车",
+      "intro": "丰田AE86（Corolla Levin/Sprinter Trueno）是一款经典的轻量化前置后驱跑车。凭借其均衡的底盘调校、高转速4A-GE发动机以及在动漫《头文字D》中的传奇地位，成为了全球JDM车迷与漂移爱好者心中的神车。",
+      "specs": {
+        "dimensions": "长4180mm × 宽1625mm × 高1335mm，轴距2400mm，整备质量约925kg",
+        "engine": "1.6L 4A-GE 直列四缸自然吸气，最大功率约130PS，最大扭矩149N·m",
+        "transmission": "5MT",
+        "chassis": "前麦弗逊、后四连杆硬轴，前置后驱"
+      }
+    }
+  },
+  {
+    "id": 202,
+    "title": "丰田 亚洲龙",
+    "brand": "丰田",
+    "sizeClass": "中型",
+    "images": [
+      "https://p3.dcarimg.com/img/motor-mis-img/DCP_5cc8c55495a10ee49ea657f58a2b4388~2508x0.webp",
+      "https://p3.dcarimg.com/img/motor-mis-img/DCP_b4d5cbd182ac42a4cf516658a58de2b2~2508x0.webp",
+      "https://p3.dcarimg.com/img/motor-mis-img/DCP_ba5117a74d13c8236aaa7a68ee40ffbf~2508x0.webp"
+    ],
+    "energy": [
+      "燃油",
+      "混动"
+    ],
+    "body": "轿车",
+    "intro": "丰田亚洲龙（Avalon）是丰田旗下的旗舰级中型/中大型轿车，拥有纯正的美系血统。基于TNGA-K平台打造，车长接近5米。提供2.0L/2.5L燃油版及2.5L智能电混双擎版，匹配CVT/8AT/E-CVT变速箱。以其宽奢的后排空间、出色的静谧性与低至4.3L/100km的油耗表现，成为B+级轿车市场的强力竞争者。",
+    "specs": {
+      "dimensions": "长4990mm × 宽1850mm × 高1450mm，轴距2870mm",
+      "engine": "2.0L / 2.5L / 2.5L THS双擎混动",
+      "transmission": "CVT / 8AT / E-CVT",
+      "chassis": "前麦弗逊、后E型多连杆独立悬架，前置前驱"
+    }
+  },
+  {
+    "id": 203,
+    "title": "丰田 汉兰达",
+    "brand": "丰田",
+    "sizeClass": "中型",
+    "images": [
+      "https://p3.dcarimg.com/img/motor-mis-img/DCP_eb4994f3ce50133773f9a4876fb08bad~2508x0.webp",
+      "https://p3.dcarimg.com/img/motor-mis-img/DCP_ff4efde14a87833cb695b480d9a18090~2508x0.webp",
+      "https://p3.dcarimg.com/img/motor-mis-img/DCP_5ca64c264447c683c865cf77afca1b96~2508x0.webp"
+    ],
+    "energy": [
+      "燃油",
+      "混动"
+    ],
+    "body": "SUV",
+    "intro": "丰田汉兰达（Highlander）是一款中型SUV，以其宽敞的三排空间、卓越的可靠性与平顺的驾驶体验著称。基于TNGA-K平台打造，提供2.0T燃油版与2.5L智能电混双擎版，匹配Direct Shift-8AT或E-CVT变速箱。它是家庭出行的标杆车型，兼顾了日常通勤与长途旅行的舒适需求。",
+    "specs": {
+      "dimensions": "长4965mm × 宽1930mm × 高1750mm，轴距2850mm",
+      "engine": "2.0T L4 涡轮增压 / 2.5L THS双擎混动",
+      "transmission": "8AT / E-CVT",
+      "chassis": "前麦弗逊、后E型多连杆独立悬架，前置前驱/适时四驱"
+    }
+  },
+  {
+    "id": 204,
+    "title": "丰田 埃尔法",
+    "brand": "丰田",
+    "sizeClass": "中大型",
+    "images": [
+      "https://p3.dcarimg.com/img/motor-mis-img/3c52fb34a9631eaec6117c7e9054d6b5~2508x0.webp",
+      "https://p3.dcarimg.com/img/motor-mis-img/23a5efbff83692979086a90b3bc7258e~2508x0.webp",
+      "https://p3.dcarimg.com/img/motor-mis-img/5ed184978dc808406218c11f7eb04c59~2508x0.webp"
+    ],
+    "energy": [
+      "混动"
+    ],
+    "body": "MPV",
+    "intro": "丰田埃尔法（Alphard）是丰田旗下的旗舰级豪华MPV，被誉为“保姆车”界的标杆。以其夸张霸气的前脸设计、极其奢华的第二排航空座椅以及出色的静谧性闻名。搭载2.5L智能电混双擎系统，匹配E-CVT变速箱和E-Four电子四驱系统，为高端商务接待与家庭出行提供顶级的舒适体验。",
+    "specs": {
+      "dimensions": "长5005mm × 宽1850mm × 高1950mm，轴距3000mm",
+      "engine": "2.5L THS双擎混动系统",
+      "transmission": "E-CVT",
+      "chassis": "前麦弗逊、后双叉臂式独立悬架，前置四驱 (E-Four)"
+    }
+  },
+  {
+    "id": 205,
+    "title": "丰田 兰德酷路泽",
+    "brand": "丰田",
+    "sizeClass": "中大型",
+    "images": [
+      "https://p3.dcarimg.com/img/motor-mis-img/3ccab45386debdba1b5cec19525fe030~2508x0.webp",
+      "https://p3.dcarimg.com/img/motor-mis-img/6383b936b08b6bc0019902649513d350~2508x0.webp",
+      "https://p3.dcarimg.com/img/motor-mis-img/43f2720d520fb26efdb51a71c987eeb4~2508x0.webp",
+      "https://images.pexels.com/photos/27952120/pexels-photo-27952120.jpeg"
+    ],
+    "energy": [
+      "燃油"
+    ],
+    "body": "SUV",
+    "intro": "丰田兰德酷路泽（Land Cruiser），被广泛称为“陆地巡洋舰”，是丰田旗下享誉全球的硬派越野旗舰SUV。以其无与伦比的越野性能、极高的可靠性和耐用性在越野爱好者中拥有极高声望。全新一代基于TNGA-F平台打造，搭载3.5T V6双涡轮增压发动机，匹配10AT变速箱，配备全时四驱系统及多地形选择系统，是征服极限路况与长途穿越的顶级利器。",
+    "specs": {
+      "dimensions": "长4985mm × 宽1980mm × 高1945mm，轴距2850mm",
+      "engine": "3.5T V6 双涡轮增压发动机",
+      "transmission": "10AT",
+      "chassis": "前双叉臂、后四连杆非独立悬架（非承载式车身），全时四驱"
+    }
+  },
+  {
+    "id": 206,
+    "title": "丰田 普拉多",
+    "brand": "丰田",
+    "sizeClass": "中大型",
+    "images": [
+      "https://p3.dcarimg.com/img/motor-mis-img/DCP_ab7ff2588db1f080d20898da10b3bc74~2508x0.webp",
+      "https://p3.dcarimg.com/img/motor-mis-img/DCP_b9a5e9137e11038f1a25c5654516da93~2508x0.webp",
+      "https://p3.dcarimg.com/img/motor-mis-img/DCP_a965306de4ebb1af0724ed188fd2f6fb~2508x0.webp"
+    ],
+    "energy": [
+      "燃油",
+      "混动"
+    ],
+    "body": "SUV",
+    "intro": "丰田普拉多（Prado），作为兰德酷路泽家族的核心成员，以其卓越的越野能力、坚固耐用的非承载式车身以及全路况的适应性闻名于世。全新一代普拉多基于TNGA-F平台打造，回归经典的复古硬派设计，搭载2.4T超级混动系统，兼顾了强悍的动力输出与燃油经济性，是无数越野爱好者心中的“霸道”。",
+    "specs": {
+      "dimensions": "长4920mm × 宽1980mm × 高1860mm，轴距2850mm",
+      "engine": "2.4T L4 涡轮增压发动机 + 电机 (超级混动)",
+      "transmission": "8AT",
+      "chassis": "前双叉臂、后多连杆非独立悬架（非承载式车身），全时四驱"
+    }
+  },
+  {
+    "id": 207,
+    "title": "丰田 普锐斯",
+    "brand": "丰田",
+    "sizeClass": "紧凑型",
+    "images": [
+      "https://g.autoimg.cn/@img/cjh2/chejiahaodfs/g34/M02/2A/BD/1200x0_autohomecar__ChxpV2kvrXaAS5-JABCk4kblsS4731.png?x_image_process=text/6am-5LuV5rS-/fontSize/16",
+      "https://g.autoimg.cn/@img/cjh2/chejiahaodfs/g34/M05/2A/C8/1200x0_autohomecar__ChxpWGkvrXaAWdAKABH6XPJqlHI816.png?x_image_process=text/6am-5LuV5rS-/fontSize/16",
+      "https://g.autoimg.cn/@img/cjh2/chejiahaodfs/g33/M09/2D/69/1200x0_autohomecar__ChxpVmkvriCAb-nMAA4jfUQmK8c168.png?x_image_process=text/6am-5LuV5rS-/fontSize/16",
+      "https://images.pexels.com/photos/6191762/pexels-photo-6191762.jpeg"
+    ],
+    "energy": [
+      "混动",
+      "插混"
+    ],
+    "body": "轿车",
+    "intro": "丰田普锐斯（Prius）是全球首款量产的混合动力汽车，一直是新能源环保出行的标志性符号。全新一代普锐斯基于第二代TNGA-C平台打造，拥有极具未来感与空气动力学的流线型轿跑车身。搭载第五代THS混动系统及全新的插电式混动系统（PHEV），在保持极致燃油经济性的同时，大幅提升了动力性能与驾驶乐趣。",
+    "specs": {
+      "dimensions": "长4600mm × 宽1782mm × 高1420mm，轴距2750mm",
+      "engine": "1.8L / 2.0L 第五代THS混动系统 / 2.0L PHEV插电混动系统",
+      "transmission": "E-CVT",
+      "chassis": "前麦弗逊、后双叉臂式独立悬架，前置前驱/E-Four四驱"
+    }
+  },
+  {
     "id": 1,
     "title": "本田 思域",
     "brand": "本田",
@@ -70,9 +253,10 @@
     "brand": "本田",
     "sizeClass": "中型",
     "images": [
-      "https://p3.dcarimg.com/img/motor-mis-img/DCP_c7377bbfc31b691024e86003974cfd78~2508x0.webp",
-      "https://p3.dcarimg.com/img/motor-mis-img/DCP_1edab071ad1c91933780882d9c04e834~2508x0.webp",
-      "https://p3.dcarimg.com/img/motor-mis-img/DCP_6d0917828c27f8f9a7f13ddec72bc717~2508x0.webp"
+      "https://p3.dcarimg.com/img/motor-mis-img/DCP_5dbf3d9cbfb12b1056331b0519e5d816~2508x0.webp",
+      "https://p3.dcarimg.com/img/motor-mis-img/DCP_a19242897fc0d20f4417326c3250ff5f~2508x0.webp",
+      "https://p3.dcarimg.com/img/motor-mis-img/DCP_6d0917828c27f8f9a7f13ddec72bc717~2508x0.webp",
+      "https://images.unsplash.com/photo-1613538712814-42d97ce67d78?q=80&w=774&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
     ],
     "energy": [
       "燃油",
@@ -115,7 +299,8 @@
     "images": [
       "https://p3.dcarimg.com/img/motor-mis-img/DCP_a13b1bf7cc76b97e32e4f6e58b7cf234~2508x0.webp",
       "https://p3.dcarimg.com/img/motor-mis-img/DCP_08c237025a34549d1301c9bd67e39e25~2508x0.webp",
-      "https://p3.dcarimg.com/img/motor-mis-img/DCP_f9ccb4155915a82c2cb5fca22c5fe243~2508x0.webp"
+      "https://p3.dcarimg.com/img/motor-mis-img/DCP_f9ccb4155915a82c2cb5fca22c5fe243~2508x0.webp",
+      "https://images.unsplash.com/photo-1741479897627-d98ff167f115?q=80&w=738&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
     ],
     "energy": "燃油",
     "body": "轿车",
@@ -352,7 +537,8 @@
     "images": [
       "https://p3.dcarimg.com/img/motor-mis-img/DCP_7b6e61c0c0b518903985c992422a065d~2508x0.webp",
       "https://p3.dcarimg.com/img/motor-mis-img/DCP_185236f63930447ed24157810622ecc2~2508x0.webp",
-      "https://p3.dcarimg.com/img/motor-mis-img/DCP_7c0f402aa8c69b11a62d31e0270de22a~2508x0.webp"
+      "https://p3.dcarimg.com/img/motor-mis-img/DCP_7c0f402aa8c69b11a62d31e0270de22a~2508x0.webp",
+      "https://images.pexels.com/photos/13936547/pexels-photo-13936547.jpeg"
     ],
     "energy": [
       "燃油",
@@ -431,7 +617,8 @@
     "images": [
       "https://p3.dcarimg.com/img/motor-mis-img/DCP_53516affa811cffe393d29e13784b827~2508x0.webp",
       "https://p3.dcarimg.com/img/motor-mis-img/DCP_dc991f867fc8d683696ef3549db77a14~2508x0.webp",
-      "https://p3.dcarimg.com/img/motor-mis-img/DCP_f4e0e82bfe2a2430bd40a242c14a99c2~2508x0.webp"
+      "https://p3.dcarimg.com/img/motor-mis-img/DCP_f4e0e82bfe2a2430bd40a242c14a99c2~2508x0.webp",
+      "https://images.unsplash.com/photo-1724620961935-ee922e2dfad5?q=80&w=772&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
     ],
     "energy": "燃油",
     "body": "轿车",
@@ -860,6 +1047,573 @@
       "engine": "1.5T / 2.0T 涡轮增压发动机 237PS",
       "transmission": "9AT",
       "chassis": "前麦弗逊、后多连杆独立悬架，前置前驱"
+    }
+  },
+  {
+    "id": 40,
+    "title": "大众 朗逸",
+    "brand": "大众",
+    "sizeClass": "紧凑型",
+    "images": [
+      "https://p3.dcarimg.com/img/motor-mis-img/DCP_299ede0f58e334065b216eaaae19f002~2508x0.webp",
+      "https://p3.dcarimg.com/img/motor-mis-img/DCP_9cbe51609ca73b7c0c1850088bffa49b~2508x0.webp",
+      "https://p3.dcarimg.com/img/motor-mis-img/DCP_bf01e82202ff852f0ed522c2cd4e4a23~2508x0.webp"
+    ],
+    "energy": "燃油",
+    "body": "轿车",
+    "intro": "大众朗逸（Lavida）是上汽大众旗下的一款紧凑型家用轿车，长期占据中国乘用车销量榜前列。凭借中庸大气的外观、可靠的品质、宽敞的空间和极高的燃油经济性，被称为“国民家轿”。提供1.5L自然吸气和1.5T涡轮增压发动机选项，适合日常代步与家庭出行。",
+    "specs": {
+      "dimensions": "长4678mm × 宽1806mm × 高1474mm，轴距2688mm",
+      "engine": "1.5L 自然吸气 / 1.5T 涡轮增压",
+      "transmission": "6AT / 7DSG",
+      "chassis": "前麦弗逊独立悬架、后扭力梁非独立悬架，前置前驱"
+    }
+  },
+  {
+    "id": 41,
+    "title": "大众 ID.3",
+    "brand": "大众",
+    "sizeClass": "紧凑型",
+    "images": [
+      "https://p3.dcarimg.com/img/motor-mis-img/DCP_ccdf23d2fbc808de1c3ddb048700f02a~2508x0.webp",
+      "https://p3.dcarimg.com/img/motor-mis-img/DCP_35f88eec3f8c94caa3f093a737350646~2508x0.webp",
+      "https://p3.dcarimg.com/img/motor-mis-img/DCP_469f1304e459265f0dd47d3e76db7a80~2508x0.webp"
+    ],
+    "energy": "纯电",
+    "body": "轿车",
+    "intro": "大众ID.3是基于大众MEB专属纯电平台打造的紧凑型纯电掀背车。它拥有灵动的后驱操控体验、50:50的理想配重以及越级的车内乘坐空间。搭载高效电机与智能驾驶辅助系统，是大众向电动化转型的标志性先锋产品，尤其受到城市年轻家庭的青睐。",
+    "specs": {
+      "dimensions": "长4261mm × 宽1778mm × 高1568mm，轴距2765mm",
+      "engine": "后置单电机 170PS，最大扭矩310N·m",
+      "transmission": "单速固定齿比",
+      "chassis": "前麦弗逊、后多连杆独立悬架，后置后驱"
+    }
+  },
+  {
+    "id": 42,
+    "title": "大众 途观",
+    "brand": "大众",
+    "sizeClass": "中型",
+    "images": [
+      "https://p3.dcarimg.com/img/motor-mis-img/DCP_d41002f7dadf909f44afd787c4879687~2508x0.webp",
+      "https://p3.dcarimg.com/img/motor-mis-img/DCP_2cf3d9fe2a6cf6f3afd9a425899059d8~2508x0.webp",
+      "https://p3.dcarimg.com/img/motor-mis-img/DCP_5c6652d4df028f1ab9bf0ed0cbd8dbeb~2508x0.webp"
+    ],
+    "energy": [
+      "燃油",
+      "混动"
+    ],
+    "body": "SUV",
+    "intro": "大众途观（Tiguan）/ 途观L 是大众品牌在全球范围内极具影响力的中型SUV，常年位居销量榜前列。途观L专为国内市场加长轴距，提供了宽裕的五座或七座布局。它搭载了第三代EA888 2.0T发动机，匹配7速湿式双离合，兼具强劲动力与优秀的行驶质感，是家庭消费升级的经典之选。",
+    "specs": {
+      "dimensions": "长4735mm × 宽1859mm × 高1677mm，轴距2791mm",
+      "engine": "1.5T / 2.0T L4 涡轮增压 160PS/186PS/220PS",
+      "transmission": "7DSG",
+      "chassis": "前麦弗逊、后多连杆独立悬架，前置前驱/4MOTION四驱"
+    }
+  },
+  {
+    "id": 43,
+    "title": "大众 探岳",
+    "brand": "大众",
+    "sizeClass": "中型",
+    "images": [
+      "https://p3.dcarimg.com/img/motor-mis-img/DCP_822b0c9822927e69024f3386b462c076~2508x0.webp",
+      "https://p3.dcarimg.com/img/motor-mis-img/DCP_5089b0cbe24e9f26720f90aaac6da606~2508x0.webp",
+      "https://p3.dcarimg.com/img/motor-mis-img/DCP_b09159b6a086a4bf7a6b48f5316a30eb~2508x0.webp"
+    ],
+    "energy": [
+      "燃油",
+      "混动"
+    ],
+    "body": "SUV",
+    "intro": "大众探岳（Tayron）是一汽-大众基于MQB A2平台打造的高端中型SUV。相比途观L，探岳在外观设计上更加年轻运动，车身线条硬朗有力。其同样提供1.5T与2.0T发动机选项，并配备IQ.Drive智驾系统，不仅在空间上灵活实用，更带来了纯正的德系操控体验，深受年轻家庭喜爱。",
+    "specs": {
+      "dimensions": "长4593mm × 宽1860mm × 高1665mm，轴距2731mm",
+      "engine": "1.5T / 2.0T L4 涡轮增压 160PS/186PS/220PS",
+      "transmission": "7DSG",
+      "chassis": "前麦弗逊、后多连杆独立悬架，前置前驱/4MOTION四驱"
+    }
+  },
+  {
+    "id": 44,
+    "title": "大众 甲壳虫",
+    "brand": "大众",
+    "sizeClass": "紧凑型",
+    "images": [
+      "https://p3.dcarimg.com/img/motor-mis-img/d7b67bea62a06d92a44a47e7a19cb41f~2508x0.webp",
+      "https://p3.dcarimg.com/img/motor-mis-img/7b47d8c533de0aa3c574fcb5c5dc6c64~2508x0.webp",
+      "https://p3.dcarimg.com/img/motor-mis-img/4a1db9c19092ff5915c41f7f136b20b6~2508x0.webp",
+      "https://images.unsplash.com/photo-1565520651265-1148c3b277f4?q=80&w=928&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+    ],
+    "energy": "燃油",
+    "body": "轿车",
+    "intro": "大众甲壳虫（Beetle）是大众汽车历史上最经典的车型之一，以其独特的复古流线型外观和双门掀背设计风靡全球。自诞生以来，它不仅是平民出行的标志，更成为了一种汽车文化符号。尽管已于2019年停产，但其经典的造型和情怀价值，依然让它在众多车迷和收藏家中享有极高的声誉。",
+    "specs": {
+      "dimensions": "长4278mm × 宽1808mm × 高1486mm，轴距2537mm",
+      "engine": "1.2T / 1.4T L4 涡轮增压发动机",
+      "transmission": "7速双离合",
+      "chassis": "前麦弗逊、后多连杆独立悬架，前置前驱"
+    }
+  },
+  {
+    "id": 45,
+    "title": "本田 CR-V",
+    "brand": "本田",
+    "sizeClass": "紧凑型",
+    "images": [
+      "https://images.unsplash.com/photo-1617469767053-d3b523a0b982?q=80&w=1600&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1606664515524-ed2f786a0bd6?q=80&w=1600&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1549927681-4b602b44f1a0?q=80&w=1600&auto=format&fit=crop"
+    ],
+    "energy": [
+      "燃油",
+      "混动"
+    ],
+    "body": "SUV",
+    "intro": "本田CR-V是全球畅销的城市SUV代表车型，兼顾家用空间、燃油经济性与日常驾驶舒适性。在国内市场提供燃油与e:HEV混动版本，满足通勤与长途出行的多场景需求。",
+    "specs": {
+      "dimensions": "长4703mm × 宽1866mm × 高1680mm，轴距2701mm",
+      "engine": "1.5T L4 涡轮增压 / 2.0L e:HEV 混动",
+      "transmission": "CVT / E-CVT",
+      "chassis": "前麦弗逊、后多连杆独立悬架，前置前驱/四驱"
+    }
+  },
+  {
+    "id": 46,
+    "title": "本田 Pilot",
+    "brand": "本田",
+    "sizeClass": "中大型",
+    "images": [
+      "https://car3.autoimg.cn/cardfs/product/g25/M08/67/6E/1400x1050_autohomecar__ChxkqWN4e4OAPrBVAE8KzZDwLN4564.jpg",
+      "https://car3.autoimg.cn/cardfs/product/g30/M0A/36/10/1400x1050_autohomecar__ChwFlGN4e36AbYmuAFOgQi9y0Kc555.jpg",
+      "https://car2.autoimg.cn/cardfs/product/g26/M02/57/CB/1400x1050_autohomecar__ChwFkGN4e3eAYbCRAEbjcnKVLTM745.jpg"
+    ],
+    "energy": "燃油",
+    "body": "SUV",
+    "intro": "本田Pilot是本田面向北美市场的三排七/八座中大型SUV，强调大空间、可靠性与长途舒适性。新一代车型采用更硬朗设计并强化了四驱通过能力，定位家庭全能旗舰SUV。",
+    "specs": {
+      "dimensions": "长5077mm × 宽1994mm × 高1803mm，轴距2891mm",
+      "engine": "3.5L V6 自然吸气",
+      "transmission": "10AT",
+      "chassis": "前麦弗逊、后多连杆独立悬架，前置前驱/四驱"
+    }
+  },
+  {
+    "id": 47,
+    "title": "本田 奥德赛",
+    "brand": "本田",
+    "sizeClass": "中大型",
+    "images": [
+      "https://p3.dcarimg.com/img/motor-mis-img/DCP_2c5f7ee81bad8e90eb0cf9cde88da81e~2508x0.webp",
+      "https://p3.dcarimg.com/img/motor-mis-img/DCP_0e392d107471e5458ec9ec4a3e7ceab6~2508x0.webp",
+      "https://p3.dcarimg.com/img/motor-mis-img/DCP_3d2e7d76498370f2df17cfb9bceb265c~2508x0.webp"
+    ],
+    "energy": [
+      "燃油",
+      "混动"
+    ],
+    "body": "MPV",
+    "intro": "本田奥德赛是本田品牌经典家用MPV，以灵活的大空间、低地台上下车体验和稳定的舒适性著称。面向家庭与商务接待场景，提供更注重油耗与平顺性的混动动力版本。",
+    "specs": {
+      "dimensions": "长4861mm × 宽1820mm × 高1712mm，轴距2900mm",
+      "engine": "2.0L e:HEV 混动 / 2.4L 自然吸气",
+      "transmission": "E-CVT / CVT",
+      "chassis": "前麦弗逊、后扭力梁悬架，前置前驱"
+    }
+  },
+  {
+    "id": 48,
+    "title": "本田 飞度",
+    "brand": "本田",
+    "sizeClass": "小型",
+    "images": [
+      "https://images.unsplash.com/photo-1619767886558-efdc259cde1a?q=80&w=1600&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1616422285623-13ff0162193c?q=80&w=1600&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1549399542-7e3f8b79c341?q=80&w=1600&auto=format&fit=crop"
+    ],
+    "energy": "燃油",
+    "body": "轿车",
+    "intro": "本田飞度（Fit/Jazz）是全球经典小型两厢车，以空间利用率高、油耗低、可靠耐用而闻名。其“MM理念”让车内空间表现远超同级，长期是城市通勤与年轻家庭的热门选择。",
+    "specs": {
+      "dimensions": "长4125mm × 宽1694mm × 高1537mm，轴距2530mm",
+      "engine": "1.5L L4 自然吸气",
+      "transmission": "CVT / 5MT",
+      "chassis": "前麦弗逊、后扭力梁悬架，前置前驱"
+    }
+  },
+  {
+    "id": 208,
+    "title": "比亚迪 秦PLUS DM-i",
+    "brand": "比亚迪",
+    "sizeClass": "紧凑型",
+    "images": [
+      "https://p3.dcarimg.com/img/motor-mis-img/DCP_3de5f78d85838bb56e2f2491023325b0~2508x0.webp",
+      "https://p3.dcarimg.com/img/motor-mis-img/DCP_8865f9a55f7df674a1670a78c9d71c9b~2508x0.webp",
+      "https://p3.dcarimg.com/img/motor-mis-img/DCP_74256e53933d3f1fcf274624aed04d7b~2508x0.webp"
+    ],
+    "energy": [
+      "插混",
+      "纯电"
+    ],
+    "body": "轿车",
+    "intro": "比亚迪秦PLUS DM-i是比亚迪王朝网的主力紧凑型新能源轿车，采用以电驱为主的DM-i超级混动技术，兼顾低油耗与长续航。该车型在家用通勤与网约运营场景中拥有较高市场认可度，并提供EV版本满足纯电出行需求。",
+    "specs": {
+      "dimensions": "长4765mm × 宽1837mm × 高1495mm，轴距2718mm",
+      "engine": "1.5L DM-i 插混系统 / 纯电单电机版本",
+      "transmission": "EHS电混系统 / 单速固定齿比",
+      "chassis": "前麦弗逊、后扭力梁悬架，前置前驱"
+    }
+  },
+  {
+    "id": 209,
+    "title": "比亚迪 海豹06",
+    "brand": "比亚迪",
+    "sizeClass": "中型",
+    "images": [
+      "https://p3.dcarimg.com/img/motor-mis-img/DCP_b99f43b8d3075f11541e0b56ad3a43b9~2508x0.webp",
+      "https://p3.dcarimg.com/img/motor-mis-img/DCP_735c2fd24419bf901fbf0aec22e20483~2508x0.webp",
+      "https://p3.dcarimg.com/img/motor-mis-img/DCP_24c3ed45bf0961457519019b17e6f78f~2508x0.webp"
+    ],
+    "energy": [
+      "插混",
+      "纯电"
+    ],
+    "body": "轿车",
+    "intro": "比亚迪海豹06是比亚迪海洋网面向主流家用市场的重要中型新能源轿车，主打高性价比与低能耗。车型以DM-i插混版本为核心，同时覆盖纯电产品序列，兼顾城市通勤经济性与中长途出行便利性。",
+    "specs": {
+      "dimensions": "长4830mm × 宽1875mm × 高1495mm，轴距2790mm",
+      "engine": "1.5L DM-i 插混系统 / 纯电版本",
+      "transmission": "EHS电混系统 / 单速固定齿比",
+      "chassis": "前麦弗逊、后多连杆独立悬架，前置前驱"
+    }
+  },
+  {
+    "id": 210,
+    "title": "比亚迪 宋PLUS DM-i",
+    "brand": "比亚迪",
+    "sizeClass": "紧凑型",
+    "images": [
+      "https://images.unsplash.com/photo-1511919884226-fd3cad34687c?q=80&w=1600&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1606664515524-ed2f786a0bd6?q=80&w=1600&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1549927681-4b602b44f1a0?q=80&w=1600&auto=format&fit=crop"
+    ],
+    "energy": [
+      "插混",
+      "纯电"
+    ],
+    "body": "SUV",
+    "intro": "比亚迪宋PLUS DM-i是比亚迪家用SUV市场的核心车型之一，以低能耗、空间实用和配置均衡著称。其DM-i版本适合长短途混合用车，EV版本则面向纯电通勤与城市家庭出行需求。",
+    "specs": {
+      "dimensions": "长4775mm × 宽1890mm × 高1670mm，轴距2765mm",
+      "engine": "1.5L DM-i 插混系统 / 纯电单电机版本",
+      "transmission": "EHS电混系统 / 单速固定齿比",
+      "chassis": "前麦弗逊、后多连杆独立悬架，前置前驱"
+    }
+  },
+  {
+    "id": 211,
+    "title": "比亚迪 元PLUS",
+    "brand": "比亚迪",
+    "sizeClass": "紧凑型",
+    "images": [
+      "https://images.unsplash.com/photo-1617469767053-d3b523a0b982?q=80&w=1600&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1514316454349-750a7fd3da3a?q=80&w=1600&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1580273916550-e323be2ae537?q=80&w=1600&auto=format&fit=crop"
+    ],
+    "energy": "纯电",
+    "body": "SUV",
+    "intro": "比亚迪元PLUS（海外名ATTO 3）是比亚迪面向全球市场的重要纯电紧凑型SUV。车型强调高安全电池系统、灵活车内空间和综合续航表现，已成为品牌出海的主力产品之一。",
+    "specs": {
+      "dimensions": "长4455mm × 宽1875mm × 高1615mm，轴距2720mm",
+      "engine": "前置永磁同步电机 150kW，最大扭矩310N·m",
+      "transmission": "单速固定齿比",
+      "chassis": "前麦弗逊、后多连杆独立悬架，前置前驱"
+    }
+  },
+  {
+    "id": 212,
+    "title": "比亚迪 汉",
+    "brand": "比亚迪",
+    "sizeClass": "中大型",
+    "images": [
+      "https://p3.dcarimg.com/img/motor-mis-img/DCP_0395b39db7892351bb37b81eca47e1df~2508x0.webp",
+      "https://p3.dcarimg.com/img/motor-mis-img/DCP_3735645a6d402186c2197b05e2bbbbf3~2508x0.webp",
+      "https://p3.dcarimg.com/img/motor-mis-img/4fa2f8ba563a51f5ed9f044adcb811d6~2508x0.webp"
+    ],
+    "energy": [
+      "纯电",
+      "插混"
+    ],
+    "body": "轿车",
+    "intro": "比亚迪汉是比亚迪王朝系列的旗舰轿车，提供EV与DM-i/DM-p等多种动力路线。车辆兼顾行政级舒适、智能座舱与高性能需求，在中大型新能源轿车市场具备较强竞争力。",
+    "specs": {
+      "dimensions": "长4995mm × 宽1910mm × 高1495mm，轴距2920mm",
+      "engine": "纯电单/双电机版本 + 1.5T插混系统版本",
+      "transmission": "单速固定齿比 / EHS电混系统",
+      "chassis": "前麦弗逊、后多连杆独立悬架，前置前驱/电四驱"
+    }
+  },
+  {
+    "id": 213,
+    "title": "沃尔沃 XC60",
+    "brand": "沃尔沃",
+    "sizeClass": "中型",
+    "images": [
+      "https://p3.dcarimg.com/img/motor-mis-img/DCP_352e17316fa646716c59e39f642b36ed~2508x0.webp",
+      "https://p3.dcarimg.com/img/motor-mis-img/DCP_488ee193e448a9c69fec3666045b810d~2508x0.webp",
+      "https://p3.dcarimg.com/img/motor-mis-img/DCP_794f47c4508e9fbe3ea31904932c8934~2508x0.webp"
+    ],
+    "energy": [
+      "燃油",
+      "插混"
+    ],
+    "body": "SUV",
+    "intro": "沃尔沃XC60是沃尔沃全球销量长期领先的核心豪华中型SUV，兼顾北欧设计、安全配置与家庭实用性。国内在售版本覆盖燃油与插混动力，是沃尔沃品牌在中国市场热度和关注度最高的主力车型之一。",
+    "specs": {
+      "dimensions": "长4708mm × 宽1902mm × 高1658mm，轴距2865mm",
+      "engine": "2.0T 涡轮增压（B5）/ 2.0T 插电混动（T8）",
+      "transmission": "8AT",
+      "chassis": "前双叉臂、后多连杆独立悬架，前置四驱"
+    }
+  },
+  {
+    "id": 214,
+    "title": "沃尔沃 S60",
+    "brand": "沃尔沃",
+    "sizeClass": "中型",
+    "images": [
+      "https://p3.dcarimg.com/img/motor-mis-img/DCP_5a58f8fff81a99063e089d4f8201ce8c~2508x0.webp",
+      "https://p3.dcarimg.com/img/motor-mis-img/DCP_6385384fc2fe4188470e0ccb5131d98b~2508x0.webp",
+      "https://p3.dcarimg.com/img/motor-mis-img/DCP_18d4bd29fc8ec0c0c6861754e79389c0~2508x0.webp"
+    ],
+    "energy": [
+      "燃油",
+      "插混"
+    ],
+    "body": "轿车",
+    "intro": "沃尔沃S60是沃尔沃在豪华中型轿车市场的重要走量车型之一，强调操控、安全与健康座舱体验。车型提供2.0T燃油及插混版本，兼顾日常通勤舒适性与长途出行能效表现。",
+    "specs": {
+      "dimensions": "长4778mm × 宽1850mm × 高1437mm，轴距2872mm",
+      "engine": "2.0T 涡轮增压（B4/B5）/ 2.0T 插电混动（T8）",
+      "transmission": "8AT",
+      "chassis": "前双叉臂、后多连杆独立悬架，前置前驱/四驱"
+    }
+  },
+  {
+    "id": 215,
+    "title": "沃尔沃 XC90",
+    "brand": "沃尔沃",
+    "sizeClass": "中大型",
+    "images": [
+      "https://images.unsplash.com/photo-1511919884226-fd3cad34687c?q=80&w=1600&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1606664515524-ed2f786a0bd6?q=80&w=1600&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1549927681-4b602b44f1a0?q=80&w=1600&auto=format&fit=crop"
+    ],
+    "energy": [
+      "燃油",
+      "插混"
+    ],
+    "body": "SUV",
+    "intro": "沃尔沃XC90是沃尔沃旗舰级豪华SUV，在7座空间、安全配置与长途舒适性方面具备代表性。作为品牌高端产品线的核心车型，XC90在全球与中国市场均有较高关注度。",
+    "specs": {
+      "dimensions": "长4953mm × 宽1958mm × 高1776mm，轴距2984mm",
+      "engine": "2.0T 涡轮增压（B6）/ 2.0T 插电混动（T8）",
+      "transmission": "8AT",
+      "chassis": "前双叉臂、后整体式多连杆独立悬架，前置四驱"
+    }
+  },
+  {
+    "id": 216,
+    "brand": "奥迪",
+    "sizeClass": "中型",
+    "title": "奥迪 Q5",
+    "images": [
+      "https://p3.dcarimg.com/img/motor-mis-img/DCP_84174263f058eba61b5f779765bbe846~2508x0.webp",
+      "https://p3.dcarimg.com/img/motor-mis-img/DCP_c354e4c29247bb8c1e792c763953005d~2508x0.webp",
+      "https://p3.dcarimg.com/img/motor-mis-img/DCP_45809fc7c074071020f8b4bb74cdfe0b~2508x0.webp"
+    ],
+    "energy": "燃油",
+    "body": "SUV",
+    "intro": "奥迪Q5（Audi Q5）是一款全球畅销的中型豪华SUV，凭借均衡的产品力、精湛的德系工艺以及quattro ultra智能四驱系统，成为全能家庭用车的标杆。它搭载了2.0T高效涡轮增压发动机与7速S-tronic双离合变速箱，结合五连杆前后独立悬挂，在铺装路面和复杂路况下均能提供稳定且舒适的驾驶体验。",
+    "specs": {
+      "dimensions": "长4682mm × 宽1893mm × 高1666mm，轴距2819mm",
+      "engine": "2.0T L4 涡轮增压 190PS / 245PS，功率140kW / 180kW，最大扭矩320N·m / 370N·m",
+      "transmission": "7DCT",
+      "chassis": "前五连杆、后五连杆独立悬架，前置适时四驱 (quattro ultra)"
+    }
+  },
+  {
+    "id": 217,
+    "brand": "奥迪",
+    "sizeClass": "中大型",
+    "title": "奥迪 RS 6",
+    "images": [
+      "https://p3.dcarimg.com/img/motor-mis-img/DCP_833284fb26d4d0f2c6e4d468795c2733~2508x0.webp",
+      "https://p3.dcarimg.com/img/motor-mis-img/DCP_abadeef064163090175543c7bfb3d317~2508x0.webp",
+      "https://p3.dcarimg.com/img/motor-mis-img/DCP_e329a592f73286aef79e92c27eedd129~2508x0.webp"
+    ],
+    "energy": "燃油",
+    "body": "旅行车",
+    "intro": "奥迪 RS 6 Avant 被誉为“地表最强旅行车”与“西装暴徒”，它将中大型旅行车的极致实用性与超级跑车的狂暴性能完美结合。搭载4.0L V8双涡轮增压发动机配合48V轻混系统，拥有高达600匹马力的惊人动力，在quattro全时四驱系统的加持下，零百加速仅需3.6秒。不仅是赛道利器，更是满足家庭出行的终极梦想之车。",
+    "specs": {
+      "dimensions": "长4995mm × 宽1951mm × 高1486mm，轴距2929mm，整备质量约2150kg",
+      "engine": "4.0T V8 双涡轮增压 + 48V轻混 600PS / 630PS (Performance)，最大功率441kW / 463kW，最大扭矩800N·m / 850N·m",
+      "transmission": "8AT (Tiptronic)",
+      "chassis": "前五连杆、后五连杆独立悬架，前置全时四驱 (quattro带机械式中央差速器)"
+    }
+  },
+  {
+    "id": 218,
+    "brand": "长城",
+    "sizeClass": "紧凑型",
+    "title": "哈弗 H6",
+    "images": [
+      "https://p3.dcarimg.com/img/motor-mis-img/DCP_9d7241b1d037f0164088a884b1dd683d~2508x0.webp",
+      "https://p3.dcarimg.com/img/motor-mis-img/DCP_1f86f238d24126a6fe6baef8705c2027~2508x0.webp",
+      "https://p3.dcarimg.com/img/motor-mis-img/DCP_8d8e1fa1fb0e0abaa8b13fa6ed9f6c9b~2508x0.webp",
+      "https://images.unsplash.com/photo-1628711956301-9e6768d8331b?q=80&w=988&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+    ],
+    "energy": [
+      "燃油",
+      "混动"
+    ],
+    "body": "SUV",
+    "intro": "哈弗H6（Haval H6）是长城汽车旗下最畅销的紧凑型SUV，曾连续近百个月蝉联中国SUV销量冠军，被誉为“国民神车”。新一代车型基于柠檬平台打造，外观设计更显年轻运动，内饰科技感大幅提升。提供1.5T和2.0T燃油版以及1.5T DHT插电混动版，兼具宽敞的空间、丰富的配置与极高的性价比。",
+    "specs": {
+      "dimensions": "长4703mm × 宽1886mm × 高1730mm，轴距2738mm",
+      "engine": "1.5T L4 涡轮增压 184PS / 2.0T L4 涡轮增压 238PS",
+      "transmission": "7DCT / 9DCT",
+      "chassis": "前麦弗逊、后多连杆独立悬架，前置前驱/适时四驱"
+    }
+  },
+  {
+    "id": 219,
+    "brand": "长城",
+    "sizeClass": "紧凑型",
+    "title": "坦克 300",
+    "images": [
+      "https://p3.dcarimg.com/img/motor-mis-img/18d8f76918cf3b90a7d565c4866cf746~2508x0.webp",
+      "https://p3.dcarimg.com/img/motor-mis-img/a395d21a2ce05ef26869c95207c3956a~2508x0.webp",
+      "https://p3.dcarimg.com/img/motor-mis-img/01bd3d104862f7db9d6a30c3dfa34762~2508x0.webp"
+    ],
+    "energy": [
+      "燃油",
+      "混动"
+    ],
+    "body": "越野车",
+    "intro": "坦克300（TANK 300）是长城汽车旗下的一款现象级硬派越野车，成功开创了中国品牌“潮玩越野”的新品类。它采用非承载式车身结构，配备分时四驱系统、前后桥差速锁以及丰富的越野驾驶模式。复古方盒子的外观结合现代豪华的内饰，使其不仅在越野老炮中备受推崇，也赢得了大量都市年轻用户的喜爱。",
+    "specs": {
+      "dimensions": "长4760mm × 宽1930mm × 高1903mm，轴距2750mm",
+      "engine": "2.0T L4 涡轮增压 227PS / 252PS (48V轻混)",
+      "transmission": "8AT / 9AT",
+      "chassis": "前双叉臂、后多连杆非独立悬架，前置四驱 (分时四驱/适时四驱)，非承载式车身"
+    }
+  },
+  {
+    "id": 220,
+    "brand": "长城",
+    "sizeClass": "中大型",
+    "title": "长城炮",
+    "images": [
+      "https://p3.dcarimg.com/img/motor-mis-img/DCP_1370c153998fc269f923cd2e68eed425~2508x0.webp",
+      "https://p3.dcarimg.com/img/motor-mis-img/DCP_fe920c456a9b00cc698d1ee37bc99d80~2508x0.webp",
+      "https://p3.dcarimg.com/img/motor-mis-img/DCP_fca9a559383d2b9c8338bae59624c760~2508x0.webp"
+    ],
+    "energy": "燃油",
+    "body": "皮卡",
+    "intro": "长城炮（GWM Poer）是长城皮卡向乘用化、高端化转型的战略级车型。它打破了传统皮卡仅作为工具车的刻板印象，推出了乘用炮、商用炮、越野炮等多个细分版本。基于坦克平台打造，长城炮拥有强悍的越野性能与拖拽能力，同时在内饰豪华感、智能互联与主动安全配置上达到了主流乘用车的标准。",
+    "specs": {
+      "dimensions": "长5416mm × 宽1947mm × 高1886mm，轴距3230mm",
+      "engine": "2.0T L4 涡轮增压汽油机 190PS / 2.0T L4 涡轮增压柴油机 163PS",
+      "transmission": "8AT / 6MT",
+      "chassis": "前双叉臂独立悬架、后多连杆整体桥式非独立悬架，前置四驱 (适时四驱)"
+    }
+  },
+  {
+    "id": 221,
+    "brand": "凯迪拉克",
+    "sizeClass": "中型",
+    "title": "凯迪拉克 XT5",
+    "images": [
+      "https://p3.dcarimg.com/img/motor-mis-img/DCP_17f5537370613c45f8f8c0c78365514d~2508x0.webp",
+      "https://p3.dcarimg.com/img/motor-mis-img/DCP_96e9315940fcfd1f021cc317100f4767~2508x0.webp",
+      "https://p3.dcarimg.com/img/motor-mis-img/DCP_e9424e0e28994570686d86ff637f4d35~2508x0.webp"
+    ],
+    "energy": [
+      "燃油",
+      "轻混"
+    ],
+    "body": "SUV",
+    "intro": "凯迪拉克XT5（Cadillac XT5）是凯迪拉克品牌在全球最畅销的豪华中型SUV。它延续了凯迪拉克经典的“钻石切割”设计语言，配合星瀑式前大灯，极具美式豪华的辨识度。全新XT5不仅在内饰上迎来了33英寸环幕式超视网膜屏的科技升级，其全系标配的2.0T可变缸涡轮增压发动机与蜂鸟底盘技术，更是为家庭出行提供了充沛动力与越级的舒适平稳体验。",
+    "specs": {
+      "dimensions": "长4888mm × 宽1957mm × 高1694mm，轴距2863mm",
+      "engine": "2.0T L4 涡轮增压 + 48V轻混 237PS，功率174kW，最大扭矩350N·m",
+      "transmission": "9AT",
+      "chassis": "前麦弗逊、后五连杆独立悬架，前置前驱/适时四驱 (蜂鸟底盘)"
+    }
+  },
+  {
+    "id": 222,
+    "brand": "凯迪拉克",
+    "sizeClass": "大型",
+    "title": "凯迪拉克 Escalade 凯雷德",
+    "images": [
+      "https://p3.dcarimg.com/img/motor-mis-img/af6561eec3a4cd532ff0d4787b0336a5~2508x0.webp",
+      "https://p3.dcarimg.com/img/motor-mis-img/fc6912f3e89f80bed4220a10aee8841b~2508x0.webp",
+      "https://p3.dcarimg.com/img/motor-mis-img/7cd3f848de015fceb0207a8a8268bb49~2508x0.webp"
+    ],
+    "energy": "燃油",
+    "body": "SUV",
+    "intro": "凯迪拉克凯雷德（Cadillac Escalade）是全尺寸美式豪华SUV的绝对王者，长久以来作为美国总统护卫车队及好莱坞巨星的标志性座驾而闻名于世。它拥有极为霸气庞大的车身尺寸和超过3米的轴距，内部配备了业界首创的曲面OLED显示屏与AKG录音棚级音响系统。搭载了经典的6.2L V8大排量自然吸气发动机与MRC主动电磁感应悬挂，将狂暴的动力与如履平地的魔毯般舒适性完美结合。",
+    "specs": {
+      "dimensions": "长5382mm × 宽2059mm × 高1948mm，轴距3071mm",
+      "engine": "6.2L V8 自然吸气 426PS，功率313kW，最大扭矩623N·m",
+      "transmission": "10AT",
+      "chassis": "前双叉臂、后多连杆独立悬架，前置全时四驱 (带MRC电磁悬挂及空气悬架)"
+    }
+  },
+  {
+    "id": 223,
+    "brand": "奔驰",
+    "sizeClass": "中型",
+    "title": "奔驰 GLC",
+    "images": [
+      "https://p3.dcarimg.com/img/motor-mis-img/DCP_aff15840e071e2b26a33d363f42a4e23~2508x0.webp",
+      "https://p3.dcarimg.com/img/motor-mis-img/DCP_4996dc557cd30b04779a80bc89ab2be5~2508x0.webp",
+      "https://p3.dcarimg.com/img/motor-mis-img/DCP_46c7df75ce6e125b27d6a3910199e457~2508x0.webp"
+    ],
+    "energy": [
+      "燃油",
+      "轻混"
+    ],
+    "body": "SUV",
+    "intro": "梅赛德斯-奔驰GLC（Mercedes-Benz GLC）是品牌旗下最核心的豪华中型SUV。全新一代GLC在继承了奔驰家族式的优雅与豪华设计的同时，内饰全面升级为与S级同源的“星辉环阵”豪华座舱与第二代MBUX智能人机交互系统。全系搭载2.0T发动机匹配48V ISG智能电机系统，在4MATIC全时四驱系统的加持下，为都市精英家庭带来平顺、静谧且充满科技感的出行体验。",
+    "specs": {
+      "dimensions": "长4826mm × 宽1890mm × 高1714mm，轴距2977mm (长轴版)",
+      "engine": "2.0T L4 涡轮增压 + 48V轻混 204PS / 258PS，最大功率150kW / 190kW，最大扭矩320N·m / 400N·m",
+      "transmission": "9G-TRONIC 9速自动变速箱",
+      "chassis": "前多连杆、后多连杆独立悬架，前置全时四驱 (4MATIC)"
+    }
+  },
+  {
+    "id": 224,
+    "brand": "奔驰",
+    "sizeClass": "中大型",
+    "title": "奔驰 G级",
+    "images": [
+      "https://p3.dcarimg.com/img/motor-mis-img/DCP_1d8348e8285148544e976f2ab3b8d07b~2508x0.webp",
+      "https://p3.dcarimg.com/img/motor-mis-img/DCP_f4a0fa19ce1d53557b4d4c36b8186fa0~2508x0.webp",
+      "https://p3.dcarimg.com/img/motor-mis-img/DCP_0bef765d56e45fb456ddb06714c26886~2508x0.webp"
+    ],
+    "energy": "燃油",
+    "body": "越野车",
+    "intro": "梅赛德斯-奔驰G级（Mercedes-Benz G-Class，简称“大G”）是越野车界无可争议的图腾与传奇。诞生四十余年来，它始终坚持着经典的“方盒子”硬派造型、外挂式备胎以及标志性的关门声。在坚不可摧的非承载式车身与“三把锁”的硬核越野底子之上，全新G级融合了顶级的双联屏豪华内饰与柏林之声音响，将极致的越野性能与巅峰奢华完美结合，成为了无数人梦寐以求的终极座驾。",
+    "specs": {
+      "dimensions": "长4866mm × 宽1931mm × 高1975mm，轴距2890mm",
+      "engine": "2.0T L4 涡轮增压 258PS (G 350) / 4.0T V8 双涡轮增压 421PS (G 500)",
+      "transmission": "9G-TRONIC 9速自动变速箱",
+      "chassis": "前双叉臂独立悬架、后整体桥非独立悬架，前置全时四驱 (带前/中/后三把机械差速锁)，非承载式车身"
     }
   }
 ]

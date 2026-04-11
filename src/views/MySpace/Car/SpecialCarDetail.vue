@@ -571,17 +571,21 @@ export default {
   background: var(--c-text-emphasis);
 }
 
-.slide-next-enter-active, .slide-next-leave-active { transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.4s ease; }
-.slide-next-enter { transform: translateX(20px); opacity: 0; }
-.slide-next-enter-to { transform: translateX(0); opacity: 1; }
-.slide-next-leave { transform: translateX(0); opacity: 1; }
-.slide-next-leave-to { transform: translateX(-20px); opacity: 0; }
+.slide-next-enter-active, .slide-next-leave-active { 
+  transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1); 
+}
+.slide-next-enter { transform: translateX(100%); }
+.slide-next-enter-to { transform: translateX(0); }
+.slide-next-leave { transform: translateX(0); }
+.slide-next-leave-to { transform: translateX(-100%); }
 
-.slide-prev-enter-active, .slide-prev-leave-active { transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.4s ease; }
-.slide-prev-enter { transform: translateX(-20px); opacity: 0; }
-.slide-prev-enter-to { transform: translateX(0); opacity: 1; }
-.slide-prev-leave { transform: translateX(0); opacity: 1; }
-.slide-prev-leave-to { transform: translateX(20px); opacity: 0; }
+.slide-prev-enter-active, .slide-prev-leave-active { 
+  transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1); 
+}
+.slide-prev-enter { transform: translateX(-100%); }
+.slide-prev-enter-to { transform: translateX(0); }
+.slide-prev-leave { transform: translateX(0); }
+.slide-prev-leave-to { transform: translateX(100%); }
 
 /* Right Section: 30% */
 .right-section {
@@ -677,17 +681,18 @@ export default {
 }
 
 .brand-logo {
-  height: 1.2em; /* 稍微增加一点高度以更好地匹配文字的视觉高度 */
+  height: 1.2em;
   width: auto;
+  max-width: 2.5em;
   object-fit: contain;
   border-radius: 3px;
   background: transparent;
   vertical-align: middle;
   position: relative;
-  top: -1px; /* 微调垂直对齐 */
+  top: -1px;
 }
 .brand-logo-xiaomi {
-  height: 1em;
+  height: 1.2em; /* 统一高度，与后边文本高度保持一致 */
 }
 
 .brand-hover-wrapper {

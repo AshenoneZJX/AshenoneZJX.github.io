@@ -36,47 +36,7 @@
 
       <div class="info-col">
         <div class="info-browse">
-          <div class="chart-block chart-block-head">
-            <div
-              ref="chartsToolbar"
-              class="charts-toolbar"
-              :class="{ 'is-expanded': isMobileMenuOpen, 'use-collapse': shouldCollapseToolbar }"
-            >
-              <div v-if="shouldCollapseToolbar" class="mobile-toggle-bar">
-                <button class="menu-toggle-btn" @click="toggleMobileMenu">
-                  {{ isMobileMenuOpen ? '收起筛选条件' : '筛选条件' }}
-                </button>
-              </div>
-              <div ref="toolbarControls" class="toolbar-controls">
-                <label>月份</label>
-                <select v-model="selectedMonth">
-                  <option v-for="m in monthsOptions" :key="m" :value="m">{{ m }}</option>
-                </select>
-                <button
-                  class="sort-btn"
-                  :aria-label="sortLabel"
-                  :title="sortLabel"
-                  @click="toggleSort"
-                >排序：{{ sortLabel }}</button>
-                <label>车型</label>
-                <select v-model="selectedType">
-                  <option v-for="t in typeOptions" :key="t" :value="t">{{ t }}</option>
-                </select>
-                <label>品牌</label>
-                <select v-model="selectedBrand">
-                  <option v-for="b in brandOptions" :key="b" :value="b">{{ b }}</option>
-                </select>
-              </div>
-            </div>
-          </div>
-          <div class="chart-container chart-container-main">
-            <YearlySalesRankingChart
-              :title="`年度车型销量排名（${selectedMonth}）`"
-              :items="filteredItems"
-              :sort-by="sortBy"
-              :sort-order="sortOrder"
-            />
-          </div>
+          <HistoricalSalesTable />
           <div class="charts-row">
             <Top10SalesTabsChart :global-items="globalTop10" :china-items="chinaTop10" />
             <PriceSegmentsTabsChart :segments="priceSegments" />
@@ -88,75 +48,18 @@
   </template>
 
 <script>
-import YearlySalesRankingChart from './YearlySalesRankingChart.vue'
 import Top10SalesTabsChart from './Top10SalesTabsChart.vue'
 import PriceSegmentsTabsChart from './PriceSegmentsTabsChart.vue'
-import sales2025 from '@/data/car/2025_dcd_sales_rank.json'
+import HistoricalSalesTable from './HistoricalSalesTable.vue'
 import sales from '@/data/car/sales.json'
-
-function typeFromSeries (s) {
-  if (!s) return '其他'
-  const t = String(s)
-  if (/SUV/i.test(t)) return 'SUV'
-  if (/MPV/i.test(t)) return 'MPV'
-  if (/车/.test(t)) return '轿车'
-  return '其他'
-}
 
 export default {
   name: 'CarsHome',
-  components: { YearlySalesRankingChart, Top10SalesTabsChart, PriceSegmentsTabsChart },
+  components: { Top10SalesTabsChart, PriceSegmentsTabsChart, HistoricalSalesTable },
   data () {
-    const months = Array.from(new Set((sales2025.items || []).map(i => i.month))).sort().reverse()
-    const brands = Array.from(new Set((sales2025.items || []).map(i => i.brand).filter(Boolean))).sort()
-    return {
-      monthsOptions: months,
-      typeOptions: ['全部', '轿车', 'SUV', 'MPV', '其他'],
-      brandOptions: ['全部', ...brands],
-      selectedMonth: months[0] || '',
-      selectedType: '全部',
-      selectedBrand: '全部',
-      sortBy: 'sales', // 当前排序字段：'sales' 或 'name'
-      sortOrder: 'desc', // 当前排序方向：'desc' 或 'asc'
-      isMobileMenuOpen: false,
-      shouldCollapseToolbar: false,
-      controlsRequiredWidth: 0,
-      toolbarResizeObserver: null
-    }
-  },
-  mounted () {
-    this.$nextTick(() => {
-      this.cacheControlsRequiredWidth()
-      this.updateToolbarCollapse()
-    })
-    window.addEventListener('resize', this.updateToolbarCollapse, { passive: true })
-    document.addEventListener('pointerdown', this.handleDocumentPointerDown)
-    if (typeof ResizeObserver !== 'undefined' && this.$refs.chartsToolbar) {
-      this.toolbarResizeObserver = new ResizeObserver(() => {
-        this.updateToolbarCollapse()
-      })
-      this.toolbarResizeObserver.observe(this.$refs.chartsToolbar)
-    }
-  },
-  beforeDestroy () {
-    window.removeEventListener('resize', this.updateToolbarCollapse)
-    document.removeEventListener('pointerdown', this.handleDocumentPointerDown)
-    if (this.toolbarResizeObserver) {
-      this.toolbarResizeObserver.disconnect()
-      this.toolbarResizeObserver = null
-    }
+    return {}
   },
   computed: {
-    filteredItems () {
-      const base = Array.isArray(sales2025.items) ? sales2025.items : []
-      const filtered = base.filter(i => {
-        const monthOk = this.selectedMonth ? i.month === this.selectedMonth : true
-        const typeOk = this.selectedType === '全部' ? true : typeFromSeries(i.seriesType) === this.selectedType
-        const brandOk = this.selectedBrand === '全部' ? true : String(i.brand || '') === this.selectedBrand
-        return monthOk && typeOk && brandOk
-      })
-      return filtered.map(i => ({ modelName: i.seriesName || i.modelName, sales: i.sales }))
-    },
     globalTop10 () {
       return sales && Array.isArray(sales.global_top10) ? sales.global_top10 : []
     },
@@ -165,84 +68,11 @@ export default {
     },
     priceSegments () {
       return sales && sales.price_segments && typeof sales.price_segments === 'object' ? sales.price_segments : {}
-    },
-    sortLabel () {
-      if (this.sortBy === 'sales') {
-        return this.sortOrder === 'desc' ? '销量降序' : '销量升序'
-      } else {
-        return this.sortOrder === 'desc' ? '名称降序' : '名称升序'
-      }
     }
   },
   methods: {
     bg (url) {
       return { backgroundImage: `url(${url})` }
-    },
-    toggleSort () {
-      // 排序切换逻辑：销量降序 -> 销量升序 -> 名称升序 -> 名称降序 -> 销量降序
-      if (this.sortBy === 'sales' && this.sortOrder === 'desc') {
-        this.sortOrder = 'asc'
-      } else if (this.sortBy === 'sales' && this.sortOrder === 'asc') {
-        this.sortBy = 'name'
-        this.sortOrder = 'asc'
-      } else if (this.sortBy === 'name' && this.sortOrder === 'asc') {
-        this.sortOrder = 'desc'
-      } else {
-        this.sortBy = 'sales'
-        this.sortOrder = 'desc'
-      }
-      this.$nextTick(() => {
-        this.cacheControlsRequiredWidth()
-        this.updateToolbarCollapse()
-      })
-    },
-    toggleMobileMenu () {
-      this.isMobileMenuOpen = !this.isMobileMenuOpen
-    },
-    handleDocumentPointerDown (event) {
-      if (!this.shouldCollapseToolbar || !this.isMobileMenuOpen) return
-      const controls = this.$refs.toolbarControls
-      if (!controls) return
-      const target = event.target
-      const clickedToggleBar = target instanceof Element && target.closest('.mobile-toggle-bar')
-      if (clickedToggleBar) return
-      if (!controls.contains(target)) {
-        this.isMobileMenuOpen = false
-      }
-    },
-    cacheControlsRequiredWidth () {
-      const controls = this.$refs.toolbarControls
-      if (!controls) return
-      const children = Array.from(controls.children || [])
-      if (children.length === 0) return
-      const style = window.getComputedStyle(controls)
-      const gap = Number.parseFloat(style.columnGap || style.gap || '0') || 0
-      const width = children.reduce((sum, el) => sum + el.getBoundingClientRect().width, 0) + gap * (children.length - 1)
-      if (width > this.controlsRequiredWidth) {
-        this.controlsRequiredWidth = Math.ceil(width)
-      }
-    },
-    updateToolbarCollapse () {
-      const toolbar = this.$refs.chartsToolbar
-      const controls = this.$refs.toolbarControls
-      if (!toolbar || !controls) return
-      const isMobile = window.matchMedia('(max-width: 768px)').matches
-      if (!isMobile) {
-        this.shouldCollapseToolbar = false
-        this.isMobileMenuOpen = false
-        return
-      }
-      if (!this.controlsRequiredWidth) {
-        this.cacheControlsRequiredWidth()
-      }
-      const style = window.getComputedStyle(toolbar)
-      const horizontalPadding = (Number.parseFloat(style.paddingLeft) || 0) + (Number.parseFloat(style.paddingRight) || 0)
-      const availableWidth = toolbar.clientWidth - horizontalPadding
-      const nextCollapse = this.controlsRequiredWidth > availableWidth
-      this.shouldCollapseToolbar = nextCollapse
-      if (!nextCollapse) {
-        this.isMobileMenuOpen = false
-      }
     }
   }
 }

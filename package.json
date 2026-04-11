@@ -16,6 +16,7 @@
     "markdown-it-mark": "^4.0.0",
     "marked": "^4.3.0",
     "mermaid": "^8.13.10",
+    "papaparse": "^5.5.3",
     "vue": "^2.6.11",
     "vue-router": "^3.6.5",
     "xlsx": "^0.18.5"

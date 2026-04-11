@@ -450,7 +450,7 @@ export default {
     border-left: 1px solid var(--c-border-default);
     transform: translateX(100%);
     transition: transform 0.25s ease;
-    z-index: 1001;
+    z-index: 2000;
     display: block;
     overflow-y: auto;
   }
@@ -460,7 +460,7 @@ export default {
     position: fixed;
     inset: 0;
     background: var(--c-shadow-medium);
-    z-index: 1000;
+    z-index: 1999;
   }
 }
 

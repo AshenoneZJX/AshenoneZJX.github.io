@@ -95,37 +95,37 @@
     </div>
     <aside class="filters-panel mobile-sheet" :class="{ active: filterOpen }">
       <div class="sheet-header">
-        <span class="sheet-title">筛选</span>
+        <span class="sheet-title">
+          <svg class="sheet-title-icon" viewBox="0 0 24 24" aria-hidden="true">
+            <path
+              fill="currentColor"
+              d="M4 6a1 1 0 0 1 1-1h14a1 1 0 1 1 0 2h-14a1 1 0 0 1-1-1Zm3 6a1 1 0 0 1 1-1h8a1 1 0 1 1 0 2H8a1 1 0 0 1-1-1Zm3 6a1 1 0 0 1 1-1h2a1 1 0 1 1 0 2h-2a1 1 0 0 1-1-1Z"
+            />
+          </svg>
+          <span>筛选</span>
+        </span>
       </div>
       <div class="sheet-content">
         <div class="sheet-subtitle">能源类型</div>
-        <div class="filter-group">
-          <select class="select" v-model="selectedEnergy">
-            <option :value="null">全部能源</option>
-            <option v-for="opt in energyOptions" :key="opt" :value="opt">{{ opt }}</option>
-          </select>
-        </div>
+        <select class="select" v-model="selectedEnergy">
+          <option :value="null">全部能源</option>
+          <option v-for="opt in energyOptions" :key="opt" :value="opt">{{ opt }}</option>
+        </select>
         <div class="sheet-subtitle">车型</div>
-        <div class="filter-group">
-          <select class="select" v-model="selectedBody">
-            <option :value="null">全部车型</option>
-            <option v-for="opt in bodyOptions" :key="opt" :value="opt">{{ opt }}</option>
-          </select>
-        </div>
+        <select class="select" v-model="selectedBody">
+          <option :value="null">全部车型</option>
+          <option v-for="opt in bodyOptions" :key="opt" :value="opt">{{ opt }}</option>
+        </select>
         <div class="sheet-subtitle">品牌</div>
-        <div class="filter-group">
-          <select class="select" v-model="selectedBrand">
-            <option :value="null">全部品牌</option>
-            <option v-for="opt in brandOptions" :key="opt" :value="opt">{{ opt }}</option>
-          </select>
-        </div>
+        <select class="select" v-model="selectedBrand">
+          <option :value="null">全部品牌</option>
+          <option v-for="opt in brandOptions" :key="opt" :value="opt">{{ opt }}</option>
+        </select>
         <div class="sheet-subtitle">尺寸等级</div>
-        <div class="filter-group">
-          <select class="select" v-model="selectedSizeClass">
-            <option :value="null">全部尺寸</option>
-            <option v-for="opt in sizeClassOptions" :key="opt" :value="opt">{{ opt }}</option>
-          </select>
-        </div>
+        <select class="select" v-model="selectedSizeClass">
+          <option :value="null">全部尺寸</option>
+          <option v-for="opt in sizeClassOptions" :key="opt" :value="opt">{{ opt }}</option>
+        </select>
         <button v-if="hasActiveFilters" class="chip clear-chip" @click="clearFilters">清除所有筛选</button>
       </div>
     </aside>
@@ -143,13 +143,32 @@
           <div class="card-image" :style="coverBg(car)"></div>
           <div class="card-info">
             <div class="card-title">
-              <img
-                v-if="brandLogoFor(car)"
-                class="brand-logo"
-                :src="brandLogoFor(car)"
-                :alt="car.brand"
-              />
-              <span class="title-text">{{ car.title }}</span>
+              <router-link
+                v-if="car.brand && car.title.startsWith(car.brand)"
+                class="brand-wrapper"
+                :to="{ name: 'BrandDetail', params: { name: car.brand } }"
+                @click.native.stop
+              >
+                <img
+                  v-if="brandLogoFor(car)"
+                  class="brand-logo"
+                  :src="brandLogoFor(car)"
+                  :alt="car.brand"
+                />
+                <span class="brand-link">{{ car.brand }}</span>
+              </router-link>
+              <div v-else-if="car.brand" class="brand-wrapper">
+                <img
+                  v-if="brandLogoFor(car)"
+                  class="brand-logo"
+                  :src="brandLogoFor(car)"
+                  :alt="car.brand"
+                />
+                <span class="brand-text">{{ car.brand }}</span>
+              </div>
+              <span class="title-text">
+                {{ modelNameFor(car) }}
+              </span>
             </div>
             <div class="card-tags">
               <span class="tag tag-energy" v-for="e in energyList(car)" :key="e">{{ e }}</span>
@@ -272,6 +291,15 @@ export default {
     },
     energyList(car) {
       return Array.isArray(car.energy) ? car.energy : [car.energy]
+    },
+    modelNameFor(car) {
+      if (!car) return ''
+      const brand = car.brand || ''
+      const t = car.title || ''
+      if (brand && t.startsWith(brand)) {
+        return t.slice(brand.length).trim()
+      }
+      return t
     },
     toggleFilters() {
       this.filterOpen = !this.filterOpen
@@ -732,32 +760,71 @@ export default {
     top: 0;
     left: 0;
     height: 100%;
-    width: 50%;
-    max-width: 360px;
-    padding: 12px 14px;
-    background: rgba(30, 32, 35, 0.65);
-    background-image: radial-gradient(at top left, rgba(255, 255, 255, 0.05) 0%, transparent 70%);
-    backdrop-filter: blur(40px) saturate(150%);
-    -webkit-backdrop-filter: blur(40px) saturate(150%);
-    box-shadow: inset 1px 1px 0 rgba(255, 255, 255, 0.1);
-    border-right: 1px solid rgba(255, 255, 255, 0.08);
+    width: min(68vw, 300px);
+    padding: 0;
+    background: linear-gradient(180deg, rgba(24, 27, 31, 0.96) 0%, rgba(18, 20, 24, 0.94) 100%);
+    backdrop-filter: blur(20px) saturate(130%);
+    -webkit-backdrop-filter: blur(20px) saturate(130%);
+    box-shadow: 12px 0 36px rgba(0, 0, 0, 0.5);
+    border-right: 1px solid rgba(255, 255, 255, 0.1);
+    border-top-right-radius: 16px;
+    border-bottom-right-radius: 16px;
     transform: translateX(-100%);
     transition: transform 0.25s ease;
     z-index: 2000;
-    display: block;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
   }
   .filters-panel.mobile-sheet.active { transform: translateX(0); }
   .sheet-mask.mobile-only {
     position: fixed;
     inset: 0;
-    background: var(--c-shadow-medium);
+    background: rgba(0, 0, 0, 0.42);
+    backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(2px);
     z-index: 1999;
     display: block;
   }
-  .sheet-header { display: flex; align-items: center; justify-content: space-between; padding: 10px 12px; border-bottom: 1px solid var(--c-border-default); }
-  .sheet-title { color: var(--c-text-title); font-size: 16px; font-weight: 600; }
-  .sheet-content { padding: 12px; display: flex; flex-direction: column; gap: 10px; }
-  .sheet-subtitle { color: var(--c-text-muted); font-size: 13px; margin-top: 6px; }
+  .sheet-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 16px 12px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0));
+  }
+  .sheet-title {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    color: var(--c-text-title);
+    font-size: 17px;
+    font-weight: 600;
+    letter-spacing: 0.8px;
+  }
+  .sheet-title-icon {
+    width: 16px;
+    height: 16px;
+    color: rgba(102, 192, 244, 0.95);
+    flex: 0 0 auto;
+  }
+  .sheet-content {
+    flex: 1 1 auto;
+    overflow-y: auto;
+    padding: 14px 16px 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .sheet-subtitle {
+    color: var(--c-text-body-alt);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.4px;
+    margin-top: 8px;
+    margin-bottom: -4px;
+  }
   .filter-toggle.mobile-only {
     font-size: 14px;
     border: 1px solid var(--c-border-hover);
@@ -770,8 +837,26 @@ export default {
     color: var(--c-text-emphasis);
     border-color: var(--c-primary);
   }
-  .filters-panel .filter-group { flex-direction: column; align-items: stretch; gap: 6px; }
-  .filters-panel .select { width: 100%; height: 32px; font-size: 13px; }
+  .filters-panel .select {
+    width: 100%;
+    height: 36px;
+    font-size: 13px;
+    border-radius: 8px;
+    border-color: rgba(255, 255, 255, 0.2);
+    background: rgba(0, 0, 0, 0.18);
+    color: var(--c-text-title);
+    padding: 0 10px;
+  }
+  .filters-panel .clear-chip {
+    width: 100%;
+    height: 34px;
+    margin-top: 6px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.06);
+    color: var(--c-text-emphasis);
+    padding: 0 12px;
+  }
   .gallery-grid { grid-template-columns: repeat(2, 1fr); gap: 6px; }
   .card-body { height: 160px; }
   .card-image { height: 140px; }
@@ -820,10 +905,51 @@ export default {
 }
 
 .card-info { padding: 12px; width: 100%; box-sizing: border-box; background: #171B21; flex: 1 1 auto; min-height: 0; overflow: hidden; }
-.card-title { color: var(--c-text-title); margin-bottom: 8px; font-weight: normal; font-family: 'Motiva Sans', sans-serif; display: flex; align-items: center; gap: 8px; }
-.card-title .title-text { display: inline-block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-family: 'PuHuiTi', 'SourceHanSansSC', sans-serif; }
+.card-title { color: var(--c-text-title); margin-bottom: 8px; font-weight: normal; font-family: 'Motiva Sans', sans-serif; display: flex; align-items: center; gap: 4px; }
+.card-title .title-text { display: inline-block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-family: 'PuHuiTi', 'SourceHanSansSC', sans-serif; font-size: 15px; font-weight: normal;}
+
+.brand-wrapper {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  padding: 4px 4px;
+  margin: -4px 0 -4px -2px;
+  border-radius: 6px;
+}
+
+.brand-wrapper:hover {
+  background: rgba(255, 255, 255, 0.08); /* 整体背景高亮 */
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.brand-link {
+  color: var(--c-primary);
+  text-decoration: none;
+  font-family: 'PuHuiTi', 'SourceHanSansSC', sans-serif;
+  font-weight: normal;
+  font-size: 15px;
+}
+
+/* 移除之前的文本单独hover效果 */
+.brand-wrapper:hover .brand-link {
+  color: var(--c-primary);
+  text-decoration: none;
+  text-shadow: none;
+}
+
+.brand-text {
+  font-family: 'PuHuiTi', 'SourceHanSansSC', sans-serif;
+  font-weight: normal;
+  font-size: 15px;
+  color: var(--c-text-title);
+}
+
 .brand-logo { width: 24px; height: 24px; object-fit: contain; background: transparent; }
-.brand-logo { height: 1em; width: auto; object-fit: contain; background: transparent; }
+.brand-logo { height: 1em; width: auto; max-width: 2.2em; object-fit: contain; background: transparent; }
 .card-tags { display: flex; align-items: center; gap: 6px; }
 .card-tags .tag { display: inline-block; padding: 2px 6px; font-size: 10px; border-radius: 3px; }
 .card-tags .tag-energy { background: #1a4d7a; color: var(--c-text-title); font-weight: 600; }

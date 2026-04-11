@@ -10,6 +10,7 @@
             class="gallery-image"
             :src="images[currentImageIndex]"
             :alt="modelName || '车辆图片'"
+            referrerpolicy="no-referrer"
           />
         </transition>
         <button
@@ -46,11 +47,11 @@
           <div class="section-header">
             <div class="title-with-logo">
               <h2>
-                <div
-                  class="brand-hover-wrapper"
+                <div 
                   v-if="brandName"
-                  @mouseenter="showBrandCard = true"
-                  @mouseleave="showBrandCard = false"
+                  class="brand-hover-wrapper"
+                  @mouseenter="showBrandTooltip = true"
+                  @mouseleave="showBrandTooltip = false"
                 >
                   <router-link
                     class="brand-link"
@@ -61,38 +62,26 @@
                       :class="['brand-logo', { 'brand-logo-xiaomi': brandName === '小米' }]"
                       :src="brandLogoFor"
                       :alt="car.brand || '品牌'"
+                      class="brand-logo-img"
                     />
-                    <span>{{ brandName }}</span>
+                    <span class="brand-name-text">{{ brandName }}</span>
                   </router-link>
-                  <div v-if="showBrandCard" class="brand-hover-card" role="tooltip" ref="hoverCard">
-                    <img
-                      v-if="brandLogoFor"
-                      class="hover-card-logo"
-                      :src="brandLogoFor"
-                      :alt="brandName"
-                      ref="hoverLogo"
-                    />
-                    <div class="hover-card-text" ref="hoverText">
-                      <div class="hover-section-desc" ref="hoverDescSection">
-                        <p
-                          v-if="brandInfo && (brandInfo.quote || brandInfo.description)"
-                          class="hover-card-desc"
-                          ref="hoverDesc"
-                          :class="{ clamp: descClamp > 0 }"
-                          :style="descClampStyle"
-                        >{{ brandInfo.quote || brandInfo.description }}</p>
+                  <transition name="fade">
+                    <div v-if="showBrandTooltip && brandInfo" class="brand-tooltip" @click.stop>
+                      <div class="tooltip-header">
+                        <img v-if="brandInfo.brandLogo" :src="brandInfo.brandLogo" :alt="brandName" class="tooltip-logo" />
+                        <span class="tooltip-brand-name">{{ brandName }}</span>
                       </div>
-                      <div class="hover-section-models" ref="hoverModelsSection">
-                        <p
-                          v-if="modelsText"
-                          class="hover-card-models"
-                          ref="hoverModels"
-                          :class="{ clamp: modelsClamp > 0 }"
-                          :style="modelsClampStyle"
-                        >代表车型：{{ modelsText }}</p>
+                      <p v-if="brandIntroText" class="tooltip-intro">{{ brandIntroText }}</p>
+                      <div v-if="brandInfo && brandInfo.models && brandInfo.models.length" class="tooltip-models">
+                        <span class="tooltip-models-label">代表车型</span>
+                        <div class="tooltip-models-tags">
+                          <span v-for="model in brandInfo.models.slice(0, 5)" :key="model" class="model-tag">{{ model }}</span>
+                          <span v-if="brandInfo.models.length > 5" class="model-tag ellipsis-tag">...</span>
+                        </div>
                       </div>
                     </div>
-                  </div>
+                  </transition>
                 </div>
                 <span class="model-name">{{ modelName }}</span>
               </h2>
@@ -218,11 +207,7 @@ export default {
       brandLogoMap: {},
       currentImageIndex: 0,
       slideDirection: 'next',
-      showBrandCard: false,
-      descClamp: 0,
-      modelsClamp: 0,
-      maxDescLines: 10,
-      maxModelsLines: 3
+      showBrandTooltip: false
     }
   },
   computed: {
@@ -289,17 +274,23 @@ export default {
       if (!name) return null
       return brandDetails[name] || null
     },
+    brandIntroText() {
+      if (!this.brandInfo) return ''
+      const quote = this.brandInfo.quote ? String(this.brandInfo.quote).trim() : ''
+      const introduction = this.brandInfo.introduction ? String(this.brandInfo.introduction).trim() : ''
+      const description = this.brandInfo.description ? String(this.brandInfo.description).trim() : ''
+      const history = this.brandInfo.history ? String(this.brandInfo.history).trim() : ''
+      
+      const summary = quote || introduction || description || ''
+      
+      if (summary && history) {
+        return summary + ' ' + history
+      }
+      return summary || history || ''
+    },
     modelsText() {
       const list = (this.brandInfo && Array.isArray(this.brandInfo.models)) ? this.brandInfo.models : []
       return list.join('、')
-    },
-    descClampStyle() {
-      if (this.descClamp > 0) return { WebkitLineClamp: String(this.descClamp) }
-      return {}
-    },
-    modelsClampStyle() {
-      if (this.modelsClamp > 0) return { WebkitLineClamp: String(this.modelsClamp) }
-      return {}
     }
   },
   methods: {
@@ -345,50 +336,6 @@ export default {
         params: { id: t.id },
         query: { anchor: t.anchor }
       })
-    },
-    computeBrandCardClamp() {
-      const desc = this.$refs.hoverDesc
-      const models = this.$refs.hoverModels
-      const descSection = this.$refs.hoverDescSection
-      const modelsSection = this.$refs.hoverModelsSection
-      const card = this.$refs.hoverCard
-      const logoEl = this.$refs.hoverLogo
-      this.descClamp = 0
-      this.modelsClamp = 0
-      if (!card || !descSection || !modelsSection || !desc) return
-      const width = card.offsetWidth || 280
-      const maxTextHeight = width * 1.5
-      const logoHeight = logoEl ? (logoEl.clientHeight || 120) : 120
-      const textAvailable = Math.max(maxTextHeight - logoHeight - 20, 0)
-      const csDesc = window.getComputedStyle(desc)
-      const csModels = models ? window.getComputedStyle(models) : null
-      const lhDesc = parseFloat(csDesc.lineHeight) || 22
-      const lhModels = csModels ? parseFloat(csModels.lineHeight) || 20 : 20
-      const fullDesc = desc.scrollHeight
-      const fullModels = models ? models.scrollHeight : 0
-      const fullDescLines = lhDesc > 0 ? Math.ceil(fullDesc / lhDesc) : 0
-      const fullModelsLines = lhModels > 0 ? Math.ceil(fullModels / lhModels) : 0
-      // 分配可用高度（与布局比例一致）
-      const descAlloc = textAvailable * 0.75
-      const modelsAlloc = textAvailable * 0.25
-      const availDescLines = lhDesc > 0 ? Math.floor(descAlloc / lhDesc) : 0
-      const availModelsLines = lhModels > 0 ? Math.floor(modelsAlloc / lhModels) : 0
-      // 介绍：超过上限或超过可用空间则启用省略，最多 10 行
-      if (fullDescLines > this.maxDescLines || fullDescLines > availDescLines) {
-        const cappedDesc = Math.min(availDescLines, this.maxDescLines)
-        this.descClamp = cappedDesc > 0 ? cappedDesc : 0
-      } else {
-        this.descClamp = 0
-      }
-      // 代表车型：超过上限或超过可用空间则启用省略，最多 3 行
-      if (models) {
-        if (fullModelsLines > this.maxModelsLines || fullModelsLines > availModelsLines) {
-          const cappedModels = Math.min(availModelsLines, this.maxModelsLines)
-          this.modelsClamp = cappedModels > 0 ? cappedModels : 0
-        } else {
-          this.modelsClamp = 0
-        }
-      }
     }
   },
   created() {
@@ -412,22 +359,6 @@ export default {
       this.loadCar(val)
       if (typeof window !== 'undefined' && window.scrollTo) {
         window.scrollTo({ top: 0, behavior: 'auto' })
-      }
-    },
-    showBrandCard(val) {
-      if (val) {
-        this.$nextTick(() => {
-          this.computeBrandCardClamp()
-          if (typeof window !== 'undefined') {
-            window.addEventListener('resize', this.computeBrandCardClamp)
-          }
-        })
-      } else {
-        if (typeof window !== 'undefined') {
-          window.removeEventListener('resize', this.computeBrandCardClamp)
-        }
-        this.descClamp = 0
-        this.modelsClamp = 0
       }
     }
   }
@@ -580,17 +511,21 @@ export default {
   background: var(--c-text-emphasis);
 }
 
-.slide-next-enter-active, .slide-next-leave-active { transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.4s ease; }
-.slide-next-enter { transform: translateX(20px); opacity: 0; }
-.slide-next-enter-to { transform: translateX(0); opacity: 1; }
-.slide-next-leave { transform: translateX(0); opacity: 1; }
-.slide-next-leave-to { transform: translateX(-20px); opacity: 0; }
+.slide-next-enter-active, .slide-next-leave-active { 
+  transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1); 
+}
+.slide-next-enter { transform: translateX(100%); }
+.slide-next-enter-to { transform: translateX(0); }
+.slide-next-leave { transform: translateX(0); }
+.slide-next-leave-to { transform: translateX(-100%); }
 
-.slide-prev-enter-active, .slide-prev-leave-active { transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.4s ease; }
-.slide-prev-enter { transform: translateX(-20px); opacity: 0; }
-.slide-prev-enter-to { transform: translateX(0); opacity: 1; }
-.slide-prev-leave { transform: translateX(0); opacity: 1; }
-.slide-prev-leave-to { transform: translateX(20px); opacity: 0; }
+.slide-prev-enter-active, .slide-prev-leave-active { 
+  transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1); 
+}
+.slide-prev-enter { transform: translateX(-100%); }
+.slide-prev-enter-to { transform: translateX(0); }
+.slide-prev-leave { transform: translateX(0); }
+.slide-prev-leave-to { transform: translateX(100%); }
 
 /* Right Section: 30% */
 .right-section {
@@ -624,26 +559,21 @@ export default {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  min-width: 0; /* 允许在 flex 容器中收缩 */
+  min-width: 0;
+  overflow: visible;
+  position: relative;
 }
 
 .section-header h2 {
   display: flex;
   align-items: center;
-  font-weight: 600; /* 修改此处：从 400 加重至 600 */
+  font-weight: 600;
   margin: 0;
   font-size: 24px;
   color: var(--c-text-emphasis);
   white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
   min-width: 0;
-}
-
-.brand-hover-wrapper {
   position: relative;
-  display: inline-flex;
-  flex-shrink: 0; /* 品牌 logo 和名称不收缩 */
 }
 
 .model-name { 
@@ -660,9 +590,141 @@ export default {
   display: flex;
   align-items: center;
   gap: 8px;
+  position: relative;
 }
 .brand-link:hover { text-decoration: none; }
 .brand-link:hover span { text-decoration: underline; }
+
+.brand-logo-img,
+.brand-name-text {
+  transition: opacity 0.2s ease;
+}
+
+.brand-hover-wrapper {
+  display: inline-flex;
+  align-items: center;
+  position: relative;
+}
+
+.brand-tooltip {
+  position: absolute;
+  top: calc(100% + 12px);
+  left: 0;
+  z-index: 100;
+  width: 260px;
+  padding: 16px;
+  /* Mica / Acrylic Material Effect */
+  background: rgba(32, 33, 36, 0.7); /* 半透明暗色背景 */
+  border: 1px solid rgba(255, 255, 255, 0.1); /* 细腻的半透明边框 */
+  border-radius: 12px;
+  box-shadow: 
+    0 12px 40px rgba(0, 0, 0, 0.4), /* 更深的外层阴影以衬托玻璃感 */
+    inset 0 1px 0 rgba(255, 255, 255, 0.1); /* 顶部内发光模拟玻璃边缘高光 */
+  backdrop-filter: blur(40px) saturate(150%); /* 强烈的模糊和色彩饱和度提升，这是Mica效果的关键 */
+  -webkit-backdrop-filter: blur(40px) saturate(150%);
+  box-sizing: border-box;
+  white-space: normal;
+  cursor: default;
+}
+
+.tooltip-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--c-border-default);
+}
+
+.tooltip-logo {
+  height: 1.2em; /* 与文字行高保持更好的视觉一致性 */
+  width: auto;
+  max-width: 2.5em; /* 限制最大宽度，防止长条形LOGO占据过多空间 */
+  object-fit: contain;
+  border-radius: 2px;
+  background: transparent;
+  vertical-align: middle;
+}
+
+.tooltip-brand-name {
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1; /* 统一行高，确保对齐 */
+  color: var(--c-text-emphasis);
+  display: flex;
+  align-items: center;
+}
+
+.tooltip-intro {
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--c-text-body-alt);
+  margin: 0 0 16px 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 8;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.tooltip-models {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-top: 12px;
+  border-top: 1px dashed var(--c-border-default);
+}
+
+.tooltip-models-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--c-text-muted);
+}
+
+.tooltip-models-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px; /* 增加一点间距替代原有的分隔 */
+}
+
+.model-tag {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--c-primary);
+  background: transparent;
+  border: none;
+  padding: 0;
+  border-radius: 0;
+  font-family: 'MotivaSans', sans-serif;
+  transition: none;
+  position: relative;
+}
+
+/* 用伪元素添加一个小圆点分隔符，最后一个除外 */
+.model-tag:not(:last-child):not(.ellipsis-tag)::after {
+  content: '·';
+  position: absolute;
+  right: -6px;
+  color: var(--c-text-muted);
+  opacity: 0.5;
+}
+
+.model-tag:hover {
+  background: transparent;
+  transform: none;
+}
+
+.ellipsis-tag {
+  background: transparent;
+  border-color: transparent;
+  color: var(--c-text-muted);
+  padding: 0;
+}
+
+.ellipsis-tag:hover {
+  background: transparent;
+  transform: none;
+}
 
 .actions {
   display: flex;
@@ -738,6 +800,7 @@ export default {
 .brand-logo {
   height: 1.2em; /* 稍微增加一点高度以更好地匹配文字的视觉高度 */
   width: auto;
+  max-width: 2.5em; /* 限制最大宽度，防止长条形LOGO（如领克）过长 */
   object-fit: contain;
   border-radius: 3px;
   background: transparent;
@@ -746,120 +809,7 @@ export default {
   top: -1px; /* 微调垂直对齐 */
 }
 .brand-logo-xiaomi {
-  height: 1em;
-}
-.brand-hover-card {
-  position: absolute;
-  top: calc(100% + 14px);
-  left: 0; /* 修改移动端下悬浮框位置，使其默认靠左对齐，防止超出左边界 */
-  z-index: 2000;
-  --hover-card-width: 280px;
-  width: var(--hover-card-width);
-  max-height: calc(var(--hover-card-width) * 1.5);
-  background: var(--c-bg-l3); /* 进一步提高背景明度至浅灰色 */
-  backdrop-filter: blur(24px) saturate(120%);
-  -webkit-backdrop-filter: blur(24px) saturate(120%);
-  border: 1px solid var(--c-border-default); /* 修改边框颜色适应主题 */
-  border-radius: 8px;
-  display: flex;
-  flex-direction: column;
-  box-shadow:
-    0 12px 32px var(--c-shadow-medium),
-    0 4px 12px var(--c-shadow-light);
-  overflow: visible;
-  will-change: box-shadow, transform, opacity;
-}
-
-@media (min-width: 769px) {
-  .brand-hover-card {
-    left: 50%;
-    transform: translateX(-50%);
-  }
-}
-
-.brand-hover-card::after {
-  content: "";
-  position: absolute;
-  top: -14px;
-  left: 0;
-  width: 100%;
-  height: 14px;
-  background: transparent;
-}
-
-.hover-card-logo {
-  width: 100%;
-  height: var(--hover-logo-height, 120px);
-  object-fit: contain;
-  background: transparent;
-  border-bottom: 1px solid rgba(102,192,244,0.25);
-  padding-top: 8px;
-  padding-bottom: 8px;
-  border-radius: 8px 8px 0 0;
-}
-.hover-card-text {
-  padding: 8px 10px;
-  flex: 1 1 auto;
-  display: flex;
-  flex-direction: column;
-}
-.brand-hover-card::before {
-  content: "";
-  position: absolute;
-  left: 24px; /* 移动端下小箭头靠左显示 */
-  margin-left: -6px;
-  top: -7px;
-  width: 14px;
-  height: 14px;
-  background: var(--c-bg-l3); /* 同步提高小箭头背景明度 */
-  border-left: 1px solid var(--c-border-default); /* 同步修改小箭头边框色 */
-  border-top: 1px solid var(--c-border-default);
-  transform: rotate(45deg);
-  z-index: -1;
-  border-radius: 2px 0 0 0;
-  box-shadow: 
-    -2px -2px 6px rgba(0, 0, 0, 0.1);
-}
-
-@media (min-width: 769px) {
-  .brand-hover-card::before {
-    left: calc(50% + 16px);
-  }
-}
-.hover-section-desc {
-  flex: 0 0 75%;
-  overflow: hidden;
-}
-.hover-section-models {
-  flex: 0 0 25%;
-  overflow: hidden;
-  border-top: 1px solid rgba(102,192,244,0.18);
-  padding-top: 6px;
-}
-.hover-card-desc {
-  color: var(--c-text-body);
-  font-size: 14px;
-  line-height: 1.6;
-  margin: 0 0 6px 0;
-  overflow: hidden;
-  word-break: break-word;
-}
-.hover-card-desc.clamp {
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  text-overflow: ellipsis;
-}
-.hover-card-models {
-  color: var(--c-primary);
-  font-size: 12px;
-  margin: 0;
-  overflow: hidden;
-  word-break: break-word;
-}
-.hover-card-models.clamp {
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  text-overflow: ellipsis;
+  height: 1.2em; /* 统一高度，与后边文本高度保持一致 */
 }
 
 

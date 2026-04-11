@@ -25,11 +25,11 @@
     <!-- 历史 -->
     <section class="brand-section span-full" v-if="brandInfo && brandInfo.history">
       <h3 class="section-title">
-        <span class="icon">📜</span> 品牌历史
+        <img src="@/assets/images/品牌历史.svg" class="icon" alt="品牌历史" /> 品牌历史
       </h3>
       
       <!-- 经典车型展示模块 -->
-      <div class="classic-models-module" v-if="(brandModels && brandModels.length) || (brandInfo && brandInfo.classic_models && brandInfo.classic_models.list)">
+      <div class="classic-models-module" v-if="brandInfo && brandInfo.classic_models && Array.isArray(brandInfo.classic_models.list) && brandInfo.classic_models.list.length > 0">
         <h4 class="sub-section-title">
           经典车型 
           <span class="sub-title-desc" v-if="brandInfo && brandInfo.classic_models && brandInfo.classic_models.description">
@@ -41,16 +41,19 @@
           <div class="classic-cards-scroll" ref="cardsScroll" @scroll="checkScroll">
             
             <!-- 渲染从brandDetails.json中获取的历史经典车型 -->
-            <template v-if="brandInfo && brandInfo.classic_models && brandInfo.classic_models.list">
+            <template v-if="brandInfo && brandInfo.classic_models && Array.isArray(brandInfo.classic_models.list) && brandInfo.classic_models.list.length > 0">
               <div 
                 class="classic-card historical-card" 
                 v-for="(car, idx) in brandInfo.classic_models.list" 
                 :key="'historical-'+idx"
+                @click="handleClassicCardClick(car)"
+                :style="carIdOfModelName(car.model_name) || carIdOfModelName(car.model_name_zh) ? 'cursor: pointer;' : 'cursor: default;'"
               >
                 <!-- 历史车型可能没有图片，使用渐变背景占位 -->
-                <div class="classic-img placeholder-bg">
+                <div class="classic-img placeholder-bg" v-if="!getCarCover(car)">
                   <span class="placeholder-text">{{ car.model_name }}</span>
                 </div>
+                <img class="classic-img" v-else :src="getCarCover(car)" :alt="car.model_name" />
                 <div class="classic-overlay">
                    <div class="classic-overlay-name">{{ getDisplayName(car) }}</div>
                    <div class="classic-overlay-intro">
@@ -88,7 +91,7 @@
       <!-- 品牌&车型架构图 (Mermaid) -->
       <div class="brand-architecture-module" v-if="brandInfo && (brandInfo.sub_brands && brandInfo.sub_brands.list || brandInfo.mermaid)">
         <h3 class="section-title">
-          <span class="icon">🏢</span> 品牌&车型架构图
+          <img src="@/assets/images/品牌&车型架构图.svg" class="icon" alt="品牌&车型架构图" /> 品牌&车型架构图
         </h3>
         <div class="mermaid-container">
           <div class="mermaid" ref="mermaidDiagram"></div>
@@ -99,7 +102,7 @@
     <!-- 左侧：在售车型 (30%) -->
     <section class="brand-section col-left" v-if="currentLineupCategories.length || representativeModelNames.length || representativeModelCategories">
       <h3 class="section-title">
-        <span class="icon">🚗</span> 在售车型
+        <img src="@/assets/images/在售车型.svg" class="icon" alt="在售车型" /> 在售车型
       </h3>
       
       <!-- 如果有详细的分类数据 (current_lineup) -->
@@ -113,9 +116,9 @@
               class="model-item"
             >
               <router-link
-                v-if="carIdOfModelName(m.model_name) !== null || carIdOfModelName(m.model_name_zh) !== null"
+                v-if="getCarRoute(m.model_name) || getCarRoute(m.model_name_zh)"
                 class="model-link"
-                :to="{ name: 'CarDetail', params: { id: carIdOfModelName(m.model_name) || carIdOfModelName(m.model_name_zh) } }"
+                :to="getCarRoute(m.model_name) || getCarRoute(m.model_name_zh)"
               >{{ m.model_name_zh || m.model_name }}</router-link>
               <span v-else class="model-name">{{ m.model_name_zh || m.model_name }}</span>
             </li>
@@ -134,9 +137,9 @@
               class="model-item"
             >
               <router-link
-                v-if="carIdOfModelName(m) !== null"
+                v-if="getCarRoute(m)"
                 class="model-link"
-                :to="{ name: 'CarDetail', params: { id: carIdOfModelName(m) } }"
+                :to="getCarRoute(m)"
               >{{ m }}</router-link>
               <span v-else class="model-name">{{ m }}</span>
             </li>
@@ -147,24 +150,24 @@
       <!-- 降级方案：如果没有分类数据，使用原来的列表 -->
       <ul class="models-list fallback-list" v-else>
         <li
-          v-for="m in representativeModelNames"
-          :key="m"
-          class="model-item"
-        >
-          <router-link
-            v-if="carIdOfModelName(m) !== null"
-            class="model-link"
-            :to="{ name: 'CarDetail', params: { id: carIdOfModelName(m) } }"
-          >{{ m }}</router-link>
-          <span v-else class="model-name">{{ m }}</span>
-        </li>
+            v-for="m in representativeModelNames"
+            :key="m"
+            class="model-item"
+          >
+            <router-link
+              v-if="getCarRoute(m)"
+              class="model-link"
+              :to="getCarRoute(m)"
+            >{{ m }}</router-link>
+            <span v-else class="model-name">{{ m }}</span>
+          </li>
       </ul>
     </section>
 
     <!-- 右侧：核心技术 (70%) -->
     <section class="brand-section col-right" v-if="brandInfo && brandInfo.technology && brandInfo.technology.length">
       <h3 class="section-title">
-        <span class="icon">🔬</span> 核心技术
+        <img src="@/assets/images/核心技术.svg" class="icon" alt="核心技术" /> 核心技术
       </h3>
       <div class="tech-cards-wrapper">
         <div v-for="(tech, index) in brandInfo.technology" :key="index" class="tech-card">
@@ -304,6 +307,9 @@ export default {
       
       // 如果直接存在 mermaid 属性，说明是预先手写的代码，直接返回并添加自定义样式
       if (brandInfo.mermaid) {
+        if (Array.isArray(brandInfo.mermaid)) {
+          return brandInfo.mermaid.join('\n')
+        }
         return brandInfo.mermaid
       }
 
@@ -421,22 +427,88 @@ export default {
     },
     modelNameOf (car) {
       const t = car && car.title ? String(car.title) : ''
-      const b = getBrand(t)
+      const b = car.brand || getBrand(t)
       if (b && t.startsWith(b)) return t.slice(b.length).trim()
       return t
     },
-    carIdOfModelName (name) {
+    getCarMatch (name) {
       const brand = this.brandName
       if (!name || !brand) return null
       
-      const hit = cars.find(c => {
-        const b = getBrand(c.title)
-        if (b !== brand) return false
-        const model = this.modelNameOf(c)
-        // 增加更宽容的匹配：如果传入的 name 包含在全称里，或者全称包含 name
-        return model === name || model.includes(name) || name.includes(model)
-      })
-      return hit ? hit.id : null
+      for (const c of cars) {
+        // 使用 c.brand 优先判断品牌，如果不存在再回退到根据 title 解析
+        const b = c.brand || getBrand(c.title)
+        if (b === brand) {
+          const model = this.modelNameOf(c)
+          if (model === name || model.includes(name) || name.includes(model)) {
+            // 防御性判断：如果名字太短且只是被包含（如"炮"被"山海炮"包含），则拒绝匹配
+            // 但允许"长城炮"与"炮"的匹配
+            if (model !== name && (model === '炮' || name === '炮')) {
+              if (name !== '长城炮' && model !== '长城炮') {
+                continue
+              }
+            }
+            // 防御性判断：防止 CT5-V 匹配到 CT5，或者 RS 6 匹配到 A6 之类的（不过A和RS不同，不会匹配）
+            if (model !== name && name.includes('-V') && !model.includes('-V')) {
+              continue
+            }
+            return { id: c.id, isSpecial: false }
+          }
+          if (c.specialEdition) {
+            const specBrand = c.specialEdition.brand || b
+            if (specBrand === brand) {
+              const specModel = this.modelNameOf(c.specialEdition)
+              if (specModel === name || specModel.includes(name) || name.includes(specModel)) {
+                if (specModel !== name && (specModel === '炮' || name === '炮')) {
+                  if (name !== '长城炮' && specModel !== '长城炮') {
+                    continue
+                  }
+                }
+                if (specModel !== name && name.includes('-V') && !specModel.includes('-V')) {
+                  continue
+                }
+                return { id: c.id, isSpecial: true }
+              }
+            }
+          }
+        }
+      }
+      return null
+    },
+    carIdOfModelName (name) {
+      const match = this.getCarMatch(name)
+      return match ? match.id : null
+    },
+    getCarRoute (name) {
+      const match = this.getCarMatch(name)
+      if (match) {
+        return { name: match.isSpecial ? 'SpecialCarDetail' : 'CarDetail', params: { id: match.id } }
+      }
+      return null
+    },
+    getCarCover (car) {
+      // 1. 如果 JSON 中明确配了 cover，优先使用
+      if (car.cover) return car.cover
+      
+      // 2. 如果未配 cover，判断是否被收录在 cars.json，使用最后一张图作为封面
+      const match = this.getCarMatch(car.model_name) || this.getCarMatch(car.model_name_zh)
+      if (match) {
+        const matchedCar = cars.find(c => c.id === match.id)
+        if (matchedCar) {
+          if (match.isSpecial && matchedCar.specialEdition && matchedCar.specialEdition.images && matchedCar.specialEdition.images.length > 0) {
+            return matchedCar.specialEdition.images[matchedCar.specialEdition.images.length - 1]
+          } else if (!match.isSpecial && matchedCar.images && matchedCar.images.length > 0) {
+            return matchedCar.images[matchedCar.images.length - 1]
+          }
+        }
+      }
+      return null
+    },
+    handleClassicCardClick (car) {
+      const route = this.getCarRoute(car.model_name) || this.getCarRoute(car.model_name_zh)
+      if (route) {
+        this.$router.push(route)
+      }
     }
   },
   created () {
@@ -514,6 +586,7 @@ h2, h3, h4 {
   align-items: center;
   gap: 8px;
   --brand-title-size: 28px;
+  height: var(--brand-title-size);
 }
 
 .section-header h2 {
@@ -521,16 +594,21 @@ h2, h3, h4 {
   font-weight: 500;
   letter-spacing: 2px;
   font-size: var(--brand-title-size);
+  line-height: 1; /* 强制行高与字体大小一致，消除上下留白 */
   font-family: 'AlibabaPuHuiTi', 'Motiva Sans', sans-serif;
   margin: 0;
+  display: flex;
+  align-items: center; /* 确保品牌标题与LOGO在交叉轴上居中对齐 */
 }
 
 .brand-logo {
   height: var(--brand-title-size);
   width: auto;
+  max-width: calc(var(--brand-title-size) * 2.5); /* 防止长条形LOGO占据过多空间 */
   object-fit: contain;
   border-radius: 4px;
   background: transparent;
+  display: block; /* 消除 img 底部默认空白间隙 */
 }
 
 .divider {
@@ -558,7 +636,9 @@ h2, h3, h4 {
 
 .section-title .icon {
   margin-right: 10px;
-  font-size: 20px;
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
 }
 
 .wiki-box {
@@ -661,7 +741,7 @@ h2, h3, h4 {
 
 /* 仅显示车型名称的列表样式 */
 .lineup-category {
-  margin-bottom: 24px;
+  margin-bottom: 32px;
 }
 .lineup-cat-title {
   color: var(--c-text-title);
@@ -688,7 +768,7 @@ h2, h3, h4 {
   padding-left: 20px;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 2px 12px;
+  gap: 12px 24px;
 }
 .model-item { line-height: 1.5; margin: 2px 0; font-size: 15px; } /* 加大字体一号 */
 .model-link {
@@ -768,8 +848,8 @@ h2, h3, h4 {
 }
 
 .mermaid-container {
-  background: #141414; /* 纯深灰/炭黑背景，去除蓝色调 */
-  border: 1px solid #2C2C2C; /* 调整边框颜色配合深背景 */
+  background: #141414; /* 纯深灰/炭黑背景 */
+  border: 1px solid #2C2C2C;
   border-radius: 12px;
   padding: 20px; /* 增加一点内边距让图表不那么拥挤 */
   box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.6), 0 4px 12px var(--c-shadow-light); /* 添加内阴影增强纵深感 */
@@ -778,30 +858,36 @@ h2, h3, h4 {
   -webkit-overflow-scrolling: touch;
 }
 
+.mermaid-container::-webkit-scrollbar {
+  height: 8px;
+  display: block;
+}
+
+.mermaid-container::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 4px;
+}
+
+.mermaid-container::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+}
+
+.mermaid-container::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
 .mermaid {
   background: transparent;
   min-width: min-content; /* 保证内部内容宽度撑开 */
   display: block; /* 取消 flex，完全交给 svg 自带尺寸 */
   margin: 0 auto; /* 没超宽时居中 */
 }
-.mermaid :deep(svg) {
-  max-width: none; /* 允许超出容器 */
-  width: auto !important; /* 强制使用原始内容计算出的绝对宽度，不要被父容器压缩 */
-  height: auto !important; /* 强制自适应高度 */
-  display: block;
-}
 
-/* 强制覆盖 SVG 内部节点的间距，适应文字尺寸并设置极小内边距 */
-.mermaid :deep(.label) {
-  padding: 4px 8px !important;
-  margin: 0 !important;
-  line-height: 1.2 !important;
-  white-space: nowrap !important;
-}
-
-.mermaid :deep(.node foreignObject) {
-  overflow: visible;
-  text-align: center;
+.mermaid ::v-deep svg {
+  max-width: none !important;
+  width: auto !important;
+  height: 100% !important;
 }
 
 /* 经典车型模块 */
@@ -924,7 +1010,7 @@ h2, h3, h4 {
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.6); /* 加深一点背景 */
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   opacity: 0;
@@ -985,12 +1071,13 @@ h2, h3, h4 {
   left: 0;
   width: 100%;
   padding: 12px 16px;
-  background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 100%);
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.4) 60%, transparent 100%);
   color: #fff;
   font-size: 15px;
   font-weight: 500;
   transition: opacity 0.3s ease;
   z-index: 1;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.8);
 }
 
 .classic-card:hover .classic-name-bottom {
@@ -1013,7 +1100,7 @@ h2, h3, h4 {
   border: 1px solid rgba(255,255,255,0.1);
 }
 
-@media (max-width: 768px) {
+@media (max-width: 480px) {
   .page-brand-detail {
     display: flex;
     flex-direction: column;
@@ -1105,7 +1192,7 @@ h2, h3, h4 {
   }
   .models-list {
     grid-template-columns: repeat(3, 1fr);
-    gap: 8px;
+    gap: 12px 16px;
     padding-left: 20px; /* 恢复适当的左侧缩进，确保列表圆点和文字不超出边界 */
   }
   .model-item {
@@ -1113,7 +1200,7 @@ h2, h3, h4 {
     font-size: 14px;
   }
   .lineup-category {
-    margin-bottom: 16px;
+    margin-bottom: 24px;
   }
   .lineup-cat-title {
     font-size: 15px;
@@ -1182,16 +1269,16 @@ h2, h3, h4 {
     font-size: 11px;
     padding: 3px 6px;
   }
+  /* 移动端下的品牌架构图容器样式调整 */
   .mermaid-container {
-    padding: 6px;
-    border-radius: 10px;
+    padding: 6px; /* 减小内边距，给图表留出更多水平展示空间 */
+    border-radius: 10px; /* 稍微减小圆角以适应更紧凑的屏幕 */
   }
+  
+  /* 移动端下 Mermaid SVG 的包裹层样式 */
   .mermaid {
-    min-width: 100%;
-    margin: 0;
-  }
-  .mermaid :deep(svg) {
-    min-width: auto; /* 移除以前设置的固定最小宽度，让 svg 自己决定 */
+    min-width: 100%; /* 确保在小屏幕下占满容器宽度 */
+    margin: 0; /* 移除外边距，让内部的 scroll 机制处理溢出 */
   }
 }
 
