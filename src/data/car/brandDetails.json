@@ -469,9 +469,9 @@
   "特斯拉": {
     "region": "其他",
     "brandLogo": "/brand-logos/tesla.png",
-    "quote": "特斯拉（Tesla, Inc.）是全球领先的电动汽车及可持续能源公司，以“加速世界向可持续能源的转变”为企业使命。其业务涵盖纯电动车设计与制造、太阳能产品以及储能设备，是当今全球市值最高、最具影响力的汽车制造商之一。",
-    "introduction": "特斯拉总部位于美国得克萨斯州奥斯汀，由马丁·艾伯哈德和马克·塔彭宁于2003年创立，随后伊隆·马斯克作为A轮投资人加入并最终成为核心领导者。特斯拉不仅是世界上最早的自动驾驶汽车生产商之一，也是软件定义汽车（Software Defined Vehicle）和垂直整合供应链的先驱。其构建的全球超级工厂（Gigafactory）和超级充电网络（Supercharger）确立了其在电动车行业的霸主地位。",
-    "history": "2003年7月1日，马丁·艾伯哈德和马克·塔彭宁创立公司，将公司命名为“特斯拉汽车”（Tesla Motors），以纪念物理学家尼古拉·特斯拉。2004年，伊隆·马斯克以A轮投资人身份加入并出任董事长，随后成为核心领导者。2008年，推出了基于路特斯Elise底盘打造的全球首款采用锂离子电池且续航超过200英里的量产电动跑车——Roadster。2010年，特斯拉成功在纳斯达克上市，并收购了位于加州的NUMMI工厂。2012年，划时代的豪华电动轿车Model S开启交付，彻底改变了公众对电动车的认知。随后在2015年推出了配备鹰翼门的豪华SUV Model X。2016年，特斯拉收购了SolarCity，正式转型为垂直整合的能源公司。2017年，面向大众市场的Model 3开启交付，迅速成为全球最畅销的电动车型之一；随后在2020年推出的Model Y更是登顶全球单一车型销量冠军。随着上海、柏林及得州等超级工厂的陆续投产，特斯拉实现了全球产能的巨大飞跃。2023年底，极具未来感的不锈钢纯电皮卡Cybertruck正式开启交付。",
+    "quote": "特斯拉（Tesla, Inc.）是全球领先的电动汽车公司，以“加速世界向可持续能源的转变”为企业使命。其业务专注于纯电动车设计与制造，是世界上最早的自动驾驶汽车生产商之一，至2018年已成为世界最畅销充电式汽车公司。",
+    "introduction": "特斯拉总部位于美国得克萨斯州奥斯汀，由马丁·艾伯哈德和马克·塔彭宁于2003年创立，以纪念物理学家尼古拉·特斯拉。随后伊隆·马斯克作为A轮投资人加入并最终成为核心领导者。特斯拉不仅是世界上最早的自动驾驶汽车生产商之一，也是软件定义汽车和垂直整合供应链的先驱。其构建的全球超级工厂（如上海、柏林、得州等）和超级充电网络确立了其在电动车行业的领导地位。",
+    "history": "2003年7月1日，马丁·艾伯哈德和马克·塔彭宁创立“特斯拉汽车”（Tesla Motors）。2004年，伊隆·马斯克以A轮投资人身份加入。2008年，推出基于莲花Elise底盘的全球首款量产电动敞篷跑车Roadster。2010年，特斯拉在纳斯达克上市。2012年，高性能全电动豪华轿车Model S开始交付。2015年，配备特色鹰翼门的豪华SUV Model X开始交付。2017年，入门级纯电动车Model 3开始量产交付；同年发表0-60mph加速仅1.9秒的新款Roadster及纯电动半挂卡车Semi。2019年，上海超级工厂动工。2020年，中型SUV Model Y开始交付，该车型在2023年第一季度成为全球历史首个登顶销量榜首的纯电动车。2022年，柏林超级工厂开业，同年首批Semi纯电动半挂卡车交付。2023年底，采用超硬冷轧不锈钢外壳的赛博越野旅行车（Cybertruck）开启交付。此外，特斯拉还计划推出取消方向盘和脚踏板的无人驾驶双座车型Cybercab以及无人驾驶客车Robovan。",
     "technology": [
       {
         "title": "FSD",
@@ -501,7 +501,9 @@
       "Model Y",
       "Cybertruck",
       "Roadster",
-      "Semi"
+      "Semi",
+      "Cybercab",
+      "Robovan"
     ],
     "current_lineup": {
       "description": "特斯拉全球“S3XY”核心产品线及商用/皮卡系列",
@@ -547,6 +549,24 @@
               "model_name_zh": "Semi"
             }
           ]
+        },
+        "future_concept": {
+          "category_name": "未来概念与无人驾驶",
+          "category_name_en": "Future & Autonomous",
+          "models": [
+            {
+              "model_name": "Roadster",
+              "model_name_zh": "第二代纯电超跑"
+            },
+            {
+              "model_name": "Cybercab",
+              "model_name_zh": "无人驾驶出租车"
+            },
+            {
+              "model_name": "Robovan",
+              "model_name_zh": "无人驾驶客车"
+            }
+          ]
         }
       }
     },
@@ -554,17 +574,19 @@
       "%%{init: {\"flowchart\": {\"padding\": 15, \"nodeSpacing\": 20, \"rankSpacing\": 40, \"htmlLabels\": true}}}%%",
       "graph TD",
       "  Root[\"特斯拉<br>Tesla\"] --> S3XY[\"S3XY 核心乘用车系列\"]",
-      "  S3XY --- Model_3(\"Model 3<br>中型纯电轿车\")",
+      "  S3XY --- Model_3(\"Model 3<br>入门纯电轿车\")",
       "  S3XY --- Model_Y(\"Model Y<br>中型纯电SUV\")",
-      "  S3XY --- Model_S(\"Model S<br>旗舰豪华轿车\")",
-      "  S3XY --- Model_X(\"Model X<br>旗舰豪华SUV\")",
+      "  S3XY --- Model_S(\"Model S<br>高性能豪华轿车\")",
+      "  S3XY --- Model_X(\"Model X<br>鹰翼门豪华SUV\")",
       "",
       "  Root --> Commercial[\"商用与越野系列\"]",
       "  Commercial --- Cybertruck(\"Cybertruck<br>赛博越野旅行车\")",
       "  Commercial --- Semi(\"Semi<br>纯电半挂卡车\")",
       "",
-      "  Root --> Performance[\"高性能跑车\"]",
-      "  Performance --- Roadster(\"Roadster<br>纯电超跑\")",
+      "  Root --> Performance[\"未来概念与无人驾驶\"]",
+      "  Performance --- Roadster(\"Roadster<br>第二代纯电超跑\")",
+      "  Performance --- Cybercab(\"Cybercab<br>无人驾驶出租车\")",
+      "  Performance --- Robovan(\"Robovan<br>无人驾驶客车\")",
       "",
       "  classDef rootNode fill:#0F172A,stroke:#38BDF8,stroke-width:2px,color:#F8FAFC,font-weight:bold,rx:8,ry:8,padding:24px;",
       "  classDef groupNode fill:#312E81,stroke:#6366F1,stroke-width:2px,color:#E0E7FF,font-weight:bold,rx:6,ry:6,padding:18px;",
@@ -572,7 +594,7 @@
       "",
       "  class Root rootNode;",
       "  class S3XY,Commercial,Performance groupNode;",
-      "  class Model_3,Model_Y,Model_S,Model_X,Cybertruck,Semi,Roadster model;"
+      "  class Model_3,Model_Y,Model_S,Model_X,Cybertruck,Semi,Roadster,Cybercab,Robovan model;"
     ]
   },
   "大众": {
@@ -902,7 +924,11 @@
           "model_name_zh": "迪尔",
           "production_years": "1996-2013",
           "historical_significance": "长城首款皮卡，打破10万元价格壁垒，奠定了长城在中国皮卡领域的绝对王者地位。",
-          "key_features": ["高性价比", "皮卡销量冠军", "实用耐造"],
+          "key_features": [
+            "高性价比",
+            "皮卡销量冠军",
+            "实用耐造"
+          ],
           "status": "已停产"
         },
         {
@@ -910,7 +936,11 @@
           "model_name_zh": "赛弗",
           "production_years": "2002-2009",
           "historical_significance": "长城首款SUV车型，开启了中国自主品牌SUV普及的先河，当年即进入全国SUV市场前三名。",
-          "key_features": ["国民SUV", "开山之作", "越野底盘"],
+          "key_features": [
+            "国民SUV",
+            "开山之作",
+            "越野底盘"
+          ],
           "status": "已停产"
         },
         {
@@ -918,7 +948,11 @@
           "model_name_zh": "哈弗 H6",
           "production_years": "2011-至今",
           "historical_significance": "中国品牌最成功的SUV之一，曾连续近百个月蝉联中国SUV销量冠军，被誉为“国民神车”。",
-          "key_features": ["国民神车", "销量传奇", "极致性价比"],
+          "key_features": [
+            "国民神车",
+            "销量传奇",
+            "极致性价比"
+          ],
           "status": "在售"
         }
       ]
@@ -930,45 +964,90 @@
           "category_name": "哈弗 (SUV)",
           "category_name_en": "Haval SUV",
           "models": [
-            { "model_name": "H6", "model_name_zh": "H6" },
-            { "model_name": "Big Dog", "model_name_zh": "大狗" },
-            { "model_name": "Raptor", "model_name_zh": "猎龙" }
+            {
+              "model_name": "H6",
+              "model_name_zh": "H6"
+            },
+            {
+              "model_name": "Big Dog",
+              "model_name_zh": "大狗"
+            },
+            {
+              "model_name": "Raptor",
+              "model_name_zh": "猎龙"
+            }
           ]
         },
         "tank": {
           "category_name": "坦克 (越野车)",
           "category_name_en": "TANK off-road",
           "models": [
-            { "model_name": "300", "model_name_zh": "300" },
-            { "model_name": "400", "model_name_zh": "400" },
-            { "model_name": "500", "model_name_zh": "500" },
-            { "model_name": "700", "model_name_zh": "700" }
+            {
+              "model_name": "300",
+              "model_name_zh": "300"
+            },
+            {
+              "model_name": "400",
+              "model_name_zh": "400"
+            },
+            {
+              "model_name": "500",
+              "model_name_zh": "500"
+            },
+            {
+              "model_name": "700",
+              "model_name_zh": "700"
+            }
           ]
         },
         "wey": {
           "category_name": "魏牌 (高端新能源)",
           "category_name_en": "WEY EV",
           "models": [
-            { "model_name": "Mocha", "model_name_zh": "摩卡" },
-            { "model_name": "Lanshan", "model_name_zh": "蓝山" },
-            { "model_name": "Gaoshan", "model_name_zh": "高山" }
+            {
+              "model_name": "Mocha",
+              "model_name_zh": "摩卡"
+            },
+            {
+              "model_name": "Lanshan",
+              "model_name_zh": "蓝山"
+            },
+            {
+              "model_name": "Gaoshan",
+              "model_name_zh": "高山"
+            }
           ]
         },
         "ora": {
           "category_name": "欧拉 (纯电小车)",
           "category_name_en": "ORA EV",
           "models": [
-            { "model_name": "Good Cat", "model_name_zh": "好猫" },
-            { "model_name": "Ballet Cat", "model_name_zh": "蕾猫" },
-            { "model_name": "Lightning Cat", "model_name_zh": "闪电猫" }
+            {
+              "model_name": "Good Cat",
+              "model_name_zh": "好猫"
+            },
+            {
+              "model_name": "Ballet Cat",
+              "model_name_zh": "蕾猫"
+            },
+            {
+              "model_name": "Lightning Cat",
+              "model_name_zh": "闪电猫"
+            }
           ]
         },
         "pickup": {
           "category_name": "长城皮卡",
           "category_name_en": "GWM Pickup",
           "models": [
-            { "model_name": "Poer", "model_name_zh": "炮" },
-            { "model_name": "Shanhai Poer", "model_name_zh": "山海炮" }
+            {
+              "model_name": "Poer",
+              "model_name_zh": "炮"
+            },
+            {
+              "model_name": "Shanhai Poer",
+              "model_name_zh": "山海炮"
+            }
           ]
         }
       }
@@ -1094,7 +1173,11 @@
           "model_name_zh": "Dixi",
           "production_years": "1928-1932",
           "historical_significance": "宝马生产的第一辆汽车，标志着宝马正式进军汽车制造领域。",
-          "key_features": ["宝马首款汽车", "四缸发动机", "经济型车"],
+          "key_features": [
+            "宝马首款汽车",
+            "四缸发动机",
+            "经济型车"
+          ],
           "status": "已停产"
         },
         {
@@ -1102,7 +1185,11 @@
           "model_name_zh": "Isetta",
           "production_years": "1955-1962",
           "historical_significance": "二战后帮助宝马度过财务危机的标志性微型车，以前开门设计和蛋形外观闻名，被称为“泡泡车”。",
-          "key_features": ["前开门设计", "微型车", "超低油耗"],
+          "key_features": [
+            "前开门设计",
+            "微型车",
+            "超低油耗"
+          ],
           "status": "已停产",
           "cover": "https://images.unsplash.com/photo-1596752003887-84a1485c2c77?q=80&w=774&auto=format&fit=crop"
         },
@@ -1111,7 +1198,12 @@
           "model_name_zh": "第一代 M3",
           "production_years": "1986-1991",
           "historical_significance": "宝马M部门的传奇之作，最初为满足Group A房车赛规则而生，奠定了宝马高性能轿跑的王者地位。",
-          "key_features": ["高转四缸机", "赛道血统", "宽体套件", "极致操控"],
+          "key_features": [
+            "高转四缸机",
+            "赛道血统",
+            "宽体套件",
+            "极致操控"
+          ],
           "status": "已停产"
         }
       ]
@@ -1123,45 +1215,108 @@
           "category_name": "轿车 / 轿跑车",
           "category_name_en": "Sedan / Coupe",
           "models": [
-            { "model_name": "3 Series", "model_name_zh": "3系" },
-            { "model_name": "4 Series", "model_name_zh": "4系" },
-            { "model_name": "5 Series", "model_name_zh": "5系" },
-            { "model_name": "7 Series", "model_name_zh": "7系" },
-            { "model_name": "8 Series", "model_name_zh": "8系" }
+            {
+              "model_name": "3 Series",
+              "model_name_zh": "3系"
+            },
+            {
+              "model_name": "4 Series",
+              "model_name_zh": "4系"
+            },
+            {
+              "model_name": "5 Series",
+              "model_name_zh": "5系"
+            },
+            {
+              "model_name": "7 Series",
+              "model_name_zh": "7系"
+            },
+            {
+              "model_name": "8 Series",
+              "model_name_zh": "8系"
+            }
           ]
         },
         "suv": {
           "category_name": "SAV / SAC (SUV)",
           "category_name_en": "Sports Activity Vehicle",
           "models": [
-            { "model_name": "X1", "model_name_zh": "X1" },
-            { "model_name": "X3", "model_name_zh": "X3" },
-            { "model_name": "X4", "model_name_zh": "X4" },
-            { "model_name": "X5", "model_name_zh": "X5" },
-            { "model_name": "X6", "model_name_zh": "X6" },
-            { "model_name": "X7", "model_name_zh": "X7" }
+            {
+              "model_name": "X1",
+              "model_name_zh": "X1"
+            },
+            {
+              "model_name": "X3",
+              "model_name_zh": "X3"
+            },
+            {
+              "model_name": "X4",
+              "model_name_zh": "X4"
+            },
+            {
+              "model_name": "X5",
+              "model_name_zh": "X5"
+            },
+            {
+              "model_name": "X6",
+              "model_name_zh": "X6"
+            },
+            {
+              "model_name": "X7",
+              "model_name_zh": "X7"
+            }
           ]
         },
         "ev": {
           "category_name": "纯电动车 (i系列)",
           "category_name_en": "BMW i",
           "models": [
-            { "model_name": "i3", "model_name_zh": "i3" },
-            { "model_name": "i4", "model_name_zh": "i4" },
-            { "model_name": "i7", "model_name_zh": "i7" },
-            { "model_name": "iX3", "model_name_zh": "iX3" },
-            { "model_name": "iX", "model_name_zh": "iX" }
+            {
+              "model_name": "i3",
+              "model_name_zh": "i3"
+            },
+            {
+              "model_name": "i4",
+              "model_name_zh": "i4"
+            },
+            {
+              "model_name": "i7",
+              "model_name_zh": "i7"
+            },
+            {
+              "model_name": "iX3",
+              "model_name_zh": "iX3"
+            },
+            {
+              "model_name": "iX",
+              "model_name_zh": "iX"
+            }
           ]
         },
         "performance": {
           "category_name": "高性能车 (M Power)",
           "category_name_en": "BMW M",
           "models": [
-            { "model_name": "M2", "model_name_zh": "M2" },
-            { "model_name": "M3", "model_name_zh": "M3" },
-            { "model_name": "M4", "model_name_zh": "M4" },
-            { "model_name": "M5", "model_name_zh": "M5" },
-            { "model_name": "XM", "model_name_zh": "XM" }
+            {
+              "model_name": "M2",
+              "model_name_zh": "M2"
+            },
+            {
+              "model_name": "M3",
+              "model_name_zh": "M3"
+            },
+            {
+              "model_name": "M4",
+              "model_name_zh": "M4"
+            },
+            {
+              "model_name": "M5",
+              "model_name_zh": "M5"
+            },
+            {
+              "model_name": "XM",
+              "model_name_zh": "XM"
+            }
           ]
         }
       }
@@ -1285,7 +1440,11 @@
           "model_name_zh": "Quattro",
           "production_years": "1980-1991",
           "historical_significance": "将四驱技术首次成功应用于轿车和拉力赛，统治了B组拉力赛，彻底改变了世界拉力锦标赛的格局，奠定了奥迪四驱王者的地位。",
-          "key_features": ["全时四驱", "直列五缸涡轮增压", "拉力赛霸主"],
+          "key_features": [
+            "全时四驱",
+            "直列五缸涡轮增压",
+            "拉力赛霸主"
+          ],
           "status": "已停产",
           "cover": "https://images.unsplash.com/photo-1603584173870-7f23fdae1b7a?q=80&w=774&auto=format&fit=crop"
         },
@@ -1294,7 +1453,12 @@
           "model_name_zh": "R8",
           "production_years": "2006-2024",
           "historical_significance": "奥迪品牌历史上最成功的超级跑车，与兰博基尼共享中置V10引擎，被称为“钢铁侠座驾”，将奥迪的品牌形象提升到了超跑级别。",
-          "key_features": ["中置四驱", "5.2L V10引擎", "ASF铝合金车身", "标志性碳纤维侧饰板"],
+          "key_features": [
+            "中置四驱",
+            "5.2L V10引擎",
+            "ASF铝合金车身",
+            "标志性碳纤维侧饰板"
+          ],
           "status": "已停产",
           "cover": "https://images.unsplash.com/photo-1603584173870-7f23fdae1b7a?q=80&w=774&auto=format&fit=crop"
         },
@@ -1303,7 +1467,11 @@
           "model_name_zh": "TT",
           "production_years": "1998-2023",
           "historical_significance": "奥迪标志性的小型双门跑车，凭借圆润纯粹的包豪斯几何设计语言成为汽车设计史上的经典之作。",
-          "key_features": ["包豪斯设计", "圆润造型", "MQB/PQ35平台"],
+          "key_features": [
+            "包豪斯设计",
+            "圆润造型",
+            "MQB/PQ35平台"
+          ],
           "status": "已停产"
         }
       ]
@@ -1315,42 +1483,96 @@
           "category_name": "轿车 / 轿跑车 (A系列)",
           "category_name_en": "Sedan / Sportback",
           "models": [
-            { "model_name": "A3", "model_name_zh": "A3" },
-            { "model_name": "A4", "model_name_zh": "A4" },
-            { "model_name": "A5", "model_name_zh": "A5" },
-            { "model_name": "A6", "model_name_zh": "A6" },
-            { "model_name": "A7", "model_name_zh": "A7" },
-            { "model_name": "A8", "model_name_zh": "A8" }
+            {
+              "model_name": "A3",
+              "model_name_zh": "A3"
+            },
+            {
+              "model_name": "A4",
+              "model_name_zh": "A4"
+            },
+            {
+              "model_name": "A5",
+              "model_name_zh": "A5"
+            },
+            {
+              "model_name": "A6",
+              "model_name_zh": "A6"
+            },
+            {
+              "model_name": "A7",
+              "model_name_zh": "A7"
+            },
+            {
+              "model_name": "A8",
+              "model_name_zh": "A8"
+            }
           ]
         },
         "suv": {
           "category_name": "SUV (Q系列)",
           "category_name_en": "SUV",
           "models": [
-            { "model_name": "Q3", "model_name_zh": "Q3" },
-            { "model_name": "Q5", "model_name_zh": "Q5" },
-            { "model_name": "Q7", "model_name_zh": "Q7" },
-            { "model_name": "Q8", "model_name_zh": "Q8" }
+            {
+              "model_name": "Q3",
+              "model_name_zh": "Q3"
+            },
+            {
+              "model_name": "Q5",
+              "model_name_zh": "Q5"
+            },
+            {
+              "model_name": "Q7",
+              "model_name_zh": "Q7"
+            },
+            {
+              "model_name": "Q8",
+              "model_name_zh": "Q8"
+            }
           ]
         },
         "ev": {
           "category_name": "纯电车型 (e-tron系列)",
           "category_name_en": "e-tron",
           "models": [
-            { "model_name": "Q4 e-tron", "model_name_zh": "Q4 e-tron" },
-            { "model_name": "Q8 e-tron", "model_name_zh": "Q8 e-tron" },
-            { "model_name": "e-tron GT", "model_name_zh": "e-tron GT" }
+            {
+              "model_name": "Q4 e-tron",
+              "model_name_zh": "Q4 e-tron"
+            },
+            {
+              "model_name": "Q8 e-tron",
+              "model_name_zh": "Q8 e-tron"
+            },
+            {
+              "model_name": "e-tron GT",
+              "model_name_zh": "e-tron GT"
+            }
           ]
         },
         "performance": {
           "category_name": "高性能车 (S/RS系列)",
           "category_name_en": "Audi Sport",
           "models": [
-            { "model_name": "S3 / RS 3", "model_name_zh": "RS 3" },
-            { "model_name": "S4 / RS 4", "model_name_zh": "RS 4" },
-            { "model_name": "S6 / RS 6", "model_name_zh": "RS 6" },
-            { "model_name": "S7 / RS 7", "model_name_zh": "RS 7" },
-            { "model_name": "RS Q8", "model_name_zh": "RS Q8" }
+            {
+              "model_name": "S3 / RS 3",
+              "model_name_zh": "RS 3"
+            },
+            {
+              "model_name": "S4 / RS 4",
+              "model_name_zh": "RS 4"
+            },
+            {
+              "model_name": "S6 / RS 6",
+              "model_name_zh": "RS 6"
+            },
+            {
+              "model_name": "S7 / RS 7",
+              "model_name_zh": "RS 7"
+            },
+            {
+              "model_name": "RS Q8",
+              "model_name_zh": "RS Q8"
+            }
           ]
         }
       }
@@ -1483,7 +1705,11 @@
           "model_name_zh": "奔驰一号",
           "production_years": "1886-1893",
           "historical_significance": "被公认为世界上第一辆现代汽车，由卡尔·本茨发明，标志着内燃机汽车时代的开启。",
-          "key_features": ["三轮设计", "单缸四冲程", "0.75马力"],
+          "key_features": [
+            "三轮设计",
+            "单缸四冲程",
+            "0.75马力"
+          ],
           "status": "博物馆藏品",
           "cover": "https://images.unsplash.com/photo-1552519507-da3b142c6e3d?q=80&w=774&auto=format&fit=crop"
         },
@@ -1492,7 +1718,11 @@
           "model_name_zh": "300 SL 鸥翼门",
           "production_years": "1954-1963",
           "historical_significance": "首款采用鸥翼门设计的量产跑车，首款搭载燃油直喷技术的民用车，被誉为“世纪跑车”。",
-          "key_features": ["鸥翼门", "机械燃油直喷", "轻量化管状车架"],
+          "key_features": [
+            "鸥翼门",
+            "机械燃油直喷",
+            "轻量化管状车架"
+          ],
           "status": "已停产",
           "cover": "https://images.unsplash.com/photo-1549399542-7e3f8b79c341?q=80&w=774&auto=format&fit=crop"
         },
@@ -1501,7 +1731,11 @@
           "model_name_zh": "S级 “虎头奔”",
           "production_years": "1991-1998",
           "historical_significance": "奠定了现代奔驰S级豪华旗舰霸主地位的经典车型，在中国以“虎头奔”之名家喻户晓。",
-          "key_features": ["双层隔音玻璃", "电吸门", "V12发动机选项"],
+          "key_features": [
+            "双层隔音玻璃",
+            "电吸门",
+            "V12发动机选项"
+          ],
           "status": "已停产",
           "cover": "https://images.unsplash.com/photo-1614200187524-dc4b892acf16?q=80&w=774&auto=format&fit=crop"
         },
@@ -1510,7 +1744,12 @@
           "model_name_zh": "初代 G级",
           "production_years": "1979-1992",
           "historical_significance": "最初为军用需求开发的硬派越野车，凭借其坚不可摧的非承载式车身和方盒子造型，演变为了经久不衰的越野图腾。",
-          "key_features": ["非承载式车身", "三把锁", "军工血统", "方盒子造型"],
+          "key_features": [
+            "非承载式车身",
+            "三把锁",
+            "军工血统",
+            "方盒子造型"
+          ],
           "status": "已停产"
         }
       ]
@@ -1522,34 +1761,82 @@
           "category_name": "轿车",
           "category_name_en": "Sedan",
           "models": [
-            { "model_name": "A-Class", "model_name_zh": "A级" },
-            { "model_name": "C-Class", "model_name_zh": "C级" },
-            { "model_name": "E-Class", "model_name_zh": "E级" },
-            { "model_name": "S-Class", "model_name_zh": "S级" }
+            {
+              "model_name": "A-Class",
+              "model_name_zh": "A级"
+            },
+            {
+              "model_name": "C-Class",
+              "model_name_zh": "C级"
+            },
+            {
+              "model_name": "E-Class",
+              "model_name_zh": "E级"
+            },
+            {
+              "model_name": "S-Class",
+              "model_name_zh": "S级"
+            }
           ]
         },
         "suv": {
           "category_name": "SUV",
           "category_name_en": "SUV",
           "models": [
-            { "model_name": "GLA", "model_name_zh": "GLA" },
-            { "model_name": "GLB", "model_name_zh": "GLB" },
-            { "model_name": "GLC", "model_name_zh": "GLC" },
-            { "model_name": "GLE", "model_name_zh": "GLE" },
-            { "model_name": "GLS", "model_name_zh": "GLS" },
-            { "model_name": "G-Class", "model_name_zh": "G级" }
+            {
+              "model_name": "GLA",
+              "model_name_zh": "GLA"
+            },
+            {
+              "model_name": "GLB",
+              "model_name_zh": "GLB"
+            },
+            {
+              "model_name": "GLC",
+              "model_name_zh": "GLC"
+            },
+            {
+              "model_name": "GLE",
+              "model_name_zh": "GLE"
+            },
+            {
+              "model_name": "GLS",
+              "model_name_zh": "GLS"
+            },
+            {
+              "model_name": "G-Class",
+              "model_name_zh": "G级"
+            }
           ]
         },
         "ev": {
           "category_name": "纯电车型 (EQ系列)",
           "category_name_en": "Mercedes-EQ",
           "models": [
-            { "model_name": "EQA", "model_name_zh": "EQA" },
-            { "model_name": "EQB", "model_name_zh": "EQB" },
-            { "model_name": "EQE", "model_name_zh": "EQE" },
-            { "model_name": "EQS", "model_name_zh": "EQS" },
-            { "model_name": "EQE SUV", "model_name_zh": "EQE SUV" },
-            { "model_name": "EQS SUV", "model_name_zh": "EQS SUV" }
+            {
+              "model_name": "EQA",
+              "model_name_zh": "EQA"
+            },
+            {
+              "model_name": "EQB",
+              "model_name_zh": "EQB"
+            },
+            {
+              "model_name": "EQE",
+              "model_name_zh": "EQE"
+            },
+            {
+              "model_name": "EQS",
+              "model_name_zh": "EQS"
+            },
+            {
+              "model_name": "EQE SUV",
+              "model_name_zh": "EQE SUV"
+            },
+            {
+              "model_name": "EQS SUV",
+              "model_name_zh": "EQS SUV"
+            }
           ]
         }
       }
@@ -1658,7 +1945,7 @@
     "region": "自主品牌",
     "brandLogo": "/brand-logos/lingke.svg",
     "description": "领克（Lynk & Co）是由吉利汽车集团与沃尔沃汽车联合开发的全球化品牌，定位年轻、潮流与智能互联，面向都市用户提供兼顾性能、设计与实用性的车型。品牌基于CMA模块化架构打造产品矩阵，并以开放生态、订阅共享以及赛道基因为特色，强调“由用户参与创造”的品牌理念。",
-    "history": "品牌于2016年发布并开启全球化布局，首款量产车型领克01于2017年上市，随后陆续推出02、03、05、06与中大型SUV 09，形成轿车与SUV的完整产品线。依托吉利与沃尔沃的联合研发体系，领克在底盘调校、主动安全与整车电子架构方面持续迭代，并通过参与国际房车锦标赛（TCR/WTCR）等赛事积累赛道技术与口碑，推动“性能与日用兼顾”的产品定位。",
+    "history": "2016年10月20日，吉利集团和沃尔沃汽车在德国柏林宣布共同合作创造领克品牌。2017年11月，领克发布旗下首个型号领克01。2019年，领克派出旗下03车型组建车队，并于同年12月获得世界房车杯（WTCR）年度总冠军。经过多年发展，领克形成了以混动产品为主力的产品线，并在2024年宣布进入纯电市场，推出了采用吉利浩瀚架构的首款纯电轿车Z10以及Z20。2024年底，吉利控股宣布极氪与领克进行战略整合，由极氪科技集团控股领克，以减少内部竞争并提升运营效率。",
     "technology": [
       {
         "title": "CMA模块化架构",
@@ -1681,18 +1968,124 @@
         "content": "在领克03等车型上引入赛道版调校与性能升级方案，强化底盘、制动与空气动力学表现。"
       }
     ],
-    "models": {
-      "轿车": [
-        "03"
-      ],
-      "SUV": [
-        "01",
-        "02",
-        "05",
-        "06",
-        "09"
-      ]
-    }
+    "models": [
+      "01",
+      "03",
+      "05",
+      "06",
+      "07",
+      "08",
+      "09",
+      "10",
+      "900",
+      "Z10",
+      "Z20"
+    ],
+    "quote": "领克（LYNK & CO）是由吉利集团和沃尔沃汽车于2016年共同合作创造的新品牌，定位为全球化、开放互联的高端汽车品牌，现由极氪科技集团控股。",
+    "introduction": "领克汽车创立于2016年，总部位于瑞典哥德堡，其“生而全球，开放互联”的品牌理念致力于为都市年轻用户提供兼顾性能、设计与实用性的智能汽车。品牌旗下多款车型与沃尔沃汽车采用技术共享形式合作研发。2024年，为推动全面战略协同，吉利控股优化了股权结构，目前极氪科技集团持有领克51%的股份，吉利汽车持有49%。",
+    "current_lineup": {
+      "description": "领克品牌当前在售的主力车型（涵盖燃油、混动与纯电）",
+      "categories": {
+        "suv": {
+          "category_name": "SUV",
+          "category_name_en": "SUV",
+          "models": [
+            {
+              "model_name": "01",
+              "model_name_zh": "01"
+            },
+            {
+              "model_name": "05",
+              "model_name_zh": "05"
+            },
+            {
+              "model_name": "06",
+              "model_name_zh": "06"
+            },
+            {
+              "model_name": "08",
+              "model_name_zh": "08"
+            },
+            {
+              "model_name": "09",
+              "model_name_zh": "09"
+            }
+          ]
+        },
+        "sedan": {
+          "category_name": "轿车",
+          "category_name_en": "Sedan",
+          "models": [
+            {
+              "model_name": "03",
+              "model_name_zh": "03"
+            },
+            {
+              "model_name": "07",
+              "model_name_zh": "07"
+            }
+          ]
+        },
+        "ev": {
+          "category_name": "纯电系列 (Z系列)",
+          "category_name_en": "EV",
+          "models": [
+            {
+              "model_name": "Z10",
+              "model_name_zh": "Z10"
+            },
+            {
+              "model_name": "Z20",
+              "model_name_zh": "Z20"
+            }
+          ]
+        },
+        "other": {
+          "category_name": "其他车型",
+          "category_name_en": "Others",
+          "models": [
+            {
+              "model_name": "10",
+              "model_name_zh": "10"
+            },
+            {
+              "model_name": "900",
+              "model_name_zh": "900"
+            }
+          ]
+        }
+      }
+    },
+    "mermaid": [
+      "%%{init: {\"flowchart\": {\"padding\": 15, \"nodeSpacing\": 20, \"rankSpacing\": 40, \"htmlLabels\": true}}}%%",
+      "graph TD",
+      "  Root[\"领克<br>Lynk & Co\"] --> SUV[\"SUV 系列\"]",
+      "  SUV --- L01(\"01<br>紧凑型SUV\")",
+      "  SUV --- L05(\"05<br>轿跑SUV\")",
+      "  SUV --- L06(\"06<br>小型SUV\")",
+      "  SUV --- L08(\"08<br>中型SUV\")",
+      "  SUV --- L09(\"09<br>中大型SUV\")",
+      "",
+      "  Root --> Sedan[\"轿车 系列\"]",
+      "  Sedan --- L03(\"03<br>紧凑型运动轿车\")",
+      "  Sedan --- L07(\"07<br>中型轿车\")",
+      "",
+      "  Root --> EV[\"纯电 Z 系列\"]",
+      "  EV --- Z10(\"Z10<br>纯电中大型轿车\")",
+      "  EV --- Z20(\"Z20<br>纯电SUV\")",
+      "",
+      "  Root --> Other[\"其他系列\"]",
+      "  Other --- L10(\"10\")",
+      "  Other --- L900(\"900\")",
+      "",
+      "  classDef rootNode fill:#0F172A,stroke:#38BDF8,stroke-width:2px,color:#F8FAFC,font-weight:bold,rx:8,ry:8,padding:24px;",
+      "  classDef groupNode fill:#312E81,stroke:#6366F1,stroke-width:2px,color:#E0E7FF,font-weight:bold,rx:6,ry:6,padding:18px;",
+      "  classDef model fill:#334155,stroke:#64748B,stroke-width:1px,color:#F1F5F9,rx:10,ry:10,padding:12px;",
+      "",
+      "  class Root rootNode;",
+      "  class SUV,Sedan,EV,Other groupNode;",
+      "  class L01,L05,L06,L08,L09,L03,L07,Z10,Z20,L10,L900 model;"
+    ]
   },
   "凯迪拉克": {
     "region": "美系车",
@@ -1741,7 +2134,11 @@
           "model_name_zh": "埃尔多拉多",
           "production_years": "1952-2002",
           "historical_significance": "美国50-60年代“火箭尾翼”设计风潮的巅峰之作，是当时美式浮夸奢华与太空时代幻想的完美结合体。",
-          "key_features": ["夸张的火箭尾翼", "巨大的镀铬保险杠", "美式奢华巅峰"],
+          "key_features": [
+            "夸张的火箭尾翼",
+            "巨大的镀铬保险杠",
+            "美式奢华巅峰"
+          ],
           "status": "已停产",
           "cover": "https://images.unsplash.com/photo-1550504787-d426463991b1?q=80&w=774&auto=format&fit=crop"
         },
@@ -1750,7 +2147,11 @@
           "model_name_zh": "弗雷特伍德",
           "production_years": "1946-1996",
           "historical_significance": "凯迪拉克的旗舰全尺寸豪华轿车，长期作为政商名流、礼车和总统座驾，是上世纪90年代在中国最著名的“大凯迪”代表。",
-          "key_features": ["超长车身", "V8后驱", "终极美式豪华"],
+          "key_features": [
+            "超长车身",
+            "V8后驱",
+            "终极美式豪华"
+          ],
           "status": "已停产"
         },
         {
@@ -1758,7 +2159,11 @@
           "model_name_zh": "CTS-V",
           "production_years": "2004-2019",
           "historical_significance": "代表凯迪拉克钻石切割设计与V系列高性能部门崛起的车型，曾在纽北赛道打破四门轿车圈速纪录。",
-          "key_features": ["大排量机械增压", "钻石切割设计", "纽北圈速纪录"],
+          "key_features": [
+            "大排量机械增压",
+            "钻石切割设计",
+            "纽北圈速纪录"
+          ],
           "status": "已停产"
         }
       ]
@@ -1770,37 +2175,76 @@
           "category_name": "轿车 (CT系列)",
           "category_name_en": "Sedan",
           "models": [
-            { "model_name": "CT4", "model_name_zh": "CT4" },
-            { "model_name": "CT5", "model_name_zh": "CT5" },
-            { "model_name": "CT6", "model_name_zh": "CT6" }
+            {
+              "model_name": "CT4",
+              "model_name_zh": "CT4"
+            },
+            {
+              "model_name": "CT5",
+              "model_name_zh": "CT5"
+            },
+            {
+              "model_name": "CT6",
+              "model_name_zh": "CT6"
+            }
           ]
         },
         "suv": {
           "category_name": "SUV (XT/全尺寸系列)",
           "category_name_en": "SUV",
           "models": [
-            { "model_name": "XT4", "model_name_zh": "XT4" },
-            { "model_name": "XT5", "model_name_zh": "XT5" },
-            { "model_name": "XT6", "model_name_zh": "XT6" },
-            { "model_name": "Escalade", "model_name_zh": "Escalade 凯雷德" }
+            {
+              "model_name": "XT4",
+              "model_name_zh": "XT4"
+            },
+            {
+              "model_name": "XT5",
+              "model_name_zh": "XT5"
+            },
+            {
+              "model_name": "XT6",
+              "model_name_zh": "XT6"
+            },
+            {
+              "model_name": "Escalade",
+              "model_name_zh": "Escalade 凯雷德"
+            }
           ]
         },
         "ev": {
           "category_name": "纯电车型 (IQ系列)",
           "category_name_en": "Electric Vehicles",
           "models": [
-            { "model_name": "LYRIQ", "model_name_zh": "LYRIQ 锐歌" },
-            { "model_name": "OPTIQ", "model_name_zh": "OPTIQ 傲歌" },
-            { "model_name": "CELESTIQ", "model_name_zh": "CELESTIQ 纯电手工旗舰" }
+            {
+              "model_name": "LYRIQ",
+              "model_name_zh": "LYRIQ 锐歌"
+            },
+            {
+              "model_name": "OPTIQ",
+              "model_name_zh": "OPTIQ 傲歌"
+            },
+            {
+              "model_name": "CELESTIQ",
+              "model_name_zh": "CELESTIQ 纯电手工旗舰"
+            }
           ]
         },
         "performance": {
           "category_name": "高性能车 (V系列)",
           "category_name_en": "V-Series",
           "models": [
-            { "model_name": "CT4-V", "model_name_zh": "CT4-V Blackwing" },
-            { "model_name": "CT5-V", "model_name_zh": "CT5-V Blackwing" },
-            { "model_name": "Escalade-V", "model_name_zh": "Escalade-V" }
+            {
+              "model_name": "CT4-V",
+              "model_name_zh": "CT4-V Blackwing"
+            },
+            {
+              "model_name": "CT5-V",
+              "model_name_zh": "CT5-V Blackwing"
+            },
+            {
+              "model_name": "Escalade-V",
+              "model_name_zh": "Escalade-V"
+            }
           ]
         }
       }
@@ -2457,23 +2901,23 @@
           "models": [
             {
               "model_name": "ES8",
-              "model_name_zh": "ES8 (旗舰六座SUV)"
+              "model_name_zh": "ES8"
             },
             {
               "model_name": "ES7",
-              "model_name_zh": "ES7 (中大型大五座SUV)"
+              "model_name_zh": "ES7"
             },
             {
               "model_name": "ES6",
-              "model_name_zh": "ES6 (全能中型SUV)"
+              "model_name_zh": "ES6"
             },
             {
               "model_name": "EC7",
-              "model_name_zh": "EC7 (旗舰轿跑SUV)"
+              "model_name_zh": "EC7"
             },
             {
               "model_name": "EC6",
-              "model_name_zh": "EC6 (智能轿跑SUV)"
+              "model_name_zh": "EC6"
             }
           ]
         },
@@ -2483,19 +2927,19 @@
           "models": [
             {
               "model_name": "ET9",
-              "model_name_zh": "ET9 (行政旗舰轿车)"
+              "model_name_zh": "ET9"
             },
             {
               "model_name": "ET7",
-              "model_name_zh": "ET7 (高端行政轿车)"
+              "model_name_zh": "ET7"
             },
             {
               "model_name": "ET5",
-              "model_name_zh": "ET5 (中型智能轿跑)"
+              "model_name_zh": "ET5"
             },
             {
               "model_name": "ET5T",
-              "model_name_zh": "ET5T (智能纯电旅行车)"
+              "model_name_zh": "ET5T"
             }
           ]
         }
@@ -2606,20 +3050,20 @@
     "history": "2021年12月2日，赛力斯汽车在重庆举行品牌发布会，正式发布AITO品牌；同年12月23日，在华为冬季旗舰新品发布会上，首款中型豪华增程SUV——问界M5正式发布，并成为首款搭载华为鸿蒙智能座舱的量产车型。2022年7月，定位中大型SUV的问界M7上市，并在次年9月推出焕新版，凭借大空间和领先的高阶智驾能力迅速爆单，成为现象级爆款。2023年12月底，被誉为“科技车皇”的全景智慧旗舰SUV问界M9正式上市，该车集成了华为多项尖端黑科技（如途灵底盘、百万像素智慧大灯、ADS 2.0/3.0无图智驾等），上市后销量持续走高，并在2024年长期霸榜中国50万级以上豪华车销量冠军，彻底奠定了问界在高端新能源市场的地位。2024年7月，赛力斯斥资25亿元人民币收购了华为持有的AITO问界相关商标及专利，标志着品牌资产向车企的进一步转移，但双方的“鸿蒙智行”联合设计与销售合作模式依然保持紧密且持续深化。",
     "technology": [
       {
-        "title": "HUAWEI ADS 3.0 高阶智驾",
+        "title": "HUAWEI ADS",
         "content": "华为高阶智能驾驶系统。全面升级至端到端（End-to-End）大模型架构，基于GOD（通用障碍物检测）和RCR（道路拓扑推理）网络，实现了“全国都能开，有路就能开”的无图高阶智驾体验，其全向防碰撞等主动安全能力在业内享有极高声誉。"
       },
       {
-        "title": "HarmonyOS 鸿蒙智能座舱",
-        "content": "被誉为“车机天花板”的智能座舱。基于华为HarmonyOS操作系统开发，实现了车机与华为手机、智能家居、穿戴设备的无缝流转与超级桌面互联，提供极致流畅的交互体验和庞大的应用生态。"
+        "title": "HarmonyOS",
+        "content": "鸿蒙智能座舱，被誉为“车机天花板”的智能座舱。基于华为HarmonyOS操作系统开发，实现了车机与华为手机、智能家居、穿戴设备的无缝流转与超级桌面互联，提供极致流畅的交互体验和庞大的应用生态。"
       },
       {
-        "title": "途灵智能底盘 (Turing Chassis)",
+        "title": "途灵智能底盘",
         "content": "华为自研的智能底盘系统。集成了多模态融合感知系统、HUAWEI DATS动态自适应扭矩系统和HUAWEI xMotion智能车身协同控制系统，通过智能算法提前预判路况并主动调节悬架阻尼与扭矩，大幅提升操控上限与乘坐舒适性。"
       },
       {
-        "title": "HUAWEI DriveONE 纯电驱增程平台",
-        "content": "基于赛力斯魔方平台与华为DriveONE三合一电驱动系统打造。支持增程与纯电双技术路线，具备高效率、长续航和静谧性，配合超高强度的笼式车身，从底层架构上保障了性能与安全。"
+        "title": "HUAWEI DriveONE",
+        "content": "纯电驱增程平台，基于赛力斯魔方平台与华为DriveONE三合一电驱动系统打造。支持增程与纯电双技术路线，具备高效率、长续航和静谧性，配合超高强度的笼式车身，从底层架构上保障了性能与安全。"
       }
     ],
     "models": [
@@ -2722,7 +3166,11 @@
           "model_name_zh": "T型车",
           "production_years": "1908-1927",
           "historical_significance": "世界上第一款通过流水线大规模生产的汽车，让汽车真正走入寻常百姓家，累计生产超1500万辆。",
-          "key_features": ["流水线生产", "价格亲民", "简单可靠"],
+          "key_features": [
+            "流水线生产",
+            "价格亲民",
+            "简单可靠"
+          ],
           "status": "已停产",
           "cover": "https://images.unsplash.com/photo-1542282088-fe8426682b8f?q=80&w=774&auto=format&fit=crop"
         }
@@ -2968,8 +3416,6 @@
       "  Denza --- D9(\"D9\")",
       "  Denza --- N7(\"N7\")",
       "  Denza --- Z9(\"Z9\")",
-      "  Fangchengbao --- Bao5(\"豹5\")",
-      "  Fangchengbao --- Bao8(\"豹8\")",
       "",
       "  classDef rootNode fill:#0F172A,stroke:#38BDF8,stroke-width:2px,color:#F8FAFC,font-weight:bold,rx:8,ry:8,padding:24px;",
       "  classDef groupNode fill:#312E81,stroke:#6366F1,stroke-width:2px,color:#E0E7FF,font-weight:bold,rx:6,ry:6,padding:18px;",
@@ -2979,16 +3425,15 @@
       "",
       "  class Root rootNode;",
       "  class UltraLuxury,Luxury,Offroad,Dynasty,Ocean groupNode;",
-      "  class Yangwang,Denza,Fangchengbao,BYDMain subBrand;",
-      "  class Han,Tang,Qin,Song,Yuan,Xia,Seagull,Dolphin,Seal06,Destroyer05,Seal06DMi,Frigate07,U8,U9,U7,D9,N7,Z9,Bao5,Bao8 model;"
+      "  class Yangwang,Denza,Fangchengbao,BYDMain subBrand;"
     ]
   },
   "沃尔沃": {
     "region": "欧洲车",
     "brandLogo": "/brand-logos/volvo.svg",
-    "quote": "沃尔沃汽车（Volvo Cars）创立于1927年，总部位于瑞典哥德堡，以安全、环保与北欧设计著称，现由吉利控股集团控股。",
-    "introduction": "沃尔沃长期坚持“以人为本”的产品哲学，在被动安全、主动安全和座舱健康等领域持续投入。品牌在豪华中型/中大型轿车与SUV市场拥有稳定影响力，并推进电动化与软件化转型，形成燃油、插混与纯电并行的产品布局。",
-    "history": "1927年沃尔沃在瑞典哥德堡推出首款车型OV4；1959年发明并推广三点式安全带，成为全球汽车安全史的重要里程碑。1999年至2010年沃尔沃汽车曾隶属福特；2010年由吉利控股集团收购。近年来沃尔沃持续推进电动化战略，并与电池及动力生态伙伴展开合作，完善全球研发与制造体系。",
+    "quote": "沃尔沃汽车（Volvo Cars）创立于1927年，总部位于瑞典哥德堡，以安全、环保与北欧设计著称。曾开发出三点式安全带等技术，现由中国浙江吉利控股集团控股。",
+    "introduction": "沃尔沃汽车由古斯塔夫·拉森和亚沙·盖布列森于1927年在瑞典哥德堡创立，其拉丁文意思为“滚动”。沃尔沃长期坚持“以人为本”的产品哲学，是汽车被动式安全领域的先锋，在主动安全和座舱健康等领域持续投入。沃尔沃汽车曾是福特汽车集团的一部分，2010年被吉利控股集团收购。目前，沃尔沃正积极推进电动化转型，与极星、领克等品牌有着紧密的合作。",
+    "history": "1927年4月14日，沃尔沃在瑞典哥德堡推出首款专为瑞典气候与地形设计的敞篷车型OV4。1935年起升格为独立公司营运。1959年，沃尔沃发明了三点式安全带并广泛使用，成为全球汽车安全史的重要里程碑。1999年，沃尔沃集团将乘用车部门“沃尔沃汽车”出售给美国福特汽车公司。2006年，沃尔沃开始在长安福特工厂生产。2010年，浙江吉利控股集团正式完成对沃尔沃轿车公司100%股权的收购。2021年10月，沃尔沃汽车在斯德哥尔摩证券交易所正式挂牌上市。在电气化方面，沃尔沃曾计划到2030年全面转型为纯电动汽车品牌，但在2024年9月因市场挑战和需求放缓宣布放弃这一激进计划，转而采取更为灵活的燃油、插混与纯电并行的产品布局。",
     "technology": [
       {
         "title": "三点式安全带",
@@ -3093,7 +3538,36 @@
           ]
         }
       }
-    }
+    },
+    "mermaid": [
+      "%%{init: {\"flowchart\": {\"padding\": 15, \"nodeSpacing\": 20, \"rankSpacing\": 40, \"htmlLabels\": true}}}%%",
+      "graph TD",
+      "  Root[\"沃尔沃<br>Volvo\"] --> Sedan[\"轿车系列\"]",
+      "  Sedan --- S60(\"S60<br>豪华中型轿车\")",
+      "  Sedan --- S90(\"S90<br>旗舰豪华轿车\")",
+      "",
+      "  Root --> SUV[\"SUV 系列\"]",
+      "  SUV --- XC40(\"XC40<br>紧凑型SUV\")",
+      "  SUV --- XC60(\"XC60<br>中型SUV\")",
+      "  SUV --- XC90(\"XC90<br>旗舰SUV\")",
+      "",
+      "  Root --> Wagon[\"旅行车系列\"]",
+      "  Wagon --- V60(\"V60<br>中型旅行车\")",
+      "  Wagon --- V90(\"V90<br>旗舰旅行车\")",
+      "",
+      "  Root --> EV[\"纯电 EX 系列\"]",
+      "  EV --- EX30(\"EX30<br>纯电紧凑SUV\")",
+      "  EV --- EX40(\"EX40<br>纯电SUV\")",
+      "  EV --- EX90(\"EX90<br>纯电旗舰SUV\")",
+      "",
+      "  classDef rootNode fill:#0F172A,stroke:#38BDF8,stroke-width:2px,color:#F8FAFC,font-weight:bold,rx:8,ry:8,padding:24px;",
+      "  classDef groupNode fill:#312E81,stroke:#6366F1,stroke-width:2px,color:#E0E7FF,font-weight:bold,rx:6,ry:6,padding:18px;",
+      "  classDef model fill:#334155,stroke:#64748B,stroke-width:1px,color:#F1F5F9,rx:10,ry:10,padding:12px;",
+      "",
+      "  class Root rootNode;",
+      "  class Sedan,SUV,Wagon,EV groupNode;",
+      "  class S60,S90,XC40,XC60,XC90,V60,V90,EX30,EX40,EX90 model;"
+    ]
   },
   "林肯": {
     "region": "美系车",
@@ -3123,7 +3597,11 @@
           "model_name_zh": "大陆",
           "production_years": "1939-2020",
           "historical_significance": "林肯最具代表性的旗舰豪华轿车，曾长期作为美国总统座驾，奠定了林肯的美式豪华标准。",
-          "key_features": ["总统座驾", "对开式车门", "美式旗舰"],
+          "key_features": [
+            "总统座驾",
+            "对开式车门",
+            "美式旗舰"
+          ],
           "status": "已停产",
           "cover": "https://images.unsplash.com/photo-1549429955-4606346b0a17?q=80&w=774&auto=format&fit=crop"
         },
@@ -3132,7 +3610,11 @@
           "model_name_zh": "城市",
           "production_years": "1980-2011",
           "historical_significance": "美国传统风格大型豪华轿车的代表，是唯一保有后轮驱动大梁式底盘的豪华轿车，广泛用于加长礼宾车市场。",
-          "key_features": ["大梁式底盘", "加长礼宾车", "宽大舒适"],
+          "key_features": [
+            "大梁式底盘",
+            "加长礼宾车",
+            "宽大舒适"
+          ],
           "status": "已停产",
           "cover": "https://images.unsplash.com/photo-1549429955-4606346b0a17?q=80&w=774&auto=format&fit=crop"
         }
@@ -3151,5 +3633,104 @@
         "领航员"
       ]
     }
+  },
+  "方程豹": {
+    "region": "自主品牌",
+    "brandLogo": "/brand-logos/fangchengbao.png",
+    "quote": "方程豹是一家中国豪华电动汽车品牌，由比亚迪汽车拥有，主要生产涵盖越野和赛道定位的SUV车型。",
+    "introduction": "方程豹汽车于2023年6月由比亚迪正式推出，定位为专业个性化的新能源品牌。与比亚迪传统经销商网络不同，方程豹采用独立直营模式。品牌主打DMO超级混动越野平台，兼顾强悍的越野通过性与城市日常通勤的低能耗，致力于为用户带来全场景极致出行体验。",
+    "history": "2023年6月，比亚迪正式宣布推出方程豹品牌；同年8月16日，方程豹发布了基于全新DMO超级混动越野平台的首款中型插电混动越野SUV——豹5，并在成都车展首次亮相。随后品牌规划了包括豹8、钛3、钛7等在内的多款插混及纯电SUV，以及名为Super 9的纯电超级跑车概念车，进一步完善其个性化和专业化的高端矩阵。",
+    "technology": [
+      {
+        "title": "DMO超级混动越野平台",
+        "content": "专为越野设计的双模架构（Dual Mode Off-road），将非承载式车身架构与越野专用混动系统深度融合，实现高性能与低能耗的平衡。"
+      },
+      {
+        "title": "云辇-P智能液压车身控制系统",
+        "content": "集成了多维感知与智能决策的底盘悬架技术，具备阻尼、刚度、高度可调能力，显著提升极端路况下的通过性与铺装路面舒适性。"
+      },
+      {
+        "title": "CTC电池底盘一体化",
+        "content": "将刀片电池与车架大梁深度集成，不仅提升了整车扭转刚度，也优化了空间利用率并降低了车辆质心。"
+      }
+    ],
+    "models": {
+      "硬派越野 (豹系列)": [
+        "豹5",
+        "豹8"
+      ],
+      "都市越野 (钛系列)": [
+        "钛3",
+        "钛7"
+      ],
+      "跑车": [
+        "Super 9"
+      ]
+    },
+    "current_lineup": {
+      "description": "方程豹当前主力越野产品线",
+      "categories": {
+        "bao_series": {
+          "category_name": "硬派越野 (豹系列)",
+          "category_name_en": "Bao Series off-road",
+          "models": [
+            {
+              "model_name": "豹5",
+              "model_name_zh": "豹5"
+            },
+            {
+              "model_name": "豹8",
+              "model_name_zh": "豹8"
+            }
+          ]
+        },
+        "ti_series": {
+          "category_name": "SUV (钛系列)",
+          "category_name_en": "Ti Series SUV",
+          "models": [
+            {
+              "model_name": "钛3",
+              "model_name_zh": "钛3"
+            },
+            {
+              "model_name": "钛7",
+              "model_name_zh": "钛7"
+            }
+          ]
+        },
+        "sports_cars": {
+          "category_name": "跑车概念车",
+          "category_name_en": "Sports Cars",
+          "models": [
+            {
+              "model_name": "Super 9",
+              "model_name_zh": "Super 9"
+            }
+          ]
+        }
+      }
+    },
+    "mermaid": [
+      "%%{init: {\"flowchart\": {\"padding\": 15, \"nodeSpacing\": 20, \"rankSpacing\": 40, \"htmlLabels\": true}}}%%",
+      "graph TD",
+      "  Root[\"方程豹<br>Fang Cheng Bao\"] --> Bao[\"硬派越野SUV<br>豹系列\"]",
+      "  Bao --- Bao5(\"豹5<br>中型插混越野SUV\")",
+      "  Bao --- Bao8(\"豹8<br>大型插混越野SUV\")",
+      "",
+      "  Root --> Ti[\"都市越野SUV<br>钛系列\"]",
+      "  Ti --- Ti3(\"钛3<br>紧凑型纯电越野SUV\")",
+      "  Ti --- Ti7(\"钛7<br>中型插混越野SUV\")",
+      "",
+      "  Root --> Concept[\"概念跑车\"]",
+      "  Concept --- Super9(\"Super 9<br>纯电超跑\")",
+      "",
+      "  classDef rootNode fill:#0F172A,stroke:#38BDF8,stroke-width:2px,color:#F8FAFC,font-weight:bold,rx:8,ry:8,padding:24px;",
+      "  classDef groupNode fill:#312E81,stroke:#6366F1,stroke-width:2px,color:#E0E7FF,font-weight:bold,rx:6,ry:6,padding:18px;",
+      "  classDef model fill:#334155,stroke:#64748B,stroke-width:1px,color:#F1F5F9,rx:10,ry:10,padding:12px;",
+      "",
+      "  class Root rootNode;",
+      "  class Bao,Ti,Concept groupNode;",
+      "  class Bao5,Bao8,Ti3,Ti7,Super9 model;"
+    ]
   }
 }

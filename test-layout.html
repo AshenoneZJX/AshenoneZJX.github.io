@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+body { font-family: sans-serif; }
+.mermaid-container {
+  width: 800px;
+  overflow-x: auto;
+  border: 1px solid red;
+  padding: 20px;
+  box-sizing: border-box;
+}
+.mermaid {
+  display: flex;
+  justify-content: center;
+  min-width: 100%;
+  width: max-content;
+  background: #eee;
+  margin: 0;
+}
+svg {
+  background: rgba(0,0,255,0.5);
+  height: 100px;
+  display: block;
+}
+</style>
+</head>
+<body>
+  <h3>Small SVG (600px)</h3>
+  <div class="mermaid-container">
+    <div class="mermaid">
+      <svg width="600" viewBox="0 0 600 100"></svg>
+    </div>
+  </div>
+
+  <h3>Large SVG (1200px)</h3>
+  <div class="mermaid-container">
+    <div class="mermaid">
+      <svg width="1200" viewBox="0 0 1200 100"></svg>
+    </div>
+  </div>
+</body>
+</html>

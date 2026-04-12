@@ -1615,5 +1615,165 @@
       "transmission": "9G-TRONIC 9速自动变速箱",
       "chassis": "前双叉臂独立悬架、后整体桥非独立悬架，前置全时四驱 (带前/中/后三把机械差速锁)，非承载式车身"
     }
+  },
+  {
+    "id": 225,
+    "title": "蔚来 ES6",
+    "brand": "蔚来",
+    "sizeClass": "中型",
+    "images": [
+      "https://p3.dcarimg.com/img/motor-mis-img/DCP_0f2558345173ec19486255793b70e31d~2508x0.webp",
+      "https://p3.dcarimg.com/img/motor-mis-img/DCP_ec912a4cb23b4066b8e1d93b8071ac84~2508x0.webp",
+      "https://p3.dcarimg.com/img/motor-mis-img/DCP_281926b14ab0ff191320160c13001dc1~2508x0.webp"
+    ],
+    "energy": "纯电",
+    "body": "SUV",
+    "intro": "蔚来 ES6 是一款全能中型智能电动SUV。基于蔚来第二代技术平台（NT2.0）打造，标配双电机四驱系统与Aquila蔚来超感系统，提供75kWh与100kWh电池包选择，支持换电模式。ES6 以其宽适的空间、高品质的内饰与出色的操控性能，成为蔚来品牌最畅销的家用SUV。",
+    "specs": {
+      "dimensions": "长4854mm × 宽1995mm × 高1703mm，轴距2915mm，整备质量约2300kg",
+      "engine": "前150kW感应异步 / 后210kW永磁同步双电机，综合功率360kW，最大扭矩700N·m",
+      "transmission": "单速固定齿比",
+      "chassis": "前双叉臂、后多连杆独立悬架，标配CDC动态悬架阻尼控制系统"
+    }
+  },
+  {
+    "id": 226,
+    "title": "蔚来 ET5",
+    "brand": "蔚来",
+    "sizeClass": "中型",
+    "images": [
+      "https://p3.dcarimg.com/img/motor-mis-img/DCP_5ebe10dbf591c1649ee65a1766d0848f~2508x0.webp",
+      "https://p3.dcarimg.com/img/motor-mis-img/DCP_315bd7c7d3747e04bdbb134b5e122e96~2508x0.webp",
+      "https://p3.dcarimg.com/img/motor-mis-img/DCP_36a0148e350722f1a100bfdf6a7f4d29~2508x0.webp"
+    ],
+    "energy": "纯电",
+    "body": "轿车",
+    "intro": "蔚来 ET5 是一款中型智能纯电轿跑。拥有极具运动感的低趴溜背造型、贯穿式心跳尾灯与全景玻璃天幕。搭载蔚来NT2.0平台，标配双电机四驱，零百加速仅需4.0秒。同时配备PanoCinema全景数字座舱与NAD自动驾驶辅助系统，深受年轻用户的喜爱。",
+    "specs": {
+      "dimensions": "长4790mm × 宽1960mm × 高1499mm，轴距2888mm，整备质量约2145kg",
+      "engine": "前150kW感应异步 / 后210kW永磁同步双电机，综合功率360kW，最大扭矩700N·m",
+      "transmission": "单速固定齿比",
+      "chassis": "前五连杆、后五连杆独立悬架，前后重量配比50:50"
+    }
+  },
+  {
+    "id": 228,
+    "title": "蔚来 ET5T",
+    "brand": "蔚来",
+    "sizeClass": "中型",
+    "images": [
+      "https://p3.dcarimg.com/img/motor-mis-img/DCP_c462f8cd5847706c02e0c8a6a52f5474~2508x0.webp",
+      "https://p3.dcarimg.com/img/motor-mis-img/DCP_b852b5665da308ead7d5e20312f04540~2508x0.webp",
+      "https://p3.dcarimg.com/img/motor-mis-img/DCP_93fc2e6d680436cd5d945dd94aec2a46~2508x0.webp"
+    ],
+    "energy": "纯电",
+    "body": "旅行车",
+    "intro": "蔚来 ET5T 是一款全球首发的智能纯电旅行车。基于 ET5 轿车打造，继承了蔚来 NT2.0 平台的强大性能与智能基因，并拥有旅行车专属的绝美比例和实用空间。不仅保留了双电机四驱的极致性能，还提供了更宽裕的后备箱装载能力，是追求生活品质与个性的用户的理想之选。",
+    "specs": {
+      "dimensions": "长4790mm × 宽1960mm × 高1499mm，轴距2888mm，整备质量约2185kg",
+      "engine": "前150kW感应异步 / 后210kW永磁同步双电机，综合功率360kW，最大扭矩700N·m",
+      "transmission": "单速固定齿比",
+      "chassis": "前五连杆、后五连杆独立悬架，前后重量配比50:50"
+    }
+  },
+  {
+    "id": 229,
+    "title": "领克 08",
+    "brand": "领克",
+    "sizeClass": "中型",
+    "images": [
+      "https://p3.dcarimg.com/img/motor-mis-img/DCP_d85e34cbc6c69d70d7fb313c8a189873~2508x0.webp",
+      "https://p3.dcarimg.com/img/motor-mis-img/DCP_684a766ba338addca9317d009468066c~2508x0.webp",
+      "https://p3.dcarimg.com/img/motor-mis-img/DCP_a4b954190937af39c524924eb78725fe~2508x0.webp"
+    ],
+    "energy": "混动",
+    "body": "SUV",
+    "intro": "领克 08 是一款中型插电混动豪华SUV，首发搭载领克EM-P超级增程电动方案与魅族Flyme Auto车机系统。基于CMA Evo架构打造，拥有前卫的都市对立美学设计，提供超长的综合续航表现与优异的智能化体验，是领克品牌当前在SUV市场的销量担当。",
+    "specs": {
+      "dimensions": "长4820mm × 宽1915mm × 高1685mm，轴距2848mm，整备质量约1988kg",
+      "engine": "1.5T四缸混动专用发动机 + 3DHT Evo双电机/三电机电驱系统",
+      "transmission": "3挡DHT",
+      "chassis": "前麦弗逊、后多连杆独立悬架，前置前驱/四驱"
+    }
+  },
+  {
+    "id": 230,
+    "title": "领克 07",
+    "brand": "领克",
+    "sizeClass": "中型",
+    "images": [
+      "https://p3.dcarimg.com/img/motor-mis-img/DCP_e39150e2a92198faa36db5ef99799e39~2508x0.webp",
+      "https://p3.dcarimg.com/img/motor-mis-img/DCP_ff9a8b10882afb3a3ee5b718e7189cd2~2508x0.webp",
+      "https://p3.dcarimg.com/img/motor-mis-img/DCP_ca4203e515f0e4dac302b05a3fd7a8ee~2508x0.webp"
+    ],
+    "energy": "混动",
+    "body": "轿车",
+    "intro": "领克 07 是领克品牌的重磅中型插电混动轿车。与08同属CMA Evo架构，同样搭载EM-P超级增程系统与Flyme Auto智能座舱。它以极致的原创设计、宽适的空间布局和越级的音响体验，满足现代家庭对豪华舒适和智能出行的全方位需求。",
+    "specs": {
+      "dimensions": "长4827mm × 宽1900mm × 高1480mm，轴距2843mm，整备质量约1915kg",
+      "engine": "1.5T四缸混动专用发动机 + 3DHT Evo双电机电驱系统",
+      "transmission": "3挡DHT",
+      "chassis": "前麦弗逊、后多连杆独立悬架，前置前驱"
+    }
+  },
+  {
+    "id": 231,
+    "title": "领克 Z10",
+    "brand": "领克",
+    "sizeClass": "中大型",
+    "images": [
+      "https://p3.dcarimg.com/img/motor-mis-img/94b746cddad9389fe7d2f2f51aed4740~2508x0.webp",
+      "https://p3.dcarimg.com/img/motor-mis-img/4b2f42662208329fd22cd36b78453e82~2508x0.webp",
+      "https://p3.dcarimg.com/img/motor-mis-img/a305dc5783bbe841a9e84a18a59280e0~2508x0.webp"
+    ],
+    "energy": "纯电",
+    "body": "轿跑",
+    "intro": "领克 Z10 是领克品牌进入纯电市场的首款旗舰中大型纯电轿车。基于吉利浩瀚（SEA）架构打造，采用极具科技感和空气动力学优化的先锋设计。提供800V高压平台选项，融合了魅族车机系统与高阶智能驾驶辅助，标志着领克正式开启全面电气化新篇章。",
+    "specs": {
+      "dimensions": "长5028mm × 宽1966mm × 高1468mm，轴距3005mm，整备质量约2275kg",
+      "engine": "后置单电机(200kW/310kW) / 前后双电机四驱(前270kW+后310kW)",
+      "transmission": "单速固定齿比",
+      "chassis": "前双叉臂、后多连杆独立悬架，高配提供双腔空悬+CDC阻尼控制"
+    }
+  },
+  {
+    "id": 232,
+    "title": "方程豹 豹5",
+    "brand": "方程豹",
+    "sizeClass": "中型",
+    "images": [
+      "https://p3.dcarimg.com/img/motor-mis-img/DCP_6db81602b1fd5c3edda5947f239cc264~2508x0.webp",
+      "https://p3.dcarimg.com/img/motor-mis-img/DCP_ce5f85a75c1b87cad02e01c79470e589~2508x0.webp",
+      "https://p3.dcarimg.com/img/motor-mis-img/DCP_7ac0d95d73ed84e6c350b1ded79acf60~2508x0.webp"
+    ],
+    "energy": "混动",
+    "body": "SUV",
+    "intro": "方程豹 豹5 是比亚迪旗下专业个性化品牌“方程豹”的首款车型，定位超级混动硬派SUV。基于全新的DMO超级混动越野平台打造，搭载云辇-P智能液压车身控制系统，兼顾了硬派越野的强大通过性与城市日常通勤的舒适性与低能耗。",
+    "specs": {
+      "dimensions": "长4890mm × 宽1970mm × 高1920mm，轴距2800mm",
+      "engine": "1.5T高功率混动专用发动机 + 前后双电机四驱，系统综合功率505kW，峰值扭矩760N·m",
+      "transmission": "E-CVT无级变速",
+      "chassis": "前后双叉臂独立悬架，非承载式车身，搭载云辇-P智能液压车身控制系统"
+    }
+  },
+  {
+    "id": 233,
+    "title": "钛7",
+    "brand": "方程豹",
+    "sizeClass": "中型",
+    "images": [
+      "https://p3.dcarimg.com/img/motor-mis-img/DCP_341b82c548a2d2208a646ec1ebd7679d~2508x0.webp",
+      "https://p3.dcarimg.com/img/motor-mis-img/DCP_fc9f4c47d77c8c0edc160eabc3a69f9d~2508x0.webp",
+      "https://p3.dcarimg.com/img/motor-mis-img/DCP_35b6b836a88d9a52416cb661cfa3badb~2508x0.webp"
+    ],
+    "energy": "纯电 / 混动",
+    "body": "SUV",
+    "intro": "方程豹钛7定位为中型插电混动/纯电都市越野SUV。相较于主打硬派越野的“豹”系列，全新的钛系列更偏向于城市生活场景与科技出行。钛7不仅拥有硬派与科技交织的外观设计，在舒适性与智能化方面也实现了全面进阶，满足用户在都市穿梭与轻度户外越野间的无缝切换。",
+    "specs": {
+      "dimensions": "长4830mm × 宽1920mm × 高1685mm，轴距2820mm（预估参数）",
+      "engine": "DMO插电混动系统 / 纯电驱动",
+      "transmission": "E-CVT无级变速 / 单速固定齿比",
+      "chassis": "前双叉臂、后多连杆独立悬架，兼顾城市舒适与轻越野路况"
+    }
   }
 ]

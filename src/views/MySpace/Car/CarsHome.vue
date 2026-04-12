@@ -125,7 +125,7 @@ export default {
   min-width: 0;
   display: flex;
   flex-direction: column;
-  gap: 0; /* 移除外层 gap，通过内部元素控制间距 */
+  gap: 20px; /* 恢复 gap，因为我们移除了多余的嵌套层 */
 }
 
 .chart-block {
@@ -133,114 +133,43 @@ export default {
   background: var(--c-bg-l2);
   border: 1px solid var(--c-border-default);
   border-radius: 10px;
-  padding: 12px;
   box-sizing: border-box;
   box-shadow: 0 4px 15px var(--c-shadow-medium);
-}
-.chart-block-head {
-  margin-bottom: 0;
-  border-bottom-left-radius: 0;
-  border-bottom-right-radius: 0;
-  border-bottom: none;
-  padding: 0;
-}
-.chart-container {
-  width: 100%;
-  box-sizing: border-box;
-  margin-bottom: 22px;
-}
-.chart-container-main {
-  background: var(--c-bg-l2);
-  border: 1px solid var(--c-border-default);
-  border-top: none;
-  border-radius: 0 0 10px 10px;
-  padding-bottom: 12px;
-  margin-top: 0;
-  box-shadow: 0 4px 15px var(--c-shadow-medium);
+  display: flex;
+  flex-direction: column;
 }
 
 .charts-row {
   display: flex;
-  gap: 22px;
+  gap: 20px;
   width: 100%;
-  margin-bottom: 22px;
 }
 
-.charts-toolbar {
-  margin-bottom: 0;
-  position: relative;
-  border-bottom: 1px solid var(--c-border-default);
-  padding: 12px 16px;
-  min-height: auto;
-  display: flex;
-  align-items: center;
-  box-sizing: border-box;
-}
-.mobile-toggle-bar {
-  display: none;
-}
-.toolbar-controls {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  flex-wrap: wrap;
-  width: 100%;
-}
-.charts-toolbar label { color: var(--c-text-label); font-size: 13px; }
-.charts-toolbar select {
-  background: transparent;
-  color: var(--c-text-body-alt);
-  border: 1px solid var(--c-border-hover);
-  padding: 0 10px;
-  border-radius: 6px;
-  height: 32px;
-  width: auto;
-  box-sizing: border-box;
-}
-.charts-toolbar select:hover {
-  border-color: var(--c-primary);
-}
-.charts-toolbar select:focus,
-.charts-toolbar select:focus-visible {
-  outline: none;
-  border-color: var(--c-primary);
-}
-.sort-btn {
-  background: transparent;
-  border: 1px solid var(--c-border-hover);
-  color: var(--c-text-body-alt);
-  padding: 0 12px;
-  border-radius: 6px;
-  cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  height: 32px;
-  width: auto;
-  box-sizing: border-box;
-}
-.sort-btn:hover {
-  background: var(--c-primary-alpha-10);
-  color: var(--c-text-emphasis);
-  border-color: var(--c-primary);
-}
 .info-browse :deep(.charts-toolbar) {
   margin-bottom: 0;
   position: relative;
   border-bottom: 1px solid var(--c-border-default);
-  padding: 8px 16px;
+  padding: 4px 12px;
   min-height: auto;
   display: flex;
   align-items: center;
   box-sizing: border-box;
 }
+
 .info-browse :deep(.charts-toolbar .toolbar-controls) {
   display: flex;
   align-items: center;
   gap: 8px;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
+  overflow-x: auto;
   width: 100%;
+  scrollbar-width: none;
 }
+
+.info-browse :deep(.charts-toolbar .toolbar-controls::-webkit-scrollbar) {
+  display: none;
+}
+
 .info-browse :deep(.charts-toolbar button) {
   background: transparent;
   border: 1px solid var(--c-border-hover);
@@ -255,19 +184,23 @@ export default {
   width: auto;
   box-sizing: border-box;
 }
+
 .info-browse :deep(.charts-toolbar button:hover) {
   background: var(--c-primary-alpha-10);
   color: var(--c-text-emphasis);
   border-color: var(--c-primary);
 }
+
 .info-browse :deep(.charts-toolbar .tab-btn.active) {
   background: var(--c-primary-alpha-20);
   color: var(--c-text-title);
   border-color: var(--c-primary);
   font-weight: 500;
 }
+
 .filter-btn { background: transparent; border: none; color: var(--c-text-body-alt); padding: 6px 10px; border-radius: 6px; cursor: pointer; }
 .filter-btn:hover { background: var(--c-primary-alpha-10); color: var(--c-text-emphasis); }
+
 .charts-toolbar { position: relative; }
 .drawer-close {
   background: transparent;
@@ -373,59 +306,6 @@ export default {
   .info-browse {
     padding: 2px;
     margin: 0;
-  }
-
-  .charts-toolbar.use-collapse .mobile-toggle-bar {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    padding: 10px 0;
-  }
-  .menu-toggle-btn {
-    background: var(--c-primary-alpha-10);
-    border: 1px solid var(--c-border-hover);
-    color: var(--c-primary);
-    padding: 6px 14px;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 14px;
-  }
-  .charts-toolbar.use-collapse .toolbar-controls {
-    display: none;
-  }
-  .charts-toolbar.use-collapse.is-expanded .toolbar-controls {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 15px;
-    padding-top: 10px;
-    position: absolute;
-    top: 100%;
-    margin-top: -15px;
-    left: 0;
-    width: fit-content;
-    z-index: 999;
-    background:
-      linear-gradient(145deg, rgba(255, 255, 255, 0.22), rgba(255, 255, 255, 0.06)),
-      linear-gradient(180deg, rgba(34, 40, 52, 0.76), rgba(26, 31, 42, 0.64));
-    backdrop-filter: blur(24px) saturate(180%);
-    -webkit-backdrop-filter: blur(24px) saturate(180%);
-    padding: 15px;
-    border: 1px solid rgba(255, 255, 255, 0.22);
-    border-radius: 6px;
-    box-shadow:
-      inset 0 1px 0 rgba(255, 255, 255, 0.22),
-      0 12px 36px rgba(0, 0, 0, 0.35);
-    box-sizing: border-box;
-  }
-  /* 让 select 和 button 在移动端占满宽度或更易点击 */
-  .charts-toolbar select {
-    width: 100%;
-    max-width: 200px;
-  }
-  .sort-btn {
-    width: 100%;
-    max-width: 200px;
   }
 }
 </style>

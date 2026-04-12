@@ -440,33 +440,14 @@ export default {
         const b = c.brand || getBrand(c.title)
         if (b === brand) {
           const model = this.modelNameOf(c)
-          if (model === name || model.includes(name) || name.includes(model)) {
-            // 防御性判断：如果名字太短且只是被包含（如"炮"被"山海炮"包含），则拒绝匹配
-            // 但允许"长城炮"与"炮"的匹配
-            if (model !== name && (model === '炮' || name === '炮')) {
-              if (name !== '长城炮' && model !== '长城炮') {
-                continue
-              }
-            }
-            // 防御性判断：防止 CT5-V 匹配到 CT5，或者 RS 6 匹配到 A6 之类的（不过A和RS不同，不会匹配）
-            if (model !== name && name.includes('-V') && !model.includes('-V')) {
-              continue
-            }
+          if (model === name) {
             return { id: c.id, isSpecial: false }
           }
           if (c.specialEdition) {
             const specBrand = c.specialEdition.brand || b
             if (specBrand === brand) {
               const specModel = this.modelNameOf(c.specialEdition)
-              if (specModel === name || specModel.includes(name) || name.includes(specModel)) {
-                if (specModel !== name && (specModel === '炮' || name === '炮')) {
-                  if (name !== '长城炮' && specModel !== '长城炮') {
-                    continue
-                  }
-                }
-                if (specModel !== name && name.includes('-V') && !specModel.includes('-V')) {
-                  continue
-                }
+              if (specModel === name) {
                 return { id: c.id, isSpecial: true }
               }
             }
@@ -697,6 +678,10 @@ h2, h3, h4 {
 }
 
 .tech-card {
+  flex: 0 0 calc(50% - 10px); /* 减去 gap 的一半 */
+  max-width: calc(50% - 10px); /* 严格限制最大宽度，防止被内部长文本撑开 */
+  min-width: 0; /* 允许 flex 子元素收缩小于内容宽度，解决省略号失效问题 */
+  box-sizing: border-box;
   background: #16191C;
   border-radius: 8px;
   padding: 8px;
@@ -713,6 +698,10 @@ h2, h3, h4 {
   display: inline-block;
   position: relative;
   z-index: 1;
+  max-width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .tech-header::after {
@@ -818,8 +807,8 @@ h2, h3, h4 {
 }
 
 .tech-cards-wrapper {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr); /* 双列布局 */
+  display: flex;
+  flex-wrap: wrap;
   gap: 20px;
 }
 
@@ -879,9 +868,11 @@ h2, h3, h4 {
 
 .mermaid {
   background: transparent;
-  min-width: min-content; /* 保证内部内容宽度撑开 */
-  display: block; /* 取消 flex，完全交给 svg 自带尺寸 */
-  margin: 0 auto; /* 没超宽时居中 */
+  display: flex;
+  justify-content: center;
+  min-width: 100%;
+  width: max-content;
+  margin: 0;
 }
 
 .mermaid ::v-deep svg {
