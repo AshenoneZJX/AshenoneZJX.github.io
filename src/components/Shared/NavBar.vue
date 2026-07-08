@@ -127,9 +127,9 @@ export default {
   left: 0;
   width: 100%;
   height: 80px;
-  background-color: #1A1A1B;
-  -webkit-backdrop-filter: blur(6px);
-  backdrop-filter: blur(6px);
+  background-color: rgba(26, 26, 27, 0.88);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
   z-index: 1200;
   box-shadow: none;
   border-bottom: 1px solid var(--c-border-default);
@@ -254,10 +254,13 @@ export default {
 
 .mobile-menu {
   display: none;
-  background-color: var(--c-bg-l0);
+  background-color: rgba(26, 26, 27, 0.94);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
   flex-direction: column;
   padding: 20px 0;
   z-index: 999;
+  border-bottom: 1px solid var(--c-border-default);
 }
 .mobile-menu.compact { top: 30px; }
 

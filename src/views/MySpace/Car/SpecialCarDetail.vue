@@ -1,7 +1,6 @@
 <template>
   <div class="container page-car-detail">
     <div v-if="car" class="detail-layout">
-      <!-- Left Column: 70% -->
       <div class="left-section">
         <transition :name="slideDirection === 'next' ? 'slide-next' : 'slide-prev'">
           <img
@@ -10,6 +9,7 @@
             class="gallery-image"
             :src="images[currentImageIndex]"
             :alt="modelName || '车辆图片'"
+            referrerpolicy="no-referrer"
           />
         </transition>
         <button
@@ -39,18 +39,16 @@
         </div>
       </div>
 
-      <!-- Right Column: 30% -->
       <div class="right-section">
-        <!-- Upper Part: Title, Back Button, Tags, Intro -->
         <div class="info-upper">
           <div class="section-header">
             <div class="title-with-logo">
               <h2>
                 <div
-                  class="brand-hover-wrapper"
                   v-if="brandName"
-                  @mouseenter="showBrandCard = true"
-                  @mouseleave="showBrandCard = false"
+                  class="brand-hover-wrapper"
+                  @mouseenter="showBrandTooltip = true"
+                  @mouseleave="showBrandTooltip = false"
                 >
                   <router-link
                     class="brand-link"
@@ -61,49 +59,38 @@
                       :class="['brand-logo', { 'brand-logo-xiaomi': brandName === '小米' }]"
                       :src="brandLogoFor"
                       :alt="car.brand || '品牌'"
+                      class="brand-logo-img"
                     />
+                    <span class="brand-name-text">{{ brandName }}</span>
                   </router-link>
-                  <div v-if="showBrandCard" class="brand-hover-card" role="tooltip" ref="hoverCard">
-                    <img
-                      v-if="brandLogoFor"
-                      class="hover-card-logo"
-                      :src="brandLogoFor"
-                      :alt="brandName"
-                      ref="hoverLogo"
-                    />
-                    <div class="hover-card-text" ref="hoverText">
-                      <div class="hover-section-desc" ref="hoverDescSection">
-                        <p
-                          v-if="brandInfo && (brandInfo.quote || brandInfo.description)"
-                          class="hover-card-desc"
-                          ref="hoverDesc"
-                          :class="{ clamp: descClamp > 0 }"
-                          :style="descClampStyle"
-                        >{{ brandInfo.quote || brandInfo.description }}</p>
+                  <transition name="fade">
+                    <div v-if="showBrandTooltip && brandInfo" class="brand-tooltip" @click.stop>
+                      <div class="tooltip-header">
+                        <img v-if="brandInfo.brandLogo" :src="brandInfo.brandLogo" :alt="brandName" class="tooltip-logo" />
+                        <span class="tooltip-brand-name">{{ brandName }}</span>
                       </div>
-                      <div class="hover-section-models" ref="hoverModelsSection">
-                        <p
-                          v-if="modelsText"
-                          class="hover-card-models"
-                          ref="hoverModels"
-                          :class="{ clamp: modelsClamp > 0 }"
-                          :style="modelsClampStyle"
-                        >代表车型：{{ modelsText }}</p>
+                      <p v-if="brandIntroText" class="tooltip-intro">{{ brandIntroText }}</p>
+                      <div v-if="brandInfo && brandInfo.models && brandInfo.models.length" class="tooltip-models">
+                        <span class="tooltip-models-label">代表车型</span>
+                        <div class="tooltip-models-tags">
+                          <span v-for="model in brandInfo.models.slice(0, 5)" :key="model" class="model-tag">{{ model }}</span>
+                          <span v-if="brandInfo.models.length > 5" class="model-tag ellipsis-tag">...</span>
+                        </div>
                       </div>
                     </div>
-                  </div>
+                  </transition>
                 </div>
                 <span class="model-name">{{ modelName }}</span>
               </h2>
             </div>
             <div class="actions">
-              <button  class="back-btn" @click="$router.push(`/mySpace/cars/${baseCarId}`)">
+              <button class="back-btn" @click="$router.push(`/mySpace/cars/${baseCarId}`)">
                 <img src="@/assets/images/fanhui.svg" class="back-icon" alt="返回" />
                 <span class="back-text">返回主款</span>
               </button>
             </div>
           </div>
-          
+
           <div class="meta-block">
             <div class="tag-group">
               <span class="tag tag-energy" v-for="e in energyList" :key="e">{{ e }}</span>
@@ -111,37 +98,41 @@
               <span class="tag tag-size" v-if="car.sizeClass">{{ car.sizeClass }}</span>
             </div>
           </div>
-          
+
           <p class="intro-text">{{ introText }}</p>
         </div>
 
-        <!-- Lower Part: Specs -->
         <div class="info-lower">
-          <div class="specs-hint">提示：点击参数名称可查看介绍详情</div>
+          <div class="specs-hint">提示：点击参数行可查看介绍详情</div>
           <div class="specs specs-box">
             <div class="spec-grid">
-              <div class="spec-row">
-                <span class="row-label" @click="goBasics('size')">车身尺寸</span>
+              <div class="spec-row" role="link" tabindex="0" @click="goBasics('size')" @keydown.enter.prevent="goBasics('size')" @keydown.space.prevent="goBasics('size')">
+                <span class="row-label">车身尺寸</span>
                 <span class="row-value">{{ bodySpecParsed.size }}</span>
               </div>
-              <div class="spec-row">
-                <span class="row-label" @click="goBasics('wheelbase')">轴距</span>
+              <div class="spec-divider" aria-hidden="true"></div>
+              <div class="spec-row" role="link" tabindex="0" @click="goBasics('wheelbase')" @keydown.enter.prevent="goBasics('wheelbase')" @keydown.space.prevent="goBasics('wheelbase')">
+                <span class="row-label">轴距</span>
                 <span class="row-value">{{ bodySpecParsed.wheelbase }}</span>
               </div>
-              <div class="spec-row">
-                <span class="row-label" @click="goBasics('weight')">车重</span>
+              <div class="spec-divider" aria-hidden="true"></div>
+              <div class="spec-row" role="link" tabindex="0" @click="goBasics('weight')" @keydown.enter.prevent="goBasics('weight')" @keydown.space.prevent="goBasics('weight')">
+                <span class="row-label">车重</span>
                 <span class="row-value">{{ bodySpecParsed.weight }}</span>
               </div>
-              <div class="spec-row">
-                <span class="row-label" @click="goBasics('engine')">发动机</span>
+              <div class="spec-divider" aria-hidden="true"></div>
+              <div class="spec-row" role="link" tabindex="0" @click="goBasics('engine')" @keydown.enter.prevent="goBasics('engine')" @keydown.space.prevent="goBasics('engine')">
+                <span class="row-label">发动机</span>
                 <span class="row-value">{{ specs.engine }}</span>
               </div>
-              <div class="spec-row">
-                <span class="row-label" @click="goBasics('transmission')">变速箱</span>
+              <div class="spec-divider" aria-hidden="true"></div>
+              <div class="spec-row" role="link" tabindex="0" @click="goBasics('transmission')" @keydown.enter.prevent="goBasics('transmission')" @keydown.space.prevent="goBasics('transmission')">
+                <span class="row-label">变速箱</span>
                 <span class="row-value">{{ specs.transmission }}</span>
               </div>
-              <div class="spec-row">
-                <span class="row-label" @click="goBasics('chassis')">底盘</span>
+              <div class="spec-divider" aria-hidden="true"></div>
+              <div class="spec-row" role="link" tabindex="0" @click="goBasics('chassis')" @keydown.enter.prevent="goBasics('chassis')" @keydown.space.prevent="goBasics('chassis')">
+                <span class="row-label">底盘</span>
                 <span class="row-value">{{ specs.chassis }}</span>
               </div>
             </div>
@@ -149,7 +140,6 @@
         </div>
       </div>
 
-      <!-- Mobile Specs Drawer (Keep for compatibility) -->
       <button class="fab-specs" aria-label="查看参数" @click="toggleSpecs">参数</button>
 
       <transition name="fade">
@@ -161,30 +151,35 @@
             <span>车辆参数</span>
           </div>
           <div class="specs specs-box-mobile">
-            <div class="specs-hint">提示：点击参数名称可查看介绍详情</div>
+            <div class="specs-hint">提示：点击参数行可查看介绍详情</div>
             <div class="spec-grid">
-               <div class="spec-row">
-                <span class="row-label" @click="goBasics('size')">车身尺寸</span>
+              <div class="spec-row" role="link" tabindex="0" @click="goBasics('size')" @keydown.enter.prevent="goBasics('size')" @keydown.space.prevent="goBasics('size')">
+                <span class="row-label">车身尺寸</span>
                 <span class="row-value">{{ bodySpecParsed.size }}</span>
               </div>
-              <div class="spec-row">
-                <span class="row-label" @click="goBasics('wheelbase')">轴距</span>
+              <div class="spec-divider" aria-hidden="true"></div>
+              <div class="spec-row" role="link" tabindex="0" @click="goBasics('wheelbase')" @keydown.enter.prevent="goBasics('wheelbase')" @keydown.space.prevent="goBasics('wheelbase')">
+                <span class="row-label">轴距</span>
                 <span class="row-value">{{ bodySpecParsed.wheelbase }}</span>
               </div>
-              <div class="spec-row">
-                <span class="row-label" @click="goBasics('weight')">车重</span>
+              <div class="spec-divider" aria-hidden="true"></div>
+              <div class="spec-row" role="link" tabindex="0" @click="goBasics('weight')" @keydown.enter.prevent="goBasics('weight')" @keydown.space.prevent="goBasics('weight')">
+                <span class="row-label">车重</span>
                 <span class="row-value">{{ bodySpecParsed.weight }}</span>
               </div>
-              <div class="spec-row">
-                <span class="row-label" @click="goBasics('engine')">发动机</span>
+              <div class="spec-divider" aria-hidden="true"></div>
+              <div class="spec-row" role="link" tabindex="0" @click="goBasics('engine')" @keydown.enter.prevent="goBasics('engine')" @keydown.space.prevent="goBasics('engine')">
+                <span class="row-label">发动机</span>
                 <span class="row-value">{{ specs.engine }}</span>
               </div>
-              <div class="spec-row">
-                <span class="row-label" @click="goBasics('transmission')">变速箱</span>
+              <div class="spec-divider" aria-hidden="true"></div>
+              <div class="spec-row" role="link" tabindex="0" @click="goBasics('transmission')" @keydown.enter.prevent="goBasics('transmission')" @keydown.space.prevent="goBasics('transmission')">
+                <span class="row-label">变速箱</span>
                 <span class="row-value">{{ specs.transmission }}</span>
               </div>
-              <div class="spec-row">
-                <span class="row-label" @click="goBasics('chassis')">底盘</span>
+              <div class="spec-divider" aria-hidden="true"></div>
+              <div class="spec-row" role="link" tabindex="0" @click="goBasics('chassis')" @keydown.enter.prevent="goBasics('chassis')" @keydown.space.prevent="goBasics('chassis')">
+                <span class="row-label">底盘</span>
                 <span class="row-value">{{ specs.chassis }}</span>
               </div>
             </div>
@@ -202,6 +197,7 @@
 <script>
 import cars from '@/data/car/cars.json'
 import brandDetails from '@/data/car/brandDetails.json'
+
 export default {
   name: 'SpecialCarDetail',
   data() {
@@ -212,11 +208,7 @@ export default {
       brandLogoMap: {},
       currentImageIndex: 0,
       slideDirection: 'next',
-      showBrandCard: false,
-      descClamp: 0,
-      modelsClamp: 0,
-      maxDescLines: 10,
-      maxModelsLines: 3
+      showBrandTooltip: false
     }
   },
   computed: {
@@ -234,7 +226,9 @@ export default {
     },
     bodySpecParsed() {
       const s = (this.specs.dimensions || '').trim()
-      let size = '', wheelbase = '', weight = ''
+      let size = ''
+      let wheelbase = ''
+      let weight = ''
       const sizeMatch = s.match(/长[^，]+?×\s*宽[^，]+?×\s*高[^，]+/)
       const wheelMatch = s.match(/轴距[^，]+/)
       const weightMatch = s.match(/(整备质量[^，]+|车重[^，]+)/)
@@ -246,8 +240,8 @@ export default {
     brandLogoFor() {
       if (!this.car) return ''
       if (this.car.brandLogo) return this.car.brandLogo
-      const b = this.car.brand
-      if (b && this.brandLogoMap && this.brandLogoMap[b]) return this.brandLogoMap[b]
+      const brand = this.car.brand
+      if (brand && this.brandLogoMap && this.brandLogoMap[brand]) return this.brandLogoMap[brand]
       return ''
     },
     brandName() {
@@ -257,11 +251,11 @@ export default {
     modelName() {
       if (!this.car) return ''
       const brand = this.car.brand || ''
-      const t = this.car.title || ''
-      if (brand && t.startsWith(brand)) {
-        return t.slice(brand.length).trim()
+      const title = this.car.title || ''
+      if (brand && title.startsWith(brand)) {
+        return title.slice(brand.length).trim()
       }
-      return t
+      return title
     },
     images() {
       if (!this.car) return []
@@ -274,17 +268,17 @@ export default {
       if (!name) return null
       return brandDetails[name] || null
     },
-    modelsText() {
-      const list = (this.brandInfo && Array.isArray(this.brandInfo.models)) ? this.brandInfo.models : []
-      return list.join('、')
-    },
-    descClampStyle() {
-      if (this.descClamp > 0) return { WebkitLineClamp: String(this.descClamp) }
-      return {}
-    },
-    modelsClampStyle() {
-      if (this.modelsClamp > 0) return { WebkitLineClamp: String(this.modelsClamp) }
-      return {}
+    brandIntroText() {
+      if (!this.brandInfo) return ''
+      const quote = this.brandInfo.quote ? String(this.brandInfo.quote).trim() : ''
+      const introduction = this.brandInfo.introduction ? String(this.brandInfo.introduction).trim() : ''
+      const description = this.brandInfo.description ? String(this.brandInfo.description).trim() : ''
+      const history = this.brandInfo.history ? String(this.brandInfo.history).trim() : ''
+      const summary = quote || introduction || description || ''
+      if (summary && history) {
+        return `${summary} ${history}`
+      }
+      return summary || history || ''
     }
   },
   methods: {
@@ -313,78 +307,36 @@ export default {
         this.baseCarId = baseCar.id
         this.car = baseCar.specialEdition || null
       } else {
+        this.baseCarId = null
         this.car = null
       }
       this.currentImageIndex = 0
+      this.showBrandTooltip = false
     },
     toggleSpecs() {
       this.showSpecs = !this.showSpecs
     },
     goBasics(key) {
       const map = {
-        size:        { id: 'body-size', anchor: '基本尺寸' },
-        wheelbase:   { id: 'body-size', anchor: '基本尺寸' },
-        weight:      { id: 'body-size', anchor: '质量参数' },
-        engine:      { id: 'power-transmission', anchor: '发动机与电机参数' },
-        transmission:{ id: 'power-transmission', anchor: '变速箱类型' },
-        chassis:     { id: 'chassis-suspension', anchor: '常见悬架形式' }
+        size: { id: 'body-size', anchor: '基本尺寸' },
+        wheelbase: { id: 'body-size', anchor: '基本尺寸' },
+        weight: { id: 'body-size', anchor: '质量参数' },
+        engine: { id: 'power-transmission', anchor: '发动机与电机参数' },
+        transmission: { id: 'power-transmission', anchor: '变速箱类型' },
+        chassis: { id: 'chassis-suspension', anchor: '常见悬架形式' }
       }
-      const t = map[key]
-      if (!t) return
+      const target = map[key]
+      if (!target) return
       this.$router.push({
         name: 'CarBasicsDetail',
-        params: { id: t.id },
-        query: { anchor: t.anchor }
+        params: { id: target.id },
+        query: { anchor: target.anchor }
       })
-    },
-    computeBrandCardClamp() {
-      const desc = this.$refs.hoverDesc
-      const models = this.$refs.hoverModels
-      const descSection = this.$refs.hoverDescSection
-      const modelsSection = this.$refs.hoverModelsSection
-      const card = this.$refs.hoverCard
-      const logoEl = this.$refs.hoverLogo
-      this.descClamp = 0
-      this.modelsClamp = 0
-      if (!card || !descSection || !modelsSection || !desc) return
-      const width = card.offsetWidth || 280
-      const maxTextHeight = width * 1.5
-      const logoHeight = logoEl ? (logoEl.clientHeight || 120) : 120
-      const textAvailable = Math.max(maxTextHeight - logoHeight - 20, 0)
-      const csDesc = window.getComputedStyle(desc)
-      const csModels = models ? window.getComputedStyle(models) : null
-      const lhDesc = parseFloat(csDesc.lineHeight) || 22
-      const lhModels = csModels ? parseFloat(csModels.lineHeight) || 20 : 20
-      const fullDesc = desc.scrollHeight
-      const fullModels = models ? models.scrollHeight : 0
-      const fullDescLines = lhDesc > 0 ? Math.ceil(fullDesc / lhDesc) : 0
-      const fullModelsLines = lhModels > 0 ? Math.ceil(fullModels / lhModels) : 0
-      // 分配可用高度（与布局比例一致）
-      const descAlloc = textAvailable * 0.75
-      const modelsAlloc = textAvailable * 0.25
-      const availDescLines = lhDesc > 0 ? Math.floor(descAlloc / lhDesc) : 0
-      const availModelsLines = lhModels > 0 ? Math.floor(modelsAlloc / lhModels) : 0
-      // 介绍：超过上限或超过可用空间则启用省略，最多 10 行
-      if (fullDescLines > this.maxDescLines || fullDescLines > availDescLines) {
-        const cappedDesc = Math.min(availDescLines, this.maxDescLines)
-        this.descClamp = cappedDesc > 0 ? cappedDesc : 0
-      } else {
-        this.descClamp = 0
-      }
-      // 代表车型：超过上限或超过可用空间则启用省略，最多 3 行
-      if (models) {
-        if (fullModelsLines > this.maxModelsLines || fullModelsLines > availModelsLines) {
-          const cappedModels = Math.min(availModelsLines, this.maxModelsLines)
-          this.modelsClamp = cappedModels > 0 ? cappedModels : 0
-        } else {
-          this.modelsClamp = 0
-        }
-      }
     }
   },
   created() {
     this.loadCar(this.$route.params.id)
-    import('@/data/car/brandDetails.json').then(mod => { 
+    import('@/data/car/brandDetails.json').then(mod => {
       const details = mod.default
       const map = {}
       for (const brand in details) {
@@ -404,29 +356,12 @@ export default {
       if (typeof window !== 'undefined' && window.scrollTo) {
         window.scrollTo({ top: 0, behavior: 'auto' })
       }
-    },
-    showBrandCard(val) {
-      if (val) {
-        this.$nextTick(() => {
-          this.computeBrandCardClamp()
-          if (typeof window !== 'undefined') {
-            window.addEventListener('resize', this.computeBrandCardClamp)
-          }
-        })
-      } else {
-        if (typeof window !== 'undefined') {
-          window.removeEventListener('resize', this.computeBrandCardClamp)
-        }
-        this.descClamp = 0
-        this.modelsClamp = 0
-      }
     }
   }
 }
 </script>
 
 <style scoped>
-
 @font-face {
   font-family: 'SourceHanSansSC';
   src: url('~@/assets/fonts/SourceHanSansSC-Regular-2.otf') format('opentype');
@@ -459,33 +394,44 @@ export default {
 }
 
 .page-car-detail {
-  padding-top: 24px;
+  padding: 56px 48px 40px;
   font-family: 'SourceHanSansSC', sans-serif;
-  min-height: max(500px, 70vh); /* 让高度自适应内容，同时保持合理的最小高度 */
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
-  padding-bottom: 24px; /* add spacing above footer */
-  max-width: 100%;
-  max-width: 1300px; /* 限制最大宽度，防止过宽 */
-  margin: 0 auto; /* 内容居中显示 */
-  width: 100%; /* 响应式宽度 */
+  width: 100%;
+  max-width: 1500px;
+  margin: 0 auto;
 }
 
 .detail-layout {
-  display: flex;
+  display: grid;
+  grid-template-columns: minmax(0, 65fr) minmax(360px, 35fr);
   flex: 1;
-  gap: 20px;
+  gap: 56px;
+  align-items: start;
+  animation: fadeInUp 0.8s ease both;
 }
 
-/* Left Section: 70% */
 .left-section {
-  flex: 0 0 60%;
   position: relative;
+  min-width: 0;
+  width: 100%;
+  aspect-ratio: 16 / 9;
   overflow: hidden;
-  border-radius: 8px; /* 添加圆角让阴影更自然 */
-  box-shadow: 0 12px 32px var(--c-shadow-heavy), 0 4px 12px rgba(0, 0, 0, 0.3); /* 添加凸显立体感的边缘阴影 */
-  /* Merged hero styles */
+  border-radius: 12px;
+  background: #101114;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.42);
+}
+
+.left-section::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at center, transparent 58%, rgba(0, 0, 0, 0.34) 100%);
+  pointer-events: none;
+  z-index: 1;
 }
 
 .gallery-image {
@@ -497,7 +443,7 @@ export default {
   height: 100%;
   object-fit: cover;
   user-select: none;
-  box-shadow: 0 8px 24px var(--c-shadow-heavy), 0 2px 8px var(--c-shadow-medium);
+  filter: contrast(1.05) saturate(1.04);
 }
 
 .gallery-nav {
@@ -525,18 +471,22 @@ export default {
   pointer-events: none;
   transition: opacity 0.15s ease, background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
 }
+
 .gallery-nav.prev { left: 10px; }
 .gallery-nav.next { right: 10px; }
+
 .left-section:hover .gallery-nav {
   opacity: 1;
   pointer-events: auto;
 }
+
 .gallery-nav:hover {
   background: var(--c-primary-alpha-20);
   border-color: transparent;
   color: var(--c-text-emphasis);
   transform: translateY(-50%) scale(1.04);
 }
+
 .gallery-nav:active {
   background: rgba(19, 19, 20, 0.92);
   border-color: var(--c-border-default);
@@ -548,109 +498,258 @@ export default {
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
-  bottom: 10px;
+  bottom: 20px;
   display: flex;
-  gap: 6px;
-  z-index: 2;
+  gap: 8px;
+  z-index: 3;
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.15s ease;
 }
+
 .left-section:hover .dot-indicators {
   opacity: 1;
   pointer-events: auto;
 }
+
 .dot {
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  border: 1px solid var(--c-text-emphasis);
-  background: transparent;
-}
-.dot.active {
-  background: var(--c-text-emphasis);
+  background: rgba(255, 255, 255, 0.4);
+  cursor: pointer;
+  transition: all 0.3s ease;
 }
 
-.slide-next-enter-active, .slide-next-leave-active { 
-  transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1); 
+.dot.active {
+  width: 20px;
+  border-radius: 4px;
+  background: #fff;
 }
+
+.slide-next-enter-active, .slide-next-leave-active {
+  transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
 .slide-next-enter { transform: translateX(100%); }
 .slide-next-enter-to { transform: translateX(0); }
 .slide-next-leave { transform: translateX(0); }
 .slide-next-leave-to { transform: translateX(-100%); }
 
-.slide-prev-enter-active, .slide-prev-leave-active { 
-  transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1); 
+.slide-prev-enter-active, .slide-prev-leave-active {
+  transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
 }
+
 .slide-prev-enter { transform: translateX(-100%); }
 .slide-prev-enter-to { transform: translateX(0); }
 .slide-prev-leave { transform: translateX(0); }
 .slide-prev-leave-to { transform: translateX(100%); }
 
-/* Right Section: 30% */
 .right-section {
-  flex: 0 0 40%;
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 36px;
   overflow: visible;
-  padding: 0 40px;
+  padding-top: 0;
   box-sizing: border-box;
-  min-width: 400px; /* 设置右侧最小宽度，防止参数框内文字换行 */
+  min-width: 0;
 }
 
-/* Upper Part */
 .info-upper {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 24px;
   overflow: visible;
 }
 
 .section-header {
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  border-bottom: 1px solid var(--c-border-default);
-  padding: 6px 0;
+  align-items: flex-start;
+  gap: 24px;
+  padding: 0;
 }
 
 .title-with-logo {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  min-width: 0; /* 允许在 flex 容器中收缩 */
+  display: flex;
+  min-width: 0;
+  overflow: visible;
+  position: relative;
+  flex: 1;
 }
 
 .section-header h2 {
   display: flex;
-  align-items: center;
-  font-weight: 600; /* 修改此处：从 400 加重至 600 */
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  font-weight: 400;
   margin: 0;
-  font-size: 24px;
-  color: var(--c-text-emphasis);
-  white-space: nowrap;
+  font-size: 13px;
+  color: #8a8a93;
+  white-space: normal;
+  min-width: 0;
+  position: relative;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+
+.model-name {
+  margin-left: 0;
+  font-family: 'MotivaSans', sans-serif;
+  font-size: 34px;
+  line-height: 1.16;
+  color: #f0f0f2;
+  font-weight: 600;
   overflow: hidden;
   text-overflow: ellipsis;
-  min-width: 0;
+  white-space: nowrap;
+  letter-spacing: 0.8px;
 }
 
 .brand-link {
-  color: var(--c-primary);
+  color: inherit;
   text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  position: relative;
+  min-width: 0;
+  font-size: 14px;
+}
+
+.brand-link:hover {
+  color: #f0f0f2;
+}
+
+.brand-logo-img,
+.brand-name-text {
+  transition: opacity 0.2s ease, color 0.2s ease;
+}
+
+.brand-hover-wrapper {
+  display: inline-flex;
+  align-items: center;
+  position: relative;
+  min-width: 0;
+}
+
+.brand-tooltip {
+  position: absolute;
+  top: calc(100% + 12px);
+  left: 0;
+  z-index: 100;
+  width: 260px;
+  padding: 16px;
+  background: rgba(32, 33, 36, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  box-shadow:
+    0 12px 40px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(40px) saturate(150%);
+  -webkit-backdrop-filter: blur(40px) saturate(150%);
+  box-sizing: border-box;
+  white-space: normal;
+  cursor: default;
+}
+
+.tooltip-header {
   display: flex;
   align-items: center;
   gap: 8px;
+  margin-bottom: 12px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--c-border-default);
 }
-.brand-link:hover { text-decoration: none; }
-.brand-link:hover span { text-decoration: underline; }
 
-.model-name { 
-  margin-left: 6px; 
-  font-family: 'MotivaSans', sans-serif;
+.tooltip-logo {
+  height: 1.2em;
+  width: auto;
+  max-width: 2.5em;
+  object-fit: contain;
+  border-radius: 2px;
+  background: transparent;
+  vertical-align: middle;
+}
+
+.tooltip-brand-name {
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1;
+  color: var(--c-text-emphasis);
+  display: flex;
+  align-items: center;
+}
+
+.tooltip-intro {
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--c-text-body-alt);
+  margin: 0 0 16px 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 8;
+  -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
-  white-space: nowrap;
+}
+
+.tooltip-models {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-top: 12px;
+  border-top: 1px dashed var(--c-border-default);
+}
+
+.tooltip-models-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--c-text-muted);
+}
+
+.tooltip-models-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.model-tag {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--c-primary);
+  background: transparent;
+  border: none;
+  padding: 0;
+  border-radius: 0;
+  font-family: 'MotivaSans', sans-serif;
+  transition: none;
+  position: relative;
+}
+
+.model-tag:not(:last-child):not(.ellipsis-tag)::after {
+  content: '·';
+  position: absolute;
+  right: -6px;
+  color: var(--c-text-muted);
+  opacity: 0.5;
+}
+
+.model-tag:hover {
+  background: transparent;
+  transform: none;
+}
+
+.ellipsis-tag {
+  background: transparent;
+  border-color: transparent;
+  color: var(--c-text-muted);
+  padding: 0;
+}
+
+.ellipsis-tag:hover {
+  background: transparent;
+  transform: none;
 }
 
 .actions {
@@ -660,161 +759,48 @@ export default {
   flex-shrink: 0;
 }
 
-.special-btn {
-  background: linear-gradient(135deg, var(--c-primary), #1a6b9c);
-  border: none;
-  border-radius: 4px;
-  color: #fff;
-  padding: 6px 12px;
-  font-size: 13px;
-  font-weight: bold;
+.back-btn {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #8a8a93;
+  padding: 7px 14px;
+  border-radius: 6px;
   cursor: pointer;
-  transition: transform 0.2s, box-shadow 0.2s;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  font-size: 13px;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
 }
-.special-btn:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(102, 192, 244, 0.4);
+
+.back-btn:hover {
+  border-color: rgba(255, 255, 255, 0.4);
+  color: #f0f0f2;
 }
-.special-btn:active {
-  transform: translateY(1px);
+
+.back-icon {
+  width: 15px;
+  height: 15px;
+  opacity: 0.82;
+}
+
+.back-text {
+  line-height: 1;
 }
 
 .brand-logo {
-  height: 1.2em;
+  height: 18px;
   width: auto;
-  max-width: 2.5em;
+  max-width: 42px;
   object-fit: contain;
   border-radius: 3px;
   background: transparent;
   vertical-align: middle;
-  position: relative;
-  top: -1px;
 }
+
 .brand-logo-xiaomi {
-  height: 1.2em; /* 统一高度，与后边文本高度保持一致 */
+  height: 18px;
 }
-
-.brand-hover-wrapper {
-  position: relative;
-  display: inline-flex;
-  flex-shrink: 0; /* 品牌 logo 和名称不收缩 */
-}
-.brand-hover-card {
-  position: absolute;
-  top: calc(100% + 14px);
-  left: 0; /* 修改移动端下悬浮框位置，使其默认靠左对齐，防止超出左边界 */
-  z-index: 2000;
-  --hover-card-width: 280px;
-  width: var(--hover-card-width);
-  max-height: calc(var(--hover-card-width) * 1.5);
-  background: var(--c-bg-l3); /* 进一步提高背景明度至浅灰色 */
-  backdrop-filter: blur(24px) saturate(120%);
-  -webkit-backdrop-filter: blur(24px) saturate(120%);
-  border: 1px solid var(--c-border-default); /* 修改边框颜色适应主题 */
-  border-radius: 8px;
-  display: flex;
-  flex-direction: column;
-  box-shadow:
-    0 12px 32px var(--c-shadow-medium),
-    0 4px 12px var(--c-shadow-light);
-  overflow: visible;
-  will-change: box-shadow, transform, opacity;
-}
-
-@media (min-width: 769px) {
-  .brand-hover-card {
-    left: 50%;
-    transform: translateX(-50%);
-  }
-}
-
-.brand-hover-card::after {
-  content: "";
-  position: absolute;
-  top: -14px;
-  left: 0;
-  width: 100%;
-  height: 14px;
-  background: transparent;
-}
-
-.hover-card-logo {
-  width: 100%;
-  height: var(--hover-logo-height, 120px);
-  object-fit: contain;
-  background: transparent;
-  border-bottom: 1px solid rgba(102,192,244,0.25);
-  padding-top: 8px;
-  padding-bottom: 8px;
-  border-radius: 8px 8px 0 0;
-}
-.hover-card-text {
-  padding: 8px 10px;
-  flex: 1 1 auto;
-  display: flex;
-  flex-direction: column;
-}
-.brand-hover-card::before {
-  content: "";
-  position: absolute;
-  left: 24px; /* 移动端下小箭头靠左显示 */
-  margin-left: -6px;
-  top: -7px;
-  width: 14px;
-  height: 14px;
-  background: var(--c-bg-l3); /* 同步提高小箭头背景明度 */
-  border-left: 1px solid var(--c-border-default); /* 同步修改小箭头边框色 */
-  border-top: 1px solid var(--c-border-default);
-  transform: rotate(45deg);
-  z-index: -1;
-  border-radius: 2px 0 0 0;
-  box-shadow: 
-    -2px -2px 6px rgba(0, 0, 0, 0.1);
-}
-
-@media (min-width: 769px) {
-  .brand-hover-card::before {
-    left: calc(50% + 16px);
-  }
-}
-.hover-section-desc {
-  flex: 0 0 75%;
-  overflow: hidden;
-}
-.hover-section-models {
-  flex: 0 0 25%;
-  overflow: hidden;
-  border-top: 1px solid rgba(102,192,244,0.18);
-  padding-top: 6px;
-}
-.hover-card-desc {
-  color: var(--c-text-body);
-  font-size: 14px;
-  line-height: 1.6;
-  margin: 0 0 6px 0;
-  overflow: hidden;
-  word-break: break-word;
-}
-.hover-card-desc.clamp {
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  text-overflow: ellipsis;
-}
-.hover-card-models {
-  color: var(--c-primary);
-  font-size: 12px;
-  margin: 0;
-  overflow: hidden;
-  word-break: break-word;
-}
-.hover-card-models.clamp {
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  text-overflow: ellipsis;
-}
-
-
 
 .meta-block {
   display: flex;
@@ -822,40 +808,40 @@ export default {
 }
 
 .tag-group {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
+  display: flex;
+  gap: 10px;
   flex-wrap: wrap;
 }
 
 .tag {
-  font-size: 11px;
-  padding: 4px 10px;
-  border-radius: 12px;
-  background: rgba(62, 128, 182, 0.3); /* 统一为同一种亚克力背景色 */
-  color: var(--c-text-title); /* White text */
-  font-weight: 600;
-  border: 1px solid rgba(102, 192, 244, 0.2); /* 统一边框色 */
-  backdrop-filter: blur(12px) saturate(120%);
-  -webkit-backdrop-filter: blur(12px) saturate(120%);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  color: #b0b0b8;
+  background: transparent;
+  font-weight: 400;
+  transition: all 0.3s ease;
 }
 
 .tag-energy {
-  color: var(--c-text-title);
+  color: #b0b0b8;
 }
 
 .intro-text {
-  color: var(--c-text-body-alt);
-  line-height: 1.6;
-  font-size: 16px;
+  color: #ffffff;
+  line-height: 1.85;
+  font-size: 14px;
   margin: 0;
-  text-align: justify;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  text-align: left;
+  font-weight: 400;
+  letter-spacing: 0.1px;
+  font-family: 'SourceHanSansSC', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
 
-/* Lower Part */
 .info-lower {
-  margin-top: auto; /* Push specs to the bottom if content is short */
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
@@ -863,11 +849,12 @@ export default {
 
 .specs-box {
   background: transparent;
-  border: 1px solid rgba(255, 255, 255, 0.15); /* Outer border */
-  border-radius: 6px; /* Rounded corners */
+  border: none;
+  border-radius: 0;
   padding: 0;
   font-family: 'MotivaSans', sans-serif;
-  overflow: hidden; /* Clip children to border radius */
+  overflow: visible;
+  box-shadow: none;
 }
 
 .spec-grid {
@@ -878,53 +865,66 @@ export default {
 }
 
 .specs-hint {
-  color: var(--c-text-muted);
-  font-size: 12px;
-  padding: 0 16px;
+  color: #666670;
+  font-size: 11px;
+  padding: 0;
   text-align: right;
-  margin: 6px 0 10px;
+  margin: 0 0 12px;
   background: transparent;
   border: none;
 }
 
 .spec-row {
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
   align-items: center;
-  gap: 16px; /* 增加 .row-label 和 .row-value 之间的间距 */
-  background: var(--c-shadow-light);
-  padding: 8px 16px;
-  transition: background 0.2s;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  gap: 18px;
+  background: transparent;
+  padding: 10px 12px;
+  transition: background 0.25s ease, box-shadow 0.25s ease;
+  border-radius: 10px;
+  cursor: pointer;
+  outline: none;
 }
 
-.spec-row:last-child {
-  border-bottom: none;
+.spec-divider {
+  height: 1px;
+  margin: 0 12px;
+  background: #1f1f26;
+  pointer-events: none;
+}
+
+.spec-row:hover,
+.spec-row:focus-visible {
+  background: rgba(0, 102, 255, 0.08);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.14), inset 0 0 0 1px rgba(0, 102, 255, 0.36);
+}
+
+.spec-row:focus-visible {
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.14), inset 0 0 0 1px rgba(0, 102, 255, 0.36);
 }
 
 .row-label {
   background: transparent;
-  color: var(--c-text-title); /* White text */
-  font-size: 12px;
+  color: #8a8a93;
+  font-size: 13px;
   padding: 0;
   width: auto;
   flex-shrink: 0;
   display: block;
   cursor: pointer;
+  transition: color 0.2s ease;
+  font-weight: 300;
+  font-family: 'SourceHanSansSC', sans-serif;
 }
 
 .row-value {
-  color: var(--c-text-title); /* White text */
-  font-size: 12px;
+  color: #f0f0f2;
+  font-size: 13px;
   text-align: right;
   padding: 0;
-  flex-grow: 1;
   display: block;
-}
-
-.row-label:hover {
-  color: var(--c-primary);
-  text-decoration: underline;
+  min-width: 0;
 }
 
 .not-found {
@@ -933,7 +933,6 @@ export default {
   margin-top: 40px;
 }
 
-/* Mobile Responsive */
 .fab-specs {
   position: fixed;
   right: 20px;
@@ -947,9 +946,9 @@ export default {
   -webkit-backdrop-filter: blur(24px) saturate(120%);
   color: var(--c-text-emphasis);
   font-weight: 700;
-  box-shadow: 0 8px 32px var(--c-shadow-medium); /* 移除发光阴影，恢复原本的阴影 */
+  box-shadow: 0 8px 32px var(--c-shadow-medium);
   z-index: 1000;
-  display: none; /* Hidden on desktop */
+  display: none;
   align-items: center;
   justify-content: center;
   cursor: pointer;
@@ -962,8 +961,64 @@ export default {
   transform: scale(0.95);
 }
 
-.specs-overlay, .specs-drawer {
+.specs-overlay,
+.specs-drawer {
   display: none;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 1180px) {
+  .page-car-detail {
+    padding: 44px 32px 32px;
+  }
+
+  .detail-layout {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .right-section {
+    display: contents;
+    padding-top: 0;
+    min-width: 0;
+  }
+
+  .info-upper {
+    display: contents;
+  }
+
+  .section-header {
+    order: 1;
+  }
+
+  .meta-block {
+    order: 2;
+  }
+
+  .left-section {
+    order: 4;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 10;
+  }
+
+  .intro-text {
+    order: 5;
+  }
+
+  .info-lower {
+    order: 6;
+  }
 }
 
 @media (max-width: 768px) {
@@ -971,128 +1026,212 @@ export default {
     min-height: auto;
     height: auto;
     display: block;
-    padding: 20px 16px; /* 添加移动端左右 padding，产生 margin 效果 */
-  }
-  
-  .detail-layout {
-    flex-direction: column;
-    height: auto;
-    display: flex;
-    gap: 0; /* 减小移动端模块之间的间距 */
-  }
-  
-  .right-section {
-    flex: 0 0 auto;
-    display: flex;
-    flex-direction: column;
-    gap: 0;
-    padding: 0; /* 移除桌面端左右 40px 的 padding */
-    min-width: 0; /* 取消移动端下的最小宽度限制 */
+    padding: 28px 18px 24px;
   }
 
-  .right-section, .info-upper {
+  .detail-layout {
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    gap: 20px;
+  }
+
+  .right-section {
+    display: contents;
+    gap: 0;
+    padding: 0;
+    min-width: 0;
+  }
+
+  .info-upper {
     display: contents;
   }
 
-  .section-header { order: 1; }
-  .meta-block { 
-    order: 2; 
-    margin-top: 16px;
-    margin-bottom: 16px;
+  .section-header {
+    order: 1;
+    gap: 14px;
+  }
+
+  .meta-block {
+    order: 2;
+    margin-top: -4px;
   }
 
   .left-section {
-    order: 3;
+    order: 4;
     width: 100%;
-    height: 300px;
+    height: auto;
+    aspect-ratio: 16 / 10;
     flex: none;
   }
 
-  .intro-text { 
-    order: 4; 
-    margin-top: 16px;
+  .section-header h2 {
+    gap: 9px;
   }
-  .info-lower { order: 5; }
-  
-  /* On very small screens, hide the specs box in column and show FAB */
-  @media (max-width: 600px) {
-    .info-lower {
-      display: none;
-    }
-    .fab-specs {
-      display: flex;
-    }
-    .specs-overlay {
-      display: block; /* But hidden by v-if */
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: var(--c-shadow-heavy);
-      z-index: 1000;
-      backdrop-filter: blur(2px);
-    }
-    .specs-drawer {
-      display: block; /* But hidden by v-if */
-    }
-    
-    .specs-drawer {
-      position: fixed;
-      left: 0; right: 0; bottom: 0;
-      max-height: 70vh;
-      background: var(--c-bg-l2);
-      backdrop-filter: blur(24px) saturate(120%);
-      -webkit-backdrop-filter: blur(24px) saturate(120%);
-      border-top: 1px solid var(--c-border-default);
-      border-radius: 16px 16px 0 0;
-      box-shadow: 0 -4px 24px var(--c-shadow-medium);
-      padding: 20px;
-      z-index: 1001;
-      overflow-y: auto;
-      will-change: transform;
-    }
-    
-    .drawer-header {
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: 4px;
-      color: var(--c-text-title);
-      font-weight: bold;
-    }
-    
-    .drawer-close {
-      background: none;
-      border: none;
-      color: var(--c-text-muted);
-      cursor: pointer;
-    }
 
-    .specs-box-mobile {
-       /* Style for mobile drawer specs */
-       color: var(--c-text-title);
-    }
+  .model-name {
+    font-size: 26px;
+  }
 
-    .specs-box-mobile .specs-hint {
-      margin: 0;
-      padding: 0;
-      text-align: left;
-    }
+  .brand-name-text {
+    max-width: 140px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
 
-    .specs-box-mobile .spec-grid {
-      margin-top: 16px;
-    }
+  .intro-text {
+    order: 5;
+    margin-top: 0;
+    font-size: 14px;
+    line-height: 1.8;
+  }
+
+  .info-lower {
+    order: 6;
+  }
+
+  .right-section {
+    padding: 0;
+    min-width: 0;
+  }
+
+  .gallery-nav {
+    width: 32px;
+    height: 32px;
+    font-size: 18px;
+  }
+
+  .gallery-nav.prev {
+    left: 10px;
+  }
+
+  .gallery-nav.next {
+    right: 10px;
+  }
+
+  .dot-indicators {
+    bottom: 14px;
+    gap: 7px;
+  }
+
+  .spec-row {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr);
+    padding: 9px 10px;
+  }
+
+  .row-label {
+    font-size: 13px;
+  }
+
+  .row-value {
+    font-size: 13px;
+  }
+
+  .back-btn {
+    padding: 7px 12px;
   }
 }
 
-/* Transitions */
-.slide-up-enter-active, .slide-up-leave-active { transition: transform 0.3s; }
-.slide-up-enter, .slide-up-leave-to { transform: translateY(100%); }
+@media (max-width: 600px) {
+  .info-lower {
+    display: none;
+  }
+
+  .fab-specs {
+    display: flex;
+  }
+
+  .specs-overlay {
+    display: block;
+    position: fixed;
+    inset: 0;
+    background: var(--c-shadow-heavy);
+    z-index: 1000;
+    backdrop-filter: blur(2px);
+  }
+
+  .specs-drawer {
+    display: block;
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100vw;
+    max-width: 100vw;
+    margin: 0;
+    max-height: 70vh;
+    background: var(--c-bg-l2);
+    backdrop-filter: blur(24px) saturate(120%);
+    -webkit-backdrop-filter: blur(24px) saturate(120%);
+    border-top: 1px solid var(--c-border-default);
+    border-radius: 16px 16px 0 0;
+    box-shadow: 0 -4px 24px var(--c-shadow-medium);
+    padding: 20px 20px calc(20px + env(safe-area-inset-bottom));
+    box-sizing: border-box;
+    z-index: 1001;
+    overflow-y: auto;
+    will-change: transform;
+    transform-origin: bottom center;
+    overscroll-behavior: contain;
+  }
+
+  .drawer-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 4px;
+    color: var(--c-text-title);
+    font-weight: bold;
+  }
+
+  .drawer-close {
+    background: none;
+    border: none;
+    color: var(--c-text-muted);
+    cursor: pointer;
+  }
+
+  .specs-box-mobile {
+    color: var(--c-text-title);
+  }
+
+  .specs-box-mobile .specs-hint {
+    margin: 0;
+    padding: 0;
+    text-align: left;
+  }
+
+  .specs-box-mobile .spec-grid {
+    margin-top: 16px;
+  }
+
+  .section-header {
+    width: 100%;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+
+  .title-with-logo {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .actions {
+    width: auto;
+    margin-left: auto;
+    flex-shrink: 0;
+  }
+
+  .back-btn {
+    width: auto;
+    justify-content: flex-start;
+  }
+}
+
+.slide-up-enter-active, .slide-up-leave-active { transition: transform 0.3s ease; }
+.slide-up-enter, .slide-up-leave-to { transform: translate3d(0, calc(100% + env(safe-area-inset-bottom)), 0); }
 .slide-up-enter-to, .slide-up-leave { transform: translateY(0); }
 
 .fade-enter-active, .fade-leave-active { transition: opacity 0.3s; }
 .fade-enter, .fade-leave-to { opacity: 0; }
-
-@media (max-width: 768px) {
-  }
 </style>

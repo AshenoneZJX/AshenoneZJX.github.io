@@ -188,8 +188,8 @@
     "brand": "本田",
     "sizeClass": "紧凑型",
     "images": [
-      "https://p3.dcarimg.com/img/motor-mis-img/43781dd9b828e478472d302877167f4e~2508x0.webp",
-      "https://p3.dcarimg.com/img/motor-mis-img/648b0631898ebf2df0412febf6f19d37~2508x0.webp",
+      "https://p3.dcarimg.com/img/motor-mis-img/DCP_e8269ce112d0c13b8fa001644ebf450d~2508x0.webp",
+      "https://p3.dcarimg.com/img/motor-mis-img/DCP_4c98750aebb9e4b4fd778dd293f5e900~2508x0.webp",
       "https://p3.dcarimg.com/img/motor-mis-img/e0188b2adb8748363a304a30a66f40c6~2508x0.webp",
       "https://p3.dcarimg.com/img/motor-mis-img/204755afa5962c83390c34ccf6ebc1c0~2508x0.webp",
       "/images/carPic/CIVIC1.JPG"
@@ -388,6 +388,26 @@
     "specs": {
       "dimensions": "长4762mm × 宽1847mm × 高1433mm，轴距2820mm，整备质量约1600kg",
       "engine": "2.0T L4 涡轮增压 190PS / 245PS，功率140kW / 180kW，最大扭矩320N·m / 370N·m",
+      "transmission": "7DCT",
+      "chassis": "前五连杆、后五连杆，前置前驱/四驱"
+    }
+  },
+  {
+    "id": 227,
+    "brand": "奥迪",
+    "sizeClass": "中型",
+    "title": "奥迪 A5",
+    "images": [
+      "https://p3.dcarimg.com/img/motor-mis-img/DCP_525cfae63de1f58eea0764024f5d7810~2508x0.webp",
+      "https://p3.dcarimg.com/img/motor-mis-img/DCP_316228dc6ffdf680ea1ca51c436f70a7~2508x0.webp",
+      "https://p3.dcarimg.com/img/motor-mis-img/DCP_7206501a6a745f15ce5c45d59f512bcb~2508x0.webp"
+    ],
+    "energy": "燃油",
+    "body": "轿跑车",
+    "intro": "奥迪A5（Audi A5）是一款中型豪华轿跑车，以优雅流畅的溜背线条、精致座舱与兼顾舒适和运动的底盘调校著称。主力版本搭载2.0T涡轮增压发动机，匹配7速S-tronic双离合变速器，并提供前驱与quattro四驱布局。结合奥迪虚拟座舱、MMI互联系统与Audi Pre Sense驾驶辅助功能，兼顾日常通勤的质感与高速巡航的稳定性。",
+    "specs": {
+      "dimensions": "长4765mm × 宽1843mm × 高1364mm，轴距2826mm，整备质量约1685kg",
+      "engine": "2.0T L4 涡轮增压 204PS / 265PS，功率150kW / 195kW，最大扭矩320N·m / 370N·m",
       "transmission": "7DCT",
       "chassis": "前五连杆、后五连杆，前置前驱/四驱"
     }
