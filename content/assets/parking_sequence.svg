@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="520" viewBox="0 0 1200 520" role="img" aria-labelledby="title desc">
+  <title id="title">自动挡停车顺序示意</title>
+  <desc id="desc">展示自动挡停车时推荐的操作顺序：停稳、N挡、手刹、松脚刹落力、P挡、熄火。</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="520" fill="url(#bg)"/>
+  <text x="50" y="72" fill="#f8fafc" font-size="38" font-family="Arial, PingFang SC, Microsoft YaHei, sans-serif" font-weight="700">自动挡推荐停车顺序</text>
+  <text x="50" y="110" fill="#cbd5e1" font-size="20" font-family="Arial, PingFang SC, Microsoft YaHei, sans-serif">核心目的：先让手刹承担车身重量，再让 P 挡负责锁止，减少驻车机构受力</text>
+
+  <g transform="translate(50 180)" font-family="Arial, PingFang SC, Microsoft YaHei, sans-serif">
+    <g>
+      <rect x="0" y="0" width="152" height="180" rx="24" fill="#0b1220" stroke="#38bdf8" stroke-width="2"/>
+      <circle cx="76" cy="52" r="28" fill="#1e293b" stroke="#38bdf8" stroke-width="4"/>
+      <text x="76" y="63" text-anchor="middle" fill="#f8fafc" font-size="28" font-weight="700">1</text>
+      <text x="20" y="114" fill="#f8fafc" font-size="23" font-weight="700">踩刹车停稳</text>
+      <text x="20" y="146" fill="#cbd5e1" font-size="18">确保车辆不再滚动</text>
+    </g>
+
+    <g transform="translate(188 0)">
+      <rect x="0" y="0" width="152" height="180" rx="24" fill="#0b1220" stroke="#22d3ee" stroke-width="2"/>
+      <circle cx="76" cy="52" r="28" fill="#1e293b" stroke="#22d3ee" stroke-width="4"/>
+      <text x="76" y="63" text-anchor="middle" fill="#f8fafc" font-size="28" font-weight="700">2</text>
+      <text x="20" y="114" fill="#f8fafc" font-size="23" font-weight="700">挂入 N 挡</text>
+      <text x="20" y="146" fill="#cbd5e1" font-size="18">给驻车制动让位</text>
+    </g>
+
+    <g transform="translate(376 0)">
+      <rect x="0" y="0" width="152" height="180" rx="24" fill="#0b1220" stroke="#34d399" stroke-width="2"/>
+      <circle cx="76" cy="52" r="28" fill="#1e293b" stroke="#34d399" stroke-width="4"/>
+      <text x="76" y="63" text-anchor="middle" fill="#f8fafc" font-size="28" font-weight="700">3</text>
+      <text x="20" y="114" fill="#f8fafc" font-size="23" font-weight="700">拉手刹</text>
+      <text x="20" y="146" fill="#cbd5e1" font-size="18">或开启电子驻车</text>
+    </g>
+
+    <g transform="translate(564 0)">
+      <rect x="0" y="0" width="152" height="180" rx="24" fill="#0b1220" stroke="#a78bfa" stroke-width="2"/>
+      <circle cx="76" cy="52" r="28" fill="#1e293b" stroke="#a78bfa" stroke-width="4"/>
+      <text x="76" y="63" text-anchor="middle" fill="#f8fafc" font-size="28" font-weight="700">4</text>
+      <text x="20" y="114" fill="#f8fafc" font-size="23" font-weight="700">轻松脚刹</text>
+      <text x="20" y="146" fill="#cbd5e1" font-size="18">让重量落在手刹上</text>
+    </g>
+
+    <g transform="translate(752 0)">
+      <rect x="0" y="0" width="152" height="180" rx="24" fill="#0b1220" stroke="#f59e0b" stroke-width="2"/>
+      <circle cx="76" cy="52" r="28" fill="#1e293b" stroke="#f59e0b" stroke-width="4"/>
+      <text x="76" y="63" text-anchor="middle" fill="#f8fafc" font-size="28" font-weight="700">5</text>
+      <text x="20" y="114" fill="#f8fafc" font-size="23" font-weight="700">挂入 P 挡</text>
+      <text x="20" y="146" fill="#cbd5e1" font-size="18">此时再做传动锁止</text>
+    </g>
+
+    <g transform="translate(940 0)">
+      <rect x="0" y="0" width="152" height="180" rx="24" fill="#0b1220" stroke="#fb7185" stroke-width="2"/>
+      <circle cx="76" cy="52" r="28" fill="#1e293b" stroke="#fb7185" stroke-width="4"/>
+      <text x="76" y="63" text-anchor="middle" fill="#f8fafc" font-size="28" font-weight="700">6</text>
+      <text x="20" y="114" fill="#f8fafc" font-size="23" font-weight="700">熄火离车</text>
+      <text x="20" y="146" fill="#cbd5e1" font-size="18">坡道上尤其有用</text>
+    </g>
+  </g>
+
+  <g transform="translate(50 412)" font-family="Arial, PingFang SC, Microsoft YaHei, sans-serif">
+    <rect x="0" y="0" width="1092" height="62" rx="18" fill="#0b1220" stroke="#334155" stroke-width="2"/>
+    <text x="22" y="40" fill="#d1d5db" font-size="20">如果先挂 P 再让整车重量压上去，之后再摘出 P 挡时，挡杆可能会发紧，这就是很多人感觉“P 挡卡住”的来源。</text>
+  </g>
+</svg>
