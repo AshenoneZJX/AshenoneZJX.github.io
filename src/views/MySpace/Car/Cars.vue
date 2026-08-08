@@ -15,33 +15,79 @@
     <div class="section-header">
       <div class="header-left">
         <h2>Cars</h2>
-        <button class="filter-btn filter-toggle mobile-only" @click="toggleFilters">筛选</button>
+        <button class="filter-btn filter-toggle mobile-only" :class="{ 'has-active': hasActiveFilters }" @click="toggleFilters">
+          <svg class="filter-toggle-icon" viewBox="0 0 24 24" aria-hidden="true">
+            <path
+              fill="currentColor"
+              d="M4 6a1 1 0 0 1 1-1h14a1 1 0 1 1 0 2H5a1 1 0 0 1-1-1Zm3 6a1 1 0 0 1 1-1h8a1 1 0 1 1 0 2H8a1 1 0 0 1-1-1Zm3 6a1 1 0 0 1 1-1h2a1 1 0 1 1 0 2h-2a1 1 0 0 1-1-1Z"
+            />
+          </svg>
+          <span>筛选</span>
+          <span v-if="hasActiveFilters" class="filter-dot" aria-hidden="true"></span>
+        </button>
+        <div class="header-tools">
         <div class="filters">
           <div class="filter-group">
-            <select class="select" v-model="selectedEnergy">
+            <select class="select" :class="{ 'has-value': selectedEnergy }" v-model="selectedEnergy">
               <option :value="null">全部能源</option>
               <option v-for="opt in energyOptions" :key="opt" :value="opt">{{ opt }}</option>
             </select>
           </div>
           <div class="filter-group">
-            <select class="select" v-model="selectedBody">
+            <select class="select" :class="{ 'has-value': selectedBody }" v-model="selectedBody">
               <option :value="null">全部车型</option>
               <option v-for="opt in bodyOptions" :key="opt" :value="opt">{{ opt }}</option>
             </select>
           </div>
           <div class="filter-group">
-            <select class="select" v-model="selectedBrand">
+            <select class="select" :class="{ 'has-value': selectedBrand }" v-model="selectedBrand">
               <option :value="null">全部品牌</option>
               <option v-for="opt in brandOptions" :key="opt" :value="opt">{{ opt }}</option>
             </select>
           </div>
           <div class="filter-group">
-            <select class="select" v-model="selectedSizeClass">
+            <select class="select" :class="{ 'has-value': selectedSizeClass }" v-model="selectedSizeClass">
               <option :value="null">全部尺寸</option>
               <option v-for="opt in sizeClassOptions" :key="opt" :value="opt">{{ opt }}</option>
             </select>
           </div>
           <button v-if="hasActiveFilters" class="chip clear-chip" @click="clearFilters">清除所有筛选</button>
+          <span class="filter-sep" aria-hidden="true"></span>
+        </div>
+        </div>
+        <div class="view-toggle" role="group" aria-label="视图切换">
+          <button
+            class="view-btn"
+            :class="{ active: viewMode === 'grid' }"
+            @click="viewMode = 'grid'"
+            aria-label="宫格视图"
+            title="宫格视图"
+            type="button"
+          >
+            <svg class="view-icon" viewBox="0 0 24 24" aria-hidden="true">
+              <path
+                fill="currentColor"
+                d="M4 4h7v7H4V4Zm9 0h7v7h-7V4ZM4 13h7v7H4v-7Zm9 0h7v7h-7v-7Z"
+              />
+            </svg>
+            <span class="view-label">宫格</span>
+          </button>
+          <button
+            class="view-btn"
+            :class="{ active: viewMode === 'list' }"
+            @click="viewMode = 'list'"
+            aria-label="列表视图"
+            title="列表视图"
+            type="button"
+          >
+            <svg class="view-icon" viewBox="0 0 24 24" aria-hidden="true">
+              <path
+                fill="currentColor"
+                d="M4 6a1 1 0 0 1 1-1h14a1 1 0 1 1 0 2H5a1 1 0 0 1-1-1Zm0 6a1 1 0 0 1 1-1h14a1 1 0 1 1 0 2H5a1 1 0 0 1-1-1Zm0 6a1 1 0 0 1 1-1h14a1 1 0 1 1 0 2H5a1 1 0 0 1-1-1Z"
+              />
+            </svg>
+            <span class="view-label">列表</span>
+          </button>
         </div>
         <div
           class="search-wrap"
@@ -107,22 +153,22 @@
       </div>
       <div class="sheet-content">
         <div class="sheet-subtitle">能源类型</div>
-        <select class="select" v-model="selectedEnergy">
+        <select class="select" :class="{ 'has-value': selectedEnergy }" v-model="selectedEnergy">
           <option :value="null">全部能源</option>
           <option v-for="opt in energyOptions" :key="opt" :value="opt">{{ opt }}</option>
         </select>
         <div class="sheet-subtitle">车型</div>
-        <select class="select" v-model="selectedBody">
+        <select class="select" :class="{ 'has-value': selectedBody }" v-model="selectedBody">
           <option :value="null">全部车型</option>
           <option v-for="opt in bodyOptions" :key="opt" :value="opt">{{ opt }}</option>
         </select>
         <div class="sheet-subtitle">品牌</div>
-        <select class="select" v-model="selectedBrand">
+        <select class="select" :class="{ 'has-value': selectedBrand }" v-model="selectedBrand">
           <option :value="null">全部品牌</option>
           <option v-for="opt in brandOptions" :key="opt" :value="opt">{{ opt }}</option>
         </select>
         <div class="sheet-subtitle">尺寸等级</div>
-        <select class="select" v-model="selectedSizeClass">
+        <select class="select" :class="{ 'has-value': selectedSizeClass }" v-model="selectedSizeClass">
           <option :value="null">全部尺寸</option>
           <option v-for="opt in sizeClassOptions" :key="opt" :value="opt">{{ opt }}</option>
         </select>
@@ -132,7 +178,7 @@
     <div v-if="filterOpen" class="sheet-mask mobile-only" @click="closeFilters"></div>
     <div class="divider"></div>
 
-    <div class="gallery-grid">
+    <div class="gallery-grid" :class="{ 'list-view': viewMode === 'list' }">
       <router-link
         class="gallery-card"
         v-for="car in paginatedCars"
@@ -211,6 +257,7 @@ export default {
       page: 1,
       pageSize: 12,
       filterOpen: false,
+      viewMode: 'grid',
       searchText: '',
       appliedSearchText: '',
       searchOpen: false,
@@ -455,31 +502,6 @@ export default {
 </script>
 
 <style scoped>
-
-@font-face {
-  font-family: 'Motiva Sans';
-  src: url('~@/assets/fonts/MotivaSans-Regular_woff.ttf') format('truetype');
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'MSYaHei-Semibold';
-  src: url('~@/assets/fonts/wryh/msyhsb.ttc') format('truetype');
-  font-weight: normal;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'PuHuiTi';
-  src: url('~@/assets/fonts/AlibabaPuHuiTi-3-65-Medium.woff2') format('woff2');
-  font-weight: 500;
-  font-style: normal;
-  font-display: swap;
-}
-
 .page-cars { 
   padding: 20px;
   width: 100%;
@@ -489,18 +511,36 @@ export default {
   box-sizing: border-box;
 }
 .section-header { display: flex; justify-content: space-between; align-items: center; }
-.section-header h2 { color: var(--c-text-title); font-weight: normal; letter-spacing: 2px; }
-.header-left { display: flex; align-items: center; gap: 16px; }
-.header-left { position: relative; }
+.section-header h2 { color: var(--c-text-title); font-size: 28px; font-weight: 500; letter-spacing: 0; font-family: 'AlibabaPuHuiTi', sans-serif; }
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  position: relative;
+  flex-wrap: wrap;
+}
 
-/* 筛选按钮容器：横向排列，元素垂直居中，间距20px */
-.filters { display: flex; flex-direction: row; align-items: center; gap: 20px; }
+/* 顶部工具区：筛选为一组（无外框背景），搜索按钮与视图切换独立显示在右侧 */
+.header-tools {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  box-sizing: border-box;
+}
 
-/* 单个筛选组：横向排列，带半透明背景、圆角边框与内边距 */
+/* 筛选工具栏：透明容器，仅承担横向布局 */
+.filters {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+}
+
+/* 单个筛选组：透明包裹，仅承担布局 */
 .filter-group {
   display: flex;
   align-items: center;
-  gap: 0px;
+  gap: 0;
   background: transparent;
   border-radius: 0;
   padding: 0;
@@ -536,15 +576,15 @@ export default {
   background: transparent;
   border: none;
   color: var(--c-text-body-alt);
-  padding: 0 20px;
-  font-size: 12px;
+  padding: 0 12px;
+  font-size: 13px;
   cursor: pointer;
   border-radius: 6px;
   white-space: nowrap;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  height: 28px;
+  height: 30px;
   line-height: 1;
   font-family: 'MSYaHei-Semibold', sans-serif;
 }
@@ -559,32 +599,66 @@ export default {
 }
 
 .clear-chip {
-  border: none;
+  border: 1px solid var(--c-border-default);
   padding: 0 12px;
+  height: 30px;
+  border-radius: 999px;
+  font-size: 13px;
+  color: var(--c-text-muted);
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
 }
-.clear-chip:hover { }
+.clear-chip::before {
+  content: '✕';
+  margin-right: 5px;
+  font-size: 11px;
+}
+.clear-chip:hover {
+  background: var(--c-primary-alpha-10);
+  border-color: var(--c-primary-alpha-30);
+  color: var(--c-text-emphasis);
+}
 
+/* 下拉筛选：最简样式，无背景填充与边框，仅文字 + chevron；选中值时文字高亮为主色 */
 .select {
-  background: transparent;
-  border: 1px solid var(--c-border-hover);
+  appearance: none;
+  -webkit-appearance: none;
+  background-color: transparent;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%239da7b3' d='M6.7 9.7a1 1 0 0 1 1.4-1.4l3.9 3.9 3.9-3.9a1 1 0 1 1 1.4 1.4l-4.6 4.6a1 1 0 0 1-1.4 0Z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 6px center;
+  background-size: 13px;
+  border: 1px solid transparent;
   color: var(--c-text-body-alt);
-  padding: 0 8px;
-  font-size: 12px;
-  border-radius: 6px;
-  height: 28px;
+  padding: 0 24px 0 10px;
+  font-size: 14px;
+  border-radius: 7px;
+  height: 30px;
   line-height: 28px;
-  width: 100px;
+  width: auto;
+  min-width: 88px;
+  max-width: 160px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+.select:hover {
+  background-color: var(--c-primary-alpha-10);
+  color: var(--c-text-emphasis);
 }
 .select:focus,
 .select:focus-visible {
   outline: none;
-  border-color: var(--c-primary);
+  background-color: var(--c-primary-alpha-10);
+  color: var(--c-text-emphasis);
 }
-.select:hover {
-  border-color: var(--c-primary);
+.select.has-value {
+  color: var(--c-primary);
+}
+.select option {
+  background: var(--c-bg-panel-deep);
+  color: var(--c-text-emphasis);
 }
 
 .mobile-only { display: none; }
@@ -595,58 +669,66 @@ export default {
     gap: 0;
     position: relative;
     max-width: 100%;
-    padding: 0 4px;
+    padding: 0;
     margin-right: 10px;
     box-sizing: border-box;
   }
+/* 展开态：按钮与输入框合为一个圆角整体（统一 999px 弧度），容器提供边框与底色 */
+.search-wrap.expanded {
+  background: var(--c-bg-l2);
+  border: 1px solid var(--c-border-default);
+  border-radius: 999px;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.25);
+}
+.search-wrap.expanded:focus-within {
+  border-color: var(--c-primary-alpha-40);
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.25), 0 0 0 3px var(--c-primary-alpha-10);
+}
 .search-panel {
   position: relative;
   width: 0;
   max-width: 0;
   margin-left: 0;
   opacity: 0;
-  transform: scaleX(0);
-  transform-origin: left center;
   pointer-events: none;
   overflow: hidden;
   z-index: 1;
-  transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1), max-width 0.3s cubic-bezier(0.4, 0, 0.2, 1), margin-left 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.2s ease, transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  /* 展开/收起不做过渡动画 */
 }
 .search-wrap.expanded .search-panel {
   width: 200px;
   max-width: 200px;
-  margin-left: -28px; /* 修改这里，使输入框左侧与按钮左侧完全对齐 */
+  margin-left: 0;
   opacity: 1;
-  transform: scaleX(1);
   pointer-events: auto;
 }
 .search-input {
-  background: var(--c-bg-l2);
-  border: 1px solid var(--c-border-default);
+  background: transparent;
+  border: none;
   color: var(--c-text-title);
-  padding: 0 34px 0 34px; /* 修改左侧内边距，避开覆盖在上面的按钮 */
+  padding: 0 34px 0 8px;
   font-size: 13px;
-  border-radius: 14px;
-  height: 30px;
-  line-height: 30px;
+  border-radius: 999px;
+  height: 32px;
+  line-height: 32px;
   width: 100%;
   box-sizing: border-box;
-  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2);
-  transition: all 0.25s ease;
+}
+.search-input::placeholder {
+  color: var(--c-text-label);
 }
 .search-input:focus,
 .search-input:focus-visible {
   outline: none;
-  border-color: var(--c-border-hover);
 }
-.search-input:hover { border-color: var(--c-border-hover); }
+.search-input:hover { border: none; }
 .search-icon-btn {
-  height: 28px;
-  width: 28px;
+  height: 32px;
+  width: 32px;
   padding: 0;
   border-radius: 999px;
   border: 1px solid var(--c-border-default);
-  background: var(--c-bg-l1);
+  background: var(--c-bg-l2);
   color: var(--c-text-emphasis);
   cursor: pointer;
   display: inline-flex;
@@ -654,20 +736,19 @@ export default {
   justify-content: center;
   position: relative;
   z-index: 2;
-  transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), background 0.2s, border-color 0.2s, color 0.2s;
+  transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), background-color 0.2s ease, color 0.2s ease;
 }
 .search-icon-btn:hover {
-  background: var(--c-bg-l2);
-  border-color: var(--c-border-hover);
-  color: #fff;
+  background: var(--c-primary-alpha-10);
+  color: var(--c-primary);
 }
 .search-icon-btn:active {
   transform: scale(0.9);
 }
 .search-wrap.expanded .search-icon-btn {
-  transform: scale(1.1);
-  color: var(--c-text-title);
-  border-color: var(--c-border-hover);
+  color: var(--c-primary);
+  background: transparent;
+  border-color: transparent;
 }
 .search-icon {
   width: 16px;
@@ -679,23 +760,21 @@ export default {
   right: 6px;
   top: 50%;
   transform: translateY(-50%);
-  height: 22px;
-  width: 22px;
+  height: 20px;
+  width: 20px;
   padding: 0;
   border-radius: 999px;
-  border: 1px solid var(--c-primary-alpha-10);
-  background: rgba(255,255,255,0.06);
-  -webkit-backdrop-filter: blur(10px);
-  backdrop-filter: blur(10px);
+  border: none;
+  background: rgba(255, 255, 255, 0.08);
   color: var(--c-text-body-alt);
   cursor: pointer;
-  font-size: 14px;
-  line-height: 20px;
+  font-size: 13px;
+  line-height: 18px;
+  transition: background-color 0.2s ease, color 0.2s ease;
 }
 .search-clear-btn:hover {
-  background: var(--c-primary-alpha-10);
-  color: var(--c-text-emphasis);
-  border-color: rgba(102,192,244,0.6);
+  background: var(--c-primary-alpha-20);
+  color: var(--c-text-title);
 }
 .search-suggest {
   position: absolute;
@@ -707,10 +786,20 @@ export default {
   overflow: auto;
   background: var(--c-bg-panel-deep);
   border: 1px solid var(--c-border-default);
-  border-radius: 8px;
-  box-shadow: 0 10px 26px var(--c-shadow-heavy);
+  border-radius: 12px;
+  box-shadow: 0 12px 32px var(--c-shadow-heavy);
   padding: 6px;
   z-index: 10;
+}
+.search-suggest::-webkit-scrollbar {
+  width: 8px;
+}
+.search-suggest::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 4px;
+}
+.search-suggest::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.2);
 }
 .suggest-item {
   width: 100%;
@@ -719,16 +808,59 @@ export default {
   border: none;
   color: var(--c-text-body-alt);
   padding: 8px 10px;
-  border-radius: 6px;
+  border-radius: 8px;
   cursor: pointer;
   font-size: 12px;
   line-height: 1.2;
+  transition: background-color 0.15s ease, color 0.15s ease;
 }
-.suggest-item:hover { background: var(--c-primary-alpha-10); color: var(--c-text-emphasis); }
+.suggest-item:hover { background: var(--c-primary-alpha-10); color: var(--c-text-title); }
 .suggest-empty {
   color: var(--c-text-muted);
   font-size: 12px;
   padding: 10px;
+}
+
+/* 视图切换：分段控件，深色容器 + 激活段高亮（图标 + 文字） */
+.view-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  background: #16191c;
+  border: 1px solid var(--c-border-default);
+  border-radius: 10px;
+  padding: 3px;
+}
+.view-btn {
+  height: 28px;
+  min-width: 0;
+  padding: 0 12px;
+  border: none;
+  border-radius: 7px;
+  background: transparent;
+  color: var(--c-text-muted);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  font-size: 13px;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+.view-btn:hover {
+  color: var(--c-text-emphasis);
+}
+.view-btn.active {
+  background: #2d333b;
+  color: var(--c-text-title);
+}
+.view-icon {
+  width: 15px;
+  height: 15px;
+  display: block;
+}
+.view-label {
+  line-height: 1;
 }
 
 /* Grid 布局核心 */
@@ -738,10 +870,48 @@ export default {
   gap: 20px;
 }
 
+/* 列表视图：单列布局，卡片横向排列（左图右文） */
+.gallery-grid.list-view {
+  grid-template-columns: 1fr;
+  gap: 14px;
+}
+.list-view .gallery-card:hover {
+  transform: translateY(-2px);
+}
+.list-view .card-body {
+  flex-direction: row;
+  height: auto;
+  align-items: stretch;
+}
+.list-view .card-image {
+  width: 220px;
+  height: auto;
+  flex: 0 0 auto;
+}
+.list-view .card-info {
+  flex: 1 1 auto;
+  min-width: 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  flex-wrap: wrap;
+  align-content: center;
+  gap: 6px 12px;
+  padding: 12px 18px;
+}
+.list-view .card-title {
+  margin-bottom: 0;
+  flex-wrap: wrap;
+}
+.list-view .card-tags {
+  flex-wrap: wrap;
+}
+
 @media (max-width: 768px) {
   /* 移动端：隐藏桌面端横向筛选条，改用底部抽屉式筛选 */
   .page-cars { padding: 10px; }
   .header-left { flex-wrap: nowrap; gap: 10px; width: 100%; min-width: 0; align-items: center; justify-content: flex-start; }
+  .header-tools { flex: 1 1 auto; min-width: 0; }
   .header-left h2 { flex: 0 0 auto; margin: 0; }
   .filter-toggle.mobile-only { flex: 0 0 auto; display: inline-flex; }
   .search-wrap { flex: 0 0 auto; justify-content: flex-start; min-width: 0; display: flex; }
@@ -751,7 +921,7 @@ export default {
     width: 100%; 
     max-width: none; 
     flex: 1 1 auto; 
-    margin-left: -28px; /* 移动端同样修改，使输入框左侧与按钮左侧完全对齐 */
+    margin-left: 0;
     min-width: 0; 
   }
   .search-suggest { width: 100%; }
@@ -826,41 +996,70 @@ export default {
     margin-bottom: -4px;
   }
   .filter-toggle.mobile-only {
+    gap: 6px;
     font-size: 14px;
-    border: 1px solid var(--c-border-hover);
-    border-radius: 6px;
-    padding: 0 16px;
-    height: 30px;
+    border: 1px solid var(--c-border-default);
+    border-radius: 999px;
+    padding: 0 12px;
+    height: 32px;
+    background: var(--c-bg-l2);
   }
   .filter-toggle.mobile-only:hover {
     background: var(--c-primary-alpha-10);
+    border-color: var(--c-primary-alpha-30);
     color: var(--c-text-emphasis);
-    border-color: var(--c-primary);
+  }
+  .filter-toggle.mobile-only.has-active {
+    border-color: var(--c-primary-alpha-40);
+    color: var(--c-primary);
+  }
+  .filter-toggle-icon {
+    width: 15px;
+    height: 15px;
+    flex: 0 0 auto;
+  }
+  .filter-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--c-primary);
+    flex: 0 0 auto;
   }
   .filters-panel .select {
     width: 100%;
+    max-width: none;
     height: 36px;
     font-size: 13px;
-    border-radius: 8px;
+    border-radius: 10px;
     border-color: rgba(255, 255, 255, 0.2);
-    background: rgba(0, 0, 0, 0.18);
+    background-color: rgba(0, 0, 0, 0.18);
     color: var(--c-text-title);
-    padding: 0 10px;
+    padding: 0 32px 0 10px;
+  }
+  .filters-panel .select.has-value {
+    border-color: var(--c-primary-alpha-40);
+    color: var(--c-primary);
   }
   .filters-panel .clear-chip {
     width: 100%;
     height: 34px;
     margin-top: 6px;
     border: 1px solid rgba(255, 255, 255, 0.18);
-    border-radius: 8px;
+    border-radius: 10px;
     background: rgba(255, 255, 255, 0.06);
     color: var(--c-text-emphasis);
     padding: 0 12px;
   }
   .gallery-grid { grid-template-columns: repeat(2, 1fr); gap: 6px; }
-  .card-body { height: 160px; }
-  .card-image { height: 140px; }
-  .card-info { padding: 4px; min-height: 80px; }
+  /* 移动端列表视图：保持单列横向卡片，缩小缩略图 */
+  .gallery-grid.list-view { grid-template-columns: 1fr; gap: 8px; }
+  .list-view .card-body { flex-direction: row; height: auto; min-height: 0; }
+  .list-view .card-image { width: 120px; height: auto; }
+  .list-view .card-info { min-height: 0; padding: 8px 10px; gap: 4px 8px; }
+  .list-view .card-title { min-height: 0; padding: 0; }
+  .card-body { height: 100%; }
+  .card-image { height: 140px; aspect-ratio: auto; }
+  .card-info { padding: 8px; min-height: 80px; }
   .card-title { margin-bottom: 0; gap: 4px; font-size: max(13px, min(4vw, 15px)); min-height: 32px; padding: 4px; box-sizing: border-box; }
   .brand-logo { width: 16px; height: 16px; }
   .card-tags { flex-wrap: nowrap; overflow-x: hidden; gap: 2px; }
@@ -870,24 +1069,24 @@ export default {
 .divider { height: 2px; background: var(--c-border-strong); margin: 10px 0 30px 0; }
 
 .gallery-card {
-  background: var(--c-bg-l2);
-  box-shadow: 0 4px 15px var(--c-shadow-medium);
+  background: #16191c;
+  box-shadow: 0 2px 10px var(--c-shadow-medium);
   border: 1px solid var(--c-border-default);
-  border-radius: 10px;
+  border-radius: 12px;
   overflow: hidden;
-  transition: transform 0.2s, box-shadow 0.2s, filter 0.2s;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
   cursor: pointer;
   text-decoration: none;
   display: block;
 }
 .gallery-card:hover {
-  transform: scale(1.03);
-  filter: brightness(1.15);
-  box-shadow: 0 10px 25px rgba(0,0,0,0.45);
+  transform: translateY(-4px);
+  border-color: var(--c-border-hover);
+  box-shadow: 0 12px 28px rgba(0,0,0,0.4);
 }
 
 .card-body {
-  height: 230px;
+  height: 100%;
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -897,33 +1096,43 @@ export default {
 }
 
 .card-image {
-  height: 160px;
+  aspect-ratio: 16 / 10;
   width: 100%;
   background-size: cover;
   background-position: center;
   position: relative;
+  filter: contrast(1.06) saturate(1.1) brightness(0.98);
+  flex: 0 0 auto;
+}
+/* 质感滤镜：边缘暗角 + 上下轻微压暗，提升卡片图高级感 */
+.card-image::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(0, 0, 0, 0.12) 0%, transparent 26%, transparent 74%, rgba(0, 0, 0, 0.24) 100%),
+    radial-gradient(ellipse at center, transparent 58%, rgba(0, 0, 0, 0.36) 100%);
+  pointer-events: none;
 }
 
-.card-info { padding: 12px; width: 100%; box-sizing: border-box; background: #171B21; flex: 1 1 auto; min-height: 0; overflow: hidden; }
-.card-title { color: var(--c-text-title); margin-bottom: 8px; font-weight: normal; font-family: 'Motiva Sans', sans-serif; display: flex; align-items: center; gap: 4px; }
+.card-info { padding: 12px 14px; width: 100%; box-sizing: border-box; background: #16191c; flex: 1 1 auto; min-height: 0; overflow: hidden; border-top: 1px solid var(--c-border-default); }
+.card-title { color: var(--c-text-title); margin-bottom: 8px; font-weight: normal; font-family: 'Motiva Sans', sans-serif; display: flex; align-items: center; gap: 6px; min-width: 0; }
 .card-title .title-text { display: inline-block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-family: 'PuHuiTi', 'SourceHanSansSC', sans-serif; font-size: 15px; font-weight: normal;}
 
 .brand-wrapper {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
   text-decoration: none;
-  transition: all 0.2s ease;
+  transition: background-color 0.2s ease;
   cursor: pointer;
-  padding: 4px 4px;
-  margin: -4px 0 -4px -2px;
+  padding: 2px 6px;
   border-radius: 6px;
+  flex: 0 0 auto;
 }
 
 .brand-wrapper:hover {
-  background: rgba(255, 255, 255, 0.08); /* 整体背景高亮 */
-  transform: translateY(-1px);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  background: var(--c-primary-alpha-10);
 }
 
 .brand-link {
@@ -950,11 +1159,11 @@ export default {
 
 .brand-logo { width: 24px; height: 24px; object-fit: contain; background: transparent; }
 .brand-logo { height: 1em; width: auto; max-width: 2.2em; object-fit: contain; background: transparent; }
-.card-tags { display: flex; align-items: center; gap: 6px; }
-.card-tags .tag { display: inline-block; padding: 2px 6px; font-size: 10px; border-radius: 3px; }
-.card-tags .tag-energy { background: #1a4d7a; color: var(--c-text-title); font-weight: 600; }
-.card-tags .tag-body { background: #2e6b36; color: var(--c-text-title); font-weight: 600; }
-.card-tags .tag-size { background: #3a3f45; color: var(--c-text-title); font-weight: 600; }
+.card-tags { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+.card-tags .tag { display: inline-block; padding: 2px 8px; font-size: 11px; border-radius: 999px; border: 1px solid transparent; }
+.card-tags .tag-energy { background: rgba(88, 166, 255, 0.14); border-color: rgba(88, 166, 255, 0.25); color: #8ab4ff; font-weight: 500; }
+.card-tags .tag-body { background: rgba(63, 185, 80, 0.12); border-color: rgba(63, 185, 80, 0.25); color: #56d364; font-weight: 500; }
+.card-tags .tag-size { background: rgba(139, 148, 158, 0.12); border-color: rgba(139, 148, 158, 0.25); color: var(--c-text-body-alt); font-weight: 500; }
 .total-count { margin-top: 26px; text-align: center; color: var(--c-text-muted); font-size: 12px; letter-spacing: 0.5px; }
 .pagination { display: flex; align-items: center; justify-content: center; gap: 10px; margin-top: 32px; }
 .page-btn {
@@ -996,9 +1205,9 @@ export default {
 }
 
   @media (max-width: 768px) {
-    .card-body { height: auto; min-height: 150px; }
-    .card-image { height: 120px; }
-    .card-info { padding: 4px; min-height: 50px; }
+    .card-body { height: 100%; }
+    .card-image { height: 120px; aspect-ratio: auto; }
+    .card-info { padding: 8px; min-height: 50px; }
     .card-title { min-height: 32px; padding: 4px; margin-bottom: 0; box-sizing: border-box; font-size: max(13px, min(4vw, 15px)); }
   }
 

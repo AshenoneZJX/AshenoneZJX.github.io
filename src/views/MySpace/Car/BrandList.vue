@@ -56,6 +56,7 @@ export default {
     brandCategoryMap () {
       return {
         仰望: '超豪华品牌',
+        保时捷: '超豪华品牌',
         奔驰: '一线豪华品牌',
         宝马: '一线豪华品牌',
         奥迪: '一线豪华品牌',
@@ -143,7 +144,7 @@ export default {
 }
 .section-header { display: flex; justify-content: space-between; align-items: center; }
 .title-group { display: flex; align-items: baseline; gap: 12px; }
-.section-header h2 { color: var(--c-text-title); font-weight: 400; letter-spacing: 2px; margin: 0; }
+.section-header h2 { color: var(--c-text-title); font-size: 28px; font-weight: 500; letter-spacing: 0; margin: 0; font-family: 'AlibabaPuHuiTi', sans-serif; }
 .brand-count { color: var(--c-text-muted); font-size: 13px; letter-spacing: 1px; }
 .divider { height: 2px; background: var(--c-border-strong); margin: 10px 0 30px 0; }
 

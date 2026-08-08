@@ -3732,5 +3732,381 @@
       "  class Bao,Ti,Concept groupNode;",
       "  class Bao5,Bao8,Ti3,Ti7,Super9 model;"
     ]
+  },
+  "保时捷": {
+    "region": "德系车",
+    "brandLogo": "/brand-logos/porsche.svg",
+    "quote": "保时捷（Porsche）是德国著名的豪华跑车与运动型豪华汽车制造商，总部位于德国斯图加特，以传奇跑车911闻名于世，品牌口号为“无可替代（There is no substitute）”。",
+    "introduction": "保时捷以制造高性能跑车著称，代表作911系列自1963年诞生以来始终坚持后置水平对置发动机布局，成为全球最具辨识度的跑车符号。在赛车领域，保时捷是勒芒24小时耐力赛历史上全场冠军次数最多的厂商（19次）。如今的保时捷产品线已扩展至Panamera豪华轿跑、Cayenne与Macan豪华SUV以及Taycan纯电轿跑，并隶属于大众汽车集团。Cayenne卡宴的成功更被视为豪华运动SUV市场的开创性事件。",
+    "history": "1931年，费迪南德·保时捷在斯图加特创立保时捷设计公司，早期以汽车工程设计与咨询为主业，其最著名的作品便是后来大众甲壳虫的原型。1948年，其子费里·保时捷打造出品牌第一款跑车356，保时捷正式成为汽车制造商。1963年，911（原名901）在法兰克福车展发布，奠定了品牌此后半个多世纪的灵魂车型。1970年代起，917等赛车横扫勒芒赛场，确立了保时捷的赛道传奇。1986年推出的959集双涡轮增压与智能四驱于一身，展示了当时最超前的造车技术。1990年代公司一度陷入财务困境，凭借1996年推出的Boxster成功翻身。2002年，Cayenne卡宴问世并大获成功，开创了豪华运动SUV细分市场；2009年推出Panamera豪华轿跑。2012年，保时捷正式并入大众汽车集团。2013年混动超跑918 Spyder与法拉利LaFerrari、迈凯伦P1并称“三大神车”；2019年，品牌首款纯电跑车Taycan发布，开启电动化新篇章。",
+    "technology": [
+      {
+        "title": "水平对置发动机（Boxer）",
+        "content": "气缸水平对向排列，重心极低且运转平顺，是911与718系列人车一体操控感的机械基础。"
+      },
+      {
+        "title": "PDK 双离合变速箱",
+        "content": "源自赛道验证的双离合技术，换挡速度以毫秒计，同时兼顾日常驾驶的平顺与效率，被公认为行业标杆。"
+      },
+      {
+        "title": "PASM 主动悬挂管理",
+        "content": "根据路况与驾驶风格实时调节每个车轮的阻尼力，在舒适与运动之间自由切换，并可搭配自适应空气悬架。"
+      },
+      {
+        "title": "PTM 牵引力管理系统",
+        "content": "保时捷的主动式全时四驱系统，可智能分配前后轴动力，让卡宴等车型兼具公路性能与复杂路况通过性。"
+      },
+      {
+        "title": "800V 高压电气架构",
+        "content": "率先应用于Taycan的800V系统电压技术，大幅提升充电功率与持续性能输出能力，引领高压纯电技术发展。"
+      }
+    ],
+    "models": [
+      "911",
+      "718",
+      "Panamera",
+      "Taycan",
+      "Cayenne",
+      "Macan"
+    ],
+    "classic_models": {
+      "description": "保时捷历史上的里程碑与经典车型",
+      "list": [
+        {
+          "model_name": "356",
+          "model_name_zh": "356",
+          "production_years": "1948-1965",
+          "historical_significance": "保时捷品牌的第一款量产跑车，由费里·保时捷基于大众甲壳虫技术打造，以轻量化与驾驶乐趣开创了品牌的造车哲学。",
+          "key_features": [
+            "品牌首款车型",
+            "后置风冷发动机",
+            "轻量化车身"
+          ],
+          "status": "已停产"
+        },
+        {
+          "model_name": "911 Carrera RS 2.7",
+          "model_name_zh": "911 Carrera RS 2.7",
+          "production_years": "1972-1973",
+          "historical_significance": "为满足赛事认证而生的轻量化911，标志性的鸭尾式扰流板成为经典符号，被公认为历代911中最具收藏价值的车型之一。",
+          "key_features": [
+            "鸭尾扰流板",
+            "轻量化强化",
+            "赛事认证车型"
+          ],
+          "status": "已停产"
+        },
+        {
+          "model_name": "959",
+          "model_name_zh": "959",
+          "production_years": "1986-1988",
+          "historical_significance": "为Group B拉力赛打造的技术旗舰超跑，集双涡轮增压与智能全时四驱于一身，是1980年代最先进的量产车，并在巴黎-达喀尔拉力赛夺冠。",
+          "key_features": [
+            "双涡轮增压",
+            "智能全时四驱",
+            "达喀尔冠军"
+          ],
+          "status": "已停产"
+        },
+        {
+          "model_name": "918 Spyder",
+          "model_name_zh": "918 Spyder",
+          "production_years": "2013-2015",
+          "historical_significance": "保时捷的混动旗舰超跑，4.6L V8发动机搭配双电机，曾以6分57秒刷新纽博格林北环量产车圈速纪录，与法拉利LaFerrari、迈凯伦P1并称“三大神车”。",
+          "key_features": [
+            "插电混动系统",
+            "综合887马力",
+            "纽北圈速纪录"
+          ],
+          "status": "已停产"
+        }
+      ]
+    },
+    "current_lineup": {
+      "description": "保时捷当前在售的主力车型系列",
+      "categories": {
+        "sports_cars": {
+          "category_name": "跑车",
+          "category_name_en": "Sports Cars",
+          "models": [
+            {
+              "model_name": "911",
+              "model_name_zh": "911"
+            },
+            {
+              "model_name": "718 Boxster",
+              "model_name_zh": "718 Boxster"
+            },
+            {
+              "model_name": "718 Cayman",
+              "model_name_zh": "718 Cayman"
+            }
+          ]
+        },
+        "sedan": {
+          "category_name": "豪华轿车 / 轿跑",
+          "category_name_en": "Sedan / Sport Saloon",
+          "models": [
+            {
+              "model_name": "Panamera",
+              "model_name_zh": "Panamera 帕拉梅拉"
+            },
+            {
+              "model_name": "Taycan",
+              "model_name_zh": "Taycan"
+            }
+          ]
+        },
+        "suv": {
+          "category_name": "SUV",
+          "category_name_en": "SUV",
+          "models": [
+            {
+              "model_name": "Cayenne",
+              "model_name_zh": "卡宴"
+            },
+            {
+              "model_name": "Macan",
+              "model_name_zh": "Macan"
+            }
+          ]
+        },
+        "performance": {
+          "category_name": "GT 高性能系列",
+          "category_name_en": "GT Models",
+          "models": [
+            {
+              "model_name": "911 GT3 RS",
+              "model_name_zh": "911 GT3 RS"
+            },
+            {
+              "model_name": "911 Turbo S",
+              "model_name_zh": "911 Turbo S"
+            },
+            {
+              "model_name": "718 Cayman GT4 RS",
+              "model_name_zh": "718 Cayman GT4 RS"
+            }
+          ]
+        }
+      }
+    },
+    "sub_brands": {
+      "title": "保时捷产品与性能体系",
+      "list": [
+        {
+          "brand_group": "主品牌",
+          "brand_name": "Porsche",
+          "brand_name_zh": "保时捷",
+          "positioning": "豪华跑车与运动型豪华汽车制造商"
+        },
+        {
+          "brand_group": "高性能系列",
+          "brand_name": "Porsche GT",
+          "brand_name_zh": "保时捷 GT",
+          "positioning": "源自赛车技术的极致性能车型（GT3/GT2/GT4）"
+        },
+        {
+          "brand_group": "定制部门",
+          "brand_name": "Porsche Exclusive Manufaktur",
+          "brand_name_zh": "保时捷独家定制",
+          "positioning": "个性化定制与限量特别版车型"
+        }
+      ]
+    },
+    "mermaid": [
+      "%%{init: {\"flowchart\": {\"padding\": 15, \"nodeSpacing\": 20, \"rankSpacing\": 40, \"htmlLabels\": true}}}%%",
+      "graph TD",
+      "  Root[\"保时捷<br>Porsche AG\"] --> P911[\"911 系列<br>品牌灵魂跑车\"]",
+      "  P911 --- Carrera(\"Carrera / Targa\")",
+      "  P911 --- Turbo(\"Turbo / Turbo S\")",
+      "  P911 --- GT3(\"GT3 / GT2 RS\")",
+      "",
+      "  Root --> P718[\"718 系列<br>中置发动机跑车\"]",
+      "  P718 --- Boxster(\"718 Boxster\")",
+      "  P718 --- Cayman(\"718 Cayman / GT4 RS\")",
+      "",
+      "  Root --> Saloon[\"豪华轿车 / 轿跑\"]",
+      "  Saloon --- Panamera(\"Panamera 帕拉梅拉\")",
+      "  Saloon --- Taycan(\"Taycan 纯电轿跑\")",
+      "",
+      "  Root --> SUV[\"SUV 系列\"]",
+      "  SUV --- Cayenne(\"Cayenne 卡宴\")",
+      "  SUV --- Macan(\"Macan\")",
+      "",
+      "  classDef rootNode fill:#0F172A,stroke:#38BDF8,stroke-width:2px,color:#F8FAFC,font-weight:bold,rx:8,ry:8,padding:24px;",
+      "  classDef groupNode fill:#312E81,stroke:#6366F1,stroke-width:2px,color:#E0E7FF,font-weight:bold,rx:6,ry:6,padding:18px;",
+      "  classDef model fill:#334155,stroke:#64748B,stroke-width:1px,color:#F1F5F9,rx:10,ry:10,padding:12px;",
+      "",
+      "  class Root rootNode;",
+      "  class P911,P718,Saloon,SUV groupNode;",
+      "  class Carrera,Turbo,GT3,Boxster,Cayman,Panamera,Taycan,Cayenne,Macan model;"
+    ]
+  },
+  "零跑": {
+    "region": "自主品牌",
+    "brandLogo": "/brand-logos/leapmotor.svg",
+    "quote": "零跑汽车（Leapmotor）是总部位于杭州的中国智能电动汽车品牌，坚持“全域自研”的技术路线，以高品价比的智能电动车服务大众市场。",
+    "introduction": "零跑汽车成立于2015年12月，由大华股份联合创始人朱江明创立，总部位于浙江杭州，2022年9月在香港联交所主板上市（股票代码：9863.HK）。品牌以“全域自研”为核心标签，整车架构、三电系统、智能座舱与智能驾驶等核心技术均为自主研发，凭借垂直整合带来的成本优势主打“高品价比”路线。2023年10月，Stellantis集团战略投资约15亿欧元获得零跑约20%股权，双方随后成立“零跑国际”合资公司（Stellantis持股51%），负责零跑车型的海外销售，成为中国新势力技术出海的代表性案例。2024年零跑全年交付近30万辆，跻身新势力销量第一梯队。",
+    "history": "2015年12月，朱江明依托大华股份的技术积累在杭州创立零跑汽车。2019年1月，首款车型纯电轿跑S01上市，因定位小众销量平淡，但验证了整车自研能力。2020年5月推出微型纯电车T03，凭借精准的城市代步定位打开市场，成为品牌的销量支柱。2021年9月，中型SUV C11交付，搭载与大华联合研发的“凌芯01”智驾芯片，品牌进入主流市场；2022年9月，中大型轿车C01上市，首发量产CTC电池底盘一体化技术，同月零跑在港交所挂牌上市。2023年，零跑发布“四叶草”中央集成式电子电气架构（LEAP 3.0），并推出C11增程版，形成纯电+增程双动力布局；同年10月与Stellantis集团达成战略合作。2024年起，基于LEAP 3.0架构的全球化车型C10、六座SUV C16相继上市，并通过零跑国际进入欧洲等海外市场；2025年推出全球化B系列首款车型B10与轿车B01，销量持续攀升，多次位居中国新势力月销榜首。",
+    "technology": [
+      {
+        "title": "全域自研",
+        "content": "整车架构、电池、电驱、座舱、智驾等核心软硬件全部自研自造，自研部件占整车成本约60%以上，带来显著的成本与迭代效率优势。"
+      },
+      {
+        "title": "CTC电池底盘一体化",
+        "content": "2022年随C01首发量产，将电芯直接集成于底盘，取消独立电池包，提升空间利用率、整车刚度与续航表现。"
+      },
+      {
+        "title": "LEAP 3.0 四叶草架构",
+        "content": "中央集成式电子电气架构，以一颗中央超算芯片统领座舱、智驾、动力与车身四域，支持整车级OTA持续进化。"
+      },
+      {
+        "title": "凌芯01智驾芯片",
+        "content": "与大华股份联合研发的国产车规级AI芯片，2021年随C11量产上车，是早期车企自研智驾芯片的代表。"
+      },
+      {
+        "title": "纯电 + 增程双动力",
+        "content": "主力车型提供纯电与增程两种动力形式，增程版搭载高效增程器与大电池，兼顾城市纯电通勤与长途出行。"
+      }
+    ],
+    "models": [
+      "S01",
+      "T03",
+      "C11",
+      "C01",
+      "C10",
+      "C16",
+      "B10",
+      "B01"
+    ],
+    "classic_models": {
+      "description": "已停产或具有里程碑意义",
+      "list": [
+        {
+          "model_name": "S01",
+          "model_name_zh": "S01",
+          "production_years": "2019-2020",
+          "historical_significance": "零跑汽车的首款量产车，定位双门纯电轿跑，验证了品牌整车自研与制造能力，为零跑后续产品奠定了技术基础。",
+          "key_features": [
+            "品牌首款车型",
+            "双门轿跑造型",
+            "纯电驱动",
+            "自研三电系统"
+          ],
+          "status": "已停产"
+        },
+        {
+          "model_name": "T03",
+          "model_name_zh": "T03",
+          "production_years": "2020-至今",
+          "historical_significance": "零跑的第一款爆款产品，以高品价比切入微型纯电市场，长期占据品牌销量主力，并随零跑国际出口欧洲。",
+          "key_features": [
+            "微型纯电代步",
+            "L2级辅助驾驶",
+            "403km续航版本",
+            "出口海外市场"
+          ],
+          "status": "在售"
+        },
+        {
+          "model_name": "C11",
+          "model_name_zh": "C11",
+          "production_years": "2021-至今",
+          "historical_significance": "零跑进入主流市场的关键车型，首发搭载自研凌芯01芯片，2023年新增增程版后销量大幅增长，是品牌的中坚产品。",
+          "key_features": [
+            "中型SUV",
+            "凌芯01芯片",
+            "纯电/增程双动力",
+            "前双叉臂悬架"
+          ],
+          "status": "在售"
+        }
+      ]
+    },
+    "current_lineup": {
+      "description": "当前在售的“C系列”家用主力、“B系列”全球化车型及微型纯电产品",
+      "categories": {
+        "c_suv": {
+          "category_name": "C 系列 SUV",
+          "category_name_en": "C Series SUV",
+          "models": [
+            {
+              "model_name": "C11",
+              "model_name_zh": "C11"
+            },
+            {
+              "model_name": "C10",
+              "model_name_zh": "C10"
+            },
+            {
+              "model_name": "C16",
+              "model_name_zh": "C16"
+            }
+          ]
+        },
+        "sedan": {
+          "category_name": "轿车系列",
+          "category_name_en": "Sedan",
+          "models": [
+            {
+              "model_name": "C01",
+              "model_name_zh": "C01"
+            },
+            {
+              "model_name": "B01",
+              "model_name_zh": "B01"
+            }
+          ]
+        },
+        "b_series": {
+          "category_name": "B 系列（全球化）",
+          "category_name_en": "B Series",
+          "models": [
+            {
+              "model_name": "B10",
+              "model_name_zh": "B10"
+            }
+          ]
+        },
+        "mini": {
+          "category_name": "微型纯电",
+          "category_name_en": "Mini EV",
+          "models": [
+            {
+              "model_name": "T03",
+              "model_name_zh": "T03"
+            }
+          ]
+        }
+      }
+    },
+    "mermaid": [
+      "%%{init: {\"flowchart\": {\"padding\": 15, \"nodeSpacing\": 20, \"rankSpacing\": 40, \"htmlLabels\": true}}}%%",
+      "graph TD",
+      "  Root[\"零跑汽车<br>Leapmotor\"] --> C_Series[\"C 系列<br>家用主力SUV\"]",
+      "  C_Series --- C11(\"C11<br>中型SUV 纯电/增程\")",
+      "  C_Series --- C10(\"C10<br>全球化中型SUV\")",
+      "  C_Series --- C16(\"C16<br>六座中大型SUV\")",
+      "",
+      "  Root --> Sedan[\"轿车系列\"]",
+      "  Sedan --- C01(\"C01<br>中大型轿车\")",
+      "  Sedan --- B01(\"B01<br>紧凑型纯电轿车\")",
+      "",
+      "  Root --> B_Series[\"B 系列<br>全球化产品\"]",
+      "  B_Series --- B10(\"B10<br>紧凑型SUV\")",
+      "",
+      "  Root --> Mini[\"微型纯电\"]",
+      "  Mini --- T03(\"T03<br>城市代步\")",
+      "",
+      "  classDef rootNode fill:#0F172A,stroke:#38BDF8,stroke-width:2px,color:#F8FAFC,font-weight:bold,rx:8,ry:8,padding:24px;",
+      "  classDef groupNode fill:#312E81,stroke:#6366F1,stroke-width:2px,color:#E0E7FF,font-weight:bold,rx:6,ry:6,padding:18px;",
+      "  classDef model fill:#334155,stroke:#64748B,stroke-width:1px,color:#F1F5F9,rx:10,ry:10,padding:12px;",
+      "",
+      "  class Root rootNode;",
+      "  class C_Series,Sedan,B_Series,Mini groupNode;",
+      "  class C11,C10,C16,C01,B01,B10,T03 model;"
+    ]
   }
 }

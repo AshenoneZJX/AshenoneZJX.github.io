@@ -10,6 +10,7 @@
             :src="images[currentImageIndex]"
             :alt="modelName || '车辆图片'"
             referrerpolicy="no-referrer"
+            @click="openLightbox"
           />
         </transition>
         <button
@@ -191,6 +192,50 @@
     <div v-else class="not-found">
       <p>抱歉，没有找到该车型。</p>
     </div>
+
+    <!-- 大图查看：全屏遮罩层，支持上一张 / 下一张切换与键盘操作 -->
+    <div v-if="lightboxOpen" class="lightbox-mask" @click="closeLightbox">
+      <button class="lightbox-close" aria-label="关闭" type="button" @click.stop="closeLightbox">×</button>
+      <button
+        v-if="images.length > 1"
+        class="lightbox-nav prev"
+        aria-label="上一张"
+        type="button"
+        @click.stop="prevImage"
+      >‹</button>
+      <transition name="lightbox-fade">
+        <img
+          v-if="images.length"
+          :key="images[currentImageIndex]"
+          class="lightbox-image"
+          :src="images[currentImageIndex]"
+          :alt="modelName || '车辆图片'"
+          referrerpolicy="no-referrer"
+          @click.stop
+        />
+      </transition>
+      <button
+        v-if="images.length > 1"
+        class="lightbox-nav next"
+        aria-label="下一张"
+        type="button"
+        @click.stop="nextImage"
+      >›</button>
+      <div
+        v-if="images.length > 1"
+        class="dot-indicators lightbox-dots"
+        aria-label="图片序号指示"
+        @click.stop
+      >
+        <span
+          v-for="(src, idx) in images"
+          :key="idx"
+          class="dot"
+          :class="{ active: idx === currentImageIndex }"
+          @click.stop="goToImage(idx)"
+        ></span>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -208,6 +253,7 @@ export default {
       brandLogoMap: {},
       currentImageIndex: 0,
       slideDirection: 'next',
+      lightboxOpen: false,
       showBrandTooltip: false
     }
   },
@@ -300,6 +346,28 @@ export default {
         this.currentImageIndex = idx
       }
     },
+    openLightbox() {
+      if (!this.images.length) return
+      this.lightboxOpen = true
+      document.addEventListener('keydown', this.onLightboxKeydown)
+      if (document.body) document.body.style.overflow = 'hidden'
+    },
+    closeLightbox() {
+      if (!this.lightboxOpen) return
+      this.lightboxOpen = false
+      document.removeEventListener('keydown', this.onLightboxKeydown)
+      if (document.body) document.body.style.overflow = ''
+    },
+    onLightboxKeydown(e) {
+      if (!this.lightboxOpen) return
+      if (e.key === 'Escape') {
+        this.closeLightbox()
+      } else if (e.key === 'ArrowRight') {
+        this.nextImage()
+      } else if (e.key === 'ArrowLeft') {
+        this.prevImage()
+      }
+    },
     loadCar(id) {
       const n = Number(id)
       const baseCar = cars.find(c => Number(c.id) === n)
@@ -350,8 +418,12 @@ export default {
       window.scrollTo({ top: 0, behavior: 'auto' })
     }
   },
+  beforeDestroy() {
+    this.closeLightbox()
+  },
   watch: {
     '$route.params.id'(val) {
+      this.closeLightbox()
       this.loadCar(val)
       if (typeof window !== 'undefined' && window.scrollTo) {
         window.scrollTo({ top: 0, behavior: 'auto' })
@@ -362,37 +434,6 @@ export default {
 </script>
 
 <style scoped>
-@font-face {
-  font-family: 'SourceHanSansSC';
-  src: url('~@/assets/fonts/SourceHanSansSC-Regular-2.otf') format('opentype');
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'RobotoMono';
-  src: url('~@/assets/fonts/RobotoMono-VariableFont_wght.ttf') format('truetype');
-  font-weight: 100 900;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'MotivaSans';
-  src: url('~@/assets/fonts/MotivaSans-Regular_woff.ttf') format('truetype');
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'MSYaHei-Semibold';
-  src: url('~@/assets/fonts/wryh/msyhsb.ttc') format('truetype');
-  font-weight: normal;
-  font-style: normal;
-  font-display: swap;
-}
-
 .page-car-detail {
   padding: 56px 48px 40px;
   font-family: 'SourceHanSansSC', sans-serif;
@@ -444,6 +485,109 @@ export default {
   object-fit: cover;
   user-select: none;
   filter: contrast(1.05) saturate(1.04);
+  cursor: zoom-in;
+}
+
+/* 大图查看（Lightbox） */
+.lightbox-mask {
+  position: fixed;
+  inset: 0;
+  z-index: 3000;
+  background: rgba(0, 0, 0, 0.88);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: zoom-out;
+}
+.lightbox-image {
+  max-width: 92vw;
+  max-height: 86vh;
+  object-fit: contain;
+  border-radius: 8px;
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.6);
+  cursor: default;
+  user-select: none;
+}
+.lightbox-fade-enter-active,
+.lightbox-fade-leave-active {
+  transition: opacity 0.25s ease;
+}
+.lightbox-fade-enter,
+.lightbox-fade-leave-to {
+  opacity: 0;
+}
+.lightbox-fade-leave-active {
+  position: absolute;
+}
+.lightbox-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  border: 1px solid var(--c-border-default);
+  background: rgba(22, 27, 34, 0.72);
+  color: var(--c-text-title);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 26px;
+  font-weight: 600;
+  line-height: 1;
+  cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+}
+.lightbox-nav:hover {
+  background: var(--c-primary-alpha-20);
+  border-color: var(--c-primary-alpha-40);
+  transform: translateY(-50%) scale(1.06);
+}
+.lightbox-nav.prev { left: 24px; }
+.lightbox-nav.next { right: 24px; }
+.lightbox-close {
+  position: absolute;
+  top: 20px;
+  right: 24px;
+  z-index: 2;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid var(--c-border-default);
+  background: rgba(22, 27, 34, 0.72);
+  color: var(--c-text-emphasis);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  font-size: 20px;
+  line-height: 1;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+.lightbox-close:hover {
+  background: var(--c-primary-alpha-20);
+  border-color: var(--c-primary-alpha-40);
+  color: var(--c-text-title);
+}
+/* 大图层圆点指示器：复用小图的 .dot-indicators/.dot 样式，但保持常显可点并浮于最上层 */
+.dot-indicators.lightbox-dots {
+  bottom: 24px;
+  opacity: 1;
+  pointer-events: auto;
+  z-index: 10;
+}
+@media (max-width: 768px) {
+  .lightbox-nav { width: 38px; height: 38px; font-size: 22px; }
+  .lightbox-nav.prev { left: 10px; }
+  .lightbox-nav.next { right: 10px; }
+  .lightbox-close { top: 12px; right: 12px; }
 }
 
 .gallery-nav {

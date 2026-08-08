@@ -55,7 +55,7 @@ export default {
   box-sizing: border-box;
 }
 .section-header { display: flex; justify-content: space-between; align-items: flex-end; }
-.section-header h2 { color: var(--c-text-title); font-weight: 300; letter-spacing: 2px; }
+.section-header h2 { color: var(--c-text-title); font-size: 28px; font-weight: 500; letter-spacing: 0; font-family: 'AlibabaPuHuiTi', sans-serif; }
 .divider { height: 2px; background: var(--c-border-strong); margin: 10px 0 30px 0; }
 
 .gallery-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 20px; }

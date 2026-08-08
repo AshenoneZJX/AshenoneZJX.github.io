@@ -6,7 +6,8 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "convert:sales2025": "node scripts/convert_sales_2025.js"
+    "convert:sales2025": "node scripts/convert_sales_2025.js",
+    "fetch:dcd-sales": "node scripts/fetch_dcd_sales.js"
   },
   "dependencies": {
     "core-js": "^3.6.5",

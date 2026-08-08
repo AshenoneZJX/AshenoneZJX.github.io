@@ -153,7 +153,7 @@ export default {
   box-sizing: border-box;
 }
 .section-header { display: flex; justify-content: space-between; align-items: center; }
-.section-header h2 { color: var(--c-text-title); font-weight: 400; letter-spacing: 2px; margin: 0; }
+.section-header h2 { color: var(--c-text-title); font-size: 28px; font-weight: 500; letter-spacing: 0; margin: 0; font-family: 'AlibabaPuHuiTi', sans-serif; }
 .header-left { display: flex; align-items: center; gap: 10px; }
 
 .mobile-filter-btn {
@@ -229,23 +229,30 @@ export default {
 }
 .filter-btn:hover { background: rgba(154, 160, 166, 0.16); color: #d3d7dd; }
 .filter-btn.active { background: rgba(154, 160, 166, 0.28); color: #e1e4e8; }
-.record-list { display: flex; flex-direction: column; gap: 8px; }
+/* 卡片列表：复用 Records 页 record-list 的表面、阴影与悬浮动效（色值取自该页 --rd-* 变量） */
+.record-list { display: flex; flex-direction: column; gap: 16px; }
 .record-item {
+  position: relative;
   display: flex;
-  background: #16191C;
-  padding: 15px;
-  border: 1px solid var(--c-border-default);
-  border-radius: 8px;
-  transition: background 0.2s, border-color 0.2s, box-shadow 0.2s, transform 0.2s;
   align-items: center;
+  background: #1e1e1e;
+  padding: 20px 22px;
+  border: none;
+  border-radius: 8px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  animation: record-in 0.45s ease backwards;
 }
-.record-item:hover { 
-  background: #1D2126;
-  border-color: var(--c-border-default);
-  box-shadow: 0 8px 20px var(--c-shadow-medium);
-  transform: scale(1.02);
+@keyframes record-in {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: translateY(0); }
 }
-.record-item:active { transform: scale(1); }
+.record-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.22);
+}
+.record-item:active { transform: translateY(0); }
 .record-item.clickable { cursor: pointer; }
 .record-logo {
   width: 60px;
@@ -262,9 +269,24 @@ export default {
   max-height: 100%;
   object-fit: contain;
 }
-.record-content { flex: 1; }
-.record-title { color: var(--c-primary); font-size: 20px; font-weight: 400; margin-bottom: 4px; }
-.record-excerpt { font-size: 13px; color: var(--c-text-muted); }
+.record-content { flex: 1; min-width: 0; }
+.record-title {
+  color: #e0e0e0;
+  font-size: 20px;
+  font-weight: 400;
+  letter-spacing: 0;
+  margin-bottom: 4px;
+  font-family: 'MotivaSans', sans-serif;
+}
+.record-excerpt {
+  font-size: 14px;
+  color: #909399;
+  line-height: 1.8;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+}
 
 @media (max-width: 768px) {
   .page-car-basics { padding: 16px; }

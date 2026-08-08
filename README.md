@@ -1,4 +1,4 @@
-# ASHENONE's Personal Blog
+# 烬途 | Ashpath
 
 ![build](https://img.shields.io/badge/build-passing-brightgreen) ![license](https://img.shields.io/badge/license-MIT-blue)
 
@@ -30,6 +30,15 @@ v3版本（最新版）
 桌面端：  
 ![v3 桌面端](./src/assets/images/showPic/index_v3_2.jpeg)
 
+v4版本（最新版）
+> 全站更名 **烬途 | Ashpath**：全新篝火 Favicon、站点标题与描述更新、专属 404 页面  
+> ![v4 导航 Logo](./src/assets/images/showPic/Logo_v4.png)  
+> **记录页 UI 现代化重构**：时间线归档布局、主题色联动热力图，移动端自适应  
+> 桌面端：  
+> ![v4 记录页桌面端](./src/assets/images/showPic/Records_v4.png)  
+> 移动端：  
+> ![v4 记录页移动端](./src/assets/images/showPic/Records_v4_mobile.png)
+
 </details>
 
 ## 3. 更新
@@ -43,6 +52,24 @@ v3版本（最新版）
 
 ### 3.2 问题修复
 > 路由模式调整：为兼容 GitHub Pages 的静态托管，将 history 模式改为 hash 模式，避免刷新 404；同时统一 base 路径为 `/`，解决子资源加载失败问题
+
+### 3.3 v4.0 版本更新
+
+**站点更名：烬途 | Ashpath**
+> 踏灰烬而行，记录代码实践、技术思考与旅途札记。
+
+- 站点标题、导航 Logo 更新为「烬途 · Ashpath」，新增搜索引擎描述的 meta description
+- 新增单线篝火 `favicon.svg`（深/浅双主题描边配色），替换原 tiger 图标
+- 新增 404 页面，文案「前路断绝，唯有余烬尚存。」；页脚更新为 Ashpath © 2026
+
+**记录页（Records）UI 现代化重构**
+> 功能零变更，仅重做视觉与信息层级。
+
+- 文章列表改为**时间线归档**：左侧日期列（日 + 月份缩写）+ 连续时间轴 + 节点圆点，hover 高亮联动
+- 卡片化设计：统一圆角、细边框与主题色辉光，保留入场动画与全部筛选交互
+- 侧栏改为吸顶布局：统计卡 + 筛选卡（胶囊化筛选按钮、区块虚线分隔）
+- **配色接入全局主题变量**：热力图色阶跟随设置页主题色实时联动（原为硬编码蓝）
+- 移动端：时间线收起为行内日期，筛选抽屉 / 遮罩 / 触发按钮行为保持不变
 
 ## 4. 安装 (Installation)
 

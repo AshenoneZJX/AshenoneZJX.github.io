@@ -75,13 +75,6 @@ export default {
 </script>
 
 <style scoped>
-@font-face {
-  font-family: 'RobotoMono';
-  src: url('~@/assets/fonts/RobotoMono-VariableFont_wght.ttf') format('truetype');
-  font-weight: 100 900;
-  font-display: swap;
-}
-
 .profile-card {
   background-color: var(--c-shadow-light); /* 稍微深一点的背景 */
   padding: 15px;

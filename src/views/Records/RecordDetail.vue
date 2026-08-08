@@ -27,10 +27,7 @@
               </svg>
               <span style="margin-left: 4px; display: none;">目录</span>
             </button>
-            <button class="back-btn" @click="$router.push('/records')">
-              <img src="@/assets/images/fanhui.svg" class="back-icon" alt="返回" />
-              <span class="back-text">返回</span>
-            </button>
+            <PageBreadcrumb :items="breadcrumbItems" />
           </div>
           <div class="header-info">
             <div class="top-title" v-if="heading">{{ heading }}</div>
@@ -95,6 +92,7 @@
 import records from '@/data/records/records.js'
 import ArticleCatalog from '@/components/Shared/ArticleCatalog.vue'
 import MarkdownViewer from '@/components/Shared/MarkdownViewer.vue'
+import PageBreadcrumb from '@/components/Shared/PageBreadcrumb.vue'
 
 const MONTHS = ['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC']
 
@@ -102,14 +100,20 @@ export default {
   name: 'RecordDetail',
   components: {
     ArticleCatalog,
-    MarkdownViewer
+    MarkdownViewer,
+    PageBreadcrumb
   },
   data() {
     return {
       record: null,
       heading: '',
       showMobileToc: false,
-      showBackTop: false
+      showBackTop: false,
+      breadcrumbItems: [
+        { label: '首页', path: '/' },
+        { label: '日志记录', path: '/records' },
+        { label: '正文' }
+      ]
     }
   },
   computed: {
@@ -179,36 +183,6 @@ export default {
 </script>
 
 <style scoped>
-
-@font-face {
-  font-family: 'SourceHanSansSC';
-  src: url('~@/assets/fonts/SourceHanSansSC-Regular-2.otf') format('opentype');
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'RobotoMono';
-  src: url('~@/assets/fonts/RobotoMono-VariableFont_wght.ttf') format('truetype');
-  font-weight: 100 900;
-  font-display: swap;
-}
-@font-face {
-  font-family: 'MotivaSans';
-  src: url('~@/assets/fonts/MotivaSans-Regular_woff.ttf') format('truetype');
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: 'Georgia';
-  src: url('~@/assets/fonts/Georgia.woff2') format('woff2');
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
 .page-record-detail { 
   --rd-bg: var(--c-bg-l0);
   --rd-surface: #1e1e1e;
@@ -227,10 +201,10 @@ export default {
   --rd-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
   --rd-shadow-soft: 0 8px 24px rgba(0, 0, 0, 0.22);
   position: relative;
-  padding: 60px 20px 60px;
+  padding: 40px 20px 60px;
   margin: 0 auto;
   width: 100%;
-  max-width: 1100px;
+  max-width: 1200px;
   box-sizing: border-box;
   min-height: 100vh;
   background: var(--rd-bg);
@@ -297,13 +271,13 @@ export default {
 .header-top-row {
   display: flex;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: flex-start;
   width: 100%;
   margin-bottom: 12px;
 }
 
 .header-top-row .toc-toggle-btn {
-  margin-right: auto;
+  margin-right: 10px;
 }
 
 .header-placeholder {
@@ -392,13 +366,16 @@ export default {
   background: var(--rd-quote-bg);
 }
 
+/* 分类标签：与列表页统一的静态徽标样式（纯底色、无边框，体现不可交互属性） */
 .tag-cat {
-  display: inline-block;
-  padding: 0;
-  border-radius: 0;
-  font-size: 14px;
-  color: var(--rd-accent);
-  background: transparent;
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  line-height: 1.4;
+  color: var(--rd-accent-strong);
+  background: var(--rd-accent-soft);
   border: none;
   text-transform: none;
   letter-spacing: 0;
@@ -756,7 +733,7 @@ export default {
 }
 
 .detail-body :deep(.content h2) {
-  font-size: 26px;
+  font-size: 22px;
   line-height: 1.4;
   margin: 40px 0 20px;
   padding-bottom: 8px;
@@ -766,7 +743,7 @@ export default {
 }
 
 .detail-body :deep(.content h3) {
-  font-size: 20px;
+  font-size: 18px;
   line-height: 1.4;
   margin: 30px 0 16px;
   font-weight: 600;
@@ -775,7 +752,7 @@ export default {
 }
 
 .detail-body :deep(.content h4) {
-  font-size: 17px;
+  font-size: 15px;
   line-height: 1.4;
   margin: 24px 0 12px;
   font-weight: 600;
@@ -955,7 +932,7 @@ export default {
   .page-record-detail {
     width: 100%;
     max-width: 100%;
-    padding: 64px 20px 40px;
+    padding: 28px 20px 40px;
   }
   .main-layout {
     display: block;
@@ -1018,11 +995,11 @@ export default {
   .sidebar {
     display: block !important;
     position: fixed;
-    top: 0;
+    top: 80px;
     left: 0;
     bottom: auto;
-    height: 100dvh;
-    min-height: 100vh;
+    height: calc(100dvh - 80px);
+    min-height: calc(100vh - 80px);
     width: fit-content;
     max-width: 80vw;
     background: rgba(18, 18, 18, 0.98);
@@ -1048,7 +1025,7 @@ export default {
   .mobile-overlay {
     display: block;
     position: fixed;
-    top: 0;
+    top: 80px;
     left: 0;
     right: 0;
     bottom: 0;
@@ -1149,7 +1126,7 @@ export default {
 
 @media (max-width: 480px) {
   .page-record-detail {
-    padding: 64px 16px 32px;
+    padding: 20px 16px 32px;
   }
 
   .top-actions-row {

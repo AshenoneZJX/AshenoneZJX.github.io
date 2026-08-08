@@ -98,14 +98,6 @@ export default {
 </script>
 
 <style scoped>
-
-@font-face {
-  font-family: 'MotivaSans';
-  src: url('~@/assets/fonts/MotivaSans-Regular_woff.ttf') format('truetype');
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
 .page-professional-detail {
   padding: 0;
   margin: 0;

@@ -170,8 +170,16 @@
         <img src="@/assets/images/核心技术.svg" class="icon" alt="核心技术" /> 核心技术
       </h3>
       <div class="tech-cards-wrapper">
-        <div v-for="(tech, index) in brandInfo.technology" :key="index" class="tech-card">
-          <h4 class="tech-header">{{ tech.title }}</h4>
+        <div
+          v-for="(tech, index) in brandInfo.technology"
+          :key="index"
+          class="tech-card"
+          :style="{ animationDelay: Math.min(index, 8) * 60 + 'ms' }"
+        >
+          <div class="tech-head-row">
+            <span class="tech-index">{{ String(index + 1).padStart(2, '0') }}</span>
+            <h4 class="tech-header">{{ tech.title }}</h4>
+          </div>
           <div class="tech-body">{{ tech.content }}</div>
         </div>
       </div>
@@ -434,20 +442,22 @@ export default {
     getCarMatch (name) {
       const brand = this.brandName
       if (!name || !brand) return null
+      const target = this.normalizeModelName(name)
+      if (!target) return null
       
       for (const c of cars) {
         // 使用 c.brand 优先判断品牌，如果不存在再回退到根据 title 解析
         const b = c.brand || getBrand(c.title)
         if (b === brand) {
-          const model = this.modelNameOf(c)
-          if (model === name) {
+          const model = this.normalizeModelName(this.modelNameOf(c))
+          if (model === target) {
             return { id: c.id, isSpecial: false }
           }
           if (c.specialEdition) {
             const specBrand = c.specialEdition.brand || b
             if (specBrand === brand) {
-              const specModel = this.modelNameOf(c.specialEdition)
-              if (specModel === name) {
+              const specModel = this.normalizeModelName(this.modelNameOf(c.specialEdition))
+              if (specModel === target) {
                 return { id: c.id, isSpecial: true }
               }
             }
@@ -455,6 +465,14 @@ export default {
         }
       }
       return null
+    },
+    /* 车型名归一化：去掉括号注释与空白，忽略大小写，
+       使 "兰德酷路泽 (陆地巡洋舰)" 能匹配到 cars.json 的 "兰德酷路泽" */
+    normalizeModelName (s) {
+      return String(s || '')
+        .replace(/[（(][^（）()]*[）)]/g, '')
+        .replace(/\s+/g, '')
+        .toLowerCase()
     },
     carIdOfModelName (name) {
       const match = this.getCarMatch(name)
@@ -508,31 +526,6 @@ export default {
 </script>
 
 <style scoped>
-
-@font-face {
-  font-family: 'Motiva Sans';
-  src: url('~@/assets/fonts/MotivaSans-Regular_woff.ttf') format('truetype');
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'AlibabaPuHuiTi';
-  src: url('~@/assets/fonts/AlibabaPuHuiTi-3-65-Medium.woff2') format('woff2');
-  font-weight: 500;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'SarasaMonoSC';
-  src: url('~@/assets/fonts/sarasa-mono-sc-nerd-regular.ttf') format('truetype');
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
 h2, h3, h4 {
   font-family: 'AlibabaPuHuiTi', 'Motiva Sans', sans-serif;
 }
@@ -678,48 +671,92 @@ h2, h3, h4 {
 }
 
 .tech-card {
-  flex: 0 0 calc(50% - 10px); /* 减去 gap 的一半 */
-  max-width: calc(50% - 10px); /* 严格限制最大宽度，防止被内部长文本撑开 */
-  min-width: 0; /* 允许 flex 子元素收缩小于内容宽度，解决省略号失效问题 */
+  position: relative;
   box-sizing: border-box;
-  background: #16191C;
-  border-radius: 8px;
-  padding: 8px;
+  min-width: 0; /* 允许 grid 子元素收缩小于内容宽度，解决省略号失效问题 */
+  padding: 20px 22px;
+  background: linear-gradient(150deg, var(--c-bg-l3) 0%, #14171b 100%);
   border: 1px solid var(--c-border-default);
-  box-shadow: 0 4px 12px var(--c-shadow-light);
+  border-radius: 12px;
+  overflow: hidden;
+  transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+  animation: tech-card-in 0.45s ease backwards;
+}
+
+@keyframes tech-card-in {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* 顶部渐变强调条：悬浮时点亮 */
+.tech-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--c-primary), var(--c-primary-alpha-10));
+  opacity: 0.45;
+  transition: opacity 0.25s ease;
+}
+
+.tech-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--c-primary-alpha-40);
+  box-shadow: 0 10px 28px var(--c-shadow-medium);
+}
+.tech-card:hover::before {
+  opacity: 1;
+}
+
+.tech-head-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+  min-width: 0;
+}
+
+/* 序号徽标：等宽数字 + 主色柔光底 */
+.tech-index {
+  flex-shrink: 0;
+  font-family: 'RobotoMono', 'Inter', monospace;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--c-primary);
+  background: var(--c-primary-alpha-10);
+  border: 1px solid var(--c-primary-alpha-20);
+  border-radius: 6px;
+  padding: 2px 7px;
+  line-height: 1.4;
+  font-variant-numeric: tabular-nums;
 }
 
 .tech-header {
   color: var(--c-text-title);
   font-weight: 500;
   font-family: 'AlibabaPuHuiTi', 'Motiva Sans', sans-serif;
-  font-size: 18px;
-  margin: 0 0 12px 0;
-  display: inline-block;
-  position: relative;
-  z-index: 1;
-  max-width: 100%;
+  font-size: 17px;
+  margin: 0;
+  min-width: 0;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  transition: color 0.25s ease;
 }
-
-.tech-header::after {
-  content: '';
-  position: absolute;
-  bottom: 2px;
-  left: 0;
-  width: 100%;
-  height: 8px;
-  background: #486A9D;
-  z-index: -1;
-  border-radius: 2px;
+.tech-card:hover .tech-header {
+  color: var(--c-primary);
 }
 
 .tech-body {
   color: var(--c-text-muted);
   font-size: 14px;
-  line-height: 1.6;
+  line-height: 1.75;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tech-card { animation: none; }
 }
 
 .empty-state {
@@ -807,8 +844,8 @@ h2, h3, h4 {
 }
 
 .tech-cards-wrapper {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 20px;
 }
 
@@ -1162,20 +1199,24 @@ h2, h3, h4 {
     scrollbar-width: none;
     -ms-overflow-style: none;
     scroll-behavior: smooth;
+    scroll-snap-type: x mandatory;
   }
   .tech-cards-wrapper::-webkit-scrollbar {
     display: none;
   }
   .tech-card {
-    padding: 12px;
+    padding: 16px;
     flex: 0 0 auto;
     width: 76vw;
     max-width: 280px;
     min-width: 240px;
+    scroll-snap-align: start;
+  }
+  .tech-head-row {
+    margin-bottom: 10px;
   }
   .tech-header {
-    font-size: 16px;
-    margin: 0 0 10px 0;
+    font-size: 15px;
   }
   .tech-body {
     font-size: 13px;

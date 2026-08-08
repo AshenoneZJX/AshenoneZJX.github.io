@@ -1,0 +1,507 @@
+{
+  "title": "近半年汽车销量榜",
+  "source": "https://www.dongchedi.com/sales/sale-x-500-x-x-x-x",
+  "updatedAt": "2026-07-18",
+  "items": [
+    {
+      "rank": 1,
+      "seriesName": "星愿",
+      "sales": 194159,
+      "brand": "吉利银河",
+      "manufacturer": "吉利银河",
+      "priceRange": "5.98-9.18万",
+      "lastRank": null,
+      "seriesId": 20154
+    },
+    {
+      "rank": 2,
+      "seriesName": "Model Y",
+      "sales": 172513,
+      "brand": "特斯拉",
+      "manufacturer": "特斯拉中国",
+      "priceRange": "26.35-31.35万",
+      "lastRank": null,
+      "seriesId": 4363
+    },
+    {
+      "rank": 3,
+      "seriesName": "理想i6",
+      "sales": 120443,
+      "brand": "理想汽车",
+      "manufacturer": "理想汽车",
+      "priceRange": "24.98-26.98万",
+      "lastRank": null,
+      "seriesId": 25557
+    },
+    {
+      "rank": 4,
+      "seriesName": "博越L",
+      "sales": 110621,
+      "brand": "吉利汽车",
+      "manufacturer": "吉利汽车",
+      "priceRange": "9.29-11.99万",
+      "lastRank": null,
+      "seriesId": 6025
+    },
+    {
+      "rank": 5,
+      "seriesName": "小米YU7",
+      "sales": 104559,
+      "brand": "小米汽车",
+      "manufacturer": "小米汽车",
+      "priceRange": "23.35-38.99万",
+      "lastRank": null,
+      "seriesId": 20041
+    },
+    {
+      "rank": 6,
+      "seriesName": "朗逸",
+      "sales": 100465,
+      "brand": "大众",
+      "manufacturer": "上汽大众",
+      "priceRange": "6.10-9.39万",
+      "lastRank": null,
+      "seriesId": 393
+    },
+    {
+      "rank": 7,
+      "seriesName": "轩逸",
+      "sales": 95129,
+      "brand": "日产",
+      "manufacturer": "东风日产",
+      "priceRange": "6.19-14.19万",
+      "lastRank": null,
+      "seriesId": 1145
+    },
+    {
+      "rank": 8,
+      "seriesName": "钛7 PHEV",
+      "sales": 88609,
+      "brand": "方程豹",
+      "manufacturer": "方程豹",
+      "priceRange": "17.98-21.98万",
+      "lastRank": null,
+      "seriesId": 25559
+    },
+    {
+      "rank": 9,
+      "seriesName": "凯美瑞",
+      "sales": 85981,
+      "brand": "丰田",
+      "manufacturer": "广汽丰田",
+      "priceRange": "12.98-21.78万",
+      "lastRank": null,
+      "seriesId": 535
+    },
+    {
+      "rank": 10,
+      "seriesName": "速腾",
+      "sales": 84591,
+      "brand": "大众",
+      "manufacturer": "一汽-大众",
+      "priceRange": "7.98-13.19万",
+      "lastRank": null,
+      "seriesId": 414
+    },
+    {
+      "rank": 11,
+      "seriesName": "途观L",
+      "sales": 82806,
+      "brand": "大众",
+      "manufacturer": "上汽大众",
+      "priceRange": "12.18-20.38万",
+      "lastRank": null,
+      "seriesId": 404
+    },
+    {
+      "rank": 12,
+      "seriesName": "元UP",
+      "sales": 82670,
+      "brand": "比亚迪",
+      "manufacturer": "比亚迪",
+      "priceRange": "6.98-10.48万",
+      "lastRank": null,
+      "seriesId": 9689
+    },
+    {
+      "rank": 13,
+      "seriesName": "帕萨特",
+      "sales": 82572,
+      "brand": "大众",
+      "manufacturer": "上汽大众",
+      "priceRange": "12.35-26.88万",
+      "lastRank": null,
+      "seriesId": 398
+    },
+    {
+      "rank": 14,
+      "seriesName": "星越L",
+      "sales": 82264,
+      "brand": "吉利汽车",
+      "manufacturer": "吉利汽车",
+      "priceRange": "12.47-16.17万",
+      "lastRank": null,
+      "seriesId": 4857
+    },
+    {
+      "rank": 15,
+      "seriesName": "小米SU7",
+      "sales": 80496,
+      "brand": "小米汽车",
+      "manufacturer": "小米汽车",
+      "priceRange": "21.99-30.39万",
+      "lastRank": null,
+      "seriesId": 6187
+    },
+    {
+      "rank": 16,
+      "seriesName": "锋兰达",
+      "sales": 78625,
+      "brand": "丰田",
+      "manufacturer": "广汽丰田",
+      "priceRange": "9.08-13.08万",
+      "lastRank": null,
+      "seriesId": 5369
+    },
+    {
+      "rank": 17,
+      "seriesName": "蔚来ES8",
+      "sales": 78618,
+      "brand": "蔚来",
+      "manufacturer": "蔚来",
+      "priceRange": "38.28-44.68万",
+      "lastRank": null,
+      "seriesId": 1616
+    },
+    {
+      "rank": 18,
+      "seriesName": "迈腾",
+      "sales": 76776,
+      "brand": "大众",
+      "manufacturer": "一汽-大众",
+      "priceRange": "11.99-21.69万",
+      "lastRank": null,
+      "seriesId": 415
+    },
+    {
+      "rank": 19,
+      "seriesName": "宋Pro DM",
+      "sales": 76298,
+      "brand": "比亚迪",
+      "manufacturer": "比亚迪",
+      "priceRange": "9.78-12.99万",
+      "lastRank": null,
+      "seriesId": 3504
+    },
+    {
+      "rank": 20,
+      "seriesName": "探岳",
+      "sales": 73469,
+      "brand": "大众",
+      "manufacturer": "一汽-大众",
+      "priceRange": "13.19-20.49万",
+      "lastRank": null,
+      "seriesId": 2835
+    },
+    {
+      "rank": 21,
+      "seriesName": "长安CS75 PLUS",
+      "sales": 72962,
+      "brand": "长安",
+      "manufacturer": "长安汽车",
+      "priceRange": "9.19-13.59万",
+      "lastRank": null,
+      "seriesId": 3196
+    },
+    {
+      "rank": 22,
+      "seriesName": "五菱宏光MINIEV",
+      "sales": 72799,
+      "brand": "五菱汽车",
+      "manufacturer": "上汽通用五菱",
+      "priceRange": "3.28-5.28万",
+      "lastRank": null,
+      "seriesId": 4499
+    },
+    {
+      "rank": 23,
+      "seriesName": "长安启源Q05",
+      "sales": 71582,
+      "brand": "长安启源",
+      "manufacturer": "长安启源",
+      "priceRange": "6.99-10.99万",
+      "lastRank": null,
+      "seriesId": 25634
+    },
+    {
+      "rank": 24,
+      "seriesName": "MG4",
+      "sales": 70753,
+      "brand": "名爵",
+      "manufacturer": "上汽集团",
+      "priceRange": "6.58-9.98万",
+      "lastRank": null,
+      "seriesId": 5828
+    },
+    {
+      "rank": 25,
+      "seriesName": "海豚",
+      "sales": 69113,
+      "brand": "比亚迪",
+      "manufacturer": "比亚迪",
+      "priceRange": "9.18-11.78万",
+      "lastRank": null,
+      "seriesId": 5008
+    },
+    {
+      "rank": 26,
+      "seriesName": "本田CR-V",
+      "sales": 69089,
+      "brand": "本田",
+      "manufacturer": "东风本田",
+      "priceRange": "13.99-20.99万",
+      "lastRank": null,
+      "seriesId": 280
+    },
+    {
+      "rank": 27,
+      "seriesName": "RAV4荣放",
+      "sales": 68874,
+      "brand": "丰田",
+      "manufacturer": "一汽丰田",
+      "priceRange": "14.68-20.58万",
+      "lastRank": null,
+      "seriesId": 546
+    },
+    {
+      "rank": 28,
+      "seriesName": "问界M7",
+      "sales": 68000,
+      "brand": "AITO",
+      "manufacturer": "赛力斯汽车",
+      "priceRange": "27.98-38.98万",
+      "lastRank": null,
+      "seriesId": 5820
+    },
+    {
+      "rank": 29,
+      "seriesName": "星瑞",
+      "sales": 67981,
+      "brand": "吉利汽车",
+      "manufacturer": "吉利汽车",
+      "priceRange": "9.37-13.67万",
+      "lastRank": null,
+      "seriesId": 3476
+    },
+    {
+      "rank": 30,
+      "seriesName": "卡罗拉锐放",
+      "sales": 67793,
+      "brand": "丰田",
+      "manufacturer": "一汽丰田",
+      "priceRange": "9.38-12.68万",
+      "lastRank": null,
+      "seriesId": 5382
+    },
+    {
+      "rank": 31,
+      "seriesName": "Model 3",
+      "sales": 66442,
+      "brand": "特斯拉",
+      "manufacturer": "特斯拉中国",
+      "priceRange": "23.55-33.95万",
+      "lastRank": null,
+      "seriesId": 3762
+    },
+    {
+      "rank": 32,
+      "seriesName": "缤越",
+      "sales": 66359,
+      "brand": "吉利汽车",
+      "manufacturer": "吉利汽车",
+      "priceRange": "5.88-8.58万",
+      "lastRank": null,
+      "seriesId": 2975
+    },
+    {
+      "rank": 33,
+      "seriesName": "零跑A10",
+      "sales": 65511,
+      "brand": "零跑汽车",
+      "manufacturer": "零跑汽车",
+      "priceRange": "6.58-8.68万",
+      "lastRank": null,
+      "seriesId": 9267
+    },
+    {
+      "rank": 34,
+      "seriesName": "宝马3系",
+      "sales": 65448,
+      "brand": "宝马",
+      "manufacturer": "华晨宝马",
+      "priceRange": "20.80-31.80万",
+      "lastRank": null,
+      "seriesId": 145
+    },
+    {
+      "rank": 35,
+      "seriesName": "海狮06EV",
+      "sales": 63270,
+      "brand": "比亚迪",
+      "manufacturer": "比亚迪",
+      "priceRange": "14.38-17.99万",
+      "lastRank": null,
+      "seriesId": 25400
+    },
+    {
+      "rank": 36,
+      "seriesName": "小鹏MONA M03",
+      "sales": 62312,
+      "brand": "小鹏汽车",
+      "manufacturer": "小鹏汽车",
+      "priceRange": "11.98-15.18万",
+      "lastRank": null,
+      "seriesId": 10170
+    },
+    {
+      "rank": 37,
+      "seriesName": "深蓝S05",
+      "sales": 61904,
+      "brand": "深蓝汽车",
+      "manufacturer": "深蓝汽车",
+      "priceRange": "10.69-13.69万",
+      "lastRank": null,
+      "seriesId": 10213
+    },
+    {
+      "rank": 38,
+      "seriesName": "瑞虎8",
+      "sales": 61320,
+      "brand": "奇瑞",
+      "manufacturer": "奇瑞汽车",
+      "priceRange": "7.99-11.99万",
+      "lastRank": null,
+      "seriesId": 2794
+    },
+    {
+      "rank": 39,
+      "seriesName": "奔驰E级",
+      "sales": 61225,
+      "brand": "奔驰",
+      "manufacturer": "北京奔驰",
+      "priceRange": "25.88-39.18万",
+      "lastRank": null,
+      "seriesId": 214
+    },
+    {
+      "rank": 40,
+      "seriesName": "奥迪A6L",
+      "sales": 59253,
+      "brand": "奥迪",
+      "manufacturer": "一汽奥迪",
+      "priceRange": "27.39-45.67万",
+      "lastRank": null,
+      "seriesId": 99
+    },
+    {
+      "rank": 41,
+      "seriesName": "逸动",
+      "sales": 58634,
+      "brand": "长安",
+      "manufacturer": "长安汽车",
+      "priceRange": "5.29-8.99万",
+      "lastRank": null,
+      "seriesId": 1455
+    },
+    {
+      "rank": 42,
+      "seriesName": "帝豪",
+      "sales": 56536,
+      "brand": "吉利汽车",
+      "manufacturer": "吉利汽车",
+      "priceRange": "4.88-8.89万",
+      "lastRank": null,
+      "seriesId": 733
+    },
+    {
+      "rank": 43,
+      "seriesName": "哈弗大狗",
+      "sales": 55195,
+      "brand": "哈弗",
+      "manufacturer": "长城汽车",
+      "priceRange": "9.09-11.69万",
+      "lastRank": null,
+      "seriesId": 4563
+    },
+    {
+      "rank": 44,
+      "seriesName": "海鸥",
+      "sales": 55105,
+      "brand": "比亚迪",
+      "manufacturer": "比亚迪",
+      "priceRange": "6.68-8.59万",
+      "lastRank": null,
+      "seriesId": 5952
+    },
+    {
+      "rank": 45,
+      "seriesName": "红旗H5",
+      "sales": 53883,
+      "brand": "红旗",
+      "manufacturer": "一汽红旗",
+      "priceRange": "10.98-16.58万",
+      "lastRank": null,
+      "seriesId": 6132
+    },
+    {
+      "rank": 46,
+      "seriesName": "零跑C10",
+      "sales": 53757,
+      "brand": "零跑汽车",
+      "manufacturer": "零跑汽车",
+      "priceRange": "12.08-14.28万",
+      "lastRank": null,
+      "seriesId": 9307
+    },
+    {
+      "rank": 47,
+      "seriesName": "奔驰GLC",
+      "sales": 52537,
+      "brand": "奔驰",
+      "manufacturer": "北京奔驰",
+      "priceRange": "25.22-36.50万",
+      "lastRank": null,
+      "seriesId": 216
+    },
+    {
+      "rank": 48,
+      "seriesName": "秦PLUS DM",
+      "sales": 51610,
+      "brand": "比亚迪",
+      "manufacturer": "比亚迪",
+      "priceRange": "6.78-9.48万",
+      "lastRank": null,
+      "seriesId": 4802
+    },
+    {
+      "rank": 49,
+      "seriesName": "奥迪Q5L",
+      "sales": 51363,
+      "brand": "奥迪",
+      "manufacturer": "一汽奥迪",
+      "priceRange": "23.79-35.58万",
+      "lastRank": null,
+      "seriesId": 2916
+    },
+    {
+      "rank": 50,
+      "seriesName": "昂科威",
+      "sales": 51096,
+      "brand": "别克",
+      "manufacturer": "上汽通用别克",
+      "priceRange": "16.39-19.39万",
+      "lastRank": null,
+      "seriesId": 352
+    }
+  ]
+}

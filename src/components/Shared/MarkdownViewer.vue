@@ -261,44 +261,6 @@ export default {
 </script>
 
 <style scoped>
-@font-face {
-  font-family: 'Inter';
-  src: url('../../assets/fonts/Inter-var.ttf') format('truetype');
-  font-weight: 100 900;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'AlibabaPuHuiTi';
-  src: url('../../assets/fonts/AlibabaPuHuiTi-3-55-Regular.woff2') format('woff2');
-  font-weight: 400;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'FiraCode';
-  src: url('../../assets/fonts/FiraCode-VF.woff2') format('woff2');
-  font-weight: 300 700;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'GeorgiaSerif';
-  src: url('../../assets/fonts/Georgia.woff2') format('woff2');
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'SarasaMonoSCNerd';
-  src: url('../../assets/fonts/sarasa-mono-sc-nerd-regular.ttf') format('truetype');
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
 .content { 
   --md-body-font-size: 17px;
   --md-body-line-height: 1.65;

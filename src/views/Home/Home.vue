@@ -16,9 +16,32 @@
       </div>
 
       <div class="middle-col content-panel">
+        <div class="quick-access-panel">
+          <h3 class="quick-access-header">
+            <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="section-icon"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+            快捷入口
+          </h3>
+          <div class="quick-access-list">
+            <router-link v-for="link in quickLinks" :key="link.path" :to="link.path" class="quick-access-card">
+              <div class="qa-card-bg"></div>
+              <div class="qa-card-content">
+                <div class="qa-icon-wrapper">
+                  <svg viewBox="0 0 24 24" width="22" height="22" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" v-html="link.icon"></svg>
+                </div>
+                <div class="qa-text">
+                  <span class="qa-title">{{ link.title }}</span>
+                  <span class="qa-desc">{{ link.desc }}</span>
+                </div>
+                <svg class="qa-arrow" viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none"><polyline points="9 18 15 12 9 6"></polyline></svg>
+              </div>
+              <div class="qa-tooltip">{{ link.title }}</div>
+            </router-link>
+          </div>
+        </div>
+
         <div class="steam-article">
            <section class="article-section intro-section">
-             <p>这是一个采用 Steam 风格的个人网站，基于三栏响应式布局与深色主题构建。融合了 Windows 11 Mica 材质效果与 Motiva Sans 字体，模块化呈现个人资料、日志记录、车型数据库与主题空间。</p>
+             <p>这是一个采用 Steam 风格的个人网站，基于双栏响应式布局与深色主题构建。融合了 Windows 11 Mica 材质效果与 Motiva Sans 字体，模块化呈现个人资料、活动记录、车辆数据库、数码与摄影空间，以及学习空间等内容。</p>
            </section>
            
            <section class="article-section module-section">
@@ -32,20 +55,24 @@
                   <span class="desc-text">固定展示头像、昵称、签名与社交链接。</span>
                 </li>
                 <li>
-                  <span class="desc-label">快捷入口（右侧）</span>
-                  <span class="desc-text">提供车型总览、品牌介绍等快速导航功能。</span>
+                  <span class="desc-label">快捷入口（顶部）</span>
+                  <span class="desc-text">集成本站主要页面的快速导航，覆盖汽车、数码、摄影、记录、学习等模块。</span>
                 </li>
                 <li>
                   <span class="desc-label">活动记录（Records）</span>
-                  <span class="desc-text">两栏响应式设计，列表呈现日志条目，支持按分类与日期筛选；详情页配备顶部工具栏与大纲导航。</span>
+                  <span class="desc-text">两栏响应式设计，列表呈现日志条目，支持按分类与时间维度组合筛选；详情页配备顶部工具栏与大纲导航。</span>
                 </li>
                 <li>
                   <span class="desc-label">车辆数据库（Cars）</span>
-                  <span class="desc-text">作为子系统深度集成，包含数据大盘（可视化图表）、车型列表、参数详情、品牌历史与汽车基础知识，支持移动端手势交互与沉浸式浏览。</span>
+                  <span class="desc-text">作为子系统深度集成，包含数据大盘（可视化图表）、车型列表、参数详情、品牌历史、汽车基础知识与相关资料文档，支持移动端手势交互与沉浸式浏览。</span>
                 </li>
                 <li>
                   <span class="desc-label">个人空间（MySpace）</span>
                   <span class="desc-text">层级化路由架构，聚合汽车、电子数码、摄影等兴趣主题的评测与作品集。</span>
+                </li>
+                <li>
+                  <span class="desc-label">学习空间（Learning）</span>
+                  <span class="desc-text">承载学习计划与长期学习记录，目前包含雅思（IELTS）备考专栏，持续沉淀学习内容。</span>
                 </li>
                 <li>
                   <span class="desc-label">主题与交互</span>
@@ -59,7 +86,7 @@
                <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none" class="section-icon"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
                活动记录 (Records)
              </h3>
-             <p>近期重构了 <strong>Records</strong> 页面，使其具备了更为专业的后台管理系统风格：</p>
+             <p><strong>Records</strong> 页面采用专业的后台管理系统风格，用于沉淀日常记录与长文内容：</p>
              <ul class="desc-list">
                <li>
                  <span class="desc-label">两栏响应式布局</span>
@@ -81,7 +108,8 @@
                <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none" class="section-icon"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
                个人空间 (MySpace)
              </h3>
-           <div class="architecture-diagram">
+           <div class="architecture-diagram" ref="archDiagram">
+            <div class="arch-scale" ref="archScale" :style="{ transform: 'scale(' + archScale + ')' }">
              <div class="arch-root">
                <div class="arch-node arch-root-node">
                  <span class="node-title">MySpace</span>
@@ -93,13 +121,8 @@
                <!-- Branch 1: Cars System -->
                <div class="arch-branch">
                  <div class="arch-node arch-primary-node">
-                   <div class="node-icon">
-                     <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none"><path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2"/><circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/><path d="M5 17h2v-6H5v6z"/></svg>
-                   </div>
-                   <div class="node-text">
-                     <span class="node-title">Cars (汽车)</span>
-                     <span class="node-desc">独立数据系统</span>
-                   </div>
+                   <span class="node-title">Cars (汽车)</span>
+                   <span class="node-path">/mySpace/cars-home</span>
                  </div>
                  <div class="arch-leaves">
                    <div class="arch-leaf"><span class="leaf-name">CarsHome</span><span class="leaf-arrow">→</span><span class="leaf-target">大盘</span></div>
@@ -112,105 +135,60 @@
                <!-- Branch 2: Digital -->
                <div class="arch-branch">
                  <div class="arch-node arch-secondary-node">
-                   <div class="node-icon">
-                     <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none"><rect x="4" y="4" width="16" height="16" rx="2" ry="2"></rect><rect x="9" y="9" width="6" height="6"></rect></svg>
-                   </div>
-                   <div class="node-text">
-                     <span class="node-title">Digital (数码)</span>
-                     <span class="node-desc">清单与选型</span>
-                   </div>
+                   <span class="node-title">Digital (数码)</span>
+                   <span class="node-path">/mySpace/digital</span>
                  </div>
                </div>
 
                <!-- Branch 3: Photography -->
                <div class="arch-branch">
                  <div class="arch-node arch-secondary-node">
-                   <div class="node-icon">
-                     <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path><circle cx="12" cy="13" r="4"></circle></svg>
-                   </div>
-                   <div class="node-text">
-                     <span class="node-title">Photography</span>
-                     <span class="node-desc">作品与器材</span>
-                   </div>
+                   <span class="node-title">Photography</span>
+                   <span class="node-path">/mySpace/photography</span>
                  </div>
                </div>
              </div>
+            </div>
            </div>
            
-           <div class="myspace-features-header">
-              <span class="feature-tag">核心专栏</span>
-              <span class="feature-subtitle">三大并列入口，探索多元兴趣空间</span>
-            </div>
+           <h3 class="myspace-features-header">
+              <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none" class="section-icon"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+              核心专栏
+            </h3>
  
             <div class="myspace-feature-grid">
-              <div class="feature-card highlight-card">
-                <div class="feature-icon">
-                  <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2"/><circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/><path d="M5 17h2v-6H5v6z"/></svg>
-                </div>
-                <div class="feature-content">
+              <div class="feature-card">
+                <div class="feature-card-head">
+                  <span class="feature-icon">
+                    <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2"/><circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/><path d="M5 17h2v-6H5v6z"/></svg>
+                  </span>
                   <h4 class="feature-title">Cars 汽车系统</h4>
-                  <p class="feature-desc">深度集成的车辆数据中心，涵盖可视化大盘、多维车型检索、参数配置详情与品牌知识百科。</p>
                 </div>
+                <p class="feature-desc">深度集成的车辆数据中心，涵盖可视化大盘、多维车型检索、参数配置详情与品牌知识百科。</p>
               </div>
               
               <div class="feature-card">
-                <div class="feature-icon">
-                  <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2" ry="2"></rect><rect x="9" y="9" width="6" height="6"></rect><line x1="9" y1="1" x2="9" y2="4"></line><line x1="15" y1="1" x2="15" y2="4"></line><line x1="9" y1="20" x2="9" y2="23"></line><line x1="15" y1="20" x2="15" y2="23"></line><line x1="20" y1="9" x2="23" y2="9"></line><line x1="20" y1="14" x2="23" y2="14"></line><line x1="1" y1="9" x2="4" y2="9"></line><line x1="1" y1="14" x2="4" y2="14"></line></svg>
-                </div>
-                <div class="feature-content">
+                <div class="feature-card-head">
+                  <span class="feature-icon">
+                    <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2" ry="2"></rect><rect x="9" y="9" width="6" height="6"></rect><line x1="9" y1="1" x2="9" y2="4"></line><line x1="15" y1="1" x2="15" y2="4"></line><line x1="9" y1="20" x2="9" y2="23"></line><line x1="15" y1="20" x2="15" y2="23"></line><line x1="20" y1="9" x2="23" y2="9"></line><line x1="20" y1="14" x2="23" y2="14"></line><line x1="1" y1="9" x2="4" y2="9"></line><line x1="1" y1="14" x2="4" y2="14"></line></svg>
+                  </span>
                   <h4 class="feature-title">Digital 数码专区</h4>
-                  <p class="feature-desc">记录常用数码设备的配置清单，分享硬核评测心得、折腾历程与选型避坑指南。</p>
                 </div>
+                <p class="feature-desc">记录常用数码设备的配置清单，分享硬核评测心得、折腾历程与选型避坑指南。</p>
               </div>
               
               <div class="feature-card">
-                <div class="feature-icon">
-                  <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path><circle cx="12" cy="13" r="4"></circle></svg>
-                </div>
-                <div class="feature-content">
+                <div class="feature-card-head">
+                  <span class="feature-icon">
+                    <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path><circle cx="12" cy="13" r="4"></circle></svg>
+                  </span>
                   <h4 class="feature-title">Photography 摄影图集</h4>
-                  <p class="feature-desc">定格光影瞬间的画廊，直观呈现精选摄影作品，并记录背后的器材与详尽拍摄参数。</p>
                 </div>
+                <p class="feature-desc">定格光影瞬间的画廊，直观呈现精选摄影作品，并记录背后的器材与详尽拍摄参数。</p>
               </div>
             </div>
             </section>
           </div>
-      </div>
-
-      <div class="right-col quick-access-panel">
-        <div class="quick-access-header">
-          <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="header-icon"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
-          <span class="quick-access-title">快捷入口</span>
-        </div>
-        <div class="quick-access-list">
-          <router-link to="/mySpace/cars" class="quick-access-card">
-            <div class="qa-card-bg qa-bg-cars"></div>
-            <div class="qa-card-content">
-              <div class="qa-icon-wrapper">
-                <svg viewBox="0 0 24 24" width="22" height="22" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2"/><circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/><path d="M5 17h2v-6H5v6z"/></svg>
-              </div>
-              <div class="qa-text">
-                <span class="qa-title">车型总览</span>
-                <span class="qa-desc">车辆数据系统</span>
-              </div>
-              <svg class="qa-arrow" viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none"><polyline points="9 18 15 12 9 6"></polyline></svg>
-            </div>
-          </router-link>
-
-          <router-link to="/mySpace/brands" class="quick-access-card">
-            <div class="qa-card-bg qa-bg-brands"></div>
-            <div class="qa-card-content">
-              <div class="qa-icon-wrapper">
-                <svg viewBox="0 0 24 24" width="22" height="22" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line></svg>
-              </div>
-              <div class="qa-text">
-                <span class="qa-title">品牌介绍</span>
-                <span class="qa-desc">汽车品牌百科</span>
-              </div>
-              <svg class="qa-arrow" viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none"><polyline points="9 18 15 12 9 6"></polyline></svg>
-            </div>
-          </router-link>
-        </div>
       </div>
     </div>
   </div>
@@ -223,47 +201,63 @@ export default {
   name: 'Home',
   components: {
     ProfileCard
+  },
+  data () {
+    return {
+      archScale: 1,
+      // 快捷入口：集成本站主要页面
+      quickLinks: [
+        { path: '/mySpace/cars-home', title: '汽车主页', desc: '数据大盘与入口', icon: '<rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect>' },
+        { path: '/mySpace/cars', title: '车型总览', desc: '车辆数据系统', icon: '<path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2"/><circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/><path d="M5 17h2v-6H5v6z"/>' },
+        { path: '/mySpace/brands', title: '品牌介绍', desc: '汽车品牌百科', icon: '<path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line>' },
+        { path: '/mySpace/car-basics', title: '汽车基础知识', desc: '入门到进阶', icon: '<path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>' },
+        { path: '/mySpace/car-docs', title: '相关资料', desc: '文档在线阅读', icon: '<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line>' },
+        { path: '/mySpace/digital', title: '数码专区', desc: '清单与选型', icon: '<rect x="4" y="4" width="16" height="16" rx="2" ry="2"></rect><rect x="9" y="9" width="6" height="6"></rect><line x1="9" y1="1" x2="9" y2="4"></line><line x1="15" y1="1" x2="15" y2="4"></line><line x1="9" y1="20" x2="9" y2="23"></line><line x1="15" y1="20" x2="15" y2="23"></line><line x1="20" y1="9" x2="23" y2="9"></line><line x1="20" y1="14" x2="23" y2="14"></line><line x1="1" y1="9" x2="4" y2="9"></line><line x1="1" y1="14" x2="4" y2="14"></line>' },
+        { path: '/mySpace/photography', title: '摄影图集', desc: '作品与器材', icon: '<path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path><circle cx="12" cy="13" r="4"></circle>' },
+        { path: '/records', title: '日志记录', desc: '日志与多维筛选', icon: '<line x1="8" y1="6" x2="21" y2="6"></line><line x1="8" y1="12" x2="21" y2="12"></line><line x1="8" y1="18" x2="21" y2="18"></line><line x1="3" y1="6" x2="3.01" y2="6"></line><line x1="3" y1="12" x2="3.01" y2="12"></line><line x1="3" y1="18" x2="3.01" y2="18"></line>' },
+        { path: '/learning', title: '学习空间', desc: '学习计划与记录', icon: '<path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>' }
+      ]
+    }
+  },
+  methods: {
+    // 根据父容器宽度等比缩放架构图，保证完整显示、不出现横向滚动条
+    updateArchScale () {
+      const container = this.$refs.archDiagram
+      const scaleEl = this.$refs.archScale
+      if (!container || !scaleEl) return
+      if (window.matchMedia('(max-width: 768px)').matches) {
+        this.archScale = 1
+        container.style.height = ''
+        scaleEl.style.marginLeft = ''
+        return
+      }
+      // offsetWidth/offsetHeight 不受 transform 影响，拿到的是自然尺寸
+      const naturalWidth = scaleEl.offsetWidth
+      const naturalHeight = scaleEl.offsetHeight
+      if (!naturalWidth) return
+      const cs = getComputedStyle(container)
+      const padX = parseFloat(cs.paddingLeft) + parseFloat(cs.paddingRight)
+      const padY = parseFloat(cs.paddingTop) + parseFloat(cs.paddingBottom)
+      const availW = container.clientWidth - padX
+      const scale = Math.min(1, availW / naturalWidth)
+      this.archScale = scale
+      // transform 不改变布局：手动把容器高度设为缩放后的可视高度，
+      // 并用左边距把缩放后的图形在容器内水平居中（flex 的 auto 边距在溢出时会失效导致右侧被裁）
+      container.style.height = (naturalHeight * scale + padY) + 'px'
+      scaleEl.style.marginLeft = Math.max(0, (availW - naturalWidth * scale) / 2) + 'px'
+    }
+  },
+  mounted () {
+    this.$nextTick(this.updateArchScale)
+    window.addEventListener('resize', this.updateArchScale)
+  },
+  beforeDestroy () {
+    window.removeEventListener('resize', this.updateArchScale)
   }
 }
 </script>
 
-<style>
-/* Light Mode 针对首页 Hero 区域的独立样式覆盖 */
-[data-theme="light"] .home-view {
-  background: var(--c-bg-l1) !important;
-  background-color: var(--c-bg-l1) !important;
-}
-[data-theme="light"] .home-view .hero-section {
-  background-image: url('~@/assets/images/bg.png') !important;
-  background-size: cover !important;
-  background-repeat: no-repeat !important;
-  background-position: center center !important;
-  background-attachment: fixed !important;
-}
-[data-theme="light"] .home-view .hero-overlay {
-  background: rgba(9, 14, 22, 0.62) !important;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
-}
-[data-theme="light"] .home-view .quote {
-  color: #e6edf3 !important;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.45);
-  font-weight: 500;
-}
-[data-theme="light"] .home-view .quote-author {
-  color: #4daafc !important;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.45);
-}
-</style>
-
 <style scoped>
-@font-face {
-  font-family: 'SourceHanSansSC';
-  src: url('~@/assets/fonts/SourceHanSansSC-Regular-2.otf') format('opentype');
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
 /* Home View 整体作为背景承载 */
 .home-view {
   background-color: var(--c-bg-l1);
@@ -349,56 +343,51 @@ export default {
   border: 1px solid var(--c-border-hover);
   box-shadow: 0 10px 28px var(--c-shadow-medium);
 }
-.right-col { width: 250px; flex-shrink: 0; position: sticky; top: 104px; }
 
 .left-col :deep(.languages-section) {
   padding: 0 14px;
   box-sizing: border-box;
 }
 
-/* Quick Access Styles 重构 */
+/* Quick Access Styles 重构：位于中栏顶部，网格布局 */
+/* 父容器不再使用边框与底色，仅作为布局容器，使中栏更紧凑 */
 .quick-access-panel {
-  background: #181a1d;
-  padding: 20px;
-  border-radius: 12px;
-  border: 1px solid #2d333b;
-  box-shadow: 0 10px 28px var(--c-shadow-medium);
-}
-
-.quick-access-header {
-  display: flex;
-  align-items: center;
-  gap: 8px;
+  padding: 0;
   margin-bottom: 20px;
 }
 
-.header-icon {
-  color: #58a6ff;
-}
-
-.quick-access-title {
-  font-size: 16px;
+/* 标题样式与 article-section 的 h3 保持统一 */
+.quick-access-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 20px;
+  line-height: 1.4;
+  margin: 0 0 14px 0;
+  font-family: 'SourceHanSansSC', sans-serif;
   color: var(--c-text-title);
   font-weight: 600;
-  font-family: 'SourceHanSansSC', sans-serif;
   letter-spacing: 0.5px;
 }
 
 .quick-access-list {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
   gap: 12px;
 }
 
 .quick-access-card {
   position: relative;
-  display: block;
+  display: flex;
+  align-items: center; /* 内容在固定高度的卡片内垂直居中 */
+  height: 64px; /* 固定卡片尺寸，不随内容多少变化 */
   border-radius: 10px;
-  overflow: hidden;
+  overflow: visible; /* 允许 tooltip 溢出显示，圆角裁剪由 qa-card-bg 承担 */
   text-decoration: none;
   background: #21262d;
   border: 1px solid #30363d;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-sizing: border-box;
 }
 
 .quick-access-card:hover {
@@ -416,14 +405,32 @@ export default {
   opacity: 0.05;
   transition: opacity 0.3s ease;
   z-index: 1;
-}
-
-.qa-bg-cars {
   background: linear-gradient(135deg, transparent 0%, #58a6ff 100%);
+  border-radius: inherit; /* 卡片改为 overflow: visible 后，由背景层保持圆角外观 */
 }
 
-.qa-bg-brands {
-  background: linear-gradient(135deg, transparent 0%, #3fb950 100%);
+/* 悬浮显示完整标题的 tooltip */
+.qa-tooltip {
+  position: absolute;
+  bottom: calc(100% + 6px);
+  left: 50%;
+  transform: translateX(-50%) translateY(4px);
+  background: #2d333b;
+  color: var(--c-text-emphasis);
+  border: 1px solid #444c56;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 12px;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  z-index: 10;
+}
+
+.quick-access-card:hover .qa-tooltip {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
 }
 
 .quick-access-card:hover .qa-card-bg {
@@ -433,10 +440,13 @@ export default {
 .qa-card-content {
   position: relative;
   z-index: 2;
-  padding: 16px;
+  padding: 10px 12px;
   display: flex;
-  align-items: center;
-  gap: 14px;
+  align-items: flex-start; /* 内部图标与文字顶端对齐 */
+  gap: 10px;
+  flex: 1;
+  min-width: 0;
+  box-sizing: border-box;
 }
 
 .qa-icon-wrapper {
@@ -458,17 +468,12 @@ export default {
   border-color: rgba(88, 166, 255, 0.2);
 }
 
-.quick-access-card:nth-child(2):hover .qa-icon-wrapper {
-  background: rgba(63, 185, 80, 0.1);
-  color: #3fb950;
-  border-color: rgba(63, 185, 80, 0.2);
-}
-
 .qa-text {
   flex: 1;
   display: flex;
   flex-direction: column;
   gap: 4px;
+  min-width: 0;
 }
 
 .qa-title {
@@ -476,19 +481,21 @@ export default {
   font-size: 15px;
   font-weight: 600;
   transition: color 0.3s ease;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .quick-access-card:hover .qa-title {
   color: #58a6ff;
 }
 
-.quick-access-card:nth-child(2):hover .qa-title {
-  color: #3fb950;
-}
-
 .qa-desc {
   color: var(--c-text-muted);
   font-size: 12px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .qa-arrow {
@@ -496,16 +503,13 @@ export default {
   transform: translateX(-4px);
   opacity: 0;
   transition: all 0.3s ease;
+  align-self: center;
 }
 
 .quick-access-card:hover .qa-arrow {
   transform: translateX(0);
   opacity: 1;
   color: #58a6ff;
-}
-
-.quick-access-card:nth-child(2):hover .qa-arrow {
-  color: #3fb950;
 }
 
 .showcase-box {
@@ -531,25 +535,40 @@ export default {
   .home-layout { flex-direction: column; }
   .home-layout { padding: 0 12px; box-sizing: border-box; margin: -100px auto 0; z-index: 3; }
   .home-layout :deep(.profile-info) { width: auto; max-width: none; margin: 0; box-sizing: border-box; }
-  .left-col, .right-col { width: 100%; position: static; top: auto; }
-  .left-col { width: 250px; margin: 0 auto; }
+  .left-col { width: 250px; position: static; top: auto; margin: 0 auto; }
   .left-col :deep(.profile-card) { width: 250px; box-sizing: border-box; }
-  .right-col { width: 250px; margin: 0 auto; }
-  .right-col.quick-access-panel { width: 250px; box-sizing: border-box; }
   .hero-section { background-attachment: fixed; }
   .home-view { padding-top: 0; }
   .hero-section { height: clamp(320px, 54vh, 480px); background-position: center -60px; }
   .hero-overlay { top: 48%; transform: translateY(-50%); padding: 16px 40px; }
   .home-layout { padding-bottom: 20px; }
-  /* Reorder: Profile(1) -> Quick Access(2) -> Intro(3) */
+  /* Reorder: Profile(1) -> Content(2) */
   .left-col { order: 1; }
-  .right-col { order: 2; }
   .middle-col { 
-    order: 3; 
+    order: 2; 
     width: 100%; 
     min-width: 0; /* 取消移动端下的 400px 最小宽度限制 */
     box-sizing: border-box;
+    padding: 16px 14px; /* 移动端收窄容器内边距 */
   }
+
+  /* 中栏内部各元素随屏幕宽度自适应 */
+  .quick-access-panel { margin-bottom: 16px; }
+  .quick-access-header { margin-bottom: 12px; }
+  .quick-access-list {
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); /* 窄屏下允许更小的卡片宽度 */
+    gap: 10px;
+  }
+  .quick-access-card { height: 60px; }
+  .qa-icon-wrapper { width: 32px; height: 32px; }
+  .qa-title { font-size: 14px; }
+  .qa-tooltip { display: none; /* 触屏无悬浮，禁用 tooltip */ }
+
+  .steam-article { gap: 24px; }
+  .article-section h3, .quick-access-header { font-size: 18px; }
+  .article-section p, .desc-label, .desc-text { font-size: 13px; }
+
+  .feature-card { padding: 12px 14px; }
 }
 
 /* 站点介绍正文与标题排版调整 */
@@ -651,12 +670,12 @@ export default {
 
 /* 架构图重构样式 */
 .architecture-diagram {
-  margin: 20px 0 30px;
-  padding: 30px 20px;
+  margin: 16px 0 20px;
+  padding: 20px 16px;
   background: #181a1d;
   border-radius: 12px;
   border: 1px solid #2d333b;
-  overflow-x: auto;
+  overflow: hidden; /* 内部按容器宽度自动缩放，不再需要横向滚动 */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -665,19 +684,29 @@ export default {
   box-sizing: border-box;
 }
 
+/* 缩放承载层：保持自然宽度，由 JS 按容器宽度计算 transform: scale 和左边距居中 */
+.arch-scale {
+  width: max-content;
+  align-self: flex-start;
+  transform-origin: top left;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .arch-root {
   position: relative;
-  margin-bottom: 40px;
+  margin-bottom: 28px;
   z-index: 2;
 }
 
 .arch-root::after {
   content: '';
   position: absolute;
-  bottom: -40px;
+  bottom: -28px;
   left: 50%;
   width: 2px;
-  height: 40px;
+  height: 28px;
   background: linear-gradient(to bottom, #58a6ff, #30363d);
   transform: translateX(-50%);
   z-index: 1;
@@ -694,20 +723,14 @@ export default {
   background: rgba(139, 148, 158, 0.1);
 }
 
-.node-text {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  text-align: left;
-}
-
 .node-title {
   font-weight: 600;
   color: var(--c-text-emphasis);
   font-size: 14px;
 }
 
-.node-path, .node-desc {
+/* 节点仅标注名称与路由地址 */
+.node-path {
   font-size: 12px;
   color: var(--c-text-muted);
   margin-top: 2px;
@@ -729,7 +752,7 @@ export default {
   top: 0;
   left: 50%;
   transform: translateX(-50%);
-  width: calc(100% - 240px); /* 动态计算：总宽度减去左右两个节点的一半宽度（预估值） */
+  width: calc(100% - 224px); /* 动态计算：总宽度减去左右两个节点的一半宽度加外边距（200/2 + 12） */
   height: 2px;
   background: #30363d;
   z-index: 1;
@@ -740,7 +763,7 @@ export default {
   flex-direction: column;
   align-items: center;
   position: relative;
-  margin: 0 20px; /* 左右间距 20px，相当于 gap: 40px */
+  margin: 0 12px; /* 左右间距 12px，相当于 gap: 24px */
 }
 
 /* 垂直连接线 */
@@ -768,8 +791,9 @@ export default {
   z-index: 2;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
   display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 12px;
+  gap: 2px;
   width: 200px; /* 给所有节点一个固定宽度，方便对齐和计算连线 */
   box-sizing: border-box;
 }
@@ -781,7 +805,6 @@ export default {
   background: linear-gradient(135deg, #1f2a38 0%, #2f425a 100%);
   border-color: #58a6ff;
   box-shadow: 0 0 15px rgba(88, 166, 255, 0.2);
-  flex-direction: column;
   gap: 4px;
   padding: 14px 30px;
 }
@@ -792,7 +815,7 @@ export default {
 }
 
 .arch-leaves {
-  margin-top: 20px;
+  margin-top: 14px;
   display: flex;
   flex-direction: column;
   gap: 8px;
@@ -803,10 +826,10 @@ export default {
 .arch-leaves::before {
   content: '';
   position: absolute;
-  top: -10px;
+  top: -14px;
   left: 50%;
   width: 2px;
-  height: 20px;
+  height: 24px;
   background: #58a6ff;
   opacity: 0.5;
   transform: translateX(-50%);
@@ -833,6 +856,13 @@ export default {
   .architecture-diagram {
     align-items: flex-start;
     padding: 20px 15px;
+  }
+
+  /* 移动端为纵向布局，不做缩放，缩放层占满容器宽度 */
+  .arch-scale {
+    width: 100%;
+    margin: 0;
+    align-items: flex-start;
   }
   
   .arch-root { margin-bottom: 20px; }
@@ -879,105 +909,54 @@ export default {
 
 /* Learning 静态卡片展示已移除，此处清除无关 CSS 以保持整洁 */
 
-/* MySpace Features Grid - 重构后更专业的卡片展示 */
+/* MySpace Features Grid - 紧凑实用的展示卡片，与中栏深色风格一致 */
+/* 标题与上方 article-section 的 h3 样式统一，仅补充与架构图的间距 */
 .myspace-features-header {
-  margin: 30px 0 16px 0;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.feature-tag {
-  background: var(--c-primary-alpha-10);
-  color: var(--c-primary);
-  border: 1px solid var(--c-primary-alpha-20);
-  padding: 4px 10px;
-  border-radius: 4px;
-  font-size: 12px;
-  font-weight: bold;
-  letter-spacing: 1px;
-}
-
-.feature-subtitle {
-  color: var(--c-text-muted);
-  font-size: 14px;
+  margin: 22px 0 14px 0;
 }
 
 .myspace-feature-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 16px;
-  margin-bottom: 10px;
+  gap: 12px;
+  margin-bottom: 4px;
 }
 
+/* 卡片为纯展示用途，不可点击：无悬浮交互反馈，光标保持默认 */
 .feature-card {
   background: #252729;
   border: 1px solid #3a3d41;
-  border-radius: 10px;
-  padding: 20px;
+  border-radius: 8px;
+  padding: 14px 16px;
+  cursor: default;
+}
+
+/* 卡片头部：小图标 + 标题同行排列 */
+.feature-card-head {
   display: flex;
-  flex-direction: column;
-  transition: all 0.3s ease;
-  position: relative;
-  overflow: hidden;
-}
-
-.feature-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
-  border-color: var(--c-border-hover);
-}
-
-.feature-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 3px;
-  background: linear-gradient(90deg, transparent, transparent);
-  transition: background 0.3s ease;
-}
-
-.feature-card:hover::before {
-  background: linear-gradient(90deg, var(--c-primary), #9b78ff);
-}
-
-.highlight-card::before {
-  background: linear-gradient(90deg, #58a6ff, #2f81f7);
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
 }
 
 .feature-icon {
-  width: 44px;
-  height: 44px;
-  border-radius: 8px;
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
   background: #1a1e24;
   border: 1px solid #30363d;
   display: flex;
   align-items: center;
   justify-content: center;
   color: #c6cbd3;
-  margin-bottom: 16px;
-  transition: all 0.3s ease;
-}
-
-.feature-card:hover .feature-icon {
-  background: var(--c-primary-alpha-10);
-  color: var(--c-primary);
-  border-color: var(--c-primary-alpha-20);
-}
-
-.feature-content {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
+  flex-shrink: 0;
 }
 
 .feature-title {
   color: var(--c-text-title);
-  font-size: 17px;
+  font-size: 15px;
   font-weight: 600;
-  margin: 0 0 8px 0;
+  margin: 0;
   font-family: 'SourceHanSansSC', sans-serif;
 }
 
@@ -986,18 +965,12 @@ export default {
   font-size: 13px;
   line-height: 1.6;
   margin: 0;
-  flex: 1;
 }
 
 @media (max-width: 768px) {
   .myspace-feature-grid {
     grid-template-columns: 1fr;
     gap: 12px;
-  }
-  .myspace-features-header {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 8px;
   }
 }
 </style>

@@ -1,7 +1,7 @@
 <template>
   <footer class="steam-footer">
     <div class="footer-content">
-      <div class="footer-text">© 2025 AshenOne's Blog. Powered by Vue 2.</div>
+      <div class="footer-text">Ashpath © 2026</div>
       <div class="footer-links">
         <a href="https://github.com/AshenoneZJX" target="_blank" rel="noopener noreferrer" class="footer-link">
           <img src="@/assets/images/GitHub.svg" alt="GitHub" class="footer-icon">

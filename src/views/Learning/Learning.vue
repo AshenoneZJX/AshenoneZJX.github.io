@@ -13,14 +13,6 @@ export default {
 </script>
 
 <style scoped>
-@font-face {
-  font-family: 'MotivaSans';
-  src: url('~@/assets/fonts/MotivaSans-Regular_woff.ttf') format('truetype');
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
 .learning-view {
   padding: 20px;
   width: 100%;
@@ -30,7 +22,7 @@ export default {
   font-family: "SF Pro", "Helvetica", "Arial", "Roboto", "PingFang SC", "Microsoft YaHei", "Source Han Sans SC", sans-serif;
 }
 .learning-view >>> h2 {
-  font-family: 'MotivaSans', sans-serif;
+  font-family: 'AlibabaPuHuiTi', sans-serif;
   font-weight: 500;
 }
 .learning-view >>> .gallery-card,

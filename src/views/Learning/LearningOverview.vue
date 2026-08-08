@@ -35,10 +35,11 @@ export default {
 }
 .section-header h2 { 
   color: var(--c-text-title); 
-  font-size: 24px;
-  font-weight: bold; 
+  font-size: 28px;
+  font-weight: 500; 
   letter-spacing: 0; 
   margin: 0 0 12px 0;
+  font-family: 'AlibabaPuHuiTi', sans-serif;
 }
 .divider { height: 2px; background: var(--c-border-strong); margin: 12px 0 20px 0; }
 

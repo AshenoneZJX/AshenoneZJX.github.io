@@ -96,7 +96,7 @@ export default {
   box-sizing: border-box;
 }
 .section-header { display: flex; justify-content: space-between; align-items: center; }
-.section-header h2 { color: var(--c-text-title); font-weight: 400; letter-spacing: 2px; }
+.section-header h2 { color: var(--c-text-title); font-size: 28px; font-weight: 500; letter-spacing: 0; font-family: 'AlibabaPuHuiTi', sans-serif; }
 .divider { height: 2px; background: var(--c-border-strong); margin: 10px 0 20px 0; }
 
 .content-2col { display: flex; gap: 16px; align-items: flex-start; }

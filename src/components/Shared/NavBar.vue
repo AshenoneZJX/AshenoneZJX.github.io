@@ -3,7 +3,7 @@
     <nav class="steam-navbar">
       <div class="nav-container">
         <div class="logo" @click="goHome">
-          ASHENONE's Blog
+          烬途 · Ashpath
         </div>
         <div class="nav-right">
           <button
@@ -26,10 +26,9 @@
             <router-link to="/records" tag="button">记录</router-link>
             <router-link to="/learning" tag="button">Learning</router-link>
           </div>
-          <button class="theme-toggle" @click="toggleTheme" :title="isLightMode ? '切换到暗色模式' : '切换到浅色模式'">
-            <svg v-if="!isLightMode" viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="theme-icon"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
-            <svg v-else viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="theme-icon"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
-          </button>
+          <router-link to="/settings" tag="button" class="theme-toggle settings-btn" title="设置" aria-label="设置">
+            <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="theme-icon"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+          </router-link>
         </div>
       </div>
     </nav>
@@ -43,6 +42,7 @@
       <router-link @click.native="closeMenu" to="/mySpace" tag="button">个人空间</router-link>
       <router-link @click.native="closeMenu" to="/records" tag="button">记录</router-link>
       <router-link @click.native="closeMenu" to="/learning" tag="button">Learning</router-link>
+      <router-link @click.native="closeMenu" to="/settings" tag="button">设置</router-link>
     </div>
     <div v-if="isOpen" class="menu-mask" @click="closeMenu"></div>
   </div>
@@ -53,8 +53,7 @@ export default {
   name: 'NavBar',
   data() {
     return {
-      isOpen: false,
-      isLightMode: false
+      isOpen: false
     }
   },
   watch: {
@@ -62,17 +61,6 @@ export default {
       this.isOpen = false
     }
   },
-  mounted() {
-    // Check saved theme or system preference
-    const savedTheme = localStorage.getItem('theme')
-    if (savedTheme) {
-      this.isLightMode = savedTheme === 'light'
-    } else {
-      this.isLightMode = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches
-    }
-    this.applyTheme()
-  },
-  beforeDestroy() {},
   methods: {
     toggleMenu() {
       this.isOpen = !this.isOpen
@@ -83,15 +71,6 @@ export default {
     goHome() {
       this.isOpen = false
       this.$router.push('/')
-    },
-    toggleTheme() {
-      this.isLightMode = !this.isLightMode
-      this.applyTheme()
-    },
-    applyTheme() {
-      const theme = this.isLightMode ? 'light' : 'dark'
-      document.documentElement.setAttribute('data-theme', theme)
-      localStorage.setItem('theme', theme)
     }
   }
 }
@@ -104,34 +83,17 @@ export default {
   z-index: 1200;
 }
 
-@font-face {
-  font-family: 'Inter';
-  src: url('~@/assets/fonts/Inter-var.ttf') format('truetype');
-  /* 定义可变字体支持的粗细范围 */
-  font-weight: 100 900;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'AlibabaPuHuiTi';
-  src: url('~@/assets/fonts/AlibabaPuHuiTi-3-65-Medium.woff2') format('woff2');
-  font-weight: 500;
-  font-style: normal;
-  font-display: swap;
-}
-
 .steam-navbar {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 80px;
-  background-color: rgba(26, 26, 27, 0.88);
-  -webkit-backdrop-filter: blur(8px);
-  backdrop-filter: blur(8px);
+  background-color: var(--c-navbar-bg);
+  -webkit-backdrop-filter: blur(14px) saturate(150%);
+  backdrop-filter: blur(14px) saturate(150%);
   z-index: 1200;
-  box-shadow: none;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.25);
   border-bottom: 1px solid var(--c-border-default);
   display: flex;
   justify-content: center;
@@ -151,28 +113,32 @@ export default {
 .logo {
   font-family: var(--title-font);
   font-size: 24px;
-  font-weight: 300;
+  font-weight: 700;
   color: var(--c-text-title);
   letter-spacing: 2px;
   display: flex;
   align-items: center;
   cursor: pointer;
-  transition: font-size 0.2s ease;
+  transition: font-size 0.2s ease, color 0.25s ease, text-shadow 0.25s ease;
+}
+.logo:hover {
+  color: var(--c-primary);
+  text-shadow: 0 0 18px var(--c-primary-alpha-40);
 }
 .steam-navbar.compact .logo { font-size: 14px; }
 
 .menu-toggle {
   display: none;
   background: transparent;
-  border: 1px solid var(--c-border-strong);
+  border: 1px solid var(--c-border-default);
   color: var(--c-text-nav);
   font-size: 14px;
   font-weight: bold;
   text-transform: uppercase;
   padding: 8px 14px;
   cursor: pointer;
-  border-radius: 4px;
-  transition: padding 0.2s ease, font-size 0.2s ease;
+  border-radius: 8px;
+  transition: padding 0.2s ease, font-size 0.2s ease, color 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
   line-height: 1;
   align-items: center;
   justify-content: center;
@@ -182,8 +148,9 @@ export default {
 .steam-navbar.compact .menu-icon { width: 14px; height: 14px; }
 
 .menu-toggle:hover {
-  color: var(--c-text-title);
-  border-color: var(--c-border-hover);
+  color: var(--c-primary);
+  background: var(--c-primary-alpha-10);
+  border-color: var(--c-primary-alpha-40);
 }
 
 .nav-right {
@@ -194,37 +161,51 @@ export default {
 
 .nav-links {
   display: flex;
+  align-items: center;
+  gap: 4px;
 }
 
 .nav-links button {
+  position: relative;
   background: transparent;
   border: none;
   color: var(--c-text-nav);
-  font-size: 16px;
+  font-size: 17px;
   font-weight: normal;
   text-transform: uppercase;
-  padding: 10px 20px;
+  padding: 10px 12px;
   cursor: pointer;
-  transition: color 0.3s;
+  transition: color 0.2s ease, background-color 0.2s ease;
   outline: none;
   font-family: 'Inter', 'AlibabaPuHuiTi', sans-serif;
   letter-spacing: 1px;
+  border-radius: 8px;
 }
 .steam-navbar.compact .nav-links button {
-  font-size: 12px;
-  padding: 4px 10px;
+  font-size: 13px;
+  padding: 6px 8px;
 }
 
 .nav-links button:hover {
   color: var(--c-text-title);
+  background: var(--c-primary-alpha-10);
 }
 
-/* Vue Router 激活时的类名 */
+/* Vue Router 激活时的类名：按钮下方一条高亮直线 */
 .nav-links button.router-link-active {
-  color: #9aa0a6;
-  background-color: rgba(154, 160, 166, 0.2);
-  border-radius: 4px;
-  border-bottom: 3px solid #9aa0a6;
+  color: var(--c-primary);
+  background: transparent;
+}
+.nav-links button.router-link-active::after {
+  content: '';
+  position: absolute;
+  left: 10px;
+  right: 10px;
+  bottom: -2px;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--c-primary);
+  box-shadow: 0 0 8px var(--c-primary-alpha-40);
 }
 
 .theme-toggle {
@@ -237,15 +218,19 @@ export default {
   justify-content: center;
   padding: 8px;
   border-radius: 50%;
-  transition: all 0.3s ease;
+  transition: color 0.2s ease, background-color 0.2s ease;
 }
 .theme-toggle:hover {
-  color: var(--c-text-title);
+  color: var(--c-primary);
   background: var(--c-primary-alpha-10);
 }
 .theme-icon {
   width: 20px;
   height: 20px;
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.theme-toggle:hover .theme-icon {
+  transform: rotate(60deg);
 }
 .steam-navbar.compact .theme-icon {
   width: 16px;
@@ -254,13 +239,17 @@ export default {
 
 .mobile-menu {
   display: none;
-  background-color: rgba(26, 26, 27, 0.94);
-  -webkit-backdrop-filter: blur(8px);
-  backdrop-filter: blur(8px);
+  background-color: var(--c-navbar-bg);
+  -webkit-backdrop-filter: blur(16px) saturate(150%);
+  backdrop-filter: blur(16px) saturate(150%);
   flex-direction: column;
-  padding: 20px 0;
+  gap: 4px;
+  padding: 14px 12px;
   z-index: 999;
   border-bottom: 1px solid var(--c-border-default);
+  border-bottom-left-radius: 16px;
+  border-bottom-right-radius: 16px;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.45);
 }
 .mobile-menu.compact { top: 30px; }
 
@@ -268,19 +257,25 @@ export default {
   background: transparent;
   border: none;
   color: var(--c-text-nav);
-  font-size: 16px;
+  font-size: 15px;
   font-weight: bold;
   text-transform: uppercase;
-  padding: 12px 20px;
+  padding: 12px 16px;
   text-align: left;
   cursor: pointer;
   font-family: 'Inter', 'AlibabaPuHuiTi', sans-serif;
   letter-spacing: 1px;
+  border-radius: 10px;
+  transition: color 0.2s ease, background-color 0.2s ease;
 }
 
-.mobile-menu button:hover,
-.mobile-menu button.router-link-active {
+.mobile-menu button:hover {
   color: var(--c-text-title);
+  background: var(--c-primary-alpha-10);
+}
+.mobile-menu button.router-link-active {
+  color: var(--c-primary);
+  background: var(--c-primary-alpha-20);
 }
 
 .menu-mask {

@@ -121,7 +121,7 @@
       "https://p3.dcarimg.com/img/motor-mis-img/3ccab45386debdba1b5cec19525fe030~2508x0.webp",
       "https://p3.dcarimg.com/img/motor-mis-img/6383b936b08b6bc0019902649513d350~2508x0.webp",
       "https://p3.dcarimg.com/img/motor-mis-img/43f2720d520fb26efdb51a71c987eeb4~2508x0.webp",
-      "https://images.pexels.com/photos/27952120/pexels-photo-27952120.jpeg"
+      "https://images.unsplash.com/photo-1610064094665-57e727e29f8b?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
     ],
     "energy": [
       "燃油"
@@ -256,7 +256,7 @@
       "https://p3.dcarimg.com/img/motor-mis-img/DCP_5dbf3d9cbfb12b1056331b0519e5d816~2508x0.webp",
       "https://p3.dcarimg.com/img/motor-mis-img/DCP_a19242897fc0d20f4417326c3250ff5f~2508x0.webp",
       "https://p3.dcarimg.com/img/motor-mis-img/DCP_6d0917828c27f8f9a7f13ddec72bc717~2508x0.webp",
-      "https://images.unsplash.com/photo-1613538712814-42d97ce67d78?q=80&w=774&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+      "https://p3.dcarimg.com/img/motor-mis-img/883ac8eabf7a823c548ed06d01c3d102~2508x0.webp"
     ],
     "energy": [
       "燃油",
@@ -398,6 +398,7 @@
     "sizeClass": "中型",
     "title": "奥迪 A5",
     "images": [
+      "https://www.audi.cn/content/dam/OneWeb/faw_vw/model_finder/faw_vw/model_filter/model_filter_car_image/a5l-180.png",
       "https://p3.dcarimg.com/img/motor-mis-img/DCP_525cfae63de1f58eea0764024f5d7810~2508x0.webp",
       "https://p3.dcarimg.com/img/motor-mis-img/DCP_316228dc6ffdf680ea1ca51c436f70a7~2508x0.webp",
       "https://p3.dcarimg.com/img/motor-mis-img/DCP_7206501a6a745f15ce5c45d59f512bcb~2508x0.webp"
@@ -527,6 +528,26 @@
       "engine": "后置永磁同步电机 / 前后双电机（Max） 673PS，功率495kW，最大扭矩838N·m",
       "transmission": "单速固定齿比",
       "chassis": "前双叉臂、后五连杆，后置后驱/双电机四驱"
+    },
+    "specialEdition": {
+      "id": 151,
+      "title": "SU7 Ultra",
+      "brand": "小米",
+      "sizeClass": "中大型",
+      "images": [
+        "https://p3.dcarimg.com/img/motor-mis-img/DCP_f498e859a0ec10785d0dc13a32de3bc2~2508x0.webp",
+        "https://p3.dcarimg.com/img/motor-mis-img/DCP_93db993cb534741ee5b877ab8340d4af~2508x0.webp",
+        "https://p3.dcarimg.com/img/motor-mis-img/1d55078a8e0bbead6758c601ed941ef3~2508x0.webp"
+      ],
+      "energy": "纯电",
+      "body": "轿车",
+      "intro": "小米 SU7 Ultra 是 SU7 车系中的高性能旗舰版本，以赛道级空气动力学、三电机四驱与极致加速表现著称。量产版采用小米自研超级三电机系统，综合功率高达1138kW，零百加速仅需1.98秒，极速可达350km/h，同时保留 HyperOS 智能座舱与高阶辅助驾驶能力，兼顾极限性能与科技体验。",
+      "specs": {
+        "dimensions": "长4997mm × 宽1963mm × 高1440mm，轴距3000mm，整备质量约2360kg",
+        "engine": "前V6s + 后双V8s 三电机四驱，综合功率1138kW（1548PS），最大扭矩1770N·m",
+        "transmission": "单速固定齿比",
+        "chassis": "前双叉臂、后五连杆，三电机四驱，闭式双腔空气悬架 + CDC"
+      }
     }
   },
   {
@@ -612,12 +633,34 @@
     }
   },
   {
+    "id": 235,
+    "brand": "凯迪拉克",
+    "sizeClass": "中大型",
+    "title": "凯迪拉克 CT6",
+    "images": [
+      "https://p3.dcarimg.com/img/motor-mis-img/DCP_a02c37c3bdbe2b5f37f2dc51f3f239b4~2508x0.webp",
+      "https://p3.dcarimg.com/img/motor-mis-img/DCP_c8770889ad5756c51cc5412f72ac4b3c~2508x0.webp",
+      "https://p3.dcarimg.com/img/motor-mis-img/DCP_1da67a6969a7a835779746a316cce34f~2508x0.webp"
+    ],
+    "energy": "燃油",
+    "body": "轿车",
+    "intro": "凯迪拉克CT6（Cadillac CT6）是凯迪拉克旗下的旗舰级中大型豪华轿车，基于Omega后驱平台打造，车身长度超过5.2米，轴距达3109mm，气场直逼大型车。全系标配2.0T可变缸涡轮增压发动机与10AT变速箱，并搭载MRC主动电磁感应悬挂与Super Cruise超级辅助驾驶系统，配合33英寸环幕式超视网膜屏，将美式豪华、越级空间与前沿科技融为一体，是商务与家用的全能旗舰之选。",
+    "specs": {
+      "dimensions": "长5223mm × 宽1890mm × 高1473mm，轴距3109mm，后备厢容积508L",
+      "engine": "2.0T L4 可变缸涡轮增压 237PS，功率174kW，最大扭矩350N·m",
+      "transmission": "10AT",
+      "chassis": "前双横臂、后多连杆独立悬架，前置后驱 (MRC主动电磁感应悬挂)"
+    }
+  },
+  {
     "id": 20,
     "brand": "奥迪",
     "sizeClass": "中大型",
     "title": "奥迪 A6",
     "images": [
-      "https://p3.dcarimg.com/img/motor-mis-img/DCP_6a37bf06e9a9b532ad052cccb49c5993~2508x0.webp"
+      "https://p3.dcarimg.com/img/motor-mis-img/DCP_6a37bf06e9a9b532ad052cccb49c5993~2508x0.webp",
+      "https://p3.dcarimg.com/img/motor-mis-img/44888f35323ae85e5fa747e6d46b8439~2508x0.webp",
+      "https://p3.dcarimg.com/img/motor-mis-img/DCP_d4f891e0f75952f911e3877c774b2ab3~2508x0.webp"
     ],
     "energy": "燃油",
     "body": "轿车",
@@ -1182,9 +1225,9 @@
     "brand": "本田",
     "sizeClass": "紧凑型",
     "images": [
-      "https://images.unsplash.com/photo-1617469767053-d3b523a0b982?q=80&w=1600&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1606664515524-ed2f786a0bd6?q=80&w=1600&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1549927681-4b602b44f1a0?q=80&w=1600&auto=format&fit=crop"
+      "https://p3.dcarimg.com/img/motor-mis-img/DCP_83ac43bdb9386dede7171258845ac295~2508x0.webp",
+      "https://p3.dcarimg.com/img/motor-mis-img/DCP_7fe41f2bb6aa3c22408053571a8859b1~2508x0.webp",
+      "https://p3.dcarimg.com/img/motor-mis-img/DCP_d94f7252d13a74fc43aad6c64bf7fe9b~2508x0.webp"
     ],
     "energy": [
       "燃油",
@@ -1248,9 +1291,9 @@
     "brand": "本田",
     "sizeClass": "小型",
     "images": [
-      "https://images.unsplash.com/photo-1619767886558-efdc259cde1a?q=80&w=1600&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1616422285623-13ff0162193c?q=80&w=1600&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1549399542-7e3f8b79c341?q=80&w=1600&auto=format&fit=crop"
+      "https://p3.dcarimg.com/img/motor-mis-img/5fe4a912d7f797d3fbc0320cb4a775bd~2508x0.webp",
+      "https://p3.dcarimg.com/img/motor-mis-img/ba7cc03cf3a1c2c05c41bc8406ba5b1e~2508x0.webp",
+      "https://p3.dcarimg.com/img/motor-mis-img/ed5c8cfb0e3ebc5b4e365480cd190b41~2508x0.webp"
     ],
     "energy": "燃油",
     "body": "轿车",
@@ -1794,6 +1837,134 @@
       "engine": "DMO插电混动系统 / 纯电驱动",
       "transmission": "E-CVT无级变速 / 单速固定齿比",
       "chassis": "前双叉臂、后多连杆独立悬架，兼顾城市舒适与轻越野路况"
+    }
+  },
+  {
+    "id": 234,
+    "title": "保时捷 卡宴",
+    "brand": "保时捷",
+    "sizeClass": "中大型",
+    "images": [
+      "https://upload.wikimedia.org/wikipedia/commons/thumb/3/34/Porsche_Cayenne_%282023%E2%80%93%29_IMG_5392.jpg/1920px-Porsche_Cayenne_%282023%E2%80%93%29_IMG_5392.jpg",
+      "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4f/2023_Porsche_Cayenne_S_IAA_2023_1X7A0025.jpg/1920px-2023_Porsche_Cayenne_S_IAA_2023_1X7A0025.jpg",
+      "https://upload.wikimedia.org/wikipedia/commons/thumb/5/52/Porsche_PO536_Cayenne_Turbo_E-Hybrid_IAA_2023_1X7A0536.jpg/1920px-Porsche_PO536_Cayenne_Turbo_E-Hybrid_IAA_2023_1X7A0536.jpg"
+    ],
+    "energy": [
+      "燃油",
+      "混动"
+    ],
+    "body": "SUV",
+    "intro": "保时捷卡宴（Cayenne）是保时捷旗下的中大型豪华SUV，也是品牌的首款SUV车型，目前已发展至第三代。它将跑车级的操控性能与豪华舒适的驾乘体验融为一体，提供Cayenne、Cayenne S、GTS、Turbo以及E-Hybrid插电混动等多种动力版本，全系标配8挡Tiptronic S手自一体变速箱与全时四驱系统，是豪华运动SUV市场的标杆车型之一。",
+    "specs": {
+      "dimensions": "长4930mm × 宽1983mm × 高1698mm，轴距2895mm",
+      "engine": "3.0T V6 / 4.0T V8 / 3.0T V6 E-Hybrid插电混动",
+      "transmission": "8挡手自一体（Tiptronic S）",
+      "chassis": "前后多连杆式独立悬架，全时四驱，可选装自适应空气悬架与后轮转向"
+    }
+  },
+  {
+    "id": 236,
+    "title": "宝马 X5",
+    "brand": "宝马",
+    "sizeClass": "中大型",
+    "images": [
+      "https://p3.dcarimg.com/img/motor-mis-img/DCP_ceb611bec16216425b019b9e59713e3d~2508x0.webp",
+      "https://p3.dcarimg.com/img/motor-mis-img/DCP_6567b6edc8d0760da2f805d9a2e746da~2508x0.webp",
+      "https://p3.dcarimg.com/img/motor-mis-img/DCP_100dfee91d4532ecb5bb29aec433d4ea~2508x0.webp"
+    ],
+    "energy": "燃油",
+    "body": "SUV",
+    "intro": "宝马X5（BMW X5）是一款中大型豪华SUV，国产长轴距版由华晨宝马生产，兼顾公路操控与豪华舒适。提供2.0T与3.0T直列六缸（配48V轻混）两种动力，匹配8AT变速器与xDrive智能四驱系统，标配BMW iDrive智能互联与驾驶辅助功能，是豪华中大型SUV市场的标杆车型之一。",
+    "specs": {
+      "dimensions": "长5060mm × 宽2004mm × 高1779mm，轴距3105mm",
+      "engine": "2.0T L4 涡轮增压 258PS / 3.0T L6 涡轮增压（48V轻混） 381PS，功率190kW / 280kW，最大扭矩400N·m / 520N·m",
+      "transmission": "8AT",
+      "chassis": "前双叉臂、后多连杆式独立悬架，xDrive全时四驱"
+    }
+  },
+  {
+    "id": 237,
+    "title": "宝马 i3",
+    "brand": "宝马",
+    "sizeClass": "中型",
+    "images": [
+      "https://p3.dcarimg.com/img/tos-cn-i-dcdx/812cf2f507c041059d2d1793521927a1~2508x0.webp",
+      "https://p3.dcarimg.com/img/motor-mis-img/DCP_2689ae08e9960b09dea339d5b44eb10f~2508x0.webp",
+      "https://p3.dcarimg.com/img/motor-mis-img/f9d945b994db309c0e162dbebdfafcb5~2508x0.webp"
+    ],
+    "energy": "纯电",
+    "body": "轿车",
+    "intro": "宝马i3（BMW i3）是华晨宝马基于CLAR平台打造的中型纯电轿车，可视作3系长轴距的纯电版本。提供eDrive35L与eDrive40L两种动力，后置励磁同步电机带来后驱驾驶质感，CLTC续航526-592km，配备BMW iDrive 8智能互联与一体式悬浮曲面屏，兼顾运动操控与日常通勤。",
+    "specs": {
+      "dimensions": "长4872mm × 宽1846mm × 高1481mm，轴距2966mm",
+      "engine": "后置励磁同步电机 286PS / 340PS，功率210kW / 250kW，最大扭矩400N·m / 430N·m，CLTC续航526-592km",
+      "transmission": "单速固定齿比",
+      "chassis": "前双球节弹簧减振支柱、后多连杆式独立悬架，后置后驱"
+    }
+  },
+  {
+    "id": 238,
+    "title": "宝马 M4",
+    "brand": "宝马",
+    "sizeClass": "中型",
+    "images": [
+      "https://p3.dcarimg.com/img/tos-cn-i-dcdx/61623f1f17d7406bb4623645127522c5~2508x0.webp",
+      "https://p3.dcarimg.com/img/motor-mis-img/b883167ef1edeb56eee52f782ba42e9c~2508x0.webp",
+      "https://p3.dcarimg.com/img/motor-mis-img/dc35c838c3c3bc9ea80e3fb860e0c937~2508x0.webp"
+    ],
+    "energy": "燃油",
+    "body": "轿跑车",
+    "intro": "宝马M4（BMW M4）是BMW M部门打造的高性能中型轿跑车，提供双门轿跑与敞篷轿跑两种车身形式。搭载S58 3.0T直列六缸双涡轮增压发动机，雷霆版最大功率510马力，匹配8速M Steptronic手自一体变速器，可选后驱或M xDrive智能四驱，xDrive版零百加速约3.5秒，是兼顾赛道性能与日常驾驶的高性能轿跑标杆。",
+    "specs": {
+      "dimensions": "长4803mm × 宽1887mm × 高1404mm，轴距2857mm",
+      "engine": "S58 3.0T L6 双涡轮增压 510PS，功率375kW，最大扭矩650N·m",
+      "transmission": "8AT（M Steptronic）",
+      "chassis": "前双球节弹簧减振支柱、后五连杆式独立悬架，前置后驱 / M xDrive四驱"
+    }
+  },
+  {
+    "id": 239,
+    "title": "零跑 B10",
+    "brand": "零跑",
+    "sizeClass": "紧凑型",
+    "images": [
+      "https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/Leapmotor_B10_001.jpg/1920px-Leapmotor_B10_001.jpg",
+      "https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Leapmotor_B10_002.jpg/1920px-Leapmotor_B10_002.jpg",
+      "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/Leapmotor_B10_003.jpg/1920px-Leapmotor_B10_003.jpg",
+      "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c8/Leapmotor_B10_Lighting_White.jpg/1920px-Leapmotor_B10_Lighting_White.jpg"
+    ],
+    "energy": "纯电",
+    "body": "SUV",
+    "intro": "零跑B10是基于LEAP 3.5技术架构打造的全球化紧凑型纯电SUV，2025年上市后迅速成为品牌销量主力，并通过零跑国际出口欧洲等海外市场。搭载后置后驱电驱系统与磷酸铁锂电池，CLTC续航最高600km，配备高通8295座舱芯片与激光雷达高阶智驾版本，以高品价比切入主流家用市场。",
+    "specs": {
+      "dimensions": "长4515mm × 宽1885mm × 高1655mm，轴距2735mm",
+      "engine": "后置永磁同步电机 160kW（218PS），最大扭矩240N·m，零百加速6.8s；CLTC续航510/600km",
+      "transmission": "单速固定齿比",
+      "chassis": "前麦弗逊、后多连杆式独立悬架，后置后驱"
+    }
+  },
+  {
+    "id": 240,
+    "title": "零跑 C11",
+    "brand": "零跑",
+    "sizeClass": "中型",
+    "images": [
+      "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/Leapmotor_C11_2021120301.jpg/1920px-Leapmotor_C11_2021120301.jpg",
+      "https://upload.wikimedia.org/wikipedia/commons/thumb/a/af/Leapmotor_C11_2021120302.jpg/1920px-Leapmotor_C11_2021120302.jpg",
+      "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9f/Leapmotor_C11_IAA_2023_1X7A0243.jpg/1920px-Leapmotor_C11_IAA_2023_1X7A0243.jpg",
+      "https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/Leapmotor_C11_REEV_2023120901.jpg/1920px-Leapmotor_C11_REEV_2023120901.jpg"
+    ],
+    "energy": [
+      "纯电",
+      "混动"
+    ],
+    "body": "SUV",
+    "intro": "零跑C11是品牌进入主流市场的中型SUV，2021年交付，首发搭载自研“凌芯01”智驾芯片，2023年新增增程版形成纯电/增程双动力布局。采用前双叉臂、后五连杆独立悬架，纯电四驱版最大功率400kW，增程版以1.5L增程器配大容量电池，CLTC综合续航超1200km，是15-20万级家用SUV市场的热门选择。",
+    "specs": {
+      "dimensions": "长4780mm × 宽1905mm × 高1675mm，轴距2930mm",
+      "engine": "纯电：后驱200kW / 四驱400kW（544PS）；增程：1.5L增程器 + 后置200kW电机",
+      "transmission": "单速固定齿比",
+      "chassis": "前双叉臂、后五连杆式独立悬架，后置后驱 / 双电机四驱"
     }
   }
 ]

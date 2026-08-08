@@ -1,0 +1,185 @@
+/* ============================================================
+ * 全局主题配置（字体 / 颜色）
+ * 本文件集中管理原散落在各组件中的 @font-face 声明、
+ * 以及原 App.vue 中的 CSS 变量（颜色、字体）定义。
+ * 运行时设置（设置页）通过 JS 覆盖同名变量实现即时换肤，
+ * 对应的可选项配置见 src/constants/theme.js。
+ * ============================================================ */
+
+/* ---------------- 字体声明（集中管理，全站可用） ---------------- */
+
+/* 标题默认字体 */
+@font-face {
+  font-family: 'MotivaTitle';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('../fonts/MotivaSans-Regular_woff.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'MotivaSans';
+  src: url('../fonts/MotivaSans-Regular_woff.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* 与全局正文字体栈（--body-font）首选项同名的声明，
+   原仅在 Cars/BrandDetail 页内定义，集中后全站生效 */
+@font-face {
+  font-family: 'Motiva Sans';
+  src: url('../fonts/MotivaSans-Regular_woff.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Inter';
+  src: url('../fonts/Inter-var.ttf') format('truetype');
+  /* 可变字体支持的粗细范围 */
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'AlibabaPuHuiTi';
+  src: url('../fonts/AlibabaPuHuiTi-3-55-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'AlibabaPuHuiTi';
+  src: url('../fonts/AlibabaPuHuiTi-3-65-Medium.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'RobotoMono';
+  src: url('../fonts/RobotoMono-VariableFont_wght.ttf') format('truetype');
+  font-weight: 100 900;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'FiraCode';
+  src: url('../fonts/FiraCode-VF.woff2') format('woff2');
+  font-weight: 300 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'GeorgiaSerif';
+  src: url('../fonts/Georgia.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Georgia';
+  src: url('../fonts/Georgia.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'SarasaMonoSCNerd';
+  src: url('../fonts/sarasa-mono-sc-nerd-regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'SourceHanSansSC';
+  src: url('../fonts/SourceHanSansSC-Regular-2.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* 以下字体族别名供特定页面使用（原在各页面内重复声明） */
+@font-face {
+  font-family: 'MSYaHei-Semibold';
+  src: url('../fonts/wryh/msyhsb.ttc') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'SarasaMonoSC';
+  src: url('../fonts/sarasa-mono-sc-nerd-regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'PuHuiTi';
+  src: url('../fonts/AlibabaPuHuiTi-3-65-Medium.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ---------------- 主题变量（深色） ---------------- */
+:root {
+  /* Core Dark Mode (Default) */
+  --c-primary: #58a6ff;
+  --c-primary-alpha-10: rgba(88, 166, 255, 0.10);
+  --c-primary-alpha-20: rgba(88, 166, 255, 0.20);
+  --c-primary-alpha-30: rgba(88, 166, 255, 0.30);
+  --c-primary-alpha-40: rgba(88, 166, 255, 0.40);
+  --c-primary-alpha-50: rgba(88, 166, 255, 0.50);
+  --c-primary-alpha-60: rgba(88, 166, 255, 0.60);
+  --c-primary-alpha-80: rgba(88, 166, 255, 0.80);
+
+  /* Background Levels */
+  --c-bg-l0: #131314;
+  --c-bg-l1: #131314;
+  --c-bg-l2: #161b22;
+  --c-bg-l3: #1f2937;
+  --c-bg-l4: #243244;
+  --c-bg-panel-deep: #0f1623;
+  --c-bg-input: #111827;
+
+  /* Text */
+  --c-text-title: #e6edf3;
+  --c-text-emphasis: #c9d1d9;
+  --c-text-body: #adbac7;
+  --c-text-body-alt: #9da7b3;
+  --c-text-muted: #8b949e;
+  --c-text-label: #7d8590;
+  --c-text-nav: #adbac7;
+
+  /* Border */
+  --c-border-default: #2d333b;
+  --c-border-hover: #30363d;
+  --c-border-strong: #388bfd;
+
+  /* Shadow Overlay */
+  --c-shadow-light: rgba(1, 4, 9, 0.20);
+  --c-shadow-medium: rgba(1, 4, 9, 0.45);
+  --c-shadow-heavy: rgba(1, 4, 9, 0.65);
+
+  /* Navbar */
+  --c-nav-bg: rgba(13, 17, 23, 0.9);
+  --c-navbar-bg: rgba(26, 26, 27, 0.88);
+  --c-nav-mask: rgba(1, 4, 9, 0.45);
+
+  /* Fonts */
+  --title-font: 'MotivaTitle', "Motiva Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --body-font: "Motiva Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+  --bp-mobile-max: 480px;
+}

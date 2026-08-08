@@ -1,0 +1,119 @@
+/*
+  图表卡片通用样式模板（全局）
+  任何图表组件的根元素使用 class="xxx-wrap chart-block"，内部按
+  .charts-toolbar > .toolbar-controls 与 .chart-container-main > .chart 的结构组织，
+  即可自动应用该样式，无需在组件内重复编写。
+  组件需要定制（如图表高度）时，在自己的 scoped 样式中覆盖即可。
+*/
+.chart-block {
+  width: 100%;
+  background: var(--c-bg-l2);
+  border: 1px solid var(--c-border-default);
+  border-radius: 10px;
+  box-sizing: border-box;
+  box-shadow: 0 4px 15px var(--c-shadow-medium);
+}
+
+.chart-container-main {
+  padding-bottom: 12px;
+  position: relative;
+  z-index: 0;
+}
+
+.charts-toolbar {
+  position: relative;
+  z-index: 10;
+  border-bottom: 1px solid var(--c-border-default);
+  padding: 0 12px;
+  min-height: 40px;
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+.toolbar-controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.chart-title {
+  color: var(--c-text-title);
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 1px;
+}
+
+.chart-meta {
+  color: var(--c-text-body-alt);
+  font-size: 12px;
+}
+
+.chart-meta a {
+  color: var(--c-primary, #4E79A7);
+  text-decoration: none;
+}
+
+.chart-meta a:hover {
+  text-decoration: underline;
+}
+
+.tab-btn {
+  background: transparent;
+  border: none;
+  color: var(--c-text-muted);
+  height: 30px;
+  padding: 0 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 13px;
+  transition: background 0.2s ease, color 0.2s ease;
+  width: auto;
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tab-btn:hover {
+  background: var(--c-primary-alpha-10);
+  color: var(--c-text-emphasis);
+}
+
+.tab-btn.active {
+  background: var(--c-primary-alpha-20);
+  color: var(--c-primary);
+  font-weight: 500;
+}
+
+.chart {
+  width: 100%;
+  min-height: 360px;
+}
+
+/* 两栏纵向工具栏变体：第一行标题，第二行 tab 按钮，均靠左对齐 */
+.charts-toolbar--stacked {
+  flex-direction: column;
+  align-items: stretch;
+  padding-top: 6px;
+  padding-bottom: 6px;
+  gap: 6px;
+}
+
+.charts-toolbar--stacked .toolbar-title-row {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+/* tab 按钮按整体宽度平均分配，占满整行 */
+.charts-toolbar--stacked .toolbar-controls {
+  gap: 4px;
+}
+
+.charts-toolbar--stacked .toolbar-controls .tab-btn {
+  flex: 1 1 0;
+  min-width: 0;
+}

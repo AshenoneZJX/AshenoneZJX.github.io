@@ -48,14 +48,6 @@ export default {
 </script>
 
 <style scoped>
-@font-face {
-  font-family: 'MotivaSans';
-  src: url('~@/assets/fonts/MotivaSans-Regular_woff.ttf') format('truetype');
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
 .page-myspace { 
   padding: 20px;
   width: 100%;
@@ -65,7 +57,7 @@ export default {
   font-family: 'MotivaSans', sans-serif;
   box-sizing: border-box;
 }
-.section-header h2 { color: var(--c-text-title); font-weight: 500; letter-spacing: 2px; }
+.section-header h2 { color: var(--c-text-title); font-size: 28px; font-weight: 500; letter-spacing: 0; font-family: 'AlibabaPuHuiTi', sans-serif; }
 .divider { height: 2px; background: var(--c-border-strong); margin: 10px 0 30px 0; }
 
 .gallery-grid {

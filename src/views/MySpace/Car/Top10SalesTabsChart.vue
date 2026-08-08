@@ -1,6 +1,9 @@
 <template>
   <div class="top10-wrap chart-block">
-    <div class="charts-toolbar">
+    <div class="charts-toolbar charts-toolbar--stacked">
+      <div class="toolbar-title-row">
+        <span class="chart-title">汽车销量 TOP10</span>
+      </div>
       <div class="toolbar-controls">
         <button class="tab-btn" :class="{ active: activeTab === 'global' }" type="button" @click="setTab('global')">全球</button>
         <button class="tab-btn" :class="{ active: activeTab === 'china' }" type="button" @click="setTab('china')">中国</button>
@@ -167,67 +170,9 @@ export default {
   flex: 1;
   min-width: 0;
 }
-.chart-block {
-  width: 100%;
-  background: var(--c-bg-l2);
-  border: 1px solid var(--c-border-default);
-  border-radius: 10px;
-  box-sizing: border-box;
-  box-shadow: 0 4px 15px var(--c-shadow-medium);
-  overflow: visible; /* 为了让下拉菜单可见 */
-}
-.chart-container-main {
-  padding-bottom: 12px;
-  flex: 1;
-  position: relative;
-  z-index: 0;
-}
-.charts-toolbar {
-  position: relative;
-  z-index: 10;
-  border-bottom: 1px solid var(--c-border-default);
-  padding: 0 16px;
-  min-height: 48px;
-  display: flex;
-  align-items: center;
-  box-sizing: border-box;
-}
-.toolbar-controls {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  flex-wrap: wrap;
-  width: 100%;
-}
-.tab-btn {
-  background: transparent;
-  border: 1px solid transparent;
-  color: var(--c-text-body-alt);
-  height: 32px;
-  padding: 0 12px;
-  border-radius: 6px;
-  cursor: pointer;
-  font-size: 14px;
-  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
-  width: auto;
-  box-sizing: border-box;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-}
-.tab-btn:hover {
-  background: var(--c-primary-alpha-10);
-  color: var(--c-text-emphasis);
-  border-color: var(--c-border-hover);
-}
-.tab-btn.active {
-  background: var(--c-primary-alpha-20);
-  color: var(--c-text-title);
-  font-weight: 500;
-  border-color: var(--c-primary);
-}
+/* 卡片/工具栏/图表样式统一来自全局模板 src/assets/styles/chart-block.css，此处仅覆盖图表高度 */
 .chart {
   width: 100%;
-  min-height: 360px;
+  min-height: 280px;
 }
 </style>

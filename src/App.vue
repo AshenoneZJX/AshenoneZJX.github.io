@@ -28,93 +28,6 @@ export default {
 </script>
 
 <style>
-:root {
-  /* Core Dark Mode (Default) */
-  --c-primary: #58a6ff;
-  --c-primary-alpha-10: rgba(88, 166, 255, 0.10);
-  --c-primary-alpha-20: rgba(88, 166, 255, 0.20);
-  --c-primary-alpha-30: rgba(88, 166, 255, 0.30);
-  --c-primary-alpha-40: rgba(88, 166, 255, 0.40);
-  --c-primary-alpha-50: rgba(88, 166, 255, 0.50);
-  --c-primary-alpha-60: rgba(88, 166, 255, 0.60);
-  --c-primary-alpha-80: rgba(88, 166, 255, 0.80);
-  
-  /* Background Levels */
-  --c-bg-l0: #131314;
-  --c-bg-l1: #131314;
-  --c-bg-l2: #161b22;
-  --c-bg-l3: #1f2937;
-  --c-bg-l4: #243244;
-  --c-bg-panel-deep: #0f1623;
-  --c-bg-input: #111827;
-  
-  /* Text */
-  --c-text-title: #e6edf3;
-  --c-text-emphasis: #c9d1d9;
-  --c-text-body: #adbac7;
-  --c-text-body-alt: #9da7b3;
-  --c-text-muted: #8b949e;
-  --c-text-label: #7d8590;
-  --c-text-nav: #adbac7;
-  
-  /* Border */
-  --c-border-default: #2d333b;
-  --c-border-hover: #30363d;
-  --c-border-strong: #388bfd;
-  
-  /* Shadow Overlay */
-  --c-shadow-light: rgba(1, 4, 9, 0.20);
-  --c-shadow-medium: rgba(1, 4, 9, 0.45);
-  --c-shadow-heavy: rgba(1, 4, 9, 0.65);
-  
-  /* Navbar */
-  --c-nav-bg: rgba(13, 17, 23, 0.9);
-  --c-nav-mask: rgba(1, 4, 9, 0.45);
-  
-  --title-font: 'MotivaTitle', "Motiva Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  --bp-mobile-max: 480px;
-}
-
-[data-theme="light"] {
-  /* Light Mode - Steam Inspired but bright */
-  --c-primary: #58a6ff;
-  --c-primary-alpha-10: rgba(88, 166, 255, 0.10);
-  --c-primary-alpha-20: rgba(88, 166, 255, 0.20);
-  --c-primary-alpha-30: rgba(88, 166, 255, 0.30);
-  --c-primary-alpha-40: rgba(88, 166, 255, 0.40);
-  --c-primary-alpha-50: rgba(88, 166, 255, 0.50);
-  --c-primary-alpha-60: rgba(88, 166, 255, 0.60);
-  --c-primary-alpha-80: rgba(88, 166, 255, 0.80);
-  
-  --c-bg-l0: #131314;
-  --c-bg-l1: #131314;
-  --c-bg-l2: #161b22;
-  --c-bg-l3: #1f2937;
-  --c-bg-l4: #243244;
-  --c-bg-panel-deep: #0f1623;
-  --c-bg-input: #111827;
-  
-  --c-text-title: #e6edf3;
-  --c-text-emphasis: #c9d1d9;
-  --c-text-body: #adbac7;
-  --c-text-body-alt: #9da7b3;
-  --c-text-muted: #8b949e;
-  --c-text-label: #7d8590;
-  --c-text-nav: #adbac7;
-  
-  --c-border-default: #2d333b;
-  --c-border-hover: #30363d;
-  --c-border-strong: #388bfd;
-  
-  --c-shadow-light: rgba(1, 4, 9, 0.20);
-  --c-shadow-medium: rgba(1, 4, 9, 0.45);
-  --c-shadow-heavy: rgba(1, 4, 9, 0.65);
-  
-  --c-nav-bg: rgba(13, 17, 23, 0.9);
-  --c-nav-mask: rgba(1, 4, 9, 0.45);
-}
-
-@font-face { font-family: 'MotivaTitle'; font-style: normal; font-weight: 400; font-display: swap; src: url('./assets/fonts/MotivaSans-Regular_woff.ttf') format('truetype'); }
 h2 { color: var(--c-text-title); font-weight: 300; letter-spacing: 2px; }
 h1, h2, h3, .logo, .section-header h2, .panel-header { font-family: var(--title-font); }
 /* --- 全局样式重置 --- */
@@ -126,7 +39,7 @@ h1, h2, h3, .logo, .section-header h2, .panel-header { font-family: var(--title-
 }
 
 body {
-  font-family: "Motiva Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: var(--body-font);
   -webkit-font-smoothing: antialiased;
   background-color: var(--c-bg-l1); /* Steam 主背景色 */
   color: var(--c-text-body); /* Steam 默认字色 */

@@ -14,9 +14,11 @@ import CarBasics from '@/views/MySpace/Car/CarBasics.vue'
 import CarBasicsDetail from '@/views/MySpace/Car/CarBasicsDetail.vue'
 import BrandList from '@/views/MySpace/Car/BrandList.vue'
 import BrandDetail from '@/views/MySpace/Car/BrandDetail.vue'
+import CarDocs from '@/views/MySpace/Car/CarDocs.vue'
 import Learning from '@/views/Learning/Learning.vue'
 import LearningOverview from '@/views/Learning/LearningOverview.vue'
 import IeltsLearning from '@/views/Learning/IeltsLearning.vue'
+import Settings from '@/views/Settings/Settings.vue'
 
 Vue.use(VueRouter)
 
@@ -41,6 +43,7 @@ const routes = [
   { path: '/mySpace/car-basics/:id', name: 'CarBasicsDetail', component: CarBasicsDetail },
   { path: '/mySpace/brands', name: 'BrandList', component: BrandList },
   { path: '/mySpace/brands/:name', name: 'BrandDetail', component: BrandDetail },
+  { path: '/mySpace/car-docs', name: 'CarDocs', component: CarDocs },
   {
     path: '/records',
     name: 'Records',
@@ -50,6 +53,11 @@ const routes = [
     path: '/records/:id',
     name: 'RecordDetail',
     component: RecordDetail
+  },
+  {
+    path: '/settings',
+    name: 'Settings',
+    component: Settings
   },
   {
     path: '/learning',
