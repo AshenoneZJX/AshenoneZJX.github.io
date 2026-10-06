@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="900" viewBox="0 0 1280 900" role="img" aria-labelledby="title desc">
+  <title id="title">典型驾驶场景用挡示意</title>
+  <desc id="desc">用四个驾驶场景说明不同工况下手动挡和自动挡的推荐用挡思路。</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#111827"/>
+      <stop offset="100%" stop-color="#0f172a"/>
+    </linearGradient>
+  </defs>
+  <rect width="1280" height="900" fill="url(#bg)"/>
+  <text x="60" y="78" fill="#f8fafc" font-size="42" font-family="Arial, PingFang SC, Microsoft YaHei, sans-serif" font-weight="700">典型驾驶场景用挡示意</text>
+  <text x="60" y="118" fill="#cbd5e1" font-size="20" font-family="Arial, PingFang SC, Microsoft YaHei, sans-serif">真正重要的不是死记字母，而是根据工况选择“更有力”“更平顺”还是“更可控”的挡位策略</text>
+
+  <g transform="translate(60 180)" font-family="Arial, PingFang SC, Microsoft YaHei, sans-serif">
+    <g transform="translate(0 0)">
+      <rect width="540" height="260" rx="26" fill="#0b1220" stroke="#38bdf8" stroke-width="2"/>
+      <text x="28" y="44" fill="#f8fafc" font-size="30" font-weight="700">起步 / 拥堵跟车</text>
+      <text x="28" y="86" fill="#cbd5e1" font-size="21">手动挡：1 挡起步，离合和油门平顺配合</text>
+      <text x="28" y="120" fill="#cbd5e1" font-size="21">自动挡：D 挡即可，靠刹车与轻油门细控</text>
+      <text x="28" y="170" fill="#7dd3fc" font-size="22" font-weight="700">关键词：平顺、别急、别大脚油门</text>
+      <path d="M340 190h130" stroke="#38bdf8" stroke-width="6" stroke-linecap="round"/>
+      <circle cx="372" cy="190" r="22" fill="#1e293b" stroke="#38bdf8" stroke-width="4"/>
+      <circle cx="438" cy="190" r="22" fill="#1e293b" stroke="#38bdf8" stroke-width="4"/>
+      <rect x="296" y="150" width="44" height="40" rx="8" fill="#1e293b" stroke="#38bdf8" stroke-width="3"/>
+    </g>
+
+    <g transform="translate(620 0)">
+      <rect width="540" height="260" rx="26" fill="#0b1220" stroke="#34d399" stroke-width="2"/>
+      <text x="28" y="44" fill="#f8fafc" font-size="30" font-weight="700">爬坡 / 重载</text>
+      <text x="28" y="86" fill="#cbd5e1" font-size="21">手动挡：保持低挡位，避免高挡硬拖</text>
+      <text x="28" y="120" fill="#cbd5e1" font-size="21">自动挡：D 挡不够时可用 L 挡或 M 挡保低挡</text>
+      <text x="28" y="170" fill="#6ee7b7" font-size="22" font-weight="700">关键词：低挡、大扭矩、别让转速太憋</text>
+      <path d="M300 214 L420 154 L512 214" fill="none" stroke="#34d399" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+      <circle cx="362" cy="204" r="18" fill="#1e293b" stroke="#34d399" stroke-width="4"/>
+      <circle cx="434" cy="204" r="18" fill="#1e293b" stroke="#34d399" stroke-width="4"/>
+    </g>
+
+    <g transform="translate(0 320)">
+      <rect width="540" height="260" rx="26" fill="#0b1220" stroke="#a78bfa" stroke-width="2"/>
+      <text x="28" y="44" fill="#f8fafc" font-size="30" font-weight="700">长下坡</text>
+      <text x="28" y="86" fill="#cbd5e1" font-size="21">手动挡：降到合适低挡，用发动机制动控速</text>
+      <text x="28" y="120" fill="#cbd5e1" font-size="21">自动挡：L / M / 拨片辅助降挡，不要空挡滑行</text>
+      <text x="28" y="170" fill="#c4b5fd" font-size="22" font-weight="700">关键词：控制车速，减轻刹车负担</text>
+      <path d="M300 150 L520 230" stroke="#a78bfa" stroke-width="8" stroke-linecap="round"/>
+      <circle cx="360" cy="172" r="18" fill="#1e293b" stroke="#a78bfa" stroke-width="4"/>
+      <circle cx="430" cy="198" r="18" fill="#1e293b" stroke="#a78bfa" stroke-width="4"/>
+    </g>
+
+    <g transform="translate(620 320)">
+      <rect width="540" height="260" rx="26" fill="#0b1220" stroke="#fb7185" stroke-width="2"/>
+      <text x="28" y="44" fill="#f8fafc" font-size="30" font-weight="700">超车 / 山路响应</text>
+      <text x="28" y="86" fill="#cbd5e1" font-size="21">手动挡：提前降一挡或两挡，再给油超车</text>
+      <text x="28" y="120" fill="#cbd5e1" font-size="21">自动挡：深踩油门触发降挡，或切到 S 挡 / M 挡</text>
+      <text x="28" y="170" fill="#fda4af" font-size="22" font-weight="700">关键词：提前准备动力，而不是临时硬踩</text>
+      <path d="M300 212h178" stroke="#fb7185" stroke-width="8" stroke-linecap="round"/>
+      <path d="M460 186l42 26-42 26" fill="none" stroke="#fb7185" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+      <circle cx="340" cy="212" r="18" fill="#1e293b" stroke="#fb7185" stroke-width="4"/>
+      <circle cx="410" cy="212" r="18" fill="#1e293b" stroke="#fb7185" stroke-width="4"/>
+    </g>
+  </g>
+
+  <g transform="translate(60 810)" font-family="Arial, PingFang SC, Microsoft YaHei, sans-serif">
+    <rect x="0" y="0" width="1160" height="56" rx="18" fill="#0b1220" stroke="#334155" stroke-width="2"/>
+    <text x="22" y="36" fill="#d1d5db" font-size="20">一句话记住：起步和爬坡看低挡，巡航看高挡，超车看提前降挡，下坡看发动机制动。</text>
+  </g>
+</svg>
